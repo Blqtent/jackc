@@ -1,0 +1,15 @@
+/** hello 
+ */
+class Main 
+{
+
+	function void main() 
+	{
+		/* main */
+		do Output.printString("Hello world");
+		do Output.println(); // new line
+		
+		return;
+	}
+}
+
