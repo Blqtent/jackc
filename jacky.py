@@ -18,22 +18,6 @@ c_ = ""
 t_ = ""
 m = "f"
 
-def wri(txt):
-    fi1 = open("j2exe.c", "a+")
-    fi1.write(txt)
-    fi1.close()
-
-def h(txt):
-    wri(txt)
-
-def c(txt):
-    global c_
-    c_ = c_ + txt
-
-def t(txt):
-    global t_
-    t_ = t_ + txt
-
 def identifier_():
     return tokens.pop(0)
 
@@ -48,10 +32,8 @@ def match(txt):
 def classVarDec_():
     global className
     p = className + "__"
-    l = h;
     if tokens[0] == "static":
         tokens.pop(0)
-        l = t
     elif tokens[0] == "field":
         tokens.pop(0)
         p = "";
@@ -59,12 +41,9 @@ def classVarDec_():
         return 0
     type_ = identifier_()
     varName = identifier_()
-    l("var " + p + varName)
     while tokens[0] == ",":
         tokens.pop(0)
         varName = identifier_()
-        l(", " + p + varName)
-    l(";")
     match(";")
     return 1
        
@@ -151,8 +130,6 @@ def subroutineCall_():
     elif tokens[1] != "(":
         return 0
     subroutineName = identifier_()
-    current = current.set("subroutineCall").add(subroutineName)
-    current.set("classVarName").add(classVarName)
     match("(");
     current = current.set("parameters")
     if expression_():
@@ -202,7 +179,6 @@ def statement_():
         tokens.pop(0)
         subroutineCall_()
         match(";")
-        c(";")
     elif tokens[0] == "return":
         tokens.pop(0)
         expression_()
@@ -236,41 +212,27 @@ def subroutineDec_():
     current = current.add(subroutineName)
     current.set("RetType").add(type_)
 
-    c("\n")
-    c(type_ + " " + className + "__" + subroutineName + " ( ")
     match("(")
     if tokens[0] != ")":
         type_ = identifier_()
         paramName = identifier_()
-        c("var " + paramName)
-        current.set("paramName").add(paramName).add(type_)
         while tokens[0] == ",":
             tokens.pop(0)
             type_ = identifier_()
             paramName = identifier_()
-            current.set("paramName").add(paramName).add(type_)
-            c(", var " + paramName)
     match(")")
     match("{")
-    c(") {")
     while tokens[0] == "var":
         type_ = identifier_()
         varName = identifier_()
-        c("var " + varName)
-        current.set("varName").add(varName).add(type_)
         while tokens[0] == ",":
             tokens.pop(0)
             varName = identifier_()
-            current.set("varName").add(varName).add(type_)
-            c(", var " + varName)
         match(";");
-        c(";");
         
     while (statement_()):
         pass
     match("}")
-    c("}")
-    current = last
     return 1
 
 
@@ -282,16 +244,11 @@ def class_(txt):
     className = identifier_()
     match("{")
 
-    class_n = current.add(className)
-    current = class_n.add("classVarDec");
     while (classVarDec_()):
         pass
-    h("} " + className + ";")
-    current = class_n.add("subroutineDec");
     while (subroutineDec_()):
         pass
     match("}");
-    current = ast
     return 1
 
 
@@ -381,30 +338,19 @@ def parse (f):
 
 
 import os
+import sys
 from os import walk
 
-if os.path.exists("j2exe.c"):
-    os.remove("j2exe.c")
+out = sys.argv[1] + ".py"
 
-_, _, files = next(walk("jexe"), (None, None, []))
+if os.path.exists(out):
+    os.remove(out)
 
-h("typedef union var {")
-h("  void *pointer;")
-h("  short int_;")
-h("  unsigned short char_;")
-h("  int boolean_;")
-h("} var;")
+_, _, files = next(walk(sys.argv[1]), (None, None, []))
 
 for f in files:
-    parse("jexe/" + f)
-
-wri(t_)
-c("\n")
-c("int main(int argc, char *argv[]) {")
-c("  Main__main();")
-c("  return 0;")
-c("}")
-wri(c_)
+    parse(sys.argv[1] + "/" + f)
 
 print ast
 
+tree2py.process(ast, out)

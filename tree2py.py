@@ -28,4 +28,9 @@ class Tree:
 global ast
 ast = Tree("root")
 
+def process(ast, out):
+    f = open(out, "a+")
+    f.write("hello")
+    f.close
+
 

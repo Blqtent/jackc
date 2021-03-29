@@ -7,4 +7,5 @@ exe.py: jacky.py tree2py.py  exe/main.jack
 
 clean:
 	rm -f exe.py
+	rm -f *.pyc
 
