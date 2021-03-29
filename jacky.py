@@ -1,5 +1,5 @@
 """
- *                             jack to exe
+ *                             jack to python 
  *
  *                      14 march MMXXI PUBLIC DOMAIN
  *           The author disclaims copyright to this source code.
@@ -10,13 +10,7 @@
 import re
 import tree2py
 
-ast = tree2py.ast
-current = ast
 tokens = []
-className = ""
-c_ = ""
-t_ = ""
-m = "f"
 
 def identifier_():
     return tokens.pop(0)
@@ -30,32 +24,39 @@ def match(txt):
         exit(-1)
 
 def classVarDec_():
-    global className
-    p = className + "__"
+    global current
+    current
+    p = tokens[0]
     if tokens[0] == "static":
         tokens.pop(0)
     elif tokens[0] == "field":
         tokens.pop(0)
-        p = "";
     else:
         return 0
     type_ = identifier_()
     varName = identifier_()
+    
+    t2 = current.add(p, varName)
+    t2.add("type", type_)
     while tokens[0] == ",":
         tokens.pop(0)
         varName = identifier_()
+        t2 = current.add(p, varName)
+        t2.add("type", type_)
     match(";")
     return 1
        
 def stringConstant_():
     if (tokens[0][0] == "\""):
         strin = tokens.pop(0)
+        current.add("string", strin)
         return 1
     return 0
 
 def integerConstant_():
     if (is_integer(tokens[0][0])):
         num = tokens.pop(0)
+        current.add("int", num)
         return 1
     return 0
 
@@ -72,6 +73,8 @@ def is_identifier():
     return 0
 
 def term_():
+    global current
+    last = current
     if integerConstant_():
         return 1
     elif stringConstant_():
@@ -80,25 +83,35 @@ def term_():
         return 1
     elif tokens[1] == "[":
         varName = tokens.pop(0)
+        current = current.add("arrayvar", varName)
         match("[")
         expression_()
         match("]")
+        current = last
         return 1
     elif tokens[0] == "(":
+        current = current.add("paran", "(")
         match("(")
         expression_()
         match(")")
+        current = last
         return 1
     elif tokens[0] == "-" or tokens[0] == "~":
         unaryOp = tokens.pop(0)
+        current = current.add("unaryop", unaryOp)
         term_()
+        current = last
         return 1
     elif is_identifier():
         varName = tokens.pop(0)
+        current.add("varname", varName)
         return 1;
     return 0
 
 def expression_():
+    global current
+    last = current
+    current = current.add("expr", "")
     ret = 0;
     while term_():
         ret = 1
@@ -113,13 +126,17 @@ def expression_():
             tokens[0] == ">" or 
             tokens[0] == "="): 
             op = tokens.pop(0)
+            current.add("op", op)
         else:
+            current = last
             return ret
+    current = last
     return ret
 
 def subroutineCall_():
     global current
     last = current
+    classVarName = ""
     if is_identifier() == 0:
         return 0
     if (tokens[1] == "."):
@@ -130,8 +147,10 @@ def subroutineCall_():
     elif tokens[1] != "(":
         return 0
     subroutineName = identifier_()
+    current = current.add("call", subroutineName)
+    current.add("class", classVarName)
     match("(");
-    current = current.set("parameters")
+    current = current.add("args", "")
     if expression_():
         while tokens[0] == ",":
             tokens.pop(0)
@@ -143,17 +162,24 @@ def subroutineCall_():
 
 def statement_():
     global current
+    last = current
     if tokens[0] == "let":
+        current = current.add("let", "")
         tokens.pop(0)
         varName = identifier_()
+        l2 = current.add("varname", varName)
         if tokens[0] == "[":
+            current = current.add("array", "[")
             match("[")
             expression_()
             match("]")
+        current = l2;
         match("=")
+        current = current.add("assign", "=")
         expression_()
         match(";")
     elif tokens[0] == "if":
+        current = current.add("if", "")
         tokens.pop(0)
         match("(")
         match(")")
@@ -161,6 +187,7 @@ def statement_():
         while (statement_()):
             pass
         match("}")
+        current = current.add("else", "")
         if tokens[0] == "else":
             match("else")
             match("{")
@@ -168,6 +195,7 @@ def statement_():
                 pass
             match("}")
     elif tokens[0] == "while":
+        current = current.add("while", "")
         tokens.pop(0)
         match("(")
         match(")")
@@ -176,15 +204,18 @@ def statement_():
             pass
         match("}")
     elif tokens[0] == "do":
+        current = current.add("do", "")
         tokens.pop(0)
         subroutineCall_()
         match(";")
     elif tokens[0] == "return":
+        current = current.add("return", "")
         tokens.pop(0)
         expression_()
         match(";")
     else:
         return 0
+    current = last
     return 1
 
 def subroutineDec_():
@@ -192,56 +223,62 @@ def subroutineDec_():
     global m
     global current
     last = current
-    m = "c"
+    m = tokens[0]
     if tokens[0] == "constructor":
         tokens.pop(0)
-        current = current.set("constructor")
     elif tokens[0] == "function":
         tokens.pop(0)
-        current = current.set("function")
-        m = "f"
     elif tokens[0] == "method":
         tokens.pop(0)
-        current = current.set("method")
-        m = "m"
     else:
         return 0
     type_ = identifier_()
     subroutineName = identifier_()
-    
-    current = current.add(subroutineName)
-    current.set("RetType").add(type_)
-
+    current = current.add(m, subroutineName)
+    current.add("return", type_)
+   
+    p = current.add("params", "");
     match("(")
     if tokens[0] != ")":
         type_ = identifier_()
         paramName = identifier_()
+        p.add(type_, paramName)
         while tokens[0] == ",":
             tokens.pop(0)
             type_ = identifier_()
             paramName = identifier_()
+            p.add(type_, paramName)
     match(")")
     match("{")
+    p = current.add("vars", "");
     while tokens[0] == "var":
         type_ = identifier_()
         varName = identifier_()
+        p.add(type_, varName)
         while tokens[0] == ",":
             tokens.pop(0)
             varName = identifier_()
+            p.add(type_, varName)
         match(";");
         
+    current = current.add("statements", "")
     while (statement_()):
         pass
     match("}")
+    current = last
     return 1
 
 
 def class_(txt):
     global className
-    global ast
     global current
+    last = current
+    
     match("class")
     className = identifier_()
+    
+    current = current.add("class", className)
+
     match("{")
 
     while (classVarDec_()):
@@ -249,6 +286,8 @@ def class_(txt):
     while (subroutineDec_()):
         pass
     match("}");
+
+    current = last;
     return 1
 
 
@@ -274,7 +313,6 @@ def tokenize(x):
             incomment = 0
             s = s + "*/"
             c = ""
-            print s
             s = ""
         elif inquote == 1 and c == "\"":
             inquote = 0
@@ -343,6 +381,9 @@ from os import walk
 
 out = sys.argv[1] + ".py"
 
+ast = tree2py.Tree("root", sys.argv[1])
+current = ast
+
 if os.path.exists(out):
     os.remove(out)
 
@@ -351,6 +392,5 @@ _, _, files = next(walk(sys.argv[1]), (None, None, []))
 for f in files:
     parse(sys.argv[1] + "/" + f)
 
-print ast
-
 tree2py.process(ast, out)
+
