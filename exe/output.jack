@@ -1,0 +1,32 @@
+
+class Output {
+	function void init() {
+		return;
+	}
+
+	function void moveCursor(int x, int y) {
+#py 	sys.stdout.write("\033[%d;%dH" % (y, x))
+		return;
+	}
+	function void printString(String s) {
+#py 	sys.stdout.write(s)
+		return;
+	}
+
+	function void println() {
+#py 	sys.stdout.write("\n")
+		return;
+	}
+	
+	function void printChar(char c) {
+#py 	sys.stdout.write("%c" % (c))
+	}
+
+	function void printInt(int c) {
+#py 	sys.stdout.write("%d" % (c))
+	}
+
+	function void backSpace() {
+#py 	sys.stdout.write("\b")
+	}
+}

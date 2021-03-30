@@ -6,9 +6,13 @@ class Main
 	function void main() 
 	{
 		/* main */
+		do Output.moveCursor(20, 5);
 		do Output.printString("Hello world");
 		do Output.println(); // new line
-		
+		do Output.printChar(65); 
+		do Output.printInt(65 * 10 + (2 - 1)); 
+		do Output.backSpace(); 
+			
 		return;
 	}
 }

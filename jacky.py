@@ -213,6 +213,9 @@ def statement_():
         tokens.pop(0)
         expression_()
         match(";")
+    elif tokens[0][0] == "#":
+        current.add("#", tokens[0])
+        tokens.pop(0)
     else:
         return 0
     current = last
@@ -299,6 +302,7 @@ def tokenize(x):
     global s
     insinglec = 0
     inquote = 0
+    insharp = 0
     r = []
     l = ""
     for c in x:
@@ -320,8 +324,13 @@ def tokenize(x):
             r.append(s)
             s = ""
             c = ""
-        elif incomment == 1 or insinglec == 1 or inquote == 1:
+        elif incomment == 1 or insinglec == 1 or inquote == 1 or insharp == 1:
             s = s + l
+        elif l == "#":
+            insharp = 1
+            if s != "":
+                r.append(s)
+            s = l;
         elif l == "\"":
             inquote = 1
             if s != "":
