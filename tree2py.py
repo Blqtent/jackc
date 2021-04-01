@@ -160,6 +160,7 @@ def process(ast, out):
     f = open(out, "a+")
     f.write("#! /usr/bin/python3\n")
     f.write("import sys\n")
+    f.write("import time\n")
     f.write("__memory = {}\n")
     ast.process(f, "")
     for c in ast.children:

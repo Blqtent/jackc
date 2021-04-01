@@ -1,3 +1,11 @@
+/*
+ *                         jack standard library 
+ *
+ *                      1 april MMXXI PUBLIC DOMAIN
+ *           The author disclaims copyright to this source code.
+ *
+ *
+ */
 
 class Sys {
 	function void init() {
@@ -10,16 +18,18 @@ class Sys {
 	}
 	
 	function void halt() {
+#py 	exit(0)
 		return;
 	}
 
 	function void error(int errorCode) {
+#py 	exit(errorCode)
 
-		do Sys.halt();
 		return;
 	}
 
 	function void wait(int duration) {
+#py 	time.sleep(duration / 1000.0)
 		return;
 	}
 }

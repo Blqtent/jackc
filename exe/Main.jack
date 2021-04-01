@@ -1,5 +1,12 @@
-/** hello 
+/*
+ *                         jack test code 
+ *
+ *                      1 april MMXXI PUBLIC DOMAIN
+ *           The author disclaims copyright to this source code.
+ *
+ *
  */
+
 class Main 
 {
 
@@ -13,6 +20,9 @@ class Main
 		let y = Array.new(10);
 		let s = String.new(80);
 		do s.appendChar(67);
+		do s.appendChar(68);
+		do s.appendChar(269);
+		do s.appendChar(70);
 		let y[9] = 65;
 		do Output.moveCursor(20, 5);
 		do Output.printString("Hello world\n");
@@ -21,7 +31,23 @@ class Main
 		do Output.printChar(y[9]); 
 		do Output.printInt(65 * 10 + (-2 - 1)); 
 		do Output.backSpace(); 
-			
+		do Output.printString(" "); 
+		do Output.printInt(s.length()); 
+		do Output.printString(" *  "); 
+		do Output.printChar(String.newLine()); 
+		do s.setCharAt(13, 65);
+		do Output.printString("  "); 
+		do Output.printString(s); 
+		do Output.printString("  "); 
+		do s.eraseLastChar();
+		do Output.printString(s); 
+		do Output.printInt(s.charAt(1)); 
+		do s.setInt(89);
+		do Output.printString(s); 
+		do Output.printInt(s.intValue()); 
+		do s.dispose();	
+		do Sys.wait(900);
+		do Sys.error(-1);
 		return;
 	}
 }

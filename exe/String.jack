@@ -1,3 +1,11 @@
+/*
+ *                         jack standard library 
+ *
+ *                      1 april MMXXI PUBLIC DOMAIN
+ *           The author disclaims copyright to this source code.
+ *
+ *
+ */
 
 class String {
 	field Array str;
@@ -13,7 +21,9 @@ class String {
 	}
 
 	method int length() {
-		return 0;
+		var int l;
+#py 	l=len(__memory[__this])
+		return l;
 	}
 
 	method char charAt(int a) {
@@ -23,23 +33,30 @@ class String {
 	}
 
 	method void setCharAt(int j, char c) {
+#py 	m = __memory[__this][:j]	
+#py 	n = __memory[__this][j+1:]	
+#py 	__memory[__this]=m + chr(c) + n;	
 		return;
 	}
 	
-	method void appendChar(char c) {
+	method String appendChar(char c) {
 #py 	__memory[__this] = __memory[__this] + chr(c)	
-		return;
+		return this;
 	}
 
 	method void eraseLastChar() {
+#py 	__memory[__this]=__memory[__this][:-1];	
 		return;
 	}
 	
 	method int intValue() {
-		return 0;
+		var int v;
+#py 	v=int(__memory[__this]);	
+		return v;
 	}
 	
 	method void setInt(int j) {
+#py 	__memory[__this]=str(j);	
 		return;
 	}
 
@@ -54,6 +71,4 @@ class String {
 	function char newLine() {
 		return 10;
 	}
-
 }
-
