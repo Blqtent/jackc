@@ -9,7 +9,7 @@ class Output {
 		return;
 	}
 	function void printString(String s) {
-#py 	sys.stdout.write(s)
+#py 	sys.stdout.write(__memory[s])
 		return;
 	}
 
@@ -19,7 +19,7 @@ class Output {
 	}
 	
 	function void printChar(char c) {
-#py 	sys.stdout.write("%c" % (c))
+#py 	sys.stdout.write(chr(c))
 	}
 
 	function void printInt(int c) {

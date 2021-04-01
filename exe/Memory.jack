@@ -1,0 +1,26 @@
+
+class Memory {
+	static int begin, freelist;
+	static Array mem;
+	function void init() {
+		let mem = 0;
+		let begin = mem[0];
+		return;
+	}
+	function int peek(int addr) {
+		return mem[addr];
+	}
+
+	function void poke(int addr, int value) {
+		let mem[addr] = value;
+		return;
+	}
+	function Array alloc(int size) {
+		var Array a;
+		let a = 3;
+		return a;
+	}
+	function void deAlloc(Array a) {
+		return;
+	}
+}

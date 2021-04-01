@@ -11,16 +11,30 @@ import re
 import tree2py
 
 tokens = []
+__file = ""
+__line = ""
 
 def identifier_():
-    return tokens.pop(0)
+    return tokens_pop(0)
+
+def tokens_pop(n):
+    global __line
+    global tokens
+    r = tokens.pop(n)
+    while (len(tokens) > 0) and (tokens[0][:1] == "@"):
+        __line = tokens[0][1:]
+        tokens.pop(0)
+    return r
 
 def match(txt):
+    global __file
+    global __line
+    global tokens
     if tokens[0] == txt:
-        tokens.pop(0)
+        tokens_pop(0)
         return 1
     else:
-        print "syntax error: expected '" + txt + "' got '" + tokens[0] + "'"
+        print "syntax error: " + __file + "(" + __line + ") expected '" + txt + "' got '" + tokens[0] + "'"
         exit(-1)
 
 def classVarDec_():
@@ -28,9 +42,9 @@ def classVarDec_():
     current
     p = tokens[0]
     if tokens[0] == "static":
-        tokens.pop(0)
+        tokens_pop(0)
     elif tokens[0] == "field":
-        tokens.pop(0)
+        tokens_pop(0)
     else:
         return 0
     type_ = identifier_()
@@ -39,7 +53,7 @@ def classVarDec_():
     t2 = current.add(p, varName)
     t2.add("type", type_)
     while tokens[0] == ",":
-        tokens.pop(0)
+        tokens_pop(0)
         varName = identifier_()
         t2 = current.add(p, varName)
         t2.add("type", type_)
@@ -48,14 +62,14 @@ def classVarDec_():
        
 def stringConstant_():
     if (tokens[0][0] == "\""):
-        strin = tokens.pop(0)
+        strin = tokens_pop(0)
         current.add("string", strin)
         return 1
     return 0
 
 def integerConstant_():
     if (is_integer(tokens[0][0])):
-        num = tokens.pop(0)
+        num = tokens_pop(0)
         current.add("int", num)
         return 1
     return 0
@@ -82,7 +96,7 @@ def term_():
     elif subroutineCall_():
         return 1
     elif tokens[1] == "[":
-        varName = tokens.pop(0)
+        varName = tokens_pop(0)
         current = current.add("arrayvar", varName)
         match("[")
         expression_()
@@ -97,13 +111,13 @@ def term_():
         current = last
         return 1
     elif tokens[0] == "-" or tokens[0] == "~":
-        unaryOp = tokens.pop(0)
+        unaryOp = tokens_pop(0)
         current = current.add("unaryop", unaryOp)
         term_()
         current = last
         return 1
     elif is_identifier():
-        varName = tokens.pop(0)
+        varName = tokens_pop(0)
         current.add("varname", varName)
         return 1;
     return 0
@@ -125,7 +139,7 @@ def expression_():
             tokens[0] == "<" or 
             tokens[0] == ">" or 
             tokens[0] == "="): 
-            op = tokens.pop(0)
+            op = tokens_pop(0)
             current.add("op", op)
         else:
             current = last
@@ -148,12 +162,12 @@ def subroutineCall_():
         return 0
     subroutineName = identifier_()
     current = current.add("call", subroutineName)
-    current.add("class", classVarName)
+    current.add("classo", classVarName)
     match("(");
     current = current.add("args", "")
     if expression_():
         while tokens[0] == ",":
-            tokens.pop(0)
+            tokens_pop(0)
             expression_()
     match(")");
     current = last
@@ -165,11 +179,11 @@ def statement_():
     last = current
     if tokens[0] == "let":
         current = current.add("let", "")
-        tokens.pop(0)
+        tokens_pop(0)
         varName = identifier_()
         l2 = current.add("varname", varName)
         if tokens[0] == "[":
-            current = current.add("array", "[")
+            current = l2.add("array", "[")
             match("[")
             expression_()
             match("]")
@@ -180,7 +194,7 @@ def statement_():
         match(";")
     elif tokens[0] == "if":
         current = current.add("if", "")
-        tokens.pop(0)
+        tokens_pop(0)
         match("(")
         match(")")
         match("{")
@@ -196,7 +210,7 @@ def statement_():
             match("}")
     elif tokens[0] == "while":
         current = current.add("while", "")
-        tokens.pop(0)
+        tokens_pop(0)
         match("(")
         match(")")
         match("{")
@@ -205,17 +219,17 @@ def statement_():
         match("}")
     elif tokens[0] == "do":
         current = current.add("do", "")
-        tokens.pop(0)
+        tokens_pop(0)
         subroutineCall_()
         match(";")
     elif tokens[0] == "return":
         current = current.add("return", "")
-        tokens.pop(0)
+        tokens_pop(0)
         expression_()
         match(";")
     elif tokens[0][0] == "#":
         current.add("#", tokens[0])
-        tokens.pop(0)
+        tokens_pop(0)
     else:
         return 0
     current = last
@@ -228,11 +242,11 @@ def subroutineDec_():
     last = current
     m = tokens[0]
     if tokens[0] == "constructor":
-        tokens.pop(0)
+        tokens_pop(0)
     elif tokens[0] == "function":
-        tokens.pop(0)
+        tokens_pop(0)
     elif tokens[0] == "method":
-        tokens.pop(0)
+        tokens_pop(0)
     else:
         return 0
     type_ = identifier_()
@@ -247,7 +261,7 @@ def subroutineDec_():
         paramName = identifier_()
         p.add(type_, paramName)
         while tokens[0] == ",":
-            tokens.pop(0)
+            tokens_pop(0)
             type_ = identifier_()
             paramName = identifier_()
             p.add(type_, paramName)
@@ -255,11 +269,12 @@ def subroutineDec_():
     match("{")
     p = current.add("vars", "");
     while tokens[0] == "var":
+        match("var")
         type_ = identifier_()
         varName = identifier_()
         p.add(type_, varName)
         while tokens[0] == ",":
-            tokens.pop(0)
+            tokens_pop(0)
             varName = identifier_()
             p.add(type_, varName)
         match(";");
@@ -335,7 +350,13 @@ def tokenize(x):
             inquote = 1
             if s != "":
                 r.append(s)
-            s = "\""
+            if (c == "\""):
+                inquote = 0
+                r.append("\"\"")
+                c = ""
+                s = ""
+            else:
+                s = "\""
         elif c == "/" and l == "/":
             insinglec = 1
             if s != "":
@@ -371,15 +392,25 @@ def tokenize(x):
 
 def parse (f):
     global tokens
-    global c_
+    global __file
+    __file = f
+    line = 0
     tokens = []
     fi = open(f, "r");
     for x in fi:
+        line = line + 1
+        tokens.append("@" + str(line))
         for y in tokenize(x):
             tokens.append(y)
 
+    
+    if len(tokens) > 0:
+        if (tokens[0][:1] == "@"):
+            tokens_pop(0)
+
     while len(tokens) > 0:
         class_(tokens[0])
+
     fi.close()
 
 

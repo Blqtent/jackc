@@ -1,0 +1,28 @@
+/** hello 
+ */
+class Main 
+{
+
+	function void main() 
+	{
+		/* main */
+		var int z;
+		var Array y;
+		var String s;
+		let z = 66;
+		let y = Array.new(10);
+		let s = String.new(80);
+		do s.appendChar(67);
+		let y[9] = 65;
+		do Output.moveCursor(20, 5);
+		do Output.printString("Hello world");
+		do Output.printString(s);
+		do Output.println(); // new line
+		do Output.printChar(y[9]); 
+		do Output.printInt(65 * 10 + (-2 - 1)); 
+		do Output.backSpace(); 
+			
+		return;
+	}
+}
+
