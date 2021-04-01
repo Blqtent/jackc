@@ -1,0 +1,31 @@
+
+class Math {
+	function void init() {
+		return;
+	}
+
+	function int abs() {
+		return 0;
+	}
+	
+	function int multiply(int x, int y) {
+		return 0;
+	}
+
+	function int divide(int x, int y) {
+		return 0;
+	}
+
+	function int min(int x, int y) {
+		return 0;
+	}
+	
+	function int max(int x, int y) {
+		return 0;
+	}
+
+	function int sqrt(int x) {
+		return 0;
+	}
+}
+

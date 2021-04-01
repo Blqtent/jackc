@@ -8,6 +8,7 @@
 """
 
 import re
+import tree
 import tree2py
 
 tokens = []
@@ -34,7 +35,8 @@ def match(txt):
         tokens_pop(0)
         return 1
     else:
-        print "syntax error: " + __file + "(" + __line + ") expected '" + txt + "' got '" + tokens[0] + "'"
+        print ("syntax error: " + __file + "(" + __line + ") expected '" 
+                + txt + "' got '" + tokens[0] + "'")
         exit(-1)
 
 def classVarDec_():
@@ -421,7 +423,7 @@ from os import walk
 
 out = sys.argv[1] + ".py"
 
-ast = tree2py.Tree("root", sys.argv[1])
+ast = tree.Tree("root", sys.argv[1])
 current = ast
 
 if os.path.exists(out):

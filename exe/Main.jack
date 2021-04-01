@@ -15,7 +15,7 @@ class Main
 		do s.appendChar(67);
 		let y[9] = 65;
 		do Output.moveCursor(20, 5);
-		do Output.printString("Hello world");
+		do Output.printString("Hello world\n");
 		do Output.printString(s);
 		do Output.println(); // new line
 		do Output.printChar(y[9]); 

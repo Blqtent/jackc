@@ -8,19 +8,39 @@ class String {
 	}
 
 	method void dispose() {
+		do Memory.deAlloc(this);
 		return;
 	}
 
-	method void appendChar(char c) {
-#py 	__memory[__this] = __memory[__this] + unichr(c)	
-		/*do Output.printInt(charAt(0));*/
+	method int length() {
+		return 0;
 	}
-
 
 	method char charAt(int a) {
 		var char ret;
 #py 	ret =  ord(__memory[__this][a])	
 		return ret;
+	}
+
+	method void setCharAt(int j, char c) {
+		return;
+	}
+	
+	method void appendChar(char c) {
+#py 	__memory[__this] = __memory[__this] + chr(c)	
+		return;
+	}
+
+	method void eraseLastChar() {
+		return;
+	}
+	
+	method int intValue() {
+		return 0;
+	}
+	
+	method void setInt(int j) {
+		return;
 	}
 
 	function char backSpace() {

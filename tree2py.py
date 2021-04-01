@@ -1,36 +1,4 @@
 
-
-class Tree:
-    def __init__(self, tag, data, parent=None):
-        self.children = []
-        self.tag = tag
-        self.data = data
-        self.parent = parent
-
-    def add(self, tag, data):
-        child = Tree(tag, data, self)
-        self.children.append(child)
-        return child
-
-    def set(self, tag, data):
-        child = None
-        for c in self.children:
-            if (c.data == data) and (c.tag == tag):
-                return c
-        return self.add(tag, data)
-
-    def __str__(self):
-        if not self.children:
-           return str("<" + self.tag + " data=\"" + self.data + "\"/>")
-        return '<{tag} data="{data}">{children}</{tag}>'.format(tag=self.tag,data=self.data, children='\n '.join(map(str, self.children)))
-
-    def process(self, f, n):
-        print n + str(self.tag) + " " + str(self.data) + ""
-        l = n + "  ";
-        for c in self.children:
-            c.process(f, l)
-
-
 stati = 0
 memory = {}
 
@@ -177,9 +145,12 @@ def statements_(f, b):
                 expr_(f, e)
             w(f, "\n")
 
+def escape(s):
+    return s.replace("\\", "\\\\")
+
 def process(ast, out):
     f = open(out, "a+")
-    f.write("#! /usr/bin/python\n")
+    f.write("#! /usr/bin/python3\n")
     f.write("import sys\n")
     f.write("__memory = {}\n")
     ast.process(f, "")
@@ -240,7 +211,7 @@ def process(ast, out):
     i = 0
     while (i < stati):
         i += 1;
-        w(f, "__memory[" + str(i) + "] = " + memory[i] + "\n")
+        w(f, "__memory[" + str(i) + "] = " + escape(memory[i]) + "\n")
     f.write("__memory[0] = " + str(stati + 1) +  "\n")
     w(f, "Sys__init()\n")
     f.close
