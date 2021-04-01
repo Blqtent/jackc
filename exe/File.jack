@@ -2,6 +2,7 @@
 
 class File {
 	field int fd;
+	field Array buffer;
 
 	constructor File new(String path, String mode) {
 
@@ -12,14 +13,23 @@ class File {
 		return;
 	}
 
-	method int read(Array buffer) {
+	method Array read() {
+		return buffer;
+	}
+
+	method int write(Array data) {
 		return 0;
 	}
 
-	method int write(Array buffer) {
+	method boolean delete() {
 		return 0;
 	}
-	method int seek(nt pos) {
+
+	method boolean mkdir() {
+		return 0;
+	}
+
+	method Array list() {
 		return 0;
 	}
 }
