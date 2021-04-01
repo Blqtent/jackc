@@ -1,3 +1,11 @@
+"""
+ *                             jack to python 
+ *
+ *                      1 april MMXXI PUBLIC DOMAIN
+ *           The author disclaims copyright to this source code.
+ *
+ *
+"""
 
 stati = 0
 memory = {}

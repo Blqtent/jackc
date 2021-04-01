@@ -15,7 +15,7 @@ class Sys {
 
 	function void error(int errorCode) {
 
-		do halt();
+		do Sys.halt();
 		return;
 	}
 

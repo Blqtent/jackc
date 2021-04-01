@@ -1,0 +1,6 @@
+
+class Canavas {
+	function void draw(int x, int y) {
+		return;
+	}
+}

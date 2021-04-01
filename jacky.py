@@ -10,6 +10,8 @@
 import re
 import tree
 import tree2py
+import os
+import sys
 
 tokens = []
 __file = ""
@@ -416,23 +418,19 @@ def parse (f):
     fi.close()
 
 
+if __name__ == "__main__":
+    out = sys.argv[1] + ".py"
 
-import os
-import sys
-from os import walk
+    ast = tree.Tree("root", sys.argv[1])
+    current = ast
 
-out = sys.argv[1] + ".py"
+    if os.path.exists(out):
+        os.remove(out)
 
-ast = tree.Tree("root", sys.argv[1])
-current = ast
+    files = os.listdir(sys.argv[1])
 
-if os.path.exists(out):
-    os.remove(out)
+    for f in files:
+        parse(sys.argv[1] + "/" + f)
 
-_, _, files = next(walk(sys.argv[1]), (None, None, []))
-
-for f in files:
-    parse(sys.argv[1] + "/" + f)
-
-tree2py.process(ast, out)
+    tree2py.process(ast, out)
 

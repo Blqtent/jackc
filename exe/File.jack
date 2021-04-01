@@ -1,0 +1,26 @@
+
+
+class File {
+	field int fd;
+
+	constructor File new(String path, String mode) {
+
+		return this;
+	}
+
+	method void dispose() {
+		return;
+	}
+
+	method int read(Array buffer) {
+		return 0;
+	}
+
+	method int write(Array buffer) {
+		return 0;
+	}
+	method int seek(nt pos) {
+		return 0;
+	}
+}
+

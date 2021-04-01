@@ -1,0 +1,7 @@
+
+class Http {
+	constructor Http new(String url) {
+		return this;
+	}
+}
+
