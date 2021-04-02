@@ -420,7 +420,6 @@ def parse (f):
 def go(files, p):
     for f in files:
         pf = p + f
-        print ("Parse : " + pf)
         if (os.path.isdir(pf)):
             fi = os.listdir(pf)
             go(fi, pf + "/")

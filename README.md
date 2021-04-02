@@ -1,7 +1,7 @@
 The Jack programming language
 =============================
 
-![public domain](https://avatars.githubusercontent.com/u/34268323?v=4)
+![public domain] (https://raw.githubusercontent.com/public-domain/jack/main/img/pd.png)
 
 ### Editor's Draft 2 april 2021
 
