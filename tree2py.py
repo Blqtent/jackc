@@ -13,6 +13,15 @@ memory = {}
 def w(f, txt):
     f.write(txt)
 
+def global_(f, a, tab):
+    o = a.parent;
+    while (o != None and o.tag != "class"):
+        o = o.parent
+    if (o != None):
+        for b in o.children:
+            if (b.tag == "static"):
+                w(f, tab + "global " + o.data + "__" + b.data + "\n")
+
 def get_var(f, a):
     o = a.parent;
     while (o != None and o.tag != "class"):
@@ -164,12 +173,12 @@ def statements_(f, b, tab):
                     expr_(f, c, "")
                     w(f, "):\n")
                 elif (c.tag == "statements"):
-                    statements_(f, c, tab + "\t")
-                elif (c.tag == "else"):
+                    statements_(f, c, tab + "\t" )
+                elif (c.tag == "else" and len(c.children) > 0):
                     w(f, tab + "else:\n")
                     statements_(f, c, tab + "\t")
         elif (d.tag == "return"):
-            w(f, "\t" + "return ")
+            w(f, tab + "return ")
             for e in d.children:
                 expr_(f, e, "")
             w(f, "\n")
@@ -197,6 +206,7 @@ def process(ast, out):
                                 w(f, co + a.data)
                                 co = ", "
                     w(f, "):\n")
+                    global_(f, m, "\t");
                     for b in m.children:
                         if b.tag == "statements":
                             statements_(f, b, "\t")
@@ -215,6 +225,7 @@ def process(ast, out):
                             for a in b.children:
                                 w(f, ", " + a.data)
                     w(f, "):\n")
+                    global_(f, m, "\t");
                     for b in m.children:
                         if b.tag == "statements":
                             statements_(f, b, "\t")
@@ -230,8 +241,10 @@ def process(ast, out):
                                 w(f, co + a.data)
                                 co = ", "
                     w(f, "):\n")
-                    si = 0;
-                    w(f, "\t__this = Memory__alloc(" + str(nb_field) +  ")\n")
+                    global_(f, m, "\t");
+                    si = 0
+                    w(f, "\t__this = Memory__alloc(" + str(nb_field) 
+                            +  ")\n")
                     for b in m.children:
                         if b.tag == "statements":
                             statements_(f,b, "\t")
