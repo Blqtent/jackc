@@ -5,11 +5,11 @@ The Jack programming language
 
 ### Editor's Draft 2 april 2021
 
-Public domain JACK programming language specification
------------------------------------------------------
+Unofficial JACK programming language specification
+--------------------------------------------------
 
 ### This version 
-https://github.com/public-domain/jack
+https://github.com/public-domain/jack#readme
 
 ### Editors:
 Jean-Marc Lienher ( *lienher.org/jean-marc* )
@@ -17,12 +17,18 @@ Jean-Marc Lienher ( *lienher.org/jean-marc* )
 ### Default Ref Status:
 ~~snapshot~~
 
+### Participate:
+https://github.com/public-domain/jack/issues
+
 ***
 
 Abstract
 --------
 
-The [Jack programming language][1].
+The [Jack programming language][1] is described in the book 
+[The Elements of Computing Systems][8] and on the website [www.nand2tetris.org][https://www.nand2tetris.org/].
+
+This document is an unofficial sepcification with a python reference implementation of a Jack compiler.
 
 Status of this document
 -----------------------
@@ -47,11 +53,6 @@ Table of Contents
      2. [HTML5 document](#12-html5document)
 2. [Format Specification]()
      1. [FSS-UTF]()
-     2. [Encodings mapping]()
-     3. [Special function code points]()
-     4. [Upper/lower case table]()
-     5. [Non printable code points table]()
-     6. [Space code point table]()
      
 ***
 
@@ -70,5 +71,8 @@ Table of Contents
 [4]: https://www.youtube.com/watch?v=kq_GSIw0X0w
 [5]: https://commons.wikimedia.org/wiki/File:UN_emblem_blue.svg
 [6]: https://tekeye.uk/playing_cards/svg-playing-cards 
+[7]: https://www.nand2tetris.org/
+[8]: https://www.amazon.com/Elements-Computing-Systems-Building-Principles/dp/0262640686/ref=ed_oe_p
+
 ***
 
