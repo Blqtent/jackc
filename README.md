@@ -29,7 +29,7 @@ The [Jack programming language][1] is described in the book
 [The Elements of Computing Systems][8] and on the website 
 [www.nand2tetris.org][7].
 
-This document is an unofficial sepcification with a python reference implementation of a Jack compiler.
+This document is an unofficial specification with a python reference implementation of a Jack compiler.
 
 Status of this document
 -----------------------
@@ -59,6 +59,13 @@ Table of Contents
 
 ## 1. Introduction
 
+Elon Musk asks is [life a video game][9] ?
+
+In a blues song (the roots of Hard Rock), AC/DC says she's got [the Jack][4] and she's a dirty woman.
+
+Could the roots of our Univers be coded in Jack programming language ?
+
+Jack is easy to learn but it is designed to be yet useful.
 
 
 ### 1.1 Background
@@ -74,6 +81,7 @@ Table of Contents
 [6]: https://tekeye.uk/playing_cards/svg-playing-cards 
 [7]: https://www.nand2tetris.org/
 [8]: https://www.amazon.com/Elements-Computing-Systems-Building-Principles/dp/0262640686/ref=ed_oe_p
+[9]: https://www.youtube.com/watch?v=2KK_kzrJPS8 
 
 ***
 
