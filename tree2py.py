@@ -28,7 +28,7 @@ def get_var(f, a):
                 nf += 1
     return a.data
 
-def expr_(f, e):
+def expr_(f, e, tab):
     global stati
     for a in e.children:
         if a.tag == "string":
@@ -52,7 +52,7 @@ def expr_(f, e):
             w(f, "__memory[" + get_var(f, a) + "+(")
             for b in a.children:
                 if (b.tag == "expr"):
-                    expr_(f, b)
+                    expr_(f, b, tab)
             w(f, ")]")
         elif a.tag == "op":
             o = a.data
@@ -63,13 +63,13 @@ def expr_(f, e):
             w(f, "(")
             for b in a.children:
                 if (b.tag == "expr"):
-                    expr_(f, b)
+                    expr_(f, b, tab)
             w(f, ")")
         elif (a.tag == "call"):
-            call_(f, a)
+            call_(f, a, tab)
         elif a.tag == "unaryop":
             w(f, a.data)
-            expr_(f, a)
+            expr_(f, a, tab)
 
 
 def vars_(f, b):
@@ -98,12 +98,12 @@ def get_class(q):
                     return o.data
     return q.data
 
-def call_(f, c):
+def call_(f, c, tab):
     cla = ""
     for q in c.children:
         if q.tag == "classo":
             cla = get_class(q) 
-            w(f, "\t" + cla + "__" + c.data + "(")
+            w(f, tab + cla + "__" + c.data + "(")
             if (cla != "" and q.data == ""):
                 w(f, "__this")
             for r in c.children:
@@ -115,42 +115,63 @@ def call_(f, c):
                         com = ", "
 
                     for e in r.children:
-                        w(f, com)
-                        expr_(f, e)
-                        com = ", "
-            w(f, ")\n")
+                        if (len(e.children) > 0):
+                            w(f, com)
+                            expr_(f, e, "")
+                            com = ", "
+            w(f, ")")
 
-def statements_(f, b):
+def statements_(f, b, tab):
     for d in b.children:
         if (d.data[0:4] == "#py "):
             w(f, d.data[4:])
         elif (d.tag == "do"):
             for c in d.children:
                 if (c.tag == "call"):
-                    call_(f, c)
+                    call_(f, c, tab)
+                    w(f, "\n")
         elif (d.tag == "let"):
             for c in d.children:
                 is_array = 0
                 for e in c.children:
                     if (e.tag == "assign"):
                         if (c.tag == "varname" and is_array == 0):
-                            w(f, "\t" + get_var(f, c)) 
+                            w(f, tab + get_var(f, c)) 
                         w(f, "=")
                         for k in e.children:
                             if (k.tag == "expr"):
-                                expr_(f, k)
+                                expr_(f, k, "")
                     elif (e.tag == "array"):
                         is_array = 1
-                        w(f, "\t__memory[" + get_var(f, c)+ " +(")
+                        w(f, tab + "__memory[" + get_var(f, c)+ " +(")
                         for k in e.children:
                             if (k.tag == "expr"):
-                                expr_(f, k)
+                                expr_(f, k, "")
                         w(f, ")]")
             w(f, "\n")
+        elif (d.tag == "while"):
+            w(f, tab + "while (")
+            for c in d.children:
+                if (c.tag == "expr"):
+                    expr_(f, c, "")
+                    w(f, "):\n")
+                elif (c.tag == "statements"):
+                    statements_(f, c, tab + "\t")
+        elif (d.tag == "if"):
+            w(f, tab + "if (")
+            for c in d.children:
+                if (c.tag == "expr"):
+                    expr_(f, c, "")
+                    w(f, "):\n")
+                elif (c.tag == "statements"):
+                    statements_(f, c, tab + "\t")
+                elif (c.tag == "else"):
+                    w(f, tab + "else:\n")
+                    statements_(f, c, tab + "\t")
         elif (d.tag == "return"):
             w(f, "\t" + "return ")
             for e in d.children:
-                expr_(f, e)
+                expr_(f, e, "")
             w(f, "\n")
 
 def escape(s):
@@ -178,7 +199,7 @@ def process(ast, out):
                     w(f, "):\n")
                     for b in m.children:
                         if b.tag == "statements":
-                            statements_(f,b)
+                            statements_(f, b, "\t")
                         elif b.tag == "vars":
                             vars_(f,b)
                     w(f, "\n")
@@ -196,7 +217,7 @@ def process(ast, out):
                     w(f, "):\n")
                     for b in m.children:
                         if b.tag == "statements":
-                            statements_(f,b)
+                            statements_(f, b, "\t")
                         elif b.tag == "vars":
                             vars_(f,b)
                     w(f, "\n")
@@ -213,7 +234,7 @@ def process(ast, out):
                     w(f, "\t__this = Memory__alloc(" + str(nb_field) +  ")\n")
                     for b in m.children:
                         if b.tag == "statements":
-                            statements_(f,b)
+                            statements_(f,b, "\t")
                         elif b.tag == "vars":
                             vars_(f,b)
                     w(f, "\n")

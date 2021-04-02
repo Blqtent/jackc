@@ -200,12 +200,15 @@ def statement_():
         current = current.add("if", "")
         tokens_pop(0)
         match("(")
+        expression_()
         match(")")
         match("{")
+        last2 = current
+        current = current.add("statements", "")
         while (statement_()):
             pass
         match("}")
-        current = current.add("else", "")
+        current = last2.add("else", "")
         if tokens[0] == "else":
             match("else")
             match("{")
@@ -216,8 +219,10 @@ def statement_():
         current = current.add("while", "")
         tokens_pop(0)
         match("(")
+        expression_()
         match(")")
         match("{")
+        current = current.add("statements", "")
         while (statement_()):
             pass
         match("}")

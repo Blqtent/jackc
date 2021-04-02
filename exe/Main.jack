@@ -39,13 +39,21 @@ class Main
 		do Output.printString("  "); 
 		do Output.printString(s); 
 		do Output.printString("  "); 
-		do s.eraseLastChar();
 		do Output.printString(s); 
 		do Output.printInt(s.charAt(1)); 
 		do s.setInt(89);
 		do Output.printString(s); 
 		do Output.printInt(s.intValue()); 
 		do s.dispose();	
+		do Output.printString("  "); 
+		while (s.length() > 0) {
+			do s.eraseLastChar();
+		}
+		if (1 = 2) {
+			do Output.printInt(s.intValue()); 
+		} else {
+			do Output.printString(s); 
+		}
 		do Sys.wait(900);
 		do Sys.error(-1);
 		return;
