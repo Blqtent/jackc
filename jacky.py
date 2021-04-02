@@ -417,6 +417,17 @@ def parse (f):
 
     fi.close()
 
+def go(files, p):
+    for f in files:
+        pf = p + f
+        print ("Parse : " + pf)
+        if (os.path.isdir(pf)):
+            fi = os.listdir(pf)
+            go(fi, pf + "/")
+        elif (pf[-5:] != ".jack"):
+            None
+        else:    
+            parse(pf)
 
 if __name__ == "__main__":
     out = sys.argv[1] + ".py"
@@ -428,9 +439,7 @@ if __name__ == "__main__":
         os.remove(out)
 
     files = os.listdir(sys.argv[1])
-
-    for f in files:
-        parse(sys.argv[1] + "/" + f)
+    go(files, sys.argv[1] + "/")
 
     tree2py.process(ast, out)
 
