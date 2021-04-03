@@ -13,6 +13,21 @@ memory = {}
 def w(f, txt):
     f.write(txt)
 
+def isbool(a):
+    if (a.left and isbool(a.left)):
+            return 1
+    if (a.right and isbool(a.right)):
+            return 1
+    if (a.data == "="or a.data == "~" or a.data == ">" or a.data == "<"
+            or a.data == "true" or a.data == "false"):
+        return 1
+    if (get_class(a) == "boolean"):
+            return 1
+    for b in a.children:
+        if (isbool(b)):
+            return 1
+    return 0
+
 def global_(f, a, tab):
     o = a.parent;
     while (o != None and o.tag != "class"):
@@ -38,12 +53,17 @@ def get_var(f, a):
     return a.data
 
 def expr_(f, e, tab):
-    global stati
     for a in e.children:
+        sexpr_(f, a, tab)
+
+def sexpr_(f, a, tab):
+        global stati
         if a.tag == "string":
             stati = stati + 1
             memory[stati] = a.data
             w(f, str(stati))
+        elif a.tag == "expr":
+            expr_(f, a, tab)
         elif a.tag == "int":
             w(f, a.data)
         elif a.tag == "varname":
@@ -65,9 +85,18 @@ def expr_(f, e, tab):
             w(f, ")]")
         elif a.tag == "op":
             o = a.data
+            w(f, "(")
+            sexpr_(f, a.left, tab)
+            if (isbool(a.left) or isbool(a.right)):
+                if (o == "&"):
+                    o = " and "
+                elif (o == "|"):
+                    o = " or "
             if o == "=":
                 o = "=="
             w(f, o)
+            expr_(f, a.right, tab)
+            w(f, ")")
         elif a.tag == "paran":
             w(f, "(")
             for b in a.children:

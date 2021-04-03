@@ -131,6 +131,8 @@ def expression_():
     last = current
     current = current.add("expr", "")
     ret = 0;
+    rt = None
+    exp = current
     while term_():
         ret = 1
         if (tokens[0] == "+" or 
@@ -144,7 +146,17 @@ def expression_():
             tokens[0] == ">" or 
             tokens[0] == "="): 
             op = tokens_pop(0)
-            current.add("op", op)
+            if len(current.children) != 1:
+                print ("syntax error: " + __file + "(" + __line + 
+                            ") single expression expected near '" + op + "'")
+                exit(-1)
+            rt = tree.Tree("op", op, current)
+            rt.left = current.children.pop(0)
+            rt.left.parent = rt
+            current.children.append(rt)
+            current = tree.Tree("expr", "", rt);
+            rt.right = current;
+
         else:
             current = last
             return ret

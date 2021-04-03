@@ -13,11 +13,18 @@ class Tree:
         self.children = []
         self.tag = tag
         self.data = data
+        self.left = None;
+        self.right = None;
         self.parent = parent
 
     def add(self, tag, data):
         child = Tree(tag, data, self)
         self.children.append(child)
+        return child
+
+    def addop(self, data, left):
+        child = Tree("op", data, self)
+        child.left = left
         return child
 
     def set(self, tag, data):
@@ -35,6 +42,12 @@ class Tree:
     def process(self, f, n):
         print (n + str(self.tag) + " " + str(self.data) + "")
         l = n + "  ";
+        if (self.left != None):
+            print (l + "left ")
+            self.left.process(f, l + "  ")
+        if (self.right != None):
+            print (l + "right ")
+            self.right.process(f, l + "  ")
         for c in self.children:
             c.process(f, l)
 
