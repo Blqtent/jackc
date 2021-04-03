@@ -70,9 +70,9 @@ def sexpr_(f, a, tab):
             if a.data == "this":
                 w(f, "__this")
             elif a.data == "false":
-                w(f, "0")
+                w(f, "False")
             elif a.data == "true":
-                w(f, "(-1)")
+                w(f, "True")
             elif a.data == "null":
                 w(f, "None")
             else:
@@ -84,19 +84,30 @@ def sexpr_(f, a, tab):
                     expr_(f, b, tab)
             w(f, ")]")
         elif a.tag == "op":
+            ib = 0
             o = a.data
-            w(f, "(")
-            sexpr_(f, a.left, tab)
+            if o == "=":
+                o = "=="
             if (isbool(a.left) or isbool(a.right)):
+                ib = 1
                 if (o == "&"):
                     o = " and "
                 elif (o == "|"):
                     o = " or "
-            if o == "=":
-                o = "=="
+            if (ib):
+                if (o == "~"):
+                    o = "";
+                    w(f, "(False==");
+                else:
+                    w(f, "(False!=");
+
+            w(f, "(")
+            sexpr_(f, a.left, tab)
             w(f, o)
             expr_(f, a.right, tab)
             w(f, ")")
+            if (ib):
+                w(f, ")");
         elif a.tag == "paran":
             w(f, "(")
             for b in a.children:
@@ -106,7 +117,11 @@ def sexpr_(f, a, tab):
         elif (a.tag == "call"):
             call_(f, a, tab)
         elif a.tag == "unaryop":
-            w(f, a.data)
+            o = a.data
+            if (isbool(a)):
+                if (o == "~"):
+                    o = "False=="
+            w(f, o)
             expr_(f, a, tab)
 
 
@@ -220,6 +235,9 @@ def process(ast, out):
     f.write("#! /usr/bin/python3\n")
     f.write("import sys\n")
     f.write("import time\n")
+    f.write("import tty\n")
+    f.write("import termios\n")
+    f.write("import select\n")
     f.write("__memory = {}\n")
     ast.process(f, "")
     for c in ast.children:

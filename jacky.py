@@ -156,7 +156,6 @@ def expression_():
             current.children.append(rt)
             current = tree.Tree("expr", "", rt);
             rt.right = current;
-
         else:
             current = last
             return ret

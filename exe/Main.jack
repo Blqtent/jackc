@@ -17,6 +17,7 @@ class Main
 		var Array y;
 		var String s;
 		var boolean b;
+		
 		let z = 66;
 		let y = Array.new(10);
 		let s = String.new(80);
@@ -57,7 +58,23 @@ class Main
 		} else {
 			do Output.printString(s); 
 		}
+	
+		let z = 100;
+		while (z > 0) {
+			let z = z -1;
+			let s = String.new(256);
+			// do s.dispose();
+		}
+		do Output.println(); // new line
 		do Sys.wait(900);
+		do Output.println(); // new line
+		while (z = 0) {
+			//do Sys.wait(200);
+			let z = Keyboard.keyPressed();
+			//do Output.println(); // new line
+		}
+		do Output.printInt(z); 
+		do Output.println(); // new line
 		do Sys.error(-1);
 		return;
 	}

@@ -1,11 +1,20 @@
 
 class Keyboard {
 	function void init() {
+#py 	#tty.setcbreak(sys.stdin)
 		return;
 	}
 
 	function char keyPressed() {
-		return 0;
+		var int x;
+#py 	x=0
+#py 	ts = termios.tcgetattr(sys.stdin.fileno())
+//#py 	tty.setraw(sys.stdin.fileno())
+#py 	tty.setcbreak(sys.stdin.fileno())
+#py 	if select.select([sys.stdin],[],[],.01)[0]:
+#py 		x = ord(sys.stdin.read(1)[0])
+#py 	termios.tcsetattr(sys.stdin.fileno(), termios.TCSADRAIN, ts)
+		return x;
 	}
 
 	function char readChar() {
