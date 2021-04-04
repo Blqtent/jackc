@@ -88,7 +88,7 @@ def sexpr_(f, a, tab):
             o = a.data
             if o == "=":
                 o = "=="
-            if (isbool(a.left) or isbool(a.right)):
+            if (isbool(a)):
                 ib = 1
                 if (o == "&"):
                     o = " and "
@@ -109,11 +109,11 @@ def sexpr_(f, a, tab):
             if (ib):
                 w(f, ")");
         elif a.tag == "paran":
-            w(f, "(")
+            w(f, "( ")
             for b in a.children:
                 if (b.tag == "expr"):
                     expr_(f, b, tab)
-            w(f, ")")
+            w(f, " )")
         elif (a.tag == "call"):
             call_(f, a, tab)
         elif a.tag == "unaryop":
@@ -238,6 +238,8 @@ def process(ast, out):
     f.write("import tty\n")
     f.write("import termios\n")
     f.write("import select\n")
+    f.write("import atexit\n")
+    f.write("import signal\n")
     f.write("__memory = {}\n")
     ast.process(f, "")
     for c in ast.children:

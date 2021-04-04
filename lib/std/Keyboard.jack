@@ -1,18 +1,96 @@
 
 class Keyboard {
+	function void exit() {
+#py 	global ts
+#py 	if (sys.stdin.closed == 0):
+#py 		termios.tcsetattr(sys.stdin.fileno(), termios.TCSADRAIN, ts)
+		do Sys.halt();
+		return;
+	}
+
+	function void exits(int a, int b) {
+		do Keyboard.exit();
+		return;
+	}
+
 	function void init() {
-#py 	#tty.setcbreak(sys.stdin)
+#py 	global keybuf
+#py 	global keyindex
+#py 	global ts
+#py 	ts = termios.tcgetattr(sys.stdin.fileno())
+#py 	keybuf=""
+#py 	keyindex = 0;
+#py 	atexit.register(Keyboard__exit)
+#py 	signal.signal(signal.SIGINT, Keyboard__exits) # ctlr + c
+#py 	signal.signal(signal.SIGTSTP, Keyboard__exits) # ctlr + z
 		return;
 	}
 
 	function char keyPressed() {
 		var int x;
+		let x = Keyboard.getChar();
+		if (x = 10) {
+			return 128; // newline
+		}				
+		if (x = 127) {
+			return 129; //backspace
+		}		
+				
+		if (x = 27) {
+			let x = Keyboard.getChar();
+			if (x = 0) {
+				return 140; // ESC
+			}
+			//do Output.printInt(x);
+			//do Output.println();
+			if (x = 91) {
+				let x = Keyboard.getChar();
+				if (x = 65) {
+					let x = 131; // up
+				}
+				if (x = 66) {
+					let x = 133; // down
+				}
+				if (x = 67) {
+					let x = 132;  // right
+				}
+				if (x = 68) {
+					let x = 130; // left
+				}
+				// FIXME
+				// 136 page up
+				// 137 page down
+				// 138 insert
+				// 139 delete
+				// 134 home
+				// 135 end
+			} else { if (x = 79) {
+				let x = Keyboard.getChar();
+				let x = (x - 80) + 141; // F1-F10
+			} else { if (x = 50) {
+				let x = Keyboard.getChar();
+				let x = (x - 125) + 150; // 151-152 F11-F12
+			}}}
+		}
+		return x;
+	}
+
+	function char getChar() {
+#py 	global keybuf
+#py 	global keyindex
+#py 	global ts
 #py 	x=0
-#py 	ts = termios.tcgetattr(sys.stdin.fileno())
-//#py 	tty.setraw(sys.stdin.fileno())
+#py 	if (len(keybuf) > keyindex):
+#py 		x = ord(keybuf[keyindex])
+#py 		keyindex = keyindex + 1
+#py 		return x
 #py 	tty.setcbreak(sys.stdin.fileno())
-#py 	if select.select([sys.stdin],[],[],.01)[0]:
-#py 		x = ord(sys.stdin.read(1)[0])
+#py 	n = select.select([sys.stdin],[],[],.01)[0]
+#py 	if (n):
+#py 		keybuf = sys.stdin.buffer.peek(1)
+#py 		keybuf = (sys.stdin.read(len(keybuf)))
+#py 		x = ord(keybuf[0])
+#py 		keyindex = 1
 #py 	termios.tcsetattr(sys.stdin.fileno(), termios.TCSADRAIN, ts)
 		return x;
 	}
