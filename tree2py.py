@@ -137,7 +137,7 @@ def get_class(q):
         o = o.parent;
     if (o != None):
         for e in o.children:
-            if (e.tag == "vars"):
+            if (e.tag == "vars" or e.tag == "params"):
                 for t in e.children:
                     if (t.data == q.data):
                        return t.tag
@@ -149,6 +149,8 @@ def get_class(q):
             if (e.tag == "method" or e.tag == "field"):
                 if (e.data == q.parent.data):
                     return o.data
+                if (e.data == q.data):
+                    return e.children[0].data
     return q.data
 
 def call_(f, c, tab):
@@ -164,7 +166,7 @@ def call_(f, c, tab):
                     if (q.data == cla):
                         com = ""
                     else:
-                        w(f, q.data)
+                        w(f, get_var(f, q))
                         com = ", "
 
                     for e in r.children:
@@ -236,6 +238,7 @@ def process(ast, out):
     f.write("import sys\n")
     f.write("import time\n")
     f.write("import tty\n")
+    f.write("import os\n")
     f.write("import termios\n")
     f.write("import select\n")
     f.write("import atexit\n")

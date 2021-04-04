@@ -2,22 +2,54 @@
 
 class File {
 	field int fd;
+	field boolean is_write;
 	field Array buffer;
+	field String name;
 
-	constructor File new(String path, String mode) {
-
+	constructor File new(String path, boolean writeing) {
+		var int i, l;
+		let is_write = writeing;
+		let l = path.length();
+		let name = String.new(l);
+		let i = 0;
+		while (i < l) {
+			let name = name.appendChar(path.charAt(i));
+			let i = i + 1;
+		}
+#py 	m = "rb"
+#py 	if writeing:
+#py 		m = "w+b"
+#py 	if (os.path.isdir(__memory[__memory[__this+3]])==False):
+#py 		__memory[__this+0] = open(__memory[__memory[__this+3]], m)
 		return this;
 	}
 
 	method void dispose() {
+#py 	__memory[__this+0].close()
+		do name.dispose();
 		return;
 	}
 
-	method Array read() {
-		return buffer;
+	method int readByte() {
+		var int b;
+#py 	b = __memory[__this+0].read(1);
+#py 	if len(b) < 1:
+#py 		return -1
+#py 	b = b[0]
+		return b;
 	}
 
-	method int write(Array data) {
+	method int writeByte(int data) {
+		var int r;
+#py 	r = __memory[__this+0].write(bytes([data & 255]));
+		return r;
+	}
+
+	method char readUtf8() {
+		return 0;
+	}
+
+	method int writeUtf8(char data) {
 		return 0;
 	}
 
