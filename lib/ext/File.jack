@@ -45,11 +45,93 @@ class File {
 		return r;
 	}
 
-	method char readUtf8() {
-		return 0;
+	// FSS-UTF
+	method char readUtf8() {	
+		var int c, b;
+		let c = readByte();
+		if (c < 128) {
+			return c; // U+0000 U+007F
+		} else { if (c < 192) { // 128+64
+			return c; // Error unexpected trailing byte
+		} else { if (c < 224) { // b110xxxxx 128+64+32
+			let c = c & 31; 
+			let b = readByte() & 63; // b10xxxxxx 63
+			let c = b + (c * 64); 
+			return c; // U+0080 U+07FF
+		} else { if (c < 240) { // b1110xxxx 128+64+32+16
+			let c = c & 15; 
+			let b = readByte() & 63; 
+			let c = (b * 64) + (c * 4096); 
+			let b = readByte() & 63; 
+			let c = c + b; 
+			return c; // U+0800 U+FFFF
+		} else { if (c < 248) { // b11110xxx 128+64+32+16+8
+			let c = c & 7; 
+			let b = readByte() & 63; 
+			let c = (b * 4096) + (c * 262144); 
+			let b = readByte() & 63; 
+			let c = (b * 64) + c; 
+			let b = readByte() & 63; 
+			let c = c + b; 
+			return c; // U+10000 U+1FFFFF
+		} else { if (c < 252) { // b111110xx 128+64+32+16+8+4
+			let c = c & 3; 
+			let b = readByte() & 63; 
+			let c = (b * 262144) + (c * 16777216); 
+			let b = readByte() & 63; 
+			let c = (b * 4096) + c; 
+			let b = readByte() & 63; 
+			let c = (b * 64) + c; 
+			let b = readByte() & 63; 
+			let c = c + b; 
+			return c; // U+200000 U+3FFFFFF
+		} else {  // b111111xx
+			let c = c & 3; 
+			let b = readByte() & 63; 
+			let c = (b * 16777216) | (c * 1073741824);
+			let b = readByte() & 63; 
+			let c = (b * 262144) | c; 
+			let b = readByte() & 63; 
+			let c = (b * 4096) | c; 
+			let b = readByte() & 63; 
+			let c = (b * 64) | c; 
+			let b = readByte() & 63; 
+			let c = c | b; 
+			return c; // U+4000000 U+FFFFFFFF
+		}}}}}}
+		return c;
 	}
 
+	// https://www.cl.cam.ac.uk/~mgk25/ucs/utf-8-history.txt
 	method int writeUtf8(char data) {
+		if (data & 3221225472) { // 2^30 + 2^31
+			do writeByte(((data / 1073741824) & 3) | 252); // 2^30
+			do writeByte(((data / 16777216) & 63) | 128); // 2^24
+			do writeByte(((data / 262144) & 63) | 128);   // 2^18
+			do writeByte(((data / 4096) & 63) | 128);    // 2^12
+			do writeByte(((data / 64) & 63) | 128);     // 2^6
+			do writeByte(((data) & 63) | 128);
+		} else { if (data > 2097152) {
+			do writeByte(((data / 16777216) & 3) | 248);
+			do writeByte(((data / 262144) & 63) | 128);
+			do writeByte(((data / 4096) & 63) | 128);
+			do writeByte(((data / 64) & 63) | 128);
+			do writeByte(((data) & 63) | 128);
+		} else { if (data > 65535) {
+			do writeByte(((data / 262144) & 7) | 240);
+			do writeByte(((data / 4096) & 63) | 128);
+			do writeByte(((data / 64) & 63) | 128);
+			do writeByte(((data) & 63) | 128);
+		} else { if (data > 2047) {
+			do writeByte(((data / 4096) & 15) | 224);
+			do writeByte(((data / 64) & 63) | 128);
+			do writeByte(((data) & 63) | 128);
+		} else { if (data > 127) {
+			do writeByte(((data / 64) & 31) | 192);
+			do writeByte(((data) & 63) | 128);
+		} else { 
+			do writeByte(((data) & 127));
+		}}}}}
 		return 0;
 	}
 

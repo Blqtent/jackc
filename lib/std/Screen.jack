@@ -1,10 +1,20 @@
 
 class Screen {
 	function void init() {
+#py 	global tk
+#py 	tk = None
 		return;
 	}
 
-	function clearScreen init() {
+	function void clearScreen() {
+#py 	global tk
+#py 	if (tk == None):
+#py 		tk = tkinter.Tk()
+#py 		p = tkinter.PhotoImage(file ="screen.gif")
+#py 		lbl = tkinter.Label(tk, image = p)
+#py 		lbl.image = p
+#py 		lbl.grid(row=0, column=0)
+
 		return;
 	}
 

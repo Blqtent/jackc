@@ -69,6 +69,7 @@ class Main
 		do Output.println(); // new line
 		do Sys.wait(900);
 		do Output.println(); // new line
+		do Screen.clearScreen();
 		while ((z = 0) | (~(z = 65))) {
 		//while (z < 128) {
 			//do Sys.wait(200);
@@ -79,11 +80,24 @@ class Main
 			}
 		}
 		let f = File.new("test.txt", true);
-		do f.writeByte(65);
+		//do f.writeUtf8(1073741824);
+		do f.writeUtf8(233);
+		do f.writeUtf8(11918);
+		do f.writeUtf8(20479);
+		do f.writeUtf8(4294967295); // 2^32-1
+		do f.writeUtf8(4294967296); // 2^32
+		//do f.writeUtf8(-2); 
 		do f.dispose();
 		let f = File.new("test.txt", false);
-		do Output.printInt(f.readByte());
-		do Output.printInt(f.readByte());
+		do Output.printInt(f.readUtf8());
+		do Output.println(); // new line
+		do Output.printInt(f.readUtf8());
+		do Output.println(); // new line
+		do Output.printInt(f.readUtf8());
+		do Output.println(); // new line
+		do Output.printInt(f.readUtf8());
+		do Output.println(); // new line
+		do Output.printInt(f.readUtf8());
 		do f.dispose();
 		do Sys.error(-1);
 		return;

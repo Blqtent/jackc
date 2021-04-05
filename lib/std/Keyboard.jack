@@ -79,11 +79,14 @@ class Keyboard {
 #py 	global keybuf
 #py 	global keyindex
 #py 	global ts
+#py 	global tk
 #py 	x=0
 #py 	if (len(keybuf) > keyindex):
 #py 		x = ord(keybuf[keyindex])
 #py 		keyindex = keyindex + 1
 #py 		return x
+#py 	if (tk != None):
+#py 		tk.update()
 #py 	tty.setcbreak(sys.stdin.fileno())
 #py 	n = select.select([sys.stdin],[],[],.01)[0]
 #py 	if (n):

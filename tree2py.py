@@ -100,14 +100,15 @@ def sexpr_(f, a, tab):
                     w(f, "(False==");
                 else:
                     w(f, "(False!=");
+            else:
+                    w(f, "(int");
 
             w(f, "(")
             sexpr_(f, a.left, tab)
             w(f, o)
             expr_(f, a.right, tab)
             w(f, ")")
-            if (ib):
-                w(f, ")");
+            w(f, ")");
         elif a.tag == "paran":
             w(f, "( ")
             for b in a.children:
@@ -243,6 +244,7 @@ def process(ast, out):
     f.write("import select\n")
     f.write("import atexit\n")
     f.write("import signal\n")
+    f.write("import tkinter\n")
     f.write("__memory = {}\n")
     ast.process(f, "")
     for c in ast.children:
