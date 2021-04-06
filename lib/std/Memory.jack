@@ -52,11 +52,11 @@ class Memory {
 		var Array p, end;
 		var int k, n, tries;
 		var boolean doit;
-		let doit = true;
 		let tries = 0;
 		while (tries < 3) {
 			let end = arena + asize;
 			let p = freep;
+			let doit = true;
 			while (doit | (~(p = freep))) {
 				let doit = false;
 				if (p[0] > size) {
@@ -84,8 +84,9 @@ class Memory {
 				do Memory.defrag();
 			} else {
 				let k = asize;
-				let asize = asize + (size * 8);
+				let asize = asize + (size * 8) + 64;
 				let end[0] = asize - k;
+				let arena[asize - 1] = 0;
 			}
 			let tries = tries + 1;
 		}

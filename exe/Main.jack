@@ -18,6 +18,7 @@ class Main
 		var String s;
 		var boolean b;
 		var File f;
+		var Gif g;
 
 		let z = 66;
 		let y = Array.new(10);
@@ -78,6 +79,7 @@ class Main
 				do Output.printInt(z); 
 				do Output.println(); // new line
 			}
+			let z = 65;
 		}
 		let f = File.new("test.txt", true);
 		//do f.writeUtf8(1073741824);
@@ -107,6 +109,8 @@ class Main
 		do Output.printInt(f.readInt32());
 		do Output.println(); // new line
 		do f.dispose();
+		let g = Gif.new();
+		let y = g.readFile("screen.gif");
 		do Sys.error(-1);
 		return;
 	}

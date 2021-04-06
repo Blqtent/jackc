@@ -1,0 +1,53 @@
+
+class Buffer {
+	field Array buffer;
+	field int size;
+	field int pos;
+
+	constructor Buffer new() {
+		let buffer = Array.new(256);
+		let size = 256;
+		let pos = 0;
+		return this;
+	}
+	
+	method void dispose() {
+		do buffer.dispose();
+		do Memory.deAlloc(this);
+	}
+
+	method int intAt(int p) {
+		return buffer[p];
+	}
+
+	method void setAt(int p, int data) {
+		do checkSize(p);
+		let buffer[p] = data;
+		return;
+	}
+
+	method void append(int data) {
+		do checkSize(pos);
+		let buffer[pos] = data;
+		let pos = pos + 1;
+		return;
+	}
+
+	method void checkSize(int idx) {
+		var Array b;
+		var int i;
+		var int ns;
+		if (dx > (size - 1)) {
+			let ns = size + idx + 32;
+			let b = Array.new(ns);
+			let i = 0;
+			while (i < size) {
+				let b[i] = buffer[i];
+				let i = i + 1;
+			}
+			let size = ns;
+		}
+		return;
+	}		
+
+}

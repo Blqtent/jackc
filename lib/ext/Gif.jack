@@ -1,0 +1,207 @@
+
+class Gif {
+	field File fd;
+	field Array in;
+	field int in_pos;
+	
+	field int w;	// int32
+	field int h;	// int32
+	field Buffer out;	// byte * // 4 components
+	field Buffer background;	// byte * 
+	field Buffer history;	// byte *
+	field int flags;	// int32
+	field int bgindex;	// int32
+	field int ratio;	// int32
+	field int tranparent;	// int32
+	field int eflags;	// int32
+	field Array pal;	// byte[256][4]
+	field Array lpal;	// byte[256][4]
+	field Array codes;	// gif_lzw[8192]
+	field Array color_table;	// byte *
+	field int parse;	// int32
+	field int step;	// int32
+	field int lflags;	// int32
+	field int start_x;	// int32
+	field int start_y;	// int32
+	field int max_x;	// int32
+	field int max_y;	// int32
+	field int cur_x;	// int32
+	field int cur_y;	// int32
+	field int line_size;	// int32
+	field int delay;	// int32
+	field int version;	// byte
+	field int comp;		// byte
+	
+	constructor Gif new() {
+		var int i;
+		let in_pos = 0;
+		let fd = 0;
+		let in = 0;
+
+		let w = 0;	// int32
+		let h = 0;	// int32
+		let out = Buffer.new();	// byte * // 4 components
+		let background = Buffer.new();	// byte * 
+		let history = Buffer.new();	// byte *
+		let flags = 0;	// int32
+		let bgindex = 0;	// int32
+		let ratio = 0;	// int32
+		let tranparent = 0;	// int32
+		let eflags = 0;	// int32
+		let pal = Array.new(256);	// byte[256][4]
+		let lpal = Array.new(256);	// byte[256][4]
+		let codes = Array.new(8192);
+		let version = 0;
+		let comp = 0;
+		let i = 0;
+		while (i < 8192) {
+			let codes[i] = GifLzw.new();	
+			let i = i + 1;
+		}
+		let color_table = Buffer.new();	
+		let parse = 0;
+		let step = 0;	
+		let lflags = 0;	
+		let start_x = 0;
+		let start_y = 0;
+		let max_x = 0;	
+		let max_y = 0;
+		let cur_x = 0;	
+		let cur_y = 0;	
+		let line_size = 0;
+		let delay = 0;
+		return this;
+	}
+
+	method void dispose() {
+		var int i;
+		var GifLzw g;
+		if (fd) {
+			do fd.dispose();
+		}
+		do out.dispose();
+		do pal.dispose();
+		let i = 0;
+		while (i < 8192) {
+			let g = codes[i];
+			do g.dispose();
+			let i = i + 1;
+		}
+		do codes.dispose();
+		do Memory.deAlloc(this);
+	}
+
+	method int get8() {
+		var int r;
+		if (fd) {
+			return fd.readByte();
+		}
+		if (in) {
+			let r = in[in_pos]; // possible buffer overflow
+			let in_pos = in_pos + 1;
+			return r;
+		}
+		return -1;
+	}
+
+	method int get16le() {
+		var int r;
+		let r = get8();
+		let r = r + (get8() * 256);
+		return r;
+	}
+
+	method void parseColortable(Array pal, int num_entries, int transp) {
+		var int i, n;
+		let i = 0;
+		
+		while (i < num_entries) {
+			let n = get8() * 65536;
+			let n = n + (get8() * 256);
+			let n = n + get8();
+			if (transp = 0) {
+				let n = n + (255 * 16777216); 
+			}
+			let pal[i] = n;
+			let i = i + 1;
+		}
+		return;
+	}
+
+	method boolean header() {
+		if (testRaw()) {
+			let w = get16le();	
+			let h = get16le();	
+			let flags = get8();	
+			let bgindex = get8();	
+			let ratio = get8();	
+			let tranparent = -1;
+			if ((w > 100000) | (h > 10000)) {
+				return false;
+			}
+			let comp = 4;
+				
+			if (flags & 128) {	
+				do parseColortable(pal, 
+					Math2.shiftLeft(2, (flags&7)), -1);
+			}
+			return true;
+		}
+
+		return false;
+	}
+
+	method boolean testRaw() {
+		var int sz;
+		if ((get8()=71) & (get8()=73) & (get8()=70) & (get8()=56)) {
+			// "GIF8"
+			let version = get8();
+			if ((version = 55) | (version = 57)) {
+				if (get8()=97) {
+					do Output.printString("GIF8");
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	method void outGifCode(int code) {
+		var GifLzw g;
+		var Array p;
+		var Array c;
+		var int idx;
+
+		let g = codes[code];
+		if (g.getPrefix() > (-1)) {
+			do outGif(g.getPrefix());
+		}
+		if (cur_y > (max_y - 1)) {
+			return;
+		}
+
+		return;
+	}
+
+	method Array readFile(String f) {
+		let fd = File.new(f, false);
+		if (header()) {
+			return out;
+		}
+		do fd.dispose();
+		let fd = 0;
+		return 0;
+	}
+
+	method void WriteFile(String f) {
+		return;
+	}
+
+	method Array readArray(Array a) {
+		return 0;
+	}
+
+	method void WriteArray(Array src, Array dest) {
+		return;
+	}
+}

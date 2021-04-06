@@ -1,0 +1,19 @@
+
+class Math2 {
+	function int shiftLeft(int value, int shift) {
+		while (shift > 0) {
+			let value = value * 2;
+			let shift = shift - 1;
+		}
+		return value;
+	}
+
+	function int shiftRight(int value, int shift) {
+		while (shift > 0) {
+			let value = value / 2;
+			let shift = shift - 1;
+		}
+		return value;
+	}
+}
+
