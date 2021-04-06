@@ -134,6 +134,43 @@ class File {
 		}}}}}
 		return 0;
 	}
+	
+	// little endian
+	method int writeInt16(int d) {
+		do writeByte(d & 255); 
+		return writeByte((d / 256) & 255);
+	}
+
+	method int writeInt32(int d) {
+		do writeInt16(d);
+		return writeInt16(d / 65536);
+	}
+
+	method int writeInt64(int d) {
+		do writeInt32(d);
+		return writeInt32((d / 2147483648) / 2);
+	}
+
+	method int readInt16() {
+		var int d;
+		let d = readByte();
+		let d =  d + (readByte() * 256);
+		return d;
+	}
+
+	method int readInt32() {
+		var int d;
+		let d = readInt16();
+		let d =  d + (readInt16() * 65536);
+		return d;
+	}
+
+	method int readInt64() {
+		var int d;
+		let d = readInt32();
+		let d =  d + ((readInt32() * 2147483648) * 2);
+		return d;
+	}
 
 	method boolean delete() {
 		return 0;

@@ -98,6 +98,14 @@ class Main
 		do Output.printInt(f.readUtf8());
 		do Output.println(); // new line
 		do Output.printInt(f.readUtf8());
+		do Output.println(); // new line
+		do f.dispose();
+		let f = File.new("test.txt", true);
+		do f.writeInt32(65536 + 2);
+		do f.dispose();
+		let f = File.new("test.txt", false);
+		do Output.printInt(f.readInt32());
+		do Output.println(); // new line
 		do f.dispose();
 		do Sys.error(-1);
 		return;
