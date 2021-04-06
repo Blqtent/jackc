@@ -19,6 +19,8 @@ class Main
 		var boolean b;
 		var File f;
 		var Gif g;
+		var Buffer d;
+		var int q;
 
 		let z = 66;
 		let y = Array.new(10);
@@ -110,7 +112,25 @@ class Main
 		do Output.println(); // new line
 		do f.dispose();
 		let g = Gif.new();
-		let y = g.readFile("screen.gif");
+		let d = g.readFile("screen.gif");
+		do Output.printString("S = ");
+		do Output.printInt(d.getSize());
+		do Output.printString("W = ");
+		do Output.printInt(g.getW());
+		do Output.printString("H = ");
+		do Output.printInt(g.getH());
+		do Output.println(); // new line
+		let f = File.new("test.txt", true);
+		let z = d.getSize();
+		while (z > 0) {
+			let z = z -1;
+			let q = d.getAt(z);
+			if (q > 0) {
+				do Output.printInt(q);
+			}
+			do f.writeInt32(q);
+		}
+		do f.dispose();
 		do Sys.error(-1);
 		return;
 	}

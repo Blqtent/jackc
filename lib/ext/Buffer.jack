@@ -4,9 +4,9 @@ class Buffer {
 	field int size;
 	field int pos;
 
-	constructor Buffer new() {
-		let buffer = Array.new(256);
-		let size = 256;
+	constructor Buffer new(int initial) {
+		let buffer = Array.new(initial);
+		let size = initial;
 		let pos = 0;
 		return this;
 	}
@@ -16,13 +16,18 @@ class Buffer {
 		do Memory.deAlloc(this);
 	}
 
-	method int intAt(int p) {
+	method int getAt(int p) {
 		return buffer[p];
 	}
 
 	method void setAt(int p, int data) {
 		do checkSize(p);
 		let buffer[p] = data;
+/*
+		do Output.printString("AAA");
+		do Output.printInt(size);
+		do Output.println();
+*/
 		return;
 	}
 
@@ -37,7 +42,7 @@ class Buffer {
 		var Array b;
 		var int i;
 		var int ns;
-		if (dx > (size - 1)) {
+		if (idx > (size - 1)) {
 			let ns = size + idx + 32;
 			let b = Array.new(ns);
 			let i = 0;
@@ -46,8 +51,13 @@ class Buffer {
 				let i = i + 1;
 			}
 			let size = ns;
+			do buffer.dispose();
+			let buffer = b;
 		}
 		return;
 	}		
 
+	method int getSize() {
+		return size;
+	}
 }
