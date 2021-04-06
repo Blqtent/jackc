@@ -15,5 +15,15 @@ class Math2 {
 		}
 		return value;
 	}
+
+	function int rem(int a, int b) {
+		var int c;
+		if (b = 0) {
+			return 0;
+		}
+		let c = a / b;
+		let c = c * b;
+		return a - c;
+	}
 }
 

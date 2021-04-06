@@ -125,10 +125,16 @@ class Main
 		while (z > 0) {
 			let z = z -1;
 			let q = d.getAt(z);
-			if (q > 0) {
-				do Output.printInt(q);
+			if (q = 0) {
+				do f.writeByte(66);
+			} else {
+				do f.writeByte(65);
 			}
-			do f.writeInt32(q);
+			//do Output.printInt(Math2.rem(z, g.getW()));
+			//do Output.println(); // new line
+			if (Math2.rem(z, g.getW()) = 0) {
+				do f.writeByte(10);
+			}
 		}
 		do f.dispose();
 		do Sys.error(-1);

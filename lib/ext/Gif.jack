@@ -121,7 +121,7 @@ class Gif {
 		return r;
 	}
 
-	method void parseColortable(Array pal, int num_entries, int transp) {
+	method void parseColortable(Array pal_, int num_entries, int transp) {
 		var int i, n;
 		let i = 0;
 		
@@ -132,7 +132,7 @@ class Gif {
 			if (transp = 0) {
 				let n = n + (255 * 16777216); 
 			}
-			let pal[i] = n;
+			let pal_[i] = n;
 			let i = i + 1;
 		}
 		return;
@@ -168,7 +168,6 @@ class Gif {
 			let version = get8();
 			if ((version = 55) | (version = 57)) {
 				if (get8()=97) {
-					do Output.printString("GIF8");
 					return true;
 				}
 			}
@@ -193,6 +192,7 @@ class Gif {
 		let idx = cur_x + cur_y;
 		do history.setAt(idx, 1);
 		do out.setAt(idx, color_table[g.getSuffix()]);
+		//do error(cur_x,color_table, " process ");
 		let cur_x = cur_x + 1;
 	
 		if (cur_x > (max_x - 1)) {
@@ -249,9 +249,6 @@ class Gif {
 		let avail = clear + 2;
 		let oldcode = -1;
 		let len = 0;
-			do Output.printString("HH");
-			do Output.printInt(out.getSize());
-			do Output.printString("HH");
 		while (true) {
 			if (valid_bits < codesize) {
 				if (len = 0) {
@@ -306,6 +303,7 @@ class Gif {
 					} else { if (code_ = avail) {
 						return null; // illegal code
 					}}
+
 					do outGifCode(code_);
 					if (((avail & codemask) = 0) &
 						(avail < 40969)) 
@@ -402,8 +400,13 @@ class Gif {
 				let lflags = get8();
 				if (lflags & 64) {
 					let step = 2 * line_size; // FIXME is 8 or 2
+					let parse = 3;
+				} else {
+					let step = line_size;
 					let parse = 0;
 				}
+				//do error(w_, lflags, "step");
+				//do Sys.halt();
 				if (lflags & 128) {
 					let tmp = -1;
 					if (eflags & 1) {
@@ -419,9 +422,6 @@ class Gif {
 					return null; // missing color table
 				}}
 				let o = processGifRaster();
-			do Output.printString("KK");
-			do Output.printInt(out.getSize());
-			do Output.printString("KK");
 				if (o = null) {
 					return null;
 				}
@@ -438,9 +438,6 @@ class Gif {
 						}
 						let pi = pi + 1;
 					}
-			do Output.printString("KK");
-			do Output.printInt(out.getSize());
-			do Output.printString("KK");
 				}
 				return o;
 			} else { if (tag = 33) {
@@ -487,15 +484,21 @@ class Gif {
 		return out;
 	}
 
+	method void error(int e, int d, String a) {
+		do Output.printString(a);
+		do Output.printInt(e);
+		do Output.printString(" ");
+		do Output.printInt(d);
+		do Output.println();
+		return;
+	}
+
 	method Buffer loadMain() {
 		var Buffer o;
 		let o = null;
 		if (header()) {
 			let o = loadNext(null);
 		}
-		do Output.printString("Bad gif!");
-		do Output.printInt(o);
-		do Output.printString("Bad gif!");
 		return out;
 	}
 
