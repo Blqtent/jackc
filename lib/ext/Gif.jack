@@ -1,4 +1,6 @@
 
+// https://github.com/nothings/stb/
+
 class Gif {
 	field File fd;
 	field Array in;
@@ -129,10 +131,18 @@ class Gif {
 			let n = get8() * 65536;
 			let n = n + (get8() * 256);
 			let n = n + get8();
-			if (transp = 0) {
+			if (transp = i) {
 				let n = n + (255 * 16777216); 
 			}
 			let pal_[i] = n;
+/*
+			do Output.printString("	let map[");
+			do Output.printInt(i);
+			do Output.printString("] = ");
+			do Output.printInt(n);
+			do Output.printString(";");
+			do Output.println();
+*/
 			let i = i + 1;
 		}
 		return;
@@ -192,7 +202,7 @@ class Gif {
 		let idx = cur_x + cur_y;
 		do history.setAt(idx, 1);
 		do out.setAt(idx, color_table[g.getSuffix()]);
-		//do error(cur_x,color_table, " process ");
+		//do error(g.getSuffix(),color_table[g.getSuffix()],"  KKK");
 		let cur_x = cur_x + 1;
 	
 		if (cur_x > (max_x - 1)) {
@@ -238,7 +248,7 @@ class Gif {
 		let bits = 0;
 		let valid_bits = 0;
 		let init_code = 0;
-		while (init_code < clear) {
+		while (init_code < clear ) {
 			let g = codes[init_code];
 			do g.setPrefix(-1);
 			do g.setFirst(init_code);
@@ -297,6 +307,7 @@ class Gif {
 							do p.setSuffix(
 								p.getFirst());
 						} else {
+							let g = codes[code_];
 							do p.setSuffix(
 								g.getFirst());
 						}
@@ -306,7 +317,7 @@ class Gif {
 
 					do outGifCode(code_);
 					if (((avail & codemask) = 0) &
-						(avail < 40969)) 
+						(avail < 4096)) 
 					{
 						let codesize = codesize + 1;
 						let codemask = Math2.shiftLeft(
@@ -332,7 +343,10 @@ class Gif {
 		var int x_, y_, w_, h_;
 		var Buffer o;
 		var int tmp;
+		var boolean BREAK;
 
+
+		let o = null;
 		if (out = null) {
 			let pcount = w * h;
 			let out = Buffer.new(pcount);
@@ -361,7 +375,7 @@ class Gif {
 			} else { if (dispose_ = 2) {
 				let pi = 0;
 				while (pi < count) {
-					do out.setAt(i, background.getAt(i));
+					do out.setAt(pi, background.getAt(i));
 					let pi = pi + 1;
 				}
 			}}
@@ -378,6 +392,7 @@ class Gif {
 			let i = i + 1;
 		}
 		while (true) {
+			let BREAK = true;
 			let tag = get8();
 			if (tag = 44) {
 				let x_ = get16le();
@@ -434,7 +449,7 @@ class Gif {
 								pal[bgindex] |
 								4278190080; 
 							do out.setAt(pi,
-							  pal.getAt(bgindex));
+							  pal[bgindex]);
 						}
 						let pi = pi + 1;
 					}
@@ -446,7 +461,7 @@ class Gif {
 					let len = get8();
 					if (len = 4) {
 						let eflags = get8();
-						let delay = get16le();
+						let delay = 10 * get16le();
 						if (tranparent > -1) {
 						    let pal[transparent] =
 							pal[transparent] |
@@ -456,7 +471,7 @@ class Gif {
 						  let transparent = get8();
 						  if (tranparent > -1) {
 						     let pal[transparent] =
-							pal[transparent] |
+							pal[transparent] &
 								4278190080;
 								
 						  } else {
@@ -465,18 +480,23 @@ class Gif {
 						  }
 						} else {
 							do skip(len);
+							let BREAK = false;
 						}
 					}
-					let len = get8();
-					while (len > 0) {
-						do skip(len);
+				/*	if (BREAK) {
 						let len = get8();
+						while (~(len = 0)) {
+							do skip(len);
+							let len = get8();
+						}
+						let BREAK = false;
 					}
+				*/
 				}
-				return s;
 			} else { if (tag = 59) {
-				return s;
+				return o;
 			} else {
+				let i = i;
 				return null; // unknown code
 			}}}
 		}
@@ -499,7 +519,7 @@ class Gif {
 		if (header()) {
 			let o = loadNext(null);
 		}
-		return out;
+		return o;
 	}
 
 	method int getW() {

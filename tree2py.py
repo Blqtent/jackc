@@ -18,7 +18,7 @@ def isbool(a):
             return 1
     if (a.right and isbool(a.right)):
             return 1
-    if (a.data == "="or a.data == "~" or a.data == ">" or a.data == "<"
+    if (a.data == "="or a.data == ">" or a.data == "<"
             or a.data == "true" or a.data == "false"):
         return 1
     if (get_class(a) == "boolean"):

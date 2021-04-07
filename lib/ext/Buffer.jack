@@ -57,6 +57,10 @@ class Buffer {
 		return;
 	}		
 
+	method Array getArray() {
+		return buffer;
+	}
+
 	method int getSize() {
 		return size;
 	}

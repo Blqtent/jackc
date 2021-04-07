@@ -21,6 +21,7 @@ class Main
 		var Gif g;
 		var Buffer d;
 		var int q;
+		var GifWriter w;
 
 		let z = 66;
 		let y = Array.new(10);
@@ -120,6 +121,11 @@ class Main
 		do Output.printString("H = ");
 		do Output.printInt(g.getH());
 		do Output.println(); // new line
+		
+		let w = GifWriter.new();
+		do w.writeFile("test2.gif", d, g.getW(), g.getH());
+		do w.dispose();
+ 
 		let f = File.new("test.txt", true);
 		let z = d.getSize();
 		while (z > 0) {
@@ -136,6 +142,7 @@ class Main
 				do f.writeByte(10);
 			}
 		}
+		do Output.printInt(Math2.xor(3, 6));
 		do f.dispose();
 		do Sys.error(-1);
 		return;
