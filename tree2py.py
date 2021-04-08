@@ -99,11 +99,11 @@ def sexpr_(f, a, tab):
                     o = "";
                     w(f, "(False==");
                 else:
-                    w(f, "(");
+                    w(f, "(False!=");
             elif (o == "/" or o == "*"):
                     w(f, "(int");
             else:
-                    w(f, "(");
+                    w(f, "(int");
 
             w(f, "(")
             sexpr_(f, a.left, tab)
@@ -231,7 +231,7 @@ def statements_(f, b, tab):
                                 expr_(f, k, "")
                     elif (e.tag == "array"):
                         is_array = 1
-                        w(f, tab + "__memory[" + get_var(f, c)+ " +(")
+                        w(f, tab + "__memory[" + get_var(f, c)+ " +int(")
                         for k in e.children:
                             if (k.tag == "expr"):
                                 expr_(f, k, "")

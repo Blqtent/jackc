@@ -388,7 +388,7 @@ class GifWriter {
 		int numColors)
 	{
 		let map[0] = 0;
-		let map[1] = 8388608;
+		let map[1] = 16777215;
 		let map[2] = 32768;
 		let map[3] = 8421376;
 		let map[4] = 128;
@@ -642,13 +642,16 @@ class GifWriter {
 		let map[252] = 255;
 		let map[253] = 16711935;
 		let map[254] = 65535;
-		let map[255] = 16777215;
+		let map[255] = 8388608;
 		return;
 	}
 
 	method boolean writeFile(String file, Buffer data, int w, int h) {
+		if ((w < 1) | (h < 1)) {
+			return false;
+		}
 		let fp = File.new(file, true);
-		do start(w, h, 0, 32);
+		do start(w, h, 0, 2);
 		do frame_(data, 4, false);
 		do end();	
 		do fp.dispose();

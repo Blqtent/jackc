@@ -114,6 +114,12 @@ class Main
 		do f.dispose();
 		let g = Gif.new();
 		let d = g.readFile("screen.gif");
+		if (d = null) {
+			do g.dispose();
+			let g = Gif.new();
+			do Output.printString(" NULL ");
+			let d = Buffer.new(0);
+		}
 		do Output.printString("S = ");
 		do Output.printInt(d.getSize());
 		do Output.printString("W = ");
@@ -138,7 +144,7 @@ class Main
 			}
 			//do Output.printInt(Math2.rem(z, g.getW()));
 			//do Output.println(); // new line
-			if (Math2.rem(z, g.getW()) = 0) {
+			if ((g.getW() > 0) & (Math2.rem(z, g.getW())) = 0) {
 				do f.writeByte(10);
 			}
 		}
