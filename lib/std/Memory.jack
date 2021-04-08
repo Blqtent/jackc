@@ -50,9 +50,12 @@ class Memory {
 
 	function Array alloc(int size) {
 		var Array p, end;
-		var int k, n, tries;
+		var int k, n, tries, i,j;
 		var boolean doit;
 		let tries = 0;
+		let i = 0;
+		let j = 0;
+#py 	global __memory	
 		while (tries < 3) {
 			let end = arena + asize;
 			let p = freep;
@@ -85,6 +88,14 @@ class Memory {
 			} else {
 				let k = asize;
 				let asize = asize + (size * 8) + 64;
+#py 			__m = (Memory__arena + Memory__asize) * [0]
+				let i = 0;
+				let j = arena + k;
+				while (i < j) {
+#py 				__m[i] = __memory[i]
+					let i = i + 1;		
+				}
+#py 			__memory = __m
 				let end[0] = asize - k;
 				let arena[asize - 1] = 0;
 			}

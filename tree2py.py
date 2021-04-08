@@ -99,9 +99,11 @@ def sexpr_(f, a, tab):
                     o = "";
                     w(f, "(False==");
                 else:
-                    w(f, "(False!=");
-            else:
+                    w(f, "(");
+            elif (o == "/" or o == "*"):
                     w(f, "(int");
+            else:
+                    w(f, "(");
 
             w(f, "(")
             sexpr_(f, a.left, tab)
@@ -154,8 +156,38 @@ def get_class(q):
                     return e.children[0].data
     return q.data
 
+def replace(f, c ,tab):
+    key = "";
+    for q in c.children:
+        if q.tag == "classo":
+            if (q.data == "Math2"):
+                if (c.data == "xor"):
+                    key = "^"
+                elif (c.data == "shiftRight"):
+                    key = ">>"
+                elif (c.data == "shiftLeft"):
+                    key = "<<"
+                elif (c.data == "rem"):
+                    key = "%"
+            if (key != ""):
+                w(f, "(")
+                for r in c.children:
+                    if r.tag == "args":
+                        i = 0
+                        for e in r.children:
+                            if (i == 1):
+                                w(f, key)
+                            if (len(e.children) > 0):
+                                expr_(f, e, "")
+                            i = i + 1
+                w(f, ")")
+                return True
+        return False
+
 def call_(f, c, tab):
     cla = ""
+    if replace(f,c,tab):
+        return;
     for q in c.children:
         if q.tag == "classo":
             cla = get_class(q) 
@@ -245,7 +277,7 @@ def process(ast, out):
     f.write("import atexit\n")
     f.write("import signal\n")
     f.write("import tkinter\n")
-    f.write("__memory = {}\n")
+    f.write("__memory = 100000 * [0]\n")
     ast.process(f, "")
     for c in ast.children:
         if (c.tag == "class"):

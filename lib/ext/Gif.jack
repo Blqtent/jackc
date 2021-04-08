@@ -136,7 +136,7 @@ class Gif {
 			}
 			let pal_[i] = n;
 /*
-			do Output.printString("	let map[");
+			do Output.printString("		let map[");
 			do Output.printInt(i);
 			do Output.printString("] = ");
 			do Output.printInt(n);
@@ -483,7 +483,7 @@ class Gif {
 							let BREAK = false;
 						}
 					}
-				/*	if (BREAK) {
+					if (BREAK) {
 						let len = get8();
 						while (~(len = 0)) {
 							do skip(len);
@@ -491,7 +491,7 @@ class Gif {
 						}
 						let BREAK = false;
 					}
-				*/
+				
 				}
 			} else { if (tag = 59) {
 				return o;
