@@ -50,18 +50,34 @@ def get_var(f, a):
                 if (b.data == a.data):
                     return "__memory[__this+" + str(nf) + "]" 
                 nf += 1
-    return a.data
+    v = a.data
+    if (v == "this"):
+        v = "__this"
+    return v
 
 def expr_(f, e, tab):
     for a in e.children:
         sexpr_(f, a, tab)
 
+def static_end():
+    i = 0
+    n = 1;
+    while (i < stati):
+        i += 1;
+        j = 0
+        n += 1
+        for m in memory[i]:
+            if (m != '"'):
+                n += 1
+        n += 1
+    return n + 1;
+
 def sexpr_(f, a, tab):
         global stati
         if a.tag == "string":
+            w(f, str(static_end()))
             stati = stati + 1
             memory[stati] = a.data
-            w(f, str(stati))
         elif a.tag == "expr":
             expr_(f, a, tab)
         elif a.tag == "int":
@@ -74,11 +90,12 @@ def sexpr_(f, a, tab):
             elif a.data == "true":
                 w(f, "True")
             elif a.data == "null":
-                w(f, "None")
+                w(f, "0")
             else:
                 w(f, get_var(f, a))
         elif a.tag == "arrayvar":
-            w(f, "__memory[" + get_var(f, a) + "+(")
+            v = get_var(f, a);
+            w(f, "__memory[" + v + "+(")
             for b in a.children:
                 if (b.tag == "expr"):
                     expr_(f, b, tab)
@@ -277,7 +294,10 @@ def process(ast, out):
     f.write("import atexit\n")
     f.write("import signal\n")
     f.write("import tkinter\n")
-    f.write("__memory = 100000 * [0]\n")
+    f.write("import array\n")
+    f.write("__NativeObject = {}\n")
+    f.write("__NativeObjectId = -1\n")
+    f.write("__memory = array.array('l', 100000 * [0])\n")
     ast.process(f, "")
     for c in ast.children:
         if (c.tag == "class"):
@@ -338,10 +358,23 @@ def process(ast, out):
                             vars_(f,b)
                     w(f, "\n")
     i = 0
+    n = 1;
     while (i < stati):
         i += 1;
-        w(f, "__memory[" + str(i) + "] = " + escape(memory[i]) + "\n")
-    f.write("__memory[0] = " + str(stati + 1) +  "\n")
+        j = 0
+        k = 2
+        for m in memory[i]:
+            if (m != '"'):
+                k = k + 1
+        w(f, "__memory[" + str(n) + "] = " + str(-k) + "\n") # memory alloc
+        n += 1
+        for m in memory[i]:
+            if (m != '"'):
+                w(f, "__memory[" + str(n) + "] = " + str(ord(m)) + "\n") 
+                n += 1
+        w(f, "__memory[" + str(n) + "] = 0\n")
+        n += 1
+    f.write("__memory[0] = -" + str(n) +  "\n")
     w(f, "Sys__init()\n")
     f.close
 

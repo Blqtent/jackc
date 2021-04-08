@@ -7,32 +7,61 @@ class File {
 	field String name;
 
 	constructor File new(String path, boolean writeing) {
-		var int i, l;
+		var int i, l, c;
+		var Array n;
+		var int f;
+#py 	global __NativeObjectId 
+#py 	n = ""
+		let fd = -1;
 		let is_write = writeing;
 		let l = path.length();
+		if (l < 1) {
+			return this;
+		}
 		let name = String.new(l);
 		let i = 0;
 		while (i < l) {
-			let name = name.appendChar(path.charAt(i));
+			let c = path.charAt(i);
+			if (c < 0) {
+				let c = 0;
+			}
+#py 		n = n + chr(c) 
+			let name = name.appendChar(c);
 			let i = i + 1;
 		}
+		let f = -1;
 #py 	m = "rb"
 #py 	if writeing:
 #py 		m = "w+b"
-#py 	if (os.path.isdir(__memory[__memory[__this+3]])==False):
-#py 		__memory[__this+0] = open(__memory[__memory[__this+3]], m)
+#py 	if (os.path.isdir(n)==False):
+#py 		__NativeObjectId = __NativeObjectId + 1
+#py 		f = __NativeObjectId 
+#py 		__NativeObject[__NativeObjectId] = open(n, m)
+		let fd = f;
 		return this;
 	}
 
 	method void dispose() {
-#py 	__memory[__this+0].close()
+		var int f;
+		let f = fd;
 		do name.dispose();
+		if (fd < 0) {
+			return;
+		}
+#py 	__NativeObject[f].close()
+#py 	del __NativeObject[f]
+		do Memory.deAlloc(this);
 		return;
 	}
 
 	method int readByte() {
 		var int b;
-#py 	b = __memory[__this+0].read(1);
+		var int f;
+		let f = fd;
+		if (fd < 0) {
+			return;
+		}
+#py 	b = __NativeObject[f].read(1)
 #py 	if len(b) < 1:
 #py 		return -1
 #py 	b = b[0]
@@ -41,7 +70,12 @@ class File {
 
 	method int writeByte(int data) {
 		var int r;
-#py 	r = __memory[__this+0].write(bytes([data & 255]));
+		var int f;
+		let f = fd;
+		if (fd < 0) {
+			return;
+		}
+#py 	r = __NativeObject[f].write(bytes([data & 255]));
 		return r;
 	}
 

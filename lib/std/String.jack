@@ -8,11 +8,10 @@
  */
 
 class String {
-	field Array str;
-
-	constructor String new(int maxLength) {
-#py 	__memory[__this] = ""	
-		return this;
+	function String new(int maxLength) {
+		var Array str;
+		let str = Array.new(maxLength);
+		return str;
 	}
 
 	method void dispose() {
@@ -22,41 +21,85 @@ class String {
 
 	method int length() {
 		var int l;
-#py 	l=len(__memory[__this])
+		let l = 0;
+		while (this[l]) {
+			let l = l + 1;
+		}
 		return l;
 	}
 
 	method char charAt(int a) {
 		var char ret;
-#py 	ret =  ord(__memory[__this][a])	
+		let ret = this[a];
 		return ret;
 	}
 
 	method void setCharAt(int j, char c) {
-#py 	m = __memory[__this][:j]	
-#py 	n = __memory[__this][j+1:]	
-#py 	__memory[__this]=m + chr(c) + n;	
+		let this[j] = c;
 		return;
 	}
 	
 	method String appendChar(char c) {
-#py 	__memory[__this] = __memory[__this] + chr(c)	
-		return this;
+		var int l, i;
+		var int max;
+		var String b;
+		let max = Math.abs(this[-1])-1;
+		let l = length();
+		if (l < (max - 1)) {
+			let this[l] = c;
+			let this[l + 1] = 0;
+			return this;
+		}
+		let b = String.new(l * 2 + 4);
+		let i = 0;
+		while (i < l) {
+			let b[i] = this[i];
+			let i = i + 1;
+		}
+		let b[l] = c;
+		let b[l + 1] = 0;
+		do this.dispose();
+		return b;
 	}
 
 	method void eraseLastChar() {
-#py 	__memory[__this]=__memory[__this][:-1];	
+		var int l;
+		let l = length();
+		if (l > 0) {
+			let this[l-1] = 0;
+		}
 		return;
 	}
 	
 	method int intValue() {
-		var int v;
-#py 	v=int(__memory[__this]);	
-		return v;
+		var int v, s;
+		let v = 0;
+		let s = 1;
+		let d = this[0];
+		let i = 1;
+		if (d = 45) {
+			let s = -1;
+			let d = this[i];
+			let i = i + 1;
+		}
+		while ((d > 47) & (d < 58)) {
+			let v = v * 10;
+			let v = v + d - 48;
+			let d = this[i];
+			let i = i + 1;
+		} 
+		return v * s;
 	}
 	
 	method void setInt(int j) {
-#py 	__memory[__this]=str(j);	
+		var int n, r;
+		let this[0] = 0;
+		let n = 1000000000;
+		while (n > 0) {
+			do appendChar((j / n) + 48);
+			let j = Math2.rem(j, n);
+			let n = n / 10;
+		}
 		return;
 	}
 

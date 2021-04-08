@@ -16,8 +16,14 @@ class Output {
 #py 	sys.stdout.write("\033[%d;%dH" % (y, x))
 		return;
 	}
+
 	function void printString(String s) {
-#py 	sys.stdout.write(__memory[s])
+		var int l;
+		let i = 0;
+		while (s[i]) {
+			do Output.printChar(s[i]);
+			let i = i + 1;
+		}
 		return;
 	}
 
@@ -27,6 +33,9 @@ class Output {
 	}
 	
 	function void printChar(char c) {
+		if ((c > 1114111) | (c < 0)) {
+			return;
+		}
 #py 	sys.stdout.write(chr(c))
 	}
 

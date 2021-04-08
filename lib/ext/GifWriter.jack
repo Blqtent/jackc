@@ -60,7 +60,7 @@ class GifWriter {
 	}
 
 	method void lzwWrite(int code) {
-		var int i;
+		var int i, j;
 		let outBits = outBits | Math2.shiftLeft(code, curBits);
 		let curBits = curBits + numBits;
 		while (curBits > 7) {
@@ -71,7 +71,8 @@ class GifWriter {
 			if (idx > 254) {
 				do out8(idx);
 				let i = 0;
-				while (i < idx) {
+				let j = idx;
+				while (i < j) {
 					do out8(buf[i]);
 					let i = i + 1;
 				}
@@ -93,6 +94,7 @@ class GifWriter {
 		var int c;
 		var int fcode;
 		var int key;
+		var int kk;
 		var boolean CONTINUE;
 
 		let numBits = 9;
@@ -103,7 +105,6 @@ class GifWriter {
 		let hashTbl = Array.new(hashSize);
 		let i = 0;
 		while (i < hashSize) {
-			let codetab[i] = 0;
 			let hashTbl[i] = -1;
 			let i = i + 1;
 		}
@@ -123,10 +124,9 @@ class GifWriter {
 			let fcode = Math2.shiftLeft(c, 12) + ent;
 			let key = Math2.shiftLeft(c, 4);
 			let key = Math2.xor(ent, key);
-			while (CONTINUE & (((hashTbl[key]) > 0) |
-				(hashTbl[key] = 0)) ) 
-			{
-				if (hashTbl[key] = fcode) {
+			let kk = hashTbl[key];
+			while (CONTINUE & (kk > -1)) {
+				if (kk = fcode) {
 					let ent = codetab[key];
 					let CONTINUE = false;
 				}
@@ -134,11 +134,12 @@ class GifWriter {
 					let key = key + 1;
 					if ((key > (hashSize-1))) {
 						let key = key - hashSize;
-					} else {
-						let key = key;
 					}
+					let kk = hashTbl[key];
 				}
 			}
+//do Output.printInt(kk);
+//do Output.println();
 			if (CONTINUE) {
 				do lzwWrite(ent);
 				let ent = c;
@@ -294,10 +295,6 @@ class GifWriter {
 
 			let k = k + 1;
 		}
-	do Output.printInt(k);
-	do Output.printString(" OUT ");
-	do Output.printInt(size_);
-	do Output.println();
 		if (frame = 0) {
 			let i = 0;
 			let j = Math2.shiftLeft(1, palSize + 1);
@@ -361,6 +358,10 @@ class GifWriter {
 			}
 
 		}
+	do Output.printInt(k);
+	do Output.printString(" OUT ");
+	do Output.printInt(size_);
+	do Output.println();
 		do out8(8);
 		do lzwEncode(indexedPixels, size_);
 		/*let i = 0;
@@ -371,6 +372,9 @@ class GifWriter {
 		do out8(0);
 		let frame = frame + 1;
 		do indexedPixels.dispose();
+	do Output.printString(" END ");
+	do Output.printInt(frame);
+	do Output.println();
 		return true;
 	}
 

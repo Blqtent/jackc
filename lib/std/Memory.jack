@@ -14,7 +14,8 @@ class Memory {
 
 	function void init() {
 		let mem = 0;
-		let arena = mem[0];
+		let arena = Math.abs(mem[0]);
+
 		let asize = 2048; //33554432; // 2 power 25
 		let arena[0] = asize;
 		let freep = arena;
@@ -88,7 +89,7 @@ class Memory {
 			} else {
 				let k = asize;
 				let asize = asize + (size * 8) + 64;
-#py 			__m = (Memory__arena + Memory__asize) * [0]
+#py 			__m = array.array('l', (Memory__arena + Memory__asize)*[0])
 				let i = 0;
 				let j = arena + k;
 				while (i < j) {
@@ -106,14 +107,16 @@ class Memory {
 
 	function void deAlloc(Array p) {
 		var Array pi;
-		if (p = 0) {
+		if (p < arena) {
 			return;
 		}
 		let pi = p;
 		if ((pi < arena) | ((arena + asize) < pi) 
 			| (mem[pi-1] > (-1))) 
 		{
+			do Output.printInt(arena);
 			do Output.printString("Error in deAlloc!");
+			do Output.printInt(pi);
 			do Sys.error(22);
 		}
 		let pi = pi - 1;
