@@ -4,7 +4,6 @@ class Keyboard {
 #py 	global ts
 #py 	if (sys.stdin.closed == 0):
 #py 		termios.tcsetattr(sys.stdin.fileno(), termios.TCSADRAIN, ts)
-		do Sys.halt();
 		return;
 	}
 

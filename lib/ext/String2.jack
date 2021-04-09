@@ -12,5 +12,19 @@ class String2 {
 		}
 		return s;
 	}
+
+	function int compare(String p, Strings s) {
+		var int j, lp, ls, r;
+		let lp = p.length();
+		let ls = s.length();
+		while ((j < lp) & (j < ls)) {
+			let r = p.charAt(j) - s.charAt(j);
+			if (r) {
+				return r;
+			}	
+			let j = j + 1;
+		}
+		return lp - ls;
+	}
 }
 

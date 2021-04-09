@@ -19,12 +19,7 @@ class File {
 			do Sys.error(-1);
 			return this;
 		}
-		let i = 0;
-		while (i < l) {
-			let c = path.charAt(i);
-			let name = name.appendChar(c);
-			let i = i + 1;
-		}
+		let name = String2.copy(path);
 		return this;
 	}
 
@@ -33,24 +28,26 @@ class File {
 		let f = fd;
 		do name.dispose();
 		if (fd < 0) {
+			do Memory.deAlloc(this);
 			return;
 		}
+#py 	#print("jml" +str(f))
 #py 	__NativeObject[f].close()
 #py 	del __NativeObject[f]
 		do Memory.deAlloc(this);
 		return;
 	}
 
-	constructor boolean open() {
+	method boolean open() {
 		var int i, l, c;
 		var Array n;
 		var int f;
-		var boolean writing;
+		var boolean writeing;
 
 #py 	global __NativeObjectId 
 #py 	n = ""
 		let fd = -1;
-		let writing = is_write;
+		let writeing = is_write;
 		let l = name.length();
 		if (l < 1) {
 			return false;
@@ -81,9 +78,8 @@ class File {
 		if (fd < 0) {
 			do open();
 			if (fd < 0) {
-				do open();
+				return -1;
 			}
-			return -1;
 		}
 #py 	b = __NativeObject[f].read(1)
 #py 	if len(b) < 1:
@@ -95,14 +91,13 @@ class File {
 	method int writeByte(int data) {
 		var int r;
 		var int f;
-		let f = fd;
 		if (fd < 0) {
 			do open();
 			if (fd < 0) {
 				return -1;
 			}	
-			return -1;
 		}
+		let f = fd;
 #py 	r = __NativeObject[f].write(bytes([data & 255]));
 		return r;
 	}

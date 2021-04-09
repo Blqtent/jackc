@@ -1,0 +1,154 @@
+
+class XmlNode {
+	field String tag;
+	field Buffer attributes;
+	field Buffer att_names;
+	field Buffer elements;
+	field XmlNode parent;
+	field boolean is_text_;
+
+	constructor XmlNode new(XmlNode parent_, String tag_, boolean is_txt) {
+		let tag = String2.copy(tag_);
+		let parent = parent_;
+		let is_text_ = is_txt;
+		let attributes = null;
+		let att_names = null;
+		let elements = null;
+		return this;
+	}
+
+	method void dispose() {
+		var XmlNode e;
+		var int i, l;
+		do tag.dispose();
+		if (attributes) {
+			do attributes.disposeStr();
+			do att_names.disposeStr();
+		}
+		if (elements) {
+			let i = 0;
+			let l = elements.getSize();
+			while (i < l) {
+				let e = elements.getAt(i);
+				do e.dispose();
+				let i = i + 1;
+			}
+			do elements.dispose();
+		}
+		do Memory.deAlloc(this);
+		return;
+	}
+
+	method XmlNode addElement(String tag_) {
+		var XmlNode e;
+
+		let e = XmlNode.new(this, tag_, false);
+		if (elements = null) {
+			let elements = Buffer.new(1);
+		}
+		do elements.append(e);	
+		return e;
+	}
+
+	method void addAttribute(String name, String value) {
+		var int i;
+		var String s;
+
+		if (attributes = null) {
+			let attributes = Buffer.new(1);
+			let att_names = Buffer.new(1);
+		}
+		let i = att_name.indexOfStr(name);
+		let s = String2.copy(value);
+		if (i > -1) {
+			let s = attributes.setAt(i, s);
+			do s.dispose();
+		} else {
+			do attributes.append(s);
+			let s = String2.copy(name);
+			do att_names.append(s);
+		}
+	}
+
+	method void addText(String txt) {
+		var XmlNode e;
+
+		let e = XmlNode.new(this, txt, true);
+		if (elements = null) {
+			let elements = Buffer.new(1);
+		}
+		do elements.append(e);	
+		return;
+	}
+
+	method boolean isText() {
+		return is_text_;
+	}
+	
+	method Buffer getElements() {
+		return elements;
+	}
+
+	method Buffer getAttributesNames() {
+		return att_names;
+	}
+
+	method Buffer getAttributesValues() {
+		return attributes;
+	}
+
+	method  XmlNode getParent() {
+		return parent;
+	}
+	
+	method void dump(File f, int depth) {
+		var int d;
+		if (depth) {
+			let d = depth;
+			while (d) {
+				let d = d - 1;
+				do f.writeUtf8(32);
+			}
+			do f.writeUtf8(60); // <
+			
+			
+			do f.writeUtf8(61); // =
+			do f.writeUtf8(38); // &
+			do f.writeUtf8(34); // "
+			do f.writeUtf8(59); // ;
+			
+			do f.writeUtf8(62); // >
+		}
+			do f.writeUtf8(60); // <
+	}
+
+	/*
+	method String escape(String s) {
+		var int i, j, l;
+		var String d;
+		var int c;
+
+		let l = s.length();
+		let d = String.new(l);
+		let i = 0;
+		let j = 0;
+		while (i < l) {
+			let c = s.charAt(i);
+			if (c =  
+			let i = i + 1;
+		}
+		return d;
+
+	}
+*/
+/*
+&lt; represents "<";
+&gt; represents ">";
+&amp; represents "&";
+&apos; represents "'";
+&quot; represents '"'.
+Comments begin with <!-- and end with -->. 
+*/
+
+}
+

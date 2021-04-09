@@ -21,21 +21,46 @@ class Buffer {
 		return buffer[p];
 	}
 
-	method void setAt(int p, int data) {
+	method Array setAt(int p, int data) {
+		var Array r;
 		do checkSize(p);
+		let r = buffer[p];
 		let buffer[p] = data;
-/*
-		do Output.printString("AAA");
-		do Output.printInt(size);
-		do Output.println();
-*/
-		return;
+		return r;
 	}
 
-	method void append(int data) {
+	method void append(Array data) {
 		do checkSize(pos);
 		let buffer[pos] = data;
 		let pos = pos + 1;
+		return;
+	}
+
+	method int indexOfStr(String q) {
+		var String s;
+		var int i;
+		let i = 0;
+		while (i < size) {
+			let s = buffer[i];
+			if (String2.compare(s, q) = 0) {
+				return i;
+			}
+			let i = i + 1;
+		}
+		return -1;
+	}
+
+
+	method void disposeStr() {
+		var String s;
+		var int i;
+		let i = 0;
+		while (i < size) {
+			let s = buffer[i];
+			do s.dispose();
+			let i = i + 1;
+		}
+		do dispose();
 		return;
 	}
 

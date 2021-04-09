@@ -86,16 +86,18 @@ class Main {
 			do s.dispose();
 			let i = i + 1;
 		}
+		do files.dispose();
 		let dir = args.getAt(1);
 		do Output.printString("Linking ");
 		do Output.printString(dir);
 		do Output.printString("...");
 		do Output.println();
 		do cpl.link(dir);
-		do files.dispose();
+		do cpl.dispose();
 		do Output.printString("Done.");
 		do Output.println();
-		do Sys.halt();
+
+		//do Sys.halt();
 		return;
 	}
 }

@@ -15,9 +15,11 @@ class Sys {
 		do Screen.init();
 		do Keyboard.init();
 		do Main.main();
+		return;
 	}
 	
 	function void halt() {
+		do Sys2.dispose();
 		do Memory.checkEmpty();
 #py 	exit(0)
 		return;

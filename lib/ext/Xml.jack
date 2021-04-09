@@ -1,0 +1,22 @@
+
+class Xml {
+	field XmlNode root;
+	field XmlNode current;
+
+	constructor Xml new() {
+		let root = XmlNode.new(null,"root",false);
+		let current = root;
+		return this;
+	}
+
+	method void dispose() {
+		do root.dispose();
+		do Memory.deAlloc(this);
+		return;
+	}
+
+	method void dump(File f) {
+		do root.dump(f, 0);
+	}
+}
+

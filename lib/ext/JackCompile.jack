@@ -3,12 +3,24 @@ class JackCompile {
 	field File src;
 
 	constructor JackCompile new() {
-	
+		let src = null;
 		return this;
 	}
 
-	method boolean compile(File src_) {
-		let src = src_;
+	method void dispose() {
+		do Memory.deAlloc(this);
+		return;
+	}
+
+	method boolean compile(String src_) {
+		var Xml x;
+		let src = File.new(src_, false);
+		let dst = File.new("test.xml", true);
+		let x = Xml.new();
+		do x.dump(dst);
+		do dst.dispose();
+		do x.dispose();
+		do src.dispose();
 		return true;
 	}
 

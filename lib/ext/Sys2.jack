@@ -6,6 +6,24 @@ class Sys2 {
 		let args_ = null;
 	}
 
+	function void dispose() {
+		var int i;
+		var String s;
+		var Buffer b;
+
+		if (args_) {
+			let i = 0;
+			let b = args_;
+			while (i < b.getSize()) {
+				let s = b.getAt(i);
+				do s.dispose();
+				let i = i + 1;
+			}		
+			do b.dispose();	
+			let args_ = null;
+		}
+	}
+
 	function Buffer args() {
 		var Array a;
 		var String s;
