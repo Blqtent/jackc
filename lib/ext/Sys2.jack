@@ -1,0 +1,41 @@
+
+class Sys2 {
+	static Buffer args_;
+
+	function void init() {
+		let args_ = null;
+	}
+
+	function Buffer args() {
+		var Array a;
+		var String s;
+		var int i;
+		var int j;
+		var int js;
+		var int isq;
+		var int c;
+		var Buffer b;
+		if (args_) {
+			return args_;
+		}
+		let args_ = Buffer.new(1);
+		let i = 0;
+#py 	isq = len(sys.argv)
+		while (i < isq) {
+#py 		a = sys.argv[i]
+			let s = String.new(255);
+			let j = 0;
+#py 		js = len(a)
+			while (j < js) {
+#py 			c = ord(a[j])
+				let s = s.appendChar(c);
+				let j = j + 1;
+			}	
+			let b = args_;			
+			do b.append(s);
+			let i = i + 1;
+		}
+		return args_;
+	}
+}
+

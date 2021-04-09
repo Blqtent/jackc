@@ -182,7 +182,7 @@ class Main
 		//	let z = f.mkdir();
 		//	let z = f.delete();
 		}			
-		let d = Sys2.args();
+//		let d = Sys2.args();
 		if (d) {
 			let z = 0;
 			while (z < d.getSize()) {

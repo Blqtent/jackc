@@ -1,0 +1,101 @@
+
+class Main {
+
+	function void getJackFiles(Buffer lst, String dir) 
+	{
+		var File f;
+		var String p;
+		var int i;
+		var int l;
+		var int j;
+		var String c;
+		var Buffer d;
+
+		let i = 0;
+		let i = 0;
+		let f = File.new(dir, false);
+		if (f) {
+			let d = f.list();
+			if (d = 0) {
+				do f.dispose();
+				return;
+			}
+		}
+		while (i < d.getSize()) {
+			let p = d.getAt(i);
+			let l = p.length();
+			if (p.charAt(l - 1) = 47) {
+				do Main.getJackFiles(lst, p);
+			} else { if (l > 5) {
+				let c = ".jack";
+				let j = 5;
+				while (j > 0) {
+					let j = j - 1;
+					let l = l - 1;
+					if (~(p.charAt(l) = c.charAt(j))) {
+						let j = -1;
+					}
+				}
+				if (j = 0) {
+					do lst.append(p);
+				}
+				
+			}}
+			let i = i + 1;
+		}
+		do d.dispose();
+		do f.dispose();
+		return;
+	}
+
+	function void main()
+	{
+		var JackCompile cpl;
+		var String dir;
+		var Buffer args;
+		var Buffer files;
+		var File f;
+		var String s;
+		var int i;
+
+		let args = Sys2.args();
+		if (args.getSize() < 2) {
+			do Output.printString("Missing command line argument.");
+			do Sys.error(-1);
+		}
+		let dir = args.getAt(1);
+		let files = Buffer.new(1);
+		if (dir) {
+			let dir = String2.copy(dir);
+			let dir = dir.appendChar(47);
+			do Main.getJackFiles(files, dir);
+			do dir.dispose();
+		} else {
+			do Output.printString("Error argument.");
+			do Sys.error(-2);
+		}
+		let i = 0;
+		let cpl = JackCompile.new();
+		while (i < files.getSize()) {
+			let s = files.getAt(i);
+			do Output.printString("Compiling ");
+			do Output.printString(s);
+			do Output.printString("...");
+			do Output.println();
+			do cpl.compile(s);
+			do s.dispose();
+			let i = i + 1;
+		}
+		let dir = args.getAt(1);
+		do Output.printString("Linking ");
+		do Output.printString(dir);
+		do Output.printString("...");
+		do Output.println();
+		do cpl.link(dir);
+		do files.dispose();
+		do Output.printString("Done.");
+		do Output.println();
+		do Sys.halt();
+		return;
+	}
+}

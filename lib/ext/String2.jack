@@ -1,0 +1,16 @@
+
+class String2 {
+	function String copy(String p) {
+		var String s;
+		var int j, l;
+		let j = 0;
+		let l = p.length();
+		let s = String.new(l + 1);
+		while (j < l) {
+			let s = s.appendChar(p.charAt(j));
+			let j = j + 1;
+		}
+		return s;
+	}
+}
+

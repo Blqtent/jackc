@@ -1,0 +1,20 @@
+
+class JackCompile {
+	field File src;
+
+	constructor JackCompile new() {
+	
+		return this;
+	}
+
+	method boolean compile(File src_) {
+		let src = src_;
+		return true;
+	}
+
+	method boolean link(String dir) {
+
+		return true;
+	}
+}
+

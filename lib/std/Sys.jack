@@ -18,11 +18,17 @@ class Sys {
 	}
 	
 	function void halt() {
+		do Memory.checkEmpty();
 #py 	exit(0)
 		return;
 	}
 
 	function void error(int errorCode) {
+		do Output.printString("Error(");
+		do Output.printInt(errorCode);
+		do Output.printString(")");
+		do Output.println();
+		let errorCode = errorCode / 0;
 #py 	exit(errorCode)
 
 		return;

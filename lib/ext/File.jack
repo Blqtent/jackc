@@ -15,8 +15,8 @@ class File {
 		let l = path.length();
 		let name = String.new(l);
 		if (l < 0) {
-			do Output.printString(" LLLLLLLL");
-			do Output.println();
+			do Output.printString("Negative String length.");
+			do Sys.error(-1);
 			return this;
 		}
 		let i = 0;
@@ -25,12 +25,6 @@ class File {
 			let name = name.appendChar(c);
 			let i = i + 1;
 		}
-			do Output.printString(" QQQQQ");
-			do Output.printString(name);
-			do Output.printString("ZZZ");
-			do Output.printString(path);
-			do Output.printInt(l);
-			do Output.println();
 		return this;
 	}
 
@@ -319,9 +313,10 @@ class File {
 #py 	m = os.listdir(n);
 #py 	isq = len(m)
 		while (i < isq) {
-#py 		a = n + "/" + m[i]
+#py 		a = n + m[i]
 #py 		if (os.path.isdir(a)):
-#py 			a = a + "/"
+#py 			if (a[-1] != "/"):
+#py 				a = a + "/"
 			let s = String.new(255);
 			let j = 0;
 #py 		js = len(a)

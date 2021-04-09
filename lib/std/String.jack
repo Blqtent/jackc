@@ -46,11 +46,11 @@ class String {
 		var String b;
 		let max = Math.abs(this[-1])-1;
 		let l = length();
-		/*if (l < (max - 1)) {
+		if (l < (max - 1)) {
 			let this[l] = c;
 			let this[l + 1] = 0;
 			return this;
-		}*/
+		}
 		let b = String.new((l * 2) + 4);
 		let i = 0;
 		while (i < l) {

@@ -298,7 +298,7 @@ def process(ast, out):
     f.write("__NativeObject = {}\n")
     f.write("__NativeObjectId = -1\n")
     f.write("__memory = array.array('l', 100000 * [0])\n")
-    ast.process(f, "")
+    #ast.process(f, "")
     for c in ast.children:
         if (c.tag == "class"):
             nb_field = 0

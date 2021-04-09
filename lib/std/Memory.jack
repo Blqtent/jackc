@@ -49,6 +49,10 @@ class Memory {
 		} 
 	}
 
+	function boolean checkEmpty() {
+		return true;
+	}
+
 	function Array alloc(int size) {
 		var Array p, end;
 		var int k, n, tries, i,j;
@@ -60,7 +64,7 @@ class Memory {
 			do Output.printString("Size too small in alloc!");
 			do Output.printInt(size);
 			do Output.println();
-			let i = i / 0;
+			do Sys.error(24);
 			return null;
 		}
 #py 	global __memory	
@@ -97,7 +101,6 @@ class Memory {
 					do Output.printString( " p[0]=");
 					do Output.printInt(p[0]);
 					do Output.println();
-					let i = i / 0;
 					do Sys.error(23);
 				}		
 			}
@@ -137,7 +140,6 @@ class Memory {
 			do Output.printString(" asize=");
 			do Output.printInt(asize);
 			do Output.println();
-			let i = i / 0;
 			do Sys.error(22);
 		}
 		let pi = pi - 1;
