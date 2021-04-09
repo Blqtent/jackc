@@ -8,7 +8,7 @@ class Buffer {
 		let buffer = Array.new(initial);
 		let size = initial;
 		let pos = 0;
-		do Output.printInt(size);
+	//	do Output.printInt(size);
 		return this;
 	}
 	
@@ -59,13 +59,13 @@ class Buffer {
 	}		
 
 	method Array getArray() {
-		do Output.printString(" OOOO ");
-		do Output.printInt(buffer);
+//		do Output.printString(" OOOO ");
+//		do Output.printInt(buffer);
 		return buffer;
 	}
 
 	method int getSize() {
 		//do Output.printInt(size);
-		return size;
+		return pos;
 	}
 }

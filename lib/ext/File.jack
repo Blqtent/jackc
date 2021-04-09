@@ -10,34 +10,27 @@ class File {
 		var int i, l, c;
 		var Array n;
 		var int f;
-#py 	global __NativeObjectId 
-#py 	n = ""
 		let fd = -1;
 		let is_write = writeing;
 		let l = path.length();
-		if (l < 1) {
+		let name = String.new(l);
+		if (l < 0) {
+			do Output.printString(" LLLLLLLL");
+			do Output.println();
 			return this;
 		}
-		let name = String.new(l);
 		let i = 0;
 		while (i < l) {
 			let c = path.charAt(i);
-			if (c < 0) {
-				let c = 0;
-			}
-#py 		n = n + chr(c) 
 			let name = name.appendChar(c);
 			let i = i + 1;
 		}
-		let f = -1;
-#py 	m = "rb"
-#py 	if writeing:
-#py 		m = "w+b"
-#py 	if (os.path.isdir(n)==False):
-#py 		__NativeObjectId = __NativeObjectId + 1
-#py 		f = __NativeObjectId 
-#py 		__NativeObject[__NativeObjectId] = open(n, m)
-		let fd = f;
+			do Output.printString(" QQQQQ");
+			do Output.printString(name);
+			do Output.printString("ZZZ");
+			do Output.printString(path);
+			do Output.printInt(l);
+			do Output.println();
 		return this;
 	}
 
@@ -54,12 +47,49 @@ class File {
 		return;
 	}
 
+	constructor boolean open() {
+		var int i, l, c;
+		var Array n;
+		var int f;
+		var boolean writing;
+
+#py 	global __NativeObjectId 
+#py 	n = ""
+		let fd = -1;
+		let writing = is_write;
+		let l = name.length();
+		if (l < 1) {
+			return false;
+		}
+		let i = 0;
+		while (i < l) {
+			let c = name.charAt(i);
+#py 		n = n + chr(c) 
+			let i = i + 1;
+		}
+		let f = -1;
+#py 	m = "rb"
+#py 	if writeing:
+#py 		m = "w+b"
+#py 	if (os.path.isdir(n)==False):
+#py 		__NativeObjectId = __NativeObjectId + 1
+#py 		f = __NativeObjectId 
+#py 		__NativeObject[__NativeObjectId] = open(n, m)
+		let fd = f;
+		return true;
+	}
+
+
 	method int readByte() {
 		var int b;
 		var int f;
 		let f = fd;
 		if (fd < 0) {
-			return;
+			do open();
+			if (fd < 0) {
+				do open();
+			}
+			return -1;
 		}
 #py 	b = __NativeObject[f].read(1)
 #py 	if len(b) < 1:
@@ -73,7 +103,11 @@ class File {
 		var int f;
 		let f = fd;
 		if (fd < 0) {
-			return;
+			do open();
+			if (fd < 0) {
+				return -1;
+			}	
+			return -1;
 		}
 #py 	r = __NativeObject[f].write(bytes([data & 255]));
 		return r;
@@ -207,15 +241,99 @@ class File {
 	}
 
 	method boolean delete() {
-		return 0;
+		var int i, l, c, m, n;
+#py 	n = ""
+		if (name = null) {
+			return false;
+		}
+		let l =name.length();
+		if (l < 1) {
+			return false;
+		}
+		let i = 0;
+		while (i < l) {
+			let c = name.charAt(i);
+			if (c < 0) {
+				let c = -1; 
+			}
+#py 		n = n + chr(c) 
+			let i = i + 1;
+		}
+#py 	if (os.path.isdir(n)==False):
+#py 	 	m = os.remove(n)
+#py 	else:
+#py 	 	m = os.rmdir(n)
+		return true;
 	}
 
 	method boolean mkdir() {
-		return 0;
+		var int i, l, c, m, n;
+#py 	n = ""
+		if (name = null) {
+			return false;
+		}
+		let l =name.length();
+		if (l < 1) {
+			return false;
+		}
+		let i = 0;
+		while (i < l) {
+			let c = name.charAt(i);
+			if (c < 0) {
+				let c = -1; 
+			}
+#py 		n = n + chr(c) 
+			let i = i + 1;
+		}
+#py 	m = os.mkdir(n)
+		return true;
 	}
 
-	method Array list() {
-		return 0;
+	method Buffer list() {
+		var int i, l, c;
+		var int j, isq, js;
+		var Buffer b;
+		var int f;
+		var String s;
+#py 	n = ""
+		if (name = null) {
+			return null;
+		}
+		let l =name.length();
+		if (l < 1) {
+			return null;
+		}
+		let i = 0;
+		while (i < l) {
+			let c = name.charAt(i);
+			if (c < 0) {
+				let c = -1; 
+			}
+#py 		n = n + chr(c) 
+			let i = i + 1;
+		}
+		let f = -1;
+
+		let b = Buffer.new(10);
+		let i = 0;
+#py 	m = os.listdir(n);
+#py 	isq = len(m)
+		while (i < isq) {
+#py 		a = n + "/" + m[i]
+#py 		if (os.path.isdir(a)):
+#py 			a = a + "/"
+			let s = String.new(255);
+			let j = 0;
+#py 		js = len(a)
+			while (j < js) {
+#py 			c = ord(a[j])
+				let s = s.appendChar(c);
+				let j = j + 1;
+			}	
+			do b.append(s);
+			let i = i + 1;
+		}
+		return b;
 	}
 }
 

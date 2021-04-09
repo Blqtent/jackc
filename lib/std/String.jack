@@ -10,7 +10,8 @@
 class String {
 	function String new(int maxLength) {
 		var Array str;
-		let str = Array.new(maxLength);
+		let str = Array.new(maxLength + 1);
+		let str[0] = 0;
 		return str;
 	}
 
@@ -45,12 +46,12 @@ class String {
 		var String b;
 		let max = Math.abs(this[-1])-1;
 		let l = length();
-		if (l < (max - 1)) {
+		/*if (l < (max - 1)) {
 			let this[l] = c;
 			let this[l + 1] = 0;
 			return this;
-		}
-		let b = String.new(l * 2 + 4);
+		}*/
+		let b = String.new((l * 2) + 4);
 		let i = 0;
 		while (i < l) {
 			let b[i] = this[i];

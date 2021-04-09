@@ -22,7 +22,7 @@ class Main
 		var Buffer d;
 		var int q;
 		var GifWriter w;
-
+/*
 		let z = 66;
 		let y = Array.new(10);
 		let s = String.new(80);
@@ -116,7 +116,8 @@ class Main
 		do Output.printInt(f.readInt32());
 		do Output.println(); // new line
 		do f.dispose();
-		let g = Gif.new();
+*/
+	/*	let g = Gif.new();
 		let d = g.readFile("screen.gif");
 		if (d = null) {
 			do g.dispose();
@@ -135,7 +136,10 @@ class Main
 		let w = GifWriter.new();
 		do w.writeFile("test2.gif", d, g.getW(), g.getH());
 		do w.dispose();
- 
+ */
+		let f = null;
+		let d = null;
+		let d = Buffer.new(1);
 		let f = File.new("test.txt", true);
 		let z = d.getSize();
 		while (z > 0) {
@@ -152,8 +156,43 @@ class Main
 				do f.writeByte(10);
 			}
 		}
+
 		do Output.printInt(Math2.xor(3, 6));
-		do f.dispose();
+		if (d) {
+			do f.dispose();
+			do d.dispose();
+			let d = null;
+		}
+
+			do Output.printString("TTT");
+		let f = null;
+		let f = File.new(".", false);
+			do Output.printString("XYX");
+		
+		if (f) {
+			let d = null;
+			do Output.printString("AAA");
+			do Memory.alloc(256);
+			do Memory.alloc(256);
+			let d = f.list();
+			do Output.printString("GOOOOOOO");
+			do f.dispose();
+			let f = File.new("test.txt", true);
+		//	let z = f.delete();
+		//	let z = f.mkdir();
+		//	let z = f.delete();
+		}			
+		let d = Sys2.args();
+		if (d) {
+			let z = 0;
+			while (z < d.getSize()) {
+				let s = d.getAt(z);
+				do Output.printString(s);
+				do Output.println(); // new line
+				let z = z + 1;
+			}
+		}
+		
 		do Sys.error(-1);
 		return;
 	}

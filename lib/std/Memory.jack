@@ -56,6 +56,13 @@ class Memory {
 		let tries = 0;
 		let i = 0;
 		let j = 0;
+		if (size < 1) {
+			do Output.printString("Size too small in alloc!");
+			do Output.printInt(size);
+			do Output.println();
+			let i = i / 0;
+			return null;
+		}
 #py 	global __memory	
 		while (tries < 3) {
 			let end = arena + asize;
@@ -81,6 +88,16 @@ class Memory {
 				if ((p < arena) | (p > (end-1)) | (p[0] = 0)) {
 					do Output.printString(
 						"Error in alloc!");
+					do Output.printString( " p=");
+					do Output.printInt(p);
+					do Output.printString( " arena=");
+					do Output.printInt(arena);
+					do Output.printString( " end=");
+					do Output.printInt(end);
+					do Output.printString( " p[0]=");
+					do Output.printInt(p[0]);
+					do Output.println();
+					let i = i / 0;
 					do Sys.error(23);
 				}		
 			}
@@ -117,6 +134,10 @@ class Memory {
 			do Output.printInt(arena);
 			do Output.printString("Error in deAlloc!");
 			do Output.printInt(pi);
+			do Output.printString(" asize=");
+			do Output.printInt(asize);
+			do Output.println();
+			let i = i / 0;
 			do Sys.error(22);
 		}
 		let pi = pi - 1;
