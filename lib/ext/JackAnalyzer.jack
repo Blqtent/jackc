@@ -1,8 +1,8 @@
 
-class JackCompile {
+class JackAnalyser {
 	field File src;
 
-	constructor JackCompile new() {
+	constructor JackAnalyser new() {
 		let src = null;
 		return this;
 	}

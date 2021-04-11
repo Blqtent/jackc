@@ -1,0 +1,14 @@
+
+class JackTokenizer {
+	field File src;
+
+	constructor JackTokeniser new() {
+		return this;
+	}
+
+	method void dispose() {
+		do Memory.deAlloc(this);
+		return;
+	}
+}
+

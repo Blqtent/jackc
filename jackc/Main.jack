@@ -53,7 +53,7 @@ class Main {
 
 	function void main()
 	{
-		var JackCompile cpl;
+		var JackAnalyser cpl;
 		var String dir;
 		var Buffer args;
 		var Buffer files;
@@ -78,7 +78,7 @@ class Main {
 			do Sys.error(-2);
 		}
 		let i = 0;
-		let cpl = JackCompile.new();
+		let cpl = JackAnalyser.new();
 		while (i < files.getSize()) {
 			let s = files.getAt(i);
 			do Output.printString("Compiling ");

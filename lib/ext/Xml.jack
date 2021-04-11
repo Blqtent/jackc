@@ -8,7 +8,7 @@ class Xml {
 	constructor Xml new() {
 		let strings = Buffer.new(8);
 		let esca = String.new(32);
-		let root = XmlNode.new(this, null,"root",false);
+		let root = XmlNode.new(this, null,"%root%",false);
 		let current = root;
 		return this;
 	}
