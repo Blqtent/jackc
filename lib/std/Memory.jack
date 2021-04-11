@@ -54,9 +54,11 @@ class Memory {
 	}
 
 	function boolean checkEmpty() {
-		var Array p, q, end;
+		var Array p, q, end;	
+		var boolean ok;
 		let end = arena + asize;
 		let p = arena;
+		let ok = true;
 		while (p < end) {
 			if (p[0] < 0) {
 				do Output.printString(
@@ -65,6 +67,7 @@ class Memory {
 				do Output.printString(" p[0]=");
 				do Output.printInt(p[0]);
 				do Output.println();
+				let ok = false;
 			} else { if (p[0] = 0) {
 				do Output.printString(
 					"Unespeced p0 p=");
@@ -74,7 +77,7 @@ class Memory {
 			}}
 			let p = p + Math.abs(p[0]);
 		}
-		return true;
+		return ok;
 	}
 
 	function Array alloc(int size) {

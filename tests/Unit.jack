@@ -13,7 +13,11 @@ class Unit {
 		}
 		do Output.printString(txt);
 		do Output.printString("... ");
-		do Output.printInt(state);
+		if (state) {
+			do Output.printString("pass");
+		} else {
+			do Output.printString("fail");
+		}
 		do Output.println();
 		return;
 	}

@@ -7,6 +7,8 @@ class UnitString2 {
 		let s = String2.copy("Hello World");
 		let s = String2.appendStr(s, "!!!");
 		do s.dispose();
+		//let s = String2.appendStr("GOTCHA", "!!!");
+		//do s.dispose();
 		do Unit.log(l + 1, "String2.copy...", true);
 		if (String2.compare("AA", "BA") < 0) {
 			do Unit.log(l, "String2.compare < ok...", true);

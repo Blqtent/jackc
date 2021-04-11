@@ -1,6 +1,5 @@
 
-class Main {
-
+class UnitFile {
 	function void getJackFiles(Buffer lst, String dir) 
 	{
 		var File f;
@@ -15,6 +14,7 @@ class Main {
 		let f = File.new(dir, false);
 		if (f) {
 			let d = f.list();
+			//let d = Buffer.new(1);
 			if (d = 0) {
 				do f.dispose();
 				return;
@@ -24,8 +24,9 @@ class Main {
 			let p = d.getAt(i);
 			let l = p.length();
 			if ((l > 0) & (p.charAt(l - 1) = 47)) {
-				do Main.getJackFiles(lst, p);
+				//do UnitFile.getJackFiles(lst, p);
 				do p.dispose();
+				let l = l;
 			} else { if (l > 5) {
 				let c = ".jack";
 				let j = 5;
@@ -38,7 +39,7 @@ class Main {
 				}
 				if (j = 0) {
 					do lst.append(p);
-				} else {	
+				} else {
 					do p.dispose();
 				}
 			} else {
@@ -51,55 +52,32 @@ class Main {
 		return;
 	}
 
-	function void main()
+	function boolean testRec(int l)
 	{
-		var JackCompile cpl;
-		var String dir;
-		var Buffer args;
 		var Buffer files;
 		var File f;
 		var String s;
 		var int i;
-
-		let args = Sys2.args();
-		if (args.getSize() < 2) {
-			do Output.printString("Missing command line argument.");
-			do Sys.error(-1);
-		}
-		let dir = args.getAt(1);
+		let l = l + 1;
 		let files = Buffer.new(1);
-		if (dir) {
-			let dir = String2.copy(dir);
-			let dir = dir.appendChar(47);
-			do Main.getJackFiles(files, dir);
-			//do dir.dispose();
-		} else {
-			do Output.printString("Error argument.");
-			do Sys.error(-2);
-		}
+		do UnitFile.getJackFiles(files, "./jackc/");
 		let i = 0;
-		let cpl = JackCompile.new();
 		while (i < files.getSize()) {
 			let s = files.getAt(i);
-			do Output.printString("Compiling ");
-			do Output.printString(s);
-			do Output.printString("...");
-			do Output.println();
-			do cpl.compile(s);
+			do Unit.log(l, s, true);
 			let i = i + 1;
 		}
-		let dir = args.getAt(1);
-		do Output.printString("Linking ");
-		do Output.printString(dir);
-		do Output.printString("...");
-		do Output.println();
-		do cpl.link(dir);
-		do cpl.dispose();
 		do files.disposeStr();
-		do Output.printString("Done.");
-		do Output.println();
+		return true;
+	}
 
-		//do Sys.halt();
-		return;
+
+	function boolean isOk(int l) {
+		var boolean r;
+		let l = l + 1;
+		let r = UnitFile.testRec(l);
+		do Unit.log(l, "File...", r);
+		return Memory.checkEmpty();
 	}
 }
+

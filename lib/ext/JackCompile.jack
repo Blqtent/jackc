@@ -14,22 +14,22 @@ class JackCompile {
 
 	method boolean compile(String src_) {
 		var Xml x;
-	//	let src = File.new(src_, false);
-	//	let dst = File.new("test.xml", true);
+		let src = File.new(src_, false);
+		let dst = File.new("test.xml", true);
 		let x = Xml.new();
-		//do x.addElement("hello");
-/*
+		do x.addElement("hello");
+
 		do x.addAttribute("id", "jml'");
 		do x.addContent("Jumps over the lazy dog");
 		do x.addElement("sub");
 		do x.addContent("the quick brown fox");
 		do x.closeElement("sub");
 		do x.addContent("iyes");
-*/
-		//do x.dump(dst);
-		//do dst.dispose();
+
+		do x.dump(dst);
+		do dst.dispose();
 		do x.dispose();
-	//	do src.dispose();
+		do src.dispose();
 		return true;
 	}
 

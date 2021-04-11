@@ -14,10 +14,10 @@ class XmlNode {
 			let tag = String2.copy(tag_);
 		} else {
 			let tag = x.getString(tag_);
-			do Output.printString("TAG=");
-			do Output.printString(tag_);
-			do Output.printInt(tag);
-			do Output.println();
+		//	do Output.printString("TAG=");
+		//	do Output.printString(tag_);
+		//	do Output.printInt(tag);
+		//	do Output.println();
 		}
 		let parent = parent_;
 		let is_content_ = is_txt;
@@ -36,9 +36,6 @@ class XmlNode {
 			do att_values.disposeStr();
 			do att_names.dispose();
 		}
-		do Output.printString("jjjjj");
-		do Output.printInt(is_content_);
-		do Output.printString("jjjjj");
 		if (is_content_) {
 			if (tag) {
 				do tag.dispose();
@@ -83,6 +80,9 @@ class XmlNode {
 		if (elements = null) {
 			let elements = Buffer.new(1);
 		}
+		//do Output.printString(tag_);
+		//do Output.printInt(e);
+		//do Output.printString("jjjjj");
 		do elements.append(e);	
 		return e;
 	}
@@ -144,7 +144,7 @@ class XmlNode {
 	
 	
 	method void dump(Xml x, File f, int depth) {
-		var int d;
+		var int d, i;
 		var String s;
 		var XmlNode e;
 		if (is_content_) {
@@ -156,60 +156,62 @@ class XmlNode {
 
 		if (depth) {
 			let d = depth;
-			while (d) {
-				let d = d - 1;
-				do f.writeUtf8(32);
-			}
+			//while (d) {
+			//	let d = d - 1;
+			//	do f.writeUtf8(32);
+			//}
 			do f.writeUtf8(60); // <
 			do f.writeString(tag); 
-			do f.writeUtf8(32); // space
 
-			let d = att_names.getSize();
-			while (d > 0) {
-				let d = d -1;
-				let s = att_names.getAt(d);
-				do f.writeString(s); 
+			let d = 0;
+			if (att_names) {
+				let d = att_names.getSize();
+			}
+			let i = 0;
+			while (i < d) {
 				do f.writeUtf8(32); // space
-				let s = att_values.getAt(d);
+				let s = att_names.getAt(i);
+				do f.writeString(s); 
+				let s = att_values.getAt(i);
 				if (s) {
 					do f.writeUtf8(61); // =
 					do f.writeUtf8(34); // "
 					let s = x.escape(s);
 					do f.writeString(s); 
 					do f.writeUtf8(34); // "
-					do f.writeUtf8(32); // space
 				}
-				if (elements = null) {
-					do f.writeUtf8(47); // /
-				}		
-				do f.writeUtf8(62); // >
 
+				let i = i + 1;
 			}
+			if (elements = null) {
+				do f.writeUtf8(47); // /
+			}		
+			do f.writeUtf8(62); // >
 			
 		}
 		if (elements) {
 			let d = elements.getSize();
-			while (d > 0) {
-				let d = d - 1;
-				let e = elements.getAt(d);
+			let i = 0;
+			while (i < d) {
+				let e = elements.getAt(i);
 				if (e) {
 					do e.dump(x, f, (depth + 1));
 				}
+				let i = i + 1;
 			}
 		}
 		
-		if (depth & elements) {
-			do f.writeUtf8(10); // new line 
+		if ((depth>0) & (~(elements=null))) {
 			let d = depth;
-			while (d > 0) {
-				let d = d - 1;
-				do f.writeUtf8(32);
-			}
+			//while (d > 0) {
+			//	let d = d - 1;
+			//	do f.writeUtf8(32);
+			//}
 			do f.writeUtf8(60); // <
 			do f.writeUtf8(47); // /
 			do f.writeString(tag); 
 			do f.writeUtf8(62); // >
-			do f.writeUtf8(10); // new line 
+			//do f.writeUtf8(10); // new line 
 
 		}
 	}

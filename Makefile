@@ -20,6 +20,7 @@ exe.py: jacky.py tree2py.py  exe/Main.jack
 clean:
 	rm -f exe.py jackc.py
 	rm -f test.txt
+	rm -f test.xml
 	rm -rf exe/lib
 	rm -rf ctests/lib
 	rm -rf tests/lib
