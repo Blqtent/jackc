@@ -19,9 +19,10 @@ class JackAnalyser {
 	}
 
 	method boolean compile(String src_) {
+		var File dst;
 		let src = File.new(src_, false);
 		let dst = File.new("test.xml", true);
-		/*do x.clear();
+		do x.clear();
 		do t.init(src);
 
 
@@ -30,9 +31,12 @@ class JackAnalyser {
 		}
 
 		do x.dump(dst);
-*/
+
 		do dst.dispose();
 		do src.dispose();
+		//if (String2.compare("ctests/lib/ext/Gif.jack", src_)=0) {
+		//	do Sys.halt();
+		//}
 		return true;
 	}
 

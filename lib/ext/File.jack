@@ -25,7 +25,9 @@ class File {
 	method void dispose() {
 		var int f;
 		let f = fd;
-		do name.dispose();
+		if (name) {
+			do name.dispose();
+		}
 		if (fd < 0) {
 			do Memory.deAlloc(this);
 			return;
