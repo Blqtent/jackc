@@ -10,6 +10,7 @@
 class Sys {
 	function void init() {
 		do Memory.init();
+		do Sys2.init();
 		do Math.init();
 		do Output.init();
 		do Screen.init();
@@ -17,10 +18,18 @@ class Sys {
 		do Main.main();
 		return;
 	}
+
+	function void deInit() {
+		do Sys2.deInit();
+		do Math.deInit();
+		do Output.deInit();
+		do Screen.deInit();
+		do Keyboard.deInit();
+		do Memory.deInit();
+		return;
+	}
 	
 	function void halt() {
-		do Sys2.dispose();
-		do Memory.checkEmpty();
 #py 	exit(0)
 		return;
 	}

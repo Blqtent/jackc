@@ -6,6 +6,10 @@ class Screen {
 		return;
 	}
 
+	function void deInit() {
+		return;
+	}
+
 	function void clearScreen() {
 #py 	global tk
 #py 	if (tk == None):

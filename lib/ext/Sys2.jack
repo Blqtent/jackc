@@ -6,7 +6,7 @@ class Sys2 {
 		let args_ = null;
 	}
 
-	function void dispose() {
+	function void deInit() {
 		var int i;
 		var String s;
 		var Buffer b;

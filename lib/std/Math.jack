@@ -3,6 +3,10 @@ class Math {
 	function void init() {
 		return;
 	}
+	
+	function void deInit() {
+		return;
+	}
 
 	function int abs(int a) {
 		if (a < 0) {

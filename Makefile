@@ -11,6 +11,7 @@ test:
 	rm -rf tests/lib
 	cp -r lib tests/
 	python3 jacky.py tests
+	python3 tests.py
 
 exe.py: jacky.py tree2py.py  exe/Main.jack
 	rm -rf exe/lib

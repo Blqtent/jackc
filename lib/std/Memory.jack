@@ -22,6 +22,10 @@ class Memory {
 		return;
 	}
 
+	function void deInit() {
+		return;
+	}
+	
 	function int peek(int addr) {
 		return mem[addr];
 	}

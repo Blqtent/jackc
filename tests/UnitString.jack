@@ -1,0 +1,17 @@
+
+class UnitString {
+	function boolean isOk(int l) {
+		var String s;
+		var int i;
+		let i = 0;
+		let s = String.new(1);
+		while (i < 512) {
+			let s = s.appendChar(65);
+			let i = i + 1;
+		} 
+		do s.dispose();
+		do Unit.log(l + 1, "String.append...", true);
+		return Memory.checkEmpty();
+	}
+}
+

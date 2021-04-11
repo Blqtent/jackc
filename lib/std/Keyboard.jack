@@ -25,6 +25,10 @@ class Keyboard {
 		return;
 	}
 
+	function void deInit() {
+		return;
+	}
+
 	function char keyPressed() {
 		var int x;
 		let x = Keyboard.getChar();
