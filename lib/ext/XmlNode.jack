@@ -1,17 +1,27 @@
 
 class XmlNode {
 	field String tag;
-	field Buffer attributes;
+	field Buffer att_values;
 	field Buffer att_names;
 	field Buffer elements;
 	field XmlNode parent;
-	field boolean is_text_;
+	field boolean is_content_;
 
-	constructor XmlNode new(XmlNode parent_, String tag_, boolean is_txt) {
-		let tag = String2.copy(tag_);
+	constructor XmlNode new(Xml x, XmlNode parent_, 
+		String tag_, boolean is_txt) 
+	{
+		if (is_txt) {
+			let tag = String2.copy(tag_);
+		} else {
+			let tag = x.getString(tag_);
+			do Output.printString("TAG=");
+			do Output.printString(tag_);
+			do Output.printInt(tag);
+			do Output.println();
+		}
 		let parent = parent_;
-		let is_text_ = is_txt;
-		let attributes = null;
+		let is_content_ = is_txt;
+		let att_values = null;
 		let att_names = null;
 		let elements = null;
 		return this;
@@ -20,10 +30,19 @@ class XmlNode {
 	method void dispose() {
 		var XmlNode e;
 		var int i, l;
-		do tag.dispose();
-		if (attributes) {
-			do attributes.disposeStr();
-			do att_names.disposeStr();
+		var Strings s;
+
+		if (att_values) {
+			do att_values.disposeStr();
+			do att_names.dispose();
+		}
+		do Output.printString("jjjjj");
+		do Output.printInt(is_content_);
+		do Output.printString("jjjjj");
+		if (is_content_) {
+			if (tag) {
+				do tag.dispose();
+			}
 		}
 		if (elements) {
 			let i = 0;
@@ -39,10 +58,28 @@ class XmlNode {
 		return;
 	}
 
-	method XmlNode addElement(String tag_) {
+	method XmlNode closeElement(Xml x, String tag_) {
 		var XmlNode e;
+		var XmlNode p;
+		var String s;
+		var String t;
+		let s = x.getString(tag_);
+		let e = this;
+		let p = e.getParent();
+		while (p) {
+			let t = e.getTag();
+			if (t = s) {
+				return p;
+			}
+			let e = p;
+			let p = p.getParent();
+		}
+		return e;
+	}
 
-		let e = XmlNode.new(this, tag_, false);
+	method XmlNode addElement(Xml x, String tag_) {
+		var XmlNode e;
+		let e = XmlNode.new(x, this, tag_, false);
 		if (elements = null) {
 			let elements = Buffer.new(1);
 		}
@@ -50,30 +87,30 @@ class XmlNode {
 		return e;
 	}
 
-	method void addAttribute(String name, String value) {
+	method void addAttribute(Xml x, String name, String value) {
 		var int i;
 		var String s;
 
-		if (attributes = null) {
-			let attributes = Buffer.new(1);
+		if (att_values = null) {
+			let att_values = Buffer.new(1);
 			let att_names = Buffer.new(1);
 		}
-		let i = att_name.indexOfStr(name);
+		let i = att_names.indexOfStr(name);
 		let s = String2.copy(value);
 		if (i > -1) {
-			let s = attributes.setAt(i, s);
+			let s = att_values.setAt(i, s);
 			do s.dispose();
 		} else {
-			do attributes.append(s);
-			let s = String2.copy(name);
+			do att_values.append(s);
+			let s = x.getString(name);
 			do att_names.append(s);
 		}
 	}
 
-	method void addText(String txt) {
+	method void addContent(Xml x, String txt) {
 		var XmlNode e;
 
-		let e = XmlNode.new(this, txt, true);
+		let e = XmlNode.new(x, this, txt, true);
 		if (elements = null) {
 			let elements = Buffer.new(1);
 		}
@@ -81,8 +118,8 @@ class XmlNode {
 		return;
 	}
 
-	method boolean isText() {
-		return is_text_;
+	method boolean isContent() {
+		return is_content_;
 	}
 	
 	method Buffer getElements() {
@@ -94,15 +131,29 @@ class XmlNode {
 	}
 
 	method Buffer getAttributesValues() {
-		return attributes;
+		return att_values;
 	}
 
 	method  XmlNode getParent() {
 		return parent;
 	}
+
+	method  String getTag() {
+		return tag;
+	}
 	
-	method void dump(File f, int depth) {
+	
+	method void dump(Xml x, File f, int depth) {
 		var int d;
+		var String s;
+		var XmlNode e;
+		if (is_content_) {
+			let s = x.escape(tag);
+			do f.writeString(s);
+			return; 
+
+		}
+
 		if (depth) {
 			let d = depth;
 			while (d) {
@@ -110,45 +161,59 @@ class XmlNode {
 				do f.writeUtf8(32);
 			}
 			do f.writeUtf8(60); // <
+			do f.writeString(tag); 
+			do f.writeUtf8(32); // space
+
+			let d = att_names.getSize();
+			while (d > 0) {
+				let d = d -1;
+				let s = att_names.getAt(d);
+				do f.writeString(s); 
+				do f.writeUtf8(32); // space
+				let s = att_values.getAt(d);
+				if (s) {
+					do f.writeUtf8(61); // =
+					do f.writeUtf8(34); // "
+					let s = x.escape(s);
+					do f.writeString(s); 
+					do f.writeUtf8(34); // "
+					do f.writeUtf8(32); // space
+				}
+				if (elements = null) {
+					do f.writeUtf8(47); // /
+				}		
+				do f.writeUtf8(62); // >
+
+			}
 			
-			
-			do f.writeUtf8(61); // =
-			do f.writeUtf8(38); // &
-			do f.writeUtf8(34); // "
-			do f.writeUtf8(59); // ;
-			
-			do f.writeUtf8(62); // >
 		}
+		if (elements) {
+			let d = elements.getSize();
+			while (d > 0) {
+				let d = d - 1;
+				let e = elements.getAt(d);
+				if (e) {
+					do e.dump(x, f, (depth + 1));
+				}
+			}
+		}
+		
+		if (depth & elements) {
+			do f.writeUtf8(10); // new line 
+			let d = depth;
+			while (d > 0) {
+				let d = d - 1;
+				do f.writeUtf8(32);
+			}
 			do f.writeUtf8(60); // <
-	}
+			do f.writeUtf8(47); // /
+			do f.writeString(tag); 
+			do f.writeUtf8(62); // >
+			do f.writeUtf8(10); // new line 
 
-	/*
-	method String escape(String s) {
-		var int i, j, l;
-		var String d;
-		var int c;
-
-		let l = s.length();
-		let d = String.new(l);
-		let i = 0;
-		let j = 0;
-		while (i < l) {
-			let c = s.charAt(i);
-			if (c =  
-			let i = i + 1;
 		}
-		return d;
-
 	}
-*/
-/*
-&lt; represents "<";
-&gt; represents ">";
-&amp; represents "&";
-&apos; represents "'";
-&quot; represents '"'.
-Comments begin with <!-- and end with -->. 
-*/
+
 
 }
 

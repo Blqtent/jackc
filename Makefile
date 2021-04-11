@@ -7,6 +7,10 @@ all: exe.py
 	python3 jacky.py jackc 
 	python3 jackc.py ctests
 
+test:
+	rm -rf tests/lib
+	cp -r lib tests/
+	python3 jacky.py tests
 
 exe.py: jacky.py tree2py.py  exe/Main.jack
 	rm -rf exe/lib
@@ -16,7 +20,8 @@ clean:
 	rm -f exe.py jackc.py
 	rm -f test.txt
 	rm -rf exe/lib
-	rm -rf c/lib
+	rm -rf ctests/lib
+	rm -rf tests/lib
 	rm -f *.pyc
 	rm -rf __pycache__
 

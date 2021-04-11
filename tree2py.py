@@ -295,6 +295,8 @@ def process(ast, out):
     f.write("import signal\n")
     f.write("import tkinter\n")
     f.write("import array\n")
+    f.write("import inspect\n")
+    f.write("import pdb\n")
     f.write("__NativeObject = {}\n")
     f.write("__NativeObjectId = -1\n")
     f.write("__memory = array.array('l', 100000 * [0])\n")

@@ -2,21 +2,92 @@
 class Xml {
 	field XmlNode root;
 	field XmlNode current;
+	field Buffer strings;
+	field String esca;
 
 	constructor Xml new() {
-		let root = XmlNode.new(null,"root",false);
+		let strings = Buffer.new(8);
+		let esca = String.new(32);
+		let root = XmlNode.new(this, null,"root",false);
 		let current = root;
 		return this;
 	}
 
 	method void dispose() {
 		do root.dispose();
+		do strings.disposeStr();
+		do esca.dispose();
 		do Memory.deAlloc(this);
 		return;
 	}
 
-	method void dump(File f) {
-		do root.dump(f, 0);
+	method void addElement(String tag) {
+		let current = current.addElement(this, tag);
 	}
+
+	method void addAttribute(String name, String value) {
+		do current.addAttribute(this, name, value);
+	}
+
+	method void addContent(String txt) {
+		do current.addContent(this, txt);
+	}
+
+	method void closeElement(String tag) {
+		let current = current.closeElement(this, tag);
+	}
+
+	method String getString(String s) {
+		var int i;
+		let i = strings.indexOfStr(s);
+		if (i > -1) {
+			return strings.getAt(i);
+		}
+		let s = String2.copy(s);
+		do strings.insertSortedStr(s);
+		return s;
+	}
+
+	method void dump(File f) {
+		do root.dump(this, f, 0);
+		return;
+	}
+
+	
+	method String escape(String o) {
+		var int i, j, l;
+		var int c;
+		var String s;
+		let s = esca;
+		do  s.setCharAt(0, 0);
+		let l = o.length();
+		let i = 0;
+		let j = 0;
+		while (i < l) {
+			let c = o.charAt(i);
+			if (c = 60) { // <
+				let s = String2.appendStr(s, "&lt;");
+			} else { if (c = 38) { // &
+				let s = String2.appendStr(s, "&amp;");
+			} else { if (c = 34) { // "
+				let s = String2.appendStr(s, "&quot;");
+			} else { if (c = 62) { // >
+				let s = String2.appendStr(s, "&gt;");
+			} else { if (c = 39) { // ' 
+				let s = String2.appendStr(s, "&apos;");
+			} else {
+				let s = s.appendChar(c);
+			}}}}}
+			let i = i + 1;
+		}
+		let esca = s;
+		return s;
+	}
+
+/*
+Comments begin with <!-- and end with -->. 
+he delimiters <![CDATA[ and ]]> are classified as markup, while the text between them is classified as content.
+*/
+
 }
 

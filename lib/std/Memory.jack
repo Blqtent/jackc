@@ -16,7 +16,7 @@ class Memory {
 		let mem = 0;
 		let arena = Math.abs(mem[0]);
 
-		let asize = 2048; //33554432; // 2 power 25
+		let asize = 204; //33554432; // 2 power 25
 		let arena[0] = asize;
 		let freep = arena;
 		return;
@@ -103,6 +103,7 @@ class Memory {
 						let p[size+1] = (k - size) - 1;
 					}
 					let freep = p;
+					do Memory.log("Alloc=", p + 1, size+1);
 					return p + 1;
 				}		
 				let p = p + Math.abs(p[0]);
@@ -142,12 +143,35 @@ class Memory {
 			}
 			let tries = tries + 1;
 		}
+		do Output.printString( "Error in alloc!");
+		do Output.println();
+		do Sys.error(26);
 		return 0;
+	}
+
+	function void log(String msg, int p, int q) {
+		return;
+		do Output.printString(msg);
+		do Output.printInt(p);
+		do Output.printString(" p[0]=");
+		do Output.printInt(q);
+		do Output.printString(" arena=");
+		do Output.printInt(arena);
+		do Output.printString(" asize=");
+		do Output.printInt(asize);
+#py 	print (" " + inspect.stack()[4][3] + " " + inspect.stack()[3][3] + " " + inspect.stack()[2][3])
 	}
 
 	function void deAlloc(Array p) {
 		var Array pi;
+		do Memory.log("deAlloc=", p, p[-1]);
 		if (p < arena) {
+			do Output.printString("deAlloc error: arena=");
+			do Output.printInt(arena);
+			do Output.printString(" p=");
+			do Output.printInt(p);
+			do Output.println();
+			do Sys.error(25);
 			return;
 		}
 		let pi = p;

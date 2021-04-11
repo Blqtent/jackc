@@ -12,7 +12,6 @@ class Main {
 		var Buffer d;
 
 		let i = 0;
-		let i = 0;
 		let f = File.new(dir, false);
 		if (f) {
 			let d = f.list();
@@ -24,7 +23,7 @@ class Main {
 		while (i < d.getSize()) {
 			let p = d.getAt(i);
 			let l = p.length();
-			if (p.charAt(l - 1) = 47) {
+			if ((l > 0) & (p.charAt(l - 1) = 47)) {
 				do Main.getJackFiles(lst, p);
 			} else { if (l > 5) {
 				let c = ".jack";
@@ -69,7 +68,7 @@ class Main {
 			let dir = String2.copy(dir);
 			let dir = dir.appendChar(47);
 			do Main.getJackFiles(files, dir);
-			do dir.dispose();
+			//do dir.dispose();
 		} else {
 			do Output.printString("Error argument.");
 			do Sys.error(-2);
@@ -83,10 +82,8 @@ class Main {
 			do Output.printString("...");
 			do Output.println();
 			do cpl.compile(s);
-			do s.dispose();
 			let i = i + 1;
 		}
-		do files.dispose();
 		let dir = args.getAt(1);
 		do Output.printString("Linking ");
 		do Output.printString(dir);
@@ -94,6 +91,7 @@ class Main {
 		do Output.println();
 		do cpl.link(dir);
 		do cpl.dispose();
+		do files.disposeStr();
 		do Output.printString("Done.");
 		do Output.println();
 

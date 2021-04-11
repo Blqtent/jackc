@@ -29,18 +29,26 @@ class Buffer {
 		return r;
 	}
 
-	method void append(Array data) {
+	method int append(Array data) {
+		var int i;
+		let i = pos;
 		do checkSize(pos);
 		let buffer[pos] = data;
 		let pos = pos + 1;
-		return;
+		return i;
+	}
+
+	method int insertSortedStr(String q) {
+		var int i;
+		let i = append(q); // FIXME qsort
+		return i;
 	}
 
 	method int indexOfStr(String q) {
 		var String s;
 		var int i;
 		let i = 0;
-		while (i < size) {
+		while (i < size) { // FIXME bsearch
 			let s = buffer[i];
 			if (String2.compare(s, q) = 0) {
 				return i;
@@ -57,7 +65,9 @@ class Buffer {
 		let i = 0;
 		while (i < size) {
 			let s = buffer[i];
-			do s.dispose();
+			if (s) {
+				do s.dispose();
+			}
 			let i = i + 1;
 		}
 		do dispose();

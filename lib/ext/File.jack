@@ -13,7 +13,6 @@ class File {
 		let fd = -1;
 		let is_write = writeing;
 		let l = path.length();
-		let name = String.new(l);
 		if (l < 0) {
 			do Output.printString("Negative String length.");
 			do Sys.error(-1);
@@ -46,7 +45,9 @@ class File {
 
 #py 	global __NativeObjectId 
 #py 	n = ""
-		let fd = -1;
+		if (fd > -1) {
+			do close();
+		}
 		let writeing = is_write;
 		let l = name.length();
 		if (l < 1) {
@@ -100,6 +101,19 @@ class File {
 		let f = fd;
 #py 	r = __NativeObject[f].write(bytes([data & 255]));
 		return r;
+	}
+
+	method int writeString(String s) {
+		var int i, l;
+		var char c;
+		let i = 0;
+		let l = s.length();
+		while (i < l) {
+			let c = s.charAt(i);
+			do writeUtf8(c);
+			let i = i + 1;
+		}
+		return i;
 	}
 
 	// FSS-UTF
