@@ -66,7 +66,7 @@ class File {
 #py 	if (os.path.isdir(n)==False):
 #py 		__NativeObjectId = __NativeObjectId + 1
 #py 		f = __NativeObjectId 
-#py 		__NativeObject[__NativeObjectId] = open(n, m)
+#py 		__NativeObject[f] = open(n, m)
 		let fd = f;
 		return true;
 	}
@@ -76,9 +76,10 @@ class File {
 		var int b;
 		var int f;
 		let f = fd;
-		if (fd < 0) {
+		if (f < 0) {
 			do open();
-			if (fd < 0) {
+			let f = fd;
+			if (f < 0) {
 				return -1;
 			}
 		}
@@ -120,6 +121,9 @@ class File {
 	method char readUtf8() {	
 		var int c, b;
 		let c = readByte();
+		if ((c < 1) | (c > 255)) {
+			return 0;
+		}
 		if (c < 128) {
 			return c; // U+0000 U+007F
 		} else { if (c < 192) { // 128+64

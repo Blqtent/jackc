@@ -1,0 +1,13 @@
+
+class UnitJackAnalyser {
+	function boolean isOk(int l) {
+		var JackAnalyser a;
+		let l = l + 1;
+		let a = JackAnalyser.new();
+		do a.compile("tests/Main.jack");
+		do a.dispose();
+		do Unit.log(l, "JackAnalyser...", true);
+		return Memory.checkEmpty();
+	}
+}
+

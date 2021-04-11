@@ -28,6 +28,11 @@ class XmlNode {
 	}
 
 	method void dispose() {
+		do this.clear();
+		do Memory.deAlloc(this);
+	}
+
+	method void clear() {
 		var XmlNode e;
 		var int i, l;
 		var Strings s;
@@ -35,23 +40,30 @@ class XmlNode {
 		if (att_values) {
 			do att_values.disposeStr();
 			do att_names.dispose();
+			let att_values = null;
+			let att_names = null;
 		}
+
 		if (is_content_) {
 			if (tag) {
 				do tag.dispose();
+				let tag = null;
 			}
 		}
+
 		if (elements) {
 			let i = 0;
 			let l = elements.getSize();
 			while (i < l) {
 				let e = elements.getAt(i);
-				do e.dispose();
+				if (e) {
+					do e.dispose();
+				}
 				let i = i + 1;
 			}
 			do elements.dispose();
+			let elements = null;
 		}
-		do Memory.deAlloc(this);
 		return;
 	}
 
@@ -171,7 +183,9 @@ class XmlNode {
 			while (i < d) {
 				do f.writeUtf8(32); // space
 				let s = att_names.getAt(i);
-				do f.writeString(s); 
+				if (s) {
+					do f.writeString(s); 
+				}
 				let s = att_values.getAt(i);
 				if (s) {
 					do f.writeUtf8(61); // =

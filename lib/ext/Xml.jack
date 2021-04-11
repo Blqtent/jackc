@@ -20,6 +20,11 @@ class Xml {
 		do Memory.deAlloc(this);
 		return;
 	}
+	
+	method void clear() {
+		do root.clear();
+		let current = root;
+	}
 
 	method void addElement(String tag) {
 		let current = current.addElement(this, tag);
@@ -35,6 +40,10 @@ class Xml {
 
 	method void closeElement(String tag) {
 		let current = current.closeElement(this, tag);
+	}
+
+	method void closeCurrent() {
+		let current = current.closeElement(this, current.getTag());
 	}
 
 	method String getString(String s) {
@@ -58,6 +67,7 @@ class Xml {
 		var int i, j, l;
 		var int c;
 		var String s;
+		
 		let s = esca;
 		do  s.setCharAt(0, 0);
 		let l = o.length();

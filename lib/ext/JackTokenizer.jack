@@ -1,14 +1,188 @@
 
 class JackTokenizer {
 	field File src;
-
-	constructor JackTokeniser new() {
+	field Xml x;
+	field int KEYWORD;
+	field int SYMBOL;
+	field int IDENTIFIER;
+	field int INT_CONST;
+	field int STRING_CONST;
+	field int CLASS;
+	field int METHOD;
+	field int FUNCTION;
+	field int CONSTRUCTOR;
+	field int INT;
+	field int BOOLEAN;
+	field int CHAR;
+	field int VOID;
+	field int VAR;
+	field int STATIC;
+	field int FIELD;
+	field int LET;
+	field int DO;
+	field int IF;
+	field int ELSE;
+	field int WHILE;
+	field int RETURN;
+	field int TRUE;
+	field int FALSE;
+	field int NULL;
+	field int THIS;
+	field String token;
+	field char cur_c;
+	field char lookup_c;
+	constructor JackTokeniser new(Xml destination) {
+		let src = null;
+		let x = destination;
+		let token = String.new(256);
+		let cur_c = 0;
+		let lookup_c = 0;
+		let KEYWORD = x.getString("keyword");
+		let SYMBOL = x.getString("symbol");
+		let INT_CONST = x.getString("integerConstant");
+		let STRING_CONST = x.getString("stringConstant");
+		let IDENTIFIER = x.getString("identifier");
+		let CLASS = x.getString("class");
+		let METHOD = x.getString("method");
+		let FUNCTION = x.getString("function");
+		let CONSTRUCTOR = x.getString("constructor");
+		let INT = x.getString("int");
+		let BOOLEAN = x.getString("boolean");
+		let CHAR = x.getString("char");
+		let VOID = x.getString("void");
+		let VAR = x.getString("var");
+		let STATIC = x.getString("static");
+		let FIELD = x.getString("field");
+		let LET = x.getString("let");
+		let DO = x.getString("do");
+		let IF = x.getString("if");
+		let ELSE = x.getString("else");
+		let WHILE = x.getString("while");
+		let RETURN = x.getString("return");
+		let TRUE = x.getString("true");
+		let FALSE = x.getString("false");
+		let NULL = x.getString("null");
+		let THIS = x.getString("this");
 		return this;
 	}
 
 	method void dispose() {
+		do token.dispose();
 		do Memory.deAlloc(this);
 		return;
+	}
+
+	method void init(File source) {
+		let src = source;
+	}
+
+	method boolean hasMoreTokens() {
+		var char c;
+		var boolean in_comment;
+		var boolean ignore_line;
+
+		if (cur_c) {
+			return true;
+		}
+
+		let in_comment = false;
+		let ignore_line = false;
+
+		if (lookup_c) {
+			let c = lookup_c;
+			let lookup_c = 0;
+		} else {
+			let c = src.readUtf8();
+		}
+		while ((c > 0) & (c < 1114112)) { // U+0001 to U+00110000
+			if (ignore_line) {
+				if (c = 10) {
+					let ignore_line = false;
+				}
+			} else { if (in_comment) {
+				if (c = 42) { // *
+					let c = src.readUtf8();
+					if (c = 47) { // /
+						let in_comment = false;
+					}
+				} 
+			} else {
+				if (c = 47) { // /
+					let c = src.readUtf8();
+					if (c = 42) { // *
+						let in_comment = true;
+					} else { if (c = 47) {
+						let ignore_line = true;
+					} else {
+						let lookup_c = c;
+						let cur_c = 47;
+						return true;
+					}}
+				} else {  if ((c = 9) | (c = 10) |
+					 (c = 13) | (c = 32)) 
+				{
+					 // \t\n\r space
+					let c = c;
+				} else {
+					let cur_c = c;
+					return true;
+				}}
+			}}
+			let c = src.readUtf8();
+		}	
+		return false;
+	}
+	
+	method void advance() {
+		var char c;
+		let c = cur_c;
+		let cur_c = lookup_c;
+		let lookup_c = 0;
+
+		do token.setCharAt(0, 0);
+		while ((c > 0) & (c < 1114112)) { // U+0001 to U+00110000
+			
+			if (c = 59) { // ;
+				do x.addElement(KEYWORD);
+				do x.addContent(token);
+				do x.closeCurrent();
+				do token.setCharAt(0, 0);
+			} else {
+				let token = token.appendChar(c);
+			}
+			if (cur_c) {
+				let c = cur_c;
+				let cur_c = 0;
+			} else {
+				let c = src.readUtf8();
+			}
+		}	
+		return;
+	}
+
+	method int tokenType() {
+
+		return 0;
+	}
+
+	method int KeyWord() {
+		return 0;
+	}
+
+	method char symbol() {
+		return 0;
+	}
+
+	method String identifier() {
+		return null;
+	}
+
+	method int intVal() {
+		return 0;
+	}
+
+	method String stringVal() {
+		return null;
 	}
 }
 

@@ -72,10 +72,22 @@ class UnitFile {
 	}
 
 
+	function boolean t2() {
+		var File src, dst;
+		let src = File.new("tests/Main.jack", false);
+		let dst = File.new("test.xml", true);
+		do dst.dispose();
+		do src.dispose();
+		return true;
+
+	}
+
 	function boolean isOk(int l) {
 		var boolean r;
 		let l = l + 1;
 		let r = UnitFile.testRec(l);
+		let r = Memory.checkEmpty();
+		let r = UnitFile.t2();
 		do Unit.log(l, "File...", r);
 		return Memory.checkEmpty();
 	}

@@ -11,5 +11,6 @@ class Main {
 		do Unit.log(0, "String2", UnitString2.isOk(0));	
 		do Unit.log(0, "File", UnitFile.isOk(0));	
 		do Unit.log(0, "Xml", UnitXml.isOk(0));	
+		do Unit.log(0, "JackAnalyser", UnitJackAnalyser.isOk(0));	
 	}
 }
