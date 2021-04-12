@@ -39,6 +39,10 @@ class File {
 		return;
 	}
 
+	method String getName() {
+		return name;
+	}
+
 	method boolean open() {
 		var int i, l, c;
 		var Array n;

@@ -46,6 +46,16 @@ class Xml {
 		let current = current.closeElement(this, current.getTag());
 	}
 
+	method String getStringNoCreate(String s) {
+		var int i;
+		let i = strings.indexOfStr(s);
+		if (i > -1) {
+			return strings.getAt(i);
+		}
+		return null;
+	}
+
+
 	method String getString(String s) {
 		var int i;
 		let i = strings.indexOfStr(s);

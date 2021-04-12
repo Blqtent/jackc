@@ -92,16 +92,29 @@ class String {
 		return v * s;
 	}
 	
-	method void setInt(int j) {
-		var int n, r;
+	method String setInt(int j) {
+		var int n, r, j, k;
+		var String s;
+		var boolean p;
+		let p = false;
+		let s = this;
 		let this[0] = 0;
 		let n = 1000000000;
 		while (n > 0) {
-			do appendChar((j / n) + 48);
+			let k = j / n;
+			if (k > 0) {
+				let p = true;
+			}
+			if (p) {
+				let s = s.appendChar((j / n) + 48);
+			}
 			let j = Math.rem(j, n);
 			let n = n / 10;
 		}
-		return;
+		if (p = false) {
+			let s = s.appendChar(48);
+		}
+		return s;
 	}
 
 	function char ord(String s) {

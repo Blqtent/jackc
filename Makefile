@@ -3,7 +3,7 @@ all: exe.py
 	rm -rf jackc/lib
 	cp -r lib jackc/
 	rm -rf ctests/lib
-	cp -r lib ctests/
+	cp -r lib/std ctests/
 	python3 jacky.py jackc 
 	python3 jackc.py ctests
 

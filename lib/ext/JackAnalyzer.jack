@@ -23,6 +23,7 @@ class JackAnalyser {
 		let src = File.new(src_, false);
 		let dst = File.new("test.xml", true);
 		do x.clear();
+		do x.addElement("tokens");
 		do t.init(src);
 
 

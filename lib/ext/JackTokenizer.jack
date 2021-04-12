@@ -49,19 +49,26 @@ class JackTokenizer {
 	field int EQUAL;
 	field int TILDE;
 	field String token;
-	field char cur_c;
-	field char ahead_c;
+	field char c;
+	field char ahead;
 	field int token_type;
 	field int key_word;
 	field int int_val;
+	field int line;
+	field int last_line;
+	field String new_file;
+
 
 	constructor JackTokeniser new(Xml destination) {
 		let src = null;
 		let x = destination;
 		let token = String.new(256);
-		let cur_c = 0;
-		let ahead_c = 0;
-		let token_type = 0;
+		let new_file = null;
+		let c = 0;
+		let line = 0;
+		let last_line= -1;
+		let ahead = 0;
+		let token_type = -1;
 		let key_word = 0;
 		let int_val = 0;
 		let KEYWORD = x.getString("keyword");
@@ -90,7 +97,7 @@ class JackTokenizer {
 		let FALSE = x.getString("false");
 		let NULL = x.getString("null");
 		let THIS = x.getString("this");
-		let ASM = x.getString("#");
+		let ASM = x.getString("#asm");
 		let LEFT_CURLY_BRACKET = String.ord("{");
 		let RIGHT_CURLY_BRACKET = String.ord("}");
 		let LEFT_PARENTHESIS = String.ord("(");
@@ -121,26 +128,31 @@ class JackTokenizer {
 
 	method void init(File source) {
 		let src = source;
+		if (src) {
+			let new_file = src.getName();
+		}
+		let c = 0;
+		let ahead = 0;
+		let token_type = -1;
+		let key_word = 0;
+		let int_val = 0;
+		let line = 0;
+		let last_line = -1;
 	}
 
 	method boolean hasMoreTokens() {
-		var char c;
 		var boolean in_comment;
 		var boolean ignore_line;
 
-		if (cur_c) {
-			return true;
+		if (token_type = -1) {
+			let c = src.readUtf8();
+			let ahead = src.readUtf8();
+			let token_type = 0;
 		}
 
 		let in_comment = false;
 		let ignore_line = false;
 
-		if (ahead_c) {
-			let c = ahead_c;
-			let ahead_c = 0;
-		} else {
-			let c = src.readUtf8();
-		}
 		while ((c > 0) & (c < 1114112)) { // U+0001 to U+00110000
 			if (ignore_line) {
 				if (c = 10) {
@@ -148,21 +160,18 @@ class JackTokenizer {
 				}
 			} else { if (in_comment) {
 				if (c = 42) { // *
-					let c = src.readUtf8();
-					if (c = 47) { // /
+					if (ahead = 47) { // /
 						let in_comment = false;
+						do next();			
 					}
 				} 
 			} else {
 				if (c = 47) { // /
-					let c = src.readUtf8();
-					if (c = 42) { // *
+					if (ahead = 42) { // *
 						let in_comment = true;
-					} else { if (c = 47) {
+					} else { if (ahead = 47) {
 						let ignore_line = true;
 					} else {
-						let ahead_c = c;
-						let cur_c = 47;
 						return true;
 					}}
 				} else {  if ((c = 9) | (c = 10) |
@@ -171,40 +180,204 @@ class JackTokenizer {
 					 // \t\n\r space
 					let c = c;
 				} else {
-					let cur_c = c;
 					return true;
 				}}
 			}}
-			let c = src.readUtf8();
+			if (c = 10) {
+				let line = line + 1;
+			}
+			do next();			
 		}	
 		return false;
 	}
-	
-	method void advance() {
-		var char c;
-		let c = cur_c;
-		let cur_c = ahead_c;
-		let ahead_c = 0;
 
+	method void next() {	
+		let c = ahead;
+		let ahead = src.readUtf8();
+		return;
+	}
+	
+	method void addLine() {
+		var String u;
+		if (line > last_line) {
+			let u = String.new(8);
+			let u = u.setInt(line + 1);
+			do x.addAttribute("line", u);
+			do u.dispose();
+			let last_line = line;
+		}
+		if (new_file) {
+			do x.addAttribute("file", new_file);
+			let new_file = null;
+		}
+		return;
+	}
+
+	method void advance() {
+		var int l;
+		var String k;
+		var boolean key_or_id;
+		var boolean in_string;
+		var boolean in_int;
+		var boolean in_asm;
+		let l = 0;
+		let key_or_id = false;
+		let in_string = false;
+		let in_int = false;
+		let in_asm = false;
 		do token.setCharAt(0, 0);
+		if (c = 34) {
+			let in_string = true;	
+			do next();
+		}			
 		while ((c > 0) & (c < 1114112)) { // U+0001 to U+00110000
-			
-			if (c = SEMICOLON) { 
-				do x.addElement(KEYWORD);
+	
+			if (in_string & (c = 34)) {
+				let token_type = STRING_CONST;
+				do x.addElement(token_type);
 				do x.addContent(token);
+				do addLine();
 				do x.closeCurrent();
-				do token.setCharAt(0, 0);
+				do next();
+				return;
+			} else { if (in_int) { 
+				if (((c > 47) & (c < 58))) {
+					let token = token.appendChar(c);
+					let l = l + 1;
+				} else {
+					let token_type = INT_CONST;
+					do x.addElement(token_type);
+					do x.addContent(token);
+					do addLine();
+					do x.closeCurrent();
+					return;
+				}
+			} else { if (in_string) { 
+				let token = token.appendChar(c);
+				let l = l + 1;
+			} else { if (in_asm) { 
+				let token = token.appendChar(c);
+				let l = l + 1;
+				if (c = 10) {
+					let token_type = ASM;
+					do x.addElement(token_type);
+					do x.addContent(token);
+					do addLine();
+					do x.closeCurrent();
+					do next();
+					return;
+				}
+			} else { if (((c > 64) & (c < 91)) |
+				((c > 96) & (c < 123)) |
+				(c = 95) |
+				((c > 47) & (c < 58) & (l > 0)))
+			{
+				let key_or_id = true;
+				let token = token.appendChar(c);
+				let l = l + 1;
+
+			} else { if (key_or_id) {
+				let k = x.getStringNoCreate(token);
+				if ((k = CLASS) |
+					(k = METHOD) |
+					(k = FUNCTION) |
+					(k = CONSTRUCTOR) |
+					(k = INT) |
+					(k = BOOLEAN) |
+					(k = CHAR) |
+					(k = VOID) |
+					(k = VAR) |
+					(k = STATIC) |
+					(k = FIELD) |
+					(k = LET) |
+					(k = DO) |
+					(k = IF) |
+					(k = ELSE) |
+					(k = WHILE) |
+					(k = RETURN) |
+					(k = TRUE) |
+					(k = FALSE) |
+					(k = NULL) |
+					(k = THIS))
+				{
+					let token_type = KEYWORD;
+					let key_word = k;
+				} else {
+					let token_type = IDENTIFIER;
+
+				}
+
+				do x.addElement(token_type);
+				do x.addContent(token);
+				do addLine();
+				do x.closeCurrent();
+				return;
+			} else { if (((c > 47) & (c < 58))) {
+				let token = token.appendChar(c);
+				let l = l + 1;
+				let in_int = true;
+			} else { if ((c = LEFT_CURLY_BRACKET) |
+				(c = RIGHT_CURLY_BRACKET) |
+				(c = LEFT_PARENTHESIS) |
+				(c = RIGHT_PARENTHESIS) |
+				(c = LEFT_SQUARE_BRACKET) |
+				(c = RIGHT_SQUARE_BRACKET) |
+				(c = DOT) |
+				(c = COMMA) |
+				(c = SEMICOLON) |
+				(c = PLUS) |
+				(c = MINUS) |
+				(c = MULTIPLY) |
+				(c = DIV) |
+				(c = AND) |
+				(c = OR) |
+				(c = GREATER) |
+				(c = LESS) |
+				(c = EQUAL) |
+				(c = TILDE)) 
+
+			{
+				let token_type = SYMBOL;
+				let symbol = c;	
+				let token = token.appendChar(c);
+				do x.addElement(token_type);
+				do x.addContent(token);
+				do addLine();
+				do x.closeCurrent();
+				do next();
+				return;
+			} else {  if ((c = 9) | (c = 10) |
+					 (c = 13) | (c = 32)) 
+			{
+				let line = line;
+			} else { if (c = 35) {
+				let token = token.appendChar(c);
+				let in_asm = true;
 			} else {
 				let token = token.appendChar(c);
+				do error(line, token);
+				do next();
+				return;
+			}}}}}}}}}}
+				  	
+			if (c = 10) {
+				let line = line + 1;
 			}
-			if (cur_c) {
-				let c = cur_c;
-				let cur_c = 0;
-			} else {
-				let c = src.readUtf8();
-			}
+			do next();				
 		}	
 		return;
+	}
+
+	method int error(int line_, String w) {
+		do Output.printString("Lexer error, in ");
+		do Output.printString(src.getName());
+		do Output.printString(" unespected '");
+		do Output.printString(w);
+		do Output.printString("' at line ");
+		do Output.printInt(line_ + 1);
+		do Output.println();
+		let c = 0;
+		return 0;
 	}
 
 	method int tokenType() {
