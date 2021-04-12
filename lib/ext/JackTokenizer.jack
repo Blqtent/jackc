@@ -57,7 +57,8 @@ class JackTokenizer {
 	field int line;
 	field int last_line;
 	field String new_file;
-
+	field char symbol_;
+	field boolean gen_xml;
 
 	constructor JackTokeniser new(Xml destination) {
 		let src = null;
@@ -70,7 +71,9 @@ class JackTokenizer {
 		let ahead = 0;
 		let token_type = -1;
 		let key_word = 0;
+		let symbol_ = 0;
 		let int_val = 0;
+		let gen_xml = false;
 		let KEYWORD = x.getString("keyword");
 		let SYMBOL = x.getString("symbol");
 		let INT_CONST = x.getString("integerConstant");
@@ -126,11 +129,12 @@ class JackTokenizer {
 		return;
 	}
 
-	method void init(File source) {
+	method void init(File source, boolean generate_xml) {
 		let src = source;
 		if (src) {
 			let new_file = src.getName();
 		}
+		let gen_xml = generate_xml;
 		let c = 0;
 		let ahead = 0;
 		let token_type = -1;
@@ -234,10 +238,12 @@ class JackTokenizer {
 	
 			if (in_string & (c = 34)) {
 				let token_type = STRING_CONST;
-				do x.addElement(token_type);
-				do x.addContent(token);
-				do addLine();
-				do x.closeCurrent();
+				if (gen_xml) {
+					do x.addElement(token_type);
+					do x.addContent(token);
+					do addLine();
+					do x.closeCurrent();
+				}
 				do next();
 				return;
 			} else { if (in_int) { 
@@ -246,10 +252,12 @@ class JackTokenizer {
 					let l = l + 1;
 				} else {
 					let token_type = INT_CONST;
-					do x.addElement(token_type);
-					do x.addContent(token);
-					do addLine();
-					do x.closeCurrent();
+					if (gen_xml) {
+						do x.addElement(token_type);
+						do x.addContent(token);
+						do addLine();
+						do x.closeCurrent();
+					}
 					return;
 				}
 			} else { if (in_string) { 
@@ -260,10 +268,12 @@ class JackTokenizer {
 				let l = l + 1;
 				if (c = 10) {
 					let token_type = ASM;
-					do x.addElement(token_type);
-					do x.addContent(token);
-					do addLine();
-					do x.closeCurrent();
+					if (gen_xml) {
+						do x.addElement(token_type);
+						do x.addContent(token);
+						do addLine();
+						do x.closeCurrent();
+					}
 					do next();
 					return;
 				}
@@ -306,11 +316,12 @@ class JackTokenizer {
 					let token_type = IDENTIFIER;
 
 				}
-
-				do x.addElement(token_type);
-				do x.addContent(token);
-				do addLine();
-				do x.closeCurrent();
+				if (gen_xml) {
+					do x.addElement(token_type);
+					do x.addContent(token);
+					do addLine();
+					do x.closeCurrent();
+				}
 				return;
 			} else { if (((c > 47) & (c < 58))) {
 				let token = token.appendChar(c);
@@ -338,12 +349,14 @@ class JackTokenizer {
 
 			{
 				let token_type = SYMBOL;
-				let symbol = c;	
+				let symbol_ = c;	
 				let token = token.appendChar(c);
-				do x.addElement(token_type);
-				do x.addContent(token);
-				do addLine();
-				do x.closeCurrent();
+				if (gen_xml) {
+					do x.addElement(token_type);
+					do x.addContent(token);
+					do addLine();
+					do x.closeCurrent();
+				}
 				do next();
 				return;
 			} else {  if ((c = 9) | (c = 10) |
@@ -380,29 +393,36 @@ class JackTokenizer {
 		return 0;
 	}
 
-	method int tokenType() {
+	method Xml getXml() {
+		return x;
+	}
 
-		return 0;
+	method int getLine() {
+		return line;
+	}
+
+	method int tokenType() {
+		return token_type;
 	}
 
 	method int KeyWord() {
-		return 0;
+		return key_word;
 	}
 
 	method char symbol() {
-		return 0;
+		return symbol_;
 	}
 
 	method String identifier() {
-		return null;
+		return token;
 	}
 
 	method int intVal() {
-		return 0;
+		return token.intValue();
 	}
 
 	method String stringVal() {
-		return null;
+		return token;
 	}
 }
 

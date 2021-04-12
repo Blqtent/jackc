@@ -3,11 +3,13 @@ class JackAnalyser {
 	field File src;
 	field Xml x;
 	field JackTokenizer t;
+	field CompilationEngine comp;
 
 	constructor JackAnalyser new() {
 		let src = null;
 		let x = Xml.new();
 		let t = JackTokenizer.new(x);
+		let comp = CompilationEngine.new(t);
 		return this;
 	}
 
@@ -24,12 +26,8 @@ class JackAnalyser {
 		let dst = File.new("test.xml", true);
 		do x.clear();
 		do x.addElement("tokens");
-		do t.init(src);
-
-
-		while (t.hasMoreTokens()) {
-			do t.advance();
-		}
+		do t.init(src, false);
+		do comp.compileClass(t, dst);
 
 		do x.dump(dst);
 
