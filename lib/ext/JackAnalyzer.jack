@@ -27,6 +27,7 @@ class JackAnalyser {
 		do x.clear();
 		do x.addElement("tokens");
 		do t.init(src, false);
+		do comp.init(src, false);
 		do comp.compileClass(t, dst);
 
 		do x.dump(dst);

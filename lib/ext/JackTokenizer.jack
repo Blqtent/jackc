@@ -147,6 +147,7 @@ class JackTokenizer {
 	method boolean hasMoreTokens() {
 		var boolean in_comment;
 		var boolean ignore_line;
+		var int start;
 
 		if (token_type = -1) {
 			let c = src.readUtf8();
@@ -156,7 +157,7 @@ class JackTokenizer {
 
 		let in_comment = false;
 		let ignore_line = false;
-
+		let start = line;
 		while ((c > 0) & (c < 1114112)) { // U+0001 to U+00110000
 			if (ignore_line) {
 				if (c = 10) {
@@ -172,6 +173,7 @@ class JackTokenizer {
 			} else {
 				if (c = 47) { // /
 					if (ahead = 42) { // *
+						let start = line;
 						let in_comment = true;
 					} else { if (ahead = 47) {
 						let ignore_line = true;
@@ -191,7 +193,11 @@ class JackTokenizer {
 				let line = line + 1;
 			}
 			do next();			
+		} 
+		if (in_comment) {
+			do error(start, "Comment toward end of file.");
 		}	
+		let token_type = 0;
 		return false;
 	}
 
@@ -218,6 +224,7 @@ class JackTokenizer {
 	}
 
 	method void advance() {
+		var int start;
 		var int l;
 		var String k;
 		var boolean key_or_id;
@@ -230,10 +237,11 @@ class JackTokenizer {
 		let in_int = false;
 		let in_asm = false;
 		do token.setCharAt(0, 0);
+		let start = line;			
 		if (c = 34) {
 			let in_string = true;	
 			do next();
-		}			
+		}
 		while ((c > 0) & (c < 1114112)) { // U+0001 to U+00110000
 	
 			if (in_string & (c = 34)) {
@@ -362,6 +370,7 @@ class JackTokenizer {
 			} else {  if ((c = 9) | (c = 10) |
 					 (c = 13) | (c = 32)) 
 			{
+				do error(line, "White space");
 				let line = line;
 			} else { if (c = 35) {
 				let token = token.appendChar(c);
@@ -378,6 +387,12 @@ class JackTokenizer {
 			}
 			do next();				
 		}	
+		if (in_string) {
+			do error(start, "Comment toward end of file.");
+		}
+		if (in_int | key_or_id) {
+			do error(start, "Reached end of file token.");
+		}
 		return;
 	}
 
@@ -398,14 +413,14 @@ class JackTokenizer {
 	}
 
 	method int getLine() {
-		return line;
+		return line + 1;
 	}
 
 	method int tokenType() {
 		return token_type;
 	}
 
-	method int KeyWord() {
+	method int keyWord() {
 		return key_word;
 	}
 

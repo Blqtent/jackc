@@ -55,15 +55,22 @@ class CompilationEngine {
 	field int int_val;
 	field int line;
 	field int last_line;
-	field String new_file;
 	field Xml dst;
+	
 	field JackTokenizer jt;
-
+	field File src;
+	field int maxerror;
+	field int nberror;
+	field String exp;
 	constructor CompilationEngine new(JackTokenizer source) 
 	{
+		let nberror = 0;
+		let maxerror = 1;
 		let src = null;
 		let jt = source;
 		let x = source.getXml();
+		let exp = String.new(1);
+
 		let dst = null;
 		let token = String.new(256);
 		let new_file = null;
@@ -129,11 +136,12 @@ class CompilationEngine {
 		return;
 	}
 
-	method void init(File source) {
+	method void init(File source, boolean xml_output) {
 		let src = source;
-		if (src) {
-			let new_file = src.getName();
-		}
+		let nberror = 0;
+		let maxerror = 1;
+		
+
 		let c = 0;
 		let ahead = 0;
 		let token_type = -1;
@@ -143,24 +151,105 @@ class CompilationEngine {
 		let last_line = -1;
 	}
 
+	method boolean matchKeyword(String k, boolean eat) {	
+		if (eat & jt.hasMoreTokens()) {
+			do jt.advance();
+		}
+		if (jt.tokenType() = KEYWORD) {
+			if (jt.keyWord() = k) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	method boolean matchSymbol(char k, boolean eat) {	
+		if (eat & jt.hasMoreTokens()) {
+			do jt.advance();
+		}
+		if (jt.tokenType() = SYMBOL) {
+			if (jt.symbol() = k) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	method boolean matchIntegerConstant(boolean eat) {	
+		if (jt.hasMoreTokens()) {
+			do jt.advance();
+		}
+		if (jt.tokenType() = INT_CONST) {
+			return true;
+		}
+		return false;
+	}
+
+	method boolean matchStringConstant(boolean eat) {	
+		if (eat & jt.hasMoreTokens()) {
+			do jt.advance();
+		}
+		if (jt.tokenType() = STRING_CONST) {
+			return true;
+		}
+		return false;
+	}
+	
+	method boolean matchIdentifier(boolean eat) {	
+		if (eat & jt.hasMoreTokens()) {
+			do jt.advance();
+		}
+		if (jt.tokenType() = IDENTIFIER) {
+			return true;
+		}
+		return false;
+	}
+	
 	method void compileClass(JackTokenizer tk, File dst_) {
+		var boolean doit;
 		var int l;
 		var String k;
 		var boolean key_or_id;
 		var boolean in_string;
 		var boolean in_int;
-		var boolean in_asm;
+		let doit = true;
+		let jt = tk;
 		let l = 0;
 		let key_or_id = false;
 		let in_string = false;
 		let in_int = false;
 		let in_asm = false;
 
-		while (tk.hasMoreTokens()) {
-			do tk.advance();
-			//do Output.printString(tk.tokenType());
-			//do Output.println();
+		if (matchKeyword(CLASS, true)) {
+			if (matchIdentifier(true)) {
+				if (matchSymbol(LEFT_CURLY_BRACKET, true)) {
+					while (compileClassVarDec()) {
+						let doit = doit;
+					}
+					while (compileSubroutine()) {
+						let doit = doit;
+					}
+					if (matchSymbol(
+						RIGHT_CURLY_BRACKET, false)) 
+					{
+						if (jt.hasMoreTokens() = 0) {
+							return;
+						} else {
+							do error("Extra content after class definition");
+						}	
+					}
+					if (exp.length()) {
+						do error(exp);
+					} else {
+						do error("Expected } ");
+					}
+				}
+				do error("Expected {");
+			}
+			do error("Expected class identifier");
+
 		}
+		do error("Expected class");
 		return;
 
 		do token.setCharAt(0, 0);
@@ -306,16 +395,86 @@ class CompilationEngine {
 		return;
 	}
 
-	method int error(int line_, String w) {
+	method void expect(String w) {
+		do exp.dispose();
+		let exp = w.copy();
+		return;
+	}
+
+	method int error(String w) {
+		let nberror = nberror + 1;
+		if (nberror > maxerror) {
+			return;
+		}
 		do Output.printString("Syntax error, in ");
 		do Output.printString(src.getName());
-		do Output.printString(" unespected '");
+		do Output.printString(" '");
 		do Output.printString(w);
 		do Output.printString("' at line ");
-		do Output.printInt(line_ + 1);
+		do Output.printInt(jt.getLine());
 		do Output.println();
-		let c = 0;
+		do exp.setCharAt(0, 0);
 		return 0;
 	}
+
+	method boolean compileClassVarDec() {
+		var boolean z;
+		let z = matchKeyword(STATIC, true);
+		let z = z | matchKeyword(FIELD, true);
+		if (z) {
+			return true;
+		}
+		do expect("static or field expect");
+		return false;
+	}
+
+	method boolean compileSubroutine() {
+		return false;
+	}
+
+	method void compileParameterList() {
+		return;
+	}
+
+	method boolean compileVarDec() {
+		return false;
+	}
+
+	method void compileStatements() {
+		return;
+	}
+
+	method void compileDo() {
+		return;
+	}
+
+	method void compileLet() {
+		return;
+	}
+
+	method void compileWhile() {
+		return;
+	}
+
+	method void compileReturn() {
+		return;
+	}
+
+	method void compileIf() {
+		return;
+	}
+
+	method void compileExpression() {
+		return;
+	}
+
+	method void compileTerm() {
+		return;
+	}
+
+	method void compileExpressionList() {
+		return;
+	}
+
 }
 
