@@ -56,7 +56,7 @@ class Buffer {
 		let i = 0;
 		while (i < pos) { // FIXME bsearch
 			let s = buffer[i];
-			if (String2.compare(s, q) = 0) {
+			if (s.compare(q) = 0) {
 				return i;
 			}
 			let i = i + 1;

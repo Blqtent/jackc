@@ -177,7 +177,7 @@ def replace(f, c ,tab):
     key = "";
     for q in c.children:
         if q.tag == "classo":
-            if (q.data == "Math2"):
+            if (q.data == "Math"):
                 if (c.data == "xor"):
                     key = "^"
                 elif (c.data == "shiftRight"):

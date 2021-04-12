@@ -52,7 +52,7 @@ class Xml {
 		if (i > -1) {
 			return strings.getAt(i);
 		}
-		let s = String2.copy(s);
+		let s = s.copy();
 		do strings.insertSortedStr(s);
 		return s;
 	}
@@ -76,15 +76,15 @@ class Xml {
 		while (i < l) {
 			let c = o.charAt(i);
 			if (c = 60) { // <
-				let s = String2.appendStr(s, "&lt;");
+				let s = s.appendStr("&lt;");
 			} else { if (c = 38) { // &
-				let s = String2.appendStr(s, "&amp;");
+				let s = s.appendStr("&amp;");
 			} else { if (c = 34) { // "
-				let s = String2.appendStr(s, "&quot;");
+				let s = s.appendStr("&quot;");
 			} else { if (c = 62) { // >
-				let s = String2.appendStr(s, "&gt;");
+				let s = s.appendStr("&gt;");
 			} else { if (c = 39) { // ' 
-				let s = String2.appendStr(s, "&apos;");
+				let s = s.appendStr("&apos;");
 			} else {
 				let s = s.appendChar(c);
 			}}}}}

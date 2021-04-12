@@ -18,7 +18,7 @@ class File {
 			do Sys.error(-1);
 			return this;
 		}
-		let name = String2.copy(path);
+		let name = path.copy();
 		return this;
 	}
 

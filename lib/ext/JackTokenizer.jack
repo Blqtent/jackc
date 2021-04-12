@@ -28,15 +28,42 @@ class JackTokenizer {
 	field int FALSE;
 	field int NULL;
 	field int THIS;
+	field int ASM;
+	field int LEFT_CURLY_BRACKET;
+	field int RIGHT_CURLY_BRACKET;
+	field int LEFT_PARENTHESIS;
+	field int RIGHT_PARENTHESIS;
+	field int LEFT_SQUARE_BRACKET;
+	field int RIGHT_SQUARE_BRACKET;
+	field int DOT;
+	field int COMMA;
+	field int SEMICOLON;
+	field int PLUS;
+	field int MINUS;
+	field int MULTIPLY;
+	field int DIV;
+	field int AND;
+	field int OR;
+	field int GREATER;
+	field int LESS;
+	field int EQUAL;
+	field int TILDE;
 	field String token;
 	field char cur_c;
-	field char lookup_c;
+	field char ahead_c;
+	field int token_type;
+	field int key_word;
+	field int int_val;
+
 	constructor JackTokeniser new(Xml destination) {
 		let src = null;
 		let x = destination;
 		let token = String.new(256);
 		let cur_c = 0;
-		let lookup_c = 0;
+		let ahead_c = 0;
+		let token_type = 0;
+		let key_word = 0;
+		let int_val = 0;
 		let KEYWORD = x.getString("keyword");
 		let SYMBOL = x.getString("symbol");
 		let INT_CONST = x.getString("integerConstant");
@@ -63,6 +90,26 @@ class JackTokenizer {
 		let FALSE = x.getString("false");
 		let NULL = x.getString("null");
 		let THIS = x.getString("this");
+		let ASM = x.getString("#");
+		let LEFT_CURLY_BRACKET = String.ord("{");
+		let RIGHT_CURLY_BRACKET = String.ord("}");
+		let LEFT_PARENTHESIS = String.ord("(");
+		let RIGHT_PARENTHESIS = String.ord(")");
+		let LEFT_SQUARE_BRACKET = String.ord("[");
+		let RIGHT_SQUARE_BRACKET = String.ord("]");
+		let DOT = String.ord(".");
+		let COMMA = String.ord(",");
+		let SEMICOLON = String.ord(";");
+		let PLUS = String.ord("+");
+		let MINUS = String.ord("-");
+		let MULTIPLY = String.ord("*");
+		let DIV = String.ord("/");
+		let AND = String.ord("&");
+		let OR = String.ord("|");
+		let GREATER = String.ord(">");
+		let LESS = String.ord("<");
+		let EQUAL = String.ord("=");
+		let TILDE = String.ord("~");
 		return this;
 	}
 
@@ -88,9 +135,9 @@ class JackTokenizer {
 		let in_comment = false;
 		let ignore_line = false;
 
-		if (lookup_c) {
-			let c = lookup_c;
-			let lookup_c = 0;
+		if (ahead_c) {
+			let c = ahead_c;
+			let ahead_c = 0;
 		} else {
 			let c = src.readUtf8();
 		}
@@ -114,7 +161,7 @@ class JackTokenizer {
 					} else { if (c = 47) {
 						let ignore_line = true;
 					} else {
-						let lookup_c = c;
+						let ahead_c = c;
 						let cur_c = 47;
 						return true;
 					}}
@@ -136,13 +183,13 @@ class JackTokenizer {
 	method void advance() {
 		var char c;
 		let c = cur_c;
-		let cur_c = lookup_c;
-		let lookup_c = 0;
+		let cur_c = ahead_c;
+		let ahead_c = 0;
 
 		do token.setCharAt(0, 0);
 		while ((c > 0) & (c < 1114112)) { // U+0001 to U+00110000
 			
-			if (c = 59) { // ;
+			if (c = SEMICOLON) { 
 				do x.addElement(KEYWORD);
 				do x.addContent(token);
 				do x.closeCurrent();

@@ -98,10 +98,14 @@ class String {
 		let n = 1000000000;
 		while (n > 0) {
 			do appendChar((j / n) + 48);
-			let j = Math2.rem(j, n);
+			let j = Math.rem(j, n);
 			let n = n / 10;
 		}
 		return;
+	}
+
+	function char ord(String s) {
+		return s[0];
 	}
 
 	function char backSpace() {
@@ -115,4 +119,53 @@ class String {
 	function char newLine() {
 		return 10;
 	}
+
+	method String copy() {
+		var String s;
+		var String p;
+		var int j, l;
+		let p = this;
+		let j = 0;
+		let l = p.length();
+		let s = String.new(l + 1);
+		while (j < l) {
+			let s = s.appendChar(p.charAt(j));
+			let j = j + 1;
+		}
+		return s;
+	}
+
+	method String appendStr(String p) {
+		var int j, l;
+		var String s;
+		let s = this;
+		let j = 0;
+		let l = p.length();
+		while (j < l) {
+			let s = s.appendChar(p.charAt(j));
+			let j = j + 1;
+		}
+		return s;
+	}
+
+
+	method int compare(String s) {
+		var String p;
+		var int j, lp, ls, r;
+		let p = this;
+		let lp = p.length();
+		let ls = s.length();
+		let j = 0;
+		while ((j < lp) & (j < ls)) {
+			let r = p.charAt(j) - s.charAt(j);
+			if (r) {
+				return r;
+			}	
+			let j = j + 1;
+		}
+		return lp - ls;
+	}
+
+
+
 }

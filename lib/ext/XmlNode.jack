@@ -11,7 +11,7 @@ class XmlNode {
 		String tag_, boolean is_txt) 
 	{
 		if (is_txt) {
-			let tag = String2.copy(tag_);
+			let tag = tag_.copy();
 		} else {
 			let tag = x.getString(tag_);
 		//	do Output.printString("TAG=");
@@ -108,7 +108,7 @@ class XmlNode {
 			let att_names = Buffer.new(1);
 		}
 		let i = att_names.indexOfStr(name);
-		let s = String2.copy(value);
+		let s = value.copy();
 		if (i > -1) {
 			let s = att_values.setAt(i, s);
 			do s.dispose();

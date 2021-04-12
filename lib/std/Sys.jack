@@ -8,9 +8,11 @@
  */
 
 class Sys {
+	static Buffer args_;
+
 	function void init() {
 		do Memory.init();
-		do Sys2.init();
+		let args_ = null;
 		do Math.init();
 		do Output.init();
 		do Screen.init();
@@ -20,7 +22,6 @@ class Sys {
 	}
 
 	function void deInit() {
-		do Sys2.deInit();
 		do Math.deInit();
 		do Output.deInit();
 		do Screen.deInit();
@@ -48,6 +49,56 @@ class Sys {
 	function void wait(int duration) {
 #py 	time.sleep(duration / 1000.0)
 		return;
+	}
+
+	function void deInit() {
+		var int i;
+		var String s;
+		var Buffer b;
+
+		if (args_) {
+			let i = 0;
+			let b = args_;
+			while (i < b.getSize()) {
+				let s = b.getAt(i);
+				do s.dispose();
+				let i = i + 1;
+			}		
+			do b.dispose();	
+			let args_ = null;
+		}
+	}
+
+	function Buffer args() {
+		var Array a;
+		var String s;
+		var int i;
+		var int j;
+		var int js;
+		var int isq;
+		var int c;
+		var Buffer b;
+		if (args_) {
+			return args_;
+		}
+		let args_ = Buffer.new(1);
+		let i = 0;
+#py 	isq = len(sys.argv)
+		while (i < isq) {
+#py 		a = sys.argv[i]
+			let s = String.new(255);
+			let j = 0;
+#py 		js = len(a)
+			while (j < js) {
+#py 			c = ord(a[j])
+				let s = s.appendChar(c);
+				let j = j + 1;
+			}	
+			let b = args_;			
+			do b.append(s);
+			let i = i + 1;
+		}
+		return args_;
 	}
 }
 

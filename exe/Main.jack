@@ -152,12 +152,12 @@ class Main
 			}
 			//do Output.printInt(Math2.rem(z, g.getW()));
 			//do Output.println(); // new line
-			if ((g.getW() > 0) & (Math2.rem(z, g.getW())) = 0) {
+			if ((g.getW() > 0) & (Math.rem(z, g.getW())) = 0) {
 				do f.writeByte(10);
 			}
 		}
 
-		do Output.printInt(Math2.xor(3, 6));
+		do Output.printInt(Math.xor(3, 6));
 		if (d) {
 			do f.dispose();
 			do d.dispose();

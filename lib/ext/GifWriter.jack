@@ -67,12 +67,12 @@ class GifWriter {
 		var Array buf_;
 		let buf_ = buf;
 		let idx_ = idx;
-		let outBits_ = outBits | Math2.shiftLeft(code, curBits);
+		let outBits_ = outBits | Math.shiftLeft(code, curBits);
 		let curBits_ = curBits + numBits;
 		while (curBits_ > 7) {
 			let buf_[idx_] = outBits_ & 255;
 			let idx_ = idx_ + 1;
-			let outBits_ = Math2.shiftRight(outBits_, 8);
+			let outBits_ = Math.shiftRight(outBits_, 8);
 			let curBits_ = curBits_ - 8;
 			if (idx_ > 254) {
 				do out8(idx_);
@@ -130,9 +130,9 @@ class GifWriter {
 			let CONTINUE = true;
 			let c = in_[inp];
 			let inp = inp  + 1;
-			let fcode = Math2.shiftLeft(c, 12) + ent;
-			let key = Math2.shiftLeft(c, 4);
-			let key = Math2.xor(ent, key);
+			let fcode = Math.shiftLeft(c, 12) + ent;
+			let key = Math.shiftLeft(c, 4);
+			let key = Math.xor(ent, key);
 			let kk = hashTbl[key];
 			while (CONTINUE & (kk > -1)) {
 				if (kk = fcode) {
@@ -159,7 +159,7 @@ class GifWriter {
 							let maxcode = 4096;
 						} else {
 							let maxcode =
-							  Math2.shiftLeft(1,
+							  Math.shiftLeft(1,
 								numBits) - 1;
 						}
 					}
@@ -205,7 +205,7 @@ class GifWriter {
 		let height = h;
 		let repeat = repeat_;
 		let numColors = numColors_;
-		let palSize = Math2.log2(numColors_);
+		let palSize = Math.log2(numColors_);
 		do out8(71); // "GIF89a"	
 		do out8(73); 	
 		do out8(70); 	
@@ -291,8 +291,8 @@ class GifWriter {
 				let rr = ((p / 65536) & 255) - rgb2;
 				let d = (bb*bb) + (gg*gg) + (rr*rr);*/
 				let bb = (p & 255) - rgb0;
-				let gg = (Math2.shiftRight(p, 8) & 255) - rgb1;
-				let rr = (Math2.shiftRight(p, 16) & 255) - rgb2;
+				let gg = (Math.shiftRight(p, 8) & 255) - rgb1;
+				let rr = (Math.shiftRight(p, 16) & 255) - rgb2;
 				let d = (bb*bb) + (gg*gg) + (rr*rr);
 				if (d < bestd) {
 					let bestd = d;
@@ -306,7 +306,7 @@ class GifWriter {
 		}
 		if (frame = 0) {
 			let i = 0;
-			let j = Math2.shiftLeft(1, palSize + 1);
+			let j = Math.shiftLeft(1, palSize + 1);
 			while (i < j) {
 				let d = palette[i];
 				do out8(d & 255);
@@ -355,7 +355,7 @@ class GifWriter {
 		} else {
 			do out8(128 | palSize);
 			let i = 0;
-			let j = Math2.shiftLeft(1, palSize + 1);
+			let j = Math.shiftLeft(1, palSize + 1);
 			while (i < j) {
 				let d = palette[i];
 				do out8(d & 255);

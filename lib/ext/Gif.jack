@@ -163,7 +163,7 @@ class Gif {
 				
 			if (flags & 128) {	
 				do parseColortable(pal, 
-					Math2.shiftLeft(2, (flags&7)), -1);
+					Math.shiftLeft(2, (flags&7)), -1);
 			}
 			return true;
 		}
@@ -209,10 +209,10 @@ class Gif {
 			let cur_x = start_x;
 			let cur_y = cur_y + step;
 			while ((cur_y > (max_y - 1)) & (parse > 0)) {
-				let step = Math2.shiftLeft(1, parse) 
+				let step = Math.shiftLeft(1, parse) 
 					+ line_size;
 				let cur_y = start_y + 
-					Math2.shiftRight(step, 1);
+					Math.shiftRight(step, 1);
 				let parse = parse - 1;
 			}
 		}
@@ -241,10 +241,10 @@ class Gif {
 		if (lzw_cs > 12) {
 			return null;
 		}
-		let clear = Math2.shiftLeft(1, lzw_cs);
+		let clear = Math.shiftLeft(1, lzw_cs);
 		let first = 1;
 		let codesize = lzw_cs + 1;
-		let codemask = Math2.shiftLeft(1, codesize) - 1;
+		let codemask = Math.shiftLeft(1, codesize) - 1;
 		let bits = 0;
 		let valid_bits = 0;
 		let init_code = 0;
@@ -268,16 +268,16 @@ class Gif {
 					}
 				}
 				let len = len - 1;
-				let bits = bits | Math2.shiftLeft(
+				let bits = bits | Math.shiftLeft(
 					get8(), valid_bits);
 				let valid_bits = valid_bits + 8;
 			} else {
 				let code_ = bits & codemask;
-				let bits = Math2.shiftRight(bits, codesize);
+				let bits = Math.shiftRight(bits, codesize);
  				let valid_bits = valid_bits - codesize;
 				if (code_ = clear) {
 					let codesize = lzw_cs + 1;
-					let codemask = Math2.shiftLeft(
+					let codemask = Math.shiftLeft(
 						1, codesize) - 1;
 					let avail = clear + 2;
 					let oldcode = -1;
@@ -320,7 +320,7 @@ class Gif {
 						(avail < 4096)) 
 					{
 						let codesize = codesize + 1;
-						let codemask = Math2.shiftLeft(
+						let codemask = Math.shiftLeft(
 							1, codesize) - 1;
 					} 
 					let oldcode = code_;
@@ -361,7 +361,7 @@ class Gif {
 			}
 			let first_frame = 1;
 		} else {
-			let dispose_ = Math2.shiftRight((eflags & 28), 2);
+			let dispose_ = Math.shiftRight((eflags & 28), 2);
 			let pcount = w * h;
 			if ((dispose_ = 3) & (two_back = null)) {
 				let dispose_ = 2;
@@ -428,7 +428,7 @@ class Gif {
 						let tmp = transparent;
 					}
 					do parseColortable(lpal, 
-						Math2.shiftLeft(2, 
+						Math.shiftLeft(2, 
 							lflags & 7), tmp);
 					let color_table = lpal;
 				} else { if (flags & 128) {
