@@ -120,6 +120,7 @@ class JackTokenizer {
 		let LESS = String.ord("<");
 		let EQUAL = String.ord("=");
 		let TILDE = String.ord("~");
+		
 		return this;
 	}
 
@@ -189,9 +190,6 @@ class JackTokenizer {
 					return true;
 				}}
 			}}
-			if (c = 10) {
-				let line = line + 1;
-			}
 			do next();			
 		} 
 		if (in_comment) {
@@ -202,6 +200,9 @@ class JackTokenizer {
 	}
 
 	method void next() {	
+		if (c = 10) {
+			let line = line + 1;
+		}
 		let c = ahead;
 		let ahead = src.readUtf8();
 		return;
@@ -238,10 +239,6 @@ class JackTokenizer {
 		let in_asm = false;
 		do token.setCharAt(0, 0);
 		let start = line;			
-		if (c = 34) {
-			let in_string = true;	
-			do next();
-		}
 		while ((c > 0) & (c < 1114112)) { // U+0001 to U+00110000
 	
 			if (in_string & (c = 34)) {
@@ -269,6 +266,10 @@ class JackTokenizer {
 					return;
 				}
 			} else { if (in_string) { 
+				if (c = 10) {
+					do error(line, "newline in string");
+					return;
+				}
 				let token = token.appendChar(c);
 				let l = l + 1;
 			} else { if (in_asm) { 
@@ -285,6 +286,8 @@ class JackTokenizer {
 					do next();
 					return;
 				}
+			} else { if (c = 34) {
+				let in_string = true;	
 			} else { if (((c > 64) & (c < 91)) |
 				((c > 96) & (c < 123)) |
 				(c = 95) |
@@ -380,11 +383,8 @@ class JackTokenizer {
 				do error(line, token);
 				do next();
 				return;
-			}}}}}}}}}}
+			}}}}}}}}}}}
 				  	
-			if (c = 10) {
-				let line = line + 1;
-			}
 			do next();				
 		}	
 		if (in_string) {

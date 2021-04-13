@@ -21,9 +21,11 @@ class String {
 	}
 
 	method int length() {
+		var String s;
 		var int l;
 		let l = 0;
-		while (this[l]) {
+		let s = this;
+		while (s[l]) {
 			let l = l + 1;
 		}
 		return l;

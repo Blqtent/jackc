@@ -86,9 +86,9 @@ def sexpr_(f, a, tab):
             if a.data == "this":
                 w(f, "__this")
             elif a.data == "false":
-                w(f, "False")
+                w(f, "0")
             elif a.data == "true":
-                w(f, "True")
+                w(f, "-1")
             elif a.data == "null":
                 w(f, "0")
             else:
@@ -114,9 +114,9 @@ def sexpr_(f, a, tab):
             if (ib):
                 if (o == "~"):
                     o = "";
-                    w(f, "(False==");
+                    w(f, "(0==");
                 else:
-                    w(f, "(False!=");
+                    w(f, "(0!=");
             elif (o == "/" or o == "*"):
                     w(f, "(int");
             else:
@@ -140,7 +140,7 @@ def sexpr_(f, a, tab):
             o = a.data
             if (isbool(a)):
                 if (o == "~"):
-                    o = "False=="
+                    o = "0=="
             w(f, o)
             expr_(f, a, tab)
 
