@@ -28,7 +28,9 @@ class XmlNode {
 	}
 
 	method void dispose() {
-		do this.clear();
+		var XmlNode x;
+		let x = this;
+		do x.clear();
 		do Memory.deAlloc(this);
 	}
 

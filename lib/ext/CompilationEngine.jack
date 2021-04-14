@@ -162,6 +162,7 @@ class CompilationEngine {
 
 	method void matched(String tok, int k) {
 		var String s;
+		return;
 		do Output.printString(tok);
 		if (tok = SYMBOL) {
 			let s = String.new(8);
@@ -375,6 +376,7 @@ class CompilationEngine {
 							    	SEMICOLON, 
 								false);
 							if (z) {
+							  do advance();
 							  return true;
 							} else {
 							  do error(
@@ -387,6 +389,7 @@ class CompilationEngine {
 								SEMICOLON, 
 								false);
 							if (z) {
+								do advance();
 								return true;
 							}
 							do error(
@@ -479,7 +482,7 @@ class CompilationEngine {
 	method boolean compileParameterList() {
 		var boolean z;
 		let z = true;
-		while (true) {
+		while (jt.hasMoreTokens()) {
 			let z = matchKeyword(INT, false); // type
 			let z = z | matchKeyword(CHAR, false);
 			let z = z | matchKeyword(BOOLEAN, false);
@@ -610,6 +613,7 @@ class CompilationEngine {
 				do error("')' expected");
 				return;
 			}
+			do advance();
 			return;
 		}
 		let z = matchSymbol(DOT, false);
@@ -832,9 +836,16 @@ class CompilationEngine {
 			if (matchSymbol(RIGHT_SQUARE_BRACKET, false)) {
 				return;
 			}
+			if (matchSymbol(COMMA, false)) {
+				return;
+			}
 			if (jt.tokenType() = SYMBOL) {
 				do genOp();
-				do advance();
+				if (~advance()) {
+					do error(
+						"missing token at end of file");
+					return;
+				}
 			} else {
 				return;
 			}
@@ -842,7 +853,7 @@ class CompilationEngine {
 		return;
 	}
 
-	method boolean compileTerm() {
+	method void compileTerm() {
 		var boolean z;
 		var String s;
 		let z = matchIntegerConstant(false);
@@ -929,6 +940,7 @@ class CompilationEngine {
 		let z = z | matchSymbol(LEFT_PARENTHESIS, false);
 		if (~z) {
 			// match s
+			do s.dispose();
 			return;
 		}
 		do subroutineCall(s);
