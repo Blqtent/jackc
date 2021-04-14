@@ -55,7 +55,8 @@ class CompilationEngine {
 	field int nberror;
 	field String exp;
 	field boolean gen_xml;
-
+	field int line;
+	field int last_line;
 	constructor CompilationEngine new(JackTokenizer source) 
 	{
 		let nberror = 0;
@@ -123,6 +124,8 @@ class CompilationEngine {
 		let src = source;
 		let nberror = 0;
 		let gen_xml = xml_output;
+		let line = 0;
+		let last_line = -1;
 		return;
 	}
 
@@ -276,109 +279,227 @@ class CompilationEngine {
 		return 0;
 	}
 
+	method void addLine() {
+		var String u;
+		if (jt.getLine() > last_line) {
+			let last_line = jt.getLine();
+			let u = String.new(8);
+			let u = u.setInt(last_line);
+			do x.addAttribute("line", u);
+			do u.dispose();
+		}
+		return;
+	}
+
+	method void addStringConstant() {
+		if (~gen_xml) {
+			return;
+		}
+		do x.addElement(STRING_CONST);
+		do x.addContent(jt.stringVal());
+		do addLine();
+		do x.closeCurrent();
+		return;
+	}
+
+	method void addIntegerConstant() {
+		var String s;
+		if (~gen_xml) {
+			return;
+		}
+		let s = String.new(8);
+		let s = s.setInt(jt.intVal());
+		do x.addElement(INT_CONST);
+		do x.addContent(s);
+		do s.dispose();
+		do addLine();
+		do x.closeCurrent();
+		return;
+	}
+		
+	method void addSymbol() {
+		var String s;
+		if (~gen_xml) {
+			return;
+		}
+		do x.addElement(SYMBOL);
+		let s = String.new(3);
+		let s = s.appendChar(jt.symbol());
+		do x.addContent(s);
+		do s.dispose();
+		do addLine();
+		do x.closeCurrent();
+		return;
+	}
+
+	method void addIdentifier() {
+		if (~gen_xml) {
+			return;
+		}
+		do x.addElement(IDENTIFIER);
+		do x.addContent(jt.identifier());
+		do addLine();
+		do x.closeCurrent();
+		return;
+	}
+
+	method void addKeyword() {
+		if (~gen_xml) {
+			return;
+		}
+		do x.addElement(KEYWORD);
+		do x.addContent(jt.keyWord());
+		do addLine();
+		do x.closeCurrent();
+		return;
+	}
+	
+	method void begin(String nonTerminal) {
+		if (~gen_xml) {
+			return;
+		}
+		do x.addElement(nonTerminal);
+	}
+
+	method void end(String nonTerminal) {
+		var XmlNode c;
+		var String s;
+		if (~gen_xml) {
+			return;
+		}
+		do x.closeElement(nonTerminal);
+		//do x.disposeCurrent();
+/*
+		let c = x.getCurrent();
+		let s = c.getTag();
+		while ((~(c.getParent()=null)) & s.compare(nonTerminal)) {
+				
+			do x.closeCurrent();
+			let c = x.getCurrent();
+			let s = c.getTag();
+		}
+*/
+		return;		
+	}
+
 	method void compileClass(JackTokenizer tk, File dst_) {
 		var boolean doit;
 		let jt = tk;
 
 		let doit = true; 
-		if (matchKeyword(CLASS, true)) {
-			if (matchIdentifier(true)) {
-				if (matchSymbol(LEFT_CURLY_BRACKET, true)) {
-					do advance();
-					while (compileClassVarDec()) {
-						let doit = doit; 
-					}
-					while (compileSubroutine()) {
-						let doit = doit; 
-					}
-					if (matchSymbol(
-						RIGHT_CURLY_BRACKET, false)) 
-					{
-						if (jt.hasMoreTokens() = 0) {
-							return;
-						} else {
-							do error("Extra content after class definition");
-							return;
-						}	
-					}
-					do error("Expected } ");
-					return;
-				}
-				do error("Expected {");
-				return;
-			}
+		if (~matchKeyword(CLASS, true)) {
+			do error("Expected class");
+			return;
+		}
+		do begin("class");
+		do addKeyword();
+		if (~matchIdentifier(true)) {
 			do error("Expected class identifier");
 			return;
-
 		}
-		do error("Expected class");
-		return;
+		do addIdentifier();			
+		if (~matchSymbol(LEFT_CURLY_BRACKET, true)) {
+			do error("Expected {");
+			return;
+		}
+		do addSymbol();
 
-				/*do x.addElement(token_type);
-				do x.addContent(token);
-				do addLine();
-				do x.closeCurrent();*/
+		do advance();
+		while (compileClassVarDec()) {
+			let doit = doit; 
+		}
+		while (compileSubroutine()) {
+			let doit = doit; 
+		}
+		if (~matchSymbol(RIGHT_CURLY_BRACKET, false)) {
+			do error("Expected } ");
+			return;
+		}	
+		do addSymbol();
+		if (~(jt.hasMoreTokens() = 0)) {
+			do error("Extra content after class definition");
+			return;
+		}	
+		do end("class");
+		return; // success
 	}
 
 	method boolean compileClassVarDec() {
 		var boolean z;
+
+
 		let z = matchKeyword(STATIC, false);
 		let z = z | matchKeyword(FIELD, false);
+		if (~z) {	
+			return false;
+		}
+
+		do begin("classVarDec");
+		do addKeyword();
+	
+		let z = matchKeyword(INT, true); // type
+		let z = z | matchKeyword(CHAR, false);
+		let z = z | matchKeyword(BOOLEAN, false);
 		if (z) {
-			let z = matchKeyword(INT, true); // type
-			let z = z | matchKeyword(CHAR, false);
-			let z = z | matchKeyword(BOOLEAN, false);
+			do addKeyword();
+		} else {
 			let z = z | matchIdentifier(false);
-			if (z) { 
-				let z = matchIdentifier(true); // varName
-				if (z) {
-					let z = matchSymbol(COMMA, true); // ,
-					while (z) {
- 						// varName
-						let z = matchIdentifier(true);
-						if (z) {
-						    let z = matchSymbol(
-								COMMA, true);
-						    if (z = false) {
-						        let z = matchSymbol(
-							    	SEMICOLON, 
-								false);
-							if (z) {
-							  do advance();
-							  return true;
-							} else {
-							  do error(
-							    ", or ; expected");
-							  return false;
-							}
-					    	    }
-						} else { 
-							let z = matchSymbol(
-								SEMICOLON, 
-								false);
-							if (z) {
-								do advance();
-								return true;
-							}
-							do error(
-							  ",varName expected");
-							return false;
-						} 
-					}
+			if (z) {
+				do addIdentifier();
+			}
+		}
+		if (~z) { 
+			do error("type expected");
+			return false;
+		}					
+		let z = matchIdentifier(true); // varName
+		if (~z) {
+			do error("varName expected.");	
+			return false;
+		}				
+	
+		do addIdentifier();
+	
+		let z = matchSymbol(COMMA, true); // ,
+		while (z) {
+ 			// varName
+			do addSymbol();
+			let z = matchIdentifier(true);
+			if (z) {
+				do addIdentifier();
+				let z = matchSymbol(COMMA, true);
+				if (~z) {
 					let z = matchSymbol(SEMICOLON, false);
 					if (z) {
+						do addSymbol();
 						do advance();
-						return true;
-					} 
-					do error("';' expected.");
-					return false;
-				}		
-				do error("varName expected.");	
-				return false;				
-			}
-			do error("type expected");
-			return false;					
+						do end("classVarDec");
+				  		return true;
+					} else {
+				  		do error(", or ; expected");
+						return false;
+					}
+		    	    	}
+			} else { 
+				let z = matchSymbol(SEMICOLON, false);
+				if (z) {
+					do addSymbol();
+					do advance();
+					do end("classVarDec");
+					return true;
+				}
+				do error(",varName expected");
+				return false;
+			} 
 		}
+		let z = matchSymbol(SEMICOLON, false);
+		if (z) {
+			do addSymbol();
+			do advance();		
+			do end("classVarDec");
+			return true;
+		} 
+		do error("';' expected.");
 		return false;
 	}
 
@@ -386,11 +507,13 @@ class CompilationEngine {
 		var boolean z;
 		let z = matchSymbol(LEFT_CURLY_BRACKET, false);
 		if (z) {
+			do addSymbol();
 			do advance();
 			let z = compileVarDec();
 			let z = compileStatements();
 			let z = matchSymbol(RIGHT_CURLY_BRACKET, false);
 			if (z) {
+				do addSymbol();
 				do advance();
 				return true;
 			} 
@@ -406,70 +529,125 @@ class CompilationEngine {
 		let z = matchKeyword(CONSTRUCTOR, false);
 		let z = z | matchKeyword(FUNCTION, false);
 		let z = z | matchKeyword(METHOD, false);
+		if (~z) {
+			return false;
+		}
+		do begin("subroutineDec");
+		do addKeyword();
+
+		let z = matchKeyword(VOID, true); // type
+		let z = z | matchKeyword(INT, false);
+		let z = z | matchKeyword(CHAR, false);
+		let z = z | matchKeyword(BOOLEAN, false);
 		if (z) {
-			let z = matchKeyword(VOID, true); // type
-			let z = z | matchKeyword(INT, false);
-			let z = z | matchKeyword(CHAR, false);
-			let z = z | matchKeyword(BOOLEAN, false);
+			do addKeyword();
+		} else {		
 			let z = z | matchIdentifier(false);
 			if (z) {
-				let z = matchIdentifier(true); // subroutinName
-				if (z) {
-					let z = matchSymbol(
-						LEFT_PARENTHESIS, true);
-					if (z) {
-					    do advance();
-					    let z = compileParameterList();
-					    if (~z) {
-						return false;
-					    }
-					    let z = matchSymbol(
-							RIGHT_PARENTHESIS, 
-							false);
-					     if (z) {
-						do advance();
-						return compileSubroutineBody();
-					     }
-					     do error("expect ')'.");
-					     return false;
-					}
-					do error("expect '('");
-					return false;
-				}
-				do error("expect subroutineName");
-				return false;
+				do addIdentifier();
 			}
+		}
+		if (~z) {
 			do error("expect type");
 			return false;
 		}
+		let z = matchIdentifier(true); // subroutinName
+		if (~z) {
+			do error("expect subroutineName");
+			return false;
+		}
+		do addIdentifier();
+			
+		let z = matchSymbol(
+			LEFT_PARENTHESIS, true);
+		if (~z) {
+			do error("expect '('");
+			return false;
+		}				
+		do addSymbol();
+
+		do advance();
+		let z = compileParameterList();
+		if (~z) {
+			return false;
+		}
+		let z = matchSymbol(RIGHT_PARENTHESIS, false);
+		if (z) {
+			do addSymbol();
+			do advance();
+			let z = compileSubroutineBody();
+			do end("subroutineDec");
+			return z;
+	    	}
+	        do error("expect ')'.");
 		return false;
 	}
 
 	method boolean compileParameterList() {
 		var boolean z;
 		let z = true;
+		do begin("parameterList");
 		while (jt.hasMoreTokens()) {
 			let z = matchKeyword(INT, false); // type
 			let z = z | matchKeyword(CHAR, false);
 			let z = z | matchKeyword(BOOLEAN, false);
-			let z = z | matchIdentifier(false);
+			if (z) {
+				do addKeyword();
+			} else {
+				let z = z | matchIdentifier(false);
+				if (z) {
+					do addIdentifier();
+				}
+			}
 			if (z) {
 				let z = matchIdentifier(true); // varName
 				if (z) {
+					do addIdentifier();
 					let z = matchSymbol(COMMA, true);
 					if (~z) {
+						do end("parameterList");
 						return true;
 					}
+					do addSymbol();
 				} else {	
 					do error("varName expected..");
 					return false;
 				}
 			} else {
+				do end("parameterList");
 				return true;
 			}
 			do advance();
 		}
 		return false;
+	}
+
+	method boolean compileVarDecVarList() {
+		var boolean z;
+
+		let z = matchIdentifier(true); // varName
+		while (z) {
+			do addIdentifier();
+			let z = matchSymbol(COMMA, true);
+			if (~z) {
+				let z = matchSymbol(SEMICOLON, false);
+				if (~z) {
+				  	do error(", or ; expected");
+				  	return false;	
+				}
+				do addSymbol();
+				do advance();
+				let z = false;
+			} else {
+			   	let z = matchIdentifier(true); //varName
+			    	if (~z) {
+			   		do error("varName expected..");
+				  	return false;
+			    	}				
+			    	let z = true;
+			}	
+		} 	
+		return true;
 	}
 
 	method boolean compileVarDec() {
@@ -478,37 +656,25 @@ class CompilationEngine {
 		let z = matchKeyword(VAR, false); //
 		if (~z) {
 			return false;
-		} 
+		}
 		while (z) {
+			do begin("varDec"); 
+			do addKeyword();
 			let z = matchKeyword(INT, true); // type
 			let z = z | matchKeyword(CHAR, false);
 			let z = z | matchKeyword(BOOLEAN, false);
-			let z = z | matchIdentifier(false);
 			if (z) {
-				let z = matchIdentifier(true); // varName
-				while (z) {
-					let z = matchSymbol(COMMA, true);
-					if (~z) {
-						let z = matchSymbol(
-							SEMICOLON, 
-							false);
-						if (~z) {
-						  do error(", or ; expected");
-						  return false;	
-						}
-						do advance();
-						let z = false;
-					} else {
-					   let z = matchIdentifier(
-							true); //varName
-					    if (~z) {
-					   	do error("varName expected..");
-						  return false;
-					    }				
-					    let z = true;
-					}	
-				} 	
+				do addKeyword();
+			} else {
+				let z = z | matchIdentifier(false);
+				if (z) {
+					do addIdentifier();
+				}
 			}
+			if (z) {
+				let z = compileVarDecVarList();
+			}
+			do end("varDec"); 
 			let z = matchKeyword(VAR, false);  
 		}
 		return true;
@@ -517,25 +683,22 @@ class CompilationEngine {
 	method boolean compileStatements() {
 		var boolean z;
 		let z = true;
+		do begin("statements"); 
 		while (true) {
 			let z = matchSymbol(RIGHT_CURLY_BRACKET, false);
 			if (z) {
+				do end("statements"); 
 				return false;
 			}
 			if (matchKeyword(LET, false)) {
-				do advance();
 				do compileLet();
 			} else { if (matchKeyword(DO, false)) {
-				do advance();
 				do compileDo();
 			} else { if (matchKeyword(IF, false)) {
-				do advance();
 				do compileIf();
 			} else { if (matchKeyword(WHILE, false)) {
-				do advance();
 				do compileWhile();
 			} else { if (matchKeyword(RETURN, false)) {
-				do advance();
 				do compileReturn();
 			} else { if (jt.tokenType() = ASM) {
 				do advance();
@@ -550,28 +713,41 @@ class CompilationEngine {
 	method void compileDo() {
 		var String s;
 		var boolean z;
-		if (~matchIdentifier(false)) { // subroutineName
+		var int l;
+
+		if (~matchKeyword(DO, false)) {
+			do error("do expected");
+			return;
+		}
+		do begin("doStatement"); 
+
+		if (~matchIdentifier(true)) { // subroutineName
 			do error("subroutineName expected");
 			return;
 		}
+		do addIdentifier();
 		let s = jt.identifier();
 		let s = s.copy();
+		let l = jt.getLine();
 		do advance();
-		do subroutineCall(s);
+		do subroutineCall(s, l);
 		do s.dispose();
 		let z = matchSymbol(SEMICOLON, false);
 		if (~z) {	
 			do error("';' expected..");
 			return;
 		}
+		do addSymbol();
 		do advance();
+		do end("doStatement"); 
 		return;
 	}
 
-	method void subroutineCall(String subroutineName) {
+	method void subroutineCall(String subroutineName, int tokenLine) {
 		var boolean z;
 		let z = matchSymbol(LEFT_PARENTHESIS, false);
 		if (z) {
+			do addSymbol();
 			do advance();
 			do compileExpressionList();
 			let z = matchSymbol(RIGHT_PARENTHESIS, false);
@@ -579,45 +755,58 @@ class CompilationEngine {
 				do error("')' expected");
 				return;
 			}
+			do addSymbol();
 			do advance();
 			return;
 		}
 		let z = matchSymbol(DOT, false);
-		if (z) {
-			let z = matchIdentifier(true); // subroutineName
-			if (z) {
-				let z = matchSymbol(LEFT_PARENTHESIS, true);
-				if (z) {
-					do advance();
-					do compileExpressionList();
-					let z = matchSymbol(
-						RIGHT_PARENTHESIS, false);
-					if (z) {
-						do advance();
-						return;
-					}
-					do error("')' expected.");
-					return;
-				}
-				do error("'(' expected");
-				return;
-			}
+		if (~z) {
+			do error("'(' or '.' expected");
+			return;
+		}
+		do addSymbol();
+		let z = matchIdentifier(true); // subroutineName
+		if (~z) {
 			do error("subroutineName expected");
 			return;
 		}
-		do error("'(' or '.' expected");
+		do addIdentifier();
+		let z = matchSymbol(LEFT_PARENTHESIS, true);
+		if (~z) {
+			do error("'(' expected");
+			return;
+		}
+		do addSymbol();
+		do advance();
+		do compileExpressionList();
+		let z = matchSymbol(RIGHT_PARENTHESIS, false);
+		if (z) {
+			do addSymbol();
+			do advance();
+			return;
+		}
+		do error("')' expected.");
 		return;
 	}
 
 	method void compileLet() {
 		var boolean z;
-		let z = matchIdentifier(false); 
+		do begin("letStatement");
+		if (~matchKeyword(LET, false)) {
+			do error("let expected");
+			return;
+		}
+
+		do addKeyword();
+		let z = matchIdentifier(true); 
 		if (~z) {
 			do error("varName expected");
 			return;
 		}
+		do addIdentifier();
 		let z = matchSymbol(LEFT_SQUARE_BRACKET, true);
 		if (z) {
+			do addSymbol();
 			do advance();
 			do compileExpression();
 			let z = matchSymbol(RIGHT_SQUARE_BRACKET, false);
@@ -625,6 +814,7 @@ class CompilationEngine {
 				do error("']' expected");
 				return;
 			}
+			do addSymbol();
 			do advance();
 		}
 		let z = matchSymbol(EQUAL, false);
@@ -632,6 +822,7 @@ class CompilationEngine {
 			do error("'=' expected");
 			return;
 		}
+		do addSymbol();
 		do advance();
 		do compileExpression();
 		let z = matchSymbol(SEMICOLON, false);
@@ -639,17 +830,26 @@ class CompilationEngine {
 			do error("';' expected");
 			return;
 		}
+		do addSymbol();
 		do advance();
+		do end("letStatement");
 		return;
 	}
 
 	method void compileWhile() {
 		var boolean z;
-		let z = matchSymbol(LEFT_PARENTHESIS, false);
+		
+		if (~matchKeyword(WHILE, false)) {
+			do error("while expected");
+			return;
+		}
+		do begin("whileStatement");
+		let z = matchSymbol(LEFT_PARENTHESIS, true);
 		if (~z) {
 			do error("'(' expected");
 			return;
-		}	
+		}
+		do addSymbol();	
 		do advance();
 		do compileExpression();
 		let z = matchSymbol(RIGHT_PARENTHESIS, false);
@@ -657,12 +857,14 @@ class CompilationEngine {
 			do error("')' expected");
 			return;
 		}
+		do addSymbol();	
 	
 		let z = matchSymbol(LEFT_CURLY_BRACKET, true);
 		if (~z) {
 			do error("'{' expected");
 			return;
 		}
+		do addSymbol();	
 		do advance();
 		do compileStatements();
 		let z = matchSymbol(RIGHT_CURLY_BRACKET, false);
@@ -670,14 +872,23 @@ class CompilationEngine {
 			do error("'}' expected,");
 			return;
 		}
+		do addSymbol();	
+		do end("whileStatement");
 		do advance();
 		return;
 	}
 
 	method void compileReturn() {
 		var boolean z;
-		let z = matchSymbol(SEMICOLON, false);
+		if (~matchKeyword(RETURN, false)) {
+			do error("return expected");
+			return;
+		}
+		do begin("returnStatement");
+		do addKeyword();
+		let z = matchSymbol(SEMICOLON, true);
 		if (z) {
+			do addSymbol();
 			do advance();
 			return;
 		}
@@ -687,17 +898,26 @@ class CompilationEngine {
 			do error("';' expected...");
 			return;
 		}
+		do addSymbol();
+		do end("returnStatement");
 		do advance();
 		return;
 	}
 
 	method void compileIf() {
 		var boolean z;
-		let z = matchSymbol(LEFT_PARENTHESIS, false);
+		if (~matchKeyword(IF, false)) {
+			do error("if expected");
+			return;
+		}
+		do begin("ifStatement");
+		do addKeyword();
+		let z = matchSymbol(LEFT_PARENTHESIS, true);
 		if (~z) {
 			do error("'(' expected");
 			return;
-		}	
+		}
+		do addSymbol();	
 		do advance();
 		do compileExpression();
 		let z = matchSymbol(RIGHT_PARENTHESIS, false);
@@ -705,12 +925,14 @@ class CompilationEngine {
 			do error("')' expected..");
 			return;
 		}
+		do addSymbol();	
 	
 		let z = matchSymbol(LEFT_CURLY_BRACKET, true);
 		if (~z) {
 			do error("'{' expected");
 			return;
 		}
+		do addSymbol();	
 		do advance();
 		do compileStatements();
 		let z = matchSymbol(RIGHT_CURLY_BRACKET, false);
@@ -718,15 +940,19 @@ class CompilationEngine {
 			do error("'}' expected.");
 			return;
 		}
+		do addSymbol();	
 		let z = matchKeyword(ELSE, true);
 		if (~z) {
+			do end("ifStatement");
 			return;
 		}
+		do addKeyword();	
 		let z = matchSymbol(LEFT_CURLY_BRACKET, true);
 		if (~z) {
 			do error("'{' expected");
 			return;
 		}
+		do addSymbol();	
 		do advance();
 		do compileStatements();
 		let z = matchSymbol(RIGHT_CURLY_BRACKET, false);
@@ -734,22 +960,8 @@ class CompilationEngine {
 			do error("'}' expected..");
 			return;
 		}
-		let z = matchKeyword(ELSE, true);
-		if (~z) {
-			return;
-		}
-		let z = matchSymbol(LEFT_CURLY_BRACKET, true);
-		if (~z) {
-			do error("'{' expected");
-			return;
-		}
-		do advance();
-		do compileStatements();
-		let z = matchSymbol(RIGHT_CURLY_BRACKET, false);
-		if (~z) {
-			do error("'}' expected...");
-			return;
-		}
+		do addSymbol();	
+		do end("ifStatement");
 		do advance();
 		return;
 	}
@@ -790,29 +1002,35 @@ class CompilationEngine {
 
 	method void compileExpression() {
 		var boolean z;
-
+		do begin("expression");
 		while (true) {
 			do compileTerm();
 			if (matchSymbol(SEMICOLON, false)) {
+				do end("expression");
 				return;
 			}
 			if (matchSymbol(RIGHT_PARENTHESIS, false)) {
+				do end("expression");
 				return;
 			}
 			if (matchSymbol(RIGHT_SQUARE_BRACKET, false)) {
+				do end("expression");
 				return;
 			}
 			if (matchSymbol(COMMA, false)) {
+				do end("expression");
 				return;
 			}
 			if (jt.tokenType() = SYMBOL) {
 				do genOp();
+				do addSymbol();
 				if (~advance()) {
 					do error(
 						"missing token at end of file");
 					return;
 				}
 			} else {
+				do end("expression");
 				return;
 			}
 		}	
@@ -822,27 +1040,41 @@ class CompilationEngine {
 	method void compileTerm() {
 		var boolean z;
 		var String s;
+		var int l;
+		do begin("term");
 		let z = matchIntegerConstant(false);
 		if (z) {
+			do addIntegerConstant();
+			do end("term");
 			do advance();
 			return;
 		}
 		let z = matchStringConstant(false);
 		if (z) {
+			do addStringConstant();
+			do end("term");
 			do advance();
 			return;
 		}
 		if (jt.tokenType() = KEYWORD) {
 			if (matchKeyword(TRUE, false)) {
+				do addKeyword();
+				do end("term");
 				do advance();
 				return;
 			} else { if (matchKeyword(FALSE, false)) {
+				do addKeyword();
+				do end("term");
 				do advance();
 				return;
 			} else { if (matchKeyword(NULL, false)) {
+				do addKeyword();
+				do end("term");
 				do advance();
 				return;
 			} else { if (matchKeyword(THIS, false)) {
+				do addKeyword();
+				do end("term");
 				do advance();
 				return;
 			}}}}
@@ -851,29 +1083,37 @@ class CompilationEngine {
 		}
 		let z = matchSymbol(TILDE, false);
 		if (z) {
+			do addSymbol();
 			do advance();
 			do compileTerm();
+			do end("term");
 			return;
 		}
 		let z = matchSymbol(MINUS, false);
 		if (z) {
+			do addSymbol();
 			do advance();
 			do compileTerm();
+			do end("term");
 			return;
 		}
 
 		let z = matchSymbol(RIGHT_PARENTHESIS, false);
 		if (z) {
+			do end("term");
 			return;
 		}
 
 		let z = matchSymbol(LEFT_PARENTHESIS, false);
 		if (z) {
+			do addSymbol();
 			do advance();
 			do compileExpression();
 			let z = matchSymbol(RIGHT_PARENTHESIS, false);
 			if (z) {
+				do addSymbol();
 				do advance();
+				do end("term");
 				return;
 			}
 			do error("')' expected here");
@@ -886,10 +1126,13 @@ class CompilationEngine {
 			do error("Unexpected token...");
 			return;
 		}
+		do addIdentifier();
 		let s = jt.identifier();
 		let s = s.copy();
+		let l = jt.getLine();
 		let z = matchSymbol(LEFT_SQUARE_BRACKET, true);
 		if (z) {
+			do addSymbol();
 			do s.dispose();
 			do advance();
 			do compileExpression();
@@ -898,6 +1141,8 @@ class CompilationEngine {
 				do error("']' expected.");
 				return;
 			}
+			do addSymbol();
+			do end("term");
 			do advance();
 			return;
 		}
@@ -907,19 +1152,24 @@ class CompilationEngine {
 		if (~z) {
 			// match s
 			do s.dispose();
+			do end("term");
 			return;
 		}
-		do subroutineCall(s);
+		do subroutineCall(s, l);
 		do s.dispose();
+		do end("term");
 		return;
 	}
 
 	method void compileExpressionList() {
+		do begin("expressionList");
 		do compileExpression();
 		while (matchSymbol(COMMA, false)) {
+			do addSymbol();
 			do advance();
 		 	do compileExpression();
 		}
+		do end("expressionList");
 		return;
 	}
 

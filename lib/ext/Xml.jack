@@ -46,6 +46,23 @@ class Xml {
 		let current = current.closeElement(this, current.getTag());
 	}
 
+	method XmlNode getCurrent() {
+		return current;	
+	}
+
+	method XmlNode disposeCurrent() {
+		var XmlNode o;
+		let o = current;
+		let current = current.getParent();
+		if (current) {
+			let o = current.removeElement(this, o);
+			if (o) {
+				do o.dispose();
+			}
+		}
+		return; 
+	}
+
 	method String getStringNoCreate(String s) {
 		var int i;
 		let i = strings.indexOfStr(s);

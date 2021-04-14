@@ -88,6 +88,14 @@ class XmlNode {
 		return e;
 	}
 
+	method XmlNode removeElement(Xml x, XmlNode e) {
+		if (elements = null) {
+			return null;
+		}
+		do elements.remove(e);	
+		return e;
+	}
+
 	method XmlNode addElement(Xml x, String tag_) {
 		var XmlNode e;
 		let e = XmlNode.new(x, this, tag_, false);
