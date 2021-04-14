@@ -16,6 +16,9 @@ class JackAnalyser {
 	method void dispose() {
 		do t.dispose();
 		do x.dispose();
+		if (comp) {
+			do comp.dispose();
+		}
 		do Memory.deAlloc(this);
 		return;
 	}
@@ -25,7 +28,6 @@ class JackAnalyser {
 		let src = File.new(src_, false);
 		let dst = File.new("test.xml", true);
 		do x.clear();
-		do x.addElement("tokens");
 		do t.init(src, false);
 		do comp.init(src, false);
 		do comp.compileClass(t, dst);
@@ -34,6 +36,7 @@ class JackAnalyser {
 
 		do dst.dispose();
 		do src.dispose();
+		let src = null;
 		//if (String2.compare("ctests/lib/ext/Gif.jack", src_)=0) {
 		//	do Sys.halt();
 		//}

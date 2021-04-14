@@ -1,6 +1,5 @@
 
 class CompilationEngine {
-	field Xml x;
 	field int KEYWORD;
 	field int SYMBOL;
 	field int IDENTIFIER;
@@ -47,40 +46,25 @@ class CompilationEngine {
 	field int LESS;
 	field int EQUAL;
 	field int TILDE;
-	field String token;
-	field char c;
-	field char ahead;
-	field int token_type;
-	field int key_word;
-	field int int_val;
-	field int line;
-	field int last_line;
-	field Xml dst;
+	//field Xml dst;
 	
+	field Xml x;
 	field JackTokenizer jt;
 	field File src;
 	field int maxerror;
 	field int nberror;
 	field String exp;
+	field boolean gen_xml;
+
 	constructor CompilationEngine new(JackTokenizer source) 
 	{
 		let nberror = 0;
-		let maxerror = 10;
+		let maxerror = 1;
 		let src = null;
 		let jt = source;
 		let x = source.getXml();
-		let exp = String.new(1);
+		let gen_xml = true;
 
-		let dst = null;
-		let token = String.new(256);
-		let new_file = null;
-		let c = 0;
-		let line = 0;
-		let last_line= -1;
-		let ahead = 0;
-		let token_type = -1;
-		let key_word = 0;
-		let int_val = 0;
 		let KEYWORD = x.getStringNoCreate("keyword");
 		let SYMBOL = x.getStringNoCreate("symbol");
 		let INT_CONST = x.getStringNoCreate("integerConstant");
@@ -131,7 +115,6 @@ class CompilationEngine {
 	}
 
 	method void dispose() {
-		do token.dispose();
 		do Memory.deAlloc(this);
 		return;
 	}
@@ -139,16 +122,8 @@ class CompilationEngine {
 	method void init(File source, boolean xml_output) {
 		let src = source;
 		let nberror = 0;
-		let maxerror = 10;
-		do exp.setCharAt(0, 0);
-
-		let c = 0;
-		let ahead = 0;
-		let token_type = -1;
-		let key_word = 0;
-		let int_val = 0;
-		let line = 0;
-		let last_line = -1;
+		let gen_xml = xml_output;
+		return;
 	}
 
 	method boolean advance() {
@@ -258,12 +233,6 @@ class CompilationEngine {
 		return false;
 	}
 	
-	method void expect(String w) {
-		do exp.dispose();
-		let exp = w.copy();
-		return;
-	}
-
 	method int error(String w) {
 		var String s;
 
@@ -304,7 +273,6 @@ class CompilationEngine {
 		}
 		do Output.printString("'");
 		do Output.println();
-		do exp.setCharAt(0, 0);
 		return 0;
 	}
 
@@ -411,7 +379,6 @@ class CompilationEngine {
 			do error("type expected");
 			return false;					
 		}
-		do expect("static or field expect");
 		return false;
 	}
 
@@ -475,7 +442,6 @@ class CompilationEngine {
 			do error("expect type");
 			return false;
 		}
-		do expect("expect constructor, function or method");
 		return false;
 	}
 
