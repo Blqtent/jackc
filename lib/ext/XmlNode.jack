@@ -35,12 +35,8 @@ class XmlNode {
 	}
 
 	method void clear() {
-		var XmlNode e;
-		var int i, l;
-		var Strings s;
-
 		if (att_values) {
-			do att_values.disposeStr();
+			do att_values.dispose();
 			do att_names.dispose();
 			let att_values = null;
 			let att_names = null;
@@ -54,15 +50,6 @@ class XmlNode {
 		}
 
 		if (elements) {
-			let i = 0;
-			let l = elements.getSize();
-			while (i < l) {
-				let e = elements.getAt(i);
-				if (e) {
-					do e.dispose();
-				}
-				let i = i + 1;
-			}
 			do elements.dispose();
 			let elements = null;
 		}
@@ -98,9 +85,11 @@ class XmlNode {
 
 	method XmlNode addElement(Xml x, String tag_) {
 		var XmlNode e;
+		var Callback cb;
 		let e = XmlNode.new(x, this, tag_, false);
 		if (elements = null) {
-			let elements = Buffer.new(1);
+			let cb = CallbackXmlNodeDispose.new();
+			let elements = Buffer.new(1, cb);
 		}
 		//do Output.printString(tag_);
 		//do Output.printInt(e);
@@ -114,8 +103,8 @@ class XmlNode {
 		var String s;
 
 		if (att_values = null) {
-			let att_values = Buffer.new(1);
-			let att_names = Buffer.new(1);
+			let att_values = Buffer.newString(1);
+			let att_names = Buffer.new(1, null);
 		}
 		let i = att_names.indexOfStr(name);
 		let s = value.copy();
@@ -131,10 +120,12 @@ class XmlNode {
 
 	method void addContent(Xml x, String txt) {
 		var XmlNode e;
+		var Callback cb;
 
 		let e = XmlNode.new(x, this, txt, true);
 		if (elements = null) {
-			let elements = Buffer.new(1);
+			let cb = CallbackXmlNodeDispose.new();
+			let elements = Buffer.new(1, cb);
 		}
 		do elements.append(e);	
 		return;

@@ -349,9 +349,9 @@ class Gif {
 		let o = null;
 		if (out = null) {
 			let pcount = w * h;
-			let out = Buffer.new(pcount);
-			let background = Buffer.new(pcount);
-			let history = Buffer.new(pcount);	
+			let out = Buffer.new(pcount, null);
+			let background = Buffer.new(pcount, null);
+			let history = Buffer.new(pcount, null);	
 			let i = 0;
 			while (i < pcount) {
 				do out.setAt(i, 0);

@@ -153,7 +153,7 @@ def vars_(f, b):
 def get_class(q):
     o = q.parent;
     while (o != None and o.tag != "method" and o.tag != "function" and
-            o.tag != "constructor"):
+            o.tag != "constructor" and o.tag != "callback"):
         o = o.parent;
     if (o != None):
         for e in o.children:
@@ -166,7 +166,7 @@ def get_class(q):
         o = o.parent;
     if (o != None):
         for e in o.children:
-            if (e.tag == "method" or e.tag == "field"):
+            if (e.tag == "method" or e.tag == "field" or e.tag == "callback"):
                 if (e.data == q.parent.data):
                     return o.data
                 if (e.data == q.data):
@@ -208,9 +208,13 @@ def call_(f, c, tab):
     for q in c.children:
         if q.tag == "classo":
             cla = get_class(q) 
-            w(f, tab + cla + "__" + c.data + "(")
-            if (cla != "" and q.data == ""):
-                w(f, "__this")
+            if c.data == "callback":
+                print (c.data)
+                w(f, tab + "__memory[__this](__this")
+            else:
+                w(f, tab + cla + "__" + c.data + "(")
+                if (cla != "" and q.data == ""):
+                    w(f, "__this")
             for r in c.children:
                 if r.tag == "args":
                     if (q.data == cla):
@@ -295,12 +299,18 @@ def process(ast, out):
     f.write("import signal\n")
     f.write("import tkinter\n")
     f.write("import array\n")
-    f.write("import inspect\n")
-    f.write("import pdb\n")
     f.write("__NativeObject = {}\n")
     f.write("__NativeObjectId = -1\n")
-    f.write("__memory = array.array('l', 100000 * [0])\n")
+  #  f.write("__memory = array.array('l', 100000 * [0])\n")
+    f.write("__memory = {}\n")
+    f.write("i = 0\n")
+    f.write("while (i < 10000):\n")
+    f.write("\t__memory[i] = 0\n")
+    f.write("\ti += 1\n")
+
+
     #ast.process(f, "")
+    callback = 0
     for c in ast.children:
         if (c.tag == "class"):
             nb_field = 0
@@ -325,7 +335,9 @@ def process(ast, out):
                     nb_field += 1
                 elif (m.tag == "static"):
                     w(f, c.data + "__" + m.data + "=0\n")
-                elif (m.tag == "method"):
+                elif (m.tag == "method" or m.tag == "callback"):
+                    if (m.tag == "callback"):
+                        callback=1
                     w(f, "def " + c.data + "__" + m.data + "(")
                     for b in m.children:
                         if b.tag == "params":
@@ -349,10 +361,14 @@ def process(ast, out):
                                 w(f, co + a.data)
                                 co = ", "
                     w(f, "):\n")
+
                     global_(f, m, "\t");
                     si = 0
                     w(f, "\t__this = Memory__alloc(" + str(nb_field) 
                             +  ")\n")
+                    if (callback):
+                        callback = 0
+                        w(f, "\t__memory[__this] = " + c.data + "__callback\n")
                     for b in m.children:
                         if b.tag == "statements":
                             statements_(f,b, "\t")

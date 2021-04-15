@@ -9,6 +9,7 @@ class CompilationEngine {
 	field int METHOD;
 	field int FUNCTION;
 	field int CONSTRUCTOR;
+	field int CALLBACK;
 	field int INT;
 	field int BOOLEAN;
 	field int CHAR;
@@ -75,6 +76,7 @@ class CompilationEngine {
 		let METHOD = x.getStringNoCreate("method");
 		let FUNCTION = x.getStringNoCreate("function");
 		let CONSTRUCTOR = x.getStringNoCreate("constructor");
+		let CALLBACK = x.getStringNoCreate("callback");
 		let INT = x.getStringNoCreate("int");
 		let BOOLEAN = x.getStringNoCreate("boolean");
 		let CHAR = x.getStringNoCreate("char");
@@ -526,9 +528,15 @@ class CompilationEngine {
 
 	method boolean compileSubroutine() {
 		var boolean z;
+		var boolean iscb;
+		let iscb = false;
 		let z = matchKeyword(CONSTRUCTOR, false);
 		let z = z | matchKeyword(FUNCTION, false);
 		let z = z | matchKeyword(METHOD, false);
+		if (~z) {
+			let z = z | matchKeyword(CALLBACK, false);
+			let iscb = true;
+		}
 		if (~z) {
 			return false;
 		}
@@ -551,12 +559,21 @@ class CompilationEngine {
 			do error("expect type");
 			return false;
 		}
-		let z = matchIdentifier(true); // subroutinName
-		if (~z) {
-			do error("expect subroutineName");
-			return false;
+		if (iscb) {
+			let z = matchKeyword(CALLBACK, true);
+			if (~z) {
+				do error("callback expected");
+				return false;
+			}
+			do addKeyword();
+		} else {
+			let z = matchIdentifier(true); // subroutinName
+			if (~z) {
+				do error("expect subroutineName");
+				return false;
+			}
+			do addIdentifier();
 		}
-		do addIdentifier();
 			
 		let z = matchSymbol(
 			LEFT_PARENTHESIS, true);
@@ -1041,6 +1058,8 @@ class CompilationEngine {
 		var boolean z;
 		var String s;
 		var int l;
+		var boolean iscb;
+		let iscb = false;
 		do begin("term");
 		let z = matchIntegerConstant(false);
 		if (z) {
@@ -1077,9 +1096,13 @@ class CompilationEngine {
 				do end("term");
 				do advance();
 				return;
-			}}}}
-			do error("Unespected keyword");
-			return;
+			} else { if (matchKeyword(CALLBACK, false)) {
+				let iscb = true;
+			}}}}}
+			if (~iscb) {
+				do error("Unespected keyword");
+				return;
+			}						
 		}
 		let z = matchSymbol(TILDE, false);
 		if (z) {
@@ -1120,14 +1143,19 @@ class CompilationEngine {
 			return;
 		}
 		
-
-		let z = matchIdentifier(false); // className varName subroutiN
-		if (~z) {
-			do error("Unexpected token...");
-			return;
+		if (iscb) {
+			let s = "callback";
+			do addKeyword();
+		} else {
+			// className varName subroutiN
+			let z = matchIdentifier(false); 
+			if (~z) {
+				do error("Unexpected token...");
+				return;
+			}
+			do addIdentifier();
+			let s = jt.identifier();
 		}
-		do addIdentifier();
-		let s = jt.identifier();
 		let s = s.copy();
 		let l = jt.getLine();
 		let z = matchSymbol(LEFT_SQUARE_BRACKET, true);

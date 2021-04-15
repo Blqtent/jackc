@@ -6,7 +6,7 @@ class Xml {
 	field String esca;
 
 	constructor Xml new() {
-		let strings = Buffer.new(8);
+		let strings = Buffer.newString(1024);
 		let esca = String.new(32);
 		let root = XmlNode.new(this, null,"%root%",false);
 		let current = root;
@@ -15,7 +15,7 @@ class Xml {
 
 	method void dispose() {
 		do root.dispose();
-		do strings.disposeStr();
+		do strings.dispose();
 		do esca.dispose();
 		do Memory.deAlloc(this);
 		return;

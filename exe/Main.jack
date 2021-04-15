@@ -123,7 +123,7 @@ class Main
 			do g.dispose();
 			let g = Gif.new();
 			do Output.printString(" NULL ");
-			let d = Buffer.new(0);
+			let d = Buffer.new(0, null);
 		}
 		do Output.printString("S = ");
 		do Output.printInt(d.getSize());
@@ -139,7 +139,7 @@ class Main
  */
 		let f = null;
 		let d = null;
-		let d = Buffer.new(1);
+		let d = Buffer.new(1, null);
 		let f = File.new("test.txt", true);
 		let z = d.getSize();
 		while (z > 0) {

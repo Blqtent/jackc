@@ -59,7 +59,7 @@ class UnitFile {
 		var String s;
 		var int i;
 		let l = l + 1;
-		let files = Buffer.new(1);
+		let files = Buffer.newString(1);
 		do UnitFile.getJackFiles(files, "./jackc/");
 		let i = 0;
 		while (i < files.getSize()) {
@@ -67,7 +67,7 @@ class UnitFile {
 			do Unit.log(l, s, true);
 			let i = i + 1;
 		}
-		do files.disposeStr();
+		do files.dispose();
 		return true;
 	}
 

@@ -1,0 +1,20 @@
+
+class Callback {
+	callback int callback(int a, int b) {
+		var Callback c;
+		let c = this;
+		return 0;
+	}
+	
+	constructor Callback new() {
+		return this;
+	}
+	
+	method void dispose() {
+		do Memory.deAlloc(this);
+	}
+
+	method int invoke(int a, int b) {
+		return callback(a, b);
+	}
+} 

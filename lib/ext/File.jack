@@ -327,7 +327,7 @@ class File {
 		}
 		let f = -1;
 
-		let b = Buffer.new(10);
+		let b = Buffer.new(10, null);
 		let i = 0;
 #py 	m = os.listdir(n);
 #py 	isq = len(m)

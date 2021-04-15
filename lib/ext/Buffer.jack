@@ -3,9 +3,11 @@ class Buffer {
 	field Array buffer;
 	field int size;
 	field int pos;
+	field Callback dispCb;
 
-	constructor Buffer new(int initial) {
+	constructor Buffer new(int initial, Callback disposeCb) {
 		var int i;
+		let dispCb = disposeCb;
 		let buffer = Array.new(initial);
 		let size = initial;
 		let pos = 0;
@@ -17,8 +19,28 @@ class Buffer {
 	//	do Output.printInt(size);
 		return this;
 	}
+
+	function Buffer newString(int initial) {	
+		var Callback cb;
+		let cb = CallbackStringDispose.new();
+		return Buffer.new(initial, cb);
+	}
 	
 	method void dispose() {
+		var String s;
+		var int i;
+		let i = 0;
+		if (dispCb) {
+			while (i < pos) {
+				let s = buffer[i];
+				if (s) {
+					do dispCb.invoke(s, null);
+				}
+				let i = i + 1;
+			}
+			do dispCb.dispose();
+		}
+	
 		do buffer.dispose();
 		do Memory.deAlloc(this);
 	}
@@ -85,22 +107,6 @@ class Buffer {
 			let i = i + 1;
 		}
 		return -1;
-	}
-
-
-	method void disposeStr() {
-		var String s;
-		var int i;
-		let i = 0;
-		while (i < pos) {
-			let s = buffer[i];
-			if (s) {
-				do s.dispose();
-			}
-			let i = i + 1;
-		}
-		do dispose();
-		return;
 	}
 
 	method void checkSize(int idx) {

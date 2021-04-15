@@ -11,6 +11,7 @@ class JackTokenizer {
 	field int METHOD;
 	field int FUNCTION;
 	field int CONSTRUCTOR;
+	field int CALLBACK;
 	field int INT;
 	field int BOOLEAN;
 	field int CHAR;
@@ -83,6 +84,7 @@ class JackTokenizer {
 		let METHOD = x.getString("method");
 		let FUNCTION = x.getString("function");
 		let CONSTRUCTOR = x.getString("constructor");
+		let CALLBACK = x.getString("callback");
 		let INT = x.getString("int");
 		let BOOLEAN = x.getString("boolean");
 		let CHAR = x.getString("char");
@@ -303,6 +305,7 @@ class JackTokenizer {
 					(k = METHOD) |
 					(k = FUNCTION) |
 					(k = CONSTRUCTOR) |
+					(k = CALLBACK) |
 					(k = INT) |
 					(k = BOOLEAN) |
 					(k = CHAR) |

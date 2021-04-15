@@ -267,6 +267,9 @@ def subroutineDec_():
         tokens_pop(0)
     elif tokens[0] == "method":
         tokens_pop(0)
+    elif tokens[0] == "callback":
+        current.add("field", "callback");
+        tokens_pop(0)
     else:
         return 0
     type_ = identifier_()

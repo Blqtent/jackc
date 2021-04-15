@@ -1,0 +1,11 @@
+
+class CallbackXmlNodeDispose {
+	callback int callback(XmlNode a, int b) {
+		do a.dispose();
+		return 0;
+	}
+	
+	constructor CallbackXmlNodeDispose new() {
+		return this;
+	}
+} 

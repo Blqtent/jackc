@@ -1,0 +1,11 @@
+
+class CallbackStringDispose {
+	callback int callback(String a, int b) {
+		do a.dispose();
+		return 0;
+	}
+	
+	constructor CallbackStringDispose new() {
+		return this;
+	}
+} 

@@ -137,14 +137,14 @@ class Memory {
 			} else {
 				let k = asize;
 				let asize = asize + (size * 8) + 64;
-#py 			__m = array.array('l', (Memory__arena + Memory__asize)*[0])
+#py 		#	__m = array.array('l', (Memory__arena + Memory__asize)*[0])
 				let i = 0;
 				let j = arena + k;
 				while (i < j) {
-#py 				__m[i] = __memory[i]
+#py 		#		__m[i] = __memory[i]
 					let i = i + 1;		
 				}
-#py 			__memory = __m
+#py 		#	__memory = __m
 				let end[0] = asize - k;
 				let arena[asize - 1] = 0;
 			}

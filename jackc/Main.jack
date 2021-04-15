@@ -67,7 +67,7 @@ class Main {
 			do Sys.error(-1);
 		}
 		let dir = args.getAt(1);
-		let files = Buffer.new(1);
+		let files = Buffer.newString(1);
 		if (dir) {
 			let dir = dir.copy();
 			let dir = dir.appendChar(47);
@@ -95,7 +95,7 @@ class Main {
 		do Output.println();
 		do cpl.link(dir);
 		do cpl.dispose();
-		do files.disposeStr();
+		do files.dispose();
 		do Output.printString("Done.");
 		do Output.println();
 
