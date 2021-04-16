@@ -72,6 +72,162 @@ Jack is easy to learn but it is designed to be yet useful.
 
 ![the number of](https://raw.githubusercontent.com/public-domain/jack/main/img/beast.jpg)
 
+## 2. Grammar
+``` 
+keyword: one of
+	class constructor function method callback field static var int char boolean void true false null this let do if else while return
+
+digit: one of
+	0 1 2 3 4 5 6 7 8 9
+
+integerConstant:
+	digit digit_opt
+
+stringConstant:
+	" unicodeExceptNewLineAndDoublequote_opt "
+
+letter: one of
+	a b c d e f g h i j k l m n o p q r s t u v w x y z A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+
+digitOrLetter:
+	letter
+	digit
+
+identifier:
+	_ digitOrLetter_opt
+	letter digitOrLetter_opt
+
+classDec:
+	class className { classVarDec_opt callbackDec_opt subroutineDec_opt }
+
+varNameList:
+	varName
+	varNameList, varName
+
+classVarDec:
+	static type varNameList ;
+	field type varNameList ;
+type:
+	int
+	char
+	boolean
+	className
+
+subroutineKind:
+	constructor
+	function
+	method
+
+subroutineType:
+	type
+	void
+
+subroutineDec:
+	subroutineKind subroutineType ( parameterList_opt ) subroutineBody
+
+callbackDec:
+	callback int callback ( parameterList_opt ) subroutineBody
+
+parameterList:
+	type varName
+	parameterList, type varName
+
+subroutineBody:	
+	{ varDecList_opt statements }
+
+varDecList:
+	varDec
+	varDecList , varDec
+
+varDec:
+	var type varNameList ;
+
+varNameList:
+	varName
+	varNameList , varName
+
+className:
+	identifier
+
+subroutineName:
+	identifier
+
+varName:
+	identifier
+
+statements:
+	statement
+	statements statement
+
+statement:
+	letStatement
+	ifStatement
+	whileStatement
+	doSatement
+	returnStatement
+
+letStatement:
+	let varName indexExpession_opt = expression ;
+
+indexExpression:
+	[ expression ]
+
+ifStatement:
+	if ( expression ) { statements } elseDec_opt	
+
+elseDec:
+	else { statements }
+
+whileStatement:
+	while ( expression ) { statements }
+
+doStatement:
+	do subroutineCall ;
+
+returnStatement:
+	return expression_opt;
+	return callbackCall;
+
+expression:
+	term
+	expression op term
+
+term:
+	integerConstant
+	stringConstant
+	keywordConstant
+	varName
+	varName [ expression ]
+	subroutineCall
+	( expression )
+	unaryOp term
+
+subroutineCall:
+	subroutineName ( expressionList )
+	className . subroutineName ( expressionList_opt )
+	varName . subroutineName ( expressionList_opt )
+
+callbackCall:
+	callback ( expressionList )
+
+expressionList:
+	expression
+	expressionList , expression
+
+op: one of
+	+ - * / &amp; | &lt; &gt; =
+
+unaryOp: one of
+	- ~
+
+keywordConstant:
+	true
+	false
+	null
+	this
+
+``` 
+
 ***
 [1]: https://www.nand2tetris.org/project09
 [2]: https://www.csie.ntu.edu.tw/~cyy/courses/introCS/13fall/lectures/handouts/lec11_Jack.pdf

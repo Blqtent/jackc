@@ -410,6 +410,7 @@ class CompilationEngine {
 		while (compileClassVarDec()) {
 			let doit = doit; 
 		}
+		do compileCallbackDec();
 		while (compileSubroutine()) {
 			let doit = doit; 
 		}
@@ -526,17 +527,53 @@ class CompilationEngine {
 		return false;
 	}
 
+	method void compileCallbackDec() {
+		var boolean z;
+		let z = matchKeyword(CALLBACK, false);
+		if (~z) {
+			return;
+		}
+		do begin("callbackDec");
+		let z = matchKeyword(INT, true); // type
+		if (~z) {
+			do error("'int' expected");
+			return;
+		}
+		let z = matchKeyword(CALLBACK, true); // type
+		if (~z) {
+			do error("'int' expected");
+			return;
+		}
+		let z = matchSymbol(LEFT_PARENTHESIS, true);
+		if (~z) {
+			do error("expect '('");
+			return false;
+		}				
+		do addSymbol();
+
+		do advance();
+		let z = compileParameterList();
+		if (~z) {
+			return false;
+		}
+		let z = matchSymbol(RIGHT_PARENTHESIS, false);
+		if (z) {
+			do addSymbol();
+			do advance();
+			let z = compileSubroutineBody();
+			do end("callbackDec");
+			return z;
+	    	}
+	        do error("expect ')'.");
+		return false;
+		
+	}
+
 	method boolean compileSubroutine() {
 		var boolean z;
-		var boolean iscb;
-		let iscb = false;
 		let z = matchKeyword(CONSTRUCTOR, false);
 		let z = z | matchKeyword(FUNCTION, false);
 		let z = z | matchKeyword(METHOD, false);
-		if (~z) {
-			let z = z | matchKeyword(CALLBACK, false);
-			let iscb = true;
-		}
 		if (~z) {
 			return false;
 		}
@@ -559,21 +596,12 @@ class CompilationEngine {
 			do error("expect type");
 			return false;
 		}
-		if (iscb) {
-			let z = matchKeyword(CALLBACK, true);
-			if (~z) {
-				do error("callback expected");
-				return false;
-			}
-			do addKeyword();
-		} else {
-			let z = matchIdentifier(true); // subroutinName
-			if (~z) {
-				do error("expect subroutineName");
-				return false;
-			}
-			do addIdentifier();
+		let z = matchIdentifier(true); // subroutinName
+		if (~z) {
+			do error("expect subroutineName");
+			return false;
 		}
+		do addIdentifier();
 			
 		let z = matchSymbol(
 			LEFT_PARENTHESIS, true);
@@ -760,6 +788,26 @@ class CompilationEngine {
 		return;
 	}
 
+	method void callbackCall() {
+		var boolean z;
+		if (~matchKeyword(CALLBACK, false)) {
+			return;
+		}
+		let z = matchSymbol(LEFT_PARENTHESIS, true);
+		if (~z) {
+			do error("'(' expected");
+		
+		}
+		do advance();
+		do compileExpressionList();
+		let z = matchSymbol(RIGHT_PARENTHESIS, false);
+		if (~z) {
+			do error("')' expected");
+		}
+		do advance();
+		return;
+		
+	}
 	method void subroutineCall(String subroutineName, int tokenLine) {
 		var boolean z;
 		let z = matchSymbol(LEFT_PARENTHESIS, false);
@@ -903,7 +951,11 @@ class CompilationEngine {
 		}
 		do begin("returnStatement");
 		do addKeyword();
-		let z = matchSymbol(SEMICOLON, true);
+		do advance();
+
+		do callbackCall();
+
+		let z = matchSymbol(SEMICOLON, false);
 		if (z) {
 			do addSymbol();
 			do advance();
@@ -1058,8 +1110,6 @@ class CompilationEngine {
 		var boolean z;
 		var String s;
 		var int l;
-		var boolean iscb;
-		let iscb = false;
 		do begin("term");
 		let z = matchIntegerConstant(false);
 		if (z) {
@@ -1096,13 +1146,7 @@ class CompilationEngine {
 				do end("term");
 				do advance();
 				return;
-			} else { if (matchKeyword(CALLBACK, false)) {
-				let iscb = true;
-			}}}}}
-			if (~iscb) {
-				do error("Unespected keyword");
-				return;
-			}						
+			}}}}
 		}
 		let z = matchSymbol(TILDE, false);
 		if (z) {
@@ -1143,19 +1187,14 @@ class CompilationEngine {
 			return;
 		}
 		
-		if (iscb) {
-			let s = "callback";
-			do addKeyword();
-		} else {
-			// className varName subroutiN
-			let z = matchIdentifier(false); 
-			if (~z) {
-				do error("Unexpected token...");
-				return;
-			}
-			do addIdentifier();
-			let s = jt.identifier();
+		// className varName subroutiN
+		let z = matchIdentifier(false); 
+		if (~z) {
+			do error("Unexpected token...");
+			return;
 		}
+		do addIdentifier();
+		let s = jt.identifier();
 		let s = s.copy();
 		let l = jt.getLine();
 		let z = matchSymbol(LEFT_SQUARE_BRACKET, true);
