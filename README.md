@@ -126,7 +126,7 @@ subroutineDec:
 	subroutineKind subroutineType ( parameterList_opt ) subroutineBody
 
 callbackDec:
-	callback int callback ( parameterList_opt ) subroutineBody
+	callback int callback ( parameterList ) subroutineBody
 
 parameterList:
 	type varName
