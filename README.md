@@ -128,7 +128,7 @@ identifier:
 	letterOrUnderscore digitOrLetterOrUnderscore_opt
 
 classDec:
-	class className { classVarDec_opt callbackDec_opt subroutineDec_opt }
+	class className { classVarDecList_opt callbackDec_opt subroutineDecList_opt }
 
 varNameList:
 	varName
@@ -137,6 +137,10 @@ varNameList:
 classVarKind:
 	static
 	field
+
+classVarDecList:
+	classVarDec
+	classVarDecList classVarDec
 
 classVarDec:
 	classVarKind type varNameList ;
@@ -156,6 +160,10 @@ subroutineType:
 	type
 	void
 
+subroutineDecList:
+	subroutineDec
+	subroutineDecList subroutineDec
+
 subroutineDec:
 	subroutineKind subroutineType subroutineName ( parameterList_opt ) subroutineBody
 
@@ -171,7 +179,7 @@ subroutineBody:
 
 varDecList:
 	varDec
-	varDecList , varDec
+	varDecList varDec
 
 varDec:
 	var type varNameList ;
