@@ -123,7 +123,7 @@ subroutineType:
 	void
 
 subroutineDec:
-	subroutineKind subroutineType ( parameterList_opt ) subroutineBody
+	subroutineKind subroutineType subroutineName ( parameterList_opt ) subroutineBody
 
 callbackDec:
 	callback int callback ( type varName , type varName ) subroutineBody
