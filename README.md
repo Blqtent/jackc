@@ -86,7 +86,6 @@ There is additional classes to allow interaction with the operating system (file
 
 ``` 
 class Main {
-
 	function void main()
 	{
 		do Output.printString("Hello World!");
@@ -102,20 +101,20 @@ class Main {
 keyword: one of
 	class constructor function method callback field static var int char boolean void true false null this let do if else while return
 
+symbol: one of
+	{ } ( ) [ ] . , ; + - * / & | < > = ~
+
 digit: one of
 	0 1 2 3 4 5 6 7 8 9
+
+letter: one of
+	a b c d e f g h i j k l m n o p q r s t u v w x y z A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
 
 integerConstant:
 	digit digit_opt
 
 stringConstant:
-	" unicodeExceptNewLineAndDoublequote_opt "
-
-symbol: one of
-	{ } ( ) [ ] . , ; + - * / & | < > = ~
-
-letter: one of
-	a b c d e f g h i j k l m n o p q r s t u v w x y z A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+	" unicodeExceptNewlineAndDoublequote_opt "
 
 letterOrUnderscore:
 	_
@@ -135,9 +134,12 @@ varNameList:
 	varName
 	varNameList, varName
 
+classVarKind:
+	static
+	field
+
 classVarDec:
-	static type varNameList ;
-	field type varNameList ;
+	classVarKind type varNameList ;
 
 type:
 	int
@@ -228,8 +230,7 @@ term:
 	integerConstant
 	stringConstant
 	keywordConstant
-	varName
-	varName [ expression ]
+	varName indexExpression_opt
 	subroutineCall
 	( expression )
 	unaryOp term
