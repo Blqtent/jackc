@@ -203,7 +203,7 @@ term:
 	unaryOp term
 
 subroutineCall:
-	subroutineName ( expressionList )
+	subroutineName ( expressionList_opt )
 	className . subroutineName ( expressionList_opt )
 	varName . subroutineName ( expressionList_opt )
 
