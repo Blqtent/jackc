@@ -5,8 +5,8 @@ The Jack programming language
 
 ### Editor's Draft 16 april 2021
 
-Unofficial JACK programming language specification
---------------------------------------------------
+Unofficial public domain JACK programming language specification
+----------------------------------------------------------------
 
 ### This version 
 https://github.com/public-domain/jack#readme
