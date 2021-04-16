@@ -97,6 +97,9 @@ identifier:
 	_ digitOrLetter_opt
 	letter digitOrLetter_opt
 
+symbol: one of
+	{ } ( ) [ ] . , ; + - * / & | < > = ~
+
 classDec:
 	class className { classVarDec_opt callbackDec_opt subroutineDec_opt }
 
