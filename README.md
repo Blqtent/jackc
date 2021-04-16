@@ -1,4 +1,4 @@
-The Jack programming language
+﻿The Jack programming language
 =============================
 
 ![public domain](https://raw.githubusercontent.com/public-domain/jack/main/img/pd.png)
@@ -51,9 +51,8 @@ Table of Contents
 
 1. [Introduction](#1-introduction)
      1. [Background](#11-background)
-     2. [HTML5 document](#12-html5document)
-2. [Format Specification]()
-     1. [FSS-UTF]()
+     2. [Differences](#12-differences)
+2. [Grammar](#2-grammar)
      
 ***
 
@@ -63,7 +62,7 @@ Elon Musk asks "is [life a video game][9]" ?
 
 In a blues song (the roots of Hard Rock), AC/DC says "she's got [the Jack][4]" and "she's a dirty woman".
 
-Could the roots of our Univers be coded in Jack programming language by our Creator ?
+Could the roots of our Universe be coded in Jack programming language by our Creator ?
 
 Jack is easy to learn but it is designed to be yet useful.
 
@@ -71,6 +70,16 @@ Jack is easy to learn but it is designed to be yet useful.
 ### 1.1 Background
 
 ![the number of](https://raw.githubusercontent.com/public-domain/jack/main/img/beast.jpg)
+
+### 1.2 Differences from the original Jack specification
+
+The range of decimal constant number and integer variable is unspecified.
+
+The callback extension allow to call a callback method from a variable.
+
+There is additional classes to allow interaction with the operating system (files and directories...).
+
+
 
 ## 2. Grammar
 ``` 
@@ -170,7 +179,7 @@ statement:
 	returnStatement
 
 letStatement:
-	let varName indexExpession_opt = expression ;
+	let varName indexExpression_opt = expression ;
 
 indexExpression:
 	[ expression ]
