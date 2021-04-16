@@ -84,6 +84,7 @@ There is additional classes to allow interaction with the operating system (file
 
 
 ## 2. Grammar
+
 ``` 
 keyword: one of
 	class constructor function method callback field static var int char boolean void true false null this let do if else while return
@@ -97,19 +98,21 @@ integerConstant:
 stringConstant:
 	" unicodeExceptNewLineAndDoublequote_opt "
 
+symbol: one of
+	{ } ( ) [ ] . , ; + - * / & | < > = ~
+
 letter: one of
 	a b c d e f g h i j k l m n o p q r s t u v w x y z A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
 
-digitOrLetter:
+digitOrLetterOrUnderscore:
+	_
 	letter
 	digit
 
 identifier:
 	_ digitOrLetter_opt
-	letter digitOrLetter_opt
+	letter digitOrLetterOrUnderscore_opt
 
-symbol: one of
-	{ } ( ) [ ] . , ; + - * / & | < > = ~
 
 classDec:
 	class className { classVarDec_opt callbackDec_opt subroutineDec_opt }
@@ -121,6 +124,7 @@ varNameList:
 classVarDec:
 	static type varNameList ;
 	field type varNameList ;
+
 type:
 	int
 	char
@@ -216,10 +220,13 @@ term:
 	( expression )
 	unaryOp term
 
+varOrClassName:
+	className
+	varName
+
 subroutineCall:
 	subroutineName ( expressionList_opt )
-	className . subroutineName ( expressionList_opt )
-	varName . subroutineName ( expressionList_opt )
+	varOrClassName . subroutineName ( expressionList_opt )
 
 callbackCall:
 	callback ( expression , expression )
