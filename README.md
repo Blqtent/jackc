@@ -84,7 +84,7 @@ There is additional classes to allow interaction with the operating system (file
 
 ## 2. Hello world
 
-'''
+``` 
 class Main {
 
 	function void main()
@@ -94,7 +94,7 @@ class Main {
 		return;
 	}
 }
-'''
+``` 
 
 ## 3. Grammar
 
