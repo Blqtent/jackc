@@ -187,9 +187,9 @@ indexExpression:
 	[ expression ]
 
 ifStatement:
-	if ( expression ) { statements } elseDec_opt	
+	if ( expression ) { statements } elseStatement_opt	
 
-elseDec:
+elseStatement:
 	else { statements }
 
 whileStatement:
