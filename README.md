@@ -71,11 +71,13 @@ Jack is easy to learn but it is designed to be yet useful.
 
 ![the number of](https://raw.githubusercontent.com/public-domain/jack/main/img/beast.jpg)
 
-### 1.2 Differences from the original Jack specification
+### 1.2 Differences
 
-The range of decimal constant number and integer variable is unspecified.
+Diffrences from the original Jack specification are :
 
-The callback extension allow to call a callback method from a variable.
+The range of decimal constant number and integer variable is unspecified. (It coule be from 8 to 64bits).
+
+The callback extension allows to call a callback method from a variable.
 
 There is additional classes to allow interaction with the operating system (files and directories...).
 
