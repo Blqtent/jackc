@@ -3,7 +3,7 @@ The Jack programming language
 
 ![public domain](https://raw.githubusercontent.com/public-domain/jack/main/img/pd.png)
 
-### Editor's Draft 2 april 2021
+### Editor's Draft 16 april 2021
 
 Unofficial JACK programming language specification
 --------------------------------------------------
@@ -215,7 +215,7 @@ expressionList:
 	expressionList , expression
 
 op: one of
-	+ - * / &amp; | &lt; &gt; =
+	+ - * / & | < > =
 
 unaryOp: one of
 	- ~
