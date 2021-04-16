@@ -75,7 +75,7 @@ Jack is easy to learn but it is designed to be yet useful.
 
 Diffrences from the original Jack specification are :
 
-The range of decimal constant number and integer variable is unspecified. (It coule be from 8 to 64bits).
+The range of decimal constant number and integer variable is unspecified. (It could be from 8 to 64bits).
 
 The callback extension allows to call a callback method from a variable.
 
