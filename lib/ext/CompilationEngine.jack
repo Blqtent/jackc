@@ -552,10 +552,15 @@ class CompilationEngine {
 		do addSymbol();
 
 		do advance();
-		let z = compileParameterList();
+		do compileParameter();
+		let z = matchSymbol(COMMA, false);
 		if (~z) {
+	        	do error("expect ',' ");
 			return false;
+
 		}
+		do advance();
+		do compileParameter();
 		let z = matchSymbol(RIGHT_PARENTHESIS, false);
 		if (z) {
 			do addSymbol();
@@ -628,40 +633,46 @@ class CompilationEngine {
 		return false;
 	}
 
+	method boolean compileParameter() {
+		var boolean z;
+		let z = matchKeyword(INT, false); // type
+		let z = z | matchKeyword(CHAR, false);
+		let z = z | matchKeyword(BOOLEAN, false);
+		if (z) {
+			do addKeyword();
+		} else {
+			let z = z | matchIdentifier(false);
+			if (z) {
+				do addIdentifier();
+			}
+		}
+		if (z) {
+			let z = matchIdentifier(true); // varName
+			if (z) {
+				do addIdentifier();
+				do advance();
+				return true;
+			} else {	
+				do error("varName expected..");
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+
 	method boolean compileParameterList() {
 		var boolean z;
 		let z = true;
 		do begin("parameterList");
 		while (jt.hasMoreTokens()) {
-			let z = matchKeyword(INT, false); // type
-			let z = z | matchKeyword(CHAR, false);
-			let z = z | matchKeyword(BOOLEAN, false);
-			if (z) {
-				do addKeyword();
-			} else {
-				let z = z | matchIdentifier(false);
-				if (z) {
-					do addIdentifier();
-				}
-			}
-			if (z) {
-				let z = matchIdentifier(true); // varName
-				if (z) {
-					do addIdentifier();
-					let z = matchSymbol(COMMA, true);
-					if (~z) {
-						do end("parameterList");
-						return true;
-					}
-					do addSymbol();
-				} else {	
-					do error("varName expected..");
-					return false;
-				}
-			} else {
+			let z = compileParameter();
+			let z = matchSymbol(COMMA, false);
+			if (~z) {
 				do end("parameterList");
 				return true;
 			}
+			do addSymbol();
 			do advance();
 		}
 		return false;
@@ -799,7 +810,13 @@ class CompilationEngine {
 		
 		}
 		do advance();
-		do compileExpressionList();
+		do compileExpression();
+		let z = matchSymbol(COMMA, false);
+		if (~z) {
+			do error("',' expected");
+		}
+		do advance();
+		do compileExpression();
 		let z = matchSymbol(RIGHT_PARENTHESIS, false);
 		if (~z) {
 			do error("')' expected");
