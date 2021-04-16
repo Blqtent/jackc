@@ -52,7 +52,8 @@ Table of Contents
 1. [Introduction](#1-introduction)
      1. [Background](#11-background)
      2. [Differences](#12-differences)
-2. [Grammar](#2-grammar)
+2. [Hello World!](#2-hello-world)
+3. [Grammar](#3-grammar)
      
 ***
 
@@ -75,15 +76,27 @@ Jack is easy to learn but it is designed to be yet useful.
 
 Diffrences from the original Jack specification are :
 
-The range of decimal constant number and integer variable is unspecified. (It could be from 8 to 64bits).
+The range of decimal constant number and integer variable is unspecified. (It could be from 8 to 512 bits).
 
 The callback extension allows to call a callback method from a variable.
 
 There is additional classes to allow interaction with the operating system (files and directories...).
 
+## 2. Hello world
 
+'''
+class Main {
 
-## 2. Grammar
+	function void main()
+	{
+		do Output.printString("Hello World!");
+		do Output.println();
+		return;
+	}
+}
+'''
+
+## 3. Grammar
 
 ``` 
 keyword: one of
@@ -114,7 +127,6 @@ digitOrLetterOrUnderscore:
 
 identifier:
 	letterOrUnderscore digitOrLetterOrUnderscore_opt
-
 
 classDec:
 	class className { classVarDec_opt callbackDec_opt subroutineDec_opt }
