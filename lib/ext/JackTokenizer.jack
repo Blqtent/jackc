@@ -342,7 +342,7 @@ class JackTokenizer {
 			{
 				do error(line, "White space");
 				let line = line;
-			} else { if (c = 35) {
+			} else { if (c = C.ASM()) {
 				let token = token.appendChar(c);
 				let in_asm = true;
 			} else {
