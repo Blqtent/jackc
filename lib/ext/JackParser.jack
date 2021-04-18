@@ -11,8 +11,9 @@ class JackParser {
 	field boolean gen_xml;
 	field int line;
 	field int last_line;
-	field Ast ast;
-	field Ast current;
+	field JackAst ast;
+	field JackAst current;
+
 	constructor JackParser new(JackTokenizer source) 
 	{
 		let nberror = 0;
@@ -22,7 +23,7 @@ class JackParser {
 		let x = source.getXml();
 		let gen_xml = true;
 
-		let ast = Ast.new(C.ROOT(), "", null);
+		let ast = JackAst.new(C.ROOT(), "", null);
 		let current = ast;
 
 		return this;
@@ -41,7 +42,7 @@ class JackParser {
 		let line = 0;
 		let last_line = -1;
 		do ast.dispose();
-		let ast = Ast.new(C.ROOT(), "", null);
+		let ast = JackAst.new(C.ROOT(), "", null);
 		let current = ast;
 		return;
 	}

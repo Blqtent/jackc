@@ -1,14 +1,24 @@
 
 class JackAstToC {
-	field File src;
-
-	constructor JackAstToC new() {
+	field File dst;
+	field JackParser parser;
+	field JackAst ast;
+	constructor JackAstToC new(JackParser parse) {
+		let parser = parse;
+		let dst = null;
+		let ast = parse.getAst();
 		return this;
 	}
 
 	method void dispose() {
 		do Memory.deAlloc(this);
 		return;
+	}
+	
+	method boolean compile(File dst_) {
+		let dst = dst_;
+		do ast.process(dst, 0);
+		return true;
 	}
 }
 

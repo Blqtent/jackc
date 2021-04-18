@@ -25,7 +25,7 @@ class JackAnalyser {
 
 	method boolean compile(String src_) {
 		var File dst, a;
-		var Ast ast;
+		var JackAstToC c;
 
 		let src = File.new(src_, false);
 		let dst = File.new("test.xml", true);
@@ -34,9 +34,10 @@ class JackAnalyser {
 		do t.init(src, false);
 		do comp.init(src, false);
 		do comp.compileClass(t, dst);
-		
-		let ast = comp.getAst();
-		do ast.process(a, 0);
+	
+		let c = JackAstToC.new(comp);
+		do c.compile(a);	
+		do c.dispose();
 
 		do x.dump(dst);
 
