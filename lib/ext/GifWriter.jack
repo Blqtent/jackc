@@ -400,6 +400,8 @@ class GifWriter {
 	method void quantize(Buffer rgba, int rgbaSize, int sample, Array map,
 		int numColors)
 	{
+		// FIXME must use 6-8-5 levels RGB index = (40×R)+(5×G)+B 
+		// plus 14 levels of gray
 		let map[0] = 0;
 		let map[1] = 16777215;
 		let map[2] = 32768;

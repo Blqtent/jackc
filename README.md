@@ -1,4 +1,5 @@
-﻿The Jack programming language
+﻿
+The Jack programming language
 =============================
 
 ![public domain](https://raw.githubusercontent.com/public-domain/jack/main/img/pd.png)
@@ -76,7 +77,7 @@ Jack is easy to learn but it is designed to be yet useful.
 
 Diffrences from the original Jack specification are :
 
-The range of decimal constant number and integer variable is unspecified. (It could be from 8 to 512 bits).
+The range of decimal constant number and integer variable is unspecified. The size of the integer is at least the same size as the size of a memory adresse. (It could be from 8 to 512 bits).
 
 The callback extension allows to call a callback method from a variable.
 

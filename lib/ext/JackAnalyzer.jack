@@ -24,16 +24,23 @@ class JackAnalyser {
 	}
 
 	method boolean compile(String src_) {
-		var File dst;
+		var File dst, a;
+		var Ast ast;
+
 		let src = File.new(src_, false);
 		let dst = File.new("test.xml", true);
+		let a = File.new("ast.txt", true);
 		do x.clear();
 		do t.init(src, false);
 		do comp.init(src, false);
 		do comp.compileClass(t, dst);
+		
+		let ast = comp.getAst();
+		do ast.process(a, 0);
 
 		do x.dump(dst);
 
+		do a.dispose();
 		do dst.dispose();
 		do src.dispose();
 		let src = null;

@@ -8,6 +8,10 @@ all: exe.py
 	python3 jacky.py jackc 
 	python3 jackc.py ctests
 
+hello:
+	i686-w64-mingw32-gcc -lwsock32 -lwinspool -lshell32 -luuid hello.c -o hello32.exe 
+	wine hello32.exe
+
 test:
 	rm -rf tests/lib
 	cp -r lib tests/
@@ -22,6 +26,7 @@ clean:
 	rm -f exe.py jackc.py
 	rm -f test.txt
 	rm -f test.xml
+	rm -f tests.py
 	rm -rf exe/lib
 	rm -rf ctests/lib
 	rm -rf tests/lib

@@ -167,7 +167,7 @@ def get_class(q):
     if (o != None):
         for e in o.children:
             if (e.tag == "method" or e.tag == "field" or e.tag == "callback"):
-                if (e.data == q.parent.data):
+                if (e.data == q.parent.data and q.data == ""):
                     return o.data
                 if (e.data == q.data):
                     return e.children[0].data
@@ -209,7 +209,6 @@ def call_(f, c, tab):
         if q.tag == "classo":
             cla = get_class(q) 
             if c.data == "callback":
-                print (c.data)
                 w(f, tab + "__memory[__this](__this")
             else:
                 w(f, tab + cla + "__" + c.data + "(")
