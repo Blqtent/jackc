@@ -3,13 +3,13 @@ class JackAnalyser {
 	field File src;
 	field Xml x;
 	field JackTokenizer t;
-	field CompilationEngine comp;
+	field JackParser comp;
 
 	constructor JackAnalyser new() {
 		let src = null;
 		let x = Xml.new();
 		let t = JackTokenizer.new(x);
-		let comp = CompilationEngine.new(t);
+		let comp = JackParser.new(t);
 		return this;
 	}
 

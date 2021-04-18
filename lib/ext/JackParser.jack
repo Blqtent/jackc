@@ -1,5 +1,5 @@
 
-class CompilationEngine {
+class JackParser {
 	//field Xml dst;
 	
 	field Xml x;
@@ -13,7 +13,7 @@ class CompilationEngine {
 	field int last_line;
 	field Ast ast;
 	field Ast current;
-	constructor CompilationEngine new(JackTokenizer source) 
+	constructor JackParser new(JackTokenizer source) 
 	{
 		let nberror = 0;
 		let maxerror = 1;

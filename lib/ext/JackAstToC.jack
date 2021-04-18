@@ -1,8 +1,8 @@
 
-class VMWriter {
+class JackAstToC {
 	field File src;
 
-	constructor VMWriter new() {
+	constructor JackAstToC new() {
 		return this;
 	}
 
