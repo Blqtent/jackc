@@ -96,6 +96,23 @@ class File {
 		return b;
 	}
 
+	method int seek(int position) {
+		var int b;
+		var int f;
+		let f = fd;
+		if (f < 0) {
+			do open();
+			let f = fd;
+			if (f < 0) {
+				return -1;
+			}
+		}
+#py 	b = __NativeObject[f].seek(position)
+		return b;
+	}
+
+
+	
 	method int writeByte(int data) {
 		var int r;
 		var int f;

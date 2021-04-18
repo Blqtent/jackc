@@ -1,12 +1,12 @@
 
-class UnitJackAnalyser {
+class UnitJackCompiler {
 	function boolean isOk(int l) {
-		var JackAnalyser a;
+		var JackCompiler a;
 		let l = l + 1;
-		let a = JackAnalyser.new();
+		let a = JackCompiler.new();
 		do a.compile("tests/Main.jack");
 		do a.dispose();
-		do Unit.log(l, "JackAnalyser...", true);
+		do Unit.log(l, "JackCompiler...", true);
 		return Memory.checkEmpty();
 	}
 }

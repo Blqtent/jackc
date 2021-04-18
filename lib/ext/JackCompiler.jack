@@ -1,11 +1,11 @@
 
-class JackAnalyser {
+class JackCompiler {
 	field File src;
 	field Xml x;
 	field JackTokenizer t;
 	field JackParser comp;
 
-	constructor JackAnalyser new() {
+	constructor JackCompiler new() {
 		let src = null;
 		let x = Xml.new();
 		let t = JackTokenizer.new(x);

@@ -176,7 +176,7 @@ def get_class(q):
 def replace(f, c ,tab):
     key = "";
     for q in c.children:
-        if q.tag == "classo":
+        if q.tag == "className":
             if (q.data == "Math"):
                 if (c.data == "xor"):
                     key = "^"
@@ -206,7 +206,7 @@ def call_(f, c, tab):
     if replace(f,c,tab):
         return;
     for q in c.children:
-        if q.tag == "classo":
+        if q.tag == "className":
             cla = get_class(q) 
             if c.data == "callback":
                 w(f, tab + "__memory[__this](__this")

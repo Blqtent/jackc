@@ -177,7 +177,7 @@ def subroutineCall_():
         return 0
     subroutineName = identifier_()
     current = current.add("call", subroutineName)
-    current.add("classo", classVarName)
+    current.add("className", classVarName)
     match("(");
     current = current.add("args", "")
     if expression_():

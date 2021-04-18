@@ -75,7 +75,9 @@ class UnitFile {
 	function boolean t2() {
 		var File src, dst;
 		let src = File.new("tests/Main.jack", false);
-		let dst = File.new("test.xml", true);
+		let dst = File.new("testo.xml", true);
+		do dst.seek(1000);
+		do dst.writeByte(65);
 		do dst.dispose();
 		do src.dispose();
 		return true;
