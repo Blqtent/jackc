@@ -1,0 +1,95 @@
+/*
+ * 			    Abstract Syntax Tree
+ *
+ *                      17 april MMXXI PUBLIC DOMAIN
+ *           The author disclaims copyright to this source code.
+ *
+ *
+ */
+
+class Ast {
+	field int tag;
+	field String data;
+	field Ast left;	
+	field Ast right;	
+	field Ast child;
+	field Ast next;
+	field Ast parent;	
+
+	constructor Ast new (int tag_, String data_, Ast parent_) {
+		let tag = tag_;
+		let data = data_.copy();
+		let parent = parent_;
+		let child = null;
+		let next = null;
+		let left = null;
+		let right = null;
+		return this;
+	}
+	
+	method void dispose() {
+		var Ast c, d;
+
+		do data.dispose();
+		let c = child;
+		while (c) {
+			let d = c.getNext();	
+			do c.dispose();
+			let c = d;
+		}
+		if (left) {
+			do left.dispose();
+		}
+		if (right) {
+			do right.dispose();
+		}
+		return;
+	}
+
+	method Ast add(int tag_, String data_) {
+		var Ast a, c, d;
+		let a = Ast.new(tag_, data_, this);
+		let c = child;
+		if (c = null) {
+			let child = a;
+		} else {
+			while (c.getNext()) {
+				let c = c.getNext();
+			}
+			do c.setNext(a);
+		}
+		return a;
+	}
+
+	method void setNext(Ast n) {
+		let next = n;
+		return;
+	}
+
+	method int getTag() {
+		return tag;
+	}
+
+
+	method String getData() {
+		return data;
+	}
+
+	method Ast getChild() {
+		return child;
+	}
+
+	method Ast getRight() {
+		return right;
+	}
+	method Ast getLeft() {
+		return next;
+	}
+	method Ast getParent() {
+		return parent;
+	}
+	method Ast getNext() {
+		return next;
+	}
+}
+

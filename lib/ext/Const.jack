@@ -1,0 +1,9 @@
+class Const {
+	function Hash getHash() {
+		var String v;
+		var Hash h;
+		let h = Hash.new(256, null);
+		let v = String.new(8);
+		do v.dispose();
+	}
+}
