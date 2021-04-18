@@ -32,7 +32,7 @@ class JackAnalyser {
 		let a = File.new("ast.txt", true);
 		do x.clear();
 		do t.init(src, false);
-		do comp.init(src, false);
+		do comp.init(src);
 		do comp.compileClass(t, dst);
 	
 		let c = JackAstToC.new(comp);

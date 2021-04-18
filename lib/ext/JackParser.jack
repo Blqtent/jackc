@@ -2,13 +2,11 @@
 class JackParser {
 	//field Xml dst;
 	
-	field Xml x;
 	field JackTokenizer jt;
 	field File src;
 	field int maxerror;
 	field int nberror;
 	field String exp;
-	field boolean gen_xml;
 	field int line;
 	field int last_line;
 	field JackAst ast;
@@ -20,8 +18,6 @@ class JackParser {
 		let maxerror = 1;
 		let src = null;
 		let jt = source;
-		let x = source.getXml();
-		let gen_xml = true;
 
 		let ast = JackAst.new(C.ROOT(), "", null);
 		let current = ast;
@@ -35,10 +31,9 @@ class JackParser {
 		return;
 	}
 
-	method void init(File source, boolean xml_output) {
+	method void init(File source) {
 		let src = source;
 		let nberror = 0;
-		let gen_xml = xml_output;
 		let line = 0;
 		let last_line = -1;
 		do ast.dispose();
@@ -212,109 +207,6 @@ class JackParser {
 		return s;
 	}
 
-	method void addLine() {
-		var String u;
-		if (jt.getLine() > last_line) {
-			let last_line = jt.getLine();
-			let u = String.new(8);
-			let u = u.setInt(last_line);
-			do x.addAttribute("line", u);
-			do u.dispose();
-		}
-		return;
-	}
-
-	method void addStringConstant() {
-		if (~gen_xml) {
-			return;
-		}
-		do x.addElement(C.STRING_CONST());
-		do x.addContent(jt.stringVal());
-		do addLine();
-		do x.closeCurrent();
-		return;
-	}
-
-	method void addIntegerConstant() {
-		var String s;
-		if (~gen_xml) {
-			return;
-		}
-		let s = String.new(8);
-		let s = s.setInt(jt.intVal());
-		do x.addElement(C.INT_CONST());
-		do x.addContent(s);
-		do s.dispose();
-		do addLine();
-		do x.closeCurrent();
-		return;
-	}
-		
-	method void addSymbol() {
-		var String s;
-		if (~gen_xml) {
-			return;
-		}
-		do x.addElement(C.SYMBOL());
-		let s = String.new(3);
-		let s = s.appendChar(jt.symbol());
-		do x.addContent(s);
-		do s.dispose();
-		do addLine();
-		do x.closeCurrent();
-		return;
-	}
-
-	method void addIdentifier() {
-		if (~gen_xml) {
-			return;
-		}
-		do x.addElement(C.IDENTIFIER());
-		do x.addContent(jt.identifier());
-		do addLine();
-		do x.closeCurrent();
-		return;
-	}
-
-	method void addKeyword() {
-		if (~gen_xml) {
-			return;
-		}
-		do x.addElement(C.KEYWORD());
-		do x.addContent(jt.keyWord());
-		do addLine();
-		do x.closeCurrent();
-		return;
-	}
-	
-	method void begin(String nonTerminal) {
-		if (~gen_xml) {
-			return;
-		}
-		do x.addElement(nonTerminal);
-	}
-
-	method void end(String nonTerminal) {
-		var XmlNode c;
-		var String s;
-		if (~gen_xml) {
-			return;
-		}
-		do x.closeElement(nonTerminal);
-		//do x.disposeCurrent();
-/*
-		let c = x.getCurrent();
-		let s = c.getTag();
-		while ((~(c.getParent()=null)) & s.compare(nonTerminal)) {
-				
-			do x.closeCurrent();
-			let c = x.getCurrent();
-			let s = c.getTag();
-		}
-*/
-		return;		
-	}
-
 	method void astSetCurrent(Ast c) {
 		let current = c; 
 	}
@@ -346,7 +238,6 @@ class JackParser {
 			do error("Expected {");
 			return;
 		}
-		do addSymbol();
 
 		do advance();
 		while (compileClassVarDec()) {
@@ -360,7 +251,6 @@ class JackParser {
 			do error("Expected } ");
 			return;
 		}	
-		do addSymbol();
 		if (~(jt.hasMoreTokens() = 0)) {
 			do error("Extra content after class definition");
 			return;
@@ -423,17 +313,13 @@ class JackParser {
 		let z = matchSymbol(C.COMMA(), true); // ,
 		while (z) {
  			// varName
-			do addSymbol();
 			let z = matchIdentifier(true);
 			if (z) {
-				do addIdentifier();
 				let z = matchSymbol(C.COMMA(), true);
 				if (~z) {
 					let z = matchSymbol(C.SEMICOLON(), false);
 					if (z) {
-						do addSymbol();
 						do advance();
-						do end("classVarDec");
 				  		return true;
 					} else {
 				  		do error(", or ; expected");
@@ -443,9 +329,7 @@ class JackParser {
 			} else { 
 				let z = matchSymbol(C.SEMICOLON(), false);
 				if (z) {
-					do addSymbol();
 					do advance();
-					do end("classVarDec");
 					return true;
 				}
 				do error(",varName expected");
@@ -454,9 +338,7 @@ class JackParser {
 		}
 		let z = matchSymbol(C.SEMICOLON(), false);
 		if (z) {
-			do addSymbol();
 			do advance();		
-			do end("classVarDec");
 			return true;
 		} 
 		do error("';' expected.");
@@ -467,13 +349,11 @@ class JackParser {
 		var boolean z;
 		let z = matchSymbol(C.LEFT_CURLY_BRACKET(), false);
 		if (z) {
-			do addSymbol();
 			do advance();
 			let z = compileVarDec();
 			let z = compileStatements();
 			let z = matchSymbol(C.RIGHT_CURLY_BRACKET(), false);
 			if (z) {
-				do addSymbol();
 				do advance();
 				return true;
 			} 
@@ -490,7 +370,6 @@ class JackParser {
 		if (~z) {
 			return;
 		}
-		do begin("callbackDec");
 		let z = matchKeyword(C.INT(), true); // type
 		if (~z) {
 			do error("'int' expected");
@@ -506,7 +385,6 @@ class JackParser {
 			do error("expect '('");
 			return false;
 		}				
-		do addSymbol();
 
 		do advance();
 		do compileParameter();
@@ -520,10 +398,8 @@ class JackParser {
 		do compileParameter();
 		let z = matchSymbol(C.RIGHT_PARENTHESIS(), false);
 		if (z) {
-			do addSymbol();
 			do advance();
 			let z = compileSubroutineBody();
-			do end("callbackDec");
 			return z;
 	    	}
 	        do error("expect ')'.");
@@ -539,19 +415,17 @@ class JackParser {
 		if (~z) {
 			return false;
 		}
-		do begin("subroutineDec");
-		do addKeyword();
 
 		let z = matchKeyword(C.VOID(), true); // type
 		let z = z | matchKeyword(C.INT(), false);
 		let z = z | matchKeyword(C.CHAR(), false);
 		let z = z | matchKeyword(C.BOOLEAN(), false);
 		if (z) {
-			do addKeyword();
+			let z = z;
 		} else {		
 			let z = z | matchIdentifier(false);
 			if (z) {
-				do addIdentifier();
+				let z = z;
 			}
 		}
 		if (~z) {
@@ -563,7 +437,6 @@ class JackParser {
 			do error("expect subroutineName");
 			return false;
 		}
-		do addIdentifier();
 			
 		let z = matchSymbol(
 			C.LEFT_PARENTHESIS(), true);
@@ -571,7 +444,6 @@ class JackParser {
 			do error("expect '('");
 			return false;
 		}				
-		do addSymbol();
 
 		do advance();
 		let z = compileParameterList();
@@ -580,10 +452,8 @@ class JackParser {
 		}
 		let z = matchSymbol(C.RIGHT_PARENTHESIS(), false);
 		if (z) {
-			do addSymbol();
 			do advance();
 			let z = compileSubroutineBody();
-			do end("subroutineDec");
 			return z;
 	    	}
 	        do error("expect ')'.");
@@ -596,17 +466,16 @@ class JackParser {
 		let z = z | matchKeyword(C.CHAR(), false);
 		let z = z | matchKeyword(C.BOOLEAN(), false);
 		if (z) {
-			do addKeyword();
+			let z = z;
 		} else {
 			let z = z | matchIdentifier(false);
 			if (z) {
-				do addIdentifier();
+				let z = z;
 			}
 		}
 		if (z) {
 			let z = matchIdentifier(true); // varName
 			if (z) {
-				do addIdentifier();
 				do advance();
 				return true;
 			} else {	
@@ -621,15 +490,12 @@ class JackParser {
 	method boolean compileParameterList() {
 		var boolean z;
 		let z = true;
-		do begin("parameterList");
 		while (jt.hasMoreTokens()) {
 			let z = compileParameter();
 			let z = matchSymbol(C.COMMA(), false);
 			if (~z) {
-				do end("parameterList");
 				return true;
 			}
-			do addSymbol();
 			do advance();
 		}
 		return false;
@@ -640,7 +506,6 @@ class JackParser {
 
 		let z = matchIdentifier(true); // varName
 		while (z) {
-			do addIdentifier();
 			let z = matchSymbol(C.COMMA(), true);
 			if (~z) {
 				let z = matchSymbol(C.SEMICOLON(), false);
@@ -648,7 +513,6 @@ class JackParser {
 				  	do error(", or ; expected");
 				  	return false;	
 				}
-				do addSymbol();
 				do advance();
 				let z = false;
 			} else {
@@ -671,23 +535,20 @@ class JackParser {
 			return false;
 		}
 		while (z) {
-			do begin("varDec"); 
-			do addKeyword();
 			let z = matchKeyword(C.INT(), true); // type
 			let z = z | matchKeyword(C.CHAR(), false);
 			let z = z | matchKeyword(C.BOOLEAN(), false);
 			if (z) {
-				do addKeyword();
+				let z = z;
 			} else {
 				let z = z | matchIdentifier(false);
 				if (z) {
-					do addIdentifier();
+					let z = z;
 				}
 			}
 			if (z) {
 				let z = compileVarDecVarList();
 			}
-			do end("varDec"); 
 			let z = matchKeyword(C.VAR(), false);  
 		}
 		return true;
@@ -696,11 +557,9 @@ class JackParser {
 	method boolean compileStatements() {
 		var boolean z;
 		let z = true;
-		do begin("statements"); 
 		while (true) {
 			let z = matchSymbol(C.RIGHT_CURLY_BRACKET(), false);
 			if (z) {
-				do end("statements"); 
 				return false;
 			}
 			if (matchKeyword(C.LET(), false)) {
@@ -732,13 +591,11 @@ class JackParser {
 			do error("do expected");
 			return;
 		}
-		do begin("doStatement"); 
 
 		if (~matchIdentifier(true)) { // subroutineName
 			do error("subroutineName expected");
 			return;
 		}
-		do addIdentifier();
 		let s = jt.identifier();
 		let s = s.copy();
 		let l = jt.getLine();
@@ -750,9 +607,7 @@ class JackParser {
 			do error("';' expected..");
 			return;
 		}
-		do addSymbol();
 		do advance();
-		do end("doStatement"); 
 		return;
 	}
 
@@ -786,7 +641,6 @@ class JackParser {
 		var boolean z;
 		let z = matchSymbol(C.LEFT_PARENTHESIS(), false);
 		if (z) {
-			do addSymbol();
 			do advance();
 			do compileExpressionList();
 			let z = matchSymbol(C.RIGHT_PARENTHESIS(), false);
@@ -794,7 +648,6 @@ class JackParser {
 				do error("')' expected");
 				return;
 			}
-			do addSymbol();
 			do advance();
 			return;
 		}
@@ -803,24 +656,20 @@ class JackParser {
 			do error("'(' or '.' expected");
 			return;
 		}
-		do addSymbol();
 		let z = matchIdentifier(true); // subroutineName
 		if (~z) {
 			do error("subroutineName expected");
 			return;
 		}
-		do addIdentifier();
 		let z = matchSymbol(C.LEFT_PARENTHESIS(), true);
 		if (~z) {
 			do error("'(' expected");
 			return;
 		}
-		do addSymbol();
 		do advance();
 		do compileExpressionList();
 		let z = matchSymbol(C.RIGHT_PARENTHESIS(), false);
 		if (z) {
-			do addSymbol();
 			do advance();
 			return;
 		}
@@ -830,22 +679,18 @@ class JackParser {
 
 	method void compileLet() {
 		var boolean z;
-		do begin("letStatement");
 		if (~matchKeyword(C.LET(), false)) {
 			do error("let expected");
 			return;
 		}
 
-		do addKeyword();
 		let z = matchIdentifier(true); 
 		if (~z) {
 			do error("varName expected");
 			return;
 		}
-		do addIdentifier();
 		let z = matchSymbol(C.LEFT_SQUARE_BRACKET(), true);
 		if (z) {
-			do addSymbol();
 			do advance();
 			do compileExpression();
 			let z = matchSymbol(C.RIGHT_SQUARE_BRACKET(), false);
@@ -853,7 +698,6 @@ class JackParser {
 				do error("']' expected");
 				return;
 			}
-			do addSymbol();
 			do advance();
 		}
 		let z = matchSymbol(C.EQUAL(), false);
@@ -861,7 +705,6 @@ class JackParser {
 			do error("'=' expected");
 			return;
 		}
-		do addSymbol();
 		do advance();
 		do compileExpression();
 		let z = matchSymbol(C.SEMICOLON(), false);
@@ -869,9 +712,7 @@ class JackParser {
 			do error("';' expected");
 			return;
 		}
-		do addSymbol();
 		do advance();
-		do end("letStatement");
 		return;
 	}
 
@@ -882,13 +723,11 @@ class JackParser {
 			do error("while expected");
 			return;
 		}
-		do begin("whileStatement");
 		let z = matchSymbol(C.LEFT_PARENTHESIS(), true);
 		if (~z) {
 			do error("'(' expected");
 			return;
 		}
-		do addSymbol();	
 		do advance();
 		do compileExpression();
 		let z = matchSymbol(C.RIGHT_PARENTHESIS(), false);
@@ -896,14 +735,12 @@ class JackParser {
 			do error("')' expected");
 			return;
 		}
-		do addSymbol();	
 	
 		let z = matchSymbol(C.LEFT_CURLY_BRACKET(), true);
 		if (~z) {
 			do error("'{' expected");
 			return;
 		}
-		do addSymbol();	
 		do advance();
 		do compileStatements();
 		let z = matchSymbol(C.RIGHT_CURLY_BRACKET(), false);
@@ -911,8 +748,6 @@ class JackParser {
 			do error("'}' expected,");
 			return;
 		}
-		do addSymbol();	
-		do end("whileStatement");
 		do advance();
 		return;
 	}
@@ -923,15 +758,12 @@ class JackParser {
 			do error("return expected");
 			return;
 		}
-		do begin("returnStatement");
-		do addKeyword();
 		do advance();
 
 		do callbackCall();
 
 		let z = matchSymbol(C.SEMICOLON(), false);
 		if (z) {
-			do addSymbol();
 			do advance();
 			return;
 		}
@@ -941,8 +773,6 @@ class JackParser {
 			do error("';' expected...");
 			return;
 		}
-		do addSymbol();
-		do end("returnStatement");
 		do advance();
 		return;
 	}
@@ -953,14 +783,11 @@ class JackParser {
 			do error("if expected");
 			return;
 		}
-		do begin("ifStatement");
-		do addKeyword();
 		let z = matchSymbol(C.LEFT_PARENTHESIS(), true);
 		if (~z) {
 			do error("'(' expected");
 			return;
 		}
-		do addSymbol();	
 		do advance();
 		do compileExpression();
 		let z = matchSymbol(C.RIGHT_PARENTHESIS(), false);
@@ -968,14 +795,12 @@ class JackParser {
 			do error("')' expected..");
 			return;
 		}
-		do addSymbol();	
 	
 		let z = matchSymbol(C.LEFT_CURLY_BRACKET(), true);
 		if (~z) {
 			do error("'{' expected");
 			return;
 		}
-		do addSymbol();	
 		do advance();
 		do compileStatements();
 		let z = matchSymbol(C.RIGHT_CURLY_BRACKET(), false);
@@ -983,19 +808,15 @@ class JackParser {
 			do error("'}' expected.");
 			return;
 		}
-		do addSymbol();	
 		let z = matchKeyword(C.ELSE(), true);
 		if (~z) {
-			do end("ifStatement");
 			return;
 		}
-		do addKeyword();	
 		let z = matchSymbol(C.LEFT_CURLY_BRACKET(), true);
 		if (~z) {
 			do error("'{' expected");
 			return;
 		}
-		do addSymbol();	
 		do advance();
 		do compileStatements();
 		let z = matchSymbol(C.RIGHT_CURLY_BRACKET(), false);
@@ -1003,8 +824,6 @@ class JackParser {
 			do error("'}' expected..");
 			return;
 		}
-		do addSymbol();	
-		do end("ifStatement");
 		do advance();
 		return;
 	}
@@ -1045,35 +864,28 @@ class JackParser {
 
 	method void compileExpression() {
 		var boolean z;
-		do begin("expression");
 		while (true) {
 			do compileTerm();
 			if (matchSymbol(C.SEMICOLON(), false)) {
-				do end("expression");
 				return;
 			}
 			if (matchSymbol(C.RIGHT_PARENTHESIS(), false)) {
-				do end("expression");
 				return;
 			}
 			if (matchSymbol(C.RIGHT_SQUARE_BRACKET(), false)) {
-				do end("expression");
 				return;
 			}
 			if (matchSymbol(C.COMMA(), false)) {
-				do end("expression");
 				return;
 			}
 			if (jt.tokenType() = C.SYMBOL()) {
 				do genOp();
-				do addSymbol();
 				if (~advance()) {
 					do error(
 						"missing token at end of file");
 					return;
 				}
 			} else {
-				do end("expression");
 				return;
 			}
 		}	
@@ -1084,77 +896,56 @@ class JackParser {
 		var boolean z;
 		var String s;
 		var int l;
-		do begin("term");
 		let z = matchIntegerConstant(false);
 		if (z) {
-			do addIntegerConstant();
-			do end("term");
 			do advance();
 			return;
 		}
 		let z = matchStringConstant(false);
 		if (z) {
-			do addStringConstant();
-			do end("term");
 			do advance();
 			return;
 		}
 		if (jt.tokenType() = C.KEYWORD()) {
 			if (matchKeyword(C.TRUE(), false)) {
-				do addKeyword();
-				do end("term");
 				do advance();
 				return;
 			} else { if (matchKeyword(C.FALSE(), false)) {
-				do addKeyword();
-				do end("term");
 				do advance();
 				return;
 			} else { if (matchKeyword(C.NULL(), false)) {
-				do addKeyword();
-				do end("term");
 				do advance();
 				return;
 			} else { if (matchKeyword(C.THIS(), false)) {
-				do addKeyword();
-				do end("term");
 				do advance();
 				return;
 			}}}}
 		}
 		let z = matchSymbol(C.TILDE(), false);
 		if (z) {
-			do addSymbol();
 			do advance();
 			do compileTerm();
-			do end("term");
 			return;
 		}
 		let z = matchSymbol(C.MINUS(), false);
 		if (z) {
-			do addSymbol();
 			do advance();
 			do compileTerm();
-			do end("term");
 			return;
 		}
 
 		let z = matchSymbol(C.RIGHT_PARENTHESIS(), false);
 		if (z) {
-			do end("term");
 			return;
 		}
 
 		let z = matchSymbol(C.LEFT_PARENTHESIS(), false);
 		if (z) {
-			do addSymbol();
 			do advance();
 			do compileExpression();
 			let z = matchSymbol(C.RIGHT_PARENTHESIS(), false);
 			if (z) {
-				do addSymbol();
 				do advance();
-				do end("term");
 				return;
 			}
 			do error("')' expected here");
@@ -1167,13 +958,11 @@ class JackParser {
 			do error("Unexpected token...");
 			return;
 		}
-		do addIdentifier();
 		let s = jt.identifier();
 		let s = s.copy();
 		let l = jt.getLine();
 		let z = matchSymbol(C.LEFT_SQUARE_BRACKET(), true);
 		if (z) {
-			do addSymbol();
 			do s.dispose();
 			do advance();
 			do compileExpression();
@@ -1182,8 +971,6 @@ class JackParser {
 				do error("']' expected.");
 				return;
 			}
-			do addSymbol();
-			do end("term");
 			do advance();
 			return;
 		}
@@ -1193,24 +980,19 @@ class JackParser {
 		if (~z) {
 			// match s
 			do s.dispose();
-			do end("term");
 			return;
 		}
 		do subroutineCall(s, l);
 		do s.dispose();
-		do end("term");
 		return;
 	}
 
 	method void compileExpressionList() {
-		do begin("expressionList");
 		do compileExpression();
 		while (matchSymbol(C.COMMA(), false)) {
-			do addSymbol();
 			do advance();
 		 	do compileExpression();
 		}
-		do end("expressionList");
 		return;
 	}
 
