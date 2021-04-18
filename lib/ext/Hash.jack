@@ -40,6 +40,9 @@ class Hash {
 			}
 			let i = i + 1;
 		}
+		if (cb) {
+			do cb.dispose();
+		}
 		do table.dispose();
 		do Memory.deAlloc(this);
 		return;

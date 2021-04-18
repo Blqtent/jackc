@@ -170,7 +170,7 @@ class C {
 	function int ROOT() {return 168;}
 	function int EXPR() {return 169;}
 	function int CALL() {return 170;}
-	function int CLASSO() {return 171;}
+	function int CLASSNAME() {return 171;}
 	function int ARGS() {return 172;}
 	function int VARNAME() {return 173;}
 	function int ARRAY() {return 174;}

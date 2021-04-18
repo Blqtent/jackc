@@ -64,16 +64,12 @@ class JackAst {
 		}
 		return;			
 	}
-	method void process(File f, int level) {
+	method void process(File f, int level, JackParser par) {
 		var JackAst c, d;
-		var String s;
 		var int i;
-		let s = String.new(8);
 		do ident(f, level);
-		let s = s.setInt(tag);
 		do f.writeString("tag=");
-		do f.writeString(s);
-		do s.dispose();
+		do f.writeString(par.getConst(tag));
 		do f.writeString(" data=");
 		do f.writeString(data);
 		do f.writeByte(10);
@@ -82,17 +78,17 @@ class JackAst {
 			do ident(f, level);
 			do f.writeString("left:");
 			do f.writeByte(10);
-			do left.process(f, level + 1);
+			do left.process(f, level + 1, par);
 		}
 		if (right) {
 			do ident(f, level);
 			do f.writeString("right:");
 			do f.writeByte(10);
-			do right.process(f, level + 1);
+			do right.process(f, level + 1, par);
 		}
 		let c = child;
 		while (c) {
-			do c.process(f, level);
+			do c.process(f, level, par);
 			let d = c.getNext();	
 			let c = d;
 		}

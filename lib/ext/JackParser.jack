@@ -11,6 +11,7 @@ class JackParser {
 	field int last_line;
 	field JackAst ast;
 	field JackAst current;
+	field Buffer const;
 
 	constructor JackParser new(JackTokenizer source) 
 	{
@@ -21,11 +22,13 @@ class JackParser {
 
 		let ast = JackAst.new(C.ROOT(), "", null);
 		let current = ast;
+		let const = Const.getList();
 
 		return this;
 	}
 
 	method void dispose() {
+		do const.dispose();
 		do ast.dispose();
 		do Memory.deAlloc(this);
 		return;
@@ -40,6 +43,10 @@ class JackParser {
 		let ast = JackAst.new(C.ROOT(), "", null);
 		let current = ast;
 		return;
+	}
+
+	method String getConst(int index) {
+		return const.getAt(index);
 	}
 
 	method Ast getAst() {

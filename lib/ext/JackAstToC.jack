@@ -17,7 +17,7 @@ class JackAstToC {
 	
 	method boolean compile(File dst_) {
 		let dst = dst_;
-		do ast.process(dst, 0);
+		do ast.process(dst, 0, parser);
 		return true;
 	}
 }
