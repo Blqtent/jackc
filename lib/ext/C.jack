@@ -186,6 +186,7 @@ class C {
 	function int EXPR() {return 184;}
 	function int OP() {return 185;}
 	function int DOT() {return 186;}
+	function int BODY() {return 187;}
 
-	function int NEXT_FREE_CONSTANT() {return 187;}
+	function int NEXT_FREE_CONSTANT() {return 255;}
 }

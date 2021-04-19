@@ -222,14 +222,44 @@ class JackParser {
 		var String s;
 		let s = getData();
 		let current = current.add(c, s);
-		do s.dispose(); 
+		do s.dispose(); 	
+		return;
 	}
+
+	method void astAddType() {
+		if (jt.tokenType() = C.KEYWORD()) {
+			do astAdd(jt.keyWord());
+		} else { if (jt.tokenType() = C.SYMBOL()) {
+			do astAdd(jt.symbol());
+		} else {
+			do astAdd(jt.tokenType());
+		}}
+		return;
+	}
+
+	method void astAddLike(JackAst prim, int type) {
+		var JackAst c;
+		let c = current;
+		let current = prim.getParent();
+		while (prim.getNext()) {
+			let current = current.add(
+				prim.getTag(), prim.getData());
+			let prim = prim.getNext();
+		}
+		do astAdd(type);
+		let current = c;
+		return;
+	}
+
+
 
 	method void compileClass(JackTokenizer tk, File dst_) {
 		var boolean doit;
- 
-		let jt = tk;
+ 		var JackAst save;
+		let save = current;
 
+		let jt = tk;
+		
 		let doit = true; 
 		if (~matchKeyword(C.CLASS(), true)) {
 			do error("Expected class");
@@ -262,53 +292,33 @@ class JackParser {
 			do error("Extra content after class definition");
 			return;
 		}	
+		let current = save;
 		return; // success
 	}
 
 	method boolean compileClassVarDec() {
 		var boolean z;
-		var Ast here;
-
+		var JackAst save, primary;
+		let save = current;
 
 		let z = matchKeyword(C.STATIC(), false);
-		if (z) {
-			do astAdd(C.STATIC());
-		} else {
-			let z = z | matchKeyword(C.FIELD(), false);
-			if (z) {
-				do astAdd(C.FIELD());
-			}
-		}
+		let z = z | matchKeyword(C.FIELD(), false);
 		if (~z) {	
 			return false;
 		}
+		do astAddType();
+		let primary = current;
 		
 		let z = matchKeyword(C.INT(), true); // type
-		if (z) {
-			do astAdd(C.INT());
-		} else {
-			let z = z | matchKeyword(C.CHAR(), false);
-			if (z) {
-				do astAdd(C.CHAR());
-			} else {
-				let z = z | matchKeyword(C.BOOLEAN(), false);
-				if (z) {
-					do astAdd(C.BOOLEAN());
-				}
-			}
-		}
-		if (z) {
-			let z = z;
-		} else {
-			let z = z | matchIdentifier(false);
-			if (z) {
-				do astAdd(C.CLASSO());
-			}
-		}
+		let z = z | matchKeyword(C.CHAR(), false);
+		let z = z | matchKeyword(C.BOOLEAN(), false);
+		let z = z | matchIdentifier(false);
 		if (~z) { 
 			do error("type expected");
 			return false;
 		}					
+		do astAddType();
+
 		let z = matchIdentifier(true); // varName
 		if (~z) {
 			do error("varName expected.");	
@@ -322,11 +332,14 @@ class JackParser {
  			// varName
 			let z = matchIdentifier(true);
 			if (z) {
+				do astAddLike(primary, C.VARNAME());
 				let z = matchSymbol(C.COMMA(), true);
 				if (~z) {
-					let z = matchSymbol(C.SEMICOLON(), false);
+					let z = matchSymbol(
+						C.SEMICOLON(), false);
 					if (z) {
 						do advance();
+						let current = save;
 				  		return true;
 					} else {
 				  		do error(", or ; expected");
@@ -337,6 +350,7 @@ class JackParser {
 				let z = matchSymbol(C.SEMICOLON(), false);
 				if (z) {
 					do advance();
+					let current = save;
 					return true;
 				}
 				do error(",varName expected");
@@ -346,6 +360,7 @@ class JackParser {
 		let z = matchSymbol(C.SEMICOLON(), false);
 		if (z) {
 			do advance();		
+			let current = save;
 			return true;
 		} 
 		do error("';' expected.");
@@ -354,6 +369,9 @@ class JackParser {
 
 	method boolean compileSubroutineBody() {
 		var boolean z;
+		var JackAst save;
+		let save = current;
+
 		let z = matchSymbol(C.LEFT_CURLY_BRACKET(), false);
 		if (z) {
 			do advance();
@@ -362,6 +380,7 @@ class JackParser {
 			let z = matchSymbol(C.RIGHT_CURLY_BRACKET(), false);
 			if (z) {
 				do advance();
+				let current = save;
 				return true;
 			} 
 			do error("'}' expected,,");
@@ -373,20 +392,29 @@ class JackParser {
 
 	method void compileCallbackDec() {
 		var boolean z;
+		var JackAst save, body;
+		let save = current;
+
 		let z = matchKeyword(C.CALLBACK(), false);
 		if (~z) {
 			return;
 		}
+		
+		do astAddType();
+		let body = current;
+
 		let z = matchKeyword(C.INT(), true); // type
 		if (~z) {
 			do error("'int' expected");
 			return;
 		}
+		do astAddType();
 		let z = matchKeyword(C.CALLBACK(), true); // type
 		if (~z) {
 			do error("'int' expected");
 			return;
 		}
+		do astAdd(C.IDENTIFIER());
 		let z = matchSymbol(C.LEFT_PARENTHESIS(), true);
 		if (~z) {
 			do error("expect '('");
@@ -406,7 +434,9 @@ class JackParser {
 		let z = matchSymbol(C.RIGHT_PARENTHESIS(), false);
 		if (z) {
 			do advance();
+			let current = body;
 			let z = compileSubroutineBody();
+			let current = save;
 			return z;
 	    	}
 	        do error("expect ')'.");
@@ -416,13 +446,16 @@ class JackParser {
 
 	method boolean compileSubroutine() {
 		var boolean z;
+		var JackAst save, body;
+		let save = current;
 		let z = matchKeyword(C.CONSTRUCTOR(), false);
 		let z = z | matchKeyword(C.FUNCTION(), false);
 		let z = z | matchKeyword(C.METHOD(), false);
 		if (~z) {
 			return false;
 		}
-
+		do astAddType();
+		let body = current;
 		let z = matchKeyword(C.VOID(), true); // type
 		let z = z | matchKeyword(C.INT(), false);
 		let z = z | matchKeyword(C.CHAR(), false);
@@ -435,15 +468,18 @@ class JackParser {
 				let z = z;
 			}
 		}
+		do astAddType();
 		if (~z) {
 			do error("expect type");
 			return false;
 		}
+		do astAddType();
 		let z = matchIdentifier(true); // subroutinName
 		if (~z) {
 			do error("expect subroutineName");
 			return false;
 		}
+		do astAddType();
 			
 		let z = matchSymbol(
 			C.LEFT_PARENTHESIS(), true);
@@ -460,7 +496,9 @@ class JackParser {
 		let z = matchSymbol(C.RIGHT_PARENTHESIS(), false);
 		if (z) {
 			do advance();
+			let current = body;
 			let z = compileSubroutineBody();
+			let current = save;
 			return z;
 	    	}
 	        do error("expect ')'.");
@@ -469,21 +507,19 @@ class JackParser {
 
 	method boolean compileParameter() {
 		var boolean z;
+		var JackAst save, body;
+		let save = current;
 		let z = matchKeyword(C.INT(), false); // type
 		let z = z | matchKeyword(C.CHAR(), false);
 		let z = z | matchKeyword(C.BOOLEAN(), false);
+		let z = z | matchIdentifier(false);
 		if (z) {
-			let z = z;
-		} else {
-			let z = z | matchIdentifier(false);
-			if (z) {
-				let z = z;
-			}
-		}
-		if (z) {
+			do astAddType();
 			let z = matchIdentifier(true); // varName
 			if (z) {
+				do astAddType();
 				do advance();
+				let current = save;
 				return true;
 			} else {	
 				do error("varName expected..");
@@ -510,9 +546,14 @@ class JackParser {
 
 	method boolean compileVarDecVarList() {
 		var boolean z;
+		var JackAst save, primary;
+		let save = current;
 
 		let z = matchIdentifier(true); // varName
 		while (z) {
+			do astAddType();
+			let current = save;
+
 			let z = matchSymbol(C.COMMA(), true);
 			if (~z) {
 				let z = matchSymbol(C.SEMICOLON(), false);
@@ -531,6 +572,7 @@ class JackParser {
 			    	let z = true;
 			}	
 		} 	
+		let current = save;
 		return true;
 	}
 

@@ -183,7 +183,7 @@ class JackAst {
 		return right;
 	}
 	method JackAst getLeft() {
-		return next;
+		return left;
 	}
 	method JackAst getParent() {
 		return parent;
