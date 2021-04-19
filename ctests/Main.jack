@@ -1,6 +1,13 @@
 
 class Main {
+	field int test;
+	static int testi;
 
+	method Main m() {
+		var String j;
+		do j.length();
+		return;
+	}
 	function void main()
 	{
 		do Output.printString("Hello World!");

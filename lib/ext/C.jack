@@ -183,10 +183,15 @@ class C {
 	function int ARRAYVAR() {return 181;}
 	function int PARAN() {return 182;}
 	function int UNARYOP() {return 183;}
-	function int EXPR() {return 184;}
+	function int TERM() {return 184;}
 	function int OP() {return 185;}
 	function int DOT() {return 186;}
 	function int BODY() {return 187;}
+	function int SUBROUTINENAME() {return 188;}
+	function int UNARYMINUS() {return 189;}
+	function int UNARYPLUS() {return 190;}
+	function int UNARYTILDE() {return 191;}
+	function int SUBROUTINECALL() {return 192;}
 
 	function int NEXT_FREE_CONSTANT() {return 255;}
 }

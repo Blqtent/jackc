@@ -184,6 +184,10 @@ class JackTokenizer {
 		return;
 	}
 
+	method String getFileName() {
+		return new_file;
+	}
+
 	method int getTokenConst(String s) {
 		return tbl.get(s);
 	}
@@ -345,6 +349,7 @@ class JackTokenizer {
 			} else { if (c = C.ASM()) {
 				let token = token.appendChar(c);
 				let in_asm = true;
+				do token.setCharAt(0, 0);
 			} else {
 				let token = token.appendChar(c);
 				do error(line, token);

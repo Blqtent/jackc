@@ -3,6 +3,11 @@ class JackAstToC {
 	field File dst;
 	field JackParser parser;
 	field JackAst ast;
+	field JackAst current;
+	field String clas;
+	field int nb_field;
+	field int nb_static;
+
 	constructor JackAstToC new(JackParser parse) {
 		let parser = parse;
 		let dst = null;
@@ -16,9 +21,730 @@ class JackAstToC {
 	}
 	
 	method boolean compile(File dst_) {
+		var JackAst c;
 		let dst = dst_;
-		do ast.process(dst, 0, parser);
+		let current = ast;
+		//do ast.process(dst, 0, parser);
+
+		let nb_field = 0;
+		let nb_static = 0;
+		while (current) {
+			let c = current.getChild();
+			if (c & (c.getTag() = C.CLASS())) {
+				do coClass(c);
+			}
+			let current = current.getNext();
+		}
+		
 		return true;
 	}
-}
 
+	method void coClass(JackAst c) {
+		var JackAst d;
+		var int t;
+		let clas = c.getData();
+
+		do dst.writeString("#define ");
+		do dst.writeString(clas);
+		do dst.writeString(" var");
+		do nl();
+
+		let d = c.getChild();
+		while (d) {
+			let t = d.getTag();
+
+			if (t = C.FUNCTION()) {
+				do coFunctionPre(d);
+			} else { if (t = C.METHOD()) {
+				do coMethodPre(d);
+			} else { if (t = C.CONSTRUCTOR()) {
+				do coConstructorPre(d);
+			}}}
+
+			let d = d.getNext();
+		}
+	
+
+
+
+
+		let d = c.getChild();
+		while (d) {
+			let t = d.getTag();
+			if (t = C.FUNCTION()) {
+				do coFunction(d);
+			} else { if (t = C.METHOD()) {
+				do coMethod(d);
+			} else { if (t = C.CONSTRUCTOR()) {
+				do coConstructor(d);
+			} else { if (t = C.CALLBACK()) {
+				do coCallback(d);
+			} else { if (t = C.FIELD()) {
+				do coField(d);
+			} else { if (t = C.STATIC()) {
+				do coStatic(d);
+			} else { 
+				do error("Unexpected kind.", d);
+			}}}}}}
+			let d = d.getNext();
+		}
+
+		let d = c.getChild();
+		while (d) {
+			let t = d.getTag();
+			if (t = C.FIELD()) {
+				do coFieldUndef(d);
+			}
+			let d = d.getNext();
+		}
+	
+
+		do c.process(dst, 0, parser);
+		return;
+	}
+
+	
+	method String str(int c) {
+		return parser.getConst(c);
+	}
+
+	method void nl() {
+		do dst.writeByte(10);
+		return;
+	}
+
+	method void coAsm(JackAst c) {
+		var String s;
+		var String z;
+		var int i;
+		var int l;
+		let i = 0;
+		let z = "c";
+		let s = c.getData();
+		let l = s.length();
+		while (s.charAt(i) = z.charAt(i)) {
+			let i = i + 1;
+			if (i = l) {
+				return;
+			} 
+			if (i = z.length()) {
+				while (i < l) {
+					do dst.writeUtf8(s.charAt(i));	
+					let i = i + 1;
+				}
+				return;
+			}		
+		}
+		return;
+	}
+
+	method void coStatic(JackAst c) {
+		let c = c.getChild();
+		//do coType(c);
+		do dst.writeString("var ");
+		do dst.writeString(clas);
+		do dst.writeString("__");
+		let c = c.getChild();
+		do coVarName(c);
+		do dst.writeString(";");
+		do nl();
+		let nb_static = nb_static + 1;
+		return;
+	}
+
+	method void coFieldUndef(JackAst c) {
+		var String s;
+		let c = c.getChild();
+		do dst.writeString("#undef ");
+		let c = c.getChild();
+		do coVarName(c);
+		do nl();
+		return;
+	}
+
+	method void coField(JackAst c) {
+		var String s;
+		let c = c.getChild();
+		do dst.writeString("#define ");
+		let c = c.getChild();
+		do coVarName(c);
+		do dst.writeString(" ");
+		let s = String.new(8);
+		let s = s.setInt(nb_field);
+		do dst.writeString(s);
+		do s.dispose();
+		do nl();
+	
+		let nb_field = nb_field + 1;
+		return;
+	}
+
+	method void coMethodPre(JackAst c) {
+		var JackAst d;
+		var int t, l;
+
+		let d = c.getChild();
+		let l = 0;
+		while (d) {
+			let t = d.getTag();
+			if (isType(t)) {
+				do coFunctionHead(d, true);
+				do dst.writeString(";");
+				do nl();
+				return;
+			}	
+			let d = d.getNext();
+		}
+		return;
+	}
+
+	method void coConstructorPre(JackAst c) {
+		var JackAst d;
+		var int t;
+
+		let d = c.getChild();
+		while (d) {
+			let t = d.getTag();
+			if (isType(t)) {
+				do coFunctionHead(d, false);
+				do dst.writeString(";");
+				do nl();
+				return;
+			}	
+			let d = d.getNext();
+		}
+		return;
+	}
+
+
+	method void coMethod(JackAst c) {
+		var JackAst d;
+		var int t, l;
+
+		let d = c.getChild();
+		let l = 0;
+		while (d) {
+			let t = d.getTag();
+			if (isType(t)) {
+				do coFunctionHead(d, true);
+				do dst.writeString(" {");
+				do nl();
+			}	
+			if (t = C.VAR()) {
+				do coVarDec(d);
+				let l = l + 1;
+			}
+			if (t = C.STATEMENTS()) {
+				do coStatements(d);
+				do dst.writeString("}");
+				do nl();
+			}
+			let d = d.getNext();
+		}
+		return;
+	}
+
+	method void coConstructor(JackAst c) {
+		var JackAst d;
+		var int t, l;
+		var String s;
+
+		let d = c.getChild();
+		let l = 0;
+		while (d) {
+			let t = d.getTag();
+			if (isType(t)) {
+				do coFunctionHead(d, false);
+				do dst.writeString(" {");
+				do nl();
+			}	
+			if (t = C.VAR()) {
+				if (l = 0) {
+					do dst.writeString("var __this;");
+					do nl();
+				}
+				do coVarDec(d);
+				let l = l + 1;
+			}
+			if (t = C.STATEMENTS()) {
+				let t = t;
+				do dst.writeString("__this = Memory__alloc(");
+				let s = String.new(8);
+				let s = s.setInt(nb_field);
+				do dst.writeString(s);
+				do s.dispose();
+				do dst.writeString(");");
+				do nl();
+				do coStatements(d);
+				do dst.writeString("}");
+				do nl();
+			}
+			let d = d.getNext();
+		}
+		return;
+	}
+
+	method void coCallback(JackAst c) {
+		let nb_field = nb_field + 1;
+		do coMethod(c);
+		return;
+	}
+
+	method void coFunctionPre(JackAst c) {
+		var JackAst d;
+		var int t;
+
+		let d = c.getChild();
+		while (d) {
+			let t = d.getTag();
+			if (isType(t)) {
+				do coFunctionHead(d, false);
+				do dst.writeString(";");
+				do nl();
+				return;
+			}	
+			let d = d.getNext();
+		}
+		return;
+	}
+
+	method boolean isType(int t) {
+		if ((t = C.CLASSNAME()) | 
+			(t = C.VOID()) |
+			(t = C.INT()) |
+			(t = C.BOOLEAN()) |
+			(t = C.CHAR()))
+		{
+			return true;
+		}
+		return false;
+	}
+
+	method void coFunction(JackAst c) {
+		var JackAst d;
+		var int t;
+
+		let d = c.getChild();
+		while (d) {
+			let t = d.getTag();
+			if (isType(t)) {
+				do coFunctionHead(d, false);
+				do dst.writeString(" {");
+				do nl();
+			}	
+			if (t = C.VAR()) {
+				do coVarDec(d);
+			}
+			if (t = C.STATEMENTS()) {
+				let t = t;
+				do coStatements(d);
+				do dst.writeString("}");
+				do nl();
+			}
+			let d = d.getNext();
+		}
+		return;
+	}
+
+	method void error(String txt, JackAst c) {
+		if (txt.length() < 1) {
+			return;
+		}
+		do Output.printString("In ");
+		do Output.printString(c.getFile());
+		do Output.printString(" (");
+		do Output.printInt(c.getLine());
+		do Output.printString(") ");
+		do Output.printString(txt);
+		do Output.printString(" got ");
+		do Output.printString(str(c.getTag()));
+		do Output.printString(" '");
+		do Output.printString(c.getData());
+		do Output.printString("'.");
+		do Output.println();
+	}
+
+	method void coStatement(JackAst c) {
+		var JackAst d, n;
+		var int t;
+		let d = c.getChild();
+		let t = c.getTag();
+		if (t = C.ASSIGN()) {
+			do coAssign(c);
+		} else { if (t = C.WHILE()) {
+			do error("", c);
+		} else { if (t = C.IF()) {
+			do error("", c);
+		} else { if (t = C.SUBROUTINECALL()) {
+			do coSubroutineCall(c);
+		} else { if (t = C.ELSE()) {
+			do error("", c);
+		} else { if (t = C.RETURN()) {
+			do coReturn(c);
+		} else { if (t = C.ASM()) {
+			do coAsm(c);
+		} else {
+			do error("Unknown statement", c);
+		}}}}}}}
+		do nl();
+		return;
+	}
+
+
+	method void coReturn(JackAst c) {
+		var JackAst d, n;
+		let d = c.getChild();
+		do dst.writeString("return ");
+		if (d) {
+			do coExpr(d);
+		} else {
+			do dst.writeString("0");
+		}
+		do dst.writeString(";");
+	}
+
+	method void coAssign(JackAst c) {
+		var JackAst d, n;
+		let d = c.getLeft();
+		if (d = null) {
+			return;
+		}
+		do coVarNameOrIndexed(d);
+		let d = c.getChild();
+		if (d) {
+			do dst.writeString(" = ");
+			do coExpr(d);
+		}
+		do dst.writeString(";");
+		return;
+	}
+
+	method void coVarNameOrIndexed(JackAst c) {
+		var JackAst d, n;
+		let d = c.getChild();
+		if (d) {
+			do dst.writeString("((var*)");
+			do coVarName(c);
+			do dst.writeString(")");
+			if (d.getTag() = C.LEFT_SQUARE_BRACKET()) {
+				do dst.writeString("[");
+				let d = d.getChild();
+				if (d.getTag() = C.EXPR()) {
+					do coExpr(d);
+				}
+				do dst.writeString("]");
+			}
+		} else {
+			do coVarName(c);
+		}
+		return;
+	}
+
+	method void coExpr(JackAst c) {
+		var JackAst d, n;
+		var int t;
+		let d = c.getChild();
+		while (d) {
+			let t = d.getTag();
+			if (t = C.SUBROUTINECALL()) {
+				do coSubroutineCall(d);
+			}
+			if (t = C.NULL()) {
+				do dst.writeString("0");
+			}
+			if (t = C.THIS()) {
+				do dst.writeString("__this");
+			}
+			if (t = C.FALSE()) {
+				do dst.writeString("0");
+			}
+			if (t = C.TRUE()) {
+				do dst.writeString("-1");
+			}
+			if (t = C.LEFT_PARENTHESIS()) {
+				do coExpr(d.getChild());
+			}
+			if (t = C.INT_CONST()) {
+				do dst.writeString(d.getData());
+			}
+			if (t = C.STRING_CONST()) {
+				do dst.writeByte(34);
+				do dst.writeString(d.getData());
+				do dst.writeByte(34);
+			}
+			let d = d.getNext();
+		}
+		return;
+	}
+
+	method boolean isSubroutine(int t) {
+		if (t = C.FUNCTION()) {
+			return true;
+		}
+		if (t = C.METHOD()) {
+			return true;
+		}
+		if (t = C.CONSTRUCTOR()) {
+			return true;
+		}
+		if (t = C.CALLBACK()) {
+			return true;
+		}
+		return false;
+	}
+
+	method String getTypeOfVarname(JackAst c, String s) {
+		var JackAst d, n, m;
+		var int t;
+		var String r;
+		let d = c.getChild();
+		if (s.compare(d.getData()) = 0) {
+			let t = c.getTag();
+			if ((t = C.VOID()) |		
+				(t = C.INT()) |		
+				(t = C.BOOLEAN()) |		
+				(t = C.CHAR()))
+			{
+				return str(t);
+			}
+			return c.getData();					
+		}
+		return null;
+	}
+
+	method String functionGetTypeOf(JackAst c, String s) {
+		var JackAst d, n, m;
+		var int t;
+		var String r;
+		let d = c.getChild();
+		while (d) {
+			let t = d.getTag();
+			if (isType(t)) {
+				let n = d.getChild();
+				let t = n.getTag();
+				if (t = C.SUBROUTINENAME()) {
+					let n = n.getChild();
+					let t = n.getTag();
+					if (t = C.PARAMS()) {
+					    let n = n.getChild();
+					    while (n) {
+						let r = getTypeOfVarname(n, s); 
+						if (r) {
+						    return r;
+						}
+						let n = n.getNext();
+					    }
+					}
+				
+				}	
+			}
+			if (t = C.VAR()) {
+				let n = d.getChild();
+				if (n) {
+					let r = getTypeOfVarname(n, s); 
+					if (r) {
+						return r;
+					}
+				}
+			}
+			let d = d.getNext(); 
+		}
+		return null;	
+	}
+
+	method String classGetTypeOf(JackAst c, String s) {
+		var JackAst d, n;
+		var int t;
+		var String s, r;
+		let s = c.getData();
+		let d = c.getChild();
+		while (d) {
+			let t = d.getTag();
+			if ((t = C.FIELD()) | (t = C.STATIC())) {
+				let r = getTypeOfVarname(d, s); 
+				if (r) {
+					return r;
+				}
+			}
+			let d = d.getNext();
+		}
+
+		return null;
+	}
+
+	method String getClassOf(JackAst c) {
+		var JackAst d, n;
+		var int t;
+		var String s, r;
+		let s = c.getData();
+		let d = c.getParent();
+		let t = d.getTag();
+		while (d & (isSubroutine(t) = false)) {
+			let d = d.getParent();
+			if (d) {
+				let t = d.getTag();
+			}
+		}
+		if (d = null) {
+			return null;
+		}
+
+		let r = functionGetTypeOf(d, s);
+		if (r) {
+			return r;
+		}	
+		while (d & ((t = C.CLASS()) = false)) {
+			let d = d.getParent();
+			if (d) {
+				let t = d.getTag();
+			}
+		}
+		if (d = null) {
+			return null;
+		}
+		let r = classGetTypeOf(d, s);
+		if (r) {
+			return r;
+		}	
+		
+		return null;
+	}
+
+	method void coSubroutineCall(JackAst c) {
+		var JackAst d, n;
+		var int t;
+		var String s;
+		var String thi;
+		var boolean first;
+		let first = true;
+		let thi = null;
+		let d = c.getChild();
+		let t = d.getTag();
+		if ((t = C.VARNAME()) | (t = C.CLASSNAME())) {
+			let s = getClassOf(d);
+			if (s) {
+				let thi = d.getData();
+				do dst.writeString(s);	
+			} else {
+				do dst.writeString(d.getData());	
+			}
+			let d = d.getChild();
+		} else { if (t = C.SUBROUTINENAME()) {
+			do dst.writeString(clas);	
+			
+		}}
+		do dst.writeString("__");	
+		do dst.writeString(d.getData());	
+		do dst.writeString("(");
+		if (thi) {
+			let first = false;
+			do dst.writeString(thi);
+		}	
+		let d = d.getChild();
+		while (d) {
+			if (first = false) {
+				do dst.writeString(", ");
+				let first = false;
+			}
+			do coExpr(d);
+			let d = d.getNext();
+		}	
+		do dst.writeString(");");	
+		return;
+	}
+
+	method void coStatements(JackAst c) {
+		var JackAst d, n;
+		let d = c.getChild();
+		while (d) {
+			do coStatement(d);
+			let d = d.getNext();
+		}
+		return;
+	}
+
+	method void coFunctionHead(JackAst c, boolean add_this) {
+		var JackAst d, n;
+		var int t;
+		let d = c.getChild();
+		let t = c.getTag();
+		if (t = C.CLASSNAME()) {
+			do dst.writeString(c.getData());
+		} else {
+			do dst.writeString("var");
+		}
+		do dst.writeString(" ");
+		do dst.writeString(clas);
+		do dst.writeString("__");
+		if (d.getTag() = C.SUBROUTINENAME()) {
+			do dst.writeString(d.getData());
+			let d = d.getChild();
+		}
+		if (d.getTag() = C.PARAMS()) { 
+			do coParams(d, add_this);
+		}
+		return;
+	}
+	
+	method void coParams(JackAst d, boolean add_this) {
+		var JackAst n;
+		do dst.writeString("(");
+		let d = d.getChild();
+		if (add_this) {
+			do dst.writeString("var __this");
+			if (d) {
+				do dst.writeString(", ");
+			}
+		}
+		while (d) {
+			let t = d.getTag();
+			do coType(d);
+			do dst.writeString(" ");
+			let n = d.getChild();
+			do coVarName(n);
+			let d = d.getNext();
+			if (d) {
+				do dst.writeString(", ");
+			}
+		}
+		do dst.writeString(")");
+		return;
+	}	
+
+	method void coVarDec(JackAst c) {
+		var JackAst d, n;
+		let d = c.getChild();
+		while (d) {
+			do dst.writeString("  ");
+			let t = d.getTag();
+			do coType(d);
+			let n = d.getChild();
+			if (n) {
+				do dst.writeString(" ");
+				do coVarName(n);
+				do dst.writeString(";");
+				do nl();
+			}
+			let d = d.getNext();
+		}
+		return;
+	}
+
+	method void coType(JackAst c) {
+		var int t;
+		let t = c.getTag();
+		if (t = C.CLASSNAME()) {
+			do dst.writeString(c.getData());
+		} else { 
+			do dst.writeString("var");
+		}
+		return;
+	}
+
+	method void coVarName(JackAst c) {
+		if (c.getTag() = C.VARNAME()) {
+			do dst.writeString(c.getData());
+		}
+		return;
+	}
+}

@@ -17,6 +17,7 @@ class Output {
 	}
 
 	function void moveCursor(int x, int y) {
+#c 	fwrite();
 #py 	sys.stdout.write("\033[%d;%dH" % (y, x))
 		return;
 	}

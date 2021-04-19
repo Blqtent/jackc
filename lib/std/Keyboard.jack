@@ -79,6 +79,7 @@ class Keyboard {
 	}
 
 	function char getChar() {
+		var int x;
 #py 	global keybuf
 #py 	global keyindex
 #py 	global ts

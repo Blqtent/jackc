@@ -221,10 +221,15 @@ class Const {
 		do b.append("arrayvar");
 		do b.append("paran");
 		do b.append("unaryop");
-		do b.append("expr");
+		do b.append("term");
 		do b.append("op");
 		do b.append("dot");
 		do b.append("body");
+		do b.append("subroutinename");
+		do b.append("unaryminus");
+		do b.append("unaryplus");
+		do b.append("unarytilde");
+		do b.append("subroutinecall");
 		do b.append("next_free_constant");
 		return b;
 	}

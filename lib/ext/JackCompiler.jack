@@ -26,10 +26,14 @@ class JackCompiler {
 	method boolean compile(String src_) {
 		var File dst, a;
 		var JackAstToC c;
+		var String s;
 
 		let src = File.new(src_, false);
 		let dst = File.new("test.xml", true);
-		let a = File.new("ast.txt", true);
+		let s = src_.copy();
+		let s = s.appendStr(".ast");
+		let a = File.new(s, true);
+		do s.dispose();
 		do x.clear();
 		do t.init(src, false);
 		do comp.init(src);

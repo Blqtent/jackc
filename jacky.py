@@ -33,6 +33,10 @@ def match(txt):
     global __file
     global __line
     global tokens
+    if len(tokens) < 1:
+        print ("syntax error: " + __file + "(" + __line + ") expected '" 
+                + txt + "' got 'no token'")
+        exit(-2)
     if tokens[0] == txt:
         tokens_pop(0)
         return 1
@@ -260,6 +264,8 @@ def subroutineDec_():
     global m
     global current
     last = current
+    if len(tokens) < 1:
+            return 0
     m = tokens[0]
     if tokens[0] == "constructor":
         tokens_pop(0)

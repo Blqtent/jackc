@@ -11,8 +11,7 @@ class JackAst {
 	field int tag;
 	field String data;
 	field JackAst left;	
-	field JackAst right;	
-	field JackAst child;
+	field JackAst child; // or right
 	field JackAst next;
 	field JackAst parent;	
 	field int line;	
@@ -25,7 +24,6 @@ class JackAst {
 		let child = null;
 		let next = null;
 		let left = null;
-		let right = null;
 		let line = 0;
 		let file = "";
 		return this;
@@ -43,9 +41,6 @@ class JackAst {
 		}
 		if (left) {
 			do left.dispose();
-		}
-		if (right) {
-			do right.dispose();
 		}
 		do Memory.deAlloc(this);
 		return;
@@ -79,12 +74,6 @@ class JackAst {
 			do f.writeString("left:");
 			do f.writeByte(10);
 			do left.process(f, level + 1, par);
-		}
-		if (right) {
-			do ident(f, level);
-			do f.writeString("right:");
-			do f.writeByte(10);
-			do right.process(f, level + 1, par);
 		}
 		let c = child;
 		while (c) {
@@ -150,16 +139,54 @@ class JackAst {
 		return d;
 	}
 
+	method JackAst replaceChild(JackAst old, JackAst new_) {
+		var JackAst c, n;
+		if (child = null) {
+			return;
+		}
+		let c = child;
+		if (c = old) {
+			do new_.setNext(c.getNext());
+			do c.setNext(null);
+			let child = new_;
+			do new_.setParent(this);
+			return;
+		}
+	
+		let n = c.getNext();
+		while (n) {
+			if (n = old) {
+				do new_.setNext(n.getNext());
+				do n.setNext(null);
+				do c.setNext(new_);
+				do new_.setParent(this);
+				return;
+			}
+			let c = n;	
+			let n = c.getNext();
+		} 	
+	}
+
+	method void setTag(int n) {
+		let tag = n;
+		return;
+	}
+
+	method void setParent(JackAst n) {
+		let parent = n;
+		return;
+	}
+
+
 	method void setLeft(JackAst n) {
 		let left = n;
 		return;
 	}
 
-	method void setRight(JackAst n) {
-		let right = n;
+	method void setChild(JackAst n) {
+		let child = n;
 		return;
 	}
-
 
 	method void setNext(JackAst n) {
 		let next = n;
@@ -170,6 +197,13 @@ class JackAst {
 		return tag;
 	}
 
+	method String getFile() {
+		return file;
+	}
+
+	method int getLine() {
+		return line;
+	}
 
 	method String getData() {
 		return data;
@@ -179,9 +213,6 @@ class JackAst {
 		return child;
 	}
 
-	method JackAst getRight() {
-		return right;
-	}
 	method JackAst getLeft() {
 		return left;
 	}
