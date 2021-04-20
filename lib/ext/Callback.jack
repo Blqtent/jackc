@@ -5,7 +5,7 @@ class Callback {
 		let c = this;
 		return 0;
 	}
-	
+
 	constructor Callback new() {
 		return this;
 	}

@@ -181,7 +181,7 @@ class JackParser {
 		var String s;
 		let s = null;
 		if (jt.tokenType() = C.KEYWORD()) {
-			let s = jt.keyWord();
+			let s = getConst(jt.keyWord());
 			let s = s.copy();
 		}
 		if (jt.tokenType() = C.SYMBOL()) {
@@ -421,7 +421,7 @@ class JackParser {
 		do astAdd(C.INT());
 		let z = matchKeyword(C.CALLBACK(), true); // type
 		if (~z) {
-			do error("'int' expected");
+			do error("'callback' expected");
 			return;
 		}
 		do astAdd(C.SUBROUTINENAME());
@@ -574,6 +574,7 @@ class JackParser {
 			} else {
 				do astAdd(C.VARNAME());
 			}
+			let current = save;
 			let z = matchSymbol(C.COMMA(), true);
 			if (~z) {
 				let z = matchSymbol(C.SEMICOLON(), false);
@@ -705,7 +706,8 @@ class JackParser {
 		if (~matchKeyword(C.CALLBACK(), false)) {
 			return;
 		}
-		do astAdd(C.SUBROUTINENAME());
+		do astAdd(C.SUBROUTINECALL());
+		do astAdd(C.CALLBACK());
 		let z = matchSymbol(C.LEFT_PARENTHESIS(), true);
 		if (~z) {
 			do error("'(' expected");
@@ -933,6 +935,7 @@ class JackParser {
 		}
 		let z = matchKeyword(C.ELSE(), true);
 		if (~z) {
+			let current = save;
 			return;
 		}
 		let current = begin;
@@ -1186,7 +1189,8 @@ class JackParser {
 		let l = jt.getLine();
 		let z = matchSymbol(C.LEFT_SQUARE_BRACKET(), true);
 		if (z) {
-			do astAddName(C.LEFT_SQUARE_BRACKET(), s, l);
+			do astAddName(C.VARNAME(), s, l);
+			do astAdd(C.LEFT_SQUARE_BRACKET());
 			do s.dispose();
 			do advance();
 			do compileExpression();
