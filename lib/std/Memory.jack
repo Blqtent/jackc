@@ -54,8 +54,8 @@ class Memory {
 	}
 
 	function boolean checkEmpty() {
-		var Array p, q, end;	
 		var boolean ok;
+		var Array p, q, end;	
 		let end = arena + asize;
 		let p = arena;
 		let ok = true;

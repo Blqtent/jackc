@@ -93,7 +93,7 @@ class Main {
 		do Output.printString(dir);
 		do Output.printString("...");
 		do Output.println();
-		do cpl.link(dir);
+		do cpl.link(dir, files);
 		do cpl.dispose();
 		do files.dispose();
 		do Output.printString("Done.");

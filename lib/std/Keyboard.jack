@@ -113,7 +113,7 @@ class Keyboard {
 	}
 
 	function int readInt(String message) {
-		return s;
+		return 0;
 	}
 }
 

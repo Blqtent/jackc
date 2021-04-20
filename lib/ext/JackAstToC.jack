@@ -8,6 +8,8 @@ class JackAstToC {
 	field int nb_field;
 	field int nb_static;
 	field boolean has_callback;
+	field int sp;
+	field int stringid;
 
 	constructor JackAstToC new(JackParser parse) {
 		let parser = parse;
@@ -25,12 +27,25 @@ class JackAstToC {
 		var JackAst c;
 		let dst = dst_;
 		let current = ast;
-		//do ast.process(dst, 0, parser);
 
+		do nl();
+		do dst.writeString("#if 0");
+		do nl();
+		do ast.process(dst, 0, parser);
+		do nl();
+		do dst.writeString("#endif");
+		do nl();
+
+		let stringid = 0;
+		let sp = 0;
 		let nb_field = 0;
 		let nb_static = 0;
 		let has_callback = false;
+		do dst.writeString("#ifndef var");
+		do nl();
 		do dst.writeString("#define var long");
+		do nl();
+		do dst.writeString("#endif");
 		do nl();
 
 		while (current) {
@@ -49,9 +64,13 @@ class JackAstToC {
 		var int t;
 		let clas = c.getData();
 
-		do dst.writeString("#define ");
+		do dst.writeString("#ifndef JACK_");
 		do dst.writeString(clas);
-		do dst.writeString(" var");
+		do dst.writeString("_H");
+		do nl();
+		do dst.writeString("#define JACK_");
+		do dst.writeString(clas);
+		do dst.writeString("_H");
 		do nl();
 
 		let d = c.getChild();
@@ -70,8 +89,13 @@ class JackAstToC {
 		}
 	
 
-
-
+		do dst.writeString("#endif");
+		do nl();
+		do dst.writeString("#ifdef JACK_IMPLEMENTATION");
+		do nl();
+		
+		let d = c.getChild();
+		do genStrings(d);
 
 		let d = c.getChild();
 		while (d) {
@@ -102,9 +126,62 @@ class JackAstToC {
 			}
 			let d = d.getNext();
 		}
+		do dst.writeString("#endif");
+		do nl();
 	
 		//do c.process(dst, 0, parser);
 
+		return;
+	}
+
+	method void genStrings(JackAst a) {
+		var String s, o;
+		var int i, l, n;
+		if (a.getTag() = C.STRING_CONST()) {
+			do dst.writeString("var ");
+			do dst.writeString(clas);
+			do dst.writeString("___str");
+			let s = String.new(8);
+			let s = s.setInt(stringid);
+			do dst.writeString(s);
+			do dst.writeString("[] = {-");
+			let o = a.getData();
+			let l = o.length();
+			let i = 0;
+			let s = s.setInt((l+2));
+			do dst.writeString(s);
+			while (i < l) {
+				do dst.writeString(",");
+				let n = o.charAt(i);
+				let s = s.setInt(n);
+				do dst.writeString(s);
+				let i = i + 1;
+			}
+			do dst.writeString(",0};");
+			do nl();
+			do s.dispose();
+			do a.setId(stringid);
+			let stringid = stringid + 1;
+		}
+		if (a.getLeft()) {
+			do genStrings(a.getLeft());
+		}
+		if (a.getChild()) {
+			do genStrings(a.getChild());
+		}
+		if (a.getNext()) {
+			do genStrings(a.getNext());
+		}
+		return;
+	}
+
+	method void spc() {
+		var int i;
+		let i = 0;
+		while (i < sp) {
+			let i = i + 1;
+			do dst.writeString("  ");
+		}
 		return;
 	}
 
@@ -235,6 +312,7 @@ class JackAstToC {
 				do coFunctionHead(d, true);
 				do dst.writeString(" {");
 				do nl();
+				let sp = sp + 1;
 			}	
 			if (t = C.VAR()) {
 				do coVarDec(d);
@@ -242,6 +320,7 @@ class JackAstToC {
 			}
 			if (t = C.STATEMENTS()) {
 				do coStatements(d);
+				let sp = sp - 1;
 				do dst.writeString("}");
 				do nl();
 			}
@@ -263,6 +342,7 @@ class JackAstToC {
 				do coFunctionHead(d, false);
 				do dst.writeString(" {");
 				do nl();
+				let sp = sp + 1;
 			}	
 			if (t = C.VAR()) {
 				if (l = 0) {
@@ -274,21 +354,31 @@ class JackAstToC {
 			}
 			if (t = C.STATEMENTS()) {
 				let t = t;
+				do spc();
+				do dst.writeString("var __this;");
+				do nl();
+				do spc();
 				do dst.writeString("__this = Memory__alloc(");
 				let s = String.new(8);
-				let s = s.setInt(nb_field);
+				if (nb_field < 1) {
+					let s = s.setInt(1);
+				} else {
+					let s = s.setInt(nb_field);
+				}
 				do dst.writeString(s);
 				do s.dispose();
 				do dst.writeString(");");
 				do nl();
 				if (has_callback) {
+					do spc();
 					do dst.writeString(
-						"((var(*)(var,var)__this[0]) = ");
+						"((var*)__this)[0] = (var)");
 					do dst.writeString(clas);
 					do dst.writeString("__callback;");
 					do nl();
 				}
 				do coStatements(d);
+				let sp = sp - 1;
 				do dst.writeString("}");
 				do nl();
 			}
@@ -345,6 +435,7 @@ class JackAstToC {
 				do coFunctionHead(d, false);
 				do dst.writeString(" {");
 				do nl();
+				let sp = sp + 1;
 			}	
 			if (t = C.VAR()) {
 				do coVarDec(d);
@@ -352,6 +443,7 @@ class JackAstToC {
 			if (t = C.STATEMENTS()) {
 				let t = t;
 				do coStatements(d);
+				let sp = sp - 1;
 				do dst.writeString("}");
 				do nl();
 			}
@@ -403,7 +495,10 @@ class JackAstToC {
 		} else { if (t = C.IF()) {
 			do coIf(c);
 		} else { if (t = C.SUBROUTINECALL()) {
+			do spc();
 			do coSubroutineCall(c);
+			do dst.writeString(";");
+			do nl();
 		} else { if (t = C.RETURN()) {
 			do coReturn(c);
 		} else { if (t = C.ASM()) {
@@ -418,6 +513,7 @@ class JackAstToC {
 	method void coWhile(JackAst c) {
 		var JackAst d, n;
 		let d = c.getChild();
+		do spc();
 		do dst.writeString("while (");
 		if (d) {
 			do coExpr(d, false);
@@ -427,8 +523,12 @@ class JackAstToC {
 		}
 		do dst.writeString(") {");
 		do nl();
+		let sp = sp + 1;
 		let d = d.getNext();
 		do coStatements(d);
+		let sp = sp - 1;
+		let d = d.getNext();
+		do spc();
 		do dst.writeString("}");
 		return;
 	}
@@ -436,6 +536,7 @@ class JackAstToC {
 	method void coIf(JackAst c) {
 		var JackAst d, n;
 		let d = c.getChild();
+		do spc();
 		do dst.writeString("if (");
 		if (d) {
 			do coExpr(d, false);
@@ -445,6 +546,7 @@ class JackAstToC {
 		}
 		do dst.writeString(") {");
 		do nl();
+		let sp = sp + 1;
 		let d = d.getNext();
 		if (d = 0) {
 			do error("expected statements in if", c);
@@ -456,7 +558,9 @@ class JackAstToC {
 		}
 		do coStatements(d);
 		let d = d.getNext();
+		let sp = sp - 1;
 		if (d = 0) {
+			do spc();
 			do dst.writeString("}");
 			do nl();
 			return;
@@ -466,8 +570,10 @@ class JackAstToC {
 			do error("expected else", c);
 			return;
 		}
+		do spc();
 		do dst.writeString("} else {");
 		do nl();
+		let sp = sp + 1;
 		let c = d;
 		let d = d.getChild();
 		if (d = 0) {
@@ -475,6 +581,8 @@ class JackAstToC {
 			return;
 		}
 		do coStatements(d);
+		let sp = sp - 1;
+		do spc();
 		do dst.writeString("}");
 	}
 
@@ -483,6 +591,7 @@ class JackAstToC {
 	method void coReturn(JackAst c) {
 		var JackAst d, n;
 		let d = c.getChild();
+		do spc();
 		do dst.writeString("return ");
 		if (d) {
 			do coExpr(d, false);
@@ -498,6 +607,7 @@ class JackAstToC {
 		if (d = null) {
 			return;
 		}
+		do spc();
 		do coVarNameOrIndexed(d);
 		let d = c.getChild();
 		if (d) {
@@ -536,6 +646,8 @@ class JackAstToC {
 		var JackAst d, n;
 		var boolean ok;
 		var int t;
+		var String s;
+
 		if (c.getTag() = C.EXPR()) {
 			let d = c.getChild();
 		} else {
@@ -589,9 +701,20 @@ class JackAstToC {
 				let ok = true;
 			}
 			if (t = C.STRING_CONST()) {
+				do dst.writeString("((var)(");
+				do dst.writeString(clas);
+				do dst.writeString("___str");
+				let s = String.new(8);
+				let s = s.setInt(d.getId());
+				do dst.writeString(s);
+				do s.dispose();
+				let stringid = stringid + 1;
+				do dst.writeString("+1))");
+				/*
 				do dst.writeByte(34);
 				do dst.writeString(d.getData());
 				do dst.writeByte(34);
+				*/
 				let ok = true;
 			}
 			if (t = C.PLUS()) {
@@ -857,6 +980,7 @@ class JackAstToC {
 
 		return null;
 	}
+
 	method String getTypeOf(JackAst c) {
 		var JackAst d, n;
 		var int t;
@@ -959,7 +1083,7 @@ class JackAstToC {
 			do dst.writeString("__");	
 			do dst.writeString(d.getData());	
 		} else { if (t = C.CALLBACK()) {
-			do dst.writeString("((var(*)(var,var))__this[0])");	
+			do dst.writeString("((var(*)(var,var))((var*)__this)[0])");	
 		} else { if (t = C.SUBROUTINENAME()) {
 			do dst.writeString(clas);	
 			do dst.writeString("__");	
@@ -980,7 +1104,7 @@ class JackAstToC {
 			do coExpr(d, false);
 			let d = d.getNext();
 		}	
-		do dst.writeString(");");	
+		do dst.writeString(")");	
 		return;
 	}
 

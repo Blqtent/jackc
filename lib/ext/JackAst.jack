@@ -16,6 +16,7 @@ class JackAst {
 	field JackAst parent;	
 	field int line;	
 	field String file;	
+	field int id;
 
 	constructor JackAst new (int tag_, String data_, JackAst parent_) {
 		let tag = tag_;
@@ -26,6 +27,7 @@ class JackAst {
 		let left = null;
 		let line = 0;
 		let file = "";
+		let id = 0;
 		return this;
 	}
 	
@@ -165,6 +167,15 @@ class JackAst {
 			let c = n;	
 			let n = c.getNext();
 		} 	
+	}
+
+	method void setId(int n) {
+		let id = n;
+		return;
+	}
+
+	method void getId() {
+		return id;
 	}
 
 	method void setTag(int n) {

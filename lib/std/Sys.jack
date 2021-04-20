@@ -22,11 +22,17 @@ class Sys {
 	}
 
 	function void deInit() {
+		var Buffer b;
 		do Math.deInit();
 		do Output.deInit();
 		do Screen.deInit();
 		do Keyboard.deInit();
 		do Memory.deInit();
+		if (args_) {
+			let b = args_;
+			do b.dispose();
+			let args_ = null;
+		}
 		return;
 	}
 	
@@ -49,15 +55,6 @@ class Sys {
 	function void wait(int duration) {
 #py 	time.sleep(duration / 1000.0)
 		return;
-	}
-
-	function void deInit() {
-		var Buffer b;
-		if (args_) {
-			let b = args_;
-			do b.dispose();
-			let args_ = null;
-		}
 	}
 
 	function Buffer args() {

@@ -31,7 +31,7 @@ class JackCompiler {
 		let src = File.new(src_, false);
 		let dst = File.new("test.xml", true);
 		let s = src_.copy();
-		let s = s.appendStr(".ast");
+		let s = s.appendStr(".h");
 		let a = File.new(s, true);
 		do s.dispose();
 		do x.clear();
@@ -55,8 +55,60 @@ class JackCompiler {
 		return true;
 	}
 
-	method boolean link(String dir) {
-
+	method boolean link(String dir, Buffer files) {
+		var int i;
+		var String s;
+		var File dst;
+	//	let s = dir.copy();
+	//	let s = s.appendStr("main_jack.c");
+		let dst = File.new("main_jack.c", true);
+	//	do s.dispose();
+		let i = 0;
+		while (i < files.getSize()) {
+			let s = files.getAt(i);
+			let s = s.copy();
+			let s = s.appendStr(".h");
+			do dst.writeByte(10);		
+			do dst.writeString("#include ");
+			do dst.writeByte(34);		
+			do dst.writeString(s);
+			do dst.writeByte(34);		
+			do dst.writeByte(10);		
+			do s.dispose();
+			let i = i + 1;
+		}
+		do dst.writeString("#include <string.h>");
+		do dst.writeByte(10);		
+		do dst.writeString("#include <stdlib.h>");
+		do dst.writeByte(10);		
+		do dst.writeString("#include <stdio.h>");
+		do dst.writeByte(10);		
+		let i = 0;
+		do dst.writeString("#define JACK_IMPLEMENTATION");
+		while (i < files.getSize()) {
+			let s = files.getAt(i);
+			let s = s.copy();
+			let s = s.appendStr(".h");
+			do dst.writeByte(10);		
+			do dst.writeString("#include ");
+			do dst.writeByte(34);		
+			do dst.writeString(s);
+			do dst.writeByte(34);		
+			do dst.writeByte(10);		
+			do s.dispose();
+			let i = i + 1;
+		}
+	
+		do dst.writeString("int main(int argc, char *argv[]) {");
+		do dst.writeByte(10);		
+		do dst.writeString("	Sys__init();");
+		do dst.writeByte(10);		
+		do dst.writeString("	return 0;");
+		do dst.writeByte(10);		
+		do dst.writeString("}");
+		do dst.writeByte(10);		
+		do dst.dispose();
+	
 		return true;
 	}
 }

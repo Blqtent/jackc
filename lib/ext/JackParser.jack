@@ -432,7 +432,7 @@ class JackParser {
 		}				
 
 		do advance();
-		let current = body;
+		//let current = body;
 		do astAdd(C.PARAMS());
 		do compileParameter();
 		let z = matchSymbol(C.COMMA(), false);
@@ -608,25 +608,22 @@ class JackParser {
 		if (~z) {
 			return false;
 		}
-		do astAdd(C.VAR());
-		let primary = current;
 		while (z) {
+			do astAdd(C.VAR());
+			let primary = current;
 			let z = matchKeyword(C.INT(), true); // type
 			let z = z | matchKeyword(C.CHAR(), false);
 			let z = z | matchKeyword(C.BOOLEAN(), false);
 			if (z) {
-				let z = z;
 				do astAddType();
 			} else {
 				let z = z | matchIdentifier(false);
-				if (z) {
-					let z = z;
-				}
 				do astAdd(C.CLASSNAME());
 			}
 			if (z) {
 				let z = compileVarDecVarList(primary);
 			}
+			let current = save;
 			let z = matchKeyword(C.VAR(), false);  
 		}
 		let current = save;
