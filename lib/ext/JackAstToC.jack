@@ -43,7 +43,17 @@ class JackAstToC {
 		let has_callback = false;
 		do dst.writeString("#ifndef var");
 		do nl();
+		do dst.writeString("#ifdef _WIN64");
+		do nl();
+		do dst.writeString("#include <windows.h>");
+		do nl();
+		do dst.writeString("#define var __int64");
+		do nl();
+		do dst.writeString("#else");
+		do nl();
 		do dst.writeString("#define var long");
+		do nl();
+		do dst.writeString("#endif");
 		do nl();
 		do dst.writeString("#endif");
 		do nl();

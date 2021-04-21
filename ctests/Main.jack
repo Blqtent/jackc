@@ -1,23 +1,8 @@
 
 class Main {
-	field int test, u;
-	static Buffer testi, o;
-
-	method Main m() {
-		var String j, k;
-		let j = ~0;
-		if (j) {
-			let j = 1;
-		} else {
-			let j = 2;
-		}
-		let o =  Sys.args();
-		do j.length();
-		return;
-	}
 	function void main()
 	{
-		do Output.printString("Hello World!");
+		do Output.printString("Héllo World!");
 		do Output.println();
 		return;
 	}

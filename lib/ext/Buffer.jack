@@ -43,6 +43,7 @@ class Buffer {
 	
 		do buffer.dispose();
 		do Memory.deAlloc(this);
+		return;
 	}
 
 	method int getAt(int p) {

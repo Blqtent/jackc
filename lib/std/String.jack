@@ -104,7 +104,7 @@ class String {
 	}
 	
 	method String setInt(int j) {
-		var int n, r, k;
+		var int n, k;
 		var String s, o;
 		var boolean p;
 		let o = this;

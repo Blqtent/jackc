@@ -632,10 +632,11 @@ class JackParser {
 
 	method boolean compileStatements() {
 		var boolean z;
-		var JackAst save;
+		var JackAst save, begin;
 		let save = current;
 		let z = true;
-		do astAdd(C.STATEMENTS());	
+		do astAdd(C.STATEMENTS());
+		let begin = current;
 		while (true) {
 			let z = matchSymbol(C.RIGHT_CURLY_BRACKET(), false);
 			if (z) {
@@ -653,8 +654,9 @@ class JackParser {
 			} else { if (matchKeyword(C.RETURN(), false)) {
 				do compileReturn();
 			} else { if (jt.tokenType() = C.ASM()) {
-				do astAdd(C.ASM());	
+				do astAdd(C.ASM());
 				do advance();
+				let current = begin;
 			} else {
 				do error("statement expected");
 				return false;

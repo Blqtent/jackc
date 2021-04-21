@@ -10,6 +10,10 @@ all: exe.py
 #	cp -r lib ctests/
 	python3 jacky.py jackc 
 	python3 jackc.py ctests
+	gcc -m64 -Wall main_jack.c -o jack64
+	gcc -m32 -Wall main_jack.c -o jack32
+	i686-w64-mingw32-gcc -lwsock32 -lwinspool -lshell32 -luuid main_jack.c -o jack32.exe 
+	x86_64-w64-mingw32-gcc -lwsock32 -lwinspool -lshell32 -luuid main_jack.c -o jack64.exe 
 
 hello:
 	i686-w64-mingw32-gcc -lwsock32 -lwinspool -lshell32 -luuid hello.c -o hello32.exe 
@@ -28,6 +32,9 @@ exe.py: jacky.py tree2py.py  exe/Main.jack
 clean:
 	rm -f exe.py jackc.py
 	rm -f test.txt
+	rm -f a.out
+	rm -f main_jack.c
+	rm -f jack32 jack64 jack32.exe jack64.exe
 	rm -f test.xml
 	rm -f tests.py
 	rm -rf exe/lib

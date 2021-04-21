@@ -37,6 +37,7 @@ class Sys {
 	}
 	
 	function void halt() {
+#c 	exit(0);
 #py 	exit(0)
 		return;
 	}
@@ -50,12 +51,18 @@ class Sys {
 		do Output.printString(")");
 		do Output.println();
 		let errorCode = errorCode / zero;
+#c 	exit(errorCode);
 #py 	exit(errorCode)
 
 		return;
 	}
 
 	function void wait(int duration) {
+#c #ifdef _WIN32
+#c 	Sleep(duration);
+#c #else
+#c 	usleep(duration * 1000);
+#c #endif
 #py 	time.sleep(duration / 1000.0)
 		return;
 	}
@@ -74,13 +81,17 @@ class Sys {
 		}
 		let args_ = Buffer.newString(1);
 		let i = 0;
+#c 	isq = Sys__argc__;
 #py 	isq = len(sys.argv)
 		while (i < isq) {
+#c 		a = (var)Sys__argv__[i];
 #py 		a = sys.argv[i]
 			let s = String.new(255);
 			let j = 0;
+#c 		js = strlen((char*)a);
 #py 		js = len(a)
 			while (j < js) {
+#c 			c = ((char*)a)[j];
 #py 			c = ord(a[j])
 				let s = s.appendChar(c);
 				let j = j + 1;

@@ -1,6 +1,9 @@
 
 class Keyboard {
 	function void exit() {
+#c #ifndef _WIN32
+#c 	fcntl(STDIN_FILENO, F_SETFL, Keyboard__flags);
+#c #endif
 #py 	global ts
 #py 	if (sys.stdin.closed == 0):
 #py 		termios.tcsetattr(sys.stdin.fileno(), termios.TCSADRAIN, ts)
@@ -13,6 +16,11 @@ class Keyboard {
 	}
 
 	function void init() {
+#c #ifndef _WIN32
+#c 	atexit((void(*)())Keyboard__exit);
+#c 	Keyboard__flags = fcntl(STDIN_FILENO, F_GETFL, 0);
+#c 	fcntl(STDIN_FILENO, F_SETFL, Keyboard__flags | O_NONBLOCK);
+#c #endif
 #py 	global keybuf
 #py 	global keyindex
 #py 	global ts
@@ -80,11 +88,18 @@ class Keyboard {
 
 	function char getChar() {
 		var int x;
+		let x = 0;
+#c #ifndef _WIN32
+#c 	x = getchar();
+#c #else
+#c 	if (_kbhit()) {
+#c 		x = _getch();
+#c 	}
+#c #endif
 #py 	global keybuf
 #py 	global keyindex
 #py 	global ts
 #py 	global tk
-#py 	x=0
 #py 	if (len(keybuf) > keyindex):
 #py 		x = ord(keybuf[keyindex])
 #py 		keyindex = keyindex + 1

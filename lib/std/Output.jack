@@ -17,13 +17,13 @@ class Output {
 	}
 
 	function void moveCursor(int x, int y) {
-#c 	//fwrite();
+#c 	printf("\033[%ld;%ldH", y, x);
 #py 	sys.stdout.write("\033[%d;%dH" % (y, x))
 		return;
 	}
 
 	function void printString(String s) {
-		var int l, i;
+		var int i;
 		let i = 0;
 		while (s[i]) {
 			do Output.printChar(s[i]);
@@ -33,6 +33,7 @@ class Output {
 	}
 
 	function void println() {
+#c 	putc('\n', stdout);
 #py 	sys.stdout.write("\n")
 		return;
 	}
@@ -41,14 +42,20 @@ class Output {
 		if ((c > 1114111) | (c < 0)) {
 			return;
 		}
+#c 	putc(c, stdout);
 #py 	sys.stdout.write(chr(c))
+		return;
 	}
 
 	function void printInt(int c) {
+#c 	printf("%ld", c);
 #py 	sys.stdout.write("%d" % (c))
+		return;
 	}
 
 	function void backSpace() {
+#c 	putc('\b', stdout);
 #py 	sys.stdout.write("\b")
+		return;
 	}
 }

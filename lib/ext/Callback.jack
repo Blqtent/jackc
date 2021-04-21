@@ -1,8 +1,6 @@
 
 class Callback {
 	callback int callback(int a, int b) {
-		var Callback c;
-		let c = this;
 		return 0;
 	}
 
@@ -12,6 +10,7 @@ class Callback {
 	
 	method void dispose() {
 		do Memory.deAlloc(this);
+		return;
 	}
 
 	method int invoke(int a, int b) {
