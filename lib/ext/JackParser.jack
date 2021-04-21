@@ -753,7 +753,7 @@ class JackParser {
 			do error("'(' or '.' expected");
 			return;
 		}
-		do current.setTag(C.CLASSNAME());
+		do current.setTag(C.CLASSORVARNAME());
 		let z = matchIdentifier(true); // subroutineName
 		if (~z) {
 			do error("subroutineName expected");

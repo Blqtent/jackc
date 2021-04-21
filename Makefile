@@ -5,6 +5,7 @@ all: exe.py
 	rm -rf ctests/lib
 	cp -r lib/std ctests/lib
 	cp -r lib/ext/Callback.jack ctests/lib
+	cp -r lib/ext/CallbackStringDispose.jack ctests/lib
 	cp -r lib/ext/Buffer.jack ctests/lib
 #	cp -r lib ctests/
 	python3 jacky.py jackc 

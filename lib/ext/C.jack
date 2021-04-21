@@ -192,6 +192,7 @@ class C {
 	function int UNARYPLUS() {return 190;}
 	function int UNARYTILDE() {return 191;}
 	function int SUBROUTINECALL() {return 192;}
+	function int CLASSORVARNAME() {return 193;}
 
 	function int NEXT_FREE_CONSTANT() {return 255;}
 }

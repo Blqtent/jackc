@@ -1,7 +1,7 @@
 
 class Main {
 	field int test, u;
-	static int testi, o;
+	static Buffer testi, o;
 
 	method Main m() {
 		var String j, k;
@@ -11,6 +11,7 @@ class Main {
 		} else {
 			let j = 2;
 		}
+		let o =  Sys.args();
 		do j.length();
 		return;
 	}

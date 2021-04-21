@@ -42,11 +42,14 @@ class Sys {
 	}
 
 	function void error(int errorCode) {
+		var int zero;
+		let zero = 1;
+		let zero = zero - 1;
 		do Output.printString("Error(");
 		do Output.printInt(errorCode);
 		do Output.printString(")");
 		do Output.println();
-		let errorCode = errorCode / 0;
+		let errorCode = errorCode / zero;
 #py 	exit(errorCode)
 
 		return;

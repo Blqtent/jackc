@@ -31,7 +31,7 @@ class JackAstToC {
 		do nl();
 		do dst.writeString("#if 0");
 		do nl();
-		do ast.process(dst, 0, parser);
+		//do ast.process(dst, 0, parser);
 		do nl();
 		do dst.writeString("#endif");
 		do nl();
@@ -180,7 +180,7 @@ class JackAstToC {
 		let i = 0;
 		while (i < sp) {
 			let i = i + 1;
-			do dst.writeString("  ");
+			do dst.writeString("	");
 		}
 		return;
 	}
@@ -346,6 +346,7 @@ class JackAstToC {
 			}	
 			if (t = C.VAR()) {
 				if (l = 0) {
+					do spc();
 					do dst.writeString("var __this;");
 					do nl();
 				}
@@ -354,9 +355,11 @@ class JackAstToC {
 			}
 			if (t = C.STATEMENTS()) {
 				let t = t;
-				do spc();
-				do dst.writeString("var __this;");
-				do nl();
+				if (l = 0) {
+					do spc();
+					do dst.writeString("var __this;");
+					do nl();
+				}
 				do spc();
 				do dst.writeString("__this = Memory__alloc(");
 				let s = String.new(8);
@@ -498,7 +501,6 @@ class JackAstToC {
 			do spc();
 			do coSubroutineCall(c);
 			do dst.writeString(";");
-			do nl();
 		} else { if (t = C.RETURN()) {
 			do coReturn(c);
 		} else { if (t = C.ASM()) {
@@ -970,7 +972,7 @@ class JackAstToC {
 		while (d) {
 			let t = d.getTag();
 			if ((t = C.FIELD()) | (t = C.STATIC())) {
-				let r = getTypeOfVarname(d, s); 
+				let r = getTypeOfVarname(d.getChild(), s); 
 				if (r) {
 					return r;
 				}
@@ -1021,6 +1023,39 @@ class JackAstToC {
 	}
 
 
+	method boolean isField(JackAst c) {
+		var JackAst d, n;
+		var int t;
+		var String s, r;
+		let s = c.getData();
+		let d = c.getParent();
+		let t = d.getTag();
+		while (d & ((t = C.CLASS()) = false)) {
+			let d = d.getParent();
+			if (d) {
+				let t = d.getTag();
+			}
+		}
+		if (d = null) {
+			return false;
+		}
+		let d = d.getChild();
+		while (d) {
+			if (d.getTag() = C.FIELD()) {
+				let n = d.getChild();
+				if (n) {
+					let n = n.getChild();
+					if (s.compare(n.getData()) = 0) {
+						return true;
+					}
+				}
+			}
+			let d = d.getNext();
+		}
+
+		return false;
+	}
+
 	method String getClassOf(JackAst c) {
 		var JackAst d, n;
 		var int t;
@@ -1070,8 +1105,7 @@ class JackAstToC {
 		let thi = null;
 		let d = c.getChild();
 		let t = d.getTag();
-		if ((t = C.VARNAME()) | (t = C.CLASSNAME())) 
-		{
+		if ((t = C.CLASSORVARNAME())) {
 			let s = getTypeOf(d);
 			if (s & (s.length() > 0)) {
 				let thi = d.getData();
@@ -1081,7 +1115,12 @@ class JackAstToC {
 			}
 			let d = d.getChild();
 			do dst.writeString("__");	
-			do dst.writeString(d.getData());	
+			do dst.writeString(d.getData());
+		} else { if ((t = C.CLASSNAME())) {
+			do dst.writeString(d.getData());
+			let d = d.getChild();
+			do dst.writeString("__");	
+			do dst.writeString(d.getData());
 		} else { if (t = C.CALLBACK()) {
 			do dst.writeString("((var(*)(var,var))((var*)__this)[0])");	
 		} else { if (t = C.SUBROUTINENAME()) {
@@ -1089,7 +1128,7 @@ class JackAstToC {
 			do dst.writeString("__");	
 			do dst.writeString(d.getData());	
 			let thi = "__this";
-		}}}
+		}}}}
 		do dst.writeString("(");
 		if (thi) {
 			let first = false;
@@ -1174,7 +1213,7 @@ class JackAstToC {
 		var JackAst d, n;
 		let d = c.getChild();
 		while (d) {
-			do dst.writeString("  ");
+			do spc();
 			let t = d.getTag();
 			do coType(d);
 			let n = d.getChild();
@@ -1204,10 +1243,12 @@ class JackAstToC {
 	method void coVarName(JackAst c) {
 		var String s;
 		if (c.getTag() = C.VARNAME()) {
-			let s = getClassOf(c);
-			if (s & (s.length() > 0)) {
-				do dst.writeString(s);
-				do dst.writeString("__");
+			if (isField(c) = false) {
+				let s = getClassOf(c);
+				if (s & (s.length() > 0)) {
+					do dst.writeString(s);
+					do dst.writeString("__");
+				}
 			}
 			do dst.writeString(c.getData());
 		}

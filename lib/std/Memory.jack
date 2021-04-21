@@ -14,6 +14,7 @@ class Memory {
 
 	function void init() {
 		let mem = 0;
+#c 	return 0;
 		let arena = Math.abs(mem[0]);
 
 		let asize = 204; //33554432; // 2 power 25
@@ -56,6 +57,7 @@ class Memory {
 	function boolean checkEmpty() {
 		var boolean ok;
 		var Array p, q, end;	
+#c 	return -1;
 		let end = arena + asize;
 		let p = arena;
 		let ok = true;
@@ -84,6 +86,9 @@ class Memory {
 		var Array p, end;
 		var int k, n, tries, i,j;
 		var boolean doit;
+#c 	p = (var) malloc(sizeof(var)* (size+1));
+#c 	((var*)p)[0] = -(size+1);
+#c 	return (var) (((var*)p)+1);
 		let tries = 0;
 		let i = 0;
 		let j = 0;
@@ -171,6 +176,8 @@ class Memory {
 
 	function void deAlloc(Array p) {
 		var Array pi;
+#c 	free(((var*)p)-1);
+#c 	return 0;
 		do Memory.log("deAlloc=", p, p[-1]);
 		if (p < arena) {
 			do Output.printString("deAlloc error: arena=");
