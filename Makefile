@@ -11,13 +11,13 @@ all: exe.py
 	python3 jacky.py jackc 
 	#python3 jackc.py tests
 	python3 jackc.py jackc
-	gcc -m64 -Wall main_jack.c -o jack64
-	gcc -m32 -Wall main_jack.c -o jack32
-	i686-w64-mingw32-gcc -lwsock32 -lwinspool -lshell32 -luuid main_jack.c -o jack32.exe 
-	x86_64-w64-mingw32-gcc -lwsock32 -lwinspool -lshell32 -luuid main_jack.c -o jack64.exe 
+	gcc -m64 -static -Wall main_jack.c -o jack64
+	gcc -m32 -static -Wall main_jack.c -o jack32
+	i686-w64-mingw32-gcc -static -lwsock32 -lwinspool -lshell32 -luuid main_jack.c -o jack32.exe 
+	x86_64-w64-mingw32-gcc -static -lwsock32 -lwinspool -lshell32 -luuid main_jack.c -o jack64.exe 
 
 hello:
-	i686-w64-mingw32-gcc -lwsock32 -lwinspool -lshell32 -luuid hello.c -o hello32.exe 
+	i686-w64-mingw32-gcc -static -lwsock32 -lwinspool -lshell32 -luuid hello.c -o hello32.exe 
 	wine hello32.exe
 
 test:
@@ -33,7 +33,7 @@ exe.py: jacky.py tree2py.py  exe/Main.jack
 clean:
 	rm -f exe.py jackc.py
 	rm -f test.txt
-	rm -f a.out
+	rm -f a.out a.exe hello32.exe
 	rm -f ctests/Main.jack.h
 	rm -f jackc/Main.jack.h
 	rm -f exe/Main.jack.h
@@ -45,6 +45,7 @@ clean:
 	rm -rf exe/lib
 	rm -rf ctests/lib
 	rm -rf tests/lib
+	rm -rf jackc/lib
 	rm -f *.pyc
 	rm -rf __pycache__
 

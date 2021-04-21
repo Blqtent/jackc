@@ -1,0 +1,21 @@
+
+class Bytes {
+	field Array buf;
+	field int size;
+
+	constructor Bytes new(int size_in_byte) {
+		let size = size_in_byte;
+		let buf = Array.new(size);
+		return this;
+	}
+
+	method void dispose() {
+		do buf.dispose();
+		do Memory.deAlloc(this);
+	}
+
+	method Array getBuffer() {
+		return buf;
+	}
+}
+
