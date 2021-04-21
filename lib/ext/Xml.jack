@@ -3,8 +3,10 @@ class Xml {
 	field XmlNode root;
 	field XmlNode current;
 	field String esca;
+	field Buffer strings; // FIXME: Hash
 
 	constructor Xml new() {
+		let strings = Buffer.newString(1024);
 		let esca = String.new(32);
 		let root = XmlNode.new(this, null,"%root%",false);
 		let current = root;
@@ -14,6 +16,7 @@ class Xml {
 	method void dispose() {
 		do root.dispose();
 		do esca.dispose();
+		do strings.dispose();
 		do Memory.deAlloc(this);
 		return;
 	}
@@ -24,6 +27,26 @@ class Xml {
 		return;
 	}
 
+	method String getStringNoCreate(String s) {
+		var int i;
+		let i = strings.indexOfStr(s);
+		if (i > -1) {
+			return strings.getAt(i);
+		}
+		return null;
+	}
+
+
+	method String getString(String s) {
+		var int i;
+		let i = strings.indexOfStr(s);
+		if (i > -1) {
+			return strings.getAt(i);
+		}
+		let s = s.copy();
+		do strings.insertSortedStr(s);
+		return s;
+	}
 	method void addElement(String tag) {
 		let current = current.addElement(this, tag);
 		return;

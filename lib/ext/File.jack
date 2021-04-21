@@ -32,7 +32,7 @@ class File {
 			do Memory.deAlloc(this);
 			return;
 		}
-#c 	fclose(f);
+#c 	//fclose(f);
 #py 	#print("jml" +str(f))
 #py 	__NativeObject[f].close()
 #py 	del __NativeObject[f]
@@ -48,14 +48,11 @@ class File {
 		var int i, l, c;
 		var Array n;
 		var int f;
-		var boolean writeing;
+		var boolean writing;
 
 #py 	global __NativeObjectId 
 #py 	n = ""
-		if (fd > -1) {
-			do close();
-		}
-		let writeing = is_write;
+		let writing = is_write;
 		let l = name.length();
 		if (l < 1) {
 			return false;
@@ -68,7 +65,7 @@ class File {
 		}
 		let f = -1;
 #py 	m = "rb"
-#py 	if writeing:
+#py 	if writing:
 #py 		m = "w+b"
 #py 	if (os.path.isdir(n)==False):
 #py 		__NativeObjectId = __NativeObjectId + 1

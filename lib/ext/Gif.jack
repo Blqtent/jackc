@@ -157,7 +157,7 @@ class Gif {
 			let flags = get8();	
 			let bgindex = get8();	
 			let ratio = get8();	
-			let tranparent = -1;
+			let transparent = -1;
 			if ((w > 100000) | (h > 10000)) {
 				return false;
 			}
@@ -187,8 +187,8 @@ class Gif {
 	}
 
 	method void outGifCode(int code) {
-		var Array c;
 		var int idx;
+		var GifLzw g;
 
 		let g = codes[code];
 		if (g.getPrefix() > (-1)) {
@@ -347,14 +347,14 @@ class Gif {
 		var int tmp;
 		var boolean BREAK;
 
-
+		
 		let o = null;
+		let i = 0;
 		if (out = null) {
 			let pcount = w * h;
 			let out = Buffer.new(pcount, null);
 			let background = Buffer.new(pcount, null);
 			let history = Buffer.new(pcount, null);	
-			let i = 0;
 			while (i < pcount) {
 				do out.setAt(i, 0);
 				do background.setAt(i, 0);
@@ -464,14 +464,14 @@ class Gif {
 					if (len = 4) {
 						let eflags = get8();
 						let delay = 10 * get16le();
-						if (tranparent > -1) {
+						if (transparent > -1) {
 						    let pal[transparent] =
 							pal[transparent] |
 								4278190080;
 						}
 						if (eflags & 1) {
 						  let transparent = get8();
-						  if (tranparent > -1) {
+						  if (transparent > -1) {
 						     let pal[transparent] =
 							pal[transparent] &
 								4278190080;

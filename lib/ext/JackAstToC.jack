@@ -276,7 +276,6 @@ class JackAstToC {
 		var int t;
 
 		let d = c.getChild();
-		let l = 0;
 		while (d) {
 			let t = d.getTag();
 			if (isType(t)) {
@@ -673,17 +672,13 @@ class JackAstToC {
 				let ok = true;
 			}
 			if (t = C.UNARYMINUS()) {
-				if ((d = c) = false) {
-					do dst.writeString("-");
-					do coExpr(d.getChild(), true);
-				}
+				do dst.writeString("-");
+				do coExpr(d.getChild(), true);
 				let ok = true;
 			}
 			if (t = C.UNARYTILDE()) {
-				if ((d = c) = false) {
-					do dst.writeString("~");
-					do coExpr(d.getChild(), true);
-				}
+				do dst.writeString("~");
+				do coExpr(d.getChild(), true);
 				let ok = true;
 			}
 			if (t = C.NULL()) {

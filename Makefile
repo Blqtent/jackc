@@ -9,7 +9,7 @@ all: exe.py
 	cp -r lib/ext/Buffer.jack ctests/lib
 #	cp -r lib ctests/
 	python3 jacky.py jackc 
-	# python3 jackc.py ctests
+	#python3 jackc.py tests
 	python3 jackc.py jackc
 	gcc -m64 -Wall main_jack.c -o jack64
 	gcc -m32 -Wall main_jack.c -o jack32

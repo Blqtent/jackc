@@ -157,7 +157,7 @@ class Hash {
 	} 
 
 	method int get(String k) {
-		var int p, h;
+		var int p, h, cmp;
 		var Array a, n;
 
 		let h = hash(k);
