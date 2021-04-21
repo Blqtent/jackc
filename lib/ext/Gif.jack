@@ -14,7 +14,7 @@ class Gif {
 	field int flags;	// int32
 	field int bgindex;	// int32
 	field int ratio;	// int32
-	field int tranparent;	// int32
+	field int transparent;	// int32
 	field int eflags;	// int32
 	field Array pal;	// byte[256][4]
 	field Array lpal;	// byte[256][4]
@@ -48,7 +48,7 @@ class Gif {
 		let flags = 0;	// int32
 		let bgindex = 0;	// int32
 		let ratio = 0;	// int32
-		let tranparent = 0;	// int32
+		let transparent = 0;	// int32
 		let eflags = 0;	// int32
 		let pal = Array.new(256);	// byte[256][4]
 		let lpal = Array.new(256);	// byte[256][4]
@@ -101,6 +101,7 @@ class Gif {
 		}
 		do codes.dispose();
 		do Memory.deAlloc(this);
+		return;
 	}
 
 	method int get8() {
@@ -124,7 +125,7 @@ class Gif {
 	}
 
 	method void parseColortable(Array pal_, int num_entries, int transp) {
-		var int i, n;
+		var int i, n, o;
 		let i = 0;
 		
 		while (i < num_entries) {
@@ -132,7 +133,8 @@ class Gif {
 			let n = n + (get8() * 256);
 			let n = n + get8();
 			if (transp = i) {
-				let n = n + (255 * 16777216); 
+				let o = 255;
+				let n = n + (o * 16777216); 
 			}
 			let pal_[i] = n;
 /*
@@ -172,7 +174,6 @@ class Gif {
 	}
 
 	method boolean testRaw() {
-		var int sz;
 		if ((get8()=71) & (get8()=73) & (get8()=70) & (get8()=56)) {
 			// "GIF8"
 			let version = get8();
@@ -186,8 +187,6 @@ class Gif {
 	}
 
 	method void outGifCode(int code) {
-		var GifLzw g;
-		var Array p;
 		var Array c;
 		var int idx;
 
@@ -237,6 +236,7 @@ class Gif {
 		var GifLzw g;
 		var int code_;
 
+		let oldcode = 0;
 		let lzw_cs = get8();
 		if (lzw_cs > 12) {
 			return null;
@@ -338,6 +338,8 @@ class Gif {
 		var int pi;
 		var int pcount;
 		var int i;
+		var int tag;
+		var int count;
 		var int len;
 		var int ext;
 		var int x_, y_, w_, h_;
@@ -441,7 +443,7 @@ class Gif {
 					return null;
 				}
 				let pcount = w * h;
-				if ((~(first_frame = 0)) & (bgindex > 0)) {
+				if ((false=(first_frame = 0)) & (bgindex > 0)) {
 					let pi = 0;
 					while (pi < pcount) {
 						if (history[pi] = 0) {
@@ -485,7 +487,7 @@ class Gif {
 					}
 					if (BREAK) {
 						let len = get8();
-						while (~(len = 0)) {
+						while (false=(len = 0)) {
 							do skip(len);
 							let len = get8();
 						}

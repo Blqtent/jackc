@@ -32,6 +32,7 @@ class XmlNode {
 		let x = this;
 		do x.clear();
 		do Memory.deAlloc(this);
+		return;
 	}
 
 	method void clear() {
@@ -116,6 +117,7 @@ class XmlNode {
 			let s = x.getString(name);
 			do att_names.append(s);
 		}
+		return;
 	}
 
 	method void addContent(Xml x, String txt) {
@@ -216,7 +218,7 @@ class XmlNode {
 			}
 		}
 		
-		if ((depth>0) & (~(elements=null))) {
+		if ((depth>0) & (false=(elements=null))) {
 			let d = depth;
 			//while (d > 0) {
 			//	let d = d - 1;
@@ -229,6 +231,7 @@ class XmlNode {
 			//do f.writeUtf8(10); // new line 
 
 		}
+		return;
 	}
 
 

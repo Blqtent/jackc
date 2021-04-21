@@ -245,7 +245,6 @@ class JackAstToC {
 	}
 
 	method void coFieldUndef(JackAst c) {
-		var String s;
 		let c = c.getChild();
 		do dst.writeString("#undef ");
 		let c = c.getChild();
@@ -274,7 +273,7 @@ class JackAstToC {
 
 	method void coMethodPre(JackAst c) {
 		var JackAst d;
-		var int t, l;
+		var int t;
 
 		let d = c.getChild();
 		let l = 0;
@@ -493,13 +492,12 @@ class JackAstToC {
 			do Output.printString(" null ");
 		}
 		do Output.println();
-		let c = 1/0;
+		//let c = 1/0;
+		return;
 	}
 
 	method void coStatement(JackAst c) {
-		var JackAst d, n;
 		var int t;
-		let d = c.getChild();
 		let t = c.getTag();
 		if (t = C.ASSIGN()) {
 			do coAssign(c);
@@ -523,7 +521,7 @@ class JackAstToC {
 	}
 
 	method void coWhile(JackAst c) {
-		var JackAst d, n;
+		var JackAst d;
 		let d = c.getChild();
 		do spc();
 		do dst.writeString("while (");
@@ -546,7 +544,7 @@ class JackAstToC {
 	}
 
 	method void coIf(JackAst c) {
-		var JackAst d, n;
+		var JackAst d;
 		let d = c.getChild();
 		do spc();
 		do dst.writeString("if (");
@@ -596,12 +594,13 @@ class JackAstToC {
 		let sp = sp - 1;
 		do spc();
 		do dst.writeString("}");
+		return;
 	}
 
 
 
 	method void coReturn(JackAst c) {
-		var JackAst d, n;
+		var JackAst d;
 		let d = c.getChild();
 		do spc();
 		do dst.writeString("return ");
@@ -611,10 +610,11 @@ class JackAstToC {
 			do dst.writeString("0");
 		}
 		do dst.writeString(";");
+		return;
 	}
 
 	method void coAssign(JackAst c) {
-		var JackAst d, n;
+		var JackAst d;
 		let d = c.getLeft();
 		if (d = null) {
 			return;
@@ -631,7 +631,7 @@ class JackAstToC {
 	}
 
 	method void coVarNameOrIndexed(JackAst c) {
-		var JackAst d, n;
+		var JackAst d;
 		let d = c.getChild();
 		if (d) {
 			do dst.writeString("((var*)");
@@ -655,7 +655,7 @@ class JackAstToC {
 	}
 
 	method void coExpr(JackAst c, boolean isterm) {
-		var JackAst d, n;
+		var JackAst d;
 		var boolean ok;
 		var int t;
 		var String s;
@@ -830,9 +830,7 @@ class JackAstToC {
 	}
 
 	method boolean isVarnameSet(JackAst c, String s) {
-		var JackAst d, n, m;
-		var int t;
-		var String r;
+		var JackAst d;
 		let d = c.getChild();
 		if (d) {
 			// type
@@ -848,9 +846,8 @@ class JackAstToC {
 
 
 	method String getTypeOfVarname(JackAst c, String s) {
-		var JackAst d, n, m;
+		var JackAst d;
 		var int t;
-		var String r;
 		let d = c.getChild();
 		if (d = null) {
 			return null;
@@ -873,7 +870,7 @@ class JackAstToC {
 	}
 
 	method String functionGetClassOf(JackAst c, String s) {
-		var JackAst d, n, m;
+		var JackAst d, n;
 		var int t;
 		var String r;
 		let d = c.getChild();
@@ -915,7 +912,7 @@ class JackAstToC {
 
 
 	method String functionGetTypeOf(JackAst c, String s) {
-		var JackAst d, n, m;
+		var JackAst d, n;
 		var int t;
 		var String r;
 		let d = c.getChild();
@@ -955,7 +952,7 @@ class JackAstToC {
 	}
 
 	method String classGetClassOf(JackAst c, String s) {
-		var JackAst d, n;
+		var JackAst d;
 		var int t;
 		var String r;
 		let d = c.getChild();
@@ -975,7 +972,7 @@ class JackAstToC {
 
 
 	method String classGetTypeOf(JackAst c, String s) {
-		var JackAst d, n;
+		var JackAst d;
 		var int t;
 		var String r;
 		let d = c.getChild();
@@ -994,7 +991,7 @@ class JackAstToC {
 	}
 
 	method String getTypeOf(JackAst c) {
-		var JackAst d, n;
+		var JackAst d;
 		var int t;
 		var String s, r;
 		let s = c.getData();
@@ -1036,7 +1033,7 @@ class JackAstToC {
 	method boolean isField(JackAst c) {
 		var JackAst d, n;
 		var int t;
-		var String s, r;
+		var String s;
 		let s = c.getData();
 		let d = c.getParent();
 		let t = d.getTag();
@@ -1067,7 +1064,7 @@ class JackAstToC {
 	}
 
 	method String getClassOf(JackAst c) {
-		var JackAst d, n;
+		var JackAst d;
 		var int t;
 		var String s, r;
 		let s = c.getData();
@@ -1107,7 +1104,7 @@ class JackAstToC {
 
 	method void coSubroutineCall(JackAst c) {
 		var JackAst d, n;
-		var int t, l;
+		var int t;
 		var String s;
 		var String thi;
 		var boolean first;
@@ -1158,7 +1155,7 @@ class JackAstToC {
 	}
 
 	method void coStatements(JackAst c) {
-		var JackAst d, n;
+		var JackAst d;
 		let d = c.getChild();
 		while (d) {
 			do coStatement(d);
@@ -1168,7 +1165,7 @@ class JackAstToC {
 	}
 
 	method void coFunctionHead(JackAst c, boolean add_this) {
-		var JackAst d, n;
+		var JackAst d;
 		var int t;
 		let d = c.getChild();
 		let t = c.getTag();
@@ -1205,7 +1202,6 @@ class JackAstToC {
 			}
 		}
 		while (d) {
-			let t = d.getTag();
 			do coType(d);
 			do dst.writeString(" ");
 			let n = d.getChild();
@@ -1224,7 +1220,6 @@ class JackAstToC {
 		let d = c.getChild();
 		while (d) {
 			do spc();
-			let t = d.getTag();
 			do coType(d);
 			let n = d.getChild();
 			if (n) {

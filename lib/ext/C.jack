@@ -155,7 +155,7 @@ class C {
 	function int RETURN() {return 153;}
 	function int TRUE() {return 154;}
 	function int FALSE() {return 155;}
-	function int NULL() {return 156;}
+	function int BOOL() {return 156;}
 	function int THIS() {return 157;}
 	function int ASM() {return 158;}
 	function int PLUS() {return 159;}

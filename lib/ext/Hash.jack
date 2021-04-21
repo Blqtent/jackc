@@ -101,8 +101,8 @@ class Hash {
 	}
 	
 	method void add(String k, int val) {
-		var int p, h;
-		var Array a, next, n, r;
+		var int p, h, cmp;
+		var Array a, n, r, prev;
 
 		let h = hash(k);
 		let p = h & mask;

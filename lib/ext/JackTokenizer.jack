@@ -53,6 +53,7 @@ class JackTokenizer {
 		let int_val = 0;
 		let line = 0;
 		let last_line = -1;
+		return;
 	}
 
 

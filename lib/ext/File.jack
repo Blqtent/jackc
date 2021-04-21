@@ -32,6 +32,7 @@ class File {
 			do Memory.deAlloc(this);
 			return;
 		}
+#c 	fclose(f);
 #py 	#print("jml" +str(f))
 #py 	__NativeObject[f].close()
 #py 	del __NativeObject[f]

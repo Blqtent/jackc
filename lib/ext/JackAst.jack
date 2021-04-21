@@ -63,7 +63,6 @@ class JackAst {
 	}
 	method void process(File f, int level, JackParser par) {
 		var JackAst c, d;
-		var int i;
 		do ident(f, level);
 		do f.writeString("tag=");
 		do f.writeString(par.getConst(tag));
@@ -102,7 +101,7 @@ class JackAst {
 	}
 
 	method JackAst set(int tag_, String data_) {
-		var JackAst c, d;
+		var JackAst c;
 		let c = child;
 		while (c) {
 			if ((c.getTag() = tag_) & (~data_.compare(c.getData())))
@@ -116,7 +115,7 @@ class JackAst {
 
 
 	method JackAst append(JackAst a) {
-		var JackAst c, d;
+		var JackAst c;
 		let c = child;
 		if (c = null) {
 			let child = a;
@@ -144,7 +143,7 @@ class JackAst {
 	method JackAst replaceChild(JackAst old, JackAst new_) {
 		var JackAst c, n;
 		if (child = null) {
-			return;
+			return null;
 		}
 		let c = child;
 		if (c = old) {
@@ -152,7 +151,7 @@ class JackAst {
 			do c.setNext(null);
 			let child = new_;
 			do new_.setParent(this);
-			return;
+			return null;
 		}
 	
 		let n = c.getNext();
@@ -162,11 +161,12 @@ class JackAst {
 				do n.setNext(null);
 				do c.setNext(new_);
 				do new_.setParent(this);
-				return;
+				return new_;
 			}
 			let c = n;	
 			let n = c.getNext();
-		} 	
+		}
+		return null; 	
 	}
 
 	method void setId(int n) {

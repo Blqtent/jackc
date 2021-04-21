@@ -44,6 +44,7 @@ class GifWriter {
 			do fp.dispose();
 		}
 		do palette.dispose();
+		return;
 	}
 
 	method void out8(int code) {
@@ -225,13 +226,10 @@ class GifWriter {
 	}
 
 	method boolean frame_(Buffer rgba, int delayCsec, boolean localPalette){
-		var int width_;
-		var int height_;
 		var int size_;
 		var Array localPalTbl;
 		var Array  palette_;
 		var Array indexedPixels;
-		var Array ditheredPixels;
 		var int k;
 		var int c;
 		var int rgb0;
@@ -241,15 +239,13 @@ class GifWriter {
 		var int best;
 		var int i;
 		var int j;
+		var int rgb;
 		var int bb;
 		var int gg;
 		var int rr;
 		var int d;
-		var int diff;
 		var int p;
 		var Array a;
-		let width_ = width;
-		let height_ = height;
 		let size_ = width * height;
 		let localPalTbl = Array.new(768);
 		let i = 0;
@@ -398,7 +394,7 @@ class GifWriter {
 	}
 
 	method void quantize(Buffer rgba, int rgbaSize, int sample, Array map,
-		int numColors)
+		int numColors_)
 	{
 		// FIXME must use 6-8-5 levels RGB index = (40×R)+(5×G)+B 
 		// plus 14 levels of gray

@@ -63,7 +63,6 @@ class JackParser {
 	}
 
 	method void matched(int tok, int k) {
-		var String s;
 		return;
 		do Output.printInt(tok);
 		do Output.printString(" ");
@@ -215,10 +214,11 @@ class JackParser {
 	}
 
 	method void astSetCurrent(Ast c) {
-		let current = c; 
+		let current = c;
+		return;
 	}
 
-	method void astAddName(int c, String name, int line) {
+	method void astAddName(int c, String name, int line_) {
 		let current = current.add(c, name);
 		return;
 	}
@@ -267,17 +267,17 @@ class JackParser {
 		let jt = tk;
 		
 		let doit = true; 
-		if (~matchKeyword(C.CLASS(), true)) {
+		if (false = matchKeyword(C.CLASS(), true)) {
 			do error("Expected class");
 			return;
 		}
-		if (~matchIdentifier(true)) {
+		if (false = matchIdentifier(true)) {
 			do error("Expected class identifier");
 			return;
 		}
 		do astAdd(C.CLASS());
 
-		if (~matchSymbol(C.LEFT_CURLY_BRACKET(), true)) {
+		if (false = matchSymbol(C.LEFT_CURLY_BRACKET(), true)) {
 			do error("Expected {");
 			return;
 		}
@@ -290,11 +290,11 @@ class JackParser {
 		while (compileSubroutine()) {
 			let doit = doit; 
 		}
-		if (~matchSymbol(C.RIGHT_CURLY_BRACKET(), false)) {
+		if (false = matchSymbol(C.RIGHT_CURLY_BRACKET(), false)) {
 			do error("Expected } ");
 			return;
 		}	
-		if (~(jt.hasMoreTokens() = 0)) {
+		if (false = (jt.hasMoreTokens() = 0)) {
 			do error("Extra content after class definition");
 			return;
 		}	
@@ -514,7 +514,7 @@ class JackParser {
 
 	method boolean compileParameter() {
 		var boolean z;
-		var JackAst save, body;
+		var JackAst save;
 		let save = current;
 		let z = matchKeyword(C.INT(), false); // type
 		let z = z | matchKeyword(C.CHAR(), false);
@@ -956,7 +956,6 @@ class JackParser {
 		return;
 	}
 	method JackAst astAddAssign() {
-		var int c;
 		var JackAst me, parent;
 		let parent = current.getParent();
 		let me = JackAst.new(C.ASSIGN(), "", parent);
@@ -1013,7 +1012,6 @@ class JackParser {
 	}
 
 	method void compileExpression() {
-		var boolean z;
 		var boolean first;
 		var JackAst save;
 		let save = current;

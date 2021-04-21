@@ -9,7 +9,8 @@ all: exe.py
 	cp -r lib/ext/Buffer.jack ctests/lib
 #	cp -r lib ctests/
 	python3 jacky.py jackc 
-	python3 jackc.py ctests
+	# python3 jackc.py ctests
+	python3 jackc.py jackc
 	gcc -m64 -Wall main_jack.c -o jack64
 	gcc -m32 -Wall main_jack.c -o jack32
 	i686-w64-mingw32-gcc -lwsock32 -lwinspool -lshell32 -luuid main_jack.c -o jack32.exe 
@@ -33,6 +34,10 @@ clean:
 	rm -f exe.py jackc.py
 	rm -f test.txt
 	rm -f a.out
+	rm -f ctests/Main.jack.h
+	rm -f jackc/Main.jack.h
+	rm -f exe/Main.jack.h
+	rm -f tests/*.jack.h
 	rm -f main_jack.c
 	rm -f jack32 jack64 jack32.exe jack64.exe
 	rm -f test.xml
