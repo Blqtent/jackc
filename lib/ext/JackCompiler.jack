@@ -101,6 +101,8 @@ class JackCompiler {
 		do dst.writeByte(10);		
 		do dst.writeString("DIR *File__dir;");
 		do dst.writeByte(10);		
+		do dst.writeString("char **Sys__argv__;");
+		do dst.writeByte(10);		
 		do dst.writeString("#else");
 		do dst.writeByte(10);		
 		do dst.writeString("#include <windows.h>");
@@ -117,13 +119,13 @@ class JackCompiler {
 		do dst.writeByte(10);		
 		do dst.writeString("WIN32_FIND_DATAW File__FindFileData;");
 		do dst.writeByte(10);		
+		do dst.writeString("wchar_t **Sys__argv__;");
+		do dst.writeByte(10);		
 		do dst.writeString("#endif");
 		do dst.writeByte(10);		
 		do dst.writeString("int Keyboard__flags;");
 		do dst.writeByte(10);		
 		do dst.writeString("int Sys__argc__;");
-		do dst.writeByte(10);		
-		do dst.writeString("char **Sys__argv__;");
 		do dst.writeByte(10);		
 		let i = 0;
 		do dst.writeString("#define JACK_IMPLEMENTATION");
@@ -141,7 +143,15 @@ class JackCompiler {
 			let i = i + 1;
 		}
 	
+		do dst.writeString("#ifndef _WIN32");
+		do dst.writeByte(10);		
 		do dst.writeString("int main(int argc, char *argv[]) {");
+		do dst.writeByte(10);		
+		do dst.writeString("#else");
+		do dst.writeByte(10);		
+		do dst.writeString("int main(int argc, wchar_t *argv[]) {");
+		do dst.writeByte(10);		
+		do dst.writeString("#endif");
 		do dst.writeByte(10);		
 		do dst.writeString("	Sys__argc__ = argc;");
 		do dst.writeByte(10);		

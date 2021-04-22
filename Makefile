@@ -1,5 +1,15 @@
 
-all: exe.py
+all:
+	rm -rf jackc/lib
+	cp -r lib jackc/
+	./jack64.run jackc
+	gcc -m64 -ggdb -static -Wall main_jack.c -o jack64
+	gcc -m32 -ggdb -static -Wall main_jack.c -o jack32
+	i686-w64-mingw32-gcc -static -lwsock32 -lwinspool -lshell32 -luuid main_jack.c -o jack32.exe 
+	x86_64-w64-mingw32-gcc -static -lwsock32 -lwinspool -lshell32 -luuid main_jack.c -o jack64.exe 
+
+
+py: exe.py
 	rm -rf jackc/lib
 	cp -r lib jackc/
 	rm -rf ctests/lib
@@ -15,7 +25,7 @@ all: exe.py
 	gcc -m32 -ggdb -static -Wall main_jack.c -o jack32
 	i686-w64-mingw32-gcc -static -lwsock32 -lwinspool -lshell32 -luuid main_jack.c -o jack32.exe 
 	x86_64-w64-mingw32-gcc -static -lwsock32 -lwinspool -lshell32 -luuid main_jack.c -o jack64.exe 
-
+	cp jack64 jack64.run
 hello:
 	i686-w64-mingw32-gcc -static -lwsock32 -lwinspool -lshell32 -luuid hello.c -o hello32.exe 
 	wine hello32.exe
