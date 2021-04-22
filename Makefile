@@ -11,8 +11,8 @@ all: exe.py
 	python3 jacky.py jackc 
 	#python3 jackc.py tests
 	python3 jackc.py jackc
-	gcc -m64 -static -Wall main_jack.c -o jack64
-	gcc -m32 -static -Wall main_jack.c -o jack32
+	gcc -m64 -ggdb -static -Wall main_jack.c -o jack64
+	gcc -m32 -ggdb -static -Wall main_jack.c -o jack32
 	i686-w64-mingw32-gcc -static -lwsock32 -lwinspool -lshell32 -luuid main_jack.c -o jack32.exe 
 	x86_64-w64-mingw32-gcc -static -lwsock32 -lwinspool -lshell32 -luuid main_jack.c -o jack64.exe 
 

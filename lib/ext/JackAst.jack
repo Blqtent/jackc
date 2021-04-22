@@ -104,7 +104,8 @@ class JackAst {
 		var JackAst c;
 		let c = child;
 		while (c) {
-			if ((c.getTag() = tag_) & (~data_.compare(c.getData())))
+			if ((c.getTag() = tag_) & 
+				(false=data_.compare(c.getData())))
 			{
 				return c;
 			}

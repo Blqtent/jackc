@@ -24,6 +24,9 @@ class UnitFile {
 			let p = d.getAt(i);
 			let l = p.length();
 			if ((l > 0) & (p.charAt(l - 1) = 47)) {
+				do Output.printString(p);
+				do Output.printString( " DIR ");
+				do Output.println();
 				//do UnitFile.getJackFiles(lst, p);
 				do p.dispose();
 				let l = l;
@@ -60,7 +63,7 @@ class UnitFile {
 		var int i;
 		let l = l + 1;
 		let files = Buffer.newString(1);
-		do UnitFile.getJackFiles(files, "./jackc/");
+		do UnitFile.getJackFiles(files, "./tests/");
 		let i = 0;
 		while (i < files.getSize()) {
 			let s = files.getAt(i);
@@ -90,6 +93,8 @@ class UnitFile {
 		let r = UnitFile.testRec(l);
 		let r = Memory.checkEmpty();
 		let r = UnitFile.t2();
+		do Unit.log(l, "File...", r);
+		let r = UnitFile.testRec(l);
 		do Unit.log(l, "File...", r);
 		return Memory.checkEmpty();
 	}

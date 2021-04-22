@@ -10,6 +10,7 @@ class Main {
 		var int j;
 		var String c;
 		var Buffer d;
+		var boolean doit;
 
 		let i = 0;
 		let f = File.new(dir, false);
@@ -23,8 +24,16 @@ class Main {
 		while (i < d.getSize()) {
 			let p = d.getAt(i);
 			let l = p.length();
-			if ((l > 0) & (p.charAt(l - 1) = 47)) {
-				do Main.getJackFiles(lst, p);
+			let doit = false;
+			if (l > 0) {
+				if (p.charAt(l - 1) = 47) {
+					let doit = true;
+				}
+			} 
+			if (doit) {
+				if ((p.charAt(0)=46)=false) {
+					do Main.getJackFiles(lst, p);
+				}
 				do p.dispose();
 			} else { if (l > 5) {
 				let c = ".jack";

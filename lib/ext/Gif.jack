@@ -350,6 +350,7 @@ class Gif {
 		
 		let o = null;
 		let i = 0;
+		let count = 0;
 		if (out = null) {
 			let pcount = w * h;
 			let out = Buffer.new(pcount, null);

@@ -133,6 +133,32 @@ class String {
 		return s;
 	}
 
+	method String appendFromNative(Array native) {
+		var int l, i, c;
+		var Array n;
+		var String s;
+		let s = this;
+		let n = native;
+		let i = 0;
+#c #ifdef _WIN32
+#c 	l = (var)wcslen((wchar_t*)n);
+#c #else
+#c 	l = strlen((char*)n);
+#c #endif 
+#py 	l = len(n)
+		while (i < l) {
+#c #ifdef _WIN32
+#c 		c = (var)((wchar_t*)n)[i];// FIXME UTF16
+#c #else
+#c 		c = (var)((char*)n)[i]; // FIXME UTF8
+#c #endif 
+#py 		c = ord(n[i])
+			let s = s.appendChar(c);
+			let i = i + 1;
+		}
+		return s;
+	}
+
 	function char ord(String s) {
 		return s[0];
 	}

@@ -5,11 +5,9 @@ class File {
 	field boolean is_write;
 	field Array buffer;
 	field String name;
-
+	
 	constructor File new(String path, boolean writeing) {
-		var int i, l, c;
-		var Array n;
-		var int f;
+		var int l;
 		let fd = -1;
 		let is_write = writeing;
 		let l = path.length();
@@ -32,7 +30,7 @@ class File {
 			do Memory.deAlloc(this);
 			return;
 		}
-#c 	//fclose(f);
+#c 	fclose((FILE*)f);
 #py 	#print("jml" +str(f))
 #py 	__NativeObject[f].close()
 #py 	del __NativeObject[f]
@@ -44,34 +42,86 @@ class File {
 		return name;
 	}
 
+	method boolean isdir() {
+		var int l;
+		var Array s;
+		var int f;
+		var Bytes b;
+		
+		let l = name.length();
+		if (l < 1) {
+			return false;
+		}
+		let b = Bytes.new(256);
+		do b.setStringToNative(name);
+		let s = b.getStringNativePointer();
+		let f = 0;
+#c #ifdef _WIN32
+#c 	if (_waccess((wchar_t*)s, 0)) {
+#c 		_wstat64((wchar_t*)s, &File__status);
+#c 		if ((File__status.st_mode & S_IFDIR) != 0) {
+#c 			f =  -1;
+#c 		}
+#c 	}
+#c #else
+#c 	if (access((char*)s, 0)) {
+#c 		stat((char*)s, &File__status);
+#c 		if ((File__status.st_mode & S_IFDIR) != 0) {
+#c 			f = -1;
+#c 		}
+#c 	}
+#c #endif
+#py 	if (os.path.isdir(s)!=False):
+#py 		f = -1 
+		do b.dispose();
+		return f;
+	}
+
+
+
+
 	method boolean open() {
-		var int i, l, c;
-		var Array n;
+		var int l;
+		var Array m, s;
 		var int f;
 		var boolean writing;
+		var Bytes b;
 
 #py 	global __NativeObjectId 
-#py 	n = ""
+		if (fd > -1) {
+			return;
+		}
 		let writing = is_write;
 		let l = name.length();
 		if (l < 1) {
 			return false;
 		}
-		let i = 0;
-		while (i < l) {
-			let c = name.charAt(i);
-#py 		n = n + chr(c) 
-			let i = i + 1;
+		if (isdir()) {
+			return false;
 		}
+		let b = Bytes.new(256);
+		do b.setStringToNative(name);
+		let s = b.getStringNativePointer();
 		let f = -1;
+#c #ifdef _WIN32
+#c 	m = (var)L"rb";
+#c 	if (writing) {m = (var)L"w+b";}
+#c 	f = (var)_wfopen((wchar_t*)s, (wchar_t*)m);
+#c 	if(((var*)f)==NULL) f = -1;
+#c #else
+#c 	m = (var)"rb";
+#c 	if (writing) {m = (var)"w+b";}
+#c 	f = (var)fopen((char*)s, (char*)m);
+#c 	if(((var*)f)==NULL) f = -1;
+#c #endif
 #py 	m = "rb"
 #py 	if writing:
 #py 		m = "w+b"
-#py 	if (os.path.isdir(n)==False):
-#py 		__NativeObjectId = __NativeObjectId + 1
-#py 		f = __NativeObjectId 
-#py 		__NativeObject[f] = open(n, m)
+#py 	__NativeObjectId = __NativeObjectId + 1
+#py 	f = __NativeObjectId 
+#py 	__NativeObject[f] = open(s, m)
 		let fd = f;
+		do b.dispose();
 		return true;
 	}
 
@@ -87,6 +137,9 @@ class File {
 				return -1;
 			}
 		}
+		let b = 0;
+#c 	if (fread(&b, 1, 1, (FILE*)f) < 1) { return -1;};
+#c 	b = b & 255;
 #py 	b = __NativeObject[f].read(1)
 #py 	if len(b) < 1:
 #py 		return -1
@@ -97,7 +150,9 @@ class File {
 	method int seek(int position) {
 		var int b;
 		var int f;
+		var int p;
 		let f = fd;
+		let p = position;
 		if (f < 0) {
 			do open();
 			let f = fd;
@@ -105,6 +160,7 @@ class File {
 				return -1;
 			}
 		}
+#c 	b = fseek((FILE*)f, (long int)p, SEEK_SET);
 #py 	b = __NativeObject[f].seek(position)
 		return b;
 	}
@@ -114,6 +170,8 @@ class File {
 	method int writeByte(int data) {
 		var int r;
 		var int f;
+		var int b;
+		let b = data;
 		if (fd < 0) {
 			do open();
 			if (fd < 0) {
@@ -121,6 +179,7 @@ class File {
 			}	
 		}
 		let f = fd;
+#c 	r = fwrite(&b, 1, 1, (FILE*)f);
 #py 	r = __NativeObject[f].write(bytes([data & 255]));
 		return r;
 	}
@@ -269,7 +328,9 @@ class File {
 	}
 
 	method boolean delete() {
-		var int i, l, c, m, n;
+		var int l, m;
+		var  Bytes b;
+		var  Array s;
 #py 	n = ""
 		if (name = null) {
 			return false;
@@ -278,24 +339,32 @@ class File {
 		if (l < 1) {
 			return false;
 		}
-		let i = 0;
-		while (i < l) {
-			let c = name.charAt(i);
-			if (c < 0) {
-				let c = -1; 
-			}
-#py 		n = n + chr(c) 
-			let i = i + 1;
-		}
-#py 	if (os.path.isdir(n)==False):
+		let b = Bytes.new(256);
+		do b.setStringToNative(name);
+		let s = b.getStringNativePointer();
+		if (isdir()=false) {
+#c #ifdef _WIN32
+#c 	m = (var)_wremove((wchar_t*)s);
+#c #else
+#c 	m = (var)remove((char*)s);
+#c #endif
 #py 	 	m = os.remove(n)
-#py 	else:
-#py 	 	m = os.rmdir(n)
-		return true;
+		} else  {
+#c #ifdef _WIN32
+#c 	m = (var)_wrmdir((wchar_t*)s);
+#c #else
+#c 	m = (var)rmdir((char*)s);
+#c #endif
+#py 	 	m = os.rmdir(s)
+		} 
+		do b.dispose();
+		return (m=0);
 	}
 
 	method boolean mkdir() {
-		var int i, l, c, m, n;
+		var int l, m;
+		var Array s;
+		var Bytes b;
 #py 	n = ""
 		if (name = null) {
 			return false;
@@ -304,26 +373,24 @@ class File {
 		if (l < 1) {
 			return false;
 		}
-		let i = 0;
-		while (i < l) {
-			let c = name.charAt(i);
-			if (c < 0) {
-				let c = -1; 
-			}
-#py 		n = n + chr(c) 
-			let i = i + 1;
-		}
-#py 	m = os.mkdir(n)
-		return true;
+		let b = Bytes.new(256);
+		do b.setStringToNative(name);
+		let s = b.getStringNativePointer();
+#c #ifdef _WIN32
+#c 	m = (var)_wmkdir((wchar_t*)s);
+#c #else
+#c 	m = (var)mkdir((char*)s, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+#c #endif
+#py 	m = os.mkdir(s)
+		return (m=0);
 	}
 
 	method Buffer list() {
-		var int i, l, c;
-		var int j, isq, js;
+		var int i, l;
 		var Buffer b;
-		var int f;
-		var String s;
-#py 	n = ""
+		var String s, na;
+		var Array n, a;
+		var Bytes str;
 		if (name = null) {
 			return null;
 		}
@@ -331,37 +398,69 @@ class File {
 		if (l < 1) {
 			return null;
 		}
-		let i = 0;
-		while (i < l) {
-			let c = name.charAt(i);
-			if (c < 0) {
-				let c = -1; 
-			}
-#py 		n = n + chr(c) 
-			let i = i + 1;
+		let na = name.copy();
+		if ((na.charAt(l-1) = 47)=false) {
+			let na = na.appendChar(47);
 		}
-		let f = -1;
-
+		let str = Bytes.new(256);
+		do str.setStringToNative(na);
+		let n = str.getStringNativePointer();
+		
 		let b = Buffer.new(10, null);
 		let i = 0;
+#c 	i = i + 1;
+#c #ifdef _WIN32
+#c 	if((File__hFind = FindFirstFileW((LPCWSTR)n, &File__FindFileData))
+#c 	 	!= INVALID_HANDLE_VALUE)
+#c 	{
+#c 		do {
+#c 			s=String__copy(na);
+#c 			s=String__appendFromNative(s, a);
+#c 			if (File__FindFileData.dwFileAttributes & 
+#c 				FILE_ATTRIBUTE_DIRECTORY) { 
+#c 				s=String__appendChar(s, 47); 
+#c 			}
+#c 			Buffer__append(b, s);
+#c 			i = i + 1;
+#c         		a = (var)File__FindFileData.cFileName;
+#c		} while(FindNextFileW(File__hFind, &File__FindFileData));
+#c 		FindClose(File__hFind);
+#c	}
+#c #else
+#c 	if((File__dir = opendir((char*)n)) != 0){
+#c    		while((File__dp = readdir(File__dir)) != 0){
+#c 			a = (var)File__dp->d_name;
+#c 			if (((char*)a)[0] == '.' && 
+#c 			 	(((((char*)a)[1] == '.') && (((char*)a)[2] == 0))
+#c 					|| (((char*)a)[1] == 0)))
+#c 			{} else {
+#c 				s=String__copy(na);
+#c 				s=String__appendFromNative(s, a);
+#c 				
+#c 				if (File__dp->d_type == DT_DIR) {
+#c 					s=String__appendChar(s, 47); 
+#c 				}
+#c 				Buffer__append(b, s);
+#c 			}
+#c 			i = i + 1;
+#c     		}
+#c     		closedir(File__dir);
+#c 	}
+#c #endif
+
 #py 	m = os.listdir(n);
-#py 	isq = len(m)
-		while (i < isq) {
-#py 		a = n + m[i]
-#py 		if (os.path.isdir(a)):
+#py 	l = len(m)
+#py 	while (i < l):
+#py 		a = m[i]
+#py 		if (os.path.isdir(n + a)):
 #py 			if (a[-1] != "/"):
 #py 				a = a + "/"
-			let s = String.new(255);
-			let j = 0;
-#py 		js = len(a)
-			while (j < js) {
-#py 			c = ord(a[j])
-				let s = s.appendChar(c);
-				let j = j + 1;
-			}	
-			do b.append(s);
-			let i = i + 1;
-		}
+#py 		s=String__copy(na)
+#py 		s=String__appendFromNative(s, a)
+#py 		Buffer__append(b, s)
+#py 		i = i + 1
+		do str.dispose();
+		do na.dispose();
 		return b;
 	}
 }

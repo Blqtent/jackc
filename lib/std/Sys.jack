@@ -71,10 +71,7 @@ class Sys {
 		var Array a;
 		var String s;
 		var int i;
-		var int j;
-		var int js;
 		var int isq;
-		var int c;
 		var Buffer b;
 		if (args_) {
 			return args_;
@@ -87,16 +84,8 @@ class Sys {
 #c 		a = (var)Sys__argv__[i];
 #py 		a = sys.argv[i]
 			let s = String.new(255);
-			let j = 0;
-#c 		js = strlen((char*)a);
-#py 		js = len(a)
-			while (j < js) {
-#c 			c = ((char*)a)[j];
-#py 			c = ord(a[j])
-				let s = s.appendChar(c);
-				let j = j + 1;
-			}	
-			let b = args_;			
+			let s = s.appendFromNative(a);
+			let b = args_;
 			do b.append(s);
 			let i = i + 1;
 		}

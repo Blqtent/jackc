@@ -254,7 +254,7 @@ class GifWriter {
 			let localPalTbl[i] = 0;
 			let i = i + 1;
 		}
-		if ((frame = 0) | (~(localPalette))) {
+		if ((frame = 0) | (false=(localPalette))) {
 			let palette_ = palette;
 		} else {
 			let palette_ = localPalTbl;
@@ -346,7 +346,7 @@ class GifWriter {
 		do out8(0);
 		do out16le(width);
 		do out16le(height);
-		if ((frame = 0) | (~localPalette)) {
+		if ((frame = 0) | (false=localPalette)) {
 			do out8(0);
 		} else {
 			do out8(128 | palSize);

@@ -309,7 +309,7 @@ class JackParser {
 
 		let z = matchKeyword(C.STATIC(), false);
 		let z = z | matchKeyword(C.FIELD(), false);
-		if (~z) {	
+		if (false=z) {	
 			return false;
 		}
 		do astAddType();
@@ -324,13 +324,13 @@ class JackParser {
 			let z = z | matchIdentifier(false);
 			do astAdd(C.CLASSNAME());
 		}
-		if (~z) { 
+		if (false=z) { 
 			do error("type expected");
 			return false;
 		}					
 
 		let z = matchIdentifier(true); // varName
-		if (~z) {
+		if (false=z) {
 			do error("varName expected.");	
 			return false;
 		}				
@@ -344,7 +344,7 @@ class JackParser {
 			if (z) {
 				do astAddLike(primary, C.VARNAME());
 				let z = matchSymbol(C.COMMA(), true);
-				if (~z) {
+				if (false=z) {
 					let z = matchSymbol(
 						C.SEMICOLON(), false);
 					if (z) {
@@ -406,7 +406,7 @@ class JackParser {
 		let save = current;
 
 		let z = matchKeyword(C.CALLBACK(), false);
-		if (~z) {
+		if (false=z) {
 			return;
 		}
 		
@@ -414,19 +414,19 @@ class JackParser {
 		let body = current;
 
 		let z = matchKeyword(C.INT(), true); // type
-		if (~z) {
+		if (false=z) {
 			do error("'int' expected");
 			return;
 		}
 		do astAdd(C.INT());
 		let z = matchKeyword(C.CALLBACK(), true); // type
-		if (~z) {
+		if (false=z) {
 			do error("'callback' expected");
 			return;
 		}
 		do astAdd(C.SUBROUTINENAME());
 		let z = matchSymbol(C.LEFT_PARENTHESIS(), true);
-		if (~z) {
+		if (false=z) {
 			do error("expect '('");
 			return false;
 		}				
@@ -436,7 +436,7 @@ class JackParser {
 		do astAdd(C.PARAMS());
 		do compileParameter();
 		let z = matchSymbol(C.COMMA(), false);
-		if (~z) {
+		if (false=z) {
 	        	do error("expect ',' ");
 			return false;
 
@@ -462,7 +462,7 @@ class JackParser {
 		let z = matchKeyword(C.CONSTRUCTOR(), false);
 		let z = z | matchKeyword(C.FUNCTION(), false);
 		let z = z | matchKeyword(C.METHOD(), false);
-		if (~z) {
+		if (false=z) {
 			return false;
 		}
 		do astAddType();
@@ -477,12 +477,12 @@ class JackParser {
 			let z = z | matchIdentifier(false);
 			do astAdd(C.CLASSNAME());
 		}
-		if (~z) {
+		if (false=z) {
 			do error("expect type");
 			return false;
 		}
 		let z = matchIdentifier(true); // subroutinName
-		if (~z) {
+		if (false=z) {
 			do error("expect subroutineName");
 			return false;
 		}
@@ -490,14 +490,14 @@ class JackParser {
 			
 		let z = matchSymbol(
 			C.LEFT_PARENTHESIS(), true);
-		if (~z) {
+		if (false=z) {
 			do error("expect '('");
 			return false;
 		}				
 
 		do advance();
 		let z = compileParameterList();
-		if (~z) {
+		if (false=z) {
 			return false;
 		}
 		let z = matchSymbol(C.RIGHT_PARENTHESIS(), false);
@@ -552,7 +552,7 @@ class JackParser {
 		while (jt.hasMoreTokens()) {
 			let z = compileParameter();
 			let z = matchSymbol(C.COMMA(), false);
-			if (~z) {
+			if (false=z) {
 				let current = save;
 				return true;
 			}
@@ -576,9 +576,9 @@ class JackParser {
 			}
 			let current = save;
 			let z = matchSymbol(C.COMMA(), true);
-			if (~z) {
+			if (false=z) {
 				let z = matchSymbol(C.SEMICOLON(), false);
-				if (~z) {
+				if (false=z) {
 				  	do error(", or ; expected");
 				  	return false;	
 				}
@@ -586,7 +586,7 @@ class JackParser {
 				let z = false;
 			} else {
 			   	let z = matchIdentifier(true); //varName
-			    	if (~z) {
+			    	if (false=z) {
 			   		do error("varName expected..");
 				  	return false;
 			    	}				
@@ -605,7 +605,7 @@ class JackParser {
 		let save = current;
 		let z = true;
 		let z = matchKeyword(C.VAR(), false); //
-		if (~z) {
+		if (false=z) {
 			return false;
 		}
 		while (z) {
@@ -673,12 +673,12 @@ class JackParser {
 		var JackAst save;
 		let save = current;
 
-		if (~matchKeyword(C.DO(), false)) {
+		if (false=matchKeyword(C.DO(), false)) {
 			do error("do expected");
 			return;
 		}
 
-		if (~matchIdentifier(true)) { // subroutineName
+		if (false=matchIdentifier(true)) { // subroutineName
 			do error("subroutineName expected");
 			return;
 		}
@@ -689,7 +689,7 @@ class JackParser {
 		do subroutineCall(s, l);
 		do s.dispose();
 		let z = matchSymbol(C.SEMICOLON(), false);
-		if (~z) {	
+		if (false=z) {	
 			do error("';' expected..");
 			return;
 		}
@@ -702,26 +702,26 @@ class JackParser {
 		var boolean z;
 		var JackAst save;
 		let save = current;
-		if (~matchKeyword(C.CALLBACK(), false)) {
+		if (false=matchKeyword(C.CALLBACK(), false)) {
 			return;
 		}
 		do astAdd(C.SUBROUTINECALL());
 		do astAdd(C.CALLBACK());
 		let z = matchSymbol(C.LEFT_PARENTHESIS(), true);
-		if (~z) {
+		if (false=z) {
 			do error("'(' expected");
 		
 		}
 		do advance();
 		do compileExpression();
 		let z = matchSymbol(C.COMMA(), false);
-		if (~z) {
+		if (false=z) {
 			do error("',' expected");
 		}
 		do advance();
 		do compileExpression();
 		let z = matchSymbol(C.RIGHT_PARENTHESIS(), false);
-		if (~z) {
+		if (false=z) {
 			do error("')' expected");
 		}
 		do advance();
@@ -742,7 +742,7 @@ class JackParser {
 			do advance();
 			do compileExpressionList();
 			let z = matchSymbol(C.RIGHT_PARENTHESIS(), false);
-			if (~z) {	
+			if (false=z) {	
 				do error("')' expected");
 				return;
 			}
@@ -751,19 +751,19 @@ class JackParser {
 			return;
 		}
 		let z = matchSymbol(C.DOT(), false);
-		if (~z) {
+		if (false=z) {
 			do error("'(' or '.' expected");
 			return;
 		}
 		do current.setTag(C.CLASSORVARNAME());
 		let z = matchIdentifier(true); // subroutineName
-		if (~z) {
+		if (false=z) {
 			do error("subroutineName expected");
 			return;
 		}
 		do astAdd(C.SUBROUTINENAME());
 		let z = matchSymbol(C.LEFT_PARENTHESIS(), true);
-		if (~z) {
+		if (false=z) {
 			do error("'(' expected");
 			return;
 		}
@@ -783,13 +783,13 @@ class JackParser {
 		var boolean z;
 		var JackAst save, last;
 		let save = current;
-		if (~matchKeyword(C.LET(), false)) {
+		if (false=matchKeyword(C.LET(), false)) {
 			do error("let expected");
 			return;
 		}
 
 		let z = matchIdentifier(true); 
-		if (~z) {
+		if (false=z) {
 			do error("varName expected");
 			return;
 		}
@@ -801,7 +801,7 @@ class JackParser {
 			do advance();
 			do compileExpression();
 			let z = matchSymbol(C.RIGHT_SQUARE_BRACKET(), false);
-			if (~z) {	
+			if (false=z) {	
 				do error("']' expected");
 				return;
 			}
@@ -809,7 +809,7 @@ class JackParser {
 		}
 		let current = last;
 		let z = matchSymbol(C.EQUAL(), false);
-		if (~z) {
+		if (false=z) {
 			do error("'=' expected");
 			return;
 		}
@@ -817,7 +817,7 @@ class JackParser {
 		do advance();
 		do compileExpression();
 		let z = matchSymbol(C.SEMICOLON(), false);
-		if (~z) {
+		if (false=z) {
 			do error("';' expected");
 			return;
 		}
@@ -831,33 +831,33 @@ class JackParser {
 		var JackAst save;
 		let save = current;
 		
-		if (~matchKeyword(C.WHILE(), false)) {
+		if (false=matchKeyword(C.WHILE(), false)) {
 			do error("while expected");
 			return;
 		}
 		do astAddType();
 		let z = matchSymbol(C.LEFT_PARENTHESIS(), true);
-		if (~z) {
+		if (false=z) {
 			do error("'(' expected");
 			return;
 		}
 		do advance();
 		do compileExpression();
 		let z = matchSymbol(C.RIGHT_PARENTHESIS(), false);
-		if (~z) {
+		if (false=z) {
 			do error("')' expected");
 			return;
 		}
 	
 		let z = matchSymbol(C.LEFT_CURLY_BRACKET(), true);
-		if (~z) {
+		if (false=z) {
 			do error("'{' expected");
 			return;
 		}
 		do advance();
 		do compileStatements();
 		let z = matchSymbol(C.RIGHT_CURLY_BRACKET(), false);
-		if (~z) {
+		if (false=z) {
 			do error("'}' expected,");
 			return;
 		}
@@ -870,7 +870,7 @@ class JackParser {
 		var boolean z;
 		var JackAst save;
 		let save = current;
-		if (~matchKeyword(C.RETURN(), false)) {
+		if (false=matchKeyword(C.RETURN(), false)) {
 			do error("return expected");
 			return;
 		}
@@ -887,7 +887,7 @@ class JackParser {
 		}
 		do compileExpression();
 		let z = matchSymbol(C.SEMICOLON(), false);
-		if (~z) {
+		if (false=z) {
 			do error("';' expected...");
 			return;
 		}
@@ -900,7 +900,7 @@ class JackParser {
 		var boolean z;
 		var JackAst save, begin;
 		let save = current;
-		if (~matchKeyword(C.IF(), false)) {
+		if (false=matchKeyword(C.IF(), false)) {
 			do error("if expected");
 			return;
 		}
@@ -908,46 +908,46 @@ class JackParser {
 		let begin = current;
 
 		let z = matchSymbol(C.LEFT_PARENTHESIS(), true);
-		if (~z) {
+		if (false=z) {
 			do error("'(' expected");
 			return;
 		}
 		do advance();
 		do compileExpression();
 		let z = matchSymbol(C.RIGHT_PARENTHESIS(), false);
-		if (~z) {
+		if (false=z) {
 			do error("')' expected..");
 			return;
 		}
 	
 		let z = matchSymbol(C.LEFT_CURLY_BRACKET(), true);
-		if (~z) {
+		if (false=z) {
 			do error("'{' expected");
 			return;
 		}
 		do advance();
 		do compileStatements();
 		let z = matchSymbol(C.RIGHT_CURLY_BRACKET(), false);
-		if (~z) {
+		if (false=z) {
 			do error("'}' expected.");
 			return;
 		}
 		let z = matchKeyword(C.ELSE(), true);
-		if (~z) {
+		if (false=z) {
 			let current = save;
 			return;
 		}
 		let current = begin;
 		do astAddType();
 		let z = matchSymbol(C.LEFT_CURLY_BRACKET(), true);
-		if (~z) {
+		if (false=z) {
 			do error("'{' expected");
 			return;
 		}
 		do advance();
 		do compileStatements();
 		let z = matchSymbol(C.RIGHT_CURLY_BRACKET(), false);
-		if (~z) {
+		if (false=z) {
 			do error("'}' expected..");
 			return;
 		}
@@ -974,11 +974,13 @@ class JackParser {
 			do astAddType();
 			let parent = current.getParent();
 			let left = parent.getChild();
-			if (left & (left.getNext() = current)) {
-				do left.setParent(current);
-				do left.setNext(null);
-				do current.setLeft(left);
-				do parent.setChild(current);
+			if (left) {
+				if (left.getNext() = current) {
+					do left.setParent(current);
+					do left.setNext(null);
+					do current.setLeft(left);
+					do parent.setChild(current);
+				}
 			}
 		}
 		if (c = C.PLUS()) {
@@ -1040,7 +1042,7 @@ class JackParser {
 					do error("unexpected op.");
 					return;
 				}
-				if (~advance()) {
+				if (false=advance()) {
 					do error(
 						"missing token at end of file");
 					return;
@@ -1173,7 +1175,7 @@ class JackParser {
 		
 		// className varName subroutiN
 		let z = matchIdentifier(false); 
-		if (~z) {
+		if (false=z) {
 			do error("Unexpected token...");
 			return;
 		}
@@ -1192,7 +1194,7 @@ class JackParser {
 			do advance();
 			do compileExpression();
 			let z = matchSymbol(C.RIGHT_SQUARE_BRACKET(), false);
-			if (~z) {
+			if (false=z) {
 				do error("']' expected.");
 				return;
 			}
@@ -1203,7 +1205,7 @@ class JackParser {
 
 		let z = matchSymbol(C.DOT(), false);
 		let z = z | matchSymbol(C.LEFT_PARENTHESIS(), false);
-		if (~z) {
+		if (false=z) {
 			do astAddName(C.VARNAME(), s, l);
 			// match s
 			do s.dispose();

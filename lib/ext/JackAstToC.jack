@@ -60,8 +60,10 @@ class JackAstToC {
 
 		while (current) {
 			let c = current.getChild();
-			if (c & (c.getTag() = C.CLASS())) {
-				do coClass(c);
+			if (c) {
+				if (c.getTag() = C.CLASS()) {
+					do coClass(c);
+				}
 			}
 			let current = current.getNext();
 		}
@@ -105,8 +107,9 @@ class JackAstToC {
 		do nl();
 		
 		let d = c.getChild();
-		do genStrings(d);
-
+		if (d) {
+			do genStrings(d);
+		}
 		let d = c.getChild();
 		while (d) {
 			let t = d.getTag();
@@ -992,7 +995,7 @@ class JackAstToC {
 		let s = c.getData();
 		let d = c.getParent();
 		let t = d.getTag();
-		while (d & (isSubroutine(t) = false)) {
+		while (((d=null)=false) & (isSubroutine(t) = false)) {
 			let d = d.getParent();
 			if (d) {
 				let t = d.getTag();
@@ -1006,7 +1009,7 @@ class JackAstToC {
 		if (r) {
 			return r;
 		}	
-		while (d & ((t = C.CLASS()) = false)) {
+		while (((d = null) = false) & ((t = C.CLASS()) = false)) {
 			let d = d.getParent();
 			if (d) {
 				let t = d.getTag();
@@ -1032,7 +1035,7 @@ class JackAstToC {
 		let s = c.getData();
 		let d = c.getParent();
 		let t = d.getTag();
-		while (d & ((t = C.CLASS()) = false)) {
+		while (((d = null) = false) & ((t = C.CLASS()) = false)) {
 			let d = d.getParent();
 			if (d) {
 				let t = d.getTag();
@@ -1065,7 +1068,7 @@ class JackAstToC {
 		let s = c.getData();
 		let d = c.getParent();
 		let t = d.getTag();
-		while (d & (isSubroutine(t) = false)) {
+		while (((d = null) = false) & (isSubroutine(t) = false)) {
 			let d = d.getParent();
 			if (d) {
 				let t = d.getTag();
@@ -1079,7 +1082,7 @@ class JackAstToC {
 		if (r) {
 			return r;
 		}	
-		while (d & ((t = C.CLASS()) = false)) {
+		while (((d = null) = false) & ((t = C.CLASS()) = false)) {
 			let d = d.getParent();
 			if (d) {
 				let t = d.getTag();
@@ -1098,18 +1101,25 @@ class JackAstToC {
 	}
 
 	method void coSubroutineCall(JackAst c) {
-		var JackAst d, n;
+		var JackAst d;
 		var int t;
 		var String s;
 		var String thi;
 		var boolean first;
+		var boolean doit;
 		let first = true;
 		let thi = null;
 		let d = c.getChild();
 		let t = d.getTag();
 		if ((t = C.CLASSORVARNAME())) {
 			let s = getTypeOf(d);
-			if (s & (s.length() > 0)) {
+			let doit = false;
+			if (s) {
+				if (s.length() > 0) {
+					let doit = true;
+				}
+			}
+			if (doit) {
 				let thi = d.getData();
 				do dst.writeString(s);	
 			} else {
@@ -1124,7 +1134,9 @@ class JackAstToC {
 			do dst.writeString("__");	
 			do dst.writeString(d.getData());
 		} else { if (t = C.CALLBACK()) {
-			do dst.writeString("((var(*)(var,var))((var*)__this)[0])");	
+			do dst.writeString(
+				"((var(*)(var,var,var))((var*)__this)[0])");	
+			let thi = "__this";
 		} else { if (t = C.SUBROUTINENAME()) {
 			do dst.writeString(clas);	
 			do dst.writeString("__");	
@@ -1164,6 +1176,9 @@ class JackAstToC {
 		var int t;
 		let d = c.getChild();
 		let t = c.getTag();
+		if (d=null) {
+			return;
+		}
 		if (t = C.CLASSNAME()) {
 		//	do dst.writeString(c.getData());
 			do dst.writeString("var");
@@ -1245,9 +1260,11 @@ class JackAstToC {
 		if (c.getTag() = C.VARNAME()) {
 			if (isField(c) = false) {
 				let s = getClassOf(c);
-				if (s & (s.length() > 0)) {
-					do dst.writeString(s);
-					do dst.writeString("__");
+				if (s) {
+					if (s.length() > 0) {
+						do dst.writeString(s);
+						do dst.writeString("__");
+					}
 				}
 			}
 			do dst.writeString(c.getData());
