@@ -3,10 +3,10 @@ all:
 	rm -rf jackc/lib
 	cp -r lib jackc/
 	./jack64.run jackc
-	gcc -m64 -ggdb -static -Wall main_jack.c -o jack64
-	gcc -m32 -ggdb -static -Wall main_jack.c -o jack32
-	i686-w64-mingw32-gcc -static -lwsock32 -lwinspool -lshell32 -luuid main_jack.c -o jack32.exe 
-	x86_64-w64-mingw32-gcc -static -lwsock32 -lwinspool -lshell32 -luuid main_jack.c -o jack64.exe 
+	gcc -m64 -ggdb -static -Wall jackc.c -o jack64
+	gcc -m32 -ggdb -static -Wall jackc.c -o jack32
+	i686-w64-mingw32-gcc -g -municode  -static -lwsock32 -lwinspool -lshell32 -luuid jackc.c -o jack32.exe 
+	x86_64-w64-mingw32-gcc -g -municode  -static -lwsock32 -lwinspool -lshell32 -luuid jackc.c -o jack64.exe 
 
 
 py: exe.py
@@ -45,7 +45,7 @@ clean:
 	rm -f test.txt
 	rm -f a.out a.exe hello32.exe
 	rm -f ctests/Main.jack.h
-	rm -f jackc/Main.jack.h
+	rm -f jackc.c
 	rm -f exe/Main.jack.h
 	rm -f tests/*.jack.h
 	rm -f main_jack.c

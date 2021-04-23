@@ -75,7 +75,7 @@ class Bytes {
 		return buf;
 	}
 
-	method int getSize() {
+	method int length() {
 		return pos;
 	}
 	
@@ -206,7 +206,7 @@ class Bytes {
 	}
 
 	method void setStringToNative(String name) {
-		var int i, l, c;
+		var int i, l, c, p;
 		var Array n;
 		var Bytes b;
 	
@@ -226,7 +226,9 @@ class Bytes {
 			let i = i + 1;
 		}
 		let string = n;
+		let p = pos;
 		do b.appendNativeChar(0);
+		let pos = p;
 		return;
 	}
 

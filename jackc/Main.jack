@@ -67,7 +67,7 @@ class Main {
 		var Buffer args;
 		var Buffer files;
 		var String s;
-		var int i;
+		var int i, l;
 
 		let args = Sys.args();
 		if (args.getSize() < 2) {
@@ -78,7 +78,10 @@ class Main {
 		let files = Buffer.newString(1);
 		if (dir) {
 			let dir = dir.copy();
-			let dir = dir.appendChar(47);
+			let l = dir.length();
+			if ((dir.charAt(l-1)= 47) = false) {
+				let dir = dir.appendChar(47);
+			}
 			do Main.getJackFiles(files, dir);
 			//do dir.dispose();
 		} else {

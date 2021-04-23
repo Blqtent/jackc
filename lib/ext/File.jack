@@ -197,6 +197,24 @@ class File {
 		return i;
 	}
 
+	method String readLine(String buff) {
+		var char c;
+		let c = readUtf8();
+		if (c = 0) {
+			return null;
+		}
+		do buff.setCharAt(0, 0);
+		while ((c > 0)) {
+			let buff = buff.appendChar(c);
+			if (c = 10) {
+				let c = 0;
+			} else {
+				let c = readUtf8();
+			}
+		}	
+		return buff;
+	}
+
 	// FSS-UTF
 	method char readUtf8() {	
 		var int c, b;
@@ -327,7 +345,7 @@ class File {
 		return d;
 	}
 
-	method boolean delete() {
+	method boolean remove() {
 		var int l, m;
 		var  Bytes b;
 		var  Array s;
@@ -410,19 +428,36 @@ class File {
 		let i = 0;
 #c 	i = i + 1;
 #c #ifdef _WIN32
+#c 	l = wcslen((wchar_t*)n);
+#c	if (((wchar_t*)n)[l - 1] != L'*') {
+#c		Bytes__appendNativeChar(str, L'*');
+#c 		n = Bytes__getStringNativePointer(str);
+#c 	}
+#c	for (i = 0; i < l; i++) {
+#c		if (((wchar_t*)n)[i] == '/') {
+#c			((wchar_t*)n)[i] = '\\';
+#c 		}
+#c 	}
+#c 		
 #c 	if((File__hFind = FindFirstFileW((LPCWSTR)n, &File__FindFileData))
 #c 	 	!= INVALID_HANDLE_VALUE)
 #c 	{
 #c 		do {
-#c 			s=String__copy(na);
-#c 			s=String__appendFromNative(s, a);
-#c 			if (File__FindFileData.dwFileAttributes & 
-#c 				FILE_ATTRIBUTE_DIRECTORY) { 
-#c 				s=String__appendChar(s, 47); 
-#c 			}
-#c 			Buffer__append(b, s);
-#c 			i = i + 1;
 #c         		a = (var)File__FindFileData.cFileName;
+#c			if (((wchar_t*)a)[0] == L'.' && 
+#c 			 	(((((wchar_t*)a)[1] == L'.') && 
+#c 					(((wchar_t*)a)[2] == 0))
+#c 					|| (((wchar_t*)a)[1] == 0)))
+#c 			{} else {
+#c 				s=String__copy(na);
+#c 				s=String__appendFromNative(s, a);
+#c 				if (File__FindFileData.dwFileAttributes & 
+#c 					FILE_ATTRIBUTE_DIRECTORY) { 
+#c 					s=String__appendChar(s, 47); 
+#c 				}
+#c 				Buffer__append(b, s);
+#c			}
+#c 			i = i + 1;
 #c		} while(FindNextFileW(File__hFind, &File__FindFileData));
 #c 		FindClose(File__hFind);
 #c	}

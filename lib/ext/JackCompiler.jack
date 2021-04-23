@@ -55,24 +55,90 @@ class JackCompiler {
 		return true;
 	}
 
+	method void copyHead(File dst, String source) {
+		var String s, l;
+		var File src_;
+		var String b;
+
+		let src_ = File.new(source, false);
+		let s = "#ifdef JACK_IMPLEMENTATION";
+		let s = s.copy();
+		let s = s.appendChar(10);
+		let b = String.new(1024);
+		let l = src_.readLine(b);
+		while (l) {
+			let b = l;
+			if (s.compare(b) = 0) {
+				let l = null;
+			} else {
+				do dst.writeString(b);	
+				let l = src_.readLine(b);
+			}
+		}
+		do s.dispose();
+		do b.dispose();
+		do src_.dispose();
+		return;
+	}
+
+	method void copyBody(File dst, String source) {
+		var String s, l;
+		var File src_;
+		var String b;
+		var boolean doit;
+		let doit = false;
+		let src_ = File.new(source, false);
+		let s = "#ifdef JACK_IMPLEMENTATION";
+		let s = s.copy();
+		let s = s.appendChar(10);
+		let b = String.new(1024);
+		let l = src_.readLine(b);
+		while (l) {
+			let b = l;
+			if (doit = false) {
+				if (s.compare(b) = 0) {
+					let doit = true;
+				}  
+			}
+			if (doit) {
+				do dst.writeString(b);	
+			}
+			let l = src_.readLine(b);
+		}
+		do s.dispose();
+		do b.dispose();
+		do src_.dispose();
+	
+
+		return;
+	}
+
 	method boolean link(String dir, Buffer files) {
-		var int i;
+		var int i, l;
 		var String s;
 		var File dst;
-	//	let s = dir.copy();
-	//	let s = s.appendStr("main_jack.c");
-		let dst = File.new("main_jack.c", true);
-	//	do s.dispose();
+		var File sr;
+		let s = dir.copy();
+		let l = s.length();
+		if (s.charAt(l-1) = 47) {
+			do s.setCharAt(l-1, 0);
+		}
+		let s = s.appendStr(".c");
+		let dst = File.new(s, true);
+		do s.dispose();
 		let i = 0;
 		do dst.writeByte(10);		
 		while (i < files.getSize()) {
 			let s = files.getAt(i);
 			let s = s.copy();
 			let s = s.appendStr(".h");
+			do copyHead(dst, s);
+/*
 			do dst.writeString("#include ");
 			do dst.writeByte(34);		
 			do dst.writeString(s);
-			do dst.writeByte(34);		
+			do dst.writeByte(34);
+*/
 			do dst.writeByte(10);		
 			do s.dispose();
 			let i = i + 1;
@@ -119,7 +185,7 @@ class JackCompiler {
 		do dst.writeByte(10);		
 		do dst.writeString("WIN32_FIND_DATAW File__FindFileData;");
 		do dst.writeByte(10);		
-		do dst.writeString("wchar_t **Sys__argv__;");
+		do dst.writeString("LPWSTR *Sys__argv__;");
 		do dst.writeByte(10);		
 		do dst.writeString("#endif");
 		do dst.writeByte(10);		
@@ -134,34 +200,47 @@ class JackCompiler {
 			let s = files.getAt(i);
 			let s = s.copy();
 			let s = s.appendStr(".h");
+			do copyBody(dst, s);
+/*
 			do dst.writeString("#include ");
 			do dst.writeByte(34);		
 			do dst.writeString(s);
 			do dst.writeByte(34);		
+*/
 			do dst.writeByte(10);		
+			let sr = File.new(s, false);
+			do sr.remove();
+			do sr.dispose();
 			do s.dispose();
 			let i = i + 1;
 		}
-	
+		do dst.writeString("#ifdef JACK_IMPLEMENTATION");
+		do dst.writeByte(10);		
 		do dst.writeString("#ifndef _WIN32");
 		do dst.writeByte(10);		
 		do dst.writeString("int main(int argc, char *argv[]) {");
 		do dst.writeByte(10);		
-		do dst.writeString("#else");
-		do dst.writeByte(10);		
-		do dst.writeString("int main(int argc, wchar_t *argv[]) {");
-		do dst.writeByte(10);		
-		do dst.writeString("#endif");
-		do dst.writeByte(10);		
 		do dst.writeString("	Sys__argc__ = argc;");
 		do dst.writeByte(10);		
 		do dst.writeString("	Sys__argv__ = argv;");
+		do dst.writeByte(10);		
+		do dst.writeString("#else");
+		do dst.writeByte(10);		
+		do dst.writeString("int WINAPI wWinMain(HINSTANCE hi,HINSTANCE prev,");
+		do dst.writeString("LPWSTR cmd,int nCmdShow) {");
+		do dst.writeByte(10);		
+		do dst.writeString("	Sys__argv__ = CommandLineToArgvW(");
+		do dst.writeString("GetCommandLineW(), &Sys__argc__);");
+		do dst.writeByte(10);		
+		do dst.writeString("#endif");
 		do dst.writeByte(10);		
 		do dst.writeString("	Sys__init();");
 		do dst.writeByte(10);		
 		do dst.writeString("	return 0;");
 		do dst.writeByte(10);		
 		do dst.writeString("}");
+		do dst.writeByte(10);		
+		do dst.writeString("#endif");
 		do dst.writeByte(10);		
 		do dst.dispose();
 	
