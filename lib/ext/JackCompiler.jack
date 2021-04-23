@@ -31,7 +31,7 @@ class JackCompiler {
 		let src = File.new(src_, false);
 		let dst = File.new("test.xml", true);
 		let s = src_.copy();
-		let s = s.appendStr(".h");
+		let s = s.appendString(".h");
 		let a = File.new(s, true);
 		do s.dispose();
 		do x.clear();
@@ -81,6 +81,23 @@ class JackCompiler {
 		return;
 	}
 
+	method void copy(File dst, String source) {
+		var String l;
+		var File src_;
+		var String b;
+		let src_ = File.new(source, false);
+		let b = String.new(1024);
+		let l = src_.readLine(b);
+		while (l) {
+			let b = l;
+			do dst.writeString(b);	
+			let l = src_.readLine(b);
+		}
+		do b.dispose();
+		do src_.dispose();
+		return;
+	}
+
 	method void copyBody(File dst, String source) {
 		var String s, l;
 		var File src_;
@@ -123,7 +140,7 @@ class JackCompiler {
 		if (s.charAt(l-1) = 47) {
 			do s.setCharAt(l-1, 0);
 		}
-		let s = s.appendStr(".c");
+		let s = s.appendString(".c");
 		let dst = File.new(s, true);
 		do s.dispose();
 		let i = 0;
@@ -131,82 +148,24 @@ class JackCompiler {
 		while (i < files.getSize()) {
 			let s = files.getAt(i);
 			let s = s.copy();
-			let s = s.appendStr(".h");
+			let s = s.appendString(".h");
 			do copyHead(dst, s);
-/*
-			do dst.writeString("#include ");
-			do dst.writeByte(34);		
-			do dst.writeString(s);
-			do dst.writeByte(34);
-*/
 			do dst.writeByte(10);		
 			do s.dispose();
 			let i = i + 1;
 		}
-		do dst.writeString("#include <string.h>");
-		do dst.writeByte(10);		
-		do dst.writeString("#include <stdlib.h>");
-		do dst.writeByte(10);		
-		do dst.writeString("#include <stdio.h>");
-		do dst.writeByte(10);		
-		do dst.writeString("#include <sys/types.h>");
-		do dst.writeByte(10);		
-		do dst.writeString("#include <sys/stat.h>");
-		do dst.writeByte(10);		
-		do dst.writeString("#ifndef _WIN32");
-		do dst.writeByte(10);		
-		do dst.writeString("#include <fcntl.h>");
-		do dst.writeByte(10);		
-		do dst.writeString("#include <unistd.h>");
-		do dst.writeByte(10);		
-		do dst.writeString("#include <dirent.h>");
-		do dst.writeByte(10);		
-		do dst.writeString("struct stat File__status;");
-		do dst.writeByte(10);		
-		do dst.writeString("struct dirent *File__dp;");
-		do dst.writeByte(10);		
-		do dst.writeString("DIR *File__dir;");
-		do dst.writeByte(10);		
-		do dst.writeString("char **Sys__argv__;");
-		do dst.writeByte(10);		
-		do dst.writeString("#else");
-		do dst.writeByte(10);		
-		do dst.writeString("#include <windows.h>");
-		do dst.writeByte(10);		
-		do dst.writeString("#include <conio.h>");
-		do dst.writeByte(10);		
-		do dst.writeString("#include <io.h>");
-		do dst.writeByte(10);		
-		do dst.writeString("#include <direct.h>");
-		do dst.writeByte(10);		
-		do dst.writeString("struct __stat64 File__status;");
-		do dst.writeByte(10);		
-		do dst.writeString("HANDLE File__hFind;");
-		do dst.writeByte(10);		
-		do dst.writeString("WIN32_FIND_DATAW File__FindFileData;");
-		do dst.writeByte(10);		
-		do dst.writeString("LPWSTR *Sys__argv__;");
-		do dst.writeByte(10);		
-		do dst.writeString("#endif");
-		do dst.writeByte(10);		
-		do dst.writeString("int Keyboard__flags;");
-		do dst.writeByte(10);		
-		do dst.writeString("int Sys__argc__;");
-		do dst.writeByte(10);		
 		let i = 0;
 		do dst.writeString("#define JACK_IMPLEMENTATION");
 		do dst.writeByte(10);		
+		let s = dir.copy();
+		let s = s.appendString("/lib/c/main.h");
+		do copy(dst, s);
+		do s.dispose();
 		while (i < files.getSize()) {
 			let s = files.getAt(i);
 			let s = s.copy();
-			let s = s.appendStr(".h");
+			let s = s.appendString(".h");
 			do copyBody(dst, s);
-/*
-			do dst.writeString("#include ");
-			do dst.writeByte(34);		
-			do dst.writeString(s);
-			do dst.writeByte(34);		
-*/
 			do dst.writeByte(10);		
 			let sr = File.new(s, false);
 			do sr.remove();
@@ -214,34 +173,6 @@ class JackCompiler {
 			do s.dispose();
 			let i = i + 1;
 		}
-		do dst.writeString("#ifdef JACK_IMPLEMENTATION");
-		do dst.writeByte(10);		
-		do dst.writeString("#ifndef _WIN32");
-		do dst.writeByte(10);		
-		do dst.writeString("int main(int argc, char *argv[]) {");
-		do dst.writeByte(10);		
-		do dst.writeString("	Sys__argc__ = argc;");
-		do dst.writeByte(10);		
-		do dst.writeString("	Sys__argv__ = argv;");
-		do dst.writeByte(10);		
-		do dst.writeString("#else");
-		do dst.writeByte(10);		
-		do dst.writeString("int WINAPI wWinMain(HINSTANCE hi,HINSTANCE prev,");
-		do dst.writeString("LPWSTR cmd,int nCmdShow) {");
-		do dst.writeByte(10);		
-		do dst.writeString("	Sys__argv__ = CommandLineToArgvW(");
-		do dst.writeString("GetCommandLineW(), &Sys__argc__);");
-		do dst.writeByte(10);		
-		do dst.writeString("#endif");
-		do dst.writeByte(10);		
-		do dst.writeString("	Sys__init();");
-		do dst.writeByte(10);		
-		do dst.writeString("	return 0;");
-		do dst.writeByte(10);		
-		do dst.writeString("}");
-		do dst.writeByte(10);		
-		do dst.writeString("#endif");
-		do dst.writeByte(10);		
 		do dst.dispose();
 	
 		return true;

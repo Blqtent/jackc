@@ -32,7 +32,7 @@ class JackAstToC {
 		do dst.writeString("#if 0");
 		do nl();
 		//do ast.process(dst, 0, parser);
-		do nl();
+		//do nl();
 		do dst.writeString("#endif");
 		do nl();
 
@@ -237,8 +237,8 @@ class JackAstToC {
 		let c = c.getChild();
 		//do coType(c);
 		do dst.writeString("var ");
-		do dst.writeString(clas);
-		do dst.writeString("__");
+		//do dst.writeString(clas);
+		//do dst.writeString("__");
 		let c = c.getChild();
 		do coVarName(c);
 		do dst.writeString(";");
@@ -952,12 +952,20 @@ class JackAstToC {
 	method String classGetClassOf(JackAst c, String s) {
 		var JackAst d;
 		var int t;
-		var String r;
+		var String r, u;
 		let d = c.getChild();
 		while (d) {
 			let t = d.getTag();
 			if ((t = C.FIELD()) | (t = C.STATIC())) {
 				let r = isVarnameSet(d, s); 
+				let u = "text3";
+				if (u.compare(s) = 0) {
+					do Output.printString("HHH");
+					do Output.printString(clas);
+					do Output.printString(" ");
+					do Output.printInt(r);
+					do Output.println();
+				}
 				if (r) {
 					return clas;
 				}
@@ -1025,6 +1033,39 @@ class JackAstToC {
 		}	
 
 		return null;
+	}
+
+	method boolean isStatic(JackAst c) {
+		var JackAst d, n;
+		var int t;
+		var String s;
+		let s = c.getData();
+		let d = c.getParent();
+		let t = d.getTag();
+		while (((d = null) = false) & ((t = C.CLASS()) = false)) {
+			let d = d.getParent();
+			if (d) {
+				let t = d.getTag();
+			}
+		}
+		if (d = null) {
+			return false;
+		}
+		let d = d.getChild();
+		while (d) {
+			if (d.getTag() = C.STATIC()) {
+				let n = d.getChild();
+				if (n) {
+					let n = n.getChild();
+					if (s.compare(n.getData()) = 0) {
+						return true;
+					}
+				}
+			}
+			let d = d.getNext();
+		}
+
+		return false;
 	}
 
 
@@ -1106,24 +1147,35 @@ class JackAstToC {
 		var String s;
 		var String thi;
 		var boolean first;
-		var boolean doit;
+		var boolean free_thi;
+		let free_thi = false;
 		let first = true;
 		let thi = null;
 		let d = c.getChild();
 		let t = d.getTag();
 		if ((t = C.CLASSORVARNAME())) {
-			let s = getTypeOf(d);
-			let doit = false;
+			if (isStatic(d)) {
+				let s = getTypeOf(d);
+				do dst.writeString(s);	
+				let thi = clas.copy();
+				let thi = thi.appendString("__");
+				let thi = thi.appendString(d.getData());
+				let free_thi = true;
+				let s = null;
+			} else {
+				let s = getTypeOf(d);
+			}
 			if (s) {
 				if (s.length() > 0) {
-					let doit = true;
+					do dst.writeString(s);	
+					let thi = d.getData();
+				} else {
+					do dst.writeString(d.getData());	
 				}
-			}
-			if (doit) {
-				let thi = d.getData();
-				do dst.writeString(s);	
 			} else {
-				do dst.writeString(d.getData());	
+				if (free_thi = false) {
+					do dst.writeString(d.getData());	
+				}
 			}
 			let d = d.getChild();
 			do dst.writeString("__");	
@@ -1148,6 +1200,9 @@ class JackAstToC {
 			let first = false;
 			do dst.writeString(thi);
 		}	
+		if (free_thi) {
+			do thi.dispose();
+		}
 		let d = d.getChild();
 		while (d) {
 			if (first = false) {
@@ -1257,9 +1312,15 @@ class JackAstToC {
 
 	method void coVarName(JackAst c) {
 		var String s;
-		if (c.getTag() = C.VARNAME()) {
+		var int t;
+		let t = c.getTag();
+		if ((t = C.VARNAME()) | (t = C.CLASSORVARNAME())) {
 			if (isField(c) = false) {
-				let s = getClassOf(c);
+				if (isStatic(c)) {
+					let s = clas;
+				} else {
+					let s = getClassOf(c);
+				}
 				if (s) {
 					if (s.length() > 0) {
 						do dst.writeString(s);

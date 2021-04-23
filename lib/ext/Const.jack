@@ -230,6 +230,7 @@ class Const {
 		do b.append("unaryplus");
 		do b.append("unarytilde");
 		do b.append("subroutinecall");
+		do b.append("classorvarname");
 		do b.append("next_free_constant");
 		return b;
 	}

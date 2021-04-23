@@ -107,15 +107,15 @@ class Xml {
 		while (i < l) {
 			let c = o.charAt(i);
 			if (c = 60) { // <
-				let s = s.appendStr("&lt;");
+				let s = s.appendString("&lt;");
 			} else { if (c = 38) { // &
-				let s = s.appendStr("&amp;");
+				let s = s.appendString("&amp;");
 			} else { if (c = 34) { // "
-				let s = s.appendStr("&quot;");
+				let s = s.appendString("&quot;");
 			} else { if (c = 62) { // >
-				let s = s.appendStr("&gt;");
+				let s = s.appendString("&gt;");
 			} else { if (c = 39) { // ' 
-				let s = s.appendStr("&apos;");
+				let s = s.appendString("&apos;");
 			} else {
 				let s = s.appendChar(c);
 			}}}}}

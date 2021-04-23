@@ -2,7 +2,8 @@
 class Keyboard {
 	function void exit() {
 #c #ifndef _WIN32
-#c 	fcntl(STDIN_FILENO, F_SETFL, Keyboard__flags);
+#c 	Keyboard__term.c_lflag |= (ICANON | ECHO);
+#c 	tcsetattr(0, TCSANOW, &Keyboard__term);
 #c #endif
 #py 	global ts
 #py 	if (sys.stdin.closed == 0):
@@ -18,8 +19,11 @@ class Keyboard {
 	function void init() {
 #c #ifndef _WIN32
 #c 	atexit((void(*)())Keyboard__exit);
-#c 	Keyboard__flags = fcntl(STDIN_FILENO, F_GETFL, 0);
-#c 	fcntl(STDIN_FILENO, F_SETFL, Keyboard__flags | O_NONBLOCK);
+#c 	tcgetattr(0, &Keyboard__term);
+#c 	signal(SIGINT, ((void(*)(int))Keyboard__exit)); 
+#c 	signal(SIGTSTP, ((void(*)(int))Keyboard__exit)); 
+#c 	Keyboard__term.c_lflag &= ~(ICANON);
+#c 	tcsetattr(0, TCSANOW, &Keyboard__term);
 #c #endif
 #py 	global keybuf
 #py 	global keyindex
@@ -83,6 +87,9 @@ class Keyboard {
 				let x = (x - 125) + 150; // 151-152 F11-F12
 			}}}
 		}
+		if (x) {
+			do Output.printInt(x);
+		}
 		return x;
 	}
 
@@ -90,7 +97,12 @@ class Keyboard {
 		var int x;
 		let x = 0;
 #c #ifndef _WIN32
-#c 	x = getchar();
+#c 	ioctl(0, FIONREAD, &x);
+#c 	if (x > 0) {
+#c 		x = getchar();
+#c 	} else {
+#c 		x = 0;
+#c 	}
 #c #else
 #c 	if (_kbhit()) {
 #c 		x = _getch();

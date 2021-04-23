@@ -185,7 +185,7 @@ class JackParser {
 		}
 		if (jt.tokenType() = C.SYMBOL()) {
 			let s = String.new(8);
-			let s = s.appendStr(getConst(jt.symbol()));
+			let s = s.appendString(getConst(jt.symbol()));
 		}
 		if (jt.tokenType() = C.INT_CONST()) {
 			let s = String.new(8);

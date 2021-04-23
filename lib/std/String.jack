@@ -113,7 +113,7 @@ class String {
 		let o[0] = 0;
 		if (p < 0) {
 			let p = -p; 
-			let s = s.appendStr("-");
+			let s = s.appendString("-");
 		}
 		let n = 1000000000;
 		while (n > 0) {
@@ -190,7 +190,7 @@ class String {
 		return s;
 	}
 
-	method String appendStr(String p) {
+	method String appendString(String p) {
 		var int j, l;
 		var String s;
 		let s = this;

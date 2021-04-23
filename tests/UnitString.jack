@@ -21,9 +21,9 @@ class UnitString {
 		let l = l + 1;
 		let s = "Hello World";
 		let s = s.copy();
-		let s = s.appendStr("!!!");
+		let s = s.appendString("!!!");
 		do s.dispose();
-		//let s = String2.appendStr("GOTCHA", "!!!");
+		//let s = String2.appendString("GOTCHA", "!!!");
 		//do s.dispose();
 		do Unit.log(l + 1, "String.copy...", true);
 		let s = "AA";
