@@ -3,7 +3,7 @@ class UnitJackCompiler {
 	function boolean isOk(int l) {
 		var JackCompiler a;
 		let l = l + 1;
-		let a = JackCompiler.new();
+		let a = JackCompiler.new(false);
 		do a.compile("tests/Main.jack");
 		do a.dispose();
 		do Unit.log(l, "JackCompiler...", true);

@@ -8,13 +8,15 @@ class JackAstToC {
 	field int nb_field;
 	field int nb_static;
 	field boolean has_callback;
+	field boolean hack;
 	field int sp;
 	field int stringid;
 
-	constructor JackAstToC new(JackParser parse) {
+	constructor JackAstToC new(JackParser parse, boolean hack_mode) {
 		let parser = parse;
 		let dst = null;
 		let ast = parse.getAst();
+		let hack = hack_mode;
 		return this;
 	}
 
@@ -43,21 +45,27 @@ class JackAstToC {
 		let has_callback = false;
 		do dst.writeString("#ifndef var");
 		do nl();
-		do dst.writeString("#ifdef _WIN64");
-		do nl();
-		do dst.writeString("#include <windows.h>");
-		do nl();
-		do dst.writeString("#define var __int64");
-		do nl();
-		do dst.writeString("#else");
-		do nl();
-		do dst.writeString("#define var long");
-		do nl();
+		if (hack) {
+			do dst.writeString("#define JACK_HACK");
+			do nl();
+			do dst.writeString("#define var short");
+			do nl();
+		} else {
+			do dst.writeString("#ifdef _WIN64");
+			do nl();
+			do dst.writeString("#include <windows.h>");
+			do nl();
+			do dst.writeString("#define var __int64");
+			do nl();
+			do dst.writeString("#else");
+			do nl();
+			do dst.writeString("#define var long");
+			do nl();
+			do dst.writeString("#endif");
+			do nl();
+		}
 		do dst.writeString("#endif");
 		do nl();
-		do dst.writeString("#endif");
-		do nl();
-
 		while (current) {
 			let c = current.getChild();
 			if (c) {
@@ -240,7 +248,7 @@ class JackAstToC {
 		//do dst.writeString(clas);
 		//do dst.writeString("__");
 		let c = c.getChild();
-		do coVarName(c);
+		do coVarName(c, true);
 		do dst.writeString(";");
 		do nl();
 		let nb_static = nb_static + 1;
@@ -251,7 +259,7 @@ class JackAstToC {
 		let c = c.getChild();
 		do dst.writeString("#undef ");
 		let c = c.getChild();
-		do coVarName(c);
+		do coVarName(c, true);
 		do nl();
 		return;
 	}
@@ -261,13 +269,21 @@ class JackAstToC {
 		let c = c.getChild();
 		do dst.writeString("#define ");
 		let c = c.getChild();
-		do coVarName(c);
-		do dst.writeString(" ((var*)__this)[");
+		do coVarName(c, true);
+		if (hack) {
+			do dst.writeString(" (__this+");
+		} else {
+			do dst.writeString(" ((var*)__this)[");
+		}
 		let s = String.new(8);
 		let s = s.setInt(nb_field);
 		do dst.writeString(s);
 		do s.dispose();
-		do dst.writeString("]");
+		if (hack) {
+			do dst.writeString(")");
+		} else {
+			do dst.writeString("]");
+		}
 		do nl();
 	
 		let nb_field = nb_field + 1;
@@ -617,43 +633,124 @@ class JackAstToC {
 
 	method void coAssign(JackAst c) {
 		var JackAst d;
+		var boolean is_hack_field;
+		let is_hack_field = false;
 		let d = c.getLeft();
 		if (d = null) {
 			return;
 		}
 		do spc();
-		do coVarNameOrIndexed(d);
+		if (hack) {
+			if (d.getChild() | isField(d)) { // indexed
+				do dst.writeString("Memory__poke(");
+				let is_hack_field = true;
+			}
+		}
+		do coVarNameOrIndexed(d, true);
+		if (is_hack_field) {
+			do dst.writeString(", ");
+		}
 		let d = c.getChild();
 		if (d) {
-			do dst.writeString(" = ");
+			if (~is_hack_field) {
+				do dst.writeString(" = ");
+			}
 			do coExpr(d, false);
+		}
+		if (is_hack_field) {
+			do dst.writeString(")");
 		}
 		do dst.writeString(";");
 		return;
 	}
 
-	method void coVarNameOrIndexed(JackAst c) {
+	method void coVarNameOrIndexed(JackAst c, boolean isassign) {
 		var JackAst d;
+		var boolean dohack;
 		let d = c.getChild();
+		let dohack = hack;
+		if (isField(c) = false) {
+			//let dohack = false;
+		} 
 		if (d) {
-			do dst.writeString("((var*)");
-			do coVarName(c);
-			do dst.writeString(")");
+			if (dohack) {
+				if (isassign = false) {
+					do dst.writeString("Memory__peek(");
+				} 
+				do coVarName(c, false);
+			} else {
+				do dst.writeString("((var*)");
+				do coVarName(c, false);
+				do dst.writeString(")");
+			}
 			if (d.getTag() = C.LEFT_SQUARE_BRACKET()) {
-				do dst.writeString("[");
+				if (dohack = false) {
+					do dst.writeString("[");
+				} else {
+					do dst.writeString("+");
+				}
 				let d = d.getChild();
 				if (d.getTag() = C.EXPR()) {
 					do coExpr(d, false);
 				}
-				do dst.writeString("]");
+				if (dohack) {
+					if (isassign = false) {
+						do dst.writeString(")");
+					}
+				} else {
+					do dst.writeString("]");
+				}
 			} else {
 				do error("'[' expected", d);
 				return;
 			}
 		} else {
-			do coVarName(c);
+			do coVarName(c, isassign);
 		}
 		return;
+	}
+
+	method boolean isBoolean(JackAst c) {
+		var JackAst d;
+		var int t;
+		let d = c;	
+		while (d) {
+			let t = d.getTag();
+			if (t = C.LEFT_PARENTHESIS()) {
+				let c = d.getChild();
+			} else {
+				let c = null;
+			}
+			
+			if (t = C.LESS()) {
+				return true;
+			}
+
+			if (t = C.GREATER()) {
+				return true;
+			}
+
+			if (t = C.EQUAL()) {
+				return true;
+			}
+			if (t = C.VARNAME()) {
+				if (getTypeOf(d) = C.BOOLEAN()) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+			if (c) {
+				if (c.getTag() = C.EXPR()) {
+					let d = c.getChild();
+				} else {
+					let d = c;
+				}
+			} else {
+				return false;
+			}
+		}
+		return false;	
 	}
 
 	method void coExpr(JackAst c, boolean isterm) {
@@ -680,7 +777,12 @@ class JackAstToC {
 				let ok = true;
 			}
 			if (t = C.UNARYTILDE()) {
-				do dst.writeString("~");
+				if (isBoolean(d.getChild())) {
+					do dst.writeString("!");
+				} else {
+					do dst.writeString("~");
+				}
+				
 				do coExpr(d.getChild(), true);
 				let ok = true;
 			}
@@ -711,7 +813,12 @@ class JackAstToC {
 				let ok = true;
 			}
 			if (t = C.STRING_CONST()) {
-				do dst.writeString("((var)(");
+				if (hack) {
+					do dst.writeString("Memory__getString(");
+				}
+				if (hack=false) {
+					do dst.writeString("((var)(");
+				}
 				do dst.writeString(clas);
 				do dst.writeString("___str");
 				let s = String.new(8);
@@ -719,7 +826,11 @@ class JackAstToC {
 				do dst.writeString(s);
 				do s.dispose();
 				let stringid = stringid + 1;
-				do dst.writeString("+1))");
+				if (hack) {
+					do dst.writeString(")");
+				} else {
+					do dst.writeString("+1))");
+				}
 				/*
 				do dst.writeByte(34);
 				do dst.writeString(d.getData());
@@ -791,7 +902,7 @@ class JackAstToC {
 			}
 
 			if (t = C.VARNAME()) {
-				do coVarNameOrIndexed(d);
+				do coVarNameOrIndexed(d, false);
 				let ok = true;
 			}
 			if (t = C.EXPR()) {
@@ -1289,7 +1400,7 @@ class JackAstToC {
 			let n = d.getChild();
 			if (n) {
 				do dst.writeString(" ");
-				do coVarName(n);
+				do coVarName(n, true);
 				do dst.writeString(";");
 				do nl();
 			}
@@ -1310,7 +1421,7 @@ class JackAstToC {
 		return;
 	}
 
-	method void coVarName(JackAst c) {
+	method void coVarName(JackAst c, boolean isassign) {
 		var String s;
 		var int t;
 		let t = c.getTag();
@@ -1327,8 +1438,17 @@ class JackAstToC {
 						do dst.writeString("__");
 					}
 				}
+				do dst.writeString(c.getData());
+			} else {
+				if ((hack = true) & (isassign = false)) {
+					do dst.writeString("Memory__peek(");
+					do dst.writeString(c.getData());
+					do dst.writeString(")");
+					
+				} else {
+					do dst.writeString(c.getData());
+				}
 			}
-			do dst.writeString(c.getData());
 		}
 		return;
 	}

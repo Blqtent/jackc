@@ -8,11 +8,11 @@
  */
 
 class Sys {
-	static Buffer args_;
-
 	function void init() {
 		do Memory.init();
-		let args_ = null;
+#c #ifndef JACK_HACK
+#c 	Sys2__init();
+#c #endif
 		do Math.init();
 		do Output.init();
 		do Screen.init();
@@ -22,17 +22,11 @@ class Sys {
 	}
 
 	function void deInit() {
-		var Buffer b;
 		do Math.deInit();
 		do Output.deInit();
 		do Screen.deInit();
 		do Keyboard.deInit();
 		do Memory.deInit();
-		if (args_) {
-			let b = args_;
-			do b.dispose();
-			let args_ = null;
-		}
 		return;
 	}
 	
@@ -65,31 +59,6 @@ class Sys {
 #c #endif
 #py 	time.sleep(duration / 1000.0)
 		return;
-	}
-
-	function Buffer args() {
-		var Array a;
-		var String s;
-		var int i;
-		var int isq;
-		var Buffer b;
-		if (args_) {
-			return args_;
-		}
-		let args_ = Buffer.newString(1);
-		let i = 0;
-#c 	isq = Sys__argc__;
-#py 	isq = len(sys.argv)
-		while (i < isq) {
-#c 		a = (var)Sys__argv__[i];
-#py 		a = sys.argv[i]
-			let s = String.new(255);
-			let s = s.appendFromNative(a);
-			let b = args_;
-			do b.append(s);
-			let i = i + 1;
-		}
-		return args_;
 	}
 }
 

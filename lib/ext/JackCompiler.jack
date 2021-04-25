@@ -4,12 +4,14 @@ class JackCompiler {
 	field Xml x;
 	field JackTokenizer t;
 	field JackParser comp;
+	field boolean hack;
 
-	constructor JackCompiler new() {
+	constructor JackCompiler new(boolean hack_mode) {
 		let src = null;
 		let x = Xml.new();
 		let t = JackTokenizer.new(x);
 		let comp = JackParser.new(t);
+		let hack = hack_mode;
 		return this;
 	}
 
@@ -39,7 +41,7 @@ class JackCompiler {
 		do comp.init(src);
 		do comp.compileClass(t, dst);
 	
-		let c = JackAstToC.new(comp);
+		let c = JackAstToC.new(comp, hack);
 		do c.compile(a);	
 		do c.dispose();
 

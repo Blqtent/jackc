@@ -11,15 +11,20 @@ class Memory {
 	static int arena, asize;
 	static int freep;
 	static Array mem;
+	static boolean screen_access;
 
 	function void init() {
 		let mem = 0;
+#c #ifndef JACK_HACK
 #c 	return 0;
+#c #endif
 		let arena = Math.abs(mem[0]);
+		let arena = 0;
 
-		let asize = 204; //33554432; // 2 power 25
+		let asize = 16384;
 		let arena[0] = asize;
 		let freep = arena;
+		let screen_access = false;
 		return;
 	}
 
@@ -28,10 +33,38 @@ class Memory {
 	}
 	
 	function int peek(int addr) {
+		if (addr < 0) {
+			do Sys.error(27);
+		}
+		if (addr > 24576) {
+			do Sys.error(28);
+		}
+		if (addr = 24576) {
+			return Keyboard.keyPressed();
+		} 
+#c 	return Memory__memory[addr];
 		return mem[addr];
 	}
 
+	function boolean screenNeedRefresh() {
+		if (screen_access = true) {
+			let screen_access = false;
+			return true;
+		}
+		return false;
+	}
+
 	function void poke(int addr, int value) {
+		if (addr < 0) {
+			do Sys.error(29);
+		}
+		if (addr > 24576) {
+			do Sys.error(30);
+		}
+		if ((addr > 16383) & (addr < 24576)) {
+			let screen_access = true;
+		} 
+#c 	return Memory__memory[addr] = value;
 		let mem[addr] = value;
 		return;
 	}
@@ -87,9 +120,11 @@ class Memory {
 		var Array p, end;
 		var int k, tries, i,j;
 		var boolean doit;
+#c #ifndef JACK_HACK
 #c 	p = (var) malloc(sizeof(var)* (size+1));
 #c 	((var*)p)[0] = -(size+1);
 #c 	return (var) (((var*)p)+1);
+#c #endif
 		let tries = 0;
 		let i = 0;
 		let j = 0;
@@ -116,7 +151,7 @@ class Memory {
 						let p[size+1] = (k - size) - 1;
 					}
 					let freep = p;
-					do Memory.log("Alloc=", p + 1, size+1);
+					//do Memory.log("Alloc=", p + 1, size+1);
 					return p + 1;
 				}		
 				let p = p + Math.abs(p[0]);
@@ -177,8 +212,10 @@ class Memory {
 
 	function void deAlloc(Array p) {
 		var Array pi;
+#c #ifndef JACK_HACK
 #c 	free(((var*)p)-1);
 #c 	return 0;
+#c #endif
 		do Memory.log("deAlloc=", p, p[-1]);
 		if (p < arena) {
 			do Output.printString("deAlloc error: arena=");
@@ -202,7 +239,8 @@ class Memory {
 			do Sys.error(22);
 		}
 		let pi = pi - 1;
-		let pi[0] = -(pi[0]); 
+		//let pi[0] = -(pi[0]);
+		do Memory.poke(pi, -Memory.peek(pi)); 
 		return;
 	}
 }

@@ -68,13 +68,23 @@ class Main {
 		var Buffer files;
 		var String s;
 		var int i, l;
+		var boolean hack;
 
-		let args = Sys.args();
+		let hack = false;
+		let args = Sys2.args();
 		if (args.getSize() < 2) {
 			do Output.printString("Missing command line argument.");
 			do Sys.error(-1);
 		}
-		let dir = args.getAt(1);
+		if (args.getSize() = 3) {
+			let s = args.getAt(1);
+			if (s.compare("-hack") = 0) {
+				let hack = true;
+			}
+			let dir = args.getAt(2);
+		} else {
+			let dir = args.getAt(1);
+		}
 		let files = Buffer.newString(1);
 		if (dir) {
 			let dir = dir.copy();
@@ -89,7 +99,7 @@ class Main {
 			do Sys.error(-2);
 		}
 		let i = 0;
-		let cpl = JackCompiler.new();
+		let cpl = JackCompiler.new(hack);
 		while (i < files.getSize()) {
 			let s = files.getAt(i);
 			do Output.printString("Compiling ");
@@ -99,7 +109,11 @@ class Main {
 			do cpl.compile(s);
 			let i = i + 1;
 		}
-		let dir = args.getAt(1);
+		if (hack) {
+			let dir = args.getAt(2);
+		} else { if (hack) {
+			let dir = args.getAt(1);
+		}}
 		do Output.printString("Linking ");
 		do Output.printString(dir);
 		do Output.printString("...");

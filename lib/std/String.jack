@@ -115,7 +115,12 @@ class String {
 			let p = -p; 
 			let s = s.appendString("-");
 		}
-		let n = 1000000000;
+		let n = 10000;
+#c 	if (sizeof(var) == 8) {
+#c 		n = n * n * n * n * 100;
+#c 	} else if (sizeof(var) == 4) {
+#c 		n = n * n * n * 10; 
+#c 	} 
 		while (n > 0) {
 			let k = j / n;
 			if (k > 0) {
@@ -140,17 +145,26 @@ class String {
 		let s = this;
 		let n = native;
 		let i = 0;
+#c #ifdef JACK_HACK 
+#c 	n = 0;
+#c 	l = n;
+#c #else
 #c #ifdef _WIN32
 #c 	l = (var)wcslen((wchar_t*)n);
 #c #else
 #c 	l = strlen((char*)n);
 #c #endif 
+#c #endif 
 #py 	l = len(n)
 		while (i < l) {
+#c #ifdef JACK_HACK 
+#c 	c = 0;
+#c #else
 #c #ifdef _WIN32
 #c 		c = (var)((wchar_t*)n)[i];// FIXME UTF16
 #c #else
 #c 		c = (var)((char*)n)[i]; // FIXME UTF8
+#c #endif 
 #c #endif 
 #py 		c = ord(n[i])
 			let s = s.appendChar(c);

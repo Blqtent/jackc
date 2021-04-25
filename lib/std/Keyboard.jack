@@ -18,10 +18,11 @@ class Keyboard {
 
 	function void init() {
 #c #ifndef _WIN32
-#c 	atexit((void(*)())Keyboard__exit);
+#c 	atexit((void(*)())Keyboard__exits);
 #c 	tcgetattr(0, &Keyboard__term);
-#c 	signal(SIGINT, ((void(*)(int))Keyboard__exit)); 
-#c 	signal(SIGTSTP, ((void(*)(int))Keyboard__exit)); 
+#c 	signal(SIGINT, ((void(*)(int))Keyboard__exits)); 
+#c 	signal(SIGTSTP, ((void(*)(int))Keyboard__exits)); 
+#c 	signal(SIGSEGV, ((void(*)(int))Keyboard__exits)); 
 #c 	Keyboard__term.c_lflag &= ~(ICANON);
 #c 	tcsetattr(0, TCSANOW, &Keyboard__term);
 #c #endif
@@ -43,6 +44,10 @@ class Keyboard {
 
 	function char keyPressed() {
 		var int x;
+
+		if (Memory.screenNeedRefresh()) {
+			do Screen.refresh();
+		}
 		let x = Keyboard.getChar();
 		if (x = 10) {
 			return 128; // newline

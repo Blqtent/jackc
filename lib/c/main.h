@@ -29,6 +29,12 @@ LPWSTR *Sys__argv__;
 #endif
 int Keyboard__flags;
 int Sys__argc__;
+var Memory__getString(var*);
+#ifdef JACK_HACK
+var Memory__memory[65536];
+#else
+var Memory__memory[1];
+#endif
 
 #ifdef JACK_IMPLEMENTATION
 #ifndef _WIN32
@@ -42,5 +48,20 @@ int WINAPI wWinMain(HINSTANCE hi,HINSTANCE prev,LPWSTR cmd,int nCmdShow) {
 	Sys__init();
 	return 0;
 }
+
+var Memory__getString(var* str) {
+	int m;
+	int l;
+	int i;
+	l = (-str[0]) - 1;
+	m = Memory__alloc(l);
+	i = 0;
+	while (i < l) {
+		Memory__poke(m+i,  str[i + 1]);
+		i++;
+	}
+	return (var)m;
+}
+
 #endif
 #endif

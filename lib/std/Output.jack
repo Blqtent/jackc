@@ -17,7 +17,7 @@ class Output {
 	}
 
 	function void moveCursor(int x, int y) {
-#c 	printf("\033[%ld;%ldH", y, x);
+#c 	printf("\033[%ld;%ldH", (long)y, (long)x);
 #py 	sys.stdout.write("\033[%d;%dH" % (y, x))
 		return;
 	}
@@ -48,7 +48,7 @@ class Output {
 	}
 
 	function void printInt(int c) {
-#c 	printf("%ld", c);
+#c 	printf("%ld", (long)c);
 #py 	sys.stdout.write("%d" % (c))
 		return;
 	}

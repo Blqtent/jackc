@@ -2,7 +2,7 @@
 class Main {
 
 	function void main() {
-		do Sys.args();
+		do Sys2.args();
 		do Sys.wait(10);
 		do Sys.deInit();
 		do Unit.setLevel(2);
