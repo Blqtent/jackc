@@ -42,24 +42,39 @@ int main(int argc, char *argv[]) {
 	Sys__argc__ = argc;
 	Sys__argv__ = argv;
 #else
+#ifdef _CONSOLE
+int main(int argc, char *argv[]) {
+#else
 int WINAPI wWinMain(HINSTANCE hi,HINSTANCE prev,LPWSTR cmd,int nCmdShow) {
 	Sys__argv__ = CommandLineToArgvW(GetCommandLineW(), &Sys__argc__);
+#endif
 #endif
 	Sys__init();
 	return 0;
 }
 
 var Memory__getString(var* str) {
-	int m;
-	int l;
-	int i;
-	l = (-str[0]) - 1;
-	m = Memory__alloc(l);
+#ifndef JACK_HACK
+#else
+#endif
+	static var in = 0;
+	var m, i;
+	if (in) {
+		return 0;
+	}
+	in = -1;
+
 	i = 0;
-	while (i < l) {
-		Memory__poke(m+i,  str[i + 1]);
+	while (str[i]) {
 		i++;
 	}
+	m = String__new(i + 1);
+	i = 0;
+	while (str[i]) {
+		String__appendChar(m, str[i]);
+		i++;
+	}	
+	in = 0;
 	return (var)m;
 }
 

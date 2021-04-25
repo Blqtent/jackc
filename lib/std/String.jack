@@ -8,23 +8,30 @@
  */
 
 class String {
-	function String new(int maxLength) {
-		var Array str;
+	field Array str;
+	field int size;
+
+	constructor String new(int maxLength) {
 		let str = Array.new(maxLength + 1);
 		let str[0] = 0;
-		return str;
+		let size = maxLength;
+		return this;
 	}
 
 	method void dispose() {
+		do str.dispose();
 		do Memory.deAlloc(this);
 		return;
 	}
 
 	method int length() {
-		var String s;
+		var Array s;
 		var int l;
 		let l = 0;
-		let s = this;
+		let s = str;
+		if (s = null) {
+			return 0;
+		}
 		while (s[l]) {
 			let l = l + 1;
 		}
@@ -32,33 +39,43 @@ class String {
 	}
 
 	method char charAt(int a) {
-		var String s;
+		var Array s;
 		var char ret;
-		let s = this;
+		let s = str;
 		let ret = s[a];
 		return ret;
 	}
 
 	method void setCharAt(int j, char c) {
-		var String s;
-		let s = this;
+		var Array s;
+		let s = str;
 		let s[j] = c;
 		return;
 	}
 	
+	method Array getArray() {
+		return str;
+	}
+
 	method String appendChar(char c) {
 		var int l, i;
+		var int nl;
 		var int max;
-		var String b, d;
-		let d = this;
-		let max = Math.abs(d[-1])-1;
+		var Array b, d;
+		let d = str;
+#c 	//putc(c, stdout);
+		if (size < 1) {
+			do Sys.error(12);
+		}
+		let max = size;
 		let l = length();
 		if (l < (max - 1)) {
 			let d[l] = c;
 			let d[l + 1] = 0;
 			return this;
 		}
-		let b = String.new((l * 2) + 4);
+		let nl = (l * 2) + 4;
+		let b = Array.new(nl + 1);
 		let i = 0;
 		while (i < l) {
 			let b[i] = d[i];
@@ -66,14 +83,16 @@ class String {
 		}
 		let b[l] = c;
 		let b[l + 1] = 0;
-		do d.dispose();
-		return b;
+		do str.dispose();
+		let size = nl;
+		let str = b;
+		return this;
 	}
 
 	method void eraseLastChar() {
 		var int l;
-		var String s;
-		let s = this;
+		var Array s;
+		let s = str;
 		let l = length();
 		if (l > 0) {
 			let s[l-1] = 0;
@@ -83,8 +102,8 @@ class String {
 	
 	method int intValue() {
 		var int v, s, d, i;
-		var String o;
-		let o = this;
+		var Array o;
+		let o = str;
 		let v = 0;
 		let s = 1;
 		let d = o[0];
@@ -105,29 +124,29 @@ class String {
 	
 	method String setInt(int j) {
 		var int n, k;
-		var String s, o;
+		var String s;
 		var boolean p;
-		let o = this;
 		let p = false;
 		let s = this;
-		let o[0] = 0;
-		if (p < 0) {
-			let p = -p; 
+		do s.setCharAt(0, 0);
+		if (j < 0) {
+			let j = -j; 
 			let s = s.appendString("-");
 		}
 		let n = 10000;
 #c 	if (sizeof(var) == 8) {
 #c 		n = n * n * n * n * 100;
 #c 	} else if (sizeof(var) == 4) {
-#c 		n = n * n * n * 10; 
+#c 		n = n * n * 10; 
 #c 	} 
 		while (n > 0) {
 			let k = j / n;
 			if (k > 0) {
 				let p = true;
 			}
+			
 			if (p) {
-				let s = s.appendChar((j / n) + 48);
+				let s = s.appendChar(k + 48);
 			}
 			let j = Math.rem(j, n);
 			let n = n / 10;
@@ -135,7 +154,7 @@ class String {
 		if (p = false) {
 			let s = s.appendChar(48);
 		}
-		return s;
+		return this;
 	}
 
 	method String appendFromNative(Array native) {
@@ -170,7 +189,7 @@ class String {
 			let s = s.appendChar(c);
 			let i = i + 1;
 		}
-		return s;
+		return this;
 	}
 
 	function char ord(String s) {
@@ -214,7 +233,7 @@ class String {
 			let s = s.appendChar(p.charAt(j));
 			let j = j + 1;
 		}
-		return s;
+		return this;
 	}
 
 

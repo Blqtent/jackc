@@ -23,10 +23,11 @@ class Output {
 	}
 
 	function void printString(String s) {
-		var int i;
+		var int i, l;
 		let i = 0;
-		while (s[i]) {
-			do Output.printChar(s[i]);
+		let l = s.length();
+		while (i < l) {
+			do Output.printChar(s.charAt(i));
 			let i = i + 1;
 		}
 		return;

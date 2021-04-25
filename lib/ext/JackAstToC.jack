@@ -165,20 +165,20 @@ class JackAstToC {
 			let s = String.new(8);
 			let s = s.setInt(stringid);
 			do dst.writeString(s);
-			do dst.writeString("[] = {-");
+			do dst.writeString("[] = {");
 			let o = a.getData();
 			let l = o.length();
 			let i = 0;
-			let s = s.setInt((l+2));
-			do dst.writeString(s);
+			//let s = s.setInt((l+2));
+			//do dst.writeString(s);
 			while (i < l) {
-				do dst.writeString(",");
 				let n = o.charAt(i);
 				let s = s.setInt(n);
 				do dst.writeString(s);
 				let i = i + 1;
+				do dst.writeString(",");
 			}
-			do dst.writeString(",0};");
+			do dst.writeString("0};");
 			do nl();
 			do s.dispose();
 			do a.setId(stringid);
@@ -813,12 +813,12 @@ class JackAstToC {
 				let ok = true;
 			}
 			if (t = C.STRING_CONST()) {
-				if (hack) {
+			//	if (hack) {
 					do dst.writeString("Memory__getString(");
-				}
-				if (hack=false) {
-					do dst.writeString("((var)(");
-				}
+			//	}
+			//	if (hack=false) {
+			//		do dst.writeString("((var)(");
+			//	}
 				do dst.writeString(clas);
 				do dst.writeString("___str");
 				let s = String.new(8);
@@ -826,11 +826,11 @@ class JackAstToC {
 				do dst.writeString(s);
 				do s.dispose();
 				let stringid = stringid + 1;
-				if (hack) {
+			//	if (hack) {
 					do dst.writeString(")");
-				} else {
-					do dst.writeString("+1))");
-				}
+			//	} else {
+			//		do dst.writeString("+1))");
+			//	}
 				/*
 				do dst.writeByte(34);
 				do dst.writeString(d.getData());
