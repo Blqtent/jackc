@@ -230,13 +230,15 @@ class Memory {
 		if ((pi < arena) | ((arena + asize) < pi) 
 			| (mem[pi-1] > (-1))) 
 		{
+			do Output.println();
 			do Output.printInt(arena);
 			do Output.printString("Error in deAlloc!");
 			do Output.printInt(pi);
 			do Output.printString(" asize=");
 			do Output.printInt(asize);
 			do Output.println();
-			do Sys.error(22);
+			//do Sys.error(22);
+			return;
 		}
 		let pi = pi - 1;
 		//let pi[0] = -(pi[0]);

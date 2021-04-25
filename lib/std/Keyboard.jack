@@ -100,15 +100,21 @@ class Keyboard {
 
 	function char getChar() {
 		var int x;
-		let x = 0;
+	//	let x = 0;
 #c #ifndef _WIN32
-#c 	ioctl(0, FIONREAD, &x);
+#c 	fd_set rd;
+#c 	struct timeval tv = {0};
+#c 	FD_ZERO(&rd);
+#c 	FD_SET(STDIN_FILENO, &rd);
+#c 	x = select(1, &rd, NULL, NULL, &tv);
+#c 	//ioctl(STDIN_FILENO, FIONREAD, ((int*)&x)); // crash on linux 64bit
 #c 	if (x > 0) {
 #c 		x = getchar();
 #c 	} else {
 #c 		x = 0;
 #c 	}
 #c #else
+#c 	x = 0;
 #c 	if (_kbhit()) {
 #c 		x = _getch();
 #c 	}
@@ -117,6 +123,7 @@ class Keyboard {
 #py 	global keyindex
 #py 	global ts
 #py 	global tk
+#py 	x = 0
 #py 	if (len(keybuf) > keyindex):
 #py 		x = ord(keybuf[keyindex])
 #py 		keyindex = keyindex + 1
