@@ -27,6 +27,7 @@ class Sys {
 		do Screen.deInit();
 		do Keyboard.deInit();
 		do Memory.deInit();
+#py 	Sys__disposeStrings()
 		return;
 	}
 	

@@ -48,7 +48,10 @@ class Keyboard {
 		if (Memory.screenNeedRefresh()) {
 			do Screen.refresh();
 		}
-		let x = Keyboard.getChar();
+		let x = Keyboard.screenKeyPressed();
+		if (x = 0) {
+			let x = Keyboard.getChar();
+		}
 		if (x = 10) {
 			return 128; // newline
 		}				

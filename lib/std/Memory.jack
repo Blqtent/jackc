@@ -216,7 +216,7 @@ class Memory {
 #c 	free(((var*)p)-1);
 #c 	return 0;
 #c #endif
-		do Memory.log("deAlloc=", p, p[-1]);
+	//	do Memory.log("deAlloc=", p, p[-1]);
 		if (p < arena) {
 			do Output.printString("deAlloc error: arena=");
 			do Output.printInt(arena);

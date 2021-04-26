@@ -669,9 +669,6 @@ class JackAstToC {
 		var boolean dohack;
 		let d = c.getChild();
 		let dohack = hack;
-		if (isField(c) = false) {
-			//let dohack = false;
-		} 
 		if (d) {
 			if (dohack) {
 				if (isassign = false) {
@@ -813,12 +810,7 @@ class JackAstToC {
 				let ok = true;
 			}
 			if (t = C.STRING_CONST()) {
-			//	if (hack) {
-					do dst.writeString("Memory__getString(");
-			//	}
-			//	if (hack=false) {
-			//		do dst.writeString("((var)(");
-			//	}
+				do dst.writeString("Memory__getString(");
 				do dst.writeString(clas);
 				do dst.writeString("___str");
 				let s = String.new(8);
@@ -826,11 +818,7 @@ class JackAstToC {
 				do dst.writeString(s);
 				do s.dispose();
 				let stringid = stringid + 1;
-			//	if (hack) {
-					do dst.writeString(")");
-			//	} else {
-			//		do dst.writeString("+1))");
-			//	}
+				do dst.writeString(")");
 				/*
 				do dst.writeByte(34);
 				do dst.writeString(d.getData());

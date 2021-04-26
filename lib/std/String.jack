@@ -186,6 +186,7 @@ class String {
 #c #endif 
 #c #endif 
 #py 		c = ord(n[i])
+#py 		#print("JJJJ" + str(s) + "  " + str(c))
 			let s = s.appendChar(c);
 			let i = i + 1;
 		}

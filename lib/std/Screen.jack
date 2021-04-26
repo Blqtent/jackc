@@ -22,10 +22,6 @@ class Screen {
 		return;
 	}
 
-	function void refresh() {
-		return;
-	}
-
 	function void setColor(boolean b) {
 		return;
 	}

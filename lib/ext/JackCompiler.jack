@@ -147,6 +147,30 @@ class JackCompiler {
 		do s.dispose();
 		let i = 0;
 		do dst.writeByte(10);		
+		do dst.writeString("#ifndef var");
+		do dst.writeByte(10);		
+		if (hack) {
+			do dst.writeString("#define JACK_HACK");
+			do dst.writeByte(10);		
+			do dst.writeString("#define var short");
+			do dst.writeByte(10);		
+		} else {
+			do dst.writeString("#ifdef _WIN64");
+			do dst.writeByte(10);		
+			do dst.writeString("#include <windows.h>");
+			do dst.writeByte(10);		
+			do dst.writeString("#define var __int64");
+			do dst.writeByte(10);		
+			do dst.writeString("#else");
+			do dst.writeByte(10);		
+			do dst.writeString("#define var long");
+			do dst.writeByte(10);		
+			do dst.writeString("#endif");
+			do dst.writeByte(10);		
+		}
+		do dst.writeString("#endif");
+		do dst.writeByte(10);		
+	
 		while (i < files.getSize()) {
 			let s = files.getAt(i);
 			let s = s.copy();
@@ -161,6 +185,18 @@ class JackCompiler {
 		do dst.writeByte(10);		
 		let s = dir.copy();
 		let s = s.appendString("/lib/c/main.h");
+		do copy(dst, s);
+		do s.dispose();
+		let s = dir.copy();
+		let s = s.appendString("/lib/c/X11.h");
+		do copy(dst, s);
+		do s.dispose();
+		let s = dir.copy();
+		let s = s.appendString("/lib/c/win32.h");
+		do copy(dst, s);
+		do s.dispose();
+		let s = dir.copy();
+		let s = s.appendString("/lib/c/mac.h");
 		do copy(dst, s);
 		do s.dispose();
 		while (i < files.getSize()) {

@@ -75,9 +75,10 @@ def static_end():
 def sexpr_(f, a, tab):
         global stati
         if a.tag == "string":
-            w(f, str(static_end()))
+            #w(f,"get_string(" + str(static_end()) + ")")
             stati = stati + 1
             memory[stati] = a.data
+            w(f,"get_string(" + str(stati) + ")")
         elif a.tag == "expr":
             expr_(f, a, tab)
         elif a.tag == "int":
@@ -301,14 +302,47 @@ def process(ast, out):
     f.write("__NativeObject = {}\n")
     f.write("__NativeObjectId = -1\n")
   #  f.write("__memory = array.array('l', 100000 * [0])\n")
+
+    f.write("__stringOBJ = {}\n")
+    f.write("i = 0\n")
+    f.write("while (i < 10000):\n")
+    f.write("\t__stringOBJ[i] = 0\n")
+    f.write("\ti += 1\n")
+
+    f.write("__strings = {}\n")
+    f.write("i = 0\n")
+    f.write("while (i < 10000):\n")
+    f.write("\t__strings[i] = 0\n")
+    f.write("\ti += 1\n")
+
+
+
     f.write("__memory = {}\n")
     f.write("i = 0\n")
     f.write("while (i < 10000):\n")
     f.write("\t__memory[i] = 0\n")
     f.write("\ti += 1\n")
 
+    w(f, "def Sys__disposeStrings():\n")
+    w(f, "\tfor s in __stringOBJ:\n")
+    w(f, "\t\tString__dispose(s)\n")
 
-    #ast.process(f, "")
+
+
+    w(f, "def get_string(n):\n")
+    w(f, "\ttry:\n")
+    w(f, "\t\t__stringOBJ[n]\n")
+    w(f, "\texcept NameError:\n")
+    w(f, "\t\ts=String__new(len(__strings[n]) + 2)\n")
+    w(f, "\t\tString__appendFromNative(s, __strings[n])\n")
+    w(f, "\t\t__stringOBJ[n] = s\n")
+    w(f, "\t\treturn __stringOBJ[n]\n")
+    w(f, "\telse:\n")
+    w(f, "\t\treturn __stringOBJ[n]\n")
+
+
+
+#ast.process(f, "")
     callback = 0
     for c in ast.children:
         if (c.tag == "class"):
@@ -383,15 +417,15 @@ def process(ast, out):
         for m in memory[i]:
             if (m != '"'):
                 k = k + 1
-        w(f, "__memory[" + str(n) + "] = " + str(-k) + "\n") # memory alloc
+        w(f, "__strings[" + str(i) + "] = \"\"" )
         n += 1
         for m in memory[i]:
             if (m != '"'):
-                w(f, "__memory[" + str(n) + "] = " + str(ord(m)) + "\n") 
+                w(f, "+ chr(" + str(ord(m)) + ")") 
                 n += 1
-        w(f, "__memory[" + str(n) + "] = 0\n")
+        w(f, "\n")
         n += 1
-    f.write("__memory[0] = -" + str(n) +  "\n")
+    f.write("__memory[0] = 1\n")
     w(f, "Sys__init()\n")
     f.close
 
