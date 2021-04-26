@@ -3,8 +3,8 @@ all:
 	rm -rf jackc/lib
 	cp -r lib jackc/
 	./jack64.run jackc
-	gcc -m64 -ggdb -static -Wall jackc.c -o jack64
-	gcc -m32 -ggdb -static -Wall jackc.c -o jack32
+	# gcc -m32 -ggdb -Wall jackc.c -Wl,-rpath=/usr/lib/i386-linux-gnu/ -lX11 -o jack32
+	gcc -m64 -ggdb -Wall -o jack64 jackc.c -lX11 -lX11-xcb -lpthread
 	i686-w64-mingw32-gcc -g -municode  -static -lwsock32 -lwinspool -lshell32 -luuid jackc.c -o jack32.exe 
 	x86_64-w64-mingw32-gcc -g -municode  -static -lwsock32 -lwinspool -lshell32 -luuid jackc.c -o jack64.exe 
 
@@ -21,8 +21,8 @@ py: exe.py
 	python3 jacky.py jackc 
 	#python3 jackc.py tests
 	python3 jackc.py jackc
-	gcc -m64 -ggdb -static -Wall main_jack.c -o jack64
-	gcc -m32 -ggdb -static -Wall main_jack.c -o jack32
+	gcc -m64 -ggdb -static -Wall -lX11 main_jack.c -o jack64
+	gcc -m32 -ggdb -static -Wall -lX11 main_jack.c -o jack32
 	i686-w64-mingw32-gcc -static -lwsock32 -lwinspool -lshell32 -luuid main_jack.c -o jack32.exe 
 	x86_64-w64-mingw32-gcc -static -lwsock32 -lwinspool -lshell32 -luuid main_jack.c -o jack64.exe 
 	cp jack64 jack64.run

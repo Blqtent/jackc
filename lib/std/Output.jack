@@ -8,7 +8,10 @@
  */
 
 class Output {
+	static int x, y;
 	function void init() {
+		let x = 0;
+		let y = 0;
 		return;
 	}
 
@@ -16,9 +19,27 @@ class Output {
 		return;
 	}
 
-	function void moveCursor(int x, int y) {
-#c 	printf("\033[%ld;%ldH", (long)y, (long)x);
-#py 	sys.stdout.write("\033[%d;%dH" % (y, x))
+	function void moveCursor(int row, int col) {
+		var int xx, yy;
+		let x = col;
+		let y = row;
+		if (x < 0) {
+			let x = 0;
+		}
+		if (x > 63) {
+			let x = 63;
+		}
+		if (y < 0) {
+			let y = 0;
+		}
+		if (y > 22) {
+			let y = 22;
+		}
+		let xx = x;
+		let yy = y;
+#c 	Screen__drawChar(' ', xx, yy);
+#c 	printf("\033[%ld;%ldH", (long)col, (long)row);
+#py 	sys.stdout.write("\033[%d;%dH" % (col, row))
 		return;
 	}
 
@@ -34,17 +55,29 @@ class Output {
 	}
 
 	function void println() {
+		let y = y + 1;
+		if (y > 22) {
+			let y = 22;
+		}
 #c 	putc('\n', stdout);
 #py 	sys.stdout.write("\n")
 		return;
 	}
 	
 	function void printChar(char c) {
+		var int xx, yy;
 		if ((c > 1114111) | (c < 0)) {
 			return;
 		}
+		let xx = x;
+		let yy = y;
 #c 	putc(c, stdout);
+#c 	Screen__drawChar(c, xx, yy);
 #py 	sys.stdout.write(chr(c))
+		let x = x + 1;
+		if (x > 63) {
+			let x = 63;
+		}
 		return;
 	}
 
@@ -55,7 +88,15 @@ class Output {
 	}
 
 	function void backSpace() {
+		var int xx, yy;
+		let x = x - 1;
+		if (x < 0) {
+			let x = 0;
+		}
+		let xx = x;
+		let yy = y;
 #c 	putc('\b', stdout);
+#c  	Screen__drawChar(' ', xx, yy);
 #py 	sys.stdout.write("\b")
 		return;
 	}

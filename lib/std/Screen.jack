@@ -11,6 +11,7 @@ class Screen {
 	}
 
 	function void clearScreen() {
+#c 	Screen__clear();
 #py 	global tk
 #py 	if (tk == None):
 #py 		tk = tkinter.Tk()
@@ -18,7 +19,6 @@ class Screen {
 #py 		lbl = tkinter.Label(tk, image = p)
 #py 		lbl.image = p
 #py 		lbl.grid(row=0, column=0)
-
 		return;
 	}
 

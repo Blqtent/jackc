@@ -10,9 +10,19 @@
 
 var Screen__refresh() 
 {
-
 		return 0;
 }
+
+var Screen__clear() 
+{
+		return 0;
+}
+
+var Screen__drawChar(var c, int x, int y) 
+{
+		return 0;
+}
+
 
 var Keyboard__screenKeyPressed()
 {

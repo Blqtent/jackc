@@ -45,12 +45,14 @@ class Keyboard {
 	function char keyPressed() {
 		var int x;
 
-		if (Memory.screenNeedRefresh()) {
-			do Screen.refresh();
-		}
 		let x = Keyboard.screenKeyPressed();
 		if (x = 0) {
 			let x = Keyboard.getChar();
+			if (x = 0) {
+				do Sys.wait(10);
+			}
+		} else {
+			return x;
 		}
 		if (x = 10) {
 			return 128; // newline
@@ -156,6 +158,83 @@ class Keyboard {
 
 	function int readInt(String message) {
 		return 0;
+	}
+
+	function char NEWLINE() {
+		return 128;
+	}
+
+	function char BACKSPACE() {
+		return 129;
+	}
+	function char LEFT_ARROW() {
+		return 130;
+	}
+	function char UP_ARROW() {
+		return 131;
+	}
+	function char RIGHT_ARROW() {
+		return 132;
+	}
+	function char DOWN_ARROW() {
+		return 133;
+	}
+	function char HOME() {
+		return 134;
+	}
+	function char END() {
+		return 135;
+	}
+	function char PAGE_UP() {
+		return 136;
+	}
+	function char PAGE_DOWN() {
+		return 137;
+	}
+	function char INSERT() {
+		return 138;
+	}
+	function char DELETE() {
+		return 139;
+	}
+	function char ESC() {
+		return 140;
+	}
+	function char F1() {
+		return 141;
+	}
+	function char F2() {
+		return 142;
+	}
+	function char F3() {
+		return 143;
+	}
+	function char F4() {
+		return 144;
+	}
+	function char F5() {
+		return 145;
+	}
+	function char F6() {
+		return 146;
+	}
+	function char F7() {
+		return 147;
+	}
+	function char F8() {
+		return 148;
+	}
+	function char F9() {
+		return 149;
+	}
+	function char F10() {
+		return 150;
+	}
+	function char F11() {
+		return 151;
+	}
+	function char F12() {
+		return 152;
 	}
 }
 

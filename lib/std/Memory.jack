@@ -24,7 +24,7 @@ class Memory {
 		let asize = 16384;
 		let arena[0] = asize;
 		let freep = arena;
-		let screen_access = false;
+		let screen_access = true;
 		return;
 	}
 
