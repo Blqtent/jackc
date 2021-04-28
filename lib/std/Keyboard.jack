@@ -4,6 +4,7 @@ class Keyboard {
 #c #ifndef _WIN32
 #c 	Keyboard__term.c_lflag |= (ICANON | ECHO);
 #c 	tcsetattr(0, TCSANOW, &Keyboard__term);
+#c	exit(0);
 #c #endif
 #py 	global ts
 #py 	if (sys.stdin.closed == 0):
@@ -18,11 +19,15 @@ class Keyboard {
 
 	function void init() {
 #c #ifndef _WIN32
+#c 	struct sigaction act;
+#c 	memset(&act, 0, sizeof(act));
+#c 	sigemptyset(&act.sa_mask);
 #c 	atexit((void(*)())Keyboard__exits);
 #c 	tcgetattr(0, &Keyboard__term);
-#c 	signal(SIGINT, ((void(*)(int))Keyboard__exits)); 
-#c 	signal(SIGTSTP, ((void(*)(int))Keyboard__exits)); 
-#c 	signal(SIGSEGV, ((void(*)(int))Keyboard__exits)); 
+#c 	act.sa_handler = ((void(*)(int))Keyboard__exits);
+#c 	act.sa_flags = 0;
+#c 	sigaction(SIGINT, &act, NULL); 
+#c 	sigaction(SIGTSTP, &act, NULL); 
 #c 	Keyboard__term.c_lflag &= ~(ICANON);
 #c 	tcsetattr(0, TCSANOW, &Keyboard__term);
 #c #endif
@@ -66,8 +71,6 @@ class Keyboard {
 			if (x = 0) {
 				return 140; // ESC
 			}
-			//do Output.printInt(x);
-			//do Output.println();
 			if (x = 91) {
 				let x = Keyboard.getChar();
 				if (x = 65) {
@@ -82,23 +85,58 @@ class Keyboard {
 				if (x = 68) {
 					let x = 130; // left
 				}
-				// FIXME
-				// 136 page up
-				// 137 page down
-				// 138 insert
-				// 139 delete
-				// 134 home
-				// 135 end
+				if (x = 53) {
+					let x = Keyboard.getChar();
+					if (x = 126) {
+						let x = 136; // page up
+					}
+
+				}
+				if (x = 54) {
+					let x = Keyboard.getChar();
+					if (x = 126) {
+						let x = 137; // page down 
+					}
+
+				}
+	
+	
+				if (x = 50) {
+					let x = Keyboard.getChar();
+					if (x = 126) {
+						let x = 138; // insert 
+					}
+					if (x = 52) {
+						let x = Keyboard.getChar();
+						let x = (x - 125) + 150; // 151-152 F11-F12
+					}
+				}
+
+				if (x = 51) {
+					let x = Keyboard.getChar();
+					if (x = 126) {
+						let x = 139; // delete 
+					}
+				}
+	
+
+				if (x = 91) {
+					let x = Keyboard.getChar();
+					if (x = 70) {
+						let x = 135; // end 
+					}
+				}
+	
+				if (x = 91) {
+					let x = Keyboard.getChar();
+					if (x = 72) {
+						let x = 134; // home 
+					}
+				}
 			} else { if (x = 79) {
 				let x = Keyboard.getChar();
 				let x = (x - 80) + 141; // F1-F10
-			} else { if (x = 50) {
-				let x = Keyboard.getChar();
-				let x = (x - 125) + 150; // 151-152 F11-F12
-			}}}
-		}
-		if (x) {
-			do Output.printInt(x);
+			}}
 		}
 		return x;
 	}
@@ -107,14 +145,19 @@ class Keyboard {
 		var int x;
 	//	let x = 0;
 #c #ifndef _WIN32
-#c 	fd_set rd;
-#c 	struct timeval tv = {0};
-#c 	FD_ZERO(&rd);
-#c 	FD_SET(STDIN_FILENO, &rd);
-#c 	x = select(1, &rd, NULL, NULL, &tv);
+#c 	//fd_set rd;
+#c 	int flags;
+#c 	flags = fcntl(STDIN_FILENO, F_GETFL, 0);
+#c 	fcntl(STDIN_FILENO, F_SETFL, flags | O_NONBLOCK);
+#c 	//struct timeval tv = {0};
+#c 	//tv.tv_usec = 1000;
+#c 	//FD_ZERO(&rd);
+#c 	//FD_SET(STDIN_FILENO, &rd);
+#c 	//x = select(1, &rd, NULL, NULL, &tv);
+#c	x = getchar();
 #c 	//ioctl(STDIN_FILENO, FIONREAD, ((int*)&x)); // crash on linux 64bit
 #c 	if (x > 0) {
-#c 		x = getchar();
+#c 		x = x;
 #c 	} else {
 #c 		x = 0;
 #c 	}
@@ -143,6 +186,11 @@ class Keyboard {
 #py 		x = ord(keybuf[0])
 #py 		keyindex = 1
 #py 	termios.tcsetattr(sys.stdin.fileno(), termios.TCSADRAIN, ts)
+
+		/*if (x) {
+			do Output.printInt(x);
+			do Output.println();
+		}*/
 		return x;
 	}
 

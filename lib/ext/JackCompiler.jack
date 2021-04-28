@@ -199,6 +199,15 @@ class JackCompiler {
 		let s = s.appendString("/lib/c/mac.h");
 		do copy(dst, s);
 		do s.dispose();
+		let s = dir.copy();
+		let s = s.appendString("/lib/c/ios.h");
+		do copy(dst, s);
+		do s.dispose();
+		let s = dir.copy();
+		let s = s.appendString("/lib/c/android.h");
+		do copy(dst, s);
+		do s.dispose();
+
 		while (i < files.getSize()) {
 			let s = files.getAt(i);
 			let s = s.copy();

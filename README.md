@@ -1,25 +1,12 @@
 ﻿
-The Jack programming language
+The Jack Programming language
 =============================
 
 ![public domain](https://raw.githubusercontent.com/public-domain/jack/main/img/pd.png)
 
-### Editor's Draft 16 april 2021
 
-Unofficial public domain JACK programming language specification
-----------------------------------------------------------------
-
-### This version 
-https://github.com/public-domain/jack#readme
-
-### Editors:
-Jean-Marc Lienher ( *lienher.org/jean-marc* )
-
-### Default Ref Status:
-~~snapshot~~
-
-### Participate:
-https://github.com/public-domain/jack/issues
+Public Domain JACK compiler
+---------------------------
 
 ***
 
@@ -30,7 +17,7 @@ The [Jack programming language][1] is described in the book
 [The Elements of Computing Systems][8] and on the website 
 [www.nand2tetris.org][7]. There is a [set of video][3] on Youtube talking about it.
 
-This document is an unofficial specification along with a Jack compiler written in Jack, itselfs bootstraped with a simple Python3 Jack compiler.
+This document is describing a Jack compiler written in Jack, itselfs bootstraped with a simple Python3 Jack compiler.
 
 Status of this document
 -----------------------

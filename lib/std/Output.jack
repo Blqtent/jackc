@@ -38,7 +38,8 @@ class Output {
 		let xx = x;
 		let yy = y;
 #c 	Screen__drawChar(' ', xx, yy);
-#c 	printf("\033[%ld;%ldH", (long)col, (long)row);
+#c 	printf("\033[%ld;%ldf ", (long)yy + 1, (long)xx + 1);
+#c 	fflush(stdout);
 #py 	sys.stdout.write("\033[%d;%dH" % (col, row))
 		return;
 	}
@@ -71,8 +72,9 @@ class Output {
 		}
 		let xx = x;
 		let yy = y;
-#c 	putc(c, stdout);
+#c 	putc((char)c, stdout);
 #c 	Screen__drawChar(c, xx, yy);
+#c 	fflush(stdout);
 #py 	sys.stdout.write(chr(c))
 		let x = x + 1;
 		if (x > 63) {
@@ -83,6 +85,7 @@ class Output {
 
 	function void printInt(int c) {
 #c 	printf("%ld", (long)c);
+#c 	fflush(stdout);
 #py 	sys.stdout.write("%d" % (c))
 		return;
 	}
@@ -96,6 +99,7 @@ class Output {
 		let xx = x;
 		let yy = y;
 #c 	putc('\b', stdout);
+#c 	fflush(stdout);
 #c  	Screen__drawChar(' ', xx, yy);
 #py 	sys.stdout.write("\b")
 		return;

@@ -3,10 +3,16 @@
 #ifndef _WIN32
 #ifndef __APPLE__
 
+#include <X11/X.h>
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 #include <X11/keysym.h>
 #include <X11/keysymdef.h>
+#define GL_GLEXT_PROTOTYPES
+#include <GL/gl.h>
+#include <GL/glx.h>
+#include <GL/glext.h>
+#include <GL/glu.h>
 
 #ifdef JACK_IMPLEMENTATION
 
@@ -16,11 +22,27 @@ int width = 512;
 int height = 256;
 Visual *visual;
 Window window;
+Window root;
 GC gc;
+XVisualInfo *vi;
+Colormap cmap;
+XSetWindowAttributes swa;
+XWindowAttributes gwa;
+GLXFBConfig *fbc;
+GLuint base;
+Atom wm_del;
+
 unsigned char *image32;
 var consoleb[23 * 64] = {0};
 var need_update = -1;
-
+GLint att[] = {GLX_RENDER_TYPE, GLX_RGBA_BIT, 
+		GLX_DRAWABLE_TYPE, GLX_WINDOW_BIT,
+	       	GLX_DOUBLEBUFFER, True,
+		GLX_RED_SIZE, 1,
+		GLX_GREEN_SIZE, 1,
+		GLX_BLUE_SIZE, 1,
+		None};
+GLXContext glc;
 void init();
 
 var Screen__clear()
@@ -39,48 +61,91 @@ var Screen__clear()
 			q[0] = 0xFF; //blue
 			q[1] = 0xFF; //green
 			q[2] = 0xFF; //red
-			q[3] = 0; //alpha
+			q[3] = 0xFF; //alpha
 		}
 	}
 	return 0;
 }
 
-XImage *CreateImage()
+/*XImage *CreateImage()
 {
-	image32 = (unsigned char*)malloc(width * height * 4);
-	return XCreateImage(display, visual, 
-			DefaultDepth(display, DefaultScreen(display)),
-			ZPixmap, 0, (char*)image32, width, height, 32, 0);
-}
+	image32 = (unsigned char*)malloc(width * height * sizeof(unsigned int));
+	//return XCreateImage(display, visual, 
+	//		DefaultDepth(display, DefaultScreen(display)),
+	//
+	return NULL;
+}*/
 
 
 void init() 
 {
+	XFontStruct *fontInfo;
+	Font id;
+	unsigned int first,last;
+	int fbcount;
 	if (display != NULL) {
 		return;
 	}
 	display = XOpenDisplay(NULL);
-	visual = XDefaultVisual(display, 0);
-	window = XCreateSimpleWindow(display, RootWindow(display, 0), 
-			0, 0, width, height, 1, 0, 0);  
-	if (visual->class != TrueColor) {
-		fprintf(stderr, "Error: Visual dislay must be true color.\n");
+	root = DefaultRootWindow(display);
+	fbc = glXChooseFBConfig(display, DefaultScreen(display), att, &fbcount);
+	if (fbc == NULL) {
+		printf("\n Failed to get config.\n");
 		return;
 	}
-	ximage = CreateImage();
-	XSelectInput(display, window, 
-			ButtonPressMask|ExposureMask|KeyPressMask);
+	//vi = glXChooseVisual(display, 0, att);
+	vi = glXGetVisualFromFBConfig(display, fbc[0]);
+	if (vi == NULL) {
+		printf("\n No GL visual found.\n");
+		return;
+	}
+	//visual = XDefaultVisual(display, 0);
+	cmap = XCreateColormap(display, root, vi->visual, AllocNone);
+	swa.colormap = cmap;
+	swa.event_mask = ButtonPressMask|ExposureMask|KeyPressMask;
+	window = XCreateWindow(display, root, 
+			0, 0, width, height, 0, vi->depth, InputOutput,
+			vi->visual, CWColormap|CWEventMask, &swa);  
+
+	XMapWindow(display, window);
+	XStoreName(display, window, "JACK Application");
+
+	glc = glXCreateContext(display, vi, NULL, GL_TRUE);
+	glXMakeCurrent(display, window, glc);
+	glEnable(GL_DEPTH_TEST);
+
+	fontInfo = XLoadQueryFont(display, "fixed");
+	id = fontInfo->fid;
+	first = fontInfo->min_char_or_byte2;
+	last = fontInfo->max_char_or_byte2;
+	base = glGenLists(last + 1);
+	glXUseXFont(id, first, last-first+1, base+first);
+	image32 = (unsigned char*)malloc(width * height * 4);
+	wm_del = XInternAtom(display, "WM_DELETE_WINDOW", False);
+	XSetWMProtocols(display, window, &wm_del, 1);
 	XMapWindow(display, window);	
 }
 
 void deInit()
 {
 	if (display != NULL) {
+		glXMakeCurrent(display, None, NULL);
+		glXDestroyContext(display, glc);
 		XDestroyWindow(display, window);
 		XCloseDisplay(display);
 		display = NULL;
 		free(image32);
 	}
+}
+
+void drawImage()
+{
+	XGetWindowAttributes(display, window, &gwa);
+	glXMakeCurrent(display, window, glc);
+	glDisable(GL_TEXTURE_2D);
+	glRasterPos2i(-1, -1);
+	glViewport(0, 0, gwa.width, gwa.height);
+	glDrawPixels(width, height, GL_RGBA, GL_UNSIGNED_BYTE, image32);
 }
 
 var processEvent()
@@ -91,6 +156,10 @@ var processEvent()
 	int r;
 	int x, y;
 	var c;
+	float fx, fy;
+
+	fx = 8.0 * 2.0 / width;
+	fy = 11.0 * 2.0 / height;
 
 	XNextEvent(display, &ev);
 	gc = DefaultGC(display, 0);
@@ -133,22 +202,29 @@ var processEvent()
 		}	
 		break;
 	case Expose:
-		XPutImage(display, window, gc, ximage,
-					0, 0, 0, 0, width, height);
-		XSetForeground(display, gc, 0);
+		drawImage();
+		glColor4b(0x00, 0xFF, 0xFF, 0x00);
 		for (y = 0; y < 23; y++) {
 			for (x = 0; x < 64; x++) {
 				c = consoleb[x + y * 64];
 				if (c) {
 					text[0] = (char)c;
-					XDrawString(display, window, gc, 
-						x * 8, 11 + y * 11,text, 1); 
+					glRasterPos2f(x*fx-1.0, 1.0-(y+1)*fy);
+					glListBase(base);
+					glCallLists(1, GL_UNSIGNED_BYTE, text); 
 				}
 			}
 		}
+		glXSwapBuffers(display, window);		
 		break;
 	case ButtonPress:
 		//printf("Click\n");	
+		break;
+	case ClientMessage:
+		if (ev.xclient.data.l[0] == wm_del) {
+			deInit();
+			exit(0);
+		}
 		break;
 	}
 	return 0;
@@ -160,19 +236,24 @@ var refresh()
 	int x, y, xx;
 	var p;
 	var m;
+	int l;	
 	init();
 	m = 16384;
-
 	for (y = 0; y < height; y++) {
 		for (x = 0; x < (width >> 4); x++) {
 			p = Memory__peek(m + (y * (width>>4)) + x);
+			l =  (height - y) * width + (x << 4);
 			for (xx = 0; xx < 16; xx++) {
 				if ((p >> xx) & 0x01) {
-					XPutPixel(ximage, xx + (x << 4), y, 
-							0x00000000);		
+					 image32[(l+xx)*4] = 0x0;
+					 image32[(l+xx)*4+1] = 0x0;
+					 image32[(l+xx)*4+2] = 0x0;
+					 image32[(l+xx)*4+3] = 0xFF;
 				} else {
-					XPutPixel(ximage, xx + (x << 4), y, 
-							0x00FFFFFF); 
+					 image32[(l+xx)*4] = 0xFF;
+					 image32[(l+xx)*4+1] = 0xFF;
+					 image32[(l+xx)*4+2] = 0xFF;
+					 image32[(l+xx)*4+3] = 0xFF;
 				}
 			}		
 		}
