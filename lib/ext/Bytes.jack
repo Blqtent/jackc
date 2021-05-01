@@ -200,7 +200,7 @@ class Bytes {
 		var Array b, c;
 		let b = buf;
 		let c = string;
-#c 	c = c;
+#c 	b = b * sizeof(var);
 #py 	b = c
 		return b;
 	}

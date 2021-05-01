@@ -201,16 +201,18 @@ class JackTokenizer {
 		var boolean in_string;
 		var boolean in_int;
 		var boolean in_asm;
+		var boolean in_escape;
 		let l = 0;
 		let key_or_id = false;
 		let in_string = false;
 		let in_int = false;
 		let in_asm = false;
+		let in_escape = false;
 		do token.setCharAt(0, 0);
 		let start = line;			
 		while ((c > 0) & (c < 1114112)) { // U+0001 to U+00110000
 	
-			if (in_string & (c = 34)) {
+			if (in_string & (c = 34) & (~in_escape)) {
 				let token_type = C.STRING_CONST();
 				if (gen_xml) {
 					do x.addElement(token_type);
@@ -235,12 +237,31 @@ class JackTokenizer {
 					return;
 				}
 			} else { if (in_string) { 
-				if (c = 10) {
-					do error(line, "newline in string");
-					return;
+				if (in_escape) {
+					let in_escape = false;
+					if (c = 92) {
+						let c = 92;
+					}
+					if (c = 34) {
+						let c = 34;
+					}
+					if (c = 110) {
+						let c = 10;
+					}
+				} else {
+					if (c = 10) {
+						do error(line, 
+							"newline in string");
+						return;
+					} else { if (c = 92) {
+						let in_escape = true;
+						let c = 0;
+					}}
 				}
-				let token = token.appendChar(c);
-				let l = l + 1;
+				if (c) {
+					let token = token.appendChar(c);
+					let l = l + 1;
+				}
 			} else { if (in_asm) { 
 				let token = token.appendChar(c);
 				let l = l + 1;

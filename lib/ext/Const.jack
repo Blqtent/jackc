@@ -128,7 +128,7 @@ class Const {
 		do b.append("Y");
 		do b.append("Z");
 		do b.append("[");
-		do b.append("\");
+		do b.append("\\");
 		do b.append("]");
 		do b.append("^");
 		do b.append("_");

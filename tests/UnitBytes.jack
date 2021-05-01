@@ -2,6 +2,7 @@
 class UnitBytes {
 	function boolean isOk(int l) {
 		var Bytes s;
+		var Buffer b;
 		var int i;
 		let i = 0;
 		let s = Bytes.new(1);
@@ -11,7 +12,6 @@ class UnitBytes {
 		} 
 		do s.dispose();
 		do Unit.log(l + 1, "Bytes.appendByte...", true);
-		do UnitString.isOk1(l);
 		return Memory.checkEmpty();
 	}
 	

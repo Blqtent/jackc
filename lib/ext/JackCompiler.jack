@@ -154,6 +154,10 @@ class JackCompiler {
 			do dst.writeByte(10);		
 			do dst.writeString("#define var short");
 			do dst.writeByte(10);		
+			do dst.writeString("#define __poke Memory__poke");
+			do dst.writeByte(10);		
+			do dst.writeString("#define __peek Memory__peek");
+			do dst.writeByte(10);		
 		} else {
 			do dst.writeString("#ifdef _WIN64");
 			do dst.writeByte(10);		
@@ -166,6 +170,15 @@ class JackCompiler {
 			do dst.writeString("#define var long");
 			do dst.writeByte(10);		
 			do dst.writeString("#endif");
+			do dst.writeByte(10);		
+			do dst.writeString(
+			  "#define __poke(a, v) __peek((a)) = v");
+			do dst.writeByte(10);		
+			do dst.writeString(
+			  "#define __peek(a) (((var*)(a))[0])");
+			do dst.writeByte(10);		
+			do dst.writeString(
+			  "//#define __peek(a) (((var*)((a)*sizeof(var)))[0])");
 			do dst.writeByte(10);		
 		}
 		do dst.writeString("#endif");

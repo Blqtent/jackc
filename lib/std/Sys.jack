@@ -8,7 +8,10 @@
  */
 
 class Sys {
+	static boolean in_error;
+
 	function void init() {
+		let in_error = false;
 		do Memory.init();
 #c #ifndef JACK_HACK
 #c 	Sys2__init();
@@ -38,21 +41,24 @@ class Sys {
 	}
 
 	function void error(int errorCode) {
-		var int zero;
-		let zero = 1;
-		let zero = zero - 1;
+		if (in_error) {
+			return;
+		}
+		let in_error = true;
 		do Output.printString("Error(");
 		do Output.printInt(errorCode);
 		do Output.printString(")");
 		do Output.println();
-		let errorCode = errorCode / zero;
+#c 	errorCode = 1 / (errorCode - errorCode);
 #c 	exit(errorCode);
 #py 	exit(errorCode)
 
+		let in_error = false;
 		return;
 	}
 
 	function void wait(int duration) {
+		do Screen.processEvents();
 #c #ifdef _WIN32
 #c 	Sleep(duration);
 #c #else

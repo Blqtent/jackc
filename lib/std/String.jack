@@ -32,7 +32,7 @@ class String {
 		if (s = null) {
 			return 0;
 		}
-		while (s[l]) {
+		while (false=(s[l] = 0)) {
 			let l = l + 1;
 		}
 		return l;
@@ -42,7 +42,7 @@ class String {
 		var Array s;
 		var char ret;
 		let s = str;
-		let ret = s[a];
+		let ret = str[a];
 		return ret;
 	}
 
@@ -63,15 +63,16 @@ class String {
 		var int max;
 		var Array b, d;
 		let d = str;
-#c 	//putc(c, stdout);
 		if (size < 1) {
 			do Sys.error(12);
 		}
 		let max = size;
 		let l = length();
 		if (l < (max - 1)) {
-			let d[l] = c;
-			let d[l + 1] = 0;
+			let str[l] = c;
+			let str[l + 1] = 0;
+	//	do Output.printString(this);
+#c //printf("%d %ld OOKK %d %d<\n", c, __this, max, l);
 			return this;
 		}
 		let nl = (l * 2) + 4;
@@ -182,7 +183,7 @@ class String {
 #c #ifdef _WIN32
 #c 		c = (var)((wchar_t*)n)[i];// FIXME UTF16
 #c #else
-#c 		c = (var)((char*)n)[i]; // FIXME UTF8
+#c 		c = (var)(((char*)n)[i]) & 255; // FIXME UTF8
 #c #endif 
 #c #endif 
 #py 		c = ord(n[i])
@@ -211,14 +212,12 @@ class String {
 
 	method String copy() {
 		var String s;
-		var String p;
 		var int j, l;
-		let p = this;
 		let j = 0;
-		let l = p.length();
+		let l = length();
 		let s = String.new(l + 1);
 		while (j < l) {
-			let s = s.appendChar(p.charAt(j));
+			let s = s.appendChar(charAt(j));
 			let j = j + 1;
 		}
 		return s;
@@ -230,6 +229,7 @@ class String {
 		let s = this;
 		let j = 0;
 		let l = p.length();
+		do Output.printString(this);
 		while (j < l) {
 			let s = s.appendChar(p.charAt(j));
 			let j = j + 1;

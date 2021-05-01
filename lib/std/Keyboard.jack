@@ -48,17 +48,18 @@ class Keyboard {
 	}
 
 	function char keyPressed() {
+		var char c;
+		let c = Keyboard.getKey();
+		if (c) {
+			do Memory.poke(24576, c);
+		}
+		return Memory.peek(24576);
+	}
+
+	function char getKey() {
 		var int x;
 
-		let x = Keyboard.screenKeyPressed();
-		if (x = 0) {
-			let x = Keyboard.getChar();
-			if (x = 0) {
-				do Sys.wait(10);
-			}
-		} else {
-			return x;
-		}
+		let x = Keyboard.getChar();
 		if (x = 10) {
 			return 128; // newline
 		}				
@@ -161,6 +162,7 @@ class Keyboard {
 #c 	} else {
 #c 		x = 0;
 #c 	}
+#c 	//printf("KKEY %d\n",(int) x);
 #c #else
 #c 	x = 0;
 #c 	if (_kbhit()) {
@@ -187,25 +189,50 @@ class Keyboard {
 #py 		keyindex = 1
 #py 	termios.tcsetattr(sys.stdin.fileno(), termios.TCSADRAIN, ts)
 
-		/*if (x) {
+		if (x) {
+			do Output.println();
+			do Output.printString("KEY ");
 			do Output.printInt(x);
 			do Output.println();
-		}*/
+			do Output.println();
+		}
 		return x;
 	}
 
 	function char readChar() {
-		return 0;
+		var char k;
+		let k = Keyboard.keyPressed();
+		while (k = 0) {
+			do Sys.wait(50);
+			let k = Keyboard.keyPressed();
+		}
+		return k;
 	}
 
 	function String readLine(String message) {
 		var String s;
+		var char k;
 		let s = String.new(256);
+		do Output.printString(message);
+		let k = Keyboard.readChar();
+		while ((k = 10) = false) {
+			let s = s.appendChar(k);
+			let k = Keyboard.readChar();
+		}
 		return s;
 	}
 
 	function int readInt(String message) {
-		return 0;
+		var char k;	
+		var int i;
+		do Output.printString(message);
+		let i = 0;
+		let k = Keyboard.readChar();
+		while ((k > 47) & (k < 58)) {
+			let i = (k - 48) + (i * 10);
+			let k = Keyboard.readChar();
+		}
+		return i;
 	}
 
 	function char NEWLINE() {

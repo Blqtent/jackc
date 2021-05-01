@@ -23,8 +23,12 @@ var Screen__drawChar(var c, int x, int y)
 		return 0;
 }
 
+var Screen__putPixel(var offset, var value)
+{
+	return 0;
+}
 
-var Keyboard__screenKeyPressed()
+var Screen__processEvents()
 {
 	return 0;
 }

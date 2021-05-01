@@ -1,0 +1,16 @@
+
+class UnitMath {
+	function boolean isOk(int l) {
+		var int i;
+		var boolean ok;
+		let ok = false;
+		let i = Math.sqrt(25);
+		if (i = 5) {
+			let ok = true;
+		}
+		do Unit.log(l + 1, "Math.sqrt...", ok);
+		return Memory.checkEmpty();
+	}
+	
+}
+

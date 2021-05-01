@@ -16,23 +16,71 @@ class Math {
 	}
 	
 	function int multiply(int x, int y) {
-		return 0;
+		var int sum, j, b;
+		var int shiftedX;
+		let sum = 0;
+		let shiftedX = x;
+		if ((x < 1) | (y < 1)) {
+			return 0;
+		}
+		let j = 0;
+		let b = 1;
+		while (j < 16) {
+			if (x & b) {
+				let sum = sum + shiftedX;
+			}
+			let b = b + b;
+			let shiftedX = shiftedX + shiftedX;
+			let j = j + 1;
+		}
+		return sum;
 	}
 
 	function int divide(int x, int y) {
-		return 0;
+		var int q;
+		if ((x < 0) | (y < 1)) {
+			return 0;
+		} 
+		if (y > x) {
+			return 0;
+		}
+		let q = Math.divide(x, y + y);
+		if ((x - ((q + q) * y)) < y) {
+			return q + q;
+		}
+		return (q + q) + 1;
 	}
 
 	function int min(int x, int y) {
-		return 0;
+		if (x < y) {
+			return x;
+		}
+		return y;
 	}
 	
 	function int max(int x, int y) {
-		return 0;
+		if (x > y) {
+			return x;
+		}
+		return y;
 	}
 
 	function int sqrt(int x) {
-		return 0;
+		var int y, j, j2;
+		if (x < 1) {
+			return 0;
+		}
+		let y = 0;
+		let j2 = 16384;
+		let j = (15 / 2) - 1;
+		while (j > -1) {
+			if (x > (y + j2)) {
+				let y = y + j2;
+			}
+			let j2 = j2 / 2;	
+			let j = j - 1;
+		}
+		return y;
 	}
 
 	function int shiftLeft(int value, int shift) {

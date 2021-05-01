@@ -101,10 +101,10 @@ class Hash {
 	}
 	
 	method void add(String k, int val) {
-		var int p, h, cmp;
+		var int p, hhh, cmp;
 		var Array a, n, r, prev;
-		let h = hash(k);
-		let p = h & mask;
+		let hhh = hash(k);
+		let p = hhh & mask;
 		let a = table[p];
 		let r = null;
 		if (a = null) {
@@ -115,7 +115,7 @@ class Hash {
 			let n = a;
 			let prev = null;
 			while ((r = null) & ((n=null)=false)) {
-				if (n[1] = h) {
+				if (n[1] = hhh) {
 					let cmp = k.compare(n[2]);
 					if (cmp > 0) {
 						let r = Array.new(4);
@@ -136,7 +136,7 @@ class Hash {
 						let n[3] = val;
 						return;
 					}}
-				} else { if (h > n[1]) {
+				} else { if (hhh > n[1]) {
 					let r = Array.new(4);
 					let r[0] = n;
 					if (prev = null) {
@@ -157,7 +157,7 @@ class Hash {
 			}
 		}
 		if (r) {
-			let r[1] = h;
+			let r[1] = hhh;
 			let r[2] = k.copy();
 			let r[3] = val; 
 		}

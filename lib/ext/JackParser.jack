@@ -71,7 +71,7 @@ class JackParser {
 		return;
 	}
  
-	method boolean matchKeyword(String k, boolean eat) {	
+	method boolean matchKeyword(int k, boolean eat) {	
 		var String t;
 		if (eat) {
 		 	if (jt.hasMoreTokens()) {
@@ -173,6 +173,7 @@ class JackParser {
 		do s.dispose();
 		do Output.printString("'");
 		do Output.println();
+		do Sys.error(-1);
 		return 0;
 	}
 

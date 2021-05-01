@@ -11,20 +11,24 @@ class Memory {
 	static int arena, asize;
 	static int freep;
 	static Array mem;
-	static boolean screen_access;
 
 	function void init() {
+		var int i;
 		let mem = 0;
 #c #ifndef JACK_HACK
 #c 	return 0;
 #c #endif
+		let i = 0;
+		while (i < 24576) {
+			do Memory.poke(i, 0);
+			let i = i + 1;
+		}
 		let arena = Math.abs(mem[0]);
 		let arena = 0;
 
 		let asize = 16384;
 		let arena[0] = asize;
 		let freep = arena;
-		let screen_access = true;
 		return;
 	}
 
@@ -33,6 +37,7 @@ class Memory {
 	}
 	
 	function int peek(int addr) {
+#c 	//return ((var*)((addr)*sizeof(var)))[0];
 		if (addr < 0) {
 			do Sys.error(27);
 		}
@@ -40,21 +45,18 @@ class Memory {
 			do Sys.error(28);
 		}
 		if (addr = 24576) {
-			return Keyboard.keyPressed();
+			let addr = addr;
 		} 
+#c 	if (addr == 24576) {
+#c 		Screen__processEvents();
+#c	}
 #c 	return Memory__memory[addr];
 		return mem[addr];
 	}
 
-	function boolean screenNeedRefresh() {
-		if (screen_access = true) {
-			let screen_access = false;
-			return true;
-		}
-		return false;
-	}
-
 	function void poke(int addr, int value) {
+#c 	//((var*)((addr)*sizeof(var)))[0] = value;
+#c   	//return 0;
 		if (addr < 0) {
 			do Sys.error(29);
 		}
@@ -62,8 +64,9 @@ class Memory {
 			do Sys.error(30);
 		}
 		if ((addr > 16383) & (addr < 24576)) {
-			let screen_access = true;
+			do Screen.refresh();
 		} 
+#c 	//printf("poke %d, %d\n", (int)addr, (int)value);
 #c 	return Memory__memory[addr] = value;
 		let mem[addr] = value;
 		return;
@@ -123,7 +126,8 @@ class Memory {
 #c #ifndef JACK_HACK
 #c 	p = (var) malloc(sizeof(var)* (size+1));
 #c 	((var*)p)[0] = -(size+1);
-#c 	return (var) (((var*)p)+1);
+#c 	return ((var)(((var*)p+1))) / 1;
+#c //	return ((var)(((var*)p+1))) / sizeof(var);
 #c #endif
 		let tries = 0;
 		let i = 0;
@@ -152,6 +156,7 @@ class Memory {
 					}
 					let freep = p;
 					//do Memory.log("Alloc=", p + 1, size+1);
+#c 	//printf("alloc [%d] %d\n", (int)p, (int) size);
 					return p + 1;
 				}		
 				let p = p + Math.abs(p[0]);
@@ -213,7 +218,8 @@ class Memory {
 	function void deAlloc(Array p) {
 		var Array pi;
 #c #ifndef JACK_HACK
-#c 	free(((var*)p)-1);
+#c 	free((void*)(((var)(((var*)p)-1)) * 1));
+#c 	//free(((var*)(p* sizeof(var)))-1);
 #c 	return 0;
 #c #endif
 	//	do Memory.log("deAlloc=", p, p[-1]);

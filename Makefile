@@ -3,10 +3,10 @@ all:
 	rm -rf jackc/lib
 	cp -r lib jackc/
 	./jack64.run jackc
-	gcc -m32 -ggdb -Wall jackc.c -lX11 -lGL -lGLU -o jack32
+	#gcc -m32 -ggdb -Wall jackc.c -lX11 -lGL -lGLU -o jack32
 	gcc -m64 -ggdb -Wall -o jack64 jackc.c -lX11 -lGL -lGLU -lpthread
-	i686-w64-mingw32-gcc -g -municode  -static -lwsock32 -lopengl32 -lwinspool -lshell32 -luuid jackc.c -o jack32.exe 
-	x86_64-w64-mingw32-gcc -g -municode  -static -lwsock32 -lopengl32 -lwinspool -lshell32 -luuid jackc.c -o jack64.exe 
+	#i686-w64-mingw32-gcc -g -municode  -static -lwsock32 -lopengl32 -lwinspool -lshell32 -luuid jackc.c -o jack32.exe 
+	#x86_64-w64-mingw32-gcc -g -municode  -static -lwsock32 -lopengl32 -lwinspool -lshell32 -luuid jackc.c -o jack64.exe 
 
 
 py: exe.py
@@ -33,8 +33,12 @@ hello:
 test:
 	rm -rf tests/lib
 	cp -r lib tests/
-	python3 jacky.py tests
-	python3 tests.py
+	#./jack64.run tests
+	#gcc -g tests.c -o tests.run -lX11 -lGL -lGLU
+	#./tests.run
+	./jack64 tests
+	gcc -g tests.c -o tests.run -lX11 -lGL -lGLU
+	./tests.run
 
 exe.py: jacky.py tree2py.py  exe/Main.jack
 	rm -rf exe/lib

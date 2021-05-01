@@ -9,9 +9,11 @@
 
 class Output {
 	static int x, y;
+	static Font f;
 	function void init() {
 		let x = 0;
 		let y = 0;
+	//	let f = Font.new();
 		return;
 	}
 
@@ -37,19 +39,24 @@ class Output {
 		}
 		let xx = x;
 		let yy = y;
-#c 	Screen__drawChar(' ', xx, yy);
-#c 	printf("\033[%ld;%ldf ", (long)yy + 1, (long)xx + 1);
-#c 	fflush(stdout);
+		do Output.printChar(32);
+		let x = xx;
+		let y = yy;
+#c// 	printf("\033[%ld;%ldf ", (long)yy + 1, (long)xx + 1);
+#c //	fflush(stdout);
 #py 	sys.stdout.write("\033[%d;%dH" % (col, row))
 		return;
 	}
 
 	function void printString(String s) {
 		var int i, l;
+		var char c;
 		let i = 0;
 		let l = s.length();
 		while (i < l) {
-			do Output.printChar(s.charAt(i));
+			let c = s.charAt(i);
+#c 	//printf(" '%c' ",c);
+			do Output.printChar(c);
 			let i = i + 1;
 		}
 		return;
@@ -60,6 +67,7 @@ class Output {
 		if (y > 22) {
 			let y = 22;
 		}
+		let x = 0;
 #c 	putc('\n', stdout);
 #py 	sys.stdout.write("\n")
 		return;
@@ -67,26 +75,75 @@ class Output {
 	
 	function void printChar(char c) {
 		var int xx, yy;
+		var int i, j, l, p;
+		var Array chr;
+		var Array a;
+		var int m;
+		
 		if ((c > 1114111) | (c < 0)) {
 			return;
 		}
+		if ((c < 32) | (c > 126)) {
+#c 	//printf("(%d)", c);
+			let c = 32;
+		}
 		let xx = x;
 		let yy = y;
-#c 	putc((char)c, stdout);
-#c 	Screen__drawChar(c, xx, yy);
+		//let chr = f.get(c);
+		//let c = chr[1];
+		if (xx & 1) {
+			let m = 255;
+		} else {
+			let m = 255 * 256;
+		}
+		let i = 0;
+		let j = 0;
+/*
+		while (i < 11) {
+			let l = ((yy * 11) + i) * 32;
+			let l = l + (xx / 2);
+			let l = l + 16384;
+			let p = Memory.peek(l);
+			if ((xx & 1)) {
+				let p = (p & m) | (chr[j] * 256); 
+			} else {
+				let p = (p & m) | (chr[j] & 255); 
+			}
+			do Memory.poke(l, p);
+			let l = l + 32;
+			if (i < 10) {
+				let p = Memory.peek(l);
+				if (xx & 1) {
+					let p = (p & m) | (chr[j] & ~m); 
+				} else {
+					let p = (p & m) | ((chr[j] / 256)&255); 
+				}
+				do Memory.poke(l, p);
+			}	
+			let i = i + 2;
+			let j = j + 1;
+		}*/
+			
+#c 	printf("%c", (char)c);
 #c 	fflush(stdout);
 #py 	sys.stdout.write(chr(c))
 		let x = x + 1;
 		if (x > 63) {
-			let x = 63;
+			let x = 0;
+			let y = y + 1;
+			if (y > 22) {
+				let y = 22;
+			}
 		}
 		return;
 	}
 
 	function void printInt(int c) {
-#c 	printf("%ld", (long)c);
-#c 	fflush(stdout);
-#py 	sys.stdout.write("%d" % (c))
+		var String s;
+		let s = String.new(8);
+		let s = s.setInt(c);
+		do Output.printString(s);
+		do s.dispose();
 		return;
 	}
 
@@ -98,10 +155,9 @@ class Output {
 		}
 		let xx = x;
 		let yy = y;
-#c 	putc('\b', stdout);
-#c 	fflush(stdout);
-#c  	Screen__drawChar(' ', xx, yy);
-#py 	sys.stdout.write("\b")
+		do Output.printChar(8);
+		let x = xx;
+		let y = yy;
 		return;
 	}
 }

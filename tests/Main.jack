@@ -2,6 +2,8 @@
 class Main {
 
 	function void main() {
+		do Output.printString("Start.");
+		do Output.println();
 		do Sys2.args();
 		do Sys.wait(10);
 		do Sys.deInit();
@@ -11,6 +13,11 @@ class Main {
 		do Unit.log(0, "File", UnitFile.isOk(0));	
 		do Unit.log(0, "Xml", UnitXml.isOk(0));	
 		do Unit.log(0, "JackCompiler", UnitJackCompiler.isOk(0));	
+		do Unit.log(0, "Math", UnitMath.isOk(0));	
 		do Unit.log(0, "Bytes", UnitBytes.isOk(0));	
+		do Unit.log(0, "Screen", UnitScreen.isOk(0));	
+		do Output.printString("Done.");
+		do Output.println();
+
 	}
 }

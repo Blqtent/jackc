@@ -33,7 +33,8 @@ var Memory__getString(var*);
 #ifdef JACK_HACK
 var Memory__memory[65536];
 #else
-var Memory__memory[1];
+var Memory__memory[65536];
+//var Memory__memory[1];
 #endif
 
 #ifdef JACK_IMPLEMENTATION
