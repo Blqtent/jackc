@@ -126,8 +126,8 @@ class Memory {
 #c #ifndef JACK_HACK
 #c 	p = (var) malloc(sizeof(var)* (size+1));
 #c 	((var*)p)[0] = -(size+1);
-#c 	return ((var)(((var*)p+1))) / 1;
-#c //	return ((var)(((var*)p+1))) / sizeof(var);
+#c //	return ((var)(((var*)p+1))) / 1;
+#c 	return ((var)(((var*)p+1))) / sizeof(var);
 #c #endif
 		let tries = 0;
 		let i = 0;
@@ -218,8 +218,8 @@ class Memory {
 	function void deAlloc(Array p) {
 		var Array pi;
 #c #ifndef JACK_HACK
-#c 	free((void*)(((var)(((var*)p)-1)) * 1));
-#c 	//free(((var*)(p* sizeof(var)))-1);
+#c 	//free((void*)(((var)(((var*)p)-1)) * 1));
+#c 	free(((var*)(p* sizeof(var)))-1);
 #c 	return 0;
 #c #endif
 	//	do Memory.log("deAlloc=", p, p[-1]);

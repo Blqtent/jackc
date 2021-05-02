@@ -1,6 +1,7 @@
 
 all:
 	rm -rf jackc/lib
+	#cp -r old jackc/lib
 	cp -r lib jackc/
 	./jack64.run jackc
 	#gcc -m32 -ggdb -Wall jackc.c -lX11 -lGL -lGLU -o jack32

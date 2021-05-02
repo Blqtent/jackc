@@ -289,6 +289,9 @@ class JackTokenizer {
 
 			} else { if (key_or_id) {
 				let k = getTokenConst(token);
+				//do Output.printInt(k);
+				//do Output.println();
+				
 				if ((k = C.CLASS()) |
 					(k = C.METHOD()) |
 					(k = C.FUNCTION()) |

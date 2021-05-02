@@ -25,8 +25,8 @@ class Main {
 			let p = d.getAt(i);
 			let l = p.length();
 			let doit = false;
-			do Output.printString(p);
-			do Output.println();
+		//	do Output.printString(p);
+		//	do Output.println();
 
 			if (l > 0) {
 				if (p.charAt(l - 1) = 47) {
@@ -94,7 +94,7 @@ class Main {
 			let l = dir.length();
 			if ((dir.charAt(l-1)= 47) = false) {
 				let dir = dir.appendChar(47);
-			do Output.printInt(l);
+			//do Output.printInt(l);
 			}
 			do Main.getJackFiles(files, dir);
 			//do dir.dispose();

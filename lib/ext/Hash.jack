@@ -57,7 +57,7 @@ class Hash {
 		while (i < size_) {
 			let n = table[i];
 			let depth = 0;
-			while (n) {
+			while (false=(n = null)) {
 				let depth = depth + 1;
 				let next = n[0];
 				let s = n[2];
@@ -170,7 +170,9 @@ class Hash {
 
 		let h = hash(k);
 		let p = h & mask;
+		let a = table+p;
 		let a = table[p];
+
 /*
 		do Output.printString(k);
 		do Output.printInt(p);
@@ -181,7 +183,7 @@ class Hash {
 			return -1;
 		} else {
 			let n = a;
-			while (n) {
+			while (false = (n = null)) {
 				if (n[1] = h) {
 					let cmp = k.compare(n[2]);
 					if (cmp > 0) {

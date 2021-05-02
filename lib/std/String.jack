@@ -229,7 +229,7 @@ class String {
 		let s = this;
 		let j = 0;
 		let l = p.length();
-		do Output.printString(this);
+		//do Output.printString(this);
 		while (j < l) {
 			let s = s.appendChar(p.charAt(j));
 			let j = j + 1;

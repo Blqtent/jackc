@@ -12,10 +12,10 @@ class Main {
 		do Unit.log(0, "String", UnitString.isOk(0));	
 		do Unit.log(0, "File", UnitFile.isOk(0));	
 		do Unit.log(0, "Xml", UnitXml.isOk(0));	
-		do Unit.log(0, "JackCompiler", UnitJackCompiler.isOk(0));	
 		do Unit.log(0, "Math", UnitMath.isOk(0));	
 		do Unit.log(0, "Bytes", UnitBytes.isOk(0));	
 		do Unit.log(0, "Screen", UnitScreen.isOk(0));	
+		do Unit.log(0, "JackCompiler", UnitJackCompiler.isOk(0));	
 		do Output.printString("Done.");
 		do Output.println();
 

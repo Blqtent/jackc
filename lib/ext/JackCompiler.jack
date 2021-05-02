@@ -175,10 +175,10 @@ class JackCompiler {
 			  "#define __poke(a, v) __peek((a)) = v");
 			do dst.writeByte(10);		
 			do dst.writeString(
-			  "#define __peek(a) (((var*)(a))[0])");
+			  "//#define __peek(a) (((var*)(a))[0])");
 			do dst.writeByte(10);		
 			do dst.writeString(
-			  "//#define __peek(a) (((var*)((a)*sizeof(var)))[0])");
+			  "#define __peek(a) (((var*)((a)*sizeof(var)))[0])");
 			do dst.writeByte(10);		
 		}
 		do dst.writeString("#endif");

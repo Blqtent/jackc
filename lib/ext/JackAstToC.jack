@@ -409,15 +409,15 @@ class JackAstToC {
 				do s.dispose();
 				do dst.writeString(");");
 				do nl();
-/*				if (has_callback) {
+				if (has_callback) {
 
 					do spc();
 					do dst.writeString(
-						"((var*)__this)[0] = (var)");
+						"(__peek(__this+0)) = (var)");
 					do dst.writeString(clas);
 					do dst.writeString("__callback;");
 					do nl();
-				}*/
+				}
 				do coStatements(d);
 				let sp = sp - 1;
 				do dst.writeString("}");
@@ -429,8 +429,8 @@ class JackAstToC {
 	}
 
 	method void coCallback(JackAst c) {
-		//let nb_field = nb_field + 1;
-		//let has_callback = 1;
+		let nb_field = nb_field + 1;
+		let has_callback = 1;
 		do coMethod(c);
 		return;
 	}

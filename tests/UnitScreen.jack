@@ -17,7 +17,8 @@ class UnitScreen {
 			do Output.moveCursor(0,0);
 		do Screen.clearScreen();
 			//do Output.printString(s);
-		do Keyboard.readInt("!");
+		//do Keyboard.readInt("!");
+			do Sys.wait(10);
 			do s.setCharAt(0, 0);
 			let i = i + 1;
 		}

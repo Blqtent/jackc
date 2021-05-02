@@ -462,8 +462,8 @@ class File {
 #c 		FindClose(File__hFind);
 #c	}
 #c #else
-#c 	n = n * sizeof(var);
-#c 	printf("OPNE %s\n", n);
+#c 	//n = n * sizeof(var);
+#c 	//printf("OPNE %s\n", n);
 #c 	if((File__dir = opendir((char*)n)) != 0){
 #c    		while((File__dp = readdir(File__dir)) != 0){
 #c 			a = (var)File__dp->d_name;
