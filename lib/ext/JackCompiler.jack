@@ -68,7 +68,7 @@ class JackCompiler {
 		let s = s.appendChar(10);
 		let b = String.new(1024);
 		let l = src_.readLine(b);
-		while (l) {
+		while (~(l = null)) {
 			let b = l;
 			if (s.compare(b) = 0) {
 				let l = null;
@@ -90,7 +90,7 @@ class JackCompiler {
 		let src_ = File.new(source, false);
 		let b = String.new(1024);
 		let l = src_.readLine(b);
-		while (l) {
+		while (~(l = null)) {
 			let b = l;
 			do dst.writeString(b);	
 			let l = src_.readLine(b);
@@ -112,7 +112,7 @@ class JackCompiler {
 		let s = s.appendChar(10);
 		let b = String.new(1024);
 		let l = src_.readLine(b);
-		while (l) {
+		while (~(l = null)) {
 			let b = l;
 			if (doit = false) {
 				if (s.compare(b) = 0) {

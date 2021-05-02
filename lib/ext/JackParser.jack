@@ -249,7 +249,7 @@ class JackParser {
 		let c = current;
 		let current = prim.getParent();
 		let d = prim;
-		while (d.getChild()) {
+		while (~(d.getChild() = null)) {
 			let current = current.add(d.getTag(), d.getData());
 			let d = d.getChild();
 		}
@@ -284,11 +284,11 @@ class JackParser {
 		}
 
 		do advance();
-		while (compileClassVarDec()) {
+		while (~(compileClassVarDec() = null)) {
 			let doit = doit; 
 		}
 		do compileCallbackDec();
-		while (compileSubroutine()) {
+		while (~(compileSubroutine() = null)) {
 			let doit = doit; 
 		}
 		if (false = matchSymbol(C.RIGHT_CURLY_BRACKET(), false)) {
@@ -338,7 +338,7 @@ class JackParser {
 		do astAdd(C.VARNAME());
 	
 		let z = matchSymbol(C.COMMA(), true); // ,
-		while (z) {
+		while (~(z = null)) {
 			let current = save;
  			// varName
 			let z = matchIdentifier(true);
@@ -550,7 +550,7 @@ class JackParser {
 		let save = current;
 		let z = true;
 		do astAdd(C.PARAMS());
-		while (jt.hasMoreTokens()) {
+		while (~(jt.hasMoreTokens() = null)) {
 			let z = compileParameter();
 			let z = matchSymbol(C.COMMA(), false);
 			if (false=z) {
@@ -569,7 +569,7 @@ class JackParser {
 		let save = current;
 		let i = 0;
 		let z = matchIdentifier(true); // varName
-		while (z) {
+		while (~(z = null)) {
 			if (i) {
 				do astAddLike(primary, C.VARNAME());
 			} else {
@@ -609,7 +609,7 @@ class JackParser {
 		if (false=z) {
 			return false;
 		}
-		while (z) {
+		while (~(z = null)) {
 			do astAdd(C.VAR());
 			let primary = current;
 			let z = matchKeyword(C.INT(), true); // type
@@ -1223,7 +1223,7 @@ class JackParser {
 		var JackAst save;
 		let save = current;
 		do compileExpression();
-		while (matchSymbol(C.COMMA(), false)) {
+		while (~(matchSymbol(C.COMMA(), false) = null)) {
 			do advance();
 		 	do compileExpression();
 		}

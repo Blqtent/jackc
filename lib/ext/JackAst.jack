@@ -36,7 +36,7 @@ class JackAst {
 
 		do data.dispose();
 		let c = child;
-		while (c) {
+		while (~(c = null)) {
 			let d = c.getNext();	
 			do c.dispose();
 			let c = d;
@@ -77,7 +77,7 @@ class JackAst {
 			do left.process(f, level + 1, par);
 		}
 		let c = child;
-		while (c) {
+		while (~(c = null)) {
 			do c.process(f, level, par);
 			let d = c.getNext();	
 			let c = d;
@@ -103,7 +103,7 @@ class JackAst {
 	method JackAst set(int tag_, String data_) {
 		var JackAst c;
 		let c = child;
-		while (c) {
+		while (~(c = null)) {
 			if ((c.getTag() = tag_) & 
 				(false=data_.compare(c.getData())))
 			{
@@ -121,7 +121,7 @@ class JackAst {
 		if (c = null) {
 			let child = a;
 		} else {
-			while (c.getNext()) {
+			while (~(c.getNext() = null)) {
 				let c = c.getNext();
 			}
 			do c.setNext(a);
@@ -156,7 +156,7 @@ class JackAst {
 		}
 	
 		let n = c.getNext();
-		while (n) {
+		while (~(n = null)) {
 			if (n = old) {
 				do new_.setNext(n.getNext());
 				do n.setNext(null);

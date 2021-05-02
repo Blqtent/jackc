@@ -65,7 +65,7 @@ class XmlNode {
 		let s = x.getString(tag_);
 		let e = this;
 		let p = e.getParent();
-		while (p) {
+		while ((p = null) = 0) {
 			let t = e.getTag();
 			if (t = s) {
 				return p;

@@ -13,7 +13,7 @@ class Output {
 	function void init() {
 		let x = 0;
 		let y = 0;
-	//	let f = Font.new();
+		let f = Font.new();
 		return;
 	}
 
@@ -42,8 +42,8 @@ class Output {
 		do Output.printChar(32);
 		let x = xx;
 		let y = yy;
-#c// 	printf("\033[%ld;%ldf ", (long)yy + 1, (long)xx + 1);
-#c //	fflush(stdout);
+#c 	printf("\033[%ld;%ldf ", (long)yy + 1, (long)xx + 1);
+#c 	fflush(stdout);
 #py 	sys.stdout.write("\033[%d;%dH" % (col, row))
 		return;
 	}
@@ -89,7 +89,7 @@ class Output {
 		}
 		let xx = x;
 		let yy = y;
-		//let chr = f.get(c);
+		let chr = f.get(c);
 		//let c = chr[1];
 		if (xx & 1) {
 			let m = 255;
@@ -98,7 +98,7 @@ class Output {
 		}
 		let i = 0;
 		let j = 0;
-/*
+
 		while (i < 11) {
 			let l = ((yy * 11) + i) * 32;
 			let l = l + (xx / 2);
@@ -122,7 +122,7 @@ class Output {
 			}	
 			let i = i + 2;
 			let j = j + 1;
-		}*/
+		}
 			
 #c 	printf("%c", (char)c);
 #c 	fflush(stdout);
