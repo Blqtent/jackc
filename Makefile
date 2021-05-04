@@ -5,7 +5,7 @@ all:
 	cp -r lib jackc/
 	gcc -o jack64.run jackc.c -lX11 -lGL -lGLU 
 	./jack64.run jackc
-	gcc -m32 -ggdb -Wall jackc.c -lX11 -lGL -lGLU -o jack32
+	#gcc -m32 -ggdb -Wall jackc.c -lX11 -lGL -lGLU -o jack32
 	gcc -m64 -ggdb -Wall -o jack64 jackc.c -lX11 -lGL -lGLU -lpthread
 	#i686-w64-mingw32-gcc -g -municode  -static -lwsock32 -lopengl32 -lwinspool -lshell32 -luuid jackc.c -o jack32.exe 
 	#x86_64-w64-mingw32-gcc -g -municode  -static -lwsock32 -lopengl32 -lwinspool -lshell32 -luuid jackc.c -o jack64.exe 
