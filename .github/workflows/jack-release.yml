@@ -8,8 +8,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: make
-      - run: make release
       - uses: actions/create-release@latest
         id: create_release
         env:
@@ -21,6 +19,8 @@ jobs:
             New release.
           draft: false
           prerelease: false
+      - run: make
+      - run: make release
       - uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

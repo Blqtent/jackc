@@ -1,8 +1,9 @@
 name: win-release
 on:
-  push:
-    tags:
-      - 'v*'
+  workflow_run:
+    workflows: ["jack-release"]
+    types:
+      - completed
 jobs:
   build-win:
     runs-on: windows-2019
