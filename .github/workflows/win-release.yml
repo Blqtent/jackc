@@ -6,20 +6,27 @@ on:
       - completed
 jobs:
   build-win:
-    runs-on: windows-2019
+    runs-on: windows-latest
     steps:
       - name: Install 7zip
         shell: powershell
         run: Install-Module 7Zip4PowerShell -Force -Verbose
 
       - uses: actions/checkout@v2
+      - uses: microsoft/setup-msbuild@v1
+      - name: Nu
+        working-directory: ${{env.GITHUB_WORKSPACE}}
+        run: nuget .
+      - name: Build x64
+        working-directory: ${{env.GITHUB_WORKSPACE}}
+        run: msbuild /m /p:Configuration=Release /p:Platform=x64
+      - name: Build x86
+        working-directory: ${{env.GITHUB_WORKSPACE}}
+        run: msbuild /m /p:Configuration=Release /p:Platform=x86
       - uses: jossef/action-latest-release@v1.1.0
         id: create_release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Build
-        shell: cmd
-        run: call .\build.cmd
       - name: Zip
         shell: cmd
         run: call .\release.cmd
