@@ -16,7 +16,8 @@ release:
 	cp README.md jack-linux/
 	cp LICENSE.txt jack-linux/
 	cp jack64 jack-linux/
-	cp jack32 jack-linux/
+	cp jackc.c jack-linux/
+	//cp jack32 jack-linux/
 	tar -cvzf jack-linux.tar.gz jack-linux/
 
 py: exe.py
