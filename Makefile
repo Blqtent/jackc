@@ -4,11 +4,19 @@ all:
 	#cp -r old jackc/lib
 	cp -r lib jackc/
 	./jack64.run jackc
-	#gcc -m32 -ggdb -Wall jackc.c -lX11 -lGL -lGLU -o jack32
+	gcc -m32 -ggdb -Wall jackc.c -lX11 -lGL -lGLU -o jack32
 	gcc -m64 -ggdb -Wall -o jack64 jackc.c -lX11 -lGL -lGLU -lpthread
 	#i686-w64-mingw32-gcc -g -municode  -static -lwsock32 -lopengl32 -lwinspool -lshell32 -luuid jackc.c -o jack32.exe 
 	#x86_64-w64-mingw32-gcc -g -municode  -static -lwsock32 -lopengl32 -lwinspool -lshell32 -luuid jackc.c -o jack64.exe 
 
+release:
+	mkdir -p jack-linux/
+	rm -f jack-linux/*
+	cp README.md jack-linux/
+	cp LICENSE.txt jack-linux/
+	cp jack64 jack-linux/
+	cp jack32 jack-linux/
+	tar -cvzf jack-linux.tar.gz jack-linux/
 
 py: exe.py
 	rm -rf jackc/lib
