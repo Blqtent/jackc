@@ -12,7 +12,8 @@ jobs:
       - name: Build
         run: xcodebuild
       - name: DMG
-        run: hdiutil create -volname JACK -srcfolder . -ov -format UDZ0 jack-macos.dmg
+        run: hdiutil create -volname JACK -srcfolder .
+          -ov -format UDZ0 jack-macos.dmg
       - uses: jossef/action-latest-release@v1.1.0
         id: create_release
         env:
