@@ -10,6 +10,14 @@ all:
 	#i686-w64-mingw32-gcc -g -municode  -static -lwsock32 -lopengl32 -lwinspool -lshell32 -luuid jackc.c -o jack32.exe 
 	#x86_64-w64-mingw32-gcc -g -municode  -static -lwsock32 -lopengl32 -lwinspool -lshell32 -luuid jackc.c -o jack64.exe 
 
+win:
+	rm -rf jackc/lib
+	cp -r lib jackc/
+	./jack64.run jackc
+	i686-w64-mingw32-gcc -g -municode  jackc.c -lgdi32 -lwsock32 -lopengl32 -lwinspool -lshell32 -luuid -o jack32.exe 
+	x86_64-w64-mingw32-gcc -g -municode  jackc.c -lgdi32 -lwsock32 -lopengl32 -lwinspool -lshell32 -luuid -o jack64.exe 
+
+
 release:
 	mkdir -p jack-linux/
 	rm -f jack-linux/*

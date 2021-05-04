@@ -34,8 +34,6 @@ Atom wm_del;
 var isfirst = -1;
 var dump = 0;
 
-unsigned char *image32;
-var consoleb[23 * 64] = {0};
 var need_update = -1;
 GLint att[] = {GLX_RENDER_TYPE, GLX_RGBA_BIT, 
 		GLX_DRAWABLE_TYPE, GLX_WINDOW_BIT,
@@ -53,9 +51,6 @@ var Screen__clear()
 	unsigned char *p;
 	unsigned char *q;
 	init();
-	for (i = 0; i < (23 * 64); i++) {
-		consoleb[i] = ' ';
-	}
 	for (i = 0; i < height; i++) {
 		p = image32 + (i * width * 4);	
 		for (j = 0; j < width; j++) {
@@ -124,7 +119,6 @@ void init()
 	last = fontInfo->max_char_or_byte2;
 	base = glGenLists(last + 1);
 	glXUseXFont(id, first, last-first+1, base+first);
-	image32 = (unsigned char*)malloc(width * height * 4);
 	wm_del = XInternAtom(display, "WM_DELETE_WINDOW", False);
 	XSetWMProtocols(display, window, &wm_del, 1);
 	XMapWindow(display, window);	
@@ -346,32 +340,8 @@ var dump_font(var c)
 var refresh() 
 {
 	XEvent ev;
-	int x, y, xx;
-	var p;
-	var m;
-	int l;	
 	init();
-	m = 16384;
-	for (y = 0; y < height; y++) {
-		for (x = 0; x < (width >> 4); x++) {
-			p = Memory__peek(m + (y * (width>>4)) + x);
-			//l =  (height - y) * width + (x << 4);
-			l =  y * width + (x << 4);
-			for (xx = 0; xx < 16; xx++) {
-				if ((p >> xx) & 0x01) {
-					 image32[(l+xx)*4] = 0x0;
-					 image32[(l+xx)*4+1] = 0x0;
-					 image32[(l+xx)*4+2] = 0x0;
-					 image32[(l+xx)*4+3] = 0xFF;
-				} else {
-					 image32[(l+xx)*4] = 0xFF;
-					 image32[(l+xx)*4+1] = 0xFF;
-					 image32[(l+xx)*4+2] = 0xFF;
-					 image32[(l+xx)*4+3] = 0xFF;
-				}
-			}		
-		}
-	}
+	screen2rgba();
 	memset(&ev, 0, sizeof(ev));
 	ev.type = Expose;
 	ev.xexpose.window = window;
