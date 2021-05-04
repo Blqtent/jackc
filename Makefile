@@ -3,7 +3,6 @@ all:
 	rm -rf jackc/lib
 	#cp -r old jackc/lib
 	cp -r lib jackc/
-	mv -f jack64.run jack64.run.old
 	gcc -o jack64.run jackc.c -lX11 -lGL -lGLU 
 	./jack64.run jackc
 	gcc -m32 -ggdb -Wall jackc.c -lX11 -lGL -lGLU -o jack32
