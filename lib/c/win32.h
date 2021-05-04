@@ -243,6 +243,7 @@ var Screen__refresh()
 
 var Screen__processEvents()
 {
+	var k = 0;
 	static var in_proc = 0;
 	if (in_proc) {
 		return 0;
@@ -254,13 +255,12 @@ var Screen__processEvents()
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
 		if (key) {
-			in_proc = 0;
-			return key;
+			k = key;
 		}
 	}
-	Sys__wait(10);
+	Sys__wait(20);
 	in_proc = 0;
-	return 0;
+	return k;
 }
 
 #endif // JACK:IMPLEMENTATION
