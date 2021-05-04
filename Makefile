@@ -20,6 +20,9 @@ release:
 	#cp jack32 jack-linux/
 	tar -cvzf jack-linux.tar.gz jack-linux/
 
+ckeck:
+	echo ok.
+
 py: exe.py
 	rm -rf jackc/lib
 	cp -r lib jackc/
