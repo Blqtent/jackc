@@ -17,9 +17,10 @@ jobs:
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
-          body: |
+          body: 
             New release.
           draft: false
+          prerelease: false
 
         - uses: actions/upload-release-asset@v1
           env:
