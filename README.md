@@ -12,7 +12,7 @@ Public Domain JACK compiler
 
 Abstract
 --------
-
+ 
 The [Jack programming language][1] is described in the book 
 [The Elements of Computing Systems][8] and on the website 
 [www.nand2tetris.org][7]. There is a [set of video][3] on Youtube talking about it.
