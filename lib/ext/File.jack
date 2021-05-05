@@ -106,7 +106,8 @@ class File {
 #c #ifdef _WIN32
 #c 	m = (var)L"rb";
 #c 	if (writing) {m = (var)L"w+b";}
-#c 	f = (var)_wfopen((wchar_t*)s, (wchar_t*)m);
+#c 	f = 0;
+#c 	_wfopen_s((FILE**)&f, (wchar_t*)s, (wchar_t*)m);
 #c 	if(((var*)f)==NULL) f = -1;
 #c #else
 #c 	m = (var)"rb";

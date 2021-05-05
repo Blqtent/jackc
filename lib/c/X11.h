@@ -139,7 +139,6 @@ void deInit()
 		XDestroyWindow(display, window);
 		XCloseDisplay(display);
 		display = NULL;
-		free(image32);
 	}
 }
 
@@ -341,7 +340,7 @@ var refresh()
 {
 	XEvent ev;
 	init();
-	screen2rgba();
+	screen2rgba(width, height);
 	memset(&ev, 0, sizeof(ev));
 	ev.type = Expose;
 	ev.xexpose.window = window;
