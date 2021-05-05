@@ -2037,6 +2037,7 @@ extern id const NSDefaultRunLoopMode;
 
 #ifdef JACK_IMPLEMENTATION
 
+bool terminated = false;
 int windowCount = 0;
 int width = 512;
 int height = 256;
@@ -2306,7 +2307,6 @@ void init()
 	setSubmenuSel = sel_registerName("setSubmenu:");
 	objc_msgSend(appMenuItem, setSubmenuSel, appMenu);
 
-	rect = {{0, 0}, {512, 256}};
 	NSWindowClass = objc_getClass("NSWindow");
 	windowAlloc = objc_msgSend((id)NSWindowClass, allocSel);
 	initWithContentRectSel = sel_registerName("initWithContentRect:styleMask:backing:defer:");
@@ -2335,7 +2335,6 @@ void init()
 	setWantsBestResolutionOpenGLSurfaceSel = sel_registerName("setWantsBestResolutionOpenGLSurface:");
 	objc_msgSend(contentView, setWantsBestResolutionOpenGLSurfaceSel, YES);
 
-	point = {20, 20};
 	cascadeTopLeftFromPointSel = sel_registerName("cascadeTopLeftFromPoint:");
 	objc_msgSend(window, cascadeTopLeftFromPointSel, point);
 
@@ -2397,7 +2396,7 @@ void init()
 	return;
 }
 
-void check_events()
+int check_events()
 {
 
 	while(!terminated)
@@ -2423,9 +2422,9 @@ void check_events()
 					currentWindow = objc_msgSend(NSApp, keyWindowSel);
 
 					currentWindowContentView = objc_msgSend(currentWindow, contentViewSel);
-					adjustFrame = (NSRect)objc_msgSend_stret(currentWindowContentView, frameSel);
+					((void*)adjustFrame) = (void*)objc_msgSend_stret(currentWindowContentView, frameSel);
 
-					p = (NSPoint)objc_msgSend(currentWindow, mouseLocationOutsideOfEventStreamSel);
+					((void*)p) = (void*)objc_msgSend(currentWindow, mouseLocationOutsideOfEventStreamSel);
 
 					if(p.x < 0) p.x = 0;
 					else if(p.x > adjustFrame.size.width) p.x = adjustFrame.size.width;
@@ -2433,7 +2432,7 @@ void check_events()
 					else if(p.y > adjustFrame.size.height) p.y = adjustFrame.size.height;
 
 					r = {p.x, p.y, 0, 0};
-					r = (NSRect)objc_msgSend_stret(currentWindowContentView, convertRectToBackingSel, r);
+					((void*)r) = (void*)objc_msgSend_stret(currentWindowContentView, convertRectToBackingSel, r);
 					p = r.origin;
 
 					break;
@@ -2465,9 +2464,9 @@ void check_events()
 				//case NSScrollWheel:
 				case 22:
 				{
-					deltaX = (CGFloat)objc_msgSend_fpret(event, scrollingDeltaXSel);
+					((void*)deltaX) = (void*)objc_msgSend_fpret(event, scrollingDeltaXSel);
 
-					deltaY = (CGFloat)objc_msgSend_fpret(event, scrollingDeltaYSel);
+					((void*)deltaY) = (void*)objc_msgSend_fpret(event, scrollingDeltaYSel);
 
 					precisionScrolling = (BOOL)objc_msgSend(event, hasPreciseScrollingDeltasSel);
 
@@ -2522,9 +2521,9 @@ void check_events()
 
 		objc_msgSend(openGLContext, makeCurrentContextSel);
 
-		rect = (NSRect)objc_msgSend_stret(contentView, frameSel);
+		((void*)rect) = (void*)objc_msgSend_stret(contentView, frameSel);
 
-		rect = (NSRect)objc_msgSend_stret(contentView, convertRectToBackingSel, rect);
+		((void*)rect) = (void*)objc_msgSend_stret(contentView, convertRectToBackingSel, rect);
 
 		glViewport(0, 0, rect.size.width, rect.size.height);
 
