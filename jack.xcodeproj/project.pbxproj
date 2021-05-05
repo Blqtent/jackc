@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-			A492A914264282C700FE1882 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = A492A913264282C700FE1882 /* main.c */; };
+		A492A914264282C700FE1882 /* jackc.c in Sources */ = {isa = PBXBuildFile; fileRef = A492A913264282C700FE1882 /* jackc.c */; };
+		A4E075DA2642D71A00F45C24 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4E075D92642D71A00F45C24 /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -23,8 +24,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		A492A910264282C700FE1882 /* jack */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = .; sourceTree = BUILT_PRODUCTS_DIR; };
-		A492A913264282C700FE1882 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = jackc.c; sourceTree = "<group>"; };
+		A492A910264282C700FE1882 /* jack */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = jack; sourceTree = BUILT_PRODUCTS_DIR; };
+		A492A913264282C700FE1882 /* jackc.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = jackc.c; sourceTree = "<group>"; };
+		A4E075D92642D71A00F45C24 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4E075DA2642D71A00F45C24 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -41,8 +44,9 @@
 		A492A907264282C700FE1882 = {
 			isa = PBXGroup;
 			children = (
-				A492A912264282C700FE1882 /* jack */,
+				A492A912264282C700FE1882 /* . */,
 				A492A911264282C700FE1882 /* Products */,
+				A4E075D82642D71A00F45C24 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,12 +58,20 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		A492A912264282C700FE1882 /* jack */ = {
+		A492A912264282C700FE1882 /* . */ = {
 			isa = PBXGroup;
 			children = (
-				A492A913264282C700FE1882 /* main.c */,
+				A492A913264282C700FE1882 /* jackc.c */,
 			);
 			path = .;
+			sourceTree = "<group>";
+		};
+		A4E075D82642D71A00F45C24 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A4E075D92642D71A00F45C24 /* Cocoa.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -118,7 +130,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A492A914264282C700FE1882 /* main.c in Sources */,
+				A492A914264282C700FE1882 /* jackc.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,6 +252,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -248,6 +261,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
