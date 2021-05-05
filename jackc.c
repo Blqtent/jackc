@@ -2033,6 +2033,7 @@ extern id const NSDefaultRunLoopMode;
 #define obj_msgSend_stret obj_msgSend
 #define obj_msgSend_fpret obj_msgSend
 #endif
+#define obj_msgSend ((id)(*)(id,SEL,...))obj_msgSend
 
 #ifdef JACK_IMPLEMENTATION
 
