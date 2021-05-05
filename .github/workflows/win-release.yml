@@ -8,15 +8,8 @@ jobs:
   build-win:
     runs-on: windows-latest
     steps:
-      - name: Install 7zip
-        shell: powershell
-        run: Install-Module 7Zip4PowerShell -Force -Verbose
-
       - uses: actions/checkout@v2
       - uses: microsoft/setup-msbuild@v1
-      - name: Nu
-        working-directory: ${{env.GITHUB_WORKSPACE}}
-        run: nuget .
       - name: Build x64
         working-directory: ${{env.GITHUB_WORKSPACE}}
         run: msbuild /m /p:Configuration=Release /p:Platform=x64
