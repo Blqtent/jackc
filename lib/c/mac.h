@@ -29,10 +29,11 @@ extern id const NSDefaultRunLoopMode;
 
 int width = 512;
 int height = 256;
-var refresh = 0;
+var refresh_ = 0;
 var key = 0;
 SEL allocSel;
 SEL initSel;
+GLuint tex = 1;
 
 void display()
 {
@@ -73,8 +74,8 @@ void init()
 
 var Screen__refresh() 
 {
-	if (refresh) return 0;
-	refresh = -1;
+	if (refresh_) return 0;
+	refresh_ = -1;
 	init();
 	return 0;
 }
