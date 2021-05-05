@@ -31,7 +31,8 @@ int width = 512;
 int height = 256;
 var refresh = 0;
 var key = 0;
-
+SEL allocSel;
+SEL initSel;
 
 void display()
 {
@@ -66,7 +67,8 @@ void deInit()
 
 void init()
 {
-
+	allocSel = sel_registerName("alloc");
+	initSel = sel_registerName("init");
 }
 
 var Screen__refresh() 
