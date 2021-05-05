@@ -2422,9 +2422,9 @@ int check_events()
 					currentWindow = objc_msgSend(NSApp, keyWindowSel);
 
 					currentWindowContentView = objc_msgSend(currentWindow, contentViewSel);
-					((void*)adjustFrame) = (void*)objc_msgSend_stret(currentWindowContentView, frameSel);
+					adjustFrame = ((NSRect(*)(id,SEL))objc_msgSend_stret)(currentWindowContentView, frameSel);
 
-					((void*)p) = (void*)objc_msgSend(currentWindow, mouseLocationOutsideOfEventStreamSel);
+					p = ((NSPoint(*)(id,SEL))objc_msgSend)(currentWindow, mouseLocationOutsideOfEventStreamSel);
 
 					if(p.x < 0) p.x = 0;
 					else if(p.x > adjustFrame.size.width) p.x = adjustFrame.size.width;
@@ -2432,7 +2432,7 @@ int check_events()
 					else if(p.y > adjustFrame.size.height) p.y = adjustFrame.size.height;
 
 					r = {p.x, p.y, 0, 0};
-					((void*)r) = (void*)objc_msgSend_stret(currentWindowContentView, convertRectToBackingSel, r);
+					r = ((NSRect(*)(id,SEL,NSRect))objc_msgSend_stret)(currentWindowContentView, convertRectToBackingSel, r);
 					p = r.origin;
 
 					break;
@@ -2464,9 +2464,9 @@ int check_events()
 				//case NSScrollWheel:
 				case 22:
 				{
-					((void*)deltaX) = (void*)objc_msgSend_fpret(event, scrollingDeltaXSel);
+					deltaX = ((CGFloat(*)(id,SEL))objc_msgSend_fpret)(event, scrollingDeltaXSel);
 
-					((void*)deltaY) = (void*)objc_msgSend_fpret(event, scrollingDeltaYSel);
+					deltaY = ((CGFloat(*)(id,SEL))objc_msgSend_fpret)(event, scrollingDeltaYSel);
 
 					precisionScrolling = (BOOL)objc_msgSend(event, hasPreciseScrollingDeltasSel);
 
@@ -2521,9 +2521,9 @@ int check_events()
 
 		objc_msgSend(openGLContext, makeCurrentContextSel);
 
-		((void*)rect) = (void*)objc_msgSend_stret(contentView, frameSel);
+		rect = ((NSRect(*)(id,SEL))objc_msgSend_stret)(contentView, frameSel);
 
-		((void*)rect) = (void*)objc_msgSend_stret(contentView, convertRectToBackingSel, rect);
+		rect = ((NSRect(*)(id,SEL,NSRect))objc_msgSend_stret)(contentView, convertRectToBackingSel, rect);
 
 		glViewport(0, 0, rect.size.width, rect.size.height);
 
