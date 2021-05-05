@@ -2431,7 +2431,10 @@ int check_events()
 					if(p.y < 0) p.y = 0;
 					else if(p.y > adjustFrame.size.height) p.y = adjustFrame.size.height;
 
-					r = {p.x, p.y, 0, 0};
+					r.origin.x = p.x;
+					r.origin.y = p.y;
+					r.size.width = 0;
+					r.size.height = 0;
 					r = ((NSRect(*)(id,SEL,NSRect))objc_msgSend_stret)(currentWindowContentView, convertRectToBackingSel, r);
 					p = r.origin;
 
