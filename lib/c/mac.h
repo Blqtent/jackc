@@ -39,10 +39,10 @@ extern id NSApp;
 extern id const NSDefaultRunLoopMode;
 
 #ifdef __arm64__
-#define obj_msgSend_stret obj_msgSend
-#define obj_msgSend_fpret obj_msgSend
+#define objc_msgSend_stret objc_msgSend
+#define objc_msgSend_fpret objc_msgSend
 #endif
-#define obj_msgSend ((id)(*)(id,SEL,...))obj_msgSend
+#define objc_msgSend ((id)(*)(id,SEL,...))objc_msgSend
 
 #ifdef JACK_IMPLEMENTATION
 
