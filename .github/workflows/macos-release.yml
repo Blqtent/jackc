@@ -17,7 +17,7 @@ jobs:
         run: cp build/Release/jack jack/
       - name: DMG
         run: hdiutil create -volname JACK -srcfolder "jack"
-          -ov -format UDZ0 jack-macos.dmg
+          -ov -format UDZO jack-macos.dmg
       - uses: jossef/action-latest-release-info@v1.1.0
         id: create_release
         env:
