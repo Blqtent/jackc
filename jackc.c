@@ -52,6 +52,60 @@ var Buffer__getSize(var __this);
 #define __poke Memory__poke
 #define __peek Memory__peek
 #endif
+#ifndef JACK_JackTokenizer_H
+#define JACK_JackTokenizer_H
+var JackTokenizer__new(var destination);
+var JackTokenizer__dispose(var __this);
+var JackTokenizer__init(var __this, var source, var generate_xml);
+var JackTokenizer__getSymbolHash(var __this);
+var JackTokenizer__hasMoreTokens(var __this);
+var JackTokenizer__next(var __this);
+var JackTokenizer__addLine(var __this);
+var JackTokenizer__getFileName(var __this);
+var JackTokenizer__getTokenConst(var __this, var s);
+var JackTokenizer__advance(var __this);
+var JackTokenizer__error(var __this, var line_, var w);
+var JackTokenizer__getXml(var __this);
+var JackTokenizer__getLine(var __this);
+var JackTokenizer__tokenType(var __this);
+var JackTokenizer__keyWord(var __this);
+var JackTokenizer__symbol(var __this);
+var JackTokenizer__identifier(var __this);
+var JackTokenizer__intVal(var __this);
+var JackTokenizer__stringVal(var __this);
+#endif
+
+
+#if 0
+#endif
+#ifndef var
+#ifdef _WIN64
+#include <windows.h>
+#define var __int64
+#else
+#define var long
+#endif
+#define __poke Memory__poke
+#define __peek Memory__peek
+#endif
+#ifndef JACK_Http_H
+#define JACK_Http_H
+var Http__new(var url);
+#endif
+
+
+#if 0
+#endif
+#ifndef var
+#ifdef _WIN64
+#include <windows.h>
+#define var __int64
+#else
+#define var long
+#endif
+#define __poke Memory__poke
+#define __peek Memory__peek
+#endif
 #ifndef JACK_Bytes_H
 #define JACK_Bytes_H
 var Bytes__new(var size_in_byte);
@@ -74,6 +128,305 @@ var Bytes__appendUtf16(var __this, var codepoint);
 var Bytes__appendNativeChar(var __this, var codepoint);
 var Bytes__getStringNativePointer(var __this);
 var Bytes__setStringToNative(var __this, var name);
+#endif
+
+
+#if 0
+#endif
+#ifndef var
+#ifdef _WIN64
+#include <windows.h>
+#define var __int64
+#else
+#define var long
+#endif
+#define __poke Memory__poke
+#define __peek Memory__peek
+#endif
+#ifndef JACK_Canavas_H
+#define JACK_Canavas_H
+var Canavas__draw(var x, var y);
+#endif
+
+
+#if 0
+#endif
+#ifndef var
+#ifdef _WIN64
+#include <windows.h>
+#define var __int64
+#else
+#define var long
+#endif
+#define __poke Memory__poke
+#define __peek Memory__peek
+#endif
+#ifndef JACK_CallbackXmlNodeDispose_H
+#define JACK_CallbackXmlNodeDispose_H
+var CallbackXmlNodeDispose__new();
+#endif
+
+
+#if 0
+#endif
+#ifndef var
+#ifdef _WIN64
+#include <windows.h>
+#define var __int64
+#else
+#define var long
+#endif
+#define __poke Memory__poke
+#define __peek Memory__peek
+#endif
+#ifndef JACK_JackAst_H
+#define JACK_JackAst_H
+var JackAst__new(var tag_, var data_, var parent_);
+var JackAst__dispose(var __this);
+var JackAst__setLine(var __this, var line_, var file_);
+var JackAst__ident(var __this, var f, var level);
+var JackAst__process(var __this, var f, var level, var par);
+var JackAst__add(var __this, var tag_, var data_);
+var JackAst__addop(var __this, var data_, var left_);
+var JackAst__set(var __this, var tag_, var data_);
+var JackAst__append(var __this, var a);
+var JackAst__pop(var __this);
+var JackAst__replaceChild(var __this, var old, var new_);
+var JackAst__setId(var __this, var n);
+var JackAst__getId(var __this);
+var JackAst__setTag(var __this, var n);
+var JackAst__setParent(var __this, var n);
+var JackAst__setLeft(var __this, var n);
+var JackAst__setChild(var __this, var n);
+var JackAst__setNext(var __this, var n);
+var JackAst__getTag(var __this);
+var JackAst__getFile(var __this);
+var JackAst__getLine(var __this);
+var JackAst__getData(var __this);
+var JackAst__getChild(var __this);
+var JackAst__getLeft(var __this);
+var JackAst__getParent(var __this);
+var JackAst__getNext(var __this);
+#endif
+
+
+#if 0
+#endif
+#ifndef var
+#ifdef _WIN64
+#include <windows.h>
+#define var __int64
+#else
+#define var long
+#endif
+#define __poke Memory__poke
+#define __peek Memory__peek
+#endif
+#ifndef JACK_JackCompiler_H
+#define JACK_JackCompiler_H
+var JackCompiler__new(var hack_mode);
+var JackCompiler__dispose(var __this);
+var JackCompiler__compile(var __this, var src_);
+var JackCompiler__copyHead(var __this, var dst, var source);
+var JackCompiler__copy(var __this, var dst, var source);
+var JackCompiler__copyBody(var __this, var dst, var source);
+var JackCompiler__link(var __this, var dir, var files);
+#endif
+
+
+#if 0
+#endif
+#ifndef var
+#ifdef _WIN64
+#include <windows.h>
+#define var __int64
+#else
+#define var long
+#endif
+#define __poke Memory__poke
+#define __peek Memory__peek
+#endif
+#ifndef JACK_JackAstToC_H
+#define JACK_JackAstToC_H
+var JackAstToC__new(var parse, var hack_mode);
+var JackAstToC__dispose(var __this);
+var JackAstToC__compile(var __this, var dst_);
+var JackAstToC__coClass(var __this, var c);
+var JackAstToC__genStrings(var __this, var a);
+var JackAstToC__spc(var __this);
+var JackAstToC__str(var __this, var c);
+var JackAstToC__nl(var __this);
+var JackAstToC__coAsm(var __this, var c);
+var JackAstToC__coStatic(var __this, var c);
+var JackAstToC__coFieldUndef(var __this, var c);
+var JackAstToC__coField(var __this, var c);
+var JackAstToC__coMethodPre(var __this, var c);
+var JackAstToC__coConstructorPre(var __this, var c);
+var JackAstToC__coMethod(var __this, var c);
+var JackAstToC__coConstructor(var __this, var c);
+var JackAstToC__coCallback(var __this, var c);
+var JackAstToC__coFunctionPre(var __this, var c);
+var JackAstToC__isType(var __this, var t);
+var JackAstToC__coFunction(var __this, var c);
+var JackAstToC__error(var __this, var txt, var c);
+var JackAstToC__coStatement(var __this, var c);
+var JackAstToC__coWhile(var __this, var c);
+var JackAstToC__coIf(var __this, var c);
+var JackAstToC__coReturn(var __this, var c);
+var JackAstToC__coAssign(var __this, var c);
+var JackAstToC__coVarNameOrIndexed(var __this, var c, var isassign);
+var JackAstToC__isParentExprBool(var __this, var c);
+var JackAstToC__isInt(var __this, var c);
+var JackAstToC__coExpr(var __this, var c, var isterm);
+var JackAstToC__isSubroutine(var __this, var t);
+var JackAstToC__isVarnameSet(var __this, var c, var s);
+var JackAstToC__getTypeOfVarname(var __this, var c, var s);
+var JackAstToC__functionGetClassOf(var __this, var c, var s);
+var JackAstToC__functionGetTypeOf(var __this, var c, var s);
+var JackAstToC__classGetClassOf(var __this, var c, var s);
+var JackAstToC__classGetTypeOf(var __this, var c, var s);
+var JackAstToC__getTypeOf(var __this, var c);
+var JackAstToC__isStatic(var __this, var c);
+var JackAstToC__isField(var __this, var c);
+var JackAstToC__getClassOf(var __this, var c);
+var JackAstToC__coSubroutineCall(var __this, var c);
+var JackAstToC__coStatements(var __this, var c);
+var JackAstToC__coFunctionHead(var __this, var c, var add_this);
+var JackAstToC__coParams(var __this, var d, var add_this);
+var JackAstToC__coVarDec(var __this, var c);
+var JackAstToC__coType(var __this, var c);
+var JackAstToC__coVarName(var __this, var c, var isassign);
+#endif
+
+
+#if 0
+#endif
+#ifndef var
+#ifdef _WIN64
+#include <windows.h>
+#define var __int64
+#else
+#define var long
+#endif
+#define __poke Memory__poke
+#define __peek Memory__peek
+#endif
+#ifndef JACK_Sys2_H
+#define JACK_Sys2_H
+var Sys2__init();
+var Sys2__deInit();
+var Sys2__args();
+#endif
+
+
+#if 0
+#endif
+#ifndef var
+#ifdef _WIN64
+#include <windows.h>
+#define var __int64
+#else
+#define var long
+#endif
+#define __poke Memory__poke
+#define __peek Memory__peek
+#endif
+#ifndef JACK_File_H
+#define JACK_File_H
+var File__new(var path, var writeing);
+var File__dispose(var __this);
+var File__getName(var __this);
+var File__isdir(var __this);
+var File__open(var __this);
+var File__readByte(var __this);
+var File__seek(var __this, var position);
+var File__writeByte(var __this, var data);
+var File__writeString(var __this, var s);
+var File__readLine(var __this, var buff);
+var File__readUtf8(var __this);
+var File__writeUtf8(var __this, var data);
+var File__writeInt16(var __this, var d);
+var File__writeInt32(var __this, var d);
+var File__writeInt64(var __this, var d);
+var File__readInt16(var __this);
+var File__readInt32(var __this);
+var File__readInt64(var __this);
+var File__remove(var __this);
+var File__mkdir(var __this);
+var File__list(var __this);
+#endif
+
+
+#if 0
+#endif
+#ifndef var
+#ifdef _WIN64
+#include <windows.h>
+#define var __int64
+#else
+#define var long
+#endif
+#define __poke Memory__poke
+#define __peek Memory__peek
+#endif
+#ifndef JACK_Hash_H
+#define JACK_Hash_H
+var Hash__new(var size, var disposeCb);
+var Hash__dispose(var __this);
+var Hash__stats(var __this);
+var Hash__hash(var __this, var k);
+var Hash__add(var __this, var k, var val);
+var Hash__get(var __this, var k);
+#endif
+
+
+#if 0
+#endif
+#ifndef var
+#ifdef _WIN64
+#include <windows.h>
+#define var __int64
+#else
+#define var long
+#endif
+#define __poke Memory__poke
+#define __peek Memory__peek
+#endif
+#ifndef JACK_CallbackStringDispose_H
+#define JACK_CallbackStringDispose_H
+var CallbackStringDispose__new();
+#endif
+
+
+#if 0
+#endif
+#ifndef var
+#ifdef _WIN64
+#include <windows.h>
+#define var __int64
+#else
+#define var long
+#endif
+#define __poke Memory__poke
+#define __peek Memory__peek
+#endif
+#ifndef JACK_XmlNode_H
+#define JACK_XmlNode_H
+var XmlNode__new(var x, var parent_, var tag_, var is_txt);
+var XmlNode__dispose(var __this);
+var XmlNode__clear(var __this);
+var XmlNode__closeElement(var __this, var x, var tag_);
+var XmlNode__removeElement(var __this, var x, var e);
+var XmlNode__addElement(var __this, var x, var tag_);
+var XmlNode__addAttribute(var __this, var x, var name, var value);
+var XmlNode__addContent(var __this, var x, var txt);
+var XmlNode__isContent(var __this);
+var XmlNode__getElements(var __this);
+var XmlNode__getAttributesNames(var __this);
+var XmlNode__getAttributesValues(var __this);
+var XmlNode__getParent(var __this);
+var XmlNode__getTag(var __this);
+var XmlNode__dump(var __this, var x, var f, var depth);
 #endif
 
 
@@ -301,121 +654,20 @@ var C__NEXT_FREE_CONSTANT();
 #define __poke Memory__poke
 #define __peek Memory__peek
 #endif
-#ifndef JACK_Callback_H
-#define JACK_Callback_H
-var Callback__new();
-var Callback__dispose(var __this);
-var Callback__invoke(var __this, var a, var b);
-#endif
-
-
-#if 0
-#endif
-#ifndef var
-#ifdef _WIN64
-#include <windows.h>
-#define var __int64
-#else
-#define var long
-#endif
-#define __poke Memory__poke
-#define __peek Memory__peek
-#endif
-#ifndef JACK_CallbackStringDispose_H
-#define JACK_CallbackStringDispose_H
-var CallbackStringDispose__new();
-#endif
-
-
-#if 0
-#endif
-#ifndef var
-#ifdef _WIN64
-#include <windows.h>
-#define var __int64
-#else
-#define var long
-#endif
-#define __poke Memory__poke
-#define __peek Memory__peek
-#endif
-#ifndef JACK_CallbackXmlNodeDispose_H
-#define JACK_CallbackXmlNodeDispose_H
-var CallbackXmlNodeDispose__new();
-#endif
-
-
-#if 0
-#endif
-#ifndef var
-#ifdef _WIN64
-#include <windows.h>
-#define var __int64
-#else
-#define var long
-#endif
-#define __poke Memory__poke
-#define __peek Memory__peek
-#endif
-#ifndef JACK_Canavas_H
-#define JACK_Canavas_H
-var Canavas__draw(var x, var y);
-#endif
-
-
-#if 0
-#endif
-#ifndef var
-#ifdef _WIN64
-#include <windows.h>
-#define var __int64
-#else
-#define var long
-#endif
-#define __poke Memory__poke
-#define __peek Memory__peek
-#endif
-#ifndef JACK_Const_H
-#define JACK_Const_H
-var Const__getList();
-#endif
-
-
-#if 0
-#endif
-#ifndef var
-#ifdef _WIN64
-#include <windows.h>
-#define var __int64
-#else
-#define var long
-#endif
-#define __poke Memory__poke
-#define __peek Memory__peek
-#endif
-#ifndef JACK_File_H
-#define JACK_File_H
-var File__new(var path, var writeing);
-var File__dispose(var __this);
-var File__getName(var __this);
-var File__isdir(var __this);
-var File__open(var __this);
-var File__readByte(var __this);
-var File__seek(var __this, var position);
-var File__writeByte(var __this, var data);
-var File__writeString(var __this, var s);
-var File__readLine(var __this, var buff);
-var File__readUtf8(var __this);
-var File__writeUtf8(var __this, var data);
-var File__writeInt16(var __this, var d);
-var File__writeInt32(var __this, var d);
-var File__writeInt64(var __this, var d);
-var File__readInt16(var __this);
-var File__readInt32(var __this);
-var File__readInt64(var __this);
-var File__remove(var __this);
-var File__mkdir(var __this);
-var File__list(var __this);
+#ifndef JACK_GifWriter_H
+#define JACK_GifWriter_H
+var GifWriter__new();
+var GifWriter__dispose(var __this);
+var GifWriter__out8(var __this, var code);
+var GifWriter__out16le(var __this, var code);
+var GifWriter__lzwWrite(var __this, var code);
+var GifWriter__lzwEncode(var __this, var in_, var len);
+var GifWriter__start(var __this, var w, var h, var repeat_, var numColors_);
+var GifWriter__end(var __this);
+var GifWriter__frame_(var __this, var rgba, var delayCsec, var localPalette);
+var GifWriter__clamp(var a, var b, var c);
+var GifWriter__quantize(var __this, var rgba, var rgbaSize, var sample, var map, var numColors_);
+var GifWriter__writeFile(var __this, var file, var data, var w, var h);
 #endif
 
 
@@ -467,6 +719,55 @@ var Gif__WriteArray(var __this, var src, var dest);
 #define __poke Memory__poke
 #define __peek Memory__peek
 #endif
+#ifndef JACK_Xml_H
+#define JACK_Xml_H
+var Xml__new();
+var Xml__dispose(var __this);
+var Xml__clear(var __this);
+var Xml__getStringNoCreate(var __this, var s);
+var Xml__getString(var __this, var s);
+var Xml__addElement(var __this, var tag);
+var Xml__addAttribute(var __this, var name, var value);
+var Xml__addContent(var __this, var txt);
+var Xml__closeElement(var __this, var tag);
+var Xml__closeCurrent(var __this);
+var Xml__getCurrent(var __this);
+var Xml__disposeCurrent(var __this);
+var Xml__dump(var __this, var f);
+var Xml__escape(var __this, var o);
+#endif
+
+
+#if 0
+#endif
+#ifndef var
+#ifdef _WIN64
+#include <windows.h>
+#define var __int64
+#else
+#define var long
+#endif
+#define __poke Memory__poke
+#define __peek Memory__peek
+#endif
+#ifndef JACK_Const_H
+#define JACK_Const_H
+var Const__getList();
+#endif
+
+
+#if 0
+#endif
+#ifndef var
+#ifdef _WIN64
+#include <windows.h>
+#define var __int64
+#else
+#define var long
+#endif
+#define __poke Memory__poke
+#define __peek Memory__peek
+#endif
 #ifndef JACK_GifLzw_H
 #define JACK_GifLzw_H
 var GifLzw__new();
@@ -477,208 +778,6 @@ var GifLzw__getFirst(var __this);
 var GifLzw__setFirst(var __this, var v);
 var GifLzw__getSuffix(var __this);
 var GifLzw__setSuffix(var __this, var v);
-#endif
-
-
-#if 0
-#endif
-#ifndef var
-#ifdef _WIN64
-#include <windows.h>
-#define var __int64
-#else
-#define var long
-#endif
-#define __poke Memory__poke
-#define __peek Memory__peek
-#endif
-#ifndef JACK_GifWriter_H
-#define JACK_GifWriter_H
-var GifWriter__new();
-var GifWriter__dispose(var __this);
-var GifWriter__out8(var __this, var code);
-var GifWriter__out16le(var __this, var code);
-var GifWriter__lzwWrite(var __this, var code);
-var GifWriter__lzwEncode(var __this, var in_, var len);
-var GifWriter__start(var __this, var w, var h, var repeat_, var numColors_);
-var GifWriter__end(var __this);
-var GifWriter__frame_(var __this, var rgba, var delayCsec, var localPalette);
-var GifWriter__clamp(var a, var b, var c);
-var GifWriter__quantize(var __this, var rgba, var rgbaSize, var sample, var map, var numColors_);
-var GifWriter__writeFile(var __this, var file, var data, var w, var h);
-#endif
-
-
-#if 0
-#endif
-#ifndef var
-#ifdef _WIN64
-#include <windows.h>
-#define var __int64
-#else
-#define var long
-#endif
-#define __poke Memory__poke
-#define __peek Memory__peek
-#endif
-#ifndef JACK_Hash_H
-#define JACK_Hash_H
-var Hash__new(var size, var disposeCb);
-var Hash__dispose(var __this);
-var Hash__stats(var __this);
-var Hash__hash(var __this, var k);
-var Hash__add(var __this, var k, var val);
-var Hash__get(var __this, var k);
-#endif
-
-
-#if 0
-#endif
-#ifndef var
-#ifdef _WIN64
-#include <windows.h>
-#define var __int64
-#else
-#define var long
-#endif
-#define __poke Memory__poke
-#define __peek Memory__peek
-#endif
-#ifndef JACK_Http_H
-#define JACK_Http_H
-var Http__new(var url);
-#endif
-
-
-#if 0
-#endif
-#ifndef var
-#ifdef _WIN64
-#include <windows.h>
-#define var __int64
-#else
-#define var long
-#endif
-#define __poke Memory__poke
-#define __peek Memory__peek
-#endif
-#ifndef JACK_JackAst_H
-#define JACK_JackAst_H
-var JackAst__new(var tag_, var data_, var parent_);
-var JackAst__dispose(var __this);
-var JackAst__setLine(var __this, var line_, var file_);
-var JackAst__ident(var __this, var f, var level);
-var JackAst__process(var __this, var f, var level, var par);
-var JackAst__add(var __this, var tag_, var data_);
-var JackAst__addop(var __this, var data_, var left_);
-var JackAst__set(var __this, var tag_, var data_);
-var JackAst__append(var __this, var a);
-var JackAst__pop(var __this);
-var JackAst__replaceChild(var __this, var old, var new_);
-var JackAst__setId(var __this, var n);
-var JackAst__getId(var __this);
-var JackAst__setTag(var __this, var n);
-var JackAst__setParent(var __this, var n);
-var JackAst__setLeft(var __this, var n);
-var JackAst__setChild(var __this, var n);
-var JackAst__setNext(var __this, var n);
-var JackAst__getTag(var __this);
-var JackAst__getFile(var __this);
-var JackAst__getLine(var __this);
-var JackAst__getData(var __this);
-var JackAst__getChild(var __this);
-var JackAst__getLeft(var __this);
-var JackAst__getParent(var __this);
-var JackAst__getNext(var __this);
-#endif
-
-
-#if 0
-#endif
-#ifndef var
-#ifdef _WIN64
-#include <windows.h>
-#define var __int64
-#else
-#define var long
-#endif
-#define __poke Memory__poke
-#define __peek Memory__peek
-#endif
-#ifndef JACK_JackAstToC_H
-#define JACK_JackAstToC_H
-var JackAstToC__new(var parse, var hack_mode);
-var JackAstToC__dispose(var __this);
-var JackAstToC__compile(var __this, var dst_);
-var JackAstToC__coClass(var __this, var c);
-var JackAstToC__genStrings(var __this, var a);
-var JackAstToC__spc(var __this);
-var JackAstToC__str(var __this, var c);
-var JackAstToC__nl(var __this);
-var JackAstToC__coAsm(var __this, var c);
-var JackAstToC__coStatic(var __this, var c);
-var JackAstToC__coFieldUndef(var __this, var c);
-var JackAstToC__coField(var __this, var c);
-var JackAstToC__coMethodPre(var __this, var c);
-var JackAstToC__coConstructorPre(var __this, var c);
-var JackAstToC__coMethod(var __this, var c);
-var JackAstToC__coConstructor(var __this, var c);
-var JackAstToC__coCallback(var __this, var c);
-var JackAstToC__coFunctionPre(var __this, var c);
-var JackAstToC__isType(var __this, var t);
-var JackAstToC__coFunction(var __this, var c);
-var JackAstToC__error(var __this, var txt, var c);
-var JackAstToC__coStatement(var __this, var c);
-var JackAstToC__coWhile(var __this, var c);
-var JackAstToC__coIf(var __this, var c);
-var JackAstToC__coReturn(var __this, var c);
-var JackAstToC__coAssign(var __this, var c);
-var JackAstToC__coVarNameOrIndexed(var __this, var c, var isassign);
-var JackAstToC__isParentExprBool(var __this, var c);
-var JackAstToC__isInt(var __this, var c);
-var JackAstToC__coExpr(var __this, var c, var isterm);
-var JackAstToC__isSubroutine(var __this, var t);
-var JackAstToC__isVarnameSet(var __this, var c, var s);
-var JackAstToC__getTypeOfVarname(var __this, var c, var s);
-var JackAstToC__functionGetClassOf(var __this, var c, var s);
-var JackAstToC__functionGetTypeOf(var __this, var c, var s);
-var JackAstToC__classGetClassOf(var __this, var c, var s);
-var JackAstToC__classGetTypeOf(var __this, var c, var s);
-var JackAstToC__getTypeOf(var __this, var c);
-var JackAstToC__isStatic(var __this, var c);
-var JackAstToC__isField(var __this, var c);
-var JackAstToC__getClassOf(var __this, var c);
-var JackAstToC__coSubroutineCall(var __this, var c);
-var JackAstToC__coStatements(var __this, var c);
-var JackAstToC__coFunctionHead(var __this, var c, var add_this);
-var JackAstToC__coParams(var __this, var d, var add_this);
-var JackAstToC__coVarDec(var __this, var c);
-var JackAstToC__coType(var __this, var c);
-var JackAstToC__coVarName(var __this, var c, var isassign);
-#endif
-
-
-#if 0
-#endif
-#ifndef var
-#ifdef _WIN64
-#include <windows.h>
-#define var __int64
-#else
-#define var long
-#endif
-#define __poke Memory__poke
-#define __peek Memory__peek
-#endif
-#ifndef JACK_JackCompiler_H
-#define JACK_JackCompiler_H
-var JackCompiler__new(var hack_mode);
-var JackCompiler__dispose(var __this);
-var JackCompiler__compile(var __this, var src_);
-var JackCompiler__copyHead(var __this, var dst, var source);
-var JackCompiler__copy(var __this, var dst, var source);
-var JackCompiler__copyBody(var __this, var dst, var source);
-var JackCompiler__link(var __this, var dir, var files);
 #endif
 
 
@@ -752,27 +851,11 @@ var JackParser__compileExpressionList(var __this);
 #define __poke Memory__poke
 #define __peek Memory__peek
 #endif
-#ifndef JACK_JackTokenizer_H
-#define JACK_JackTokenizer_H
-var JackTokenizer__new(var destination);
-var JackTokenizer__dispose(var __this);
-var JackTokenizer__init(var __this, var source, var generate_xml);
-var JackTokenizer__getSymbolHash(var __this);
-var JackTokenizer__hasMoreTokens(var __this);
-var JackTokenizer__next(var __this);
-var JackTokenizer__addLine(var __this);
-var JackTokenizer__getFileName(var __this);
-var JackTokenizer__getTokenConst(var __this, var s);
-var JackTokenizer__advance(var __this);
-var JackTokenizer__error(var __this, var line_, var w);
-var JackTokenizer__getXml(var __this);
-var JackTokenizer__getLine(var __this);
-var JackTokenizer__tokenType(var __this);
-var JackTokenizer__keyWord(var __this);
-var JackTokenizer__symbol(var __this);
-var JackTokenizer__identifier(var __this);
-var JackTokenizer__intVal(var __this);
-var JackTokenizer__stringVal(var __this);
+#ifndef JACK_Callback_H
+#define JACK_Callback_H
+var Callback__new();
+var Callback__dispose(var __this);
+var Callback__invoke(var __this, var a, var b);
 #endif
 
 
@@ -807,74 +890,10 @@ var SymbolTable__dispose(var __this);
 #define __poke Memory__poke
 #define __peek Memory__peek
 #endif
-#ifndef JACK_Sys2_H
-#define JACK_Sys2_H
-var Sys2__init();
-var Sys2__deInit();
-var Sys2__args();
-#endif
-
-
-#if 0
-#endif
-#ifndef var
-#ifdef _WIN64
-#include <windows.h>
-#define var __int64
-#else
-#define var long
-#endif
-#define __poke Memory__poke
-#define __peek Memory__peek
-#endif
-#ifndef JACK_Xml_H
-#define JACK_Xml_H
-var Xml__new();
-var Xml__dispose(var __this);
-var Xml__clear(var __this);
-var Xml__getStringNoCreate(var __this, var s);
-var Xml__getString(var __this, var s);
-var Xml__addElement(var __this, var tag);
-var Xml__addAttribute(var __this, var name, var value);
-var Xml__addContent(var __this, var txt);
-var Xml__closeElement(var __this, var tag);
-var Xml__closeCurrent(var __this);
-var Xml__getCurrent(var __this);
-var Xml__disposeCurrent(var __this);
-var Xml__dump(var __this, var f);
-var Xml__escape(var __this, var o);
-#endif
-
-
-#if 0
-#endif
-#ifndef var
-#ifdef _WIN64
-#include <windows.h>
-#define var __int64
-#else
-#define var long
-#endif
-#define __poke Memory__poke
-#define __peek Memory__peek
-#endif
-#ifndef JACK_XmlNode_H
-#define JACK_XmlNode_H
-var XmlNode__new(var x, var parent_, var tag_, var is_txt);
-var XmlNode__dispose(var __this);
-var XmlNode__clear(var __this);
-var XmlNode__closeElement(var __this, var x, var tag_);
-var XmlNode__removeElement(var __this, var x, var e);
-var XmlNode__addElement(var __this, var x, var tag_);
-var XmlNode__addAttribute(var __this, var x, var name, var value);
-var XmlNode__addContent(var __this, var x, var txt);
-var XmlNode__isContent(var __this);
-var XmlNode__getElements(var __this);
-var XmlNode__getAttributesNames(var __this);
-var XmlNode__getAttributesValues(var __this);
-var XmlNode__getParent(var __this);
-var XmlNode__getTag(var __this);
-var XmlNode__dump(var __this, var x, var f, var depth);
+#ifndef JACK_Font_H
+#define JACK_Font_H
+var Font__new();
+var Font__get(var __this, var c);
 #endif
 
 
@@ -909,10 +928,157 @@ var Array__dispose(var __this);
 #define __poke Memory__poke
 #define __peek Memory__peek
 #endif
-#ifndef JACK_Font_H
-#define JACK_Font_H
-var Font__new();
-var Font__get(var __this, var c);
+#ifndef JACK_Output_H
+#define JACK_Output_H
+var Output__init();
+var Output__deInit();
+var Output__moveCursor(var row, var col);
+var Output__printString(var s);
+var Output__println();
+var Output__printChar(var c);
+var Output__printInt(var c);
+var Output__backSpace();
+#endif
+
+
+#if 0
+#endif
+#ifndef var
+#ifdef _WIN64
+#include <windows.h>
+#define var __int64
+#else
+#define var long
+#endif
+#define __poke Memory__poke
+#define __peek Memory__peek
+#endif
+#ifndef JACK_Sys_H
+#define JACK_Sys_H
+var Sys__init();
+var Sys__deInit();
+var Sys__halt();
+var Sys__error(var errorCode);
+var Sys__wait(var duration);
+#endif
+
+
+#if 0
+#endif
+#ifndef var
+#ifdef _WIN64
+#include <windows.h>
+#define var __int64
+#else
+#define var long
+#endif
+#define __poke Memory__poke
+#define __peek Memory__peek
+#endif
+#ifndef JACK_Screen_H
+#define JACK_Screen_H
+var Screen__init();
+var Screen__deInit();
+var Screen__clearScreen();
+var Screen__setColor(var b);
+var Screen__drawPixel(var x, var y);
+var Screen__drawLine(var x, var y, var x2, var y2);
+var Screen__drawRectangle(var x, var y, var x2, var y2);
+var Screen__drawCircle(var x, var y, var r);
+#endif
+
+
+#if 0
+#endif
+#ifndef var
+#ifdef _WIN64
+#include <windows.h>
+#define var __int64
+#else
+#define var long
+#endif
+#define __poke Memory__poke
+#define __peek Memory__peek
+#endif
+#ifndef JACK_Math_H
+#define JACK_Math_H
+var Math__init();
+var Math__deInit();
+var Math__abs(var a);
+var Math__multiply(var x, var y);
+var Math__divide(var x, var y);
+var Math__min(var x, var y);
+var Math__max(var x, var y);
+var Math__sqrt(var x);
+var Math__shiftLeft(var value, var shift);
+var Math__shiftRight(var value, var shift);
+var Math__rem(var a, var b);
+var Math__xor(var a, var b);
+var Math__log2(var n);
+var Math__sizeOfInt();
+var Math__isBigEndian();
+var Math__isWindows();
+#endif
+
+
+#if 0
+#endif
+#ifndef var
+#ifdef _WIN64
+#include <windows.h>
+#define var __int64
+#else
+#define var long
+#endif
+#define __poke Memory__poke
+#define __peek Memory__peek
+#endif
+#ifndef JACK_String_H
+#define JACK_String_H
+var String__new(var maxLength);
+var String__dispose(var __this);
+var String__length(var __this);
+var String__charAt(var __this, var a);
+var String__setCharAt(var __this, var j, var c);
+var String__getArray(var __this);
+var String__appendChar(var __this, var c);
+var String__eraseLastChar(var __this);
+var String__intValue(var __this);
+var String__setInt(var __this, var j);
+var String__appendFromNative(var __this, var native);
+var String__ord(var s);
+var String__backSpace();
+var String__doubleQuote();
+var String__newLine();
+var String__copy(var __this);
+var String__appendString(var __this, var p);
+var String__compare(var __this, var s);
+#endif
+
+
+#if 0
+#endif
+#ifndef var
+#ifdef _WIN64
+#include <windows.h>
+#define var __int64
+#else
+#define var long
+#endif
+#define __poke Memory__poke
+#define __peek Memory__peek
+#endif
+#ifndef JACK_Memory_H
+#define JACK_Memory_H
+var Memory__init();
+var Memory__deInit();
+var Memory__peek(var addr);
+var Memory__poke(var addr, var value);
+var Memory__defrag();
+var Memory__checkEmpty();
+var Memory__alloc(var size);
+var Memory__log(var msg, var p, var q);
+var Memory__deAlloc(var p);
 #endif
 
 
@@ -965,172 +1131,6 @@ var Keyboard__F9();
 var Keyboard__F10();
 var Keyboard__F11();
 var Keyboard__F12();
-#endif
-
-
-#if 0
-#endif
-#ifndef var
-#ifdef _WIN64
-#include <windows.h>
-#define var __int64
-#else
-#define var long
-#endif
-#define __poke Memory__poke
-#define __peek Memory__peek
-#endif
-#ifndef JACK_Math_H
-#define JACK_Math_H
-var Math__init();
-var Math__deInit();
-var Math__abs(var a);
-var Math__multiply(var x, var y);
-var Math__divide(var x, var y);
-var Math__min(var x, var y);
-var Math__max(var x, var y);
-var Math__sqrt(var x);
-var Math__shiftLeft(var value, var shift);
-var Math__shiftRight(var value, var shift);
-var Math__rem(var a, var b);
-var Math__xor(var a, var b);
-var Math__log2(var n);
-var Math__sizeOfInt();
-var Math__isBigEndian();
-var Math__isWindows();
-#endif
-
-
-#if 0
-#endif
-#ifndef var
-#ifdef _WIN64
-#include <windows.h>
-#define var __int64
-#else
-#define var long
-#endif
-#define __poke Memory__poke
-#define __peek Memory__peek
-#endif
-#ifndef JACK_Memory_H
-#define JACK_Memory_H
-var Memory__init();
-var Memory__deInit();
-var Memory__peek(var addr);
-var Memory__poke(var addr, var value);
-var Memory__defrag();
-var Memory__checkEmpty();
-var Memory__alloc(var size);
-var Memory__log(var msg, var p, var q);
-var Memory__deAlloc(var p);
-#endif
-
-
-#if 0
-#endif
-#ifndef var
-#ifdef _WIN64
-#include <windows.h>
-#define var __int64
-#else
-#define var long
-#endif
-#define __poke Memory__poke
-#define __peek Memory__peek
-#endif
-#ifndef JACK_Output_H
-#define JACK_Output_H
-var Output__init();
-var Output__deInit();
-var Output__moveCursor(var row, var col);
-var Output__printString(var s);
-var Output__println();
-var Output__printChar(var c);
-var Output__printInt(var c);
-var Output__backSpace();
-#endif
-
-
-#if 0
-#endif
-#ifndef var
-#ifdef _WIN64
-#include <windows.h>
-#define var __int64
-#else
-#define var long
-#endif
-#define __poke Memory__poke
-#define __peek Memory__peek
-#endif
-#ifndef JACK_Screen_H
-#define JACK_Screen_H
-var Screen__init();
-var Screen__deInit();
-var Screen__clearScreen();
-var Screen__setColor(var b);
-var Screen__drawPixel(var x, var y);
-var Screen__drawLine(var x, var y, var x2, var y2);
-var Screen__drawRectangle(var x, var y, var x2, var y2);
-var Screen__drawCircle(var x, var y, var r);
-#endif
-
-
-#if 0
-#endif
-#ifndef var
-#ifdef _WIN64
-#include <windows.h>
-#define var __int64
-#else
-#define var long
-#endif
-#define __poke Memory__poke
-#define __peek Memory__peek
-#endif
-#ifndef JACK_String_H
-#define JACK_String_H
-var String__new(var maxLength);
-var String__dispose(var __this);
-var String__length(var __this);
-var String__charAt(var __this, var a);
-var String__setCharAt(var __this, var j, var c);
-var String__getArray(var __this);
-var String__appendChar(var __this, var c);
-var String__eraseLastChar(var __this);
-var String__intValue(var __this);
-var String__setInt(var __this, var j);
-var String__appendFromNative(var __this, var native);
-var String__ord(var s);
-var String__backSpace();
-var String__doubleQuote();
-var String__newLine();
-var String__copy(var __this);
-var String__appendString(var __this, var p);
-var String__compare(var __this, var s);
-#endif
-
-
-#if 0
-#endif
-#ifndef var
-#ifdef _WIN64
-#include <windows.h>
-#define var __int64
-#else
-#define var long
-#endif
-#define __poke Memory__poke
-#define __peek Memory__peek
-#endif
-#ifndef JACK_Sys_H
-#define JACK_Sys_H
-var Sys__init();
-var Sys__deInit();
-var Sys__halt();
-var Sys__error(var errorCode);
-var Sys__wait(var duration);
 #endif
 
 
@@ -1409,7 +1409,6 @@ void deInit()
 		XDestroyWindow(display, window);
 		XCloseDisplay(display);
 		display = NULL;
-		free(image32);
 	}
 }
 
@@ -2003,19 +2002,90 @@ var Screen__processEvents()
 #else
 #   error "Unknown Apple platform"
 #endif
+#include <stdio.h>
+#include <objc/objc.h>
+#include <objc/runtime.h>
+#include <objc/message.h>
+#include <objc/NSObjCRuntime.h>
+#include <OpenGL/gl.h>
+#include <OpenGL/glu.h>
+#include <CoreGraphics/CGBase.h>
+#include <CoreGraphics/CGGeometry.h>
+typedef CGPoint NSPoint;
+typedef CGRect NSRect;
+extern id NSApp;
+extern id const NSDefaultRunLoopMode;
 
 #ifdef JACK_IMPLEMENTATION
 
+int width = 512;
+int height = 256;
+var refresh = 0;
+var key = 0;
+SEL allocSel;
+SEL initSel;
+
+void display()
+{
+	glClear(GL_COLOR_BUFFER_BIT);
+	glClearColor(0,0,0,1);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glBindTexture(GL_TEXTURE_2D, tex);
+	glTexImage2D(
+		GL_TEXTURE_2D,
+		0,
+		3,
+		width,
+		height,
+		0,
+		GL_RGBA,
+		GL_UNSIGNED_BYTE,
+		image32);
+	glLoadIdentity();
+	glBegin(GL_QUADS);
+	glTexCoord2f(0,0); glVertex3f(-1,1, -1);
+	glTexCoord2f(1,0); glVertex3f( 1,1, -1);
+	glTexCoord2f(1,1); glVertex3f( 1, -1, -1);
+	glTexCoord2f(0,1); glVertex3f(-1, -1, -1);
+	glEnd();
+	glBindTexture(GL_TEXTURE_2D, 0);
+//	SwapBuffers(hDC);
+}
+
+void deInit()
+{
+}
+
+void init()
+{
+	allocSel = sel_registerName("alloc");
+	initSel = sel_registerName("init");
+}
 
 var Screen__refresh() 
 {
-
-		return 0;
+	if (refresh) return 0;
+	refresh = -1;
+	init();
+	return 0;
 }
 
-var Keyboard__screenKeyPressed()
+var Screen__processEvents()
 {
-	return 0;
+	var k = 0;
+	static var in_proc = 0;
+	if (in_proc) {
+		return 0;
+	}
+	in_proc = -1;
+	init();
+	key = 0;
+		if (key) {
+			k = key;
+		}
+	Sys__wait(20);
+	in_proc = 0;
+	return k;
 }
 
 
@@ -2162,6 +2232,488 @@ var Buffer__getSize(var __this) {
 #undef size__
 #undef pos__
 #undef dispCb__
+#endif
+
+#ifdef JACK_IMPLEMENTATION
+var JackTokenizer___str0[] = {99,108,97,115,115,0};
+var JackTokenizer___str1[] = {109,101,116,104,111,100,0};
+var JackTokenizer___str2[] = {102,117,110,99,116,105,111,110,0};
+var JackTokenizer___str3[] = {99,111,110,115,116,114,117,99,116,111,114,0};
+var JackTokenizer___str4[] = {99,97,108,108,98,97,99,107,0};
+var JackTokenizer___str5[] = {105,110,116,0};
+var JackTokenizer___str6[] = {98,111,111,108,101,97,110,0};
+var JackTokenizer___str7[] = {99,104,97,114,0};
+var JackTokenizer___str8[] = {118,111,105,100,0};
+var JackTokenizer___str9[] = {118,97,114,0};
+var JackTokenizer___str10[] = {115,116,97,116,105,99,0};
+var JackTokenizer___str11[] = {102,105,101,108,100,0};
+var JackTokenizer___str12[] = {108,101,116,0};
+var JackTokenizer___str13[] = {100,111,0};
+var JackTokenizer___str14[] = {105,102,0};
+var JackTokenizer___str15[] = {101,108,115,101,0};
+var JackTokenizer___str16[] = {119,104,105,108,101,0};
+var JackTokenizer___str17[] = {114,101,116,117,114,110,0};
+var JackTokenizer___str18[] = {116,114,117,101,0};
+var JackTokenizer___str19[] = {102,97,108,115,101,0};
+var JackTokenizer___str20[] = {110,117,108,108,0};
+var JackTokenizer___str21[] = {116,104,105,115,0};
+var JackTokenizer___str22[] = {35,0};
+var JackTokenizer___str23[] = {43,0};
+var JackTokenizer___str24[] = {45,0};
+var JackTokenizer___str25[] = {42,0};
+var JackTokenizer___str26[] = {47,0};
+var JackTokenizer___str27[] = {38,0};
+var JackTokenizer___str28[] = {124,0};
+var JackTokenizer___str29[] = {62,0};
+var JackTokenizer___str30[] = {60,0};
+var JackTokenizer___str31[] = {61,0};
+var JackTokenizer___str32[] = {44,0};
+var JackTokenizer___str33[] = {126,0};
+var JackTokenizer___str34[] = {59,0};
+var JackTokenizer___str35[] = {46,0};
+var JackTokenizer___str36[] = {123,0};
+var JackTokenizer___str37[] = {125,0};
+var JackTokenizer___str38[] = {40,0};
+var JackTokenizer___str39[] = {41,0};
+var JackTokenizer___str40[] = {91,0};
+var JackTokenizer___str41[] = {93,0};
+var JackTokenizer___str42[] = {67,111,109,109,101,110,116,32,116,111,119,97,114,100,32,101,110,100,32,111,102,32,102,105,108,101,46,0};
+var JackTokenizer___str43[] = {108,105,110,101,0};
+var JackTokenizer___str44[] = {102,105,108,101,0};
+var JackTokenizer___str45[] = {110,101,119,108,105,110,101,32,105,110,32,115,116,114,105,110,103,0};
+var JackTokenizer___str46[] = {87,104,105,116,101,32,115,112,97,99,101,0};
+var JackTokenizer___str47[] = {67,111,109,109,101,110,116,32,116,111,119,97,114,100,32,101,110,100,32,111,102,32,102,105,108,101,46,0};
+var JackTokenizer___str48[] = {82,101,97,99,104,101,100,32,101,110,100,32,111,102,32,102,105,108,101,32,116,111,107,101,110,46,0};
+var JackTokenizer___str49[] = {76,101,120,101,114,32,101,114,114,111,114,44,32,105,110,32,0};
+var JackTokenizer___str50[] = {32,117,110,101,120,112,101,99,116,101,100,32,39,0};
+var JackTokenizer___str51[] = {39,32,97,116,32,108,105,110,101,32,0};
+#define src__ (__this+0)
+#define x__ (__this+1)
+#define tbl__ (__this+2)
+#define token__ (__this+3)
+#define c__ (__this+4)
+#define ahead__ (__this+5)
+#define token_type__ (__this+6)
+#define key_word__ (__this+7)
+#define int_val__ (__this+8)
+#define line__ (__this+9)
+#define last_line__ (__this+10)
+#define new_file__ (__this+11)
+#define symbol___ (__this+12)
+#define gen_xml__ (__this+13)
+var JackTokenizer__new(var destination) {
+	var __this;
+	__this = Memory__alloc(14);
+	__poke(src__, 0);
+	__poke(x__, destination);
+	__poke(token__, String__new(256));
+	__poke(new_file__, 0);
+	__poke(c__, 0);
+	__poke(line__, 0);
+	__poke(last_line__, -1);
+	__poke(ahead__, 0);
+	__poke(token_type__, -1);
+	__poke(key_word__, 0);
+	__poke(symbol___, 0);
+	__poke(int_val__, 0);
+	__poke(gen_xml__, 0);
+	__poke(tbl__, JackTokenizer__getSymbolHash(__this));
+	return __this;
+}
+var JackTokenizer__dispose(var __this) {
+	Hash__dispose(__peek(tbl__));
+	String__dispose(__peek(token__));
+	Memory__deAlloc(__this);
+	return 0;
+}
+var JackTokenizer__init(var __this, var source, var generate_xml) {
+	__poke(src__, source);
+	if (0!=(__peek(src__))) {
+		__poke(new_file__, File__getName(__peek(src__)));
+	}
+
+	__poke(gen_xml__, generate_xml);
+	__poke(c__, 0);
+	__poke(ahead__, 0);
+	__poke(token_type__, -1);
+	__poke(key_word__, 0);
+	__poke(int_val__, 0);
+	__poke(line__, 0);
+	__poke(last_line__, -1);
+	return 0;
+}
+var JackTokenizer__getSymbolHash(var __this) {
+	var h;
+	h = Hash__new(256, 0);
+	Hash__add(h, Memory__getString(JackTokenizer___str0), C__CLASS());
+	Hash__add(h, Memory__getString(JackTokenizer___str1), C__METHOD());
+	Hash__add(h, Memory__getString(JackTokenizer___str2), C__FUNCTION());
+	Hash__add(h, Memory__getString(JackTokenizer___str3), C__CONSTRUCTOR());
+	Hash__add(h, Memory__getString(JackTokenizer___str4), C__CALLBACK());
+	Hash__add(h, Memory__getString(JackTokenizer___str5), C__INT());
+	Hash__add(h, Memory__getString(JackTokenizer___str6), C__BOOLEAN());
+	Hash__add(h, Memory__getString(JackTokenizer___str7), C__CHAR());
+	Hash__add(h, Memory__getString(JackTokenizer___str8), C__VOID());
+	Hash__add(h, Memory__getString(JackTokenizer___str9), C__VAR());
+	Hash__add(h, Memory__getString(JackTokenizer___str10), C__STATIC());
+	Hash__add(h, Memory__getString(JackTokenizer___str11), C__FIELD());
+	Hash__add(h, Memory__getString(JackTokenizer___str12), C__LET());
+	Hash__add(h, Memory__getString(JackTokenizer___str13), C__DO());
+	Hash__add(h, Memory__getString(JackTokenizer___str14), C__IF());
+	Hash__add(h, Memory__getString(JackTokenizer___str15), C__ELSE());
+	Hash__add(h, Memory__getString(JackTokenizer___str16), C__WHILE());
+	Hash__add(h, Memory__getString(JackTokenizer___str17), C__RETURN());
+	Hash__add(h, Memory__getString(JackTokenizer___str18), C__TRUE());
+	Hash__add(h, Memory__getString(JackTokenizer___str19), C__FALSE());
+	Hash__add(h, Memory__getString(JackTokenizer___str20), C__NULL());
+	Hash__add(h, Memory__getString(JackTokenizer___str21), C__THIS());
+	Hash__add(h, Memory__getString(JackTokenizer___str22), C__ASM());
+	Hash__add(h, Memory__getString(JackTokenizer___str23), C__PLUS());
+	Hash__add(h, Memory__getString(JackTokenizer___str24), C__MINUS());
+	Hash__add(h, Memory__getString(JackTokenizer___str25), C__MULTIPLY());
+	Hash__add(h, Memory__getString(JackTokenizer___str26), C__DIV());
+	Hash__add(h, Memory__getString(JackTokenizer___str27), C__AND());
+	Hash__add(h, Memory__getString(JackTokenizer___str28), C__OR());
+	Hash__add(h, Memory__getString(JackTokenizer___str29), C__GREATER());
+	Hash__add(h, Memory__getString(JackTokenizer___str30), C__LESS());
+	Hash__add(h, Memory__getString(JackTokenizer___str31), C__EQUAL());
+	Hash__add(h, Memory__getString(JackTokenizer___str32), C__COMMA());
+	Hash__add(h, Memory__getString(JackTokenizer___str33), C__TILDE());
+	Hash__add(h, Memory__getString(JackTokenizer___str34), C__SEMICOLON());
+	Hash__add(h, Memory__getString(JackTokenizer___str35), C__DOT());
+	Hash__add(h, Memory__getString(JackTokenizer___str36), C__LEFT_CURLY_BRACKET());
+	Hash__add(h, Memory__getString(JackTokenizer___str37), C__RIGHT_CURLY_BRACKET());
+	Hash__add(h, Memory__getString(JackTokenizer___str38), C__LEFT_PARENTHESIS());
+	Hash__add(h, Memory__getString(JackTokenizer___str39), C__RIGHT_PARENTHESIS());
+	Hash__add(h, Memory__getString(JackTokenizer___str40), C__LEFT_SQUARE_BRACKET());
+	Hash__add(h, Memory__getString(JackTokenizer___str41), C__RIGHT_SQUARE_BRACKET());
+	return h;
+}
+var JackTokenizer__hasMoreTokens(var __this) {
+	var in_comment;
+	var ignore_line;
+	var start;
+	if (0!=(((__peek(token_type__)==-1)?-1:0))) {
+		__poke(c__, File__readUtf8(__peek(src__)));
+		__poke(ahead__, File__readUtf8(__peek(src__)));
+		__poke(token_type__, 0);
+	}
+
+	in_comment = 0;
+	ignore_line = 0;
+	start = __peek(line__);
+	while (-1==((((__peek(c__)>0)?-1:0))&(((__peek(c__)<1114112)?-1:0)))) {
+		if (0!=(ignore_line)) {
+			if (0!=(((__peek(c__)==10)?-1:0))) {
+				ignore_line = 0;
+			}
+
+		} else {
+			if (0!=(in_comment)) {
+				if (0!=(((__peek(c__)==42)?-1:0))) {
+					if (0!=(((__peek(ahead__)==47)?-1:0))) {
+						in_comment = 0;
+						JackTokenizer__next(__this);
+					}
+
+				}
+
+			} else {
+				if (0!=(((__peek(c__)==47)?-1:0))) {
+					if (0!=(((__peek(ahead__)==42)?-1:0))) {
+						start = __peek(line__);
+						in_comment = -1;
+					} else {
+						if (0!=(((__peek(ahead__)==47)?-1:0))) {
+							ignore_line = -1;
+						} else {
+							return -1;
+						}
+					}
+				} else {
+					if (0!=((((__peek(c__)==9)?-1:0))|(((__peek(c__)==10)?-1:0))|(((__peek(c__)==13)?-1:0))|(((__peek(c__)==32)?-1:0)))) {
+						__poke(c__, __peek(c__));
+					} else {
+						return -1;
+					}
+				}
+			}
+		}
+		JackTokenizer__next(__this);
+	}
+	if (0!=(in_comment)) {
+		JackTokenizer__error(__this, start, Memory__getString(JackTokenizer___str42));
+	}
+
+	__poke(token_type__, 0);
+	return 0;
+}
+var JackTokenizer__next(var __this) {
+	if (0!=(((__peek(c__)==10)?-1:0))) {
+		__poke(line__, __peek(line__)+1);
+	}
+
+	__poke(c__, __peek(ahead__));
+	__poke(ahead__, File__readUtf8(__peek(src__)));
+	return 0;
+}
+var JackTokenizer__addLine(var __this) {
+	var u;
+	if (0!=(((__peek(line__)>__peek(last_line__))?-1:0))) {
+		u = String__new(8);
+		u = String__setInt(u, __peek(line__)+1);
+		Xml__addAttribute(__peek(x__), Memory__getString(JackTokenizer___str43), u);
+		String__dispose(u);
+		__poke(last_line__, __peek(line__));
+	}
+
+	if (0!=(__peek(new_file__))) {
+		Xml__addAttribute(__peek(x__), Memory__getString(JackTokenizer___str44), __peek(new_file__));
+		__poke(new_file__, 0);
+	}
+
+	return 0;
+}
+var JackTokenizer__getFileName(var __this) {
+	return __peek(new_file__);
+}
+var JackTokenizer__getTokenConst(var __this, var s) {
+	return Hash__get(__peek(tbl__), s);
+}
+var JackTokenizer__advance(var __this) {
+	var start;
+	var l;
+	var k;
+	var key_or_id;
+	var in_string;
+	var in_int;
+	var in_asm;
+	var in_escape;
+	l = 0;
+	key_or_id = 0;
+	in_string = 0;
+	in_int = 0;
+	in_asm = 0;
+	in_escape = 0;
+	String__setCharAt(__peek(token__), 0, 0);
+	start = __peek(line__);
+	while (-1==((((__peek(c__)>0)?-1:0))&(((__peek(c__)<1114112)?-1:0)))) {
+		if (0!=(in_string&(((__peek(c__)==34)?-1:0))&(~in_escape))) {
+			__poke(token_type__, C__STRING_CONST());
+			if (0!=(__peek(gen_xml__))) {
+				Xml__addElement(__peek(x__), __peek(token_type__));
+				Xml__addContent(__peek(x__), __peek(token__));
+				JackTokenizer__addLine(__this);
+				Xml__closeCurrent(__peek(x__));
+			}
+
+			JackTokenizer__next(__this);
+			return 0;
+		} else {
+			if (0!=(in_int)) {
+				if (0!=(((((__peek(c__)>47)?-1:0))&(((__peek(c__)<58)?-1:0))))) {
+					__poke(token__, String__appendChar(__peek(token__), __peek(c__)));
+					l = l+1;
+				} else {
+					__poke(token_type__, C__INT_CONST());
+					if (0!=(__peek(gen_xml__))) {
+						Xml__addElement(__peek(x__), __peek(token_type__));
+						Xml__addContent(__peek(x__), __peek(token__));
+						JackTokenizer__addLine(__this);
+						Xml__closeCurrent(__peek(x__));
+					}
+
+					return 0;
+				}
+			} else {
+				if (0!=(in_string)) {
+					if (0!=(in_escape)) {
+						in_escape = 0;
+						if (0!=(((__peek(c__)==92)?-1:0))) {
+							__poke(c__, 92);
+						}
+
+						if (0!=(((__peek(c__)==34)?-1:0))) {
+							__poke(c__, 34);
+						}
+
+						if (0!=(((__peek(c__)==110)?-1:0))) {
+							__poke(c__, 10);
+						}
+
+					} else {
+						if (0!=(((__peek(c__)==10)?-1:0))) {
+							JackTokenizer__error(__this, __peek(line__), Memory__getString(JackTokenizer___str45));
+							return 0;
+						} else {
+							if (0!=(((__peek(c__)==92)?-1:0))) {
+								in_escape = -1;
+								__poke(c__, 0);
+							}
+
+						}
+					}
+					if (0!=(__peek(c__))) {
+						__poke(token__, String__appendChar(__peek(token__), __peek(c__)));
+						l = l+1;
+					}
+
+				} else {
+					if (0!=(in_asm)) {
+						__poke(token__, String__appendChar(__peek(token__), __peek(c__)));
+						l = l+1;
+						if (0!=(((__peek(c__)==10)?-1:0))) {
+							__poke(token_type__, C__ASM());
+							if (0!=(__peek(gen_xml__))) {
+								Xml__addElement(__peek(x__), __peek(token_type__));
+								Xml__addContent(__peek(x__), __peek(token__));
+								JackTokenizer__addLine(__this);
+								Xml__closeCurrent(__peek(x__));
+							}
+
+							JackTokenizer__next(__this);
+							return 0;
+						}
+
+					} else {
+						if (0!=(((__peek(c__)==34)?-1:0))) {
+							in_string = -1;
+						} else {
+							if (0!=(((((__peek(c__)>64)?-1:0))&(((__peek(c__)<91)?-1:0)))|((((__peek(c__)>96)?-1:0))&(((__peek(c__)<123)?-1:0)))|(((__peek(c__)==95)?-1:0))|((((__peek(c__)>47)?-1:0))&(((__peek(c__)<58)?-1:0))&(((l>0)?-1:0))))) {
+								key_or_id = -1;
+								__poke(token__, String__appendChar(__peek(token__), __peek(c__)));
+								l = l+1;
+							} else {
+								if (0!=(key_or_id)) {
+									k = JackTokenizer__getTokenConst(__this, __peek(token__));
+									if (0!=((((k==C__CLASS())?-1:0))|(((k==C__METHOD())?-1:0))|(((k==C__FUNCTION())?-1:0))|(((k==C__CONSTRUCTOR())?-1:0))|(((k==C__CALLBACK())?-1:0))|(((k==C__INT())?-1:0))|(((k==C__BOOLEAN())?-1:0))|(((k==C__CHAR())?-1:0))|(((k==C__VOID())?-1:0))|(((k==C__VAR())?-1:0))|(((k==C__STATIC())?-1:0))|(((k==C__FIELD())?-1:0))|(((k==C__LET())?-1:0))|(((k==C__DO())?-1:0))|(((k==C__IF())?-1:0))|(((k==C__ELSE())?-1:0))|(((k==C__WHILE())?-1:0))|(((k==C__RETURN())?-1:0))|(((k==C__TRUE())?-1:0))|(((k==C__FALSE())?-1:0))|(((k==C__NULL())?-1:0))|(((k==C__THIS())?-1:0)))) {
+										__poke(token_type__, C__KEYWORD());
+										__poke(key_word__, k);
+									} else {
+										__poke(token_type__, C__IDENTIFIER());
+									}
+									if (0!=(__peek(gen_xml__))) {
+										Xml__addElement(__peek(x__), __peek(token_type__));
+										Xml__addContent(__peek(x__), __peek(token__));
+										JackTokenizer__addLine(__this);
+										Xml__closeCurrent(__peek(x__));
+									}
+
+									return 0;
+								} else {
+									if (0!=(((((__peek(c__)>47)?-1:0))&(((__peek(c__)<58)?-1:0))))) {
+										__poke(token__, String__appendChar(__peek(token__), __peek(c__)));
+										l = l+1;
+										in_int = -1;
+									} else {
+										__poke(token__, String__appendChar(__peek(token__), __peek(c__)));
+										__poke(c__, JackTokenizer__getTokenConst(__this, __peek(token__)));
+										if (0!=((((__peek(c__)==C__LEFT_CURLY_BRACKET())?-1:0))|(((__peek(c__)==C__RIGHT_CURLY_BRACKET())?-1:0))|(((__peek(c__)==C__LEFT_PARENTHESIS())?-1:0))|(((__peek(c__)==C__RIGHT_PARENTHESIS())?-1:0))|(((__peek(c__)==C__LEFT_SQUARE_BRACKET())?-1:0))|(((__peek(c__)==C__RIGHT_SQUARE_BRACKET())?-1:0))|(((__peek(c__)==C__DOT())?-1:0))|(((__peek(c__)==C__COMMA())?-1:0))|(((__peek(c__)==C__SEMICOLON())?-1:0))|(((__peek(c__)==C__PLUS())?-1:0))|(((__peek(c__)==C__MINUS())?-1:0))|(((__peek(c__)==C__MULTIPLY())?-1:0))|(((__peek(c__)==C__DIV())?-1:0))|(((__peek(c__)==C__AND())?-1:0))|(((__peek(c__)==C__OR())?-1:0))|(((__peek(c__)==C__GREATER())?-1:0))|(((__peek(c__)==C__LESS())?-1:0))|(((__peek(c__)==C__EQUAL())?-1:0))|(((__peek(c__)==C__TILDE())?-1:0)))) {
+											__poke(token_type__, C__SYMBOL());
+											__poke(symbol___, __peek(c__));
+											if (0!=(__peek(gen_xml__))) {
+												Xml__addElement(__peek(x__), __peek(token_type__));
+												Xml__addContent(__peek(x__), __peek(token__));
+												JackTokenizer__addLine(__this);
+												Xml__closeCurrent(__peek(x__));
+											}
+
+											JackTokenizer__next(__this);
+											return 0;
+										} else {
+											if (0!=((((__peek(c__)==9)?-1:0))|(((__peek(c__)==10)?-1:0))|(((__peek(c__)==13)?-1:0))|(((__peek(c__)==32)?-1:0)))) {
+												JackTokenizer__error(__this, __peek(line__), Memory__getString(JackTokenizer___str46));
+												__poke(line__, __peek(line__));
+											} else {
+												if (0!=(((__peek(c__)==C__ASM())?-1:0))) {
+													__poke(token__, String__appendChar(__peek(token__), __peek(c__)));
+													in_asm = -1;
+													String__setCharAt(__peek(token__), 0, 0);
+												} else {
+													__poke(token__, String__appendChar(__peek(token__), __peek(c__)));
+													JackTokenizer__error(__this, __peek(line__), __peek(token__));
+													JackTokenizer__next(__this);
+													return 0;
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		JackTokenizer__next(__this);
+	}
+	if (0!=(in_string)) {
+		JackTokenizer__error(__this, start, Memory__getString(JackTokenizer___str47));
+	}
+
+	if (0!=(in_int|key_or_id)) {
+		JackTokenizer__error(__this, start, Memory__getString(JackTokenizer___str48));
+	}
+
+	return 0;
+}
+var JackTokenizer__error(var __this, var line_, var w) {
+	Output__printString(Memory__getString(JackTokenizer___str49));
+	Output__printString(File__getName(__peek(src__)));
+	Output__printString(Memory__getString(JackTokenizer___str50));
+	Output__printString(w);
+	Output__printString(Memory__getString(JackTokenizer___str51));
+	Output__printInt(line_+1);
+	Output__println();
+	__poke(c__, 0);
+	return 0;
+}
+var JackTokenizer__getXml(var __this) {
+	return __peek(x__);
+}
+var JackTokenizer__getLine(var __this) {
+	return __peek(line__)+1;
+}
+var JackTokenizer__tokenType(var __this) {
+	return __peek(token_type__);
+}
+var JackTokenizer__keyWord(var __this) {
+	return __peek(key_word__);
+}
+var JackTokenizer__symbol(var __this) {
+	return __peek(symbol___);
+}
+var JackTokenizer__identifier(var __this) {
+	return __peek(token__);
+}
+var JackTokenizer__intVal(var __this) {
+	return String__intValue(__peek(token__));
+}
+var JackTokenizer__stringVal(var __this) {
+	return __peek(token__);
+}
+#undef src__
+#undef x__
+#undef tbl__
+#undef token__
+#undef c__
+#undef ahead__
+#undef token_type__
+#undef key_word__
+#undef int_val__
+#undef line__
+#undef last_line__
+#undef new_file__
+#undef symbol___
+#undef gen_xml__
+#endif
+
+#ifdef JACK_IMPLEMENTATION
+var Http__new(var url) {
+	var __this;
+	__this = Memory__alloc(1);
+	return __this;
+}
 #endif
 
 #ifdef JACK_IMPLEMENTATION
@@ -2396,622 +2948,8 @@ var Bytes__setStringToNative(var __this, var name) {
 #endif
 
 #ifdef JACK_IMPLEMENTATION
-var C__NULL_CHARACTER() {
+var Canavas__draw(var x, var y) {
 	return 0;
-}
-var C__START_OF_HEADING() {
-	return 1;
-}
-var C__START_OF_TEXT() {
-	return 2;
-}
-var C__END_OF_TEXT_CHARACTER() {
-	return 3;
-}
-var C__END_OF_TRANSMISSION_CHARACTER() {
-	return 4;
-}
-var C__ENQUIRY_CHARACTER() {
-	return 5;
-}
-var C__ACKNOWLEDGE_CHARACTER() {
-	return 6;
-}
-var C__BELL_CHARACTER() {
-	return 7;
-}
-var C__BACKSPACE() {
-	return 8;
-}
-var C__HORIZONTAL_TAB() {
-	return 9;
-}
-var C__LINE_FEED() {
-	return 10;
-}
-var C__VERTICAL_TAB() {
-	return 11;
-}
-var C__FORM_FEED() {
-	return 12;
-}
-var C__CARRIAGE_RETURN() {
-	return 13;
-}
-var C__SHIFT_OUT() {
-	return 14;
-}
-var C__SHIFT_IN() {
-	return 15;
-}
-var C__DATA_LINK_ESCAPE() {
-	return 16;
-}
-var C__DEVICE_CONTROL_1() {
-	return 17;
-}
-var C__DEVICE_CONTROL_2() {
-	return 18;
-}
-var C__DEVICE_CONTROL_3() {
-	return 19;
-}
-var C__DEVICE_CONTROL_4() {
-	return 20;
-}
-var C__NEGATIVE_ACKNOWLEDGE_CHARACTER() {
-	return 21;
-}
-var C__SYNCHRONOUS_IDLE() {
-	return 22;
-}
-var C__END_OF_TRANSMISSION_BLOCK() {
-	return 23;
-}
-var C__CANCEL_CHARACTER() {
-	return 24;
-}
-var C__END_OF_MEDIUM() {
-	return 25;
-}
-var C__SUBSTITUTE_CHARACTER() {
-	return 26;
-}
-var C__ESCAPE_CHARACTER() {
-	return 27;
-}
-var C__FILE_SEPARATOR() {
-	return 28;
-}
-var C__GROUP_SEPARATOR() {
-	return 29;
-}
-var C__RECORD_SEPARATOR() {
-	return 30;
-}
-var C__UNIT_SEPARATOR() {
-	return 31;
-}
-var C__SPACE() {
-	return 32;
-}
-var C__EXCLAMATION_MARK() {
-	return 33;
-}
-var C__QUOTATION_MARK() {
-	return 34;
-}
-var C__HASHTAG() {
-	return 35;
-}
-var C__DOLLAR_SIGN() {
-	return 36;
-}
-var C__PERCENT_SIGN() {
-	return 37;
-}
-var C__AMPERSAND() {
-	return 38;
-}
-var C__APOSTROPHE() {
-	return 39;
-}
-var C__LEFT_PARENTHESIS() {
-	return 40;
-}
-var C__RIGHT_PARENTHESIS() {
-	return 41;
-}
-var C__ASTERISK() {
-	return 42;
-}
-var C__PLUS_SIGN() {
-	return 43;
-}
-var C__COMMA() {
-	return 44;
-}
-var C__HYPHEN_MINUS() {
-	return 45;
-}
-var C__FULL_STOP() {
-	return 46;
-}
-var C__SLASH() {
-	return 47;
-}
-var C__DIGIT_ZERO() {
-	return 48;
-}
-var C__DIGIT_ONE() {
-	return 49;
-}
-var C__DIGIT_TWO() {
-	return 50;
-}
-var C__DIGIT_THREE() {
-	return 51;
-}
-var C__DIGIT_FOUR() {
-	return 52;
-}
-var C__DIGIT_FIVE() {
-	return 53;
-}
-var C__DIGIT_SIX() {
-	return 54;
-}
-var C__DIGIT_SEVEN() {
-	return 55;
-}
-var C__DIGIT_EIGHT() {
-	return 56;
-}
-var C__DIGIT_NINE() {
-	return 57;
-}
-var C__COLON() {
-	return 58;
-}
-var C__SEMICOLON() {
-	return 59;
-}
-var C__LESS_THAN_SIGN() {
-	return 60;
-}
-var C__EQUAL_SIGN() {
-	return 61;
-}
-var C__GREATER_THAN_SIGN() {
-	return 62;
-}
-var C__QUESTION_MARK() {
-	return 63;
-}
-var C__AT_SIGN() {
-	return 64;
-}
-var C__LATIN_CAPITAL_LETTER_A() {
-	return 65;
-}
-var C__LATIN_CAPITAL_LETTER_B() {
-	return 66;
-}
-var C__LATIN_CAPITAL_LETTER_C() {
-	return 67;
-}
-var C__LATIN_CAPITAL_LETTER_D() {
-	return 68;
-}
-var C__LATIN_CAPITAL_LETTER_E() {
-	return 69;
-}
-var C__LATIN_CAPITAL_LETTER_F() {
-	return 70;
-}
-var C__LATIN_CAPITAL_LETTER_G() {
-	return 71;
-}
-var C__LATIN_CAPITAL_LETTER_H() {
-	return 72;
-}
-var C__LATIN_CAPITAL_LETTER_I() {
-	return 73;
-}
-var C__LATIN_CAPITAL_LETTER_J() {
-	return 74;
-}
-var C__LATIN_CAPITAL_LETTER_K() {
-	return 75;
-}
-var C__LATIN_CAPITAL_LETTER_L() {
-	return 76;
-}
-var C__LATIN_CAPITAL_LETTER_M() {
-	return 77;
-}
-var C__LATIN_CAPITAL_LETTER_N() {
-	return 78;
-}
-var C__LATIN_CAPITAL_LETTER_O() {
-	return 79;
-}
-var C__LATIN_CAPITAL_LETTER_P() {
-	return 80;
-}
-var C__LATIN_CAPITAL_LETTER_Q() {
-	return 81;
-}
-var C__LATIN_CAPITAL_LETTER_R() {
-	return 82;
-}
-var C__LATIN_CAPITAL_LETTER_S() {
-	return 83;
-}
-var C__LATIN_CAPITAL_LETTER_T() {
-	return 84;
-}
-var C__LATIN_CAPITAL_LETTER_U() {
-	return 85;
-}
-var C__LATIN_CAPITAL_LETTER_V() {
-	return 86;
-}
-var C__LATIN_CAPITAL_LETTER_W() {
-	return 87;
-}
-var C__LATIN_CAPITAL_LETTER_X() {
-	return 88;
-}
-var C__LATIN_CAPITAL_LETTER_Y() {
-	return 89;
-}
-var C__LATIN_CAPITAL_LETTER_Z() {
-	return 90;
-}
-var C__LEFT_SQUARE_BRACKET() {
-	return 91;
-}
-var C__BACKSLASH() {
-	return 92;
-}
-var C__RIGHT_SQUARE_BRACKET() {
-	return 93;
-}
-var C__CIRCUMFLEX_ACCENT() {
-	return 94;
-}
-var C__LOW_LINE() {
-	return 95;
-}
-var C__GRAVE_ACCENT() {
-	return 96;
-}
-var C__LATIN_SMALL_LETTER_A() {
-	return 97;
-}
-var C__LATIN_SMALL_LETTER_B() {
-	return 98;
-}
-var C__LATIN_SMALL_LETTER_C() {
-	return 99;
-}
-var C__LATIN_SMALL_LETTER_D() {
-	return 100;
-}
-var C__LATIN_SMALL_LETTER_E() {
-	return 101;
-}
-var C__LATIN_SMALL_LETTER_F() {
-	return 102;
-}
-var C__LATIN_SMALL_LETTER_G() {
-	return 103;
-}
-var C__LATIN_SMALL_LETTER_H() {
-	return 104;
-}
-var C__LATIN_SMALL_LETTER_I() {
-	return 105;
-}
-var C__LATIN_SMALL_LETTER_J() {
-	return 106;
-}
-var C__LATIN_SMALL_LETTER_K() {
-	return 107;
-}
-var C__LATIN_SMALL_LETTER_L() {
-	return 108;
-}
-var C__LATIN_SMALL_LETTER_M() {
-	return 109;
-}
-var C__LATIN_SMALL_LETTER_N() {
-	return 110;
-}
-var C__LATIN_SMALL_LETTER_O() {
-	return 111;
-}
-var C__LATIN_SMALL_LETTER_P() {
-	return 112;
-}
-var C__LATIN_SMALL_LETTER_Q() {
-	return 113;
-}
-var C__LATIN_SMALL_LETTER_R() {
-	return 114;
-}
-var C__LATIN_SMALL_LETTER_S() {
-	return 115;
-}
-var C__LATIN_SMALL_LETTER_T() {
-	return 116;
-}
-var C__LATIN_SMALL_LETTER_U() {
-	return 117;
-}
-var C__LATIN_SMALL_LETTER_V() {
-	return 118;
-}
-var C__LATIN_SMALL_LETTER_W() {
-	return 119;
-}
-var C__LATIN_SMALL_LETTER_X() {
-	return 120;
-}
-var C__LATIN_SMALL_LETTER_Y() {
-	return 121;
-}
-var C__LATIN_SMALL_LETTER_Z() {
-	return 122;
-}
-var C__LEFT_CURLY_BRACKET() {
-	return 123;
-}
-var C__VERTICAL_BAR() {
-	return 124;
-}
-var C__RIGHT_CURLY_BRACKET() {
-	return 125;
-}
-var C__TILDE() {
-	return 126;
-}
-var C__DELETE() {
-	return 127;
-}
-var C__INVALID() {
-	return 128;
-}
-var C__NULL() {
-	return 129;
-}
-var C__NONE() {
-	return 130;
-}
-var C__KEYWORD() {
-	return 131;
-}
-var C__SYMBOL() {
-	return 132;
-}
-var C__IDENTIFIER() {
-	return 133;
-}
-var C__INT_CONST() {
-	return 134;
-}
-var C__STRING_CONST() {
-	return 135;
-}
-var C__CLASS() {
-	return 136;
-}
-var C__METHOD() {
-	return 137;
-}
-var C__FUNCTION() {
-	return 138;
-}
-var C__CONSTRUCTOR() {
-	return 139;
-}
-var C__CALLBACK() {
-	return 140;
-}
-var C__INT() {
-	return 141;
-}
-var C__BOOLEAN() {
-	return 142;
-}
-var C__CHAR() {
-	return 143;
-}
-var C__VOID() {
-	return 144;
-}
-var C__VAR() {
-	return 145;
-}
-var C__STATIC() {
-	return 146;
-}
-var C__FIELD() {
-	return 147;
-}
-var C__LET() {
-	return 148;
-}
-var C__DO() {
-	return 149;
-}
-var C__IF() {
-	return 150;
-}
-var C__ELSE() {
-	return 151;
-}
-var C__WHILE() {
-	return 152;
-}
-var C__RETURN() {
-	return 153;
-}
-var C__TRUE() {
-	return 154;
-}
-var C__FALSE() {
-	return 155;
-}
-var C__BOOL() {
-	return 156;
-}
-var C__THIS() {
-	return 157;
-}
-var C__ASM() {
-	return 158;
-}
-var C__PLUS() {
-	return 159;
-}
-var C__MINUS() {
-	return 160;
-}
-var C__MULTIPLY() {
-	return 161;
-}
-var C__DIV() {
-	return 162;
-}
-var C__AND() {
-	return 163;
-}
-var C__OR() {
-	return 164;
-}
-var C__GREATER() {
-	return 165;
-}
-var C__LESS() {
-	return 166;
-}
-var C__EQUAL() {
-	return 167;
-}
-var C__ROOT() {
-	return 168;
-}
-var C__EXPR() {
-	return 169;
-}
-var C__CALL() {
-	return 170;
-}
-var C__CLASSNAME() {
-	return 171;
-}
-var C__ARGS() {
-	return 172;
-}
-var C__VARNAME() {
-	return 173;
-}
-var C__ARRAY() {
-	return 174;
-}
-var C__ASSIGN() {
-	return 175;
-}
-var C__STATEMENTS() {
-	return 176;
-}
-var C__PARAMS() {
-	return 177;
-}
-var C__VARS() {
-	return 178;
-}
-var C__TYPE() {
-	return 179;
-}
-var C__STRING() {
-	return 180;
-}
-var C__ARRAYVAR() {
-	return 181;
-}
-var C__PARAN() {
-	return 182;
-}
-var C__UNARYOP() {
-	return 183;
-}
-var C__TERM() {
-	return 184;
-}
-var C__OP() {
-	return 185;
-}
-var C__DOT() {
-	return 186;
-}
-var C__BODY() {
-	return 187;
-}
-var C__SUBROUTINENAME() {
-	return 188;
-}
-var C__UNARYMINUS() {
-	return 189;
-}
-var C__UNARYPLUS() {
-	return 190;
-}
-var C__UNARYTILDE() {
-	return 191;
-}
-var C__SUBROUTINECALL() {
-	return 192;
-}
-var C__CLASSORVARNAME() {
-	return 193;
-}
-var C__NEXT_FREE_CONSTANT() {
-	return 255;
-}
-#endif
-
-#ifdef JACK_IMPLEMENTATION
-var Callback__callback(var __this, var a, var b) {
-	return 0;
-}
-var Callback__new() {
-	var __this;
-	__this = Memory__alloc(1);
-	(__peek(__this+0)) = (var)Callback__callback;
-	return __this;
-}
-var Callback__dispose(var __this) {
-	Memory__deAlloc(__this);
-	return 0;
-}
-var Callback__invoke(var __this, var a, var b) {
-	return ((var(*)(var,var,var))(__peek(__this)))(__this, a, b);
-}
-#endif
-
-#ifdef JACK_IMPLEMENTATION
-var CallbackStringDispose__callback(var __this, var a, var b) {
-	String__dispose(a);
-	return 0;
-}
-var CallbackStringDispose__new() {
-	var __this;
-	__this = Memory__alloc(1);
-	(__peek(__this+0)) = (var)CallbackStringDispose__callback;
-	return __this;
 }
 #endif
 
@@ -3024,2498 +2962,6 @@ var CallbackXmlNodeDispose__new() {
 	var __this;
 	__this = Memory__alloc(1);
 	(__peek(__this+0)) = (var)CallbackXmlNodeDispose__callback;
-	return __this;
-}
-#endif
-
-#ifdef JACK_IMPLEMENTATION
-var Canavas__draw(var x, var y) {
-	return 0;
-}
-#endif
-
-#ifdef JACK_IMPLEMENTATION
-var Const___str0[] = {32,0};
-var Const___str1[] = {32,0};
-var Const___str2[] = {32,0};
-var Const___str3[] = {32,0};
-var Const___str4[] = {32,0};
-var Const___str5[] = {32,0};
-var Const___str6[] = {32,0};
-var Const___str7[] = {32,0};
-var Const___str8[] = {32,0};
-var Const___str9[] = {32,0};
-var Const___str10[] = {32,0};
-var Const___str11[] = {32,0};
-var Const___str12[] = {32,0};
-var Const___str13[] = {32,0};
-var Const___str14[] = {32,0};
-var Const___str15[] = {32,0};
-var Const___str16[] = {32,0};
-var Const___str17[] = {32,0};
-var Const___str18[] = {32,0};
-var Const___str19[] = {32,0};
-var Const___str20[] = {32,0};
-var Const___str21[] = {32,0};
-var Const___str22[] = {32,0};
-var Const___str23[] = {32,0};
-var Const___str24[] = {32,0};
-var Const___str25[] = {32,0};
-var Const___str26[] = {32,0};
-var Const___str27[] = {32,0};
-var Const___str28[] = {32,0};
-var Const___str29[] = {32,0};
-var Const___str30[] = {32,0};
-var Const___str31[] = {32,0};
-var Const___str32[] = {32,0};
-var Const___str33[] = {33,0};
-var Const___str34[] = {32,0};
-var Const___str35[] = {35,0};
-var Const___str36[] = {36,0};
-var Const___str37[] = {37,0};
-var Const___str38[] = {38,0};
-var Const___str39[] = {39,0};
-var Const___str40[] = {40,0};
-var Const___str41[] = {41,0};
-var Const___str42[] = {42,0};
-var Const___str43[] = {43,0};
-var Const___str44[] = {44,0};
-var Const___str45[] = {45,0};
-var Const___str46[] = {46,0};
-var Const___str47[] = {47,0};
-var Const___str48[] = {48,0};
-var Const___str49[] = {49,0};
-var Const___str50[] = {50,0};
-var Const___str51[] = {51,0};
-var Const___str52[] = {52,0};
-var Const___str53[] = {53,0};
-var Const___str54[] = {54,0};
-var Const___str55[] = {55,0};
-var Const___str56[] = {56,0};
-var Const___str57[] = {57,0};
-var Const___str58[] = {58,0};
-var Const___str59[] = {59,0};
-var Const___str60[] = {60,0};
-var Const___str61[] = {61,0};
-var Const___str62[] = {62,0};
-var Const___str63[] = {63,0};
-var Const___str64[] = {64,0};
-var Const___str65[] = {65,0};
-var Const___str66[] = {66,0};
-var Const___str67[] = {67,0};
-var Const___str68[] = {68,0};
-var Const___str69[] = {69,0};
-var Const___str70[] = {70,0};
-var Const___str71[] = {71,0};
-var Const___str72[] = {72,0};
-var Const___str73[] = {73,0};
-var Const___str74[] = {74,0};
-var Const___str75[] = {75,0};
-var Const___str76[] = {76,0};
-var Const___str77[] = {77,0};
-var Const___str78[] = {78,0};
-var Const___str79[] = {79,0};
-var Const___str80[] = {80,0};
-var Const___str81[] = {81,0};
-var Const___str82[] = {82,0};
-var Const___str83[] = {83,0};
-var Const___str84[] = {84,0};
-var Const___str85[] = {85,0};
-var Const___str86[] = {86,0};
-var Const___str87[] = {87,0};
-var Const___str88[] = {88,0};
-var Const___str89[] = {89,0};
-var Const___str90[] = {90,0};
-var Const___str91[] = {91,0};
-var Const___str92[] = {92,0};
-var Const___str93[] = {93,0};
-var Const___str94[] = {94,0};
-var Const___str95[] = {95,0};
-var Const___str96[] = {96,0};
-var Const___str97[] = {97,0};
-var Const___str98[] = {98,0};
-var Const___str99[] = {99,0};
-var Const___str100[] = {100,0};
-var Const___str101[] = {101,0};
-var Const___str102[] = {102,0};
-var Const___str103[] = {103,0};
-var Const___str104[] = {104,0};
-var Const___str105[] = {105,0};
-var Const___str106[] = {106,0};
-var Const___str107[] = {107,0};
-var Const___str108[] = {108,0};
-var Const___str109[] = {109,0};
-var Const___str110[] = {110,0};
-var Const___str111[] = {111,0};
-var Const___str112[] = {112,0};
-var Const___str113[] = {113,0};
-var Const___str114[] = {114,0};
-var Const___str115[] = {115,0};
-var Const___str116[] = {116,0};
-var Const___str117[] = {117,0};
-var Const___str118[] = {118,0};
-var Const___str119[] = {119,0};
-var Const___str120[] = {120,0};
-var Const___str121[] = {121,0};
-var Const___str122[] = {122,0};
-var Const___str123[] = {123,0};
-var Const___str124[] = {124,0};
-var Const___str125[] = {125,0};
-var Const___str126[] = {126,0};
-var Const___str127[] = {32,0};
-var Const___str128[] = {105,110,118,97,108,105,100,0};
-var Const___str129[] = {110,117,108,108,0};
-var Const___str130[] = {110,111,110,101,0};
-var Const___str131[] = {107,101,121,119,111,114,100,0};
-var Const___str132[] = {115,121,109,98,111,108,0};
-var Const___str133[] = {105,100,101,110,116,105,102,105,101,114,0};
-var Const___str134[] = {105,110,116,95,99,111,110,115,116,0};
-var Const___str135[] = {115,116,114,105,110,103,95,99,111,110,115,116,0};
-var Const___str136[] = {99,108,97,115,115,0};
-var Const___str137[] = {109,101,116,104,111,100,0};
-var Const___str138[] = {102,117,110,99,116,105,111,110,0};
-var Const___str139[] = {99,111,110,115,116,114,117,99,116,111,114,0};
-var Const___str140[] = {99,97,108,108,98,97,99,107,0};
-var Const___str141[] = {105,110,116,0};
-var Const___str142[] = {98,111,111,108,101,97,110,0};
-var Const___str143[] = {99,104,97,114,0};
-var Const___str144[] = {118,111,105,100,0};
-var Const___str145[] = {118,97,114,0};
-var Const___str146[] = {115,116,97,116,105,99,0};
-var Const___str147[] = {102,105,101,108,100,0};
-var Const___str148[] = {108,101,116,0};
-var Const___str149[] = {100,111,0};
-var Const___str150[] = {105,102,0};
-var Const___str151[] = {101,108,115,101,0};
-var Const___str152[] = {119,104,105,108,101,0};
-var Const___str153[] = {114,101,116,117,114,110,0};
-var Const___str154[] = {116,114,117,101,0};
-var Const___str155[] = {102,97,108,115,101,0};
-var Const___str156[] = {110,117,108,108,0};
-var Const___str157[] = {116,104,105,115,0};
-var Const___str158[] = {97,115,109,0};
-var Const___str159[] = {112,108,117,115,0};
-var Const___str160[] = {109,105,110,117,115,0};
-var Const___str161[] = {109,117,108,116,105,112,108,121,0};
-var Const___str162[] = {100,105,118,0};
-var Const___str163[] = {97,110,100,0};
-var Const___str164[] = {111,114,0};
-var Const___str165[] = {103,114,101,97,116,101,114,0};
-var Const___str166[] = {108,101,115,115,0};
-var Const___str167[] = {101,113,117,97,108,0};
-var Const___str168[] = {114,111,111,116,0};
-var Const___str169[] = {101,120,112,114,0};
-var Const___str170[] = {99,97,108,108,0};
-var Const___str171[] = {99,108,97,115,115,110,97,109,101,0};
-var Const___str172[] = {97,114,103,115,0};
-var Const___str173[] = {118,97,114,110,97,109,101,0};
-var Const___str174[] = {97,114,114,97,121,0};
-var Const___str175[] = {97,115,115,105,103,110,0};
-var Const___str176[] = {115,116,97,116,101,109,101,110,116,115,0};
-var Const___str177[] = {112,97,114,97,109,115,0};
-var Const___str178[] = {118,97,114,115,0};
-var Const___str179[] = {116,121,112,101,0};
-var Const___str180[] = {115,116,114,105,110,103,0};
-var Const___str181[] = {97,114,114,97,121,118,97,114,0};
-var Const___str182[] = {112,97,114,97,110,0};
-var Const___str183[] = {117,110,97,114,121,111,112,0};
-var Const___str184[] = {116,101,114,109,0};
-var Const___str185[] = {111,112,0};
-var Const___str186[] = {100,111,116,0};
-var Const___str187[] = {98,111,100,121,0};
-var Const___str188[] = {115,117,98,114,111,117,116,105,110,101,110,97,109,101,0};
-var Const___str189[] = {117,110,97,114,121,109,105,110,117,115,0};
-var Const___str190[] = {117,110,97,114,121,112,108,117,115,0};
-var Const___str191[] = {117,110,97,114,121,116,105,108,100,101,0};
-var Const___str192[] = {115,117,98,114,111,117,116,105,110,101,99,97,108,108,0};
-var Const___str193[] = {99,108,97,115,115,111,114,118,97,114,110,97,109,101,0};
-var Const___str194[] = {110,101,120,116,95,102,114,101,101,95,99,111,110,115,116,97,110,116,0};
-var Const__getList() {
-	var b;
-	var s;
-	b = Buffer__new(256, 0);
-	s = Memory__getString(Const___str0);
-	String__setCharAt(s, 0, 0);
-	Buffer__append(b, s);
-	s = Memory__getString(Const___str1);
-	String__setCharAt(s, 0, 1);
-	Buffer__append(b, s);
-	s = Memory__getString(Const___str2);
-	String__setCharAt(s, 0, 2);
-	Buffer__append(b, s);
-	s = Memory__getString(Const___str3);
-	String__setCharAt(s, 0, 3);
-	Buffer__append(b, s);
-	s = Memory__getString(Const___str4);
-	String__setCharAt(s, 0, 4);
-	Buffer__append(b, s);
-	s = Memory__getString(Const___str5);
-	String__setCharAt(s, 0, 5);
-	Buffer__append(b, s);
-	s = Memory__getString(Const___str6);
-	String__setCharAt(s, 0, 6);
-	Buffer__append(b, s);
-	s = Memory__getString(Const___str7);
-	String__setCharAt(s, 0, 7);
-	Buffer__append(b, s);
-	s = Memory__getString(Const___str8);
-	String__setCharAt(s, 0, 8);
-	Buffer__append(b, s);
-	s = Memory__getString(Const___str9);
-	String__setCharAt(s, 0, 9);
-	Buffer__append(b, s);
-	s = Memory__getString(Const___str10);
-	String__setCharAt(s, 0, 10);
-	Buffer__append(b, s);
-	s = Memory__getString(Const___str11);
-	String__setCharAt(s, 0, 11);
-	Buffer__append(b, s);
-	s = Memory__getString(Const___str12);
-	String__setCharAt(s, 0, 12);
-	Buffer__append(b, s);
-	s = Memory__getString(Const___str13);
-	String__setCharAt(s, 0, 13);
-	Buffer__append(b, s);
-	s = Memory__getString(Const___str14);
-	String__setCharAt(s, 0, 14);
-	Buffer__append(b, s);
-	s = Memory__getString(Const___str15);
-	String__setCharAt(s, 0, 15);
-	Buffer__append(b, s);
-	s = Memory__getString(Const___str16);
-	String__setCharAt(s, 0, 16);
-	Buffer__append(b, s);
-	s = Memory__getString(Const___str17);
-	String__setCharAt(s, 0, 17);
-	Buffer__append(b, s);
-	s = Memory__getString(Const___str18);
-	String__setCharAt(s, 0, 18);
-	Buffer__append(b, s);
-	s = Memory__getString(Const___str19);
-	String__setCharAt(s, 0, 19);
-	Buffer__append(b, s);
-	s = Memory__getString(Const___str20);
-	String__setCharAt(s, 0, 20);
-	Buffer__append(b, s);
-	s = Memory__getString(Const___str21);
-	String__setCharAt(s, 0, 21);
-	Buffer__append(b, s);
-	s = Memory__getString(Const___str22);
-	String__setCharAt(s, 0, 22);
-	Buffer__append(b, s);
-	s = Memory__getString(Const___str23);
-	String__setCharAt(s, 0, 23);
-	Buffer__append(b, s);
-	s = Memory__getString(Const___str24);
-	String__setCharAt(s, 0, 24);
-	Buffer__append(b, s);
-	s = Memory__getString(Const___str25);
-	String__setCharAt(s, 0, 25);
-	Buffer__append(b, s);
-	s = Memory__getString(Const___str26);
-	String__setCharAt(s, 0, 26);
-	Buffer__append(b, s);
-	s = Memory__getString(Const___str27);
-	String__setCharAt(s, 0, 27);
-	Buffer__append(b, s);
-	s = Memory__getString(Const___str28);
-	String__setCharAt(s, 0, 28);
-	Buffer__append(b, s);
-	s = Memory__getString(Const___str29);
-	String__setCharAt(s, 0, 29);
-	Buffer__append(b, s);
-	s = Memory__getString(Const___str30);
-	String__setCharAt(s, 0, 30);
-	Buffer__append(b, s);
-	s = Memory__getString(Const___str31);
-	String__setCharAt(s, 0, 31);
-	Buffer__append(b, s);
-	Buffer__append(b, Memory__getString(Const___str32));
-	Buffer__append(b, Memory__getString(Const___str33));
-	s = Memory__getString(Const___str34);
-	String__setCharAt(s, 0, 34);
-	Buffer__append(b, s);
-	Buffer__append(b, Memory__getString(Const___str35));
-	Buffer__append(b, Memory__getString(Const___str36));
-	Buffer__append(b, Memory__getString(Const___str37));
-	Buffer__append(b, Memory__getString(Const___str38));
-	Buffer__append(b, Memory__getString(Const___str39));
-	Buffer__append(b, Memory__getString(Const___str40));
-	Buffer__append(b, Memory__getString(Const___str41));
-	Buffer__append(b, Memory__getString(Const___str42));
-	Buffer__append(b, Memory__getString(Const___str43));
-	Buffer__append(b, Memory__getString(Const___str44));
-	Buffer__append(b, Memory__getString(Const___str45));
-	Buffer__append(b, Memory__getString(Const___str46));
-	Buffer__append(b, Memory__getString(Const___str47));
-	Buffer__append(b, Memory__getString(Const___str48));
-	Buffer__append(b, Memory__getString(Const___str49));
-	Buffer__append(b, Memory__getString(Const___str50));
-	Buffer__append(b, Memory__getString(Const___str51));
-	Buffer__append(b, Memory__getString(Const___str52));
-	Buffer__append(b, Memory__getString(Const___str53));
-	Buffer__append(b, Memory__getString(Const___str54));
-	Buffer__append(b, Memory__getString(Const___str55));
-	Buffer__append(b, Memory__getString(Const___str56));
-	Buffer__append(b, Memory__getString(Const___str57));
-	Buffer__append(b, Memory__getString(Const___str58));
-	Buffer__append(b, Memory__getString(Const___str59));
-	Buffer__append(b, Memory__getString(Const___str60));
-	Buffer__append(b, Memory__getString(Const___str61));
-	Buffer__append(b, Memory__getString(Const___str62));
-	Buffer__append(b, Memory__getString(Const___str63));
-	Buffer__append(b, Memory__getString(Const___str64));
-	Buffer__append(b, Memory__getString(Const___str65));
-	Buffer__append(b, Memory__getString(Const___str66));
-	Buffer__append(b, Memory__getString(Const___str67));
-	Buffer__append(b, Memory__getString(Const___str68));
-	Buffer__append(b, Memory__getString(Const___str69));
-	Buffer__append(b, Memory__getString(Const___str70));
-	Buffer__append(b, Memory__getString(Const___str71));
-	Buffer__append(b, Memory__getString(Const___str72));
-	Buffer__append(b, Memory__getString(Const___str73));
-	Buffer__append(b, Memory__getString(Const___str74));
-	Buffer__append(b, Memory__getString(Const___str75));
-	Buffer__append(b, Memory__getString(Const___str76));
-	Buffer__append(b, Memory__getString(Const___str77));
-	Buffer__append(b, Memory__getString(Const___str78));
-	Buffer__append(b, Memory__getString(Const___str79));
-	Buffer__append(b, Memory__getString(Const___str80));
-	Buffer__append(b, Memory__getString(Const___str81));
-	Buffer__append(b, Memory__getString(Const___str82));
-	Buffer__append(b, Memory__getString(Const___str83));
-	Buffer__append(b, Memory__getString(Const___str84));
-	Buffer__append(b, Memory__getString(Const___str85));
-	Buffer__append(b, Memory__getString(Const___str86));
-	Buffer__append(b, Memory__getString(Const___str87));
-	Buffer__append(b, Memory__getString(Const___str88));
-	Buffer__append(b, Memory__getString(Const___str89));
-	Buffer__append(b, Memory__getString(Const___str90));
-	Buffer__append(b, Memory__getString(Const___str91));
-	Buffer__append(b, Memory__getString(Const___str92));
-	Buffer__append(b, Memory__getString(Const___str93));
-	Buffer__append(b, Memory__getString(Const___str94));
-	Buffer__append(b, Memory__getString(Const___str95));
-	Buffer__append(b, Memory__getString(Const___str96));
-	Buffer__append(b, Memory__getString(Const___str97));
-	Buffer__append(b, Memory__getString(Const___str98));
-	Buffer__append(b, Memory__getString(Const___str99));
-	Buffer__append(b, Memory__getString(Const___str100));
-	Buffer__append(b, Memory__getString(Const___str101));
-	Buffer__append(b, Memory__getString(Const___str102));
-	Buffer__append(b, Memory__getString(Const___str103));
-	Buffer__append(b, Memory__getString(Const___str104));
-	Buffer__append(b, Memory__getString(Const___str105));
-	Buffer__append(b, Memory__getString(Const___str106));
-	Buffer__append(b, Memory__getString(Const___str107));
-	Buffer__append(b, Memory__getString(Const___str108));
-	Buffer__append(b, Memory__getString(Const___str109));
-	Buffer__append(b, Memory__getString(Const___str110));
-	Buffer__append(b, Memory__getString(Const___str111));
-	Buffer__append(b, Memory__getString(Const___str112));
-	Buffer__append(b, Memory__getString(Const___str113));
-	Buffer__append(b, Memory__getString(Const___str114));
-	Buffer__append(b, Memory__getString(Const___str115));
-	Buffer__append(b, Memory__getString(Const___str116));
-	Buffer__append(b, Memory__getString(Const___str117));
-	Buffer__append(b, Memory__getString(Const___str118));
-	Buffer__append(b, Memory__getString(Const___str119));
-	Buffer__append(b, Memory__getString(Const___str120));
-	Buffer__append(b, Memory__getString(Const___str121));
-	Buffer__append(b, Memory__getString(Const___str122));
-	Buffer__append(b, Memory__getString(Const___str123));
-	Buffer__append(b, Memory__getString(Const___str124));
-	Buffer__append(b, Memory__getString(Const___str125));
-	Buffer__append(b, Memory__getString(Const___str126));
-	s = Memory__getString(Const___str127);
-	String__setCharAt(s, 0, 127);
-	Buffer__append(b, s);
-	Buffer__append(b, Memory__getString(Const___str128));
-	Buffer__append(b, Memory__getString(Const___str129));
-	Buffer__append(b, Memory__getString(Const___str130));
-	Buffer__append(b, Memory__getString(Const___str131));
-	Buffer__append(b, Memory__getString(Const___str132));
-	Buffer__append(b, Memory__getString(Const___str133));
-	Buffer__append(b, Memory__getString(Const___str134));
-	Buffer__append(b, Memory__getString(Const___str135));
-	Buffer__append(b, Memory__getString(Const___str136));
-	Buffer__append(b, Memory__getString(Const___str137));
-	Buffer__append(b, Memory__getString(Const___str138));
-	Buffer__append(b, Memory__getString(Const___str139));
-	Buffer__append(b, Memory__getString(Const___str140));
-	Buffer__append(b, Memory__getString(Const___str141));
-	Buffer__append(b, Memory__getString(Const___str142));
-	Buffer__append(b, Memory__getString(Const___str143));
-	Buffer__append(b, Memory__getString(Const___str144));
-	Buffer__append(b, Memory__getString(Const___str145));
-	Buffer__append(b, Memory__getString(Const___str146));
-	Buffer__append(b, Memory__getString(Const___str147));
-	Buffer__append(b, Memory__getString(Const___str148));
-	Buffer__append(b, Memory__getString(Const___str149));
-	Buffer__append(b, Memory__getString(Const___str150));
-	Buffer__append(b, Memory__getString(Const___str151));
-	Buffer__append(b, Memory__getString(Const___str152));
-	Buffer__append(b, Memory__getString(Const___str153));
-	Buffer__append(b, Memory__getString(Const___str154));
-	Buffer__append(b, Memory__getString(Const___str155));
-	Buffer__append(b, Memory__getString(Const___str156));
-	Buffer__append(b, Memory__getString(Const___str157));
-	Buffer__append(b, Memory__getString(Const___str158));
-	Buffer__append(b, Memory__getString(Const___str159));
-	Buffer__append(b, Memory__getString(Const___str160));
-	Buffer__append(b, Memory__getString(Const___str161));
-	Buffer__append(b, Memory__getString(Const___str162));
-	Buffer__append(b, Memory__getString(Const___str163));
-	Buffer__append(b, Memory__getString(Const___str164));
-	Buffer__append(b, Memory__getString(Const___str165));
-	Buffer__append(b, Memory__getString(Const___str166));
-	Buffer__append(b, Memory__getString(Const___str167));
-	Buffer__append(b, Memory__getString(Const___str168));
-	Buffer__append(b, Memory__getString(Const___str169));
-	Buffer__append(b, Memory__getString(Const___str170));
-	Buffer__append(b, Memory__getString(Const___str171));
-	Buffer__append(b, Memory__getString(Const___str172));
-	Buffer__append(b, Memory__getString(Const___str173));
-	Buffer__append(b, Memory__getString(Const___str174));
-	Buffer__append(b, Memory__getString(Const___str175));
-	Buffer__append(b, Memory__getString(Const___str176));
-	Buffer__append(b, Memory__getString(Const___str177));
-	Buffer__append(b, Memory__getString(Const___str178));
-	Buffer__append(b, Memory__getString(Const___str179));
-	Buffer__append(b, Memory__getString(Const___str180));
-	Buffer__append(b, Memory__getString(Const___str181));
-	Buffer__append(b, Memory__getString(Const___str182));
-	Buffer__append(b, Memory__getString(Const___str183));
-	Buffer__append(b, Memory__getString(Const___str184));
-	Buffer__append(b, Memory__getString(Const___str185));
-	Buffer__append(b, Memory__getString(Const___str186));
-	Buffer__append(b, Memory__getString(Const___str187));
-	Buffer__append(b, Memory__getString(Const___str188));
-	Buffer__append(b, Memory__getString(Const___str189));
-	Buffer__append(b, Memory__getString(Const___str190));
-	Buffer__append(b, Memory__getString(Const___str191));
-	Buffer__append(b, Memory__getString(Const___str192));
-	Buffer__append(b, Memory__getString(Const___str193));
-	Buffer__append(b, Memory__getString(Const___str194));
-	return b;
-}
-#endif
-
-#ifdef JACK_IMPLEMENTATION
-var File___str0[] = {78,101,103,97,116,105,118,101,32,83,116,114,105,110,103,32,108,101,110,103,116,104,46,0};
-#define fd__ (__this+0)
-#define is_write__ (__this+1)
-#define buffer__ (__this+2)
-#define name__ (__this+3)
-var File__new(var path, var writeing) {
-	var __this;
-	var l;
-	__this = Memory__alloc(4);
-	__poke(fd__, -1);
-	__poke(is_write__, writeing);
-	l = String__length(path);
-	if (0!=(((l<0)?-1:0))) {
-		Output__printString(Memory__getString(File___str0));
-		Sys__error(-1);
-		return __this;
-	}
-
-	__poke(name__, String__copy(path));
-	return __this;
-}
-var File__dispose(var __this) {
-	var f;
-	f = __peek(fd__);
-	if (0!=(__peek(name__))) {
-		String__dispose(__peek(name__));
-	}
-
-	if (0!=(((__peek(fd__)<0)?-1:0))) {
-		Memory__deAlloc(__this);
-		return 0;
-	}
-
- 	fclose((FILE*)f);
-	Memory__deAlloc(__this);
-	return 0;
-}
-var File__getName(var __this) {
-	return __peek(name__);
-}
-var File__isdir(var __this) {
-	var l;
-	var s;
-	var f;
-	var b;
-	l = String__length(__peek(name__));
-	if (0!=(((l<1)?-1:0))) {
-		return 0;
-	}
-
-	b = Bytes__new(256);
-	Bytes__setStringToNative(b, __peek(name__));
-	s = Bytes__getStringNativePointer(b);
-	f = 0;
- #ifdef _WIN32
- 	if (_waccess((wchar_t*)s, 0)) {
- 		_wstat64((wchar_t*)s, &File__status);
- 		if ((File__status.st_mode & S_IFDIR) != 0) {
- 			f =  -1;
- 		}
- 	}
- #else
- 	if (access((char*)s, 0)) {
- 		stat((char*)s, &File__status);
- 		if ((File__status.st_mode & S_IFDIR) != 0) {
- 			f = -1;
- 		}
- 	}
- #endif
-	Bytes__dispose(b);
-	return f;
-}
-var File__open(var __this) {
-	var l;
-	var m;
-	var s;
-	var f;
-	var writing;
-	var b;
-	if (0!=(((__peek(fd__)>-1)?-1:0))) {
-		return 0;
-	}
-
-	writing = __peek(is_write__);
-	l = String__length(__peek(name__));
-	if (0!=(((l<1)?-1:0))) {
-		return 0;
-	}
-
-	if (0!=(File__isdir(__this))) {
-		return 0;
-	}
-
-	b = Bytes__new(256);
-	Bytes__setStringToNative(b, __peek(name__));
-	s = Bytes__getStringNativePointer(b);
-	f = -1;
- #ifdef _WIN32
- 	m = (var)L"rb";
- 	if (writing) {m = (var)L"w+b";}
- 	f = 0;
- 	_wfopen_s((FILE**)&f, (wchar_t*)s, (wchar_t*)m);
- 	if(((var*)f)==NULL) f = -1;
- #else
- 	m = (var)"rb";
- 	if (writing) {m = (var)"w+b";}
- 	f = (var)fopen((char*)s, (char*)m);
- 	if(((var*)f)==NULL) f = -1;
- #endif
-	__poke(fd__, f);
-	Bytes__dispose(b);
-	return -1;
-}
-var File__readByte(var __this) {
-	var b;
-	var f;
-	f = __peek(fd__);
-	if (0!=(((f<0)?-1:0))) {
-		File__open(__this);
-		f = __peek(fd__);
-		if (0!=(((f<0)?-1:0))) {
-			return -1;
-		}
-
-	}
-
-	b = 0;
- 	if (fread(&b, 1, 1, (FILE*)f) < 1) { return -1;};
- 	b = b & 255;
-	return b;
-}
-var File__seek(var __this, var position) {
-	var b;
-	var f;
-	var p;
-	f = __peek(fd__);
-	p = position;
-	if (0!=(((f<0)?-1:0))) {
-		File__open(__this);
-		f = __peek(fd__);
-		if (0!=(((f<0)?-1:0))) {
-			return -1;
-		}
-
-	}
-
- 	b = fseek((FILE*)f, (long int)p, SEEK_SET);
-	return b;
-}
-var File__writeByte(var __this, var data) {
-	var r;
-	var f;
-	var b;
-	b = data;
-	if (0!=(((__peek(fd__)<0)?-1:0))) {
-		File__open(__this);
-		if (0!=(((__peek(fd__)<0)?-1:0))) {
-			return -1;
-		}
-
-	}
-
-	f = __peek(fd__);
- 	r = fwrite(&b, 1, 1, (FILE*)f);
-	return r;
-}
-var File__writeString(var __this, var s) {
-	var i;
-	var l;
-	var c;
-	i = 0;
-	l = String__length(s);
-	while (-1==(((i<l)?-1:0))) {
-		c = String__charAt(s, i);
-		File__writeUtf8(__this, c);
-		i = i+1;
-	}
-	return i;
-}
-var File__readLine(var __this, var buff) {
-	var c;
-	c = File__readUtf8(__this);
-	if (0!=(((c==0)?-1:0))) {
-		return 0;
-	}
-
-	String__setCharAt(buff, 0, 0);
-	while (-1==((((c>0)?-1:0)))) {
-		buff = String__appendChar(buff, c);
-		if (0!=(((c==10)?-1:0))) {
-			c = 0;
-		} else {
-			c = File__readUtf8(__this);
-		}
-	}
-	return buff;
-}
-var File__readUtf8(var __this) {
-	var c;
-	var b;
-	c = File__readByte(__this);
-	if (0!=((((c<1)?-1:0))|(((c>255)?-1:0)))) {
-		return 0;
-	}
-
-	if (0!=(((c<128)?-1:0))) {
-		return c;
-	} else {
-		if (0!=(((c<192)?-1:0))) {
-			return c;
-		} else {
-			if (0!=(((c<224)?-1:0))) {
-				c = c&31;
-				b = File__readByte(__this)&63;
-				c = b+(c*64);
-				return c;
-			} else {
-				if (0!=(((c<240)?-1:0))) {
-					c = c&15;
-					b = File__readByte(__this)&63;
-					c = (b*64)+(c*4096);
-					b = File__readByte(__this)&63;
-					c = c+b;
-					return c;
-				} else {
-					if (0!=(((c<248)?-1:0))) {
-						c = c&7;
-						b = File__readByte(__this)&63;
-						c = (b*4096)+(c*262144);
-						b = File__readByte(__this)&63;
-						c = (b*64)+c;
-						b = File__readByte(__this)&63;
-						c = c+b;
-						return c;
-					} else {
-						if (0!=(((c<252)?-1:0))) {
-							c = c&3;
-							b = File__readByte(__this)&63;
-							c = (b*262144)+(c*16777216);
-							b = File__readByte(__this)&63;
-							c = (b*4096)+c;
-							b = File__readByte(__this)&63;
-							c = (b*64)+c;
-							b = File__readByte(__this)&63;
-							c = c+b;
-							return c;
-						} else {
-							c = c&3;
-							b = File__readByte(__this)&63;
-							c = (b*16777216)|(c*1073741824);
-							b = File__readByte(__this)&63;
-							c = (b*262144)|c;
-							b = File__readByte(__this)&63;
-							c = (b*4096)|c;
-							b = File__readByte(__this)&63;
-							c = (b*64)|c;
-							b = File__readByte(__this)&63;
-							c = c|b;
-							return c;
-						}
-					}
-				}
-			}
-		}
-	}
-	return c;
-}
-var File__writeUtf8(var __this, var data) {
-	if (0!=(data&-1073741824)) {
-		File__writeByte(__this, ((data/1073741824)&3)|252);
-		File__writeByte(__this, ((data/16777216)&63)|128);
-		File__writeByte(__this, ((data/262144)&63)|128);
-		File__writeByte(__this, ((data/4096)&63)|128);
-		File__writeByte(__this, ((data/64)&63)|128);
-		File__writeByte(__this, ((data)&63)|128);
-	} else {
-		if (0!=(((data>2097152)?-1:0))) {
-			File__writeByte(__this, ((data/16777216)&3)|248);
-			File__writeByte(__this, ((data/262144)&63)|128);
-			File__writeByte(__this, ((data/4096)&63)|128);
-			File__writeByte(__this, ((data/64)&63)|128);
-			File__writeByte(__this, ((data)&63)|128);
-		} else {
-			if (0!=(((data>65535)?-1:0))) {
-				File__writeByte(__this, ((data/262144)&7)|240);
-				File__writeByte(__this, ((data/4096)&63)|128);
-				File__writeByte(__this, ((data/64)&63)|128);
-				File__writeByte(__this, ((data)&63)|128);
-			} else {
-				if (0!=(((data>2047)?-1:0))) {
-					File__writeByte(__this, ((data/4096)&15)|224);
-					File__writeByte(__this, ((data/64)&63)|128);
-					File__writeByte(__this, ((data)&63)|128);
-				} else {
-					if (0!=(((data>127)?-1:0))) {
-						File__writeByte(__this, ((data/64)&31)|192);
-						File__writeByte(__this, ((data)&63)|128);
-					} else {
-						File__writeByte(__this, ((data)&127));
-					}
-				}
-			}
-		}
-	}
-	return 0;
-}
-var File__writeInt16(var __this, var d) {
-	File__writeByte(__this, d&255);
-	return File__writeByte(__this, (d/256)&255);
-}
-var File__writeInt32(var __this, var d) {
-	File__writeInt16(__this, d);
-	return File__writeInt16(__this, d/65536);
-}
-var File__writeInt64(var __this, var d) {
-	File__writeInt32(__this, d);
-	return File__writeInt32(__this, (d/-0)/2);
-}
-var File__readInt16(var __this) {
-	var d;
-	d = File__readByte(__this);
-	d = d+(File__readByte(__this)*256);
-	return d;
-}
-var File__readInt32(var __this) {
-	var d;
-	d = File__readInt16(__this);
-	d = d+(File__readInt16(__this)*65536);
-	return d;
-}
-var File__readInt64(var __this) {
-	var d;
-	d = File__readInt32(__this);
-	d = d+((File__readInt32(__this)*-0)*2);
-	return d;
-}
-var File__remove(var __this) {
-	var l;
-	var m;
-	var b;
-	var s;
-	if (0!=(((__peek(name__)==0)?-1:0))) {
-		return 0;
-	}
-
-	l = String__length(__peek(name__));
-	if (0!=(((l<1)?-1:0))) {
-		return 0;
-	}
-
-	b = Bytes__new(256);
-	Bytes__setStringToNative(b, __peek(name__));
-	s = Bytes__getStringNativePointer(b);
-	if (0!=(((File__isdir(__this)==0)?-1:0))) {
- #ifdef _WIN32
- 	m = (var)_wremove((wchar_t*)s);
- #else
- 	m = (var)remove((char*)s);
- #endif
-	} else {
- #ifdef _WIN32
- 	m = (var)_wrmdir((wchar_t*)s);
- #else
- 	m = (var)rmdir((char*)s);
- #endif
-	}
-	Bytes__dispose(b);
-	return (((m==0)?-1:0));
-}
-var File__mkdir(var __this) {
-	var l;
-	var m;
-	var s;
-	var b;
-	if (0!=(((__peek(name__)==0)?-1:0))) {
-		return 0;
-	}
-
-	l = String__length(__peek(name__));
-	if (0!=(((l<1)?-1:0))) {
-		return 0;
-	}
-
-	b = Bytes__new(256);
-	Bytes__setStringToNative(b, __peek(name__));
-	s = Bytes__getStringNativePointer(b);
- #ifdef _WIN32
- 	m = (var)_wmkdir((wchar_t*)s);
- #else
- 	m = (var)mkdir((char*)s, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
- #endif
-	return (((m==0)?-1:0));
-}
-var File__list(var __this) {
-	var i;
-	var l;
-	var b;
-	var s;
-	var na;
-	var n;
-	var a;
-	var str;
-	if (0!=(((__peek(name__)==0)?-1:0))) {
-		return 0;
-	}
-
-	l = String__length(__peek(name__));
-	if (0!=(((l<1)?-1:0))) {
-		return 0;
-	}
-
-	na = String__copy(__peek(name__));
-	if (0!=((((((String__charAt(na, l-1)==47)?-1:0))==0)?-1:0))) {
-		na = String__appendChar(na, 47);
-	}
-
-	str = Bytes__new(256);
-	Bytes__setStringToNative(str, na);
-	n = Bytes__getStringNativePointer(str);
-	b = Buffer__new(10, 0);
-	i = 0;
- 	i = i + 1;
- #ifdef _WIN32
- 	l = wcslen((wchar_t*)n);
-	if (((wchar_t*)n)[l - 1] != L'*') {
-		Bytes__appendNativeChar(str, L'*');
- 		n = Bytes__getStringNativePointer(str);
- 	}
-	for (i = 0; i < l; i++) {
-		if (((wchar_t*)n)[i] == '/') {
-			((wchar_t*)n)[i] = '\\';
- 		}
- 	}
- 		
- 	if((File__hFind = FindFirstFileW((LPCWSTR)n, &File__FindFileData))
- 	 	!= INVALID_HANDLE_VALUE)
- 	{
- 		do {
-         		a = (var)File__FindFileData.cFileName;
-			if (((wchar_t*)a)[0] == L'.' && 
- 			 	(((((wchar_t*)a)[1] == L'.') && 
- 					(((wchar_t*)a)[2] == 0))
- 					|| (((wchar_t*)a)[1] == 0)))
- 			{} else {
- 				s=String__copy(na);
- 				s=String__appendFromNative(s, a);
- 				if (File__FindFileData.dwFileAttributes & 
- 					FILE_ATTRIBUTE_DIRECTORY) { 
- 					s=String__appendChar(s, 47); 
- 				}
- 				Buffer__append(b, s);
-			}
- 			i = i + 1;
-		} while(FindNextFileW(File__hFind, &File__FindFileData));
- 		FindClose(File__hFind);
-	}
- #else
- 	//n = n * sizeof(var);
- 	//printf("OPNE %s\n", n);
- 	if((File__dir = opendir((char*)n)) != 0){
-    		while((File__dp = readdir(File__dir)) != 0){
- 			a = (var)File__dp->d_name;
- 			if (((char*)a)[0] == '.' && 
- 			 	(((((char*)a)[1] == '.') && (((char*)a)[2] == 0))
- 					|| (((char*)a)[1] == 0)))
- 			{} else {
- 				s=String__copy(na);
- 				s=String__appendFromNative(s, a);
- 				
- 				if (File__dp->d_type == DT_DIR) {
- 					s=String__appendChar(s, 47); 
- 				}
- 				Buffer__append(b, s);
- 			}
- 			i = i + 1;
-     		}
-     		closedir(File__dir);
- 	}
- #endif
-	Bytes__dispose(str);
-	String__dispose(na);
-	return b;
-}
-#undef fd__
-#undef is_write__
-#undef buffer__
-#undef name__
-#endif
-
-#ifdef JACK_IMPLEMENTATION
-var Gif___str0[] = {32,0};
-#define fd__ (__this+0)
-#define in__ (__this+1)
-#define in_pos__ (__this+2)
-#define w__ (__this+3)
-#define h__ (__this+4)
-#define out__ (__this+5)
-#define background__ (__this+6)
-#define history__ (__this+7)
-#define flags__ (__this+8)
-#define bgindex__ (__this+9)
-#define ratio__ (__this+10)
-#define transparent__ (__this+11)
-#define eflags__ (__this+12)
-#define pal__ (__this+13)
-#define lpal__ (__this+14)
-#define codes__ (__this+15)
-#define color_table__ (__this+16)
-#define parse__ (__this+17)
-#define step__ (__this+18)
-#define lflags__ (__this+19)
-#define start_x__ (__this+20)
-#define start_y__ (__this+21)
-#define max_x__ (__this+22)
-#define max_y__ (__this+23)
-#define cur_x__ (__this+24)
-#define cur_y__ (__this+25)
-#define line_size__ (__this+26)
-#define delay__ (__this+27)
-#define version__ (__this+28)
-#define comp__ (__this+29)
-var Gif__new() {
-	var __this;
-	var i;
-	__this = Memory__alloc(30);
-	__poke(in_pos__, 0);
-	__poke(fd__, 0);
-	__poke(in__, 0);
-	__poke(w__, 0);
-	__poke(h__, 0);
-	__poke(out__, 0);
-	__poke(background__, 0);
-	__poke(history__, 0);
-	__poke(flags__, 0);
-	__poke(bgindex__, 0);
-	__poke(ratio__, 0);
-	__poke(transparent__, 0);
-	__poke(eflags__, 0);
-	__poke(pal__, Array__new(256));
-	__poke(lpal__, Array__new(256));
-	i = 0;
-	while (-1==(((i<256)?-1:0))) {
-		__poke(__peek(pal__)+i, 0);
-		__poke(__peek(lpal__)+i, 0);
-		i = i+1;
-	}
-	__poke(codes__, Array__new(8192));
-	__poke(version__, 0);
-	__poke(comp__, 0);
-	i = 0;
-	while (-1==(((i<8192)?-1:0))) {
-		__poke(__peek(codes__)+i, GifLzw__new());
-		i = i+1;
-	}
-	__poke(color_table__, 0);
-	__poke(parse__, 0);
-	__poke(step__, 0);
-	__poke(lflags__, 0);
-	__poke(start_x__, 0);
-	__poke(start_y__, 0);
-	__poke(max_x__, 0);
-	__poke(max_y__, 0);
-	__poke(cur_x__, 0);
-	__poke(cur_y__, 0);
-	__poke(line_size__, 0);
-	__poke(delay__, 0);
-	return __this;
-}
-var Gif__dispose(var __this) {
-	var i;
-	var g;
-	if (0!=(__peek(fd__))) {
-		File__dispose(__peek(fd__));
-	}
-
-	if (0!=(__peek(out__))) {
-		Buffer__dispose(__peek(out__));
-		Buffer__dispose(__peek(history__));
-		Buffer__dispose(__peek(background__));
-	}
-
-	Array__dispose(__peek(pal__));
-	i = 0;
-	while (-1==(((i<8192)?-1:0))) {
-		g = __peek(__peek(codes__)+i);
-		GifLzw__dispose(g);
-		i = i+1;
-	}
-	Array__dispose(__peek(codes__));
-	Memory__deAlloc(__this);
-	return 0;
-}
-var Gif__get8(var __this) {
-	var r;
-	if (0!=(__peek(fd__))) {
-		return File__readByte(__peek(fd__));
-	}
-
-	if (0!=(__peek(in__))) {
-		r = __peek(__peek(in__)+__peek(in_pos__));
-		__poke(in_pos__, __peek(in_pos__)+1);
-		return r;
-	}
-
-	return -1;
-}
-var Gif__get16le(var __this) {
-	var r;
-	r = Gif__get8(__this);
-	r = r+(Gif__get8(__this)*256);
-	return r;
-}
-var Gif__parseColortable(var __this, var pal_, var num_entries, var transp) {
-	var i;
-	var n;
-	var o;
-	i = 0;
-	while (-1==(((i<num_entries)?-1:0))) {
-		n = Gif__get8(__this)*65536;
-		n = n+(Gif__get8(__this)*256);
-		n = n+Gif__get8(__this);
-		if (0!=(((transp==i)?-1:0))) {
-			o = 255;
-			n = n+(o*16777216);
-		}
-
-		__poke(pal_+i, n);
-		i = i+1;
-	}
-	return 0;
-}
-var Gif__header(var __this) {
-	if (0!=(Gif__testRaw(__this))) {
-		__poke(w__, Gif__get16le(__this));
-		__poke(h__, Gif__get16le(__this));
-		__poke(flags__, Gif__get8(__this));
-		__poke(bgindex__, Gif__get8(__this));
-		__poke(ratio__, Gif__get8(__this));
-		__poke(transparent__, -1);
-		if (0!=((((__peek(w__)>100000)?-1:0))|(((__peek(h__)>10000)?-1:0)))) {
-			return 0;
-		}
-
-		__poke(comp__, 4);
-		if (0!=(__peek(flags__)&128)) {
-			Gif__parseColortable(__this, __peek(pal__), Math__shiftLeft(2, (__peek(flags__)&7)), -1);
-		}
-
-		return -1;
-	}
-
-	return 0;
-}
-var Gif__testRaw(var __this) {
-	if (0!=((((Gif__get8(__this)==71)?-1:0))&(((Gif__get8(__this)==73)?-1:0))&(((Gif__get8(__this)==70)?-1:0))&(((Gif__get8(__this)==56)?-1:0)))) {
-		__poke(version__, Gif__get8(__this));
-		if (0!=((((__peek(version__)==55)?-1:0))|(((__peek(version__)==57)?-1:0)))) {
-			if (0!=(((Gif__get8(__this)==97)?-1:0))) {
-				return -1;
-			}
-
-		}
-
-	}
-
-	return 0;
-}
-var Gif__outGifCode(var __this, var code) {
-	var idx;
-	var g;
-	g = __peek(__peek(codes__)+code);
-	if (0!=(((GifLzw__getPrefix(g)>(-1))?-1:0))) {
-		Gif__outGifCode(__this, GifLzw__getPrefix(g));
-	}
-
-	if (0!=(((__peek(cur_y__)>(__peek(max_y__)-1))?-1:0))) {
-		return 0;
-	}
-
-	idx = __peek(cur_x__)+__peek(cur_y__);
-	Buffer__setAt(__peek(history__), idx, 1);
-	Buffer__setAt(__peek(out__), idx, __peek(__peek(color_table__)+GifLzw__getSuffix(g)));
-	__poke(cur_x__, __peek(cur_x__)+1);
-	if (0!=(((__peek(cur_x__)>(__peek(max_x__)-1))?-1:0))) {
-		__poke(cur_x__, __peek(start_x__));
-		__poke(cur_y__, __peek(cur_y__)+__peek(step__));
-		while (-1==((((__peek(cur_y__)>(__peek(max_y__)-1))?-1:0))&(((__peek(parse__)>0)?-1:0)))) {
-			__poke(step__, Math__shiftLeft(1, __peek(parse__))+__peek(line_size__));
-			__poke(cur_y__, __peek(start_y__)+Math__shiftRight(__peek(step__), 1));
-			__poke(parse__, __peek(parse__)-1);
-		}
-	}
-
-	return 0;
-}
-var Gif__skip(var __this, var len) {
-	while (-1==(((len>0)?-1:0))) {
-		len = len-1;
-		Gif__get8(__this);
-	}
-	return 0;
-}
-var Gif__processGifRaster(var __this) {
-	var lzw_cs;
-	var len;
-	var init_code;
-	var first;
-	var codesize;
-	var codemask;
-	var avail;
-	var oldcode;
-	var bits;
-	var valid_bits;
-	var clear;
-	var p;
-	var g;
-	var code_;
-	oldcode = 0;
-	lzw_cs = Gif__get8(__this);
-	if (0!=(((lzw_cs>12)?-1:0))) {
-		return 0;
-	}
-
-	clear = Math__shiftLeft(1, lzw_cs);
-	first = 1;
-	codesize = lzw_cs+1;
-	codemask = Math__shiftLeft(1, codesize)-1;
-	bits = 0;
-	valid_bits = 0;
-	init_code = 0;
-	while (-1==(((init_code<clear)?-1:0))) {
-		g = __peek(__peek(codes__)+init_code);
-		GifLzw__setPrefix(g, -1);
-		GifLzw__setFirst(g, init_code);
-		GifLzw__setSuffix(g, init_code);
-		init_code = init_code+1;
-	}
-	avail = clear+2;
-	oldcode = -1;
-	len = 0;
-	while (-1==(-1)) {
-		if (0!=(((valid_bits<codesize)?-1:0))) {
-			if (0!=(((len==0)?-1:0))) {
-				len = Gif__get8(__this);
-				if (0!=(((len==0)?-1:0))) {
-					return __peek(out__);
-				}
-
-			}
-
-			len = len-1;
-			bits = bits|Math__shiftLeft(Gif__get8(__this), valid_bits);
-			valid_bits = valid_bits+8;
-		} else {
-			code_ = bits&codemask;
-			bits = Math__shiftRight(bits, codesize);
-			valid_bits = valid_bits-codesize;
-			if (0!=(((code_==clear)?-1:0))) {
-				codesize = lzw_cs+1;
-				codemask = Math__shiftLeft(1, codesize)-1;
-				avail = clear+2;
-				oldcode = -1;
-				first = 0;
-			} else {
-				if (0!=(((code_==(clear+1))?-1:0))) {
-					Gif__skip(__this, len);
-					len = Gif__get8(__this);
-					while (-1==(((len>0)?-1:0))) {
-						Gif__skip(__this, len);
-						len = Gif__get8(__this);
-					}
-					return __peek(out__);
-				} else {
-					if (0!=(((code_<(avail+1))?-1:0))) {
-						if (0!=(first)) {
-							return 0;
-						}
-
-						if (0!=(((oldcode>-1)?-1:0))) {
-							p = __peek(__peek(codes__)+avail);
-							avail = avail+1;
-							if (0!=(((avail>8192)?-1:0))) {
-								return 0;
-							}
-
-							GifLzw__setPrefix(p, oldcode);
-							g = __peek(__peek(codes__)+oldcode);
-							GifLzw__setFirst(p, GifLzw__getFirst(g));
-							if (0!=(((code_==avail)?-1:0))) {
-								GifLzw__setSuffix(p, GifLzw__getFirst(p));
-							} else {
-								g = __peek(__peek(codes__)+code_);
-								GifLzw__setSuffix(p, GifLzw__getFirst(g));
-							}
-						} else {
-							if (0!=(((code_==avail)?-1:0))) {
-								return 0;
-							}
-
-						}
-						Gif__outGifCode(__this, code_);
-						if (0!=(((((avail&codemask)==0)?-1:0))&(((avail<4096)?-1:0)))) {
-							codesize = codesize+1;
-							codemask = Math__shiftLeft(1, codesize)-1;
-						}
-
-						oldcode = code_;
-					} else {
-						return 0;
-					}
-				}
-			}
-		}
-	}
-	return 0;
-}
-var Gif__loadNext(var __this, var two_back) {
-	var dispose_;
-	var first_frame;
-	var pi;
-	var pcount;
-	var i;
-	var tag;
-	var count;
-	var len;
-	var ext;
-	var x_;
-	var y_;
-	var w_;
-	var h_;
-	var o;
-	var tmp;
-	var BREAK;
-	o = 0;
-	i = 0;
-	count = 0;
-	if (0!=(((__peek(out__)==0)?-1:0))) {
-		pcount = __peek(w__)*__peek(h__);
-		__poke(out__, Buffer__new(pcount, 0));
-		__poke(background__, Buffer__new(pcount, 0));
-		__poke(history__, Buffer__new(pcount, 0));
-		while (-1==(((i<pcount)?-1:0))) {
-			Buffer__setAt(__peek(out__), i, 0);
-			Buffer__setAt(__peek(background__), i, 0);
-			Buffer__setAt(__peek(history__), i, 0);
-			i = i+1;
-		}
-		first_frame = 1;
-	} else {
-		dispose_ = Math__shiftRight((__peek(eflags__)&28), 2);
-		pcount = __peek(w__)*__peek(h__);
-		if (0!=((((dispose_==3)?-1:0))&(((two_back==0)?-1:0)))) {
-			dispose_ = 2;
-		}
-
-		if (0!=((((dispose_==3)?-1:0))&two_back)) {
-			i = 0;
-			while (-1==(((i<pcount)?-1:0))) {
-				Buffer__setAt(__peek(out__), i, Buffer__getAt(two_back, i));
-				i = i+1;
-			}
-		} else {
-			if (0!=(((dispose_==2)?-1:0))) {
-				pi = 0;
-				while (-1==(((pi<count)?-1:0))) {
-					Buffer__setAt(__peek(out__), pi, Buffer__getAt(__peek(background__), i));
-					pi = pi+1;
-				}
-			}
-
-		}
-		i = 0;
-		while (-1==(((i<pcount)?-1:0))) {
-			Buffer__setAt(__peek(background__), i, Buffer__getAt(__peek(out__), i));
-			i = i+1;
-		}
-	}
-	i = 0;
-	pcount = __peek(w__)*__peek(h__);
-	while (-1==(((i<pcount)?-1:0))) {
-		Buffer__setAt(__peek(history__), i, 0);
-		i = i+1;
-	}
-	while (-1==(-1)) {
-		BREAK = -1;
-		tag = Gif__get8(__this);
-		if (0!=(((tag==44)?-1:0))) {
-			x_ = Gif__get16le(__this);
-			y_ = Gif__get16le(__this);
-			w_ = Gif__get16le(__this);
-			h_ = Gif__get16le(__this);
-			if (0!=(((((x_+w_)>__peek(w__))?-1:0))|((((y_+h_)>__peek(h__))?-1:0)))) {
-				return 0;
-			}
-
-			__poke(line_size__, __peek(w__));
-			__poke(start_x__, x_);
-			__poke(start_y__, y_*__peek(line_size__));
-			__poke(max_x__, __peek(start_x__)+__peek(w__));
-			__poke(max_y__, __peek(start_y__)+(__peek(h__)*__peek(line_size__)));
-			__poke(cur_x__, __peek(start_x__));
-			__poke(cur_y__, __peek(start_y__));
-			if (0!=(((w_==0)?-1:0))) {
-				__poke(cur_y__, __peek(max_y__));
-			}
-
-			__poke(lflags__, Gif__get8(__this));
-			if (0!=(__peek(lflags__)&64)) {
-				__poke(step__, 2*__peek(line_size__));
-				__poke(parse__, 3);
-			} else {
-				__poke(step__, __peek(line_size__));
-				__poke(parse__, 0);
-			}
-			if (0!=(__peek(lflags__)&128)) {
-				tmp = -1;
-				if (0!=(__peek(eflags__)&1)) {
-					tmp = __peek(transparent__);
-				}
-
-				Gif__parseColortable(__this, __peek(lpal__), Math__shiftLeft(2, __peek(lflags__)&7), tmp);
-				__poke(color_table__, __peek(lpal__));
-			} else {
-				if (0!=(__peek(flags__)&128)) {
-					__poke(color_table__, __peek(pal__));
-				} else {
-					return 0;
-				}
-			}
-			o = Gif__processGifRaster(__this);
-			if (0!=(((o==0)?-1:0))) {
-				return 0;
-			}
-
-			pcount = __peek(w__)*__peek(h__);
-			if (0!=((((0==(((first_frame==0)?-1:0)))?-1:0))&(((__peek(bgindex__)>0)?-1:0)))) {
-				pi = 0;
-				while (-1==(((pi<pcount)?-1:0))) {
-					if (0!=(((__peek(__peek(history__)+pi)==0)?-1:0))) {
-						__poke(__peek(pal__)+__peek(bgindex__), __peek(__peek(pal__)+__peek(bgindex__))|-16777216);
-						Buffer__setAt(__peek(out__), pi, __peek(__peek(pal__)+__peek(bgindex__)));
-					}
-
-					pi = pi+1;
-				}
-			}
-
-			return o;
-		} else {
-			if (0!=(((tag==33)?-1:0))) {
-				ext = Gif__get8(__this);
-				if (0!=(((ext==249)?-1:0))) {
-					len = Gif__get8(__this);
-					if (0!=(((len==4)?-1:0))) {
-						__poke(eflags__, Gif__get8(__this));
-						__poke(delay__, 10*Gif__get16le(__this));
-						if (0!=(((__peek(transparent__)>-1)?-1:0))) {
-							__poke(__peek(pal__)+__peek(transparent__), __peek(__peek(pal__)+__peek(transparent__))|-16777216);
-						}
-
-						if (0!=(__peek(eflags__)&1)) {
-							__poke(transparent__, Gif__get8(__this));
-							if (0!=(((__peek(transparent__)>-1)?-1:0))) {
-								__poke(__peek(pal__)+__peek(transparent__), __peek(__peek(pal__)+__peek(transparent__))&-16777216);
-							} else {
-								Gif__skip(__this, 1);
-								__poke(transparent__, -1);
-							}
-						} else {
-							Gif__skip(__this, len);
-							BREAK = 0;
-						}
-					}
-
-					if (0!=(BREAK)) {
-						len = Gif__get8(__this);
-						while (-1==(((0==(((len==0)?-1:0)))?-1:0))) {
-							Gif__skip(__this, len);
-							len = Gif__get8(__this);
-						}
-						BREAK = 0;
-					}
-
-				}
-
-			} else {
-				if (0!=(((tag==59)?-1:0))) {
-					return o;
-				} else {
-					i = i;
-					return 0;
-				}
-			}
-		}
-	}
-	return __peek(out__);
-}
-var Gif__error(var __this, var e, var d, var a) {
-	Output__printString(a);
-	Output__printInt(e);
-	Output__printString(Memory__getString(Gif___str0));
-	Output__printInt(d);
-	Output__println();
-	return 0;
-}
-var Gif__loadMain(var __this) {
-	var o;
-	o = 0;
-	if (0!=(Gif__header(__this))) {
-		o = Gif__loadNext(__this, 0);
-	}
-
-	return o;
-}
-var Gif__getW(var __this) {
-	return __peek(w__);
-}
-var Gif__getH(var __this) {
-	return __peek(h__);
-}
-var Gif__readFile(var __this, var f) {
-	var r;
-	__poke(fd__, File__new(f, 0));
-	r = Gif__loadMain(__this);
-	File__dispose(__peek(fd__));
-	__poke(fd__, 0);
-	return r;
-}
-var Gif__WriteFile(var __this, var f) {
-	return 0;
-}
-var Gif__readArray(var __this, var a) {
-	return 0;
-}
-var Gif__WriteArray(var __this, var src, var dest) {
-	return 0;
-}
-#undef fd__
-#undef in__
-#undef in_pos__
-#undef w__
-#undef h__
-#undef out__
-#undef background__
-#undef history__
-#undef flags__
-#undef bgindex__
-#undef ratio__
-#undef transparent__
-#undef eflags__
-#undef pal__
-#undef lpal__
-#undef codes__
-#undef color_table__
-#undef parse__
-#undef step__
-#undef lflags__
-#undef start_x__
-#undef start_y__
-#undef max_x__
-#undef max_y__
-#undef cur_x__
-#undef cur_y__
-#undef line_size__
-#undef delay__
-#undef version__
-#undef comp__
-#endif
-
-#ifdef JACK_IMPLEMENTATION
-#define prefix__ (__this+0)
-#define first__ (__this+1)
-#define suffix__ (__this+2)
-var GifLzw__new() {
-	var __this;
-	__this = Memory__alloc(3);
-	__poke(prefix__, 0);
-	__poke(first__, 0);
-	__poke(suffix__, 0);
-	return __this;
-}
-var GifLzw__dispose(var __this) {
-	Memory__deAlloc(__this);
-	return 0;
-}
-var GifLzw__getPrefix(var __this) {
-	return __peek(prefix__);
-}
-var GifLzw__setPrefix(var __this, var v) {
-	__poke(prefix__, v);
-	return 0;
-}
-var GifLzw__getFirst(var __this) {
-	return __peek(first__);
-}
-var GifLzw__setFirst(var __this, var v) {
-	__poke(first__, v);
-	return 0;
-}
-var GifLzw__getSuffix(var __this) {
-	return __peek(suffix__);
-}
-var GifLzw__setSuffix(var __this, var v) {
-	__poke(suffix__, v);
-	return 0;
-}
-#undef prefix__
-#undef first__
-#undef suffix__
-#endif
-
-#ifdef JACK_IMPLEMENTATION
-var GifWriter___str0[] = {32,71,73,70,32,0};
-var GifWriter___str1[] = {32,79,85,84,32,0};
-var GifWriter___str2[] = {32,69,78,68,32,0};
-#define fp__ (__this+0)
-#define palette__ (__this+1)
-#define width__ (__this+2)
-#define height__ (__this+3)
-#define repeat__ (__this+4)
-#define numColors__ (__this+5)
-#define palSize__ (__this+6)
-#define frame__ (__this+7)
-#define numBits__ (__this+8)
-#define curBits__ (__this+9)
-#define outBits__ (__this+10)
-#define idx__ (__this+11)
-#define buf__ (__this+12)
-var GifWriter__new() {
-	var __this;
-	var i;
-	__this = Memory__alloc(13);
-	__poke(fp__, 0);
-	__poke(palette__, Array__new(768));
-	i = 0;
-	while (-1==(((i<768)?-1:0))) {
-		__poke(__peek(palette__)+i, 0);
-		i = i+1;
-	}
-	__poke(width__, 0);
-	__poke(height__, 0);
-	__poke(repeat__, 0);
-	__poke(numColors__, 0);
-	__poke(palSize__, 0);
-	__poke(frame__, 0);
-	__poke(numBits__, 0);
-	__poke(curBits__, 0);
-	__poke(outBits__, 0);
-	__poke(buf__, Array__new(256));
-	return __this;
-}
-var GifWriter__dispose(var __this) {
-	if (0!=(__peek(fp__))) {
-		File__dispose(__peek(fp__));
-	}
-
-	Array__dispose(__peek(palette__));
-	return 0;
-}
-var GifWriter__out8(var __this, var code) {
-	if (0!=(__peek(fp__))) {
-		File__writeByte(__peek(fp__), code);
-	}
-
-	return 0;
-}
-var GifWriter__out16le(var __this, var code) {
-	GifWriter__out8(__this, code&255);
-	GifWriter__out8(__this, (code/256)&255);
-	return 0;
-}
-var GifWriter__lzwWrite(var __this, var code) {
-	var i;
-	var j;
-	var outBits_;
-	var curBits_;
-	var idx_;
-	var buf_;
-	buf_ = __peek(buf__);
-	idx_ = __peek(idx__);
-	outBits_ = __peek(outBits__)|Math__shiftLeft(code, __peek(curBits__));
-	curBits_ = __peek(curBits__)+__peek(numBits__);
-	while (-1==(((curBits_>7)?-1:0))) {
-		__poke(buf_+idx_, outBits_&255);
-		idx_ = idx_+1;
-		outBits_ = Math__shiftRight(outBits_, 8);
-		curBits_ = curBits_-8;
-		if (0!=(((idx_>254)?-1:0))) {
-			GifWriter__out8(__this, idx_);
-			i = 0;
-			j = idx_;
-			while (-1==(((i<j)?-1:0))) {
-				GifWriter__out8(__this, __peek(buf_+i));
-				i = i+1;
-			}
-			idx_ = 0;
-		}
-
-	}
-	__poke(idx__, idx_);
-	__poke(outBits__, outBits_);
-	__poke(curBits__, curBits_);
-	return 0;
-}
-var GifWriter__lzwEncode(var __this, var in_, var len) {
-	var maxcode;
-	var hashSize;
-	var codetab;
-	var hashTbl;
-	var i;
-	var free_ent;
-	var inp;
-	var ent;
-	var c;
-	var fcode;
-	var key;
-	var kk;
-	var CONTINUE;
-	__poke(numBits__, 9);
-	__poke(idx__, 0);
-	maxcode = 511;
-	hashSize = 5003;
-	codetab = Array__new(hashSize);
-	hashTbl = Array__new(hashSize);
-	i = 0;
-	while (-1==(((i<hashSize)?-1:0))) {
-		__poke(hashTbl+i, -1);
-		i = i+1;
-	}
-	GifWriter__lzwWrite(__this, 256);
-	inp = 0;
-	free_ent = 258;
-	ent = __peek(in_+inp);
-	inp = inp+1;
-	len = len-1;
-	while (-1==(((len>0)?-1:0))) {
-		CONTINUE = -1;
-		c = __peek(in_+inp);
-		inp = inp+1;
-		fcode = Math__shiftLeft(c, 12)+ent;
-		key = Math__shiftLeft(c, 4);
-		key = Math__xor(ent, key);
-		kk = __peek(hashTbl+key);
-		while (-1==(CONTINUE&(((kk>-1)?-1:0)))) {
-			if (0!=(((kk==fcode)?-1:0))) {
-				ent = __peek(codetab+key);
-				CONTINUE = 0;
-			}
-
-			if (0!=(CONTINUE)) {
-				key = key+1;
-				if (0!=((((key>(hashSize-1))?-1:0)))) {
-					key = key-hashSize;
-				}
-
-				kk = __peek(hashTbl+key);
-			}
-
-		}
-		if (0!=(CONTINUE)) {
-			GifWriter__lzwWrite(__this, ent);
-			ent = c;
-			if (0!=(((free_ent<4096)?-1:0))) {
-				if (0!=(((free_ent>maxcode)?-1:0))) {
-					__poke(numBits__, __peek(numBits__)+1);
-					if (0!=(((__peek(numBits__)==12)?-1:0))) {
-						maxcode = 4096;
-					} else {
-						maxcode = Math__shiftLeft(1, __peek(numBits__))-1;
-					}
-				}
-
-				__poke(codetab+key, free_ent);
-				free_ent = free_ent+1;
-				__poke(hashTbl+key, fcode);
-			} else {
-				i = 0;
-				while (-1==(((i<hashSize)?-1:0))) {
-					__poke(hashTbl+i, -1);
-					i = i+1;
-				}
-				free_ent = 258;
-				GifWriter__lzwWrite(__this, 256);
-				__poke(numBits__, 9);
-				maxcode = 511;
-			}
-		}
-
-		len = len-1;
-	}
-	GifWriter__lzwWrite(__this, ent);
-	GifWriter__lzwWrite(__this, 257);
-	GifWriter__lzwWrite(__this, 0);
-	if (0!=(__peek(idx__))) {
-		GifWriter__out8(__this, __peek(idx__));
-		i = 0;
-		while (-1==(((i<__peek(idx__))?-1:0))) {
-			GifWriter__out8(__this, __peek(__peek(buf__)+i));
-			i = i+1;
-		}
-		__poke(idx__, 0);
-	}
-
-	return 0;
-}
-var GifWriter__start(var __this, var w, var h, var repeat_, var numColors_) {
-	if (0!=(((numColors_>255)?-1:0))) {
-		numColors_ = 255;
-	} else {
-		if (0!=(((numColors_<2)?-1:0))) {
-			numColors_ = 2;
-		}
-
-	}
-	__poke(width__, w);
-	__poke(height__, h);
-	__poke(repeat__, repeat_);
-	__poke(numColors__, numColors_);
-	__poke(palSize__, Math__log2(numColors_));
-	GifWriter__out8(__this, 71);
-	GifWriter__out8(__this, 73);
-	GifWriter__out8(__this, 70);
-	GifWriter__out8(__this, 56);
-	GifWriter__out8(__this, 57);
-	GifWriter__out8(__this, 97);
-	GifWriter__out16le(__this, __peek(width__));
-	GifWriter__out16le(__this, __peek(height__));
-	GifWriter__out8(__this, 240|(__peek(palSize__)));
-	GifWriter__out16le(__this, 0);
-	return -1;
-}
-var GifWriter__end(var __this) {
-	return GifWriter__out8(__this, 59);
-}
-var GifWriter__frame_(var __this, var rgba, var delayCsec, var localPalette) {
-	var size_;
-	var localPalTbl;
-	var palette_;
-	var indexedPixels;
-	var k;
-	var c;
-	var rgb0;
-	var rgb1;
-	var rgb2;
-	var bestd;
-	var best;
-	var i;
-	var j;
-	var rgb;
-	var bb;
-	var gg;
-	var rr;
-	var d;
-	var p;
-	var a;
-	size_ = __peek(width__)*__peek(height__);
-	localPalTbl = Array__new(768);
-	i = 0;
-	while (-1==(((i<768)?-1:0))) {
-		__poke(localPalTbl+i, 0);
-		i = i+1;
-	}
-	if (0!=((((__peek(frame__)==0)?-1:0))|(((0==(localPalette))?-1:0)))) {
-		palette_ = __peek(palette__);
-	} else {
-		palette_ = localPalTbl;
-	}
-	if (0!=((((__peek(frame__)==0)?-1:0))|localPalette)) {
-		GifWriter__quantize(__this, rgba, size_, 1, __peek(palette__), __peek(numColors__));
-	}
-
-	indexedPixels = Array__new(size_);
-	a = Buffer__getArray(rgba);
-	k = 0;
-	Output__printInt(k);
-	Output__printString(Memory__getString(GifWriter___str0));
-	Output__printInt(size_);
-	Output__println();
-	c = __peek(numColors__);
-	while (-1==(((k<size_)?-1:0))) {
-		bestd = 2147483647;
-		best = -1;
-		i = 0;
-		rgb = __peek(a+k);
-		rgb0 = rgb&255;
-		rgb1 = (rgb/256)&255;
-		rgb2 = (rgb/65536)&255;
-		while (-1==(((i<c)?-1:0))) {
-			p = __peek(palette_+i);
-			bb = (p&255)-rgb0;
-			gg = (Math__shiftRight(p, 8)&255)-rgb1;
-			rr = (Math__shiftRight(p, 16)&255)-rgb2;
-			d = (bb*bb)+(gg*gg)+(rr*rr);
-			if (0!=(((d<bestd)?-1:0))) {
-				bestd = d;
-				best = i;
-			}
-
-			i = i+1;
-		}
-		__poke(indexedPixels+k, best);
-		k = k+1;
-	}
-	if (0!=(((__peek(frame__)==0)?-1:0))) {
-		i = 0;
-		j = Math__shiftLeft(1, __peek(palSize__)+1);
-		while (-1==(((i<j)?-1:0))) {
-			d = __peek(__peek(palette__)+i);
-			GifWriter__out8(__this, d&255);
-			d = d/256;
-			GifWriter__out8(__this, d&255);
-			d = d/256;
-			GifWriter__out8(__this, d&255);
-			i = i+1;
-		}
-		if (0!=(((__peek(repeat__)>-1)?-1:0))) {
-			GifWriter__out8(__this, 33);
-			GifWriter__out8(__this, 255);
-			GifWriter__out8(__this, 11);
-			GifWriter__out8(__this, 78);
-			GifWriter__out8(__this, 69);
-			GifWriter__out8(__this, 84);
-			GifWriter__out8(__this, 83);
-			GifWriter__out8(__this, 67);
-			GifWriter__out8(__this, 65);
-			GifWriter__out8(__this, 80);
-			GifWriter__out8(__this, 69);
-			GifWriter__out8(__this, 50);
-			GifWriter__out8(__this, 46);
-			GifWriter__out8(__this, 48);
-			GifWriter__out8(__this, 3);
-			GifWriter__out8(__this, 1);
-			GifWriter__out16le(__this, __peek(repeat__));
-			GifWriter__out8(__this, 0);
-		}
-
-	}
-
-	GifWriter__out8(__this, 33);
-	GifWriter__out8(__this, 249);
-	GifWriter__out8(__this, 4);
-	GifWriter__out8(__this, 0);
-	GifWriter__out16le(__this, delayCsec);
-	GifWriter__out16le(__this, 0);
-	GifWriter__out8(__this, 44);
-	GifWriter__out8(__this, 0);
-	GifWriter__out8(__this, 0);
-	GifWriter__out8(__this, 0);
-	GifWriter__out8(__this, 0);
-	GifWriter__out16le(__this, __peek(width__));
-	GifWriter__out16le(__this, __peek(height__));
-	if (0!=((((__peek(frame__)==0)?-1:0))|(((0==localPalette)?-1:0)))) {
-		GifWriter__out8(__this, 0);
-	} else {
-		GifWriter__out8(__this, 128|__peek(palSize__));
-		i = 0;
-		j = Math__shiftLeft(1, __peek(palSize__)+1);
-		while (-1==(((i<j)?-1:0))) {
-			d = __peek(__peek(palette__)+i);
-			GifWriter__out8(__this, d&255);
-			d = d/256;
-			GifWriter__out8(__this, d&255);
-			d = d/256;
-			GifWriter__out8(__this, d&255);
-			i = i+1;
-		}
-	}
-	Output__printInt(k);
-	Output__printString(Memory__getString(GifWriter___str1));
-	Output__printInt(size_);
-	Output__println();
-	GifWriter__out8(__this, 8);
-	GifWriter__lzwEncode(__this, indexedPixels, size_);
-	GifWriter__out8(__this, 0);
-	__poke(frame__, __peek(frame__)+1);
-	Array__dispose(indexedPixels);
-	Output__printString(Memory__getString(GifWriter___str2));
-	Output__printInt(__peek(frame__));
-	Output__println();
-	return -1;
-}
-var GifWriter__clamp(var a, var b, var c) {
-	if (0!=(((a<b)?-1:0))) {
-		return b;
-	}
-
-	if (0!=(((a>c)?-1:0))) {
-		return c;
-	}
-
-	return a;
-}
-var GifWriter__quantize(var __this, var rgba, var rgbaSize, var sample, var map, var numColors_) {
-	__poke(map+0, 0);
-	__poke(map+1, 16777215);
-	__poke(map+2, 32768);
-	__poke(map+3, 8421376);
-	__poke(map+4, 128);
-	__poke(map+5, 8388736);
-	__poke(map+6, 32896);
-	__poke(map+7, 12632256);
-	__poke(map+8, 12639424);
-	__poke(map+9, 10930928);
-	__poke(map+10, 16777164);
-	__poke(map+11, 13408614);
-	__poke(map+12, 16737843);
-	__poke(map+13, 4364967);
-	__poke(map+14, 14140);
-	__poke(map+15, 39423);
-	__poke(map+16, 3355494);
-	__poke(map+17, 8388608);
-	__poke(map+18, 16737996);
-	__poke(map+19, 10027110);
-	__poke(map+20, 10053324);
-	__poke(map+21, 2236962);
-	__poke(map+22, 13421823);
-	__poke(map+23, 10066431);
-	__poke(map+24, 6710988);
-	__poke(map+25, 3407769);
-	__poke(map+26, 51);
-	__poke(map+27, 102);
-	__poke(map+28, 153);
-	__poke(map+29, 204);
-	__poke(map+30, 13056);
-	__poke(map+31, 13107);
-	__poke(map+32, 13158);
-	__poke(map+33, 13209);
-	__poke(map+34, 13260);
-	__poke(map+35, 13311);
-	__poke(map+36, 26112);
-	__poke(map+37, 26163);
-	__poke(map+38, 26214);
-	__poke(map+39, 26265);
-	__poke(map+40, 26316);
-	__poke(map+41, 26367);
-	__poke(map+42, 39168);
-	__poke(map+43, 39219);
-	__poke(map+44, 39270);
-	__poke(map+45, 39321);
-	__poke(map+46, 39372);
-	__poke(map+47, 52224);
-	__poke(map+48, 52275);
-	__poke(map+49, 52326);
-	__poke(map+50, 52377);
-	__poke(map+51, 52428);
-	__poke(map+52, 52479);
-	__poke(map+53, 65331);
-	__poke(map+54, 65382);
-	__poke(map+55, 65433);
-	__poke(map+56, 65484);
-	__poke(map+57, 3342336);
-	__poke(map+58, 3342387);
-	__poke(map+59, 3342438);
-	__poke(map+60, 3342489);
-	__poke(map+61, 3342540);
-	__poke(map+62, 3342591);
-	__poke(map+63, 3355392);
-	__poke(map+64, 3355443);
-	__poke(map+65, 3355545);
-	__poke(map+66, 3355596);
-	__poke(map+67, 3355647);
-	__poke(map+68, 3368448);
-	__poke(map+69, 3368499);
-	__poke(map+70, 3368550);
-	__poke(map+71, 3368601);
-	__poke(map+72, 3368652);
-	__poke(map+73, 3368703);
-	__poke(map+74, 3381504);
-	__poke(map+75, 3381555);
-	__poke(map+76, 3381606);
-	__poke(map+77, 3381657);
-	__poke(map+78, 3381708);
-	__poke(map+79, 3381759);
-	__poke(map+80, 3394560);
-	__poke(map+81, 3394611);
-	__poke(map+82, 3394662);
-	__poke(map+83, 3394713);
-	__poke(map+84, 3394764);
-	__poke(map+85, 3394815);
-	__poke(map+86, 3407616);
-	__poke(map+87, 3407667);
-	__poke(map+88, 3407718);
-	__poke(map+89, 3407820);
-	__poke(map+90, 3407871);
-	__poke(map+91, 6684672);
-	__poke(map+92, 6684723);
-	__poke(map+93, 6684774);
-	__poke(map+94, 6684825);
-	__poke(map+95, 6684876);
-	__poke(map+96, 6684927);
-	__poke(map+97, 6697728);
-	__poke(map+98, 6697779);
-	__poke(map+99, 6697830);
-	__poke(map+100, 6697881);
-	__poke(map+101, 6697932);
-	__poke(map+102, 6697983);
-	__poke(map+103, 6710784);
-	__poke(map+104, 6710835);
-	__poke(map+105, 6710886);
-	__poke(map+106, 6710937);
-	__poke(map+107, 6711039);
-	__poke(map+108, 6723840);
-	__poke(map+109, 6723891);
-	__poke(map+110, 6723942);
-	__poke(map+111, 6723993);
-	__poke(map+112, 6724044);
-	__poke(map+113, 6724095);
-	__poke(map+114, 6736896);
-	__poke(map+115, 6736947);
-	__poke(map+116, 6736998);
-	__poke(map+117, 6737049);
-	__poke(map+118, 6737100);
-	__poke(map+119, 6737151);
-	__poke(map+120, 6749952);
-	__poke(map+121, 6750003);
-	__poke(map+122, 6750054);
-	__poke(map+123, 6750105);
-	__poke(map+124, 6750156);
-	__poke(map+125, 6750207);
-	__poke(map+126, 10027008);
-	__poke(map+127, 10027059);
-	__poke(map+128, 10027161);
-	__poke(map+129, 10027212);
-	__poke(map+130, 10027263);
-	__poke(map+131, 10040064);
-	__poke(map+132, 10040115);
-	__poke(map+133, 10040166);
-	__poke(map+134, 10040217);
-	__poke(map+135, 10040268);
-	__poke(map+136, 10040319);
-	__poke(map+137, 10053120);
-	__poke(map+138, 10053171);
-	__poke(map+139, 10053222);
-	__poke(map+140, 10053273);
-	__poke(map+141, 10053375);
-	__poke(map+142, 10066176);
-	__poke(map+143, 10066227);
-	__poke(map+144, 10066278);
-	__poke(map+145, 10066329);
-	__poke(map+146, 10066380);
-	__poke(map+147, 10079232);
-	__poke(map+148, 10079283);
-	__poke(map+149, 10079334);
-	__poke(map+150, 10079385);
-	__poke(map+151, 10079436);
-	__poke(map+152, 10079487);
-	__poke(map+153, 10092288);
-	__poke(map+154, 10092339);
-	__poke(map+155, 10092390);
-	__poke(map+156, 10092441);
-	__poke(map+157, 10092492);
-	__poke(map+158, 10092543);
-	__poke(map+159, 13369344);
-	__poke(map+160, 13369395);
-	__poke(map+161, 13369446);
-	__poke(map+162, 13369497);
-	__poke(map+163, 13369548);
-	__poke(map+164, 13369599);
-	__poke(map+165, 13382400);
-	__poke(map+166, 13382451);
-	__poke(map+167, 13382502);
-	__poke(map+168, 13382553);
-	__poke(map+169, 13382604);
-	__poke(map+170, 13382655);
-	__poke(map+171, 13395456);
-	__poke(map+172, 13395507);
-	__poke(map+173, 13395558);
-	__poke(map+174, 13395609);
-	__poke(map+175, 13395660);
-	__poke(map+176, 13395711);
-	__poke(map+177, 13408512);
-	__poke(map+178, 13408563);
-	__poke(map+179, 13408665);
-	__poke(map+180, 13408716);
-	__poke(map+181, 13408767);
-	__poke(map+182, 13421568);
-	__poke(map+183, 13421619);
-	__poke(map+184, 13421670);
-	__poke(map+185, 13421721);
-	__poke(map+186, 13421772);
-	__poke(map+187, 13434624);
-	__poke(map+188, 13434675);
-	__poke(map+189, 13434726);
-	__poke(map+190, 13434777);
-	__poke(map+191, 13434828);
-	__poke(map+192, 13434879);
-	__poke(map+193, 16711731);
-	__poke(map+194, 16711782);
-	__poke(map+195, 16711833);
-	__poke(map+196, 16711884);
-	__poke(map+197, 16724736);
-	__poke(map+198, 16724787);
-	__poke(map+199, 16724838);
-	__poke(map+200, 16724889);
-	__poke(map+201, 16724940);
-	__poke(map+202, 16724991);
-	__poke(map+203, 16737792);
-	__poke(map+204, 16737894);
-	__poke(map+205, 16737945);
-	__poke(map+206, 16738047);
-	__poke(map+207, 16750848);
-	__poke(map+208, 16750899);
-	__poke(map+209, 16750950);
-	__poke(map+210, 16751001);
-	__poke(map+211, 16751052);
-	__poke(map+212, 16751103);
-	__poke(map+213, 16763904);
-	__poke(map+214, 16763955);
-	__poke(map+215, 16764006);
-	__poke(map+216, 16764057);
-	__poke(map+217, 16764108);
-	__poke(map+218, 16764159);
-	__poke(map+219, 16777011);
-	__poke(map+220, 16777062);
-	__poke(map+221, 16777113);
-	__poke(map+222, 16777164);
-	__poke(map+223, 13408614);
-	__poke(map+224, 16737843);
-	__poke(map+225, 4364967);
-	__poke(map+226, 14140);
-	__poke(map+227, 39423);
-	__poke(map+228, 3355494);
-	__poke(map+229, 8388608);
-	__poke(map+230, 16737996);
-	__poke(map+231, 10027110);
-	__poke(map+232, 10053324);
-	__poke(map+233, 2236962);
-	__poke(map+234, 13421823);
-	__poke(map+235, 10066431);
-	__poke(map+236, 6710988);
-	__poke(map+237, 3407769);
-	__poke(map+238, 16777164);
-	__poke(map+239, 13408614);
-	__poke(map+240, 16737843);
-	__poke(map+241, 4364967);
-	__poke(map+242, 14140);
-	__poke(map+243, 39423);
-	__poke(map+244, 3355494);
-	__poke(map+245, 8388608);
-	__poke(map+246, 16776176);
-	__poke(map+247, 10526884);
-	__poke(map+248, 8421504);
-	__poke(map+249, 16711680);
-	__poke(map+250, 65280);
-	__poke(map+251, 16776960);
-	__poke(map+252, 255);
-	__poke(map+253, 16711935);
-	__poke(map+254, 65535);
-	__poke(map+255, 8388608);
-	return 0;
-}
-var GifWriter__writeFile(var __this, var file, var data, var w, var h) {
-	if (0!=((((w<1)?-1:0))|(((h<1)?-1:0)))) {
-		return 0;
-	}
-
-	__poke(fp__, File__new(file, -1));
-	GifWriter__start(__this, w, h, 0, 2);
-	GifWriter__frame_(__this, data, 4, 0);
-	GifWriter__end(__this);
-	File__dispose(__peek(fp__));
-	__poke(fp__, 0);
-	return -1;
-}
-#undef fp__
-#undef palette__
-#undef width__
-#undef height__
-#undef repeat__
-#undef numColors__
-#undef palSize__
-#undef frame__
-#undef numBits__
-#undef curBits__
-#undef outBits__
-#undef idx__
-#undef buf__
-#endif
-
-#ifdef JACK_IMPLEMENTATION
-var Hash___str0[] = {64,0};
-var Hash___str1[] = {32,0};
-var Hash___str2[] = {72,65,83,72,32,100,101,112,116,104,61,0};
-var Hash___str3[] = {32,115,105,122,101,61,0};
-var Hash___str4[] = {59,0};
-#define size___ (__this+0)
-#define mask__ (__this+1)
-#define table__ (__this+2)
-#define cb__ (__this+3)
-var Hash__new(var size, var disposeCb) {
-	var __this;
-	var i;
-	__this = Memory__alloc(4);
-	__poke(size___, Math__shiftLeft(1, Math__log2(size)));
-	__poke(mask__, __peek(size___)-1);
-	__poke(table__, Array__new(__peek(size___)));
-	i = 0;
-	while (-1==(((i<__peek(size___))?-1:0))) {
-		__poke(__peek(table__)+i, 0);
-		i = i+1;
-	}
-	__poke(cb__, disposeCb);
-	return __this;
-}
-var Hash__dispose(var __this) {
-	var s;
-	var n;
-	var next;
-	var i;
-	i = 0;
-	while (-1==(((i<__peek(size___))?-1:0))) {
-		n = __peek(__peek(table__)+i);
-		while (-1==(n)) {
-			next = __peek(n+0);
-			if (0!=(__peek(cb__))) {
-				if (0!=(__peek(n+3))) {
-					Callback__invoke(__peek(cb__), __peek(n+3), 0);
-				}
-
-			}
-
-			s = __peek(n+2);
-			String__dispose(s);
-			Array__dispose(n);
-			n = next;
-		}
-		i = i+1;
-	}
-	if (0!=(__peek(cb__))) {
-		Callback__dispose(__peek(cb__));
-	}
-
-	Array__dispose(__peek(table__));
-	Memory__deAlloc(__this);
-	return 0;
-}
-var Hash__stats(var __this) {
-	var s;
-	var n;
-	var next;
-	var i;
-	var max;
-	var depth;
-	i = 0;
-	max = 0;
-	while (-1==(((i<__peek(size___))?-1:0))) {
-		n = __peek(__peek(table__)+i);
-		depth = 0;
-		while (-1==(((0==(((n==0)?-1:0)))?-1:0))) {
-			depth = depth+1;
-			next = __peek(n+0);
-			s = __peek(n+2);
-			Output__printString(Memory__getString(Hash___str0));
-			Output__printInt(i);
-			Output__printString(Memory__getString(Hash___str1));
-			Output__printString(s);
-			Output__printInt(depth);
-			Output__println();
-			n = next;
-		}
-		if (0!=(((depth>max)?-1:0))) {
-			max = depth;
-		}
-
-		i = i+1;
-	}
-	Output__printString(Memory__getString(Hash___str2));
-	Output__printInt(max);
-	Output__printString(Memory__getString(Hash___str3));
-	Output__printInt(__peek(size___));
-	Output__printString(Memory__getString(Hash___str4));
-	Output__println();
-	return 0;
-}
-var Hash__hash(var __this, var k) {
-	var h;
-	var l;
-	var i;
-	var t;
-	i = 1;
-	h = 0;
-	l = String__length(k);
-	if (0!=(((l>0)?-1:0))) {
-		h = String__charAt(k, 0);
-	}
-
-	while (-1==(((i<l)?-1:0))) {
-		i = i+1;
-		t = String__charAt(k, i);
-		h = Math__xor(Math__shiftLeft(h, 3), t);
-	}
-	return h;
-}
-var Hash__add(var __this, var k, var val) {
-	var p;
-	var hhh;
-	var cmp;
-	var a;
-	var n;
-	var r;
-	var prev;
-	hhh = Hash__hash(__this, k);
-	p = hhh&__peek(mask__);
-	a = __peek(__peek(table__)+p);
-	r = 0;
-	if (0!=(((a==0)?-1:0))) {
-		r = Array__new(4);
-		__poke(r+0, 0);
-		__poke(__peek(table__)+p, r);
-	} else {
-		n = a;
-		prev = 0;
-		while (-1==((((r==0)?-1:0))&((((((n==0)?-1:0))==0)?-1:0)))) {
-			if (0!=(((__peek(n+1)==hhh)?-1:0))) {
-				cmp = String__compare(k, __peek(n+2));
-				if (0!=(((cmp>0)?-1:0))) {
-					r = Array__new(4);
-					__poke(r+0, n);
-					if (0!=(((prev==0)?-1:0))) {
-						__poke(__peek(table__)+p, r);
-					} else {
-						__poke(prev+0, r);
-					}
-				} else {
-					if (0!=(((cmp==0)?-1:0))) {
-						if (0!=(__peek(cb__))) {
-							if (0!=(__peek(n+3))) {
-								Callback__invoke(__peek(cb__), __peek(n+3), 0);
-							}
-
-						}
-
-						__poke(n+3, val);
-						return 0;
-					}
-
-				}
-			} else {
-				if (0!=(((hhh>__peek(n+1))?-1:0))) {
-					r = Array__new(4);
-					__poke(r+0, n);
-					if (0!=(((prev==0)?-1:0))) {
-						__poke(__peek(table__)+p, r);
-					} else {
-						__poke(prev+0, r);
-					}
-				}
-
-			}
-			prev = n;
-			if (0!=((((r==0)?-1:0))&(((__peek(n+0)==0)?-1:0)))) {
-				r = Array__new(4);
-				__poke(r+0, 0);
-				__poke(n+0, r);
-				n = 0;
-			} else {
-				n = __peek(n+0);
-			}
-		}
-	}
-	if (0!=(r)) {
-		__poke(r+1, hhh);
-		__poke(r+2, String__copy(k));
-		__poke(r+3, val);
-	}
-
-	return 0;
-}
-var Hash__get(var __this, var k) {
-	var p;
-	var h;
-	var cmp;
-	var a;
-	var n;
-	h = Hash__hash(__this, k);
-	p = h&__peek(mask__);
-	a = __peek(table__)+p;
-	a = __peek(__peek(table__)+p);
-	if (0!=(((a==0)?-1:0))) {
-		return -1;
-	} else {
-		n = a;
-		while (-1==(((0==(((n==0)?-1:0)))?-1:0))) {
-			if (0!=(((__peek(n+1)==h)?-1:0))) {
-				cmp = String__compare(k, __peek(n+2));
-				if (0!=(((cmp>0)?-1:0))) {
-					return -1;
-				} else {
-					if (0!=(((cmp==0)?-1:0))) {
-						return __peek(n+3);
-					}
-
-				}
-			} else {
-				if (0!=(((h>__peek(n+1))?-1:0))) {
-					return -1;
-				}
-
-			}
-			n = __peek(n+0);
-		}
-	}
-	return -1;
-}
-#undef size___
-#undef mask__
-#undef table__
-#undef cb__
-#endif
-
-#ifdef JACK_IMPLEMENTATION
-var Http__new(var url) {
-	var __this;
-	__this = Memory__alloc(1);
 	return __this;
 }
 #endif
@@ -5743,6 +3189,268 @@ var JackAst__getNext(var __this) {
 #undef line__
 #undef file__
 #undef id__
+#endif
+
+#ifdef JACK_IMPLEMENTATION
+var JackCompiler___str0[] = {116,101,115,116,46,120,109,108,0};
+var JackCompiler___str1[] = {46,104,0};
+var JackCompiler___str2[] = {35,105,102,100,101,102,32,74,65,67,75,95,73,77,80,76,69,77,69,78,84,65,84,73,79,78,0};
+var JackCompiler___str3[] = {35,105,102,100,101,102,32,74,65,67,75,95,73,77,80,76,69,77,69,78,84,65,84,73,79,78,0};
+var JackCompiler___str4[] = {46,99,0};
+var JackCompiler___str5[] = {35,105,102,110,100,101,102,32,118,97,114,0};
+var JackCompiler___str6[] = {35,100,101,102,105,110,101,32,74,65,67,75,95,72,65,67,75,0};
+var JackCompiler___str7[] = {35,100,101,102,105,110,101,32,118,97,114,32,115,104,111,114,116,0};
+var JackCompiler___str8[] = {35,100,101,102,105,110,101,32,95,95,112,111,107,101,32,77,101,109,111,114,121,95,95,112,111,107,101,0};
+var JackCompiler___str9[] = {35,100,101,102,105,110,101,32,95,95,112,101,101,107,32,77,101,109,111,114,121,95,95,112,101,101,107,0};
+var JackCompiler___str10[] = {35,105,102,100,101,102,32,95,87,73,78,54,52,0};
+var JackCompiler___str11[] = {35,105,110,99,108,117,100,101,32,60,119,105,110,100,111,119,115,46,104,62,0};
+var JackCompiler___str12[] = {35,100,101,102,105,110,101,32,118,97,114,32,95,95,105,110,116,54,52,0};
+var JackCompiler___str13[] = {35,101,108,115,101,0};
+var JackCompiler___str14[] = {35,100,101,102,105,110,101,32,118,97,114,32,108,111,110,103,0};
+var JackCompiler___str15[] = {35,101,110,100,105,102,0};
+var JackCompiler___str16[] = {35,100,101,102,105,110,101,32,95,95,112,111,107,101,40,97,44,32,118,41,32,95,95,112,101,101,107,40,40,97,41,41,32,61,32,118,0};
+var JackCompiler___str17[] = {47,47,35,100,101,102,105,110,101,32,95,95,112,101,101,107,40,97,41,32,40,40,40,118,97,114,42,41,40,97,41,41,91,48,93,41,0};
+var JackCompiler___str18[] = {35,100,101,102,105,110,101,32,95,95,112,101,101,107,40,97,41,32,40,40,40,118,97,114,42,41,40,40,97,41,42,115,105,122,101,111,102,40,118,97,114,41,41,41,91,48,93,41,0};
+var JackCompiler___str19[] = {35,101,110,100,105,102,0};
+var JackCompiler___str20[] = {46,104,0};
+var JackCompiler___str21[] = {35,100,101,102,105,110,101,32,74,65,67,75,95,73,77,80,76,69,77,69,78,84,65,84,73,79,78,0};
+var JackCompiler___str22[] = {47,108,105,98,47,99,47,109,97,105,110,46,104,0};
+var JackCompiler___str23[] = {47,108,105,98,47,99,47,88,49,49,46,104,0};
+var JackCompiler___str24[] = {47,108,105,98,47,99,47,119,105,110,51,50,46,104,0};
+var JackCompiler___str25[] = {47,108,105,98,47,99,47,109,97,99,46,104,0};
+var JackCompiler___str26[] = {47,108,105,98,47,99,47,105,111,115,46,104,0};
+var JackCompiler___str27[] = {47,108,105,98,47,99,47,97,110,100,114,111,105,100,46,104,0};
+var JackCompiler___str28[] = {46,104,0};
+#define src__ (__this+0)
+#define x__ (__this+1)
+#define t__ (__this+2)
+#define comp__ (__this+3)
+#define hack__ (__this+4)
+var JackCompiler__new(var hack_mode) {
+	var __this;
+	__this = Memory__alloc(5);
+	__poke(src__, 0);
+	__poke(x__, Xml__new());
+	__poke(t__, JackTokenizer__new(__peek(x__)));
+	__poke(comp__, JackParser__new(__peek(t__)));
+	__poke(hack__, hack_mode);
+	return __this;
+}
+var JackCompiler__dispose(var __this) {
+	JackTokenizer__dispose(__peek(t__));
+	Xml__dispose(__peek(x__));
+	if (0!=(__peek(comp__))) {
+		JackParser__dispose(__peek(comp__));
+	}
+
+	Memory__deAlloc(__this);
+	return 0;
+}
+var JackCompiler__compile(var __this, var src_) {
+	var dst;
+	var a;
+	var c;
+	var s;
+	__poke(src__, File__new(src_, 0));
+	dst = File__new(Memory__getString(JackCompiler___str0), -1);
+	s = String__copy(src_);
+	s = String__appendString(s, Memory__getString(JackCompiler___str1));
+	a = File__new(s, -1);
+	String__dispose(s);
+	Xml__clear(__peek(x__));
+	JackTokenizer__init(__peek(t__), __peek(src__), 0);
+	JackParser__init(__peek(comp__), __peek(src__));
+	JackParser__compileClass(__peek(comp__), __peek(t__), dst);
+	c = JackAstToC__new(__peek(comp__), __peek(hack__));
+	JackAstToC__compile(c, a);
+	JackAstToC__dispose(c);
+	Xml__dump(__peek(x__), dst);
+	File__dispose(a);
+	File__dispose(dst);
+	File__dispose(__peek(src__));
+	__poke(src__, 0);
+	return -1;
+}
+var JackCompiler__copyHead(var __this, var dst, var source) {
+	var s;
+	var l;
+	var src_;
+	var b;
+	src_ = File__new(source, 0);
+	s = Memory__getString(JackCompiler___str2);
+	s = String__copy(s);
+	s = String__appendChar(s, 10);
+	b = String__new(1024);
+	l = File__readLine(src_, b);
+	while (-1==(~(((l==0)?-1:0)))) {
+		b = l;
+		if (0!=(((String__compare(s, b)==0)?-1:0))) {
+			l = 0;
+		} else {
+			File__writeString(dst, b);
+			l = File__readLine(src_, b);
+		}
+	}
+	String__dispose(s);
+	String__dispose(b);
+	File__dispose(src_);
+	return 0;
+}
+var JackCompiler__copy(var __this, var dst, var source) {
+	var l;
+	var src_;
+	var b;
+	src_ = File__new(source, 0);
+	b = String__new(1024);
+	l = File__readLine(src_, b);
+	while (-1==(~(((l==0)?-1:0)))) {
+		b = l;
+		File__writeString(dst, b);
+		l = File__readLine(src_, b);
+	}
+	String__dispose(b);
+	File__dispose(src_);
+	return 0;
+}
+var JackCompiler__copyBody(var __this, var dst, var source) {
+	var s;
+	var l;
+	var src_;
+	var b;
+	var doit;
+	doit = 0;
+	src_ = File__new(source, 0);
+	s = Memory__getString(JackCompiler___str3);
+	s = String__copy(s);
+	s = String__appendChar(s, 10);
+	b = String__new(1024);
+	l = File__readLine(src_, b);
+	while (-1==(~(((l==0)?-1:0)))) {
+		b = l;
+		if (0!=(((doit==0)?-1:0))) {
+			if (0!=(((String__compare(s, b)==0)?-1:0))) {
+				doit = -1;
+			}
+
+		}
+
+		if (0!=(doit)) {
+			File__writeString(dst, b);
+		}
+
+		l = File__readLine(src_, b);
+	}
+	String__dispose(s);
+	String__dispose(b);
+	File__dispose(src_);
+	return 0;
+}
+var JackCompiler__link(var __this, var dir, var files) {
+	var i;
+	var l;
+	var s;
+	var dst;
+	var sr;
+	s = String__copy(dir);
+	l = String__length(s);
+	if (0!=(((String__charAt(s, l-1)==47)?-1:0))) {
+		String__setCharAt(s, l-1, 0);
+	}
+
+	s = String__appendString(s, Memory__getString(JackCompiler___str4));
+	dst = File__new(s, -1);
+	String__dispose(s);
+	i = 0;
+	File__writeByte(dst, 10);
+	File__writeString(dst, Memory__getString(JackCompiler___str5));
+	File__writeByte(dst, 10);
+	if (0!=(__peek(hack__))) {
+		File__writeString(dst, Memory__getString(JackCompiler___str6));
+		File__writeByte(dst, 10);
+		File__writeString(dst, Memory__getString(JackCompiler___str7));
+		File__writeByte(dst, 10);
+		File__writeString(dst, Memory__getString(JackCompiler___str8));
+		File__writeByte(dst, 10);
+		File__writeString(dst, Memory__getString(JackCompiler___str9));
+		File__writeByte(dst, 10);
+	} else {
+		File__writeString(dst, Memory__getString(JackCompiler___str10));
+		File__writeByte(dst, 10);
+		File__writeString(dst, Memory__getString(JackCompiler___str11));
+		File__writeByte(dst, 10);
+		File__writeString(dst, Memory__getString(JackCompiler___str12));
+		File__writeByte(dst, 10);
+		File__writeString(dst, Memory__getString(JackCompiler___str13));
+		File__writeByte(dst, 10);
+		File__writeString(dst, Memory__getString(JackCompiler___str14));
+		File__writeByte(dst, 10);
+		File__writeString(dst, Memory__getString(JackCompiler___str15));
+		File__writeByte(dst, 10);
+		File__writeString(dst, Memory__getString(JackCompiler___str16));
+		File__writeByte(dst, 10);
+		File__writeString(dst, Memory__getString(JackCompiler___str17));
+		File__writeByte(dst, 10);
+		File__writeString(dst, Memory__getString(JackCompiler___str18));
+		File__writeByte(dst, 10);
+	}
+	File__writeString(dst, Memory__getString(JackCompiler___str19));
+	File__writeByte(dst, 10);
+	while (-1==(((i<Buffer__getSize(files))?-1:0))) {
+		s = Buffer__getAt(files, i);
+		s = String__copy(s);
+		s = String__appendString(s, Memory__getString(JackCompiler___str20));
+		JackCompiler__copyHead(__this, dst, s);
+		File__writeByte(dst, 10);
+		String__dispose(s);
+		i = i+1;
+	}
+	i = 0;
+	File__writeString(dst, Memory__getString(JackCompiler___str21));
+	File__writeByte(dst, 10);
+	s = String__copy(dir);
+	s = String__appendString(s, Memory__getString(JackCompiler___str22));
+	JackCompiler__copy(__this, dst, s);
+	String__dispose(s);
+	s = String__copy(dir);
+	s = String__appendString(s, Memory__getString(JackCompiler___str23));
+	JackCompiler__copy(__this, dst, s);
+	String__dispose(s);
+	s = String__copy(dir);
+	s = String__appendString(s, Memory__getString(JackCompiler___str24));
+	JackCompiler__copy(__this, dst, s);
+	String__dispose(s);
+	s = String__copy(dir);
+	s = String__appendString(s, Memory__getString(JackCompiler___str25));
+	JackCompiler__copy(__this, dst, s);
+	String__dispose(s);
+	s = String__copy(dir);
+	s = String__appendString(s, Memory__getString(JackCompiler___str26));
+	JackCompiler__copy(__this, dst, s);
+	String__dispose(s);
+	s = String__copy(dir);
+	s = String__appendString(s, Memory__getString(JackCompiler___str27));
+	JackCompiler__copy(__this, dst, s);
+	String__dispose(s);
+	while (-1==(((i<Buffer__getSize(files))?-1:0))) {
+		s = Buffer__getAt(files, i);
+		s = String__copy(s);
+		s = String__appendString(s, Memory__getString(JackCompiler___str28));
+		JackCompiler__copyBody(__this, dst, s);
+		File__writeByte(dst, 10);
+		sr = File__new(s, 0);
+		File__remove(sr);
+		File__dispose(sr);
+		String__dispose(s);
+		i = i+1;
+	}
+	File__dispose(dst);
+	return -1;
+}
+#undef src__
+#undef x__
+#undef t__
+#undef comp__
+#undef hack__
 #endif
 
 #ifdef JACK_IMPLEMENTATION
@@ -7530,265 +5238,3476 @@ var JackAstToC__coVarName(var __this, var c, var isassign) {
 #endif
 
 #ifdef JACK_IMPLEMENTATION
-var JackCompiler___str0[] = {116,101,115,116,46,120,109,108,0};
-var JackCompiler___str1[] = {46,104,0};
-var JackCompiler___str2[] = {35,105,102,100,101,102,32,74,65,67,75,95,73,77,80,76,69,77,69,78,84,65,84,73,79,78,0};
-var JackCompiler___str3[] = {35,105,102,100,101,102,32,74,65,67,75,95,73,77,80,76,69,77,69,78,84,65,84,73,79,78,0};
-var JackCompiler___str4[] = {46,99,0};
-var JackCompiler___str5[] = {35,105,102,110,100,101,102,32,118,97,114,0};
-var JackCompiler___str6[] = {35,100,101,102,105,110,101,32,74,65,67,75,95,72,65,67,75,0};
-var JackCompiler___str7[] = {35,100,101,102,105,110,101,32,118,97,114,32,115,104,111,114,116,0};
-var JackCompiler___str8[] = {35,100,101,102,105,110,101,32,95,95,112,111,107,101,32,77,101,109,111,114,121,95,95,112,111,107,101,0};
-var JackCompiler___str9[] = {35,100,101,102,105,110,101,32,95,95,112,101,101,107,32,77,101,109,111,114,121,95,95,112,101,101,107,0};
-var JackCompiler___str10[] = {35,105,102,100,101,102,32,95,87,73,78,54,52,0};
-var JackCompiler___str11[] = {35,105,110,99,108,117,100,101,32,60,119,105,110,100,111,119,115,46,104,62,0};
-var JackCompiler___str12[] = {35,100,101,102,105,110,101,32,118,97,114,32,95,95,105,110,116,54,52,0};
-var JackCompiler___str13[] = {35,101,108,115,101,0};
-var JackCompiler___str14[] = {35,100,101,102,105,110,101,32,118,97,114,32,108,111,110,103,0};
-var JackCompiler___str15[] = {35,101,110,100,105,102,0};
-var JackCompiler___str16[] = {35,100,101,102,105,110,101,32,95,95,112,111,107,101,40,97,44,32,118,41,32,95,95,112,101,101,107,40,40,97,41,41,32,61,32,118,0};
-var JackCompiler___str17[] = {47,47,35,100,101,102,105,110,101,32,95,95,112,101,101,107,40,97,41,32,40,40,40,118,97,114,42,41,40,97,41,41,91,48,93,41,0};
-var JackCompiler___str18[] = {35,100,101,102,105,110,101,32,95,95,112,101,101,107,40,97,41,32,40,40,40,118,97,114,42,41,40,40,97,41,42,115,105,122,101,111,102,40,118,97,114,41,41,41,91,48,93,41,0};
-var JackCompiler___str19[] = {35,101,110,100,105,102,0};
-var JackCompiler___str20[] = {46,104,0};
-var JackCompiler___str21[] = {35,100,101,102,105,110,101,32,74,65,67,75,95,73,77,80,76,69,77,69,78,84,65,84,73,79,78,0};
-var JackCompiler___str22[] = {47,108,105,98,47,99,47,109,97,105,110,46,104,0};
-var JackCompiler___str23[] = {47,108,105,98,47,99,47,88,49,49,46,104,0};
-var JackCompiler___str24[] = {47,108,105,98,47,99,47,119,105,110,51,50,46,104,0};
-var JackCompiler___str25[] = {47,108,105,98,47,99,47,109,97,99,46,104,0};
-var JackCompiler___str26[] = {47,108,105,98,47,99,47,105,111,115,46,104,0};
-var JackCompiler___str27[] = {47,108,105,98,47,99,47,97,110,100,114,111,105,100,46,104,0};
-var JackCompiler___str28[] = {46,104,0};
-#define src__ (__this+0)
-#define x__ (__this+1)
-#define t__ (__this+2)
-#define comp__ (__this+3)
-#define hack__ (__this+4)
-var JackCompiler__new(var hack_mode) {
-	var __this;
-	__this = Memory__alloc(5);
-	__poke(src__, 0);
-	__poke(x__, Xml__new());
-	__poke(t__, JackTokenizer__new(__peek(x__)));
-	__poke(comp__, JackParser__new(__peek(t__)));
-	__poke(hack__, hack_mode);
-	return __this;
+var Sys2__args_;
+var Sys2__init() {
+	return 0;
 }
-var JackCompiler__dispose(var __this) {
-	JackTokenizer__dispose(__peek(t__));
-	Xml__dispose(__peek(x__));
-	if (0!=(__peek(comp__))) {
-		JackParser__dispose(__peek(comp__));
+var Sys2__deInit() {
+	var b;
+	if (0!=(Sys2__args_)) {
+		b = Sys2__args_;
+		Buffer__dispose(b);
+		Sys2__args_ = 0;
 	}
 
+	return 0;
+}
+var Sys2__args() {
+	var a;
+	var s;
+	var i;
+	var isq;
+	var b;
+	if (0!=(Sys2__args_)) {
+		return Sys2__args_;
+	}
+
+	Sys2__args_ = Buffer__newString(1);
+	i = 0;
+ 	isq = Sys__argc__;
+	while (-1==(((i<isq)?-1:0))) {
+ 		a = (var)Sys__argv__[i];
+		s = String__new(255);
+		s = String__appendFromNative(s, a);
+		b = Sys2__args_;
+		Buffer__append(b, s);
+		i = i+1;
+	}
+	return Sys2__args_;
+}
+#endif
+
+#ifdef JACK_IMPLEMENTATION
+var File___str0[] = {78,101,103,97,116,105,118,101,32,83,116,114,105,110,103,32,108,101,110,103,116,104,46,0};
+#define fd__ (__this+0)
+#define is_write__ (__this+1)
+#define buffer__ (__this+2)
+#define name__ (__this+3)
+var File__new(var path, var writeing) {
+	var __this;
+	var l;
+	__this = Memory__alloc(4);
+	__poke(fd__, -1);
+	__poke(is_write__, writeing);
+	l = String__length(path);
+	if (0!=(((l<0)?-1:0))) {
+		Output__printString(Memory__getString(File___str0));
+		Sys__error(-1);
+		return __this;
+	}
+
+	__poke(name__, String__copy(path));
+	return __this;
+}
+var File__dispose(var __this) {
+	var f;
+	f = __peek(fd__);
+	if (0!=(__peek(name__))) {
+		String__dispose(__peek(name__));
+	}
+
+	if (0!=(((__peek(fd__)<0)?-1:0))) {
+		Memory__deAlloc(__this);
+		return 0;
+	}
+
+ 	fclose((FILE*)f);
 	Memory__deAlloc(__this);
 	return 0;
 }
-var JackCompiler__compile(var __this, var src_) {
-	var dst;
-	var a;
-	var c;
+var File__getName(var __this) {
+	return __peek(name__);
+}
+var File__isdir(var __this) {
+	var l;
 	var s;
-	__poke(src__, File__new(src_, 0));
-	dst = File__new(Memory__getString(JackCompiler___str0), -1);
-	s = String__copy(src_);
-	s = String__appendString(s, Memory__getString(JackCompiler___str1));
-	a = File__new(s, -1);
-	String__dispose(s);
-	Xml__clear(__peek(x__));
-	JackTokenizer__init(__peek(t__), __peek(src__), 0);
-	JackParser__init(__peek(comp__), __peek(src__));
-	JackParser__compileClass(__peek(comp__), __peek(t__), dst);
-	c = JackAstToC__new(__peek(comp__), __peek(hack__));
-	JackAstToC__compile(c, a);
-	JackAstToC__dispose(c);
-	Xml__dump(__peek(x__), dst);
-	File__dispose(a);
-	File__dispose(dst);
-	File__dispose(__peek(src__));
-	__poke(src__, 0);
+	var f;
+	var b;
+	l = String__length(__peek(name__));
+	if (0!=(((l<1)?-1:0))) {
+		return 0;
+	}
+
+	b = Bytes__new(256);
+	Bytes__setStringToNative(b, __peek(name__));
+	s = Bytes__getStringNativePointer(b);
+	f = 0;
+ #ifdef _WIN32
+ 	if (_waccess((wchar_t*)s, 0)) {
+ 		_wstat64((wchar_t*)s, &File__status);
+ 		if ((File__status.st_mode & S_IFDIR) != 0) {
+ 			f =  -1;
+ 		}
+ 	}
+ #else
+ 	if (access((char*)s, 0)) {
+ 		stat((char*)s, &File__status);
+ 		if ((File__status.st_mode & S_IFDIR) != 0) {
+ 			f = -1;
+ 		}
+ 	}
+ #endif
+	Bytes__dispose(b);
+	return f;
+}
+var File__open(var __this) {
+	var l;
+	var m;
+	var s;
+	var f;
+	var writing;
+	var b;
+	if (0!=(((__peek(fd__)>-1)?-1:0))) {
+		return 0;
+	}
+
+	writing = __peek(is_write__);
+	l = String__length(__peek(name__));
+	if (0!=(((l<1)?-1:0))) {
+		return 0;
+	}
+
+	if (0!=(File__isdir(__this))) {
+		return 0;
+	}
+
+	b = Bytes__new(256);
+	Bytes__setStringToNative(b, __peek(name__));
+	s = Bytes__getStringNativePointer(b);
+	f = -1;
+ #ifdef _WIN32
+ 	m = (var)L"rb";
+ 	if (writing) {m = (var)L"w+b";}
+ 	f = 0;
+ 	_wfopen_s((FILE**)&f, (wchar_t*)s, (wchar_t*)m);
+ 	if(((var*)f)==NULL) f = -1;
+ #else
+ 	m = (var)"rb";
+ 	if (writing) {m = (var)"w+b";}
+ 	f = (var)fopen((char*)s, (char*)m);
+ 	if(((var*)f)==NULL) f = -1;
+ #endif
+	__poke(fd__, f);
+	Bytes__dispose(b);
 	return -1;
 }
-var JackCompiler__copyHead(var __this, var dst, var source) {
-	var s;
-	var l;
-	var src_;
+var File__readByte(var __this) {
 	var b;
-	src_ = File__new(source, 0);
-	s = Memory__getString(JackCompiler___str2);
-	s = String__copy(s);
-	s = String__appendChar(s, 10);
-	b = String__new(1024);
-	l = File__readLine(src_, b);
-	while (-1==(~(((l==0)?-1:0)))) {
-		b = l;
-		if (0!=(((String__compare(s, b)==0)?-1:0))) {
-			l = 0;
+	var f;
+	f = __peek(fd__);
+	if (0!=(((f<0)?-1:0))) {
+		File__open(__this);
+		f = __peek(fd__);
+		if (0!=(((f<0)?-1:0))) {
+			return -1;
+		}
+
+	}
+
+	b = 0;
+ 	if (fread(&b, 1, 1, (FILE*)f) < 1) { return -1;};
+ 	b = b & 255;
+	return b;
+}
+var File__seek(var __this, var position) {
+	var b;
+	var f;
+	var p;
+	f = __peek(fd__);
+	p = position;
+	if (0!=(((f<0)?-1:0))) {
+		File__open(__this);
+		f = __peek(fd__);
+		if (0!=(((f<0)?-1:0))) {
+			return -1;
+		}
+
+	}
+
+ 	b = fseek((FILE*)f, (long int)p, SEEK_SET);
+	return b;
+}
+var File__writeByte(var __this, var data) {
+	var r;
+	var f;
+	var b;
+	b = data;
+	if (0!=(((__peek(fd__)<0)?-1:0))) {
+		File__open(__this);
+		if (0!=(((__peek(fd__)<0)?-1:0))) {
+			return -1;
+		}
+
+	}
+
+	f = __peek(fd__);
+ 	r = fwrite(&b, 1, 1, (FILE*)f);
+	return r;
+}
+var File__writeString(var __this, var s) {
+	var i;
+	var l;
+	var c;
+	i = 0;
+	l = String__length(s);
+	while (-1==(((i<l)?-1:0))) {
+		c = String__charAt(s, i);
+		File__writeUtf8(__this, c);
+		i = i+1;
+	}
+	return i;
+}
+var File__readLine(var __this, var buff) {
+	var c;
+	c = File__readUtf8(__this);
+	if (0!=(((c==0)?-1:0))) {
+		return 0;
+	}
+
+	String__setCharAt(buff, 0, 0);
+	while (-1==((((c>0)?-1:0)))) {
+		buff = String__appendChar(buff, c);
+		if (0!=(((c==10)?-1:0))) {
+			c = 0;
 		} else {
-			File__writeString(dst, b);
-			l = File__readLine(src_, b);
+			c = File__readUtf8(__this);
 		}
 	}
-	String__dispose(s);
-	String__dispose(b);
-	File__dispose(src_);
-	return 0;
+	return buff;
 }
-var JackCompiler__copy(var __this, var dst, var source) {
-	var l;
-	var src_;
+var File__readUtf8(var __this) {
+	var c;
 	var b;
-	src_ = File__new(source, 0);
-	b = String__new(1024);
-	l = File__readLine(src_, b);
-	while (-1==(~(((l==0)?-1:0)))) {
-		b = l;
-		File__writeString(dst, b);
-		l = File__readLine(src_, b);
+	c = File__readByte(__this);
+	if (0!=((((c<1)?-1:0))|(((c>255)?-1:0)))) {
+		return 0;
 	}
-	String__dispose(b);
-	File__dispose(src_);
+
+	if (0!=(((c<128)?-1:0))) {
+		return c;
+	} else {
+		if (0!=(((c<192)?-1:0))) {
+			return c;
+		} else {
+			if (0!=(((c<224)?-1:0))) {
+				c = c&31;
+				b = File__readByte(__this)&63;
+				c = b+(c*64);
+				return c;
+			} else {
+				if (0!=(((c<240)?-1:0))) {
+					c = c&15;
+					b = File__readByte(__this)&63;
+					c = (b*64)+(c*4096);
+					b = File__readByte(__this)&63;
+					c = c+b;
+					return c;
+				} else {
+					if (0!=(((c<248)?-1:0))) {
+						c = c&7;
+						b = File__readByte(__this)&63;
+						c = (b*4096)+(c*262144);
+						b = File__readByte(__this)&63;
+						c = (b*64)+c;
+						b = File__readByte(__this)&63;
+						c = c+b;
+						return c;
+					} else {
+						if (0!=(((c<252)?-1:0))) {
+							c = c&3;
+							b = File__readByte(__this)&63;
+							c = (b*262144)+(c*16777216);
+							b = File__readByte(__this)&63;
+							c = (b*4096)+c;
+							b = File__readByte(__this)&63;
+							c = (b*64)+c;
+							b = File__readByte(__this)&63;
+							c = c+b;
+							return c;
+						} else {
+							c = c&3;
+							b = File__readByte(__this)&63;
+							c = (b*16777216)|(c*1073741824);
+							b = File__readByte(__this)&63;
+							c = (b*262144)|c;
+							b = File__readByte(__this)&63;
+							c = (b*4096)|c;
+							b = File__readByte(__this)&63;
+							c = (b*64)|c;
+							b = File__readByte(__this)&63;
+							c = c|b;
+							return c;
+						}
+					}
+				}
+			}
+		}
+	}
+	return c;
+}
+var File__writeUtf8(var __this, var data) {
+	if (0!=(data&3221225472)) {
+		File__writeByte(__this, ((data/1073741824)&3)|252);
+		File__writeByte(__this, ((data/16777216)&63)|128);
+		File__writeByte(__this, ((data/262144)&63)|128);
+		File__writeByte(__this, ((data/4096)&63)|128);
+		File__writeByte(__this, ((data/64)&63)|128);
+		File__writeByte(__this, ((data)&63)|128);
+	} else {
+		if (0!=(((data>2097152)?-1:0))) {
+			File__writeByte(__this, ((data/16777216)&3)|248);
+			File__writeByte(__this, ((data/262144)&63)|128);
+			File__writeByte(__this, ((data/4096)&63)|128);
+			File__writeByte(__this, ((data/64)&63)|128);
+			File__writeByte(__this, ((data)&63)|128);
+		} else {
+			if (0!=(((data>65535)?-1:0))) {
+				File__writeByte(__this, ((data/262144)&7)|240);
+				File__writeByte(__this, ((data/4096)&63)|128);
+				File__writeByte(__this, ((data/64)&63)|128);
+				File__writeByte(__this, ((data)&63)|128);
+			} else {
+				if (0!=(((data>2047)?-1:0))) {
+					File__writeByte(__this, ((data/4096)&15)|224);
+					File__writeByte(__this, ((data/64)&63)|128);
+					File__writeByte(__this, ((data)&63)|128);
+				} else {
+					if (0!=(((data>127)?-1:0))) {
+						File__writeByte(__this, ((data/64)&31)|192);
+						File__writeByte(__this, ((data)&63)|128);
+					} else {
+						File__writeByte(__this, ((data)&127));
+					}
+				}
+			}
+		}
+	}
 	return 0;
 }
-var JackCompiler__copyBody(var __this, var dst, var source) {
-	var s;
+var File__writeInt16(var __this, var d) {
+	File__writeByte(__this, d&255);
+	return File__writeByte(__this, (d/256)&255);
+}
+var File__writeInt32(var __this, var d) {
+	File__writeInt16(__this, d);
+	return File__writeInt16(__this, d/65536);
+}
+var File__writeInt64(var __this, var d) {
+	File__writeInt32(__this, d);
+	return File__writeInt32(__this, (d/2147483648)/2);
+}
+var File__readInt16(var __this) {
+	var d;
+	d = File__readByte(__this);
+	d = d+(File__readByte(__this)*256);
+	return d;
+}
+var File__readInt32(var __this) {
+	var d;
+	d = File__readInt16(__this);
+	d = d+(File__readInt16(__this)*65536);
+	return d;
+}
+var File__readInt64(var __this) {
+	var d;
+	d = File__readInt32(__this);
+	d = d+((File__readInt32(__this)*2147483648)*2);
+	return d;
+}
+var File__remove(var __this) {
 	var l;
-	var src_;
+	var m;
 	var b;
-	var doit;
-	doit = 0;
-	src_ = File__new(source, 0);
-	s = Memory__getString(JackCompiler___str3);
-	s = String__copy(s);
-	s = String__appendChar(s, 10);
-	b = String__new(1024);
-	l = File__readLine(src_, b);
-	while (-1==(~(((l==0)?-1:0)))) {
-		b = l;
-		if (0!=(((doit==0)?-1:0))) {
-			if (0!=(((String__compare(s, b)==0)?-1:0))) {
-				doit = -1;
+	var s;
+	if (0!=(((__peek(name__)==0)?-1:0))) {
+		return 0;
+	}
+
+	l = String__length(__peek(name__));
+	if (0!=(((l<1)?-1:0))) {
+		return 0;
+	}
+
+	b = Bytes__new(256);
+	Bytes__setStringToNative(b, __peek(name__));
+	s = Bytes__getStringNativePointer(b);
+	if (0!=(((File__isdir(__this)==0)?-1:0))) {
+ #ifdef _WIN32
+ 	m = (var)_wremove((wchar_t*)s);
+ #else
+ 	m = (var)remove((char*)s);
+ #endif
+	} else {
+ #ifdef _WIN32
+ 	m = (var)_wrmdir((wchar_t*)s);
+ #else
+ 	m = (var)rmdir((char*)s);
+ #endif
+	}
+	Bytes__dispose(b);
+	return (((m==0)?-1:0));
+}
+var File__mkdir(var __this) {
+	var l;
+	var m;
+	var s;
+	var b;
+	if (0!=(((__peek(name__)==0)?-1:0))) {
+		return 0;
+	}
+
+	l = String__length(__peek(name__));
+	if (0!=(((l<1)?-1:0))) {
+		return 0;
+	}
+
+	b = Bytes__new(256);
+	Bytes__setStringToNative(b, __peek(name__));
+	s = Bytes__getStringNativePointer(b);
+ #ifdef _WIN32
+ 	m = (var)_wmkdir((wchar_t*)s);
+ #else
+ 	m = (var)mkdir((char*)s, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+ #endif
+	return (((m==0)?-1:0));
+}
+var File__list(var __this) {
+	var i;
+	var l;
+	var b;
+	var s;
+	var na;
+	var n;
+	var a;
+	var str;
+	if (0!=(((__peek(name__)==0)?-1:0))) {
+		return 0;
+	}
+
+	l = String__length(__peek(name__));
+	if (0!=(((l<1)?-1:0))) {
+		return 0;
+	}
+
+	na = String__copy(__peek(name__));
+	if (0!=((((((String__charAt(na, l-1)==47)?-1:0))==0)?-1:0))) {
+		na = String__appendChar(na, 47);
+	}
+
+	str = Bytes__new(256);
+	Bytes__setStringToNative(str, na);
+	n = Bytes__getStringNativePointer(str);
+	b = Buffer__new(10, 0);
+	i = 0;
+ 	i = i + 1;
+ #ifdef _WIN32
+ 	l = wcslen((wchar_t*)n);
+	if (((wchar_t*)n)[l - 1] != L'*') {
+		Bytes__appendNativeChar(str, L'*');
+ 		n = Bytes__getStringNativePointer(str);
+ 	}
+	for (i = 0; i < l; i++) {
+		if (((wchar_t*)n)[i] == '/') {
+			((wchar_t*)n)[i] = '\\';
+ 		}
+ 	}
+ 		
+ 	if((File__hFind = FindFirstFileW((LPCWSTR)n, &File__FindFileData))
+ 	 	!= INVALID_HANDLE_VALUE)
+ 	{
+ 		do {
+         		a = (var)File__FindFileData.cFileName;
+			if (((wchar_t*)a)[0] == L'.' && 
+ 			 	(((((wchar_t*)a)[1] == L'.') && 
+ 					(((wchar_t*)a)[2] == 0))
+ 					|| (((wchar_t*)a)[1] == 0)))
+ 			{} else {
+ 				s=String__copy(na);
+ 				s=String__appendFromNative(s, a);
+ 				if (File__FindFileData.dwFileAttributes & 
+ 					FILE_ATTRIBUTE_DIRECTORY) { 
+ 					s=String__appendChar(s, 47); 
+ 				}
+ 				Buffer__append(b, s);
+			}
+ 			i = i + 1;
+		} while(FindNextFileW(File__hFind, &File__FindFileData));
+ 		FindClose(File__hFind);
+	}
+ #else
+ 	//n = n * sizeof(var);
+ 	//printf("OPNE %s\n", n);
+ 	if((File__dir = opendir((char*)n)) != 0){
+    		while((File__dp = readdir(File__dir)) != 0){
+ 			a = (var)File__dp->d_name;
+ 			if (((char*)a)[0] == '.' && 
+ 			 	(((((char*)a)[1] == '.') && (((char*)a)[2] == 0))
+ 					|| (((char*)a)[1] == 0)))
+ 			{} else {
+ 				s=String__copy(na);
+ 				s=String__appendFromNative(s, a);
+ 				
+ 				if (File__dp->d_type == DT_DIR) {
+ 					s=String__appendChar(s, 47); 
+ 				}
+ 				Buffer__append(b, s);
+ 			}
+ 			i = i + 1;
+     		}
+     		closedir(File__dir);
+ 	}
+ #endif
+	Bytes__dispose(str);
+	String__dispose(na);
+	return b;
+}
+#undef fd__
+#undef is_write__
+#undef buffer__
+#undef name__
+#endif
+
+#ifdef JACK_IMPLEMENTATION
+var Hash___str0[] = {64,0};
+var Hash___str1[] = {32,0};
+var Hash___str2[] = {72,65,83,72,32,100,101,112,116,104,61,0};
+var Hash___str3[] = {32,115,105,122,101,61,0};
+var Hash___str4[] = {59,0};
+#define size___ (__this+0)
+#define mask__ (__this+1)
+#define table__ (__this+2)
+#define cb__ (__this+3)
+var Hash__new(var size, var disposeCb) {
+	var __this;
+	var i;
+	__this = Memory__alloc(4);
+	__poke(size___, Math__shiftLeft(1, Math__log2(size)));
+	__poke(mask__, __peek(size___)-1);
+	__poke(table__, Array__new(__peek(size___)));
+	i = 0;
+	while (-1==(((i<__peek(size___))?-1:0))) {
+		__poke(__peek(table__)+i, 0);
+		i = i+1;
+	}
+	__poke(cb__, disposeCb);
+	return __this;
+}
+var Hash__dispose(var __this) {
+	var s;
+	var n;
+	var next;
+	var i;
+	i = 0;
+	while (-1==(((i<__peek(size___))?-1:0))) {
+		n = __peek(__peek(table__)+i);
+		while (-1==(n)) {
+			next = __peek(n+0);
+			if (0!=(__peek(cb__))) {
+				if (0!=(__peek(n+3))) {
+					Callback__invoke(__peek(cb__), __peek(n+3), 0);
+				}
+
+			}
+
+			s = __peek(n+2);
+			String__dispose(s);
+			Array__dispose(n);
+			n = next;
+		}
+		i = i+1;
+	}
+	if (0!=(__peek(cb__))) {
+		Callback__dispose(__peek(cb__));
+	}
+
+	Array__dispose(__peek(table__));
+	Memory__deAlloc(__this);
+	return 0;
+}
+var Hash__stats(var __this) {
+	var s;
+	var n;
+	var next;
+	var i;
+	var max;
+	var depth;
+	i = 0;
+	max = 0;
+	while (-1==(((i<__peek(size___))?-1:0))) {
+		n = __peek(__peek(table__)+i);
+		depth = 0;
+		while (-1==(((0==(((n==0)?-1:0)))?-1:0))) {
+			depth = depth+1;
+			next = __peek(n+0);
+			s = __peek(n+2);
+			Output__printString(Memory__getString(Hash___str0));
+			Output__printInt(i);
+			Output__printString(Memory__getString(Hash___str1));
+			Output__printString(s);
+			Output__printInt(depth);
+			Output__println();
+			n = next;
+		}
+		if (0!=(((depth>max)?-1:0))) {
+			max = depth;
+		}
+
+		i = i+1;
+	}
+	Output__printString(Memory__getString(Hash___str2));
+	Output__printInt(max);
+	Output__printString(Memory__getString(Hash___str3));
+	Output__printInt(__peek(size___));
+	Output__printString(Memory__getString(Hash___str4));
+	Output__println();
+	return 0;
+}
+var Hash__hash(var __this, var k) {
+	var h;
+	var l;
+	var i;
+	var t;
+	i = 1;
+	h = 0;
+	l = String__length(k);
+	if (0!=(((l>0)?-1:0))) {
+		h = String__charAt(k, 0);
+	}
+
+	while (-1==(((i<l)?-1:0))) {
+		i = i+1;
+		t = String__charAt(k, i);
+		h = Math__xor(Math__shiftLeft(h, 3), t);
+	}
+	return h;
+}
+var Hash__add(var __this, var k, var val) {
+	var p;
+	var hhh;
+	var cmp;
+	var a;
+	var n;
+	var r;
+	var prev;
+	hhh = Hash__hash(__this, k);
+	p = hhh&__peek(mask__);
+	a = __peek(__peek(table__)+p);
+	r = 0;
+	if (0!=(((a==0)?-1:0))) {
+		r = Array__new(4);
+		__poke(r+0, 0);
+		__poke(__peek(table__)+p, r);
+	} else {
+		n = a;
+		prev = 0;
+		while (-1==((((r==0)?-1:0))&((((((n==0)?-1:0))==0)?-1:0)))) {
+			if (0!=(((__peek(n+1)==hhh)?-1:0))) {
+				cmp = String__compare(k, __peek(n+2));
+				if (0!=(((cmp>0)?-1:0))) {
+					r = Array__new(4);
+					__poke(r+0, n);
+					if (0!=(((prev==0)?-1:0))) {
+						__poke(__peek(table__)+p, r);
+					} else {
+						__poke(prev+0, r);
+					}
+				} else {
+					if (0!=(((cmp==0)?-1:0))) {
+						if (0!=(__peek(cb__))) {
+							if (0!=(__peek(n+3))) {
+								Callback__invoke(__peek(cb__), __peek(n+3), 0);
+							}
+
+						}
+
+						__poke(n+3, val);
+						return 0;
+					}
+
+				}
+			} else {
+				if (0!=(((hhh>__peek(n+1))?-1:0))) {
+					r = Array__new(4);
+					__poke(r+0, n);
+					if (0!=(((prev==0)?-1:0))) {
+						__poke(__peek(table__)+p, r);
+					} else {
+						__poke(prev+0, r);
+					}
+				}
+
+			}
+			prev = n;
+			if (0!=((((r==0)?-1:0))&(((__peek(n+0)==0)?-1:0)))) {
+				r = Array__new(4);
+				__poke(r+0, 0);
+				__poke(n+0, r);
+				n = 0;
+			} else {
+				n = __peek(n+0);
+			}
+		}
+	}
+	if (0!=(r)) {
+		__poke(r+1, hhh);
+		__poke(r+2, String__copy(k));
+		__poke(r+3, val);
+	}
+
+	return 0;
+}
+var Hash__get(var __this, var k) {
+	var p;
+	var h;
+	var cmp;
+	var a;
+	var n;
+	h = Hash__hash(__this, k);
+	p = h&__peek(mask__);
+	a = __peek(table__)+p;
+	a = __peek(__peek(table__)+p);
+	if (0!=(((a==0)?-1:0))) {
+		return -1;
+	} else {
+		n = a;
+		while (-1==(((0==(((n==0)?-1:0)))?-1:0))) {
+			if (0!=(((__peek(n+1)==h)?-1:0))) {
+				cmp = String__compare(k, __peek(n+2));
+				if (0!=(((cmp>0)?-1:0))) {
+					return -1;
+				} else {
+					if (0!=(((cmp==0)?-1:0))) {
+						return __peek(n+3);
+					}
+
+				}
+			} else {
+				if (0!=(((h>__peek(n+1))?-1:0))) {
+					return -1;
+				}
+
+			}
+			n = __peek(n+0);
+		}
+	}
+	return -1;
+}
+#undef size___
+#undef mask__
+#undef table__
+#undef cb__
+#endif
+
+#ifdef JACK_IMPLEMENTATION
+var CallbackStringDispose__callback(var __this, var a, var b) {
+	String__dispose(a);
+	return 0;
+}
+var CallbackStringDispose__new() {
+	var __this;
+	__this = Memory__alloc(1);
+	(__peek(__this+0)) = (var)CallbackStringDispose__callback;
+	return __this;
+}
+#endif
+
+#ifdef JACK_IMPLEMENTATION
+#define tag__ (__this+0)
+#define att_values__ (__this+1)
+#define att_names__ (__this+2)
+#define elements__ (__this+3)
+#define parent__ (__this+4)
+#define is_content___ (__this+5)
+var XmlNode__new(var x, var parent_, var tag_, var is_txt) {
+	var __this;
+	__this = Memory__alloc(6);
+	if (0!=(is_txt)) {
+		__poke(tag__, String__copy(tag_));
+	} else {
+		__poke(tag__, Xml__getString(x, tag_));
+	}
+	__poke(parent__, parent_);
+	__poke(is_content___, is_txt);
+	__poke(att_values__, 0);
+	__poke(att_names__, 0);
+	__poke(elements__, 0);
+	return __this;
+}
+var XmlNode__dispose(var __this) {
+	var x;
+	x = __this;
+	XmlNode__clear(x);
+	Memory__deAlloc(__this);
+	return 0;
+}
+var XmlNode__clear(var __this) {
+	if (0!=(__peek(att_values__))) {
+		Buffer__dispose(__peek(att_values__));
+		Buffer__dispose(__peek(att_names__));
+		__poke(att_values__, 0);
+		__poke(att_names__, 0);
+	}
+
+	if (0!=(__peek(is_content___))) {
+		if (0!=(__peek(tag__))) {
+			String__dispose(__peek(tag__));
+			__poke(tag__, 0);
+		}
+
+	}
+
+	if (0!=(__peek(elements__))) {
+		Buffer__dispose(__peek(elements__));
+		__poke(elements__, 0);
+	}
+
+	return 0;
+}
+var XmlNode__closeElement(var __this, var x, var tag_) {
+	var e;
+	var p;
+	var s;
+	var t;
+	s = Xml__getString(x, tag_);
+	e = __this;
+	p = XmlNode__getParent(e);
+	while (-1==((((((p==0)?-1:0))==0)?-1:0))) {
+		t = XmlNode__getTag(e);
+		if (0!=(((t==s)?-1:0))) {
+			return p;
+		}
+
+		e = p;
+		p = XmlNode__getParent(p);
+	}
+	return e;
+}
+var XmlNode__removeElement(var __this, var x, var e) {
+	if (0!=(((__peek(elements__)==0)?-1:0))) {
+		return 0;
+	}
+
+	Buffer__remove(__peek(elements__), e);
+	return e;
+}
+var XmlNode__addElement(var __this, var x, var tag_) {
+	var e;
+	var cb;
+	e = XmlNode__new(x, __this, tag_, 0);
+	if (0!=(((__peek(elements__)==0)?-1:0))) {
+		cb = CallbackXmlNodeDispose__new();
+		__poke(elements__, Buffer__new(1, cb));
+	}
+
+	Buffer__append(__peek(elements__), e);
+	return e;
+}
+var XmlNode__addAttribute(var __this, var x, var name, var value) {
+	var i;
+	var s;
+	if (0!=(((__peek(att_values__)==0)?-1:0))) {
+		__poke(att_values__, Buffer__newString(1));
+		__poke(att_names__, Buffer__new(1, 0));
+	}
+
+	i = Buffer__indexOfStr(__peek(att_names__), name);
+	s = String__copy(value);
+	if (0!=(((i>-1)?-1:0))) {
+		s = Buffer__setAt(__peek(att_values__), i, s);
+		String__dispose(s);
+	} else {
+		Buffer__append(__peek(att_values__), s);
+		s = Xml__getString(x, name);
+		Buffer__append(__peek(att_names__), s);
+	}
+	return 0;
+}
+var XmlNode__addContent(var __this, var x, var txt) {
+	var e;
+	var cb;
+	e = XmlNode__new(x, __this, txt, -1);
+	if (0!=(((__peek(elements__)==0)?-1:0))) {
+		cb = CallbackXmlNodeDispose__new();
+		__poke(elements__, Buffer__new(1, cb));
+	}
+
+	Buffer__append(__peek(elements__), e);
+	return 0;
+}
+var XmlNode__isContent(var __this) {
+	return __peek(is_content___);
+}
+var XmlNode__getElements(var __this) {
+	return __peek(elements__);
+}
+var XmlNode__getAttributesNames(var __this) {
+	return __peek(att_names__);
+}
+var XmlNode__getAttributesValues(var __this) {
+	return __peek(att_values__);
+}
+var XmlNode__getParent(var __this) {
+	return __peek(parent__);
+}
+var XmlNode__getTag(var __this) {
+	return __peek(tag__);
+}
+var XmlNode__dump(var __this, var x, var f, var depth) {
+	var d;
+	var i;
+	var s;
+	var e;
+	if (0!=(__peek(is_content___))) {
+		s = Xml__escape(x, __peek(tag__));
+		File__writeString(f, s);
+		return 0;
+	}
+
+	if (0!=(depth)) {
+		d = depth;
+		File__writeUtf8(f, 60);
+		File__writeString(f, __peek(tag__));
+		d = 0;
+		if (0!=(__peek(att_names__))) {
+			d = Buffer__getSize(__peek(att_names__));
+		}
+
+		i = 0;
+		while (-1==(((i<d)?-1:0))) {
+			File__writeUtf8(f, 32);
+			s = Buffer__getAt(__peek(att_names__), i);
+			if (0!=(s)) {
+				File__writeString(f, s);
+			}
+
+			s = Buffer__getAt(__peek(att_values__), i);
+			if (0!=(s)) {
+				File__writeUtf8(f, 61);
+				File__writeUtf8(f, 34);
+				s = Xml__escape(x, s);
+				File__writeString(f, s);
+				File__writeUtf8(f, 34);
+			}
+
+			i = i+1;
+		}
+		if (0!=(((__peek(elements__)==0)?-1:0))) {
+			File__writeUtf8(f, 47);
+		}
+
+		File__writeUtf8(f, 62);
+	}
+
+	if (0!=(__peek(elements__))) {
+		d = Buffer__getSize(__peek(elements__));
+		i = 0;
+		while (-1==(((i<d)?-1:0))) {
+			e = Buffer__getAt(__peek(elements__), i);
+			if (0!=(e)) {
+				XmlNode__dump(e, x, f, (depth+1));
+			}
+
+			i = i+1;
+		}
+	}
+
+	if (0!=((((depth>0)?-1:0))&(((0==(((__peek(elements__)==0)?-1:0)))?-1:0)))) {
+		d = depth;
+		File__writeUtf8(f, 60);
+		File__writeUtf8(f, 47);
+		File__writeString(f, __peek(tag__));
+		File__writeUtf8(f, 62);
+	}
+
+	return 0;
+}
+#undef tag__
+#undef att_values__
+#undef att_names__
+#undef elements__
+#undef parent__
+#undef is_content___
+#endif
+
+#ifdef JACK_IMPLEMENTATION
+var C__NULL_CHARACTER() {
+	return 0;
+}
+var C__START_OF_HEADING() {
+	return 1;
+}
+var C__START_OF_TEXT() {
+	return 2;
+}
+var C__END_OF_TEXT_CHARACTER() {
+	return 3;
+}
+var C__END_OF_TRANSMISSION_CHARACTER() {
+	return 4;
+}
+var C__ENQUIRY_CHARACTER() {
+	return 5;
+}
+var C__ACKNOWLEDGE_CHARACTER() {
+	return 6;
+}
+var C__BELL_CHARACTER() {
+	return 7;
+}
+var C__BACKSPACE() {
+	return 8;
+}
+var C__HORIZONTAL_TAB() {
+	return 9;
+}
+var C__LINE_FEED() {
+	return 10;
+}
+var C__VERTICAL_TAB() {
+	return 11;
+}
+var C__FORM_FEED() {
+	return 12;
+}
+var C__CARRIAGE_RETURN() {
+	return 13;
+}
+var C__SHIFT_OUT() {
+	return 14;
+}
+var C__SHIFT_IN() {
+	return 15;
+}
+var C__DATA_LINK_ESCAPE() {
+	return 16;
+}
+var C__DEVICE_CONTROL_1() {
+	return 17;
+}
+var C__DEVICE_CONTROL_2() {
+	return 18;
+}
+var C__DEVICE_CONTROL_3() {
+	return 19;
+}
+var C__DEVICE_CONTROL_4() {
+	return 20;
+}
+var C__NEGATIVE_ACKNOWLEDGE_CHARACTER() {
+	return 21;
+}
+var C__SYNCHRONOUS_IDLE() {
+	return 22;
+}
+var C__END_OF_TRANSMISSION_BLOCK() {
+	return 23;
+}
+var C__CANCEL_CHARACTER() {
+	return 24;
+}
+var C__END_OF_MEDIUM() {
+	return 25;
+}
+var C__SUBSTITUTE_CHARACTER() {
+	return 26;
+}
+var C__ESCAPE_CHARACTER() {
+	return 27;
+}
+var C__FILE_SEPARATOR() {
+	return 28;
+}
+var C__GROUP_SEPARATOR() {
+	return 29;
+}
+var C__RECORD_SEPARATOR() {
+	return 30;
+}
+var C__UNIT_SEPARATOR() {
+	return 31;
+}
+var C__SPACE() {
+	return 32;
+}
+var C__EXCLAMATION_MARK() {
+	return 33;
+}
+var C__QUOTATION_MARK() {
+	return 34;
+}
+var C__HASHTAG() {
+	return 35;
+}
+var C__DOLLAR_SIGN() {
+	return 36;
+}
+var C__PERCENT_SIGN() {
+	return 37;
+}
+var C__AMPERSAND() {
+	return 38;
+}
+var C__APOSTROPHE() {
+	return 39;
+}
+var C__LEFT_PARENTHESIS() {
+	return 40;
+}
+var C__RIGHT_PARENTHESIS() {
+	return 41;
+}
+var C__ASTERISK() {
+	return 42;
+}
+var C__PLUS_SIGN() {
+	return 43;
+}
+var C__COMMA() {
+	return 44;
+}
+var C__HYPHEN_MINUS() {
+	return 45;
+}
+var C__FULL_STOP() {
+	return 46;
+}
+var C__SLASH() {
+	return 47;
+}
+var C__DIGIT_ZERO() {
+	return 48;
+}
+var C__DIGIT_ONE() {
+	return 49;
+}
+var C__DIGIT_TWO() {
+	return 50;
+}
+var C__DIGIT_THREE() {
+	return 51;
+}
+var C__DIGIT_FOUR() {
+	return 52;
+}
+var C__DIGIT_FIVE() {
+	return 53;
+}
+var C__DIGIT_SIX() {
+	return 54;
+}
+var C__DIGIT_SEVEN() {
+	return 55;
+}
+var C__DIGIT_EIGHT() {
+	return 56;
+}
+var C__DIGIT_NINE() {
+	return 57;
+}
+var C__COLON() {
+	return 58;
+}
+var C__SEMICOLON() {
+	return 59;
+}
+var C__LESS_THAN_SIGN() {
+	return 60;
+}
+var C__EQUAL_SIGN() {
+	return 61;
+}
+var C__GREATER_THAN_SIGN() {
+	return 62;
+}
+var C__QUESTION_MARK() {
+	return 63;
+}
+var C__AT_SIGN() {
+	return 64;
+}
+var C__LATIN_CAPITAL_LETTER_A() {
+	return 65;
+}
+var C__LATIN_CAPITAL_LETTER_B() {
+	return 66;
+}
+var C__LATIN_CAPITAL_LETTER_C() {
+	return 67;
+}
+var C__LATIN_CAPITAL_LETTER_D() {
+	return 68;
+}
+var C__LATIN_CAPITAL_LETTER_E() {
+	return 69;
+}
+var C__LATIN_CAPITAL_LETTER_F() {
+	return 70;
+}
+var C__LATIN_CAPITAL_LETTER_G() {
+	return 71;
+}
+var C__LATIN_CAPITAL_LETTER_H() {
+	return 72;
+}
+var C__LATIN_CAPITAL_LETTER_I() {
+	return 73;
+}
+var C__LATIN_CAPITAL_LETTER_J() {
+	return 74;
+}
+var C__LATIN_CAPITAL_LETTER_K() {
+	return 75;
+}
+var C__LATIN_CAPITAL_LETTER_L() {
+	return 76;
+}
+var C__LATIN_CAPITAL_LETTER_M() {
+	return 77;
+}
+var C__LATIN_CAPITAL_LETTER_N() {
+	return 78;
+}
+var C__LATIN_CAPITAL_LETTER_O() {
+	return 79;
+}
+var C__LATIN_CAPITAL_LETTER_P() {
+	return 80;
+}
+var C__LATIN_CAPITAL_LETTER_Q() {
+	return 81;
+}
+var C__LATIN_CAPITAL_LETTER_R() {
+	return 82;
+}
+var C__LATIN_CAPITAL_LETTER_S() {
+	return 83;
+}
+var C__LATIN_CAPITAL_LETTER_T() {
+	return 84;
+}
+var C__LATIN_CAPITAL_LETTER_U() {
+	return 85;
+}
+var C__LATIN_CAPITAL_LETTER_V() {
+	return 86;
+}
+var C__LATIN_CAPITAL_LETTER_W() {
+	return 87;
+}
+var C__LATIN_CAPITAL_LETTER_X() {
+	return 88;
+}
+var C__LATIN_CAPITAL_LETTER_Y() {
+	return 89;
+}
+var C__LATIN_CAPITAL_LETTER_Z() {
+	return 90;
+}
+var C__LEFT_SQUARE_BRACKET() {
+	return 91;
+}
+var C__BACKSLASH() {
+	return 92;
+}
+var C__RIGHT_SQUARE_BRACKET() {
+	return 93;
+}
+var C__CIRCUMFLEX_ACCENT() {
+	return 94;
+}
+var C__LOW_LINE() {
+	return 95;
+}
+var C__GRAVE_ACCENT() {
+	return 96;
+}
+var C__LATIN_SMALL_LETTER_A() {
+	return 97;
+}
+var C__LATIN_SMALL_LETTER_B() {
+	return 98;
+}
+var C__LATIN_SMALL_LETTER_C() {
+	return 99;
+}
+var C__LATIN_SMALL_LETTER_D() {
+	return 100;
+}
+var C__LATIN_SMALL_LETTER_E() {
+	return 101;
+}
+var C__LATIN_SMALL_LETTER_F() {
+	return 102;
+}
+var C__LATIN_SMALL_LETTER_G() {
+	return 103;
+}
+var C__LATIN_SMALL_LETTER_H() {
+	return 104;
+}
+var C__LATIN_SMALL_LETTER_I() {
+	return 105;
+}
+var C__LATIN_SMALL_LETTER_J() {
+	return 106;
+}
+var C__LATIN_SMALL_LETTER_K() {
+	return 107;
+}
+var C__LATIN_SMALL_LETTER_L() {
+	return 108;
+}
+var C__LATIN_SMALL_LETTER_M() {
+	return 109;
+}
+var C__LATIN_SMALL_LETTER_N() {
+	return 110;
+}
+var C__LATIN_SMALL_LETTER_O() {
+	return 111;
+}
+var C__LATIN_SMALL_LETTER_P() {
+	return 112;
+}
+var C__LATIN_SMALL_LETTER_Q() {
+	return 113;
+}
+var C__LATIN_SMALL_LETTER_R() {
+	return 114;
+}
+var C__LATIN_SMALL_LETTER_S() {
+	return 115;
+}
+var C__LATIN_SMALL_LETTER_T() {
+	return 116;
+}
+var C__LATIN_SMALL_LETTER_U() {
+	return 117;
+}
+var C__LATIN_SMALL_LETTER_V() {
+	return 118;
+}
+var C__LATIN_SMALL_LETTER_W() {
+	return 119;
+}
+var C__LATIN_SMALL_LETTER_X() {
+	return 120;
+}
+var C__LATIN_SMALL_LETTER_Y() {
+	return 121;
+}
+var C__LATIN_SMALL_LETTER_Z() {
+	return 122;
+}
+var C__LEFT_CURLY_BRACKET() {
+	return 123;
+}
+var C__VERTICAL_BAR() {
+	return 124;
+}
+var C__RIGHT_CURLY_BRACKET() {
+	return 125;
+}
+var C__TILDE() {
+	return 126;
+}
+var C__DELETE() {
+	return 127;
+}
+var C__INVALID() {
+	return 128;
+}
+var C__NULL() {
+	return 129;
+}
+var C__NONE() {
+	return 130;
+}
+var C__KEYWORD() {
+	return 131;
+}
+var C__SYMBOL() {
+	return 132;
+}
+var C__IDENTIFIER() {
+	return 133;
+}
+var C__INT_CONST() {
+	return 134;
+}
+var C__STRING_CONST() {
+	return 135;
+}
+var C__CLASS() {
+	return 136;
+}
+var C__METHOD() {
+	return 137;
+}
+var C__FUNCTION() {
+	return 138;
+}
+var C__CONSTRUCTOR() {
+	return 139;
+}
+var C__CALLBACK() {
+	return 140;
+}
+var C__INT() {
+	return 141;
+}
+var C__BOOLEAN() {
+	return 142;
+}
+var C__CHAR() {
+	return 143;
+}
+var C__VOID() {
+	return 144;
+}
+var C__VAR() {
+	return 145;
+}
+var C__STATIC() {
+	return 146;
+}
+var C__FIELD() {
+	return 147;
+}
+var C__LET() {
+	return 148;
+}
+var C__DO() {
+	return 149;
+}
+var C__IF() {
+	return 150;
+}
+var C__ELSE() {
+	return 151;
+}
+var C__WHILE() {
+	return 152;
+}
+var C__RETURN() {
+	return 153;
+}
+var C__TRUE() {
+	return 154;
+}
+var C__FALSE() {
+	return 155;
+}
+var C__BOOL() {
+	return 156;
+}
+var C__THIS() {
+	return 157;
+}
+var C__ASM() {
+	return 158;
+}
+var C__PLUS() {
+	return 159;
+}
+var C__MINUS() {
+	return 160;
+}
+var C__MULTIPLY() {
+	return 161;
+}
+var C__DIV() {
+	return 162;
+}
+var C__AND() {
+	return 163;
+}
+var C__OR() {
+	return 164;
+}
+var C__GREATER() {
+	return 165;
+}
+var C__LESS() {
+	return 166;
+}
+var C__EQUAL() {
+	return 167;
+}
+var C__ROOT() {
+	return 168;
+}
+var C__EXPR() {
+	return 169;
+}
+var C__CALL() {
+	return 170;
+}
+var C__CLASSNAME() {
+	return 171;
+}
+var C__ARGS() {
+	return 172;
+}
+var C__VARNAME() {
+	return 173;
+}
+var C__ARRAY() {
+	return 174;
+}
+var C__ASSIGN() {
+	return 175;
+}
+var C__STATEMENTS() {
+	return 176;
+}
+var C__PARAMS() {
+	return 177;
+}
+var C__VARS() {
+	return 178;
+}
+var C__TYPE() {
+	return 179;
+}
+var C__STRING() {
+	return 180;
+}
+var C__ARRAYVAR() {
+	return 181;
+}
+var C__PARAN() {
+	return 182;
+}
+var C__UNARYOP() {
+	return 183;
+}
+var C__TERM() {
+	return 184;
+}
+var C__OP() {
+	return 185;
+}
+var C__DOT() {
+	return 186;
+}
+var C__BODY() {
+	return 187;
+}
+var C__SUBROUTINENAME() {
+	return 188;
+}
+var C__UNARYMINUS() {
+	return 189;
+}
+var C__UNARYPLUS() {
+	return 190;
+}
+var C__UNARYTILDE() {
+	return 191;
+}
+var C__SUBROUTINECALL() {
+	return 192;
+}
+var C__CLASSORVARNAME() {
+	return 193;
+}
+var C__NEXT_FREE_CONSTANT() {
+	return 255;
+}
+#endif
+
+#ifdef JACK_IMPLEMENTATION
+var GifWriter___str0[] = {32,71,73,70,32,0};
+var GifWriter___str1[] = {32,79,85,84,32,0};
+var GifWriter___str2[] = {32,69,78,68,32,0};
+#define fp__ (__this+0)
+#define palette__ (__this+1)
+#define width__ (__this+2)
+#define height__ (__this+3)
+#define repeat__ (__this+4)
+#define numColors__ (__this+5)
+#define palSize__ (__this+6)
+#define frame__ (__this+7)
+#define numBits__ (__this+8)
+#define curBits__ (__this+9)
+#define outBits__ (__this+10)
+#define idx__ (__this+11)
+#define buf__ (__this+12)
+var GifWriter__new() {
+	var __this;
+	var i;
+	__this = Memory__alloc(13);
+	__poke(fp__, 0);
+	__poke(palette__, Array__new(768));
+	i = 0;
+	while (-1==(((i<768)?-1:0))) {
+		__poke(__peek(palette__)+i, 0);
+		i = i+1;
+	}
+	__poke(width__, 0);
+	__poke(height__, 0);
+	__poke(repeat__, 0);
+	__poke(numColors__, 0);
+	__poke(palSize__, 0);
+	__poke(frame__, 0);
+	__poke(numBits__, 0);
+	__poke(curBits__, 0);
+	__poke(outBits__, 0);
+	__poke(buf__, Array__new(256));
+	return __this;
+}
+var GifWriter__dispose(var __this) {
+	if (0!=(__peek(fp__))) {
+		File__dispose(__peek(fp__));
+	}
+
+	Array__dispose(__peek(palette__));
+	return 0;
+}
+var GifWriter__out8(var __this, var code) {
+	if (0!=(__peek(fp__))) {
+		File__writeByte(__peek(fp__), code);
+	}
+
+	return 0;
+}
+var GifWriter__out16le(var __this, var code) {
+	GifWriter__out8(__this, code&255);
+	GifWriter__out8(__this, (code/256)&255);
+	return 0;
+}
+var GifWriter__lzwWrite(var __this, var code) {
+	var i;
+	var j;
+	var outBits_;
+	var curBits_;
+	var idx_;
+	var buf_;
+	buf_ = __peek(buf__);
+	idx_ = __peek(idx__);
+	outBits_ = __peek(outBits__)|Math__shiftLeft(code, __peek(curBits__));
+	curBits_ = __peek(curBits__)+__peek(numBits__);
+	while (-1==(((curBits_>7)?-1:0))) {
+		__poke(buf_+idx_, outBits_&255);
+		idx_ = idx_+1;
+		outBits_ = Math__shiftRight(outBits_, 8);
+		curBits_ = curBits_-8;
+		if (0!=(((idx_>254)?-1:0))) {
+			GifWriter__out8(__this, idx_);
+			i = 0;
+			j = idx_;
+			while (-1==(((i<j)?-1:0))) {
+				GifWriter__out8(__this, __peek(buf_+i));
+				i = i+1;
+			}
+			idx_ = 0;
+		}
+
+	}
+	__poke(idx__, idx_);
+	__poke(outBits__, outBits_);
+	__poke(curBits__, curBits_);
+	return 0;
+}
+var GifWriter__lzwEncode(var __this, var in_, var len) {
+	var maxcode;
+	var hashSize;
+	var codetab;
+	var hashTbl;
+	var i;
+	var free_ent;
+	var inp;
+	var ent;
+	var c;
+	var fcode;
+	var key;
+	var kk;
+	var CONTINUE;
+	__poke(numBits__, 9);
+	__poke(idx__, 0);
+	maxcode = 511;
+	hashSize = 5003;
+	codetab = Array__new(hashSize);
+	hashTbl = Array__new(hashSize);
+	i = 0;
+	while (-1==(((i<hashSize)?-1:0))) {
+		__poke(hashTbl+i, -1);
+		i = i+1;
+	}
+	GifWriter__lzwWrite(__this, 256);
+	inp = 0;
+	free_ent = 258;
+	ent = __peek(in_+inp);
+	inp = inp+1;
+	len = len-1;
+	while (-1==(((len>0)?-1:0))) {
+		CONTINUE = -1;
+		c = __peek(in_+inp);
+		inp = inp+1;
+		fcode = Math__shiftLeft(c, 12)+ent;
+		key = Math__shiftLeft(c, 4);
+		key = Math__xor(ent, key);
+		kk = __peek(hashTbl+key);
+		while (-1==(CONTINUE&(((kk>-1)?-1:0)))) {
+			if (0!=(((kk==fcode)?-1:0))) {
+				ent = __peek(codetab+key);
+				CONTINUE = 0;
+			}
+
+			if (0!=(CONTINUE)) {
+				key = key+1;
+				if (0!=((((key>(hashSize-1))?-1:0)))) {
+					key = key-hashSize;
+				}
+
+				kk = __peek(hashTbl+key);
+			}
+
+		}
+		if (0!=(CONTINUE)) {
+			GifWriter__lzwWrite(__this, ent);
+			ent = c;
+			if (0!=(((free_ent<4096)?-1:0))) {
+				if (0!=(((free_ent>maxcode)?-1:0))) {
+					__poke(numBits__, __peek(numBits__)+1);
+					if (0!=(((__peek(numBits__)==12)?-1:0))) {
+						maxcode = 4096;
+					} else {
+						maxcode = Math__shiftLeft(1, __peek(numBits__))-1;
+					}
+				}
+
+				__poke(codetab+key, free_ent);
+				free_ent = free_ent+1;
+				__poke(hashTbl+key, fcode);
+			} else {
+				i = 0;
+				while (-1==(((i<hashSize)?-1:0))) {
+					__poke(hashTbl+i, -1);
+					i = i+1;
+				}
+				free_ent = 258;
+				GifWriter__lzwWrite(__this, 256);
+				__poke(numBits__, 9);
+				maxcode = 511;
+			}
+		}
+
+		len = len-1;
+	}
+	GifWriter__lzwWrite(__this, ent);
+	GifWriter__lzwWrite(__this, 257);
+	GifWriter__lzwWrite(__this, 0);
+	if (0!=(__peek(idx__))) {
+		GifWriter__out8(__this, __peek(idx__));
+		i = 0;
+		while (-1==(((i<__peek(idx__))?-1:0))) {
+			GifWriter__out8(__this, __peek(__peek(buf__)+i));
+			i = i+1;
+		}
+		__poke(idx__, 0);
+	}
+
+	return 0;
+}
+var GifWriter__start(var __this, var w, var h, var repeat_, var numColors_) {
+	if (0!=(((numColors_>255)?-1:0))) {
+		numColors_ = 255;
+	} else {
+		if (0!=(((numColors_<2)?-1:0))) {
+			numColors_ = 2;
+		}
+
+	}
+	__poke(width__, w);
+	__poke(height__, h);
+	__poke(repeat__, repeat_);
+	__poke(numColors__, numColors_);
+	__poke(palSize__, Math__log2(numColors_));
+	GifWriter__out8(__this, 71);
+	GifWriter__out8(__this, 73);
+	GifWriter__out8(__this, 70);
+	GifWriter__out8(__this, 56);
+	GifWriter__out8(__this, 57);
+	GifWriter__out8(__this, 97);
+	GifWriter__out16le(__this, __peek(width__));
+	GifWriter__out16le(__this, __peek(height__));
+	GifWriter__out8(__this, 240|(__peek(palSize__)));
+	GifWriter__out16le(__this, 0);
+	return -1;
+}
+var GifWriter__end(var __this) {
+	return GifWriter__out8(__this, 59);
+}
+var GifWriter__frame_(var __this, var rgba, var delayCsec, var localPalette) {
+	var size_;
+	var localPalTbl;
+	var palette_;
+	var indexedPixels;
+	var k;
+	var c;
+	var rgb0;
+	var rgb1;
+	var rgb2;
+	var bestd;
+	var best;
+	var i;
+	var j;
+	var rgb;
+	var bb;
+	var gg;
+	var rr;
+	var d;
+	var p;
+	var a;
+	size_ = __peek(width__)*__peek(height__);
+	localPalTbl = Array__new(768);
+	i = 0;
+	while (-1==(((i<768)?-1:0))) {
+		__poke(localPalTbl+i, 0);
+		i = i+1;
+	}
+	if (0!=((((__peek(frame__)==0)?-1:0))|(((0==(localPalette))?-1:0)))) {
+		palette_ = __peek(palette__);
+	} else {
+		palette_ = localPalTbl;
+	}
+	if (0!=((((__peek(frame__)==0)?-1:0))|localPalette)) {
+		GifWriter__quantize(__this, rgba, size_, 1, __peek(palette__), __peek(numColors__));
+	}
+
+	indexedPixels = Array__new(size_);
+	a = Buffer__getArray(rgba);
+	k = 0;
+	Output__printInt(k);
+	Output__printString(Memory__getString(GifWriter___str0));
+	Output__printInt(size_);
+	Output__println();
+	c = __peek(numColors__);
+	while (-1==(((k<size_)?-1:0))) {
+		bestd = 2147483647;
+		best = -1;
+		i = 0;
+		rgb = __peek(a+k);
+		rgb0 = rgb&255;
+		rgb1 = (rgb/256)&255;
+		rgb2 = (rgb/65536)&255;
+		while (-1==(((i<c)?-1:0))) {
+			p = __peek(palette_+i);
+			bb = (p&255)-rgb0;
+			gg = (Math__shiftRight(p, 8)&255)-rgb1;
+			rr = (Math__shiftRight(p, 16)&255)-rgb2;
+			d = (bb*bb)+(gg*gg)+(rr*rr);
+			if (0!=(((d<bestd)?-1:0))) {
+				bestd = d;
+				best = i;
+			}
+
+			i = i+1;
+		}
+		__poke(indexedPixels+k, best);
+		k = k+1;
+	}
+	if (0!=(((__peek(frame__)==0)?-1:0))) {
+		i = 0;
+		j = Math__shiftLeft(1, __peek(palSize__)+1);
+		while (-1==(((i<j)?-1:0))) {
+			d = __peek(__peek(palette__)+i);
+			GifWriter__out8(__this, d&255);
+			d = d/256;
+			GifWriter__out8(__this, d&255);
+			d = d/256;
+			GifWriter__out8(__this, d&255);
+			i = i+1;
+		}
+		if (0!=(((__peek(repeat__)>-1)?-1:0))) {
+			GifWriter__out8(__this, 33);
+			GifWriter__out8(__this, 255);
+			GifWriter__out8(__this, 11);
+			GifWriter__out8(__this, 78);
+			GifWriter__out8(__this, 69);
+			GifWriter__out8(__this, 84);
+			GifWriter__out8(__this, 83);
+			GifWriter__out8(__this, 67);
+			GifWriter__out8(__this, 65);
+			GifWriter__out8(__this, 80);
+			GifWriter__out8(__this, 69);
+			GifWriter__out8(__this, 50);
+			GifWriter__out8(__this, 46);
+			GifWriter__out8(__this, 48);
+			GifWriter__out8(__this, 3);
+			GifWriter__out8(__this, 1);
+			GifWriter__out16le(__this, __peek(repeat__));
+			GifWriter__out8(__this, 0);
+		}
+
+	}
+
+	GifWriter__out8(__this, 33);
+	GifWriter__out8(__this, 249);
+	GifWriter__out8(__this, 4);
+	GifWriter__out8(__this, 0);
+	GifWriter__out16le(__this, delayCsec);
+	GifWriter__out16le(__this, 0);
+	GifWriter__out8(__this, 44);
+	GifWriter__out8(__this, 0);
+	GifWriter__out8(__this, 0);
+	GifWriter__out8(__this, 0);
+	GifWriter__out8(__this, 0);
+	GifWriter__out16le(__this, __peek(width__));
+	GifWriter__out16le(__this, __peek(height__));
+	if (0!=((((__peek(frame__)==0)?-1:0))|(((0==localPalette)?-1:0)))) {
+		GifWriter__out8(__this, 0);
+	} else {
+		GifWriter__out8(__this, 128|__peek(palSize__));
+		i = 0;
+		j = Math__shiftLeft(1, __peek(palSize__)+1);
+		while (-1==(((i<j)?-1:0))) {
+			d = __peek(__peek(palette__)+i);
+			GifWriter__out8(__this, d&255);
+			d = d/256;
+			GifWriter__out8(__this, d&255);
+			d = d/256;
+			GifWriter__out8(__this, d&255);
+			i = i+1;
+		}
+	}
+	Output__printInt(k);
+	Output__printString(Memory__getString(GifWriter___str1));
+	Output__printInt(size_);
+	Output__println();
+	GifWriter__out8(__this, 8);
+	GifWriter__lzwEncode(__this, indexedPixels, size_);
+	GifWriter__out8(__this, 0);
+	__poke(frame__, __peek(frame__)+1);
+	Array__dispose(indexedPixels);
+	Output__printString(Memory__getString(GifWriter___str2));
+	Output__printInt(__peek(frame__));
+	Output__println();
+	return -1;
+}
+var GifWriter__clamp(var a, var b, var c) {
+	if (0!=(((a<b)?-1:0))) {
+		return b;
+	}
+
+	if (0!=(((a>c)?-1:0))) {
+		return c;
+	}
+
+	return a;
+}
+var GifWriter__quantize(var __this, var rgba, var rgbaSize, var sample, var map, var numColors_) {
+	__poke(map+0, 0);
+	__poke(map+1, 16777215);
+	__poke(map+2, 32768);
+	__poke(map+3, 8421376);
+	__poke(map+4, 128);
+	__poke(map+5, 8388736);
+	__poke(map+6, 32896);
+	__poke(map+7, 12632256);
+	__poke(map+8, 12639424);
+	__poke(map+9, 10930928);
+	__poke(map+10, 16777164);
+	__poke(map+11, 13408614);
+	__poke(map+12, 16737843);
+	__poke(map+13, 4364967);
+	__poke(map+14, 14140);
+	__poke(map+15, 39423);
+	__poke(map+16, 3355494);
+	__poke(map+17, 8388608);
+	__poke(map+18, 16737996);
+	__poke(map+19, 10027110);
+	__poke(map+20, 10053324);
+	__poke(map+21, 2236962);
+	__poke(map+22, 13421823);
+	__poke(map+23, 10066431);
+	__poke(map+24, 6710988);
+	__poke(map+25, 3407769);
+	__poke(map+26, 51);
+	__poke(map+27, 102);
+	__poke(map+28, 153);
+	__poke(map+29, 204);
+	__poke(map+30, 13056);
+	__poke(map+31, 13107);
+	__poke(map+32, 13158);
+	__poke(map+33, 13209);
+	__poke(map+34, 13260);
+	__poke(map+35, 13311);
+	__poke(map+36, 26112);
+	__poke(map+37, 26163);
+	__poke(map+38, 26214);
+	__poke(map+39, 26265);
+	__poke(map+40, 26316);
+	__poke(map+41, 26367);
+	__poke(map+42, 39168);
+	__poke(map+43, 39219);
+	__poke(map+44, 39270);
+	__poke(map+45, 39321);
+	__poke(map+46, 39372);
+	__poke(map+47, 52224);
+	__poke(map+48, 52275);
+	__poke(map+49, 52326);
+	__poke(map+50, 52377);
+	__poke(map+51, 52428);
+	__poke(map+52, 52479);
+	__poke(map+53, 65331);
+	__poke(map+54, 65382);
+	__poke(map+55, 65433);
+	__poke(map+56, 65484);
+	__poke(map+57, 3342336);
+	__poke(map+58, 3342387);
+	__poke(map+59, 3342438);
+	__poke(map+60, 3342489);
+	__poke(map+61, 3342540);
+	__poke(map+62, 3342591);
+	__poke(map+63, 3355392);
+	__poke(map+64, 3355443);
+	__poke(map+65, 3355545);
+	__poke(map+66, 3355596);
+	__poke(map+67, 3355647);
+	__poke(map+68, 3368448);
+	__poke(map+69, 3368499);
+	__poke(map+70, 3368550);
+	__poke(map+71, 3368601);
+	__poke(map+72, 3368652);
+	__poke(map+73, 3368703);
+	__poke(map+74, 3381504);
+	__poke(map+75, 3381555);
+	__poke(map+76, 3381606);
+	__poke(map+77, 3381657);
+	__poke(map+78, 3381708);
+	__poke(map+79, 3381759);
+	__poke(map+80, 3394560);
+	__poke(map+81, 3394611);
+	__poke(map+82, 3394662);
+	__poke(map+83, 3394713);
+	__poke(map+84, 3394764);
+	__poke(map+85, 3394815);
+	__poke(map+86, 3407616);
+	__poke(map+87, 3407667);
+	__poke(map+88, 3407718);
+	__poke(map+89, 3407820);
+	__poke(map+90, 3407871);
+	__poke(map+91, 6684672);
+	__poke(map+92, 6684723);
+	__poke(map+93, 6684774);
+	__poke(map+94, 6684825);
+	__poke(map+95, 6684876);
+	__poke(map+96, 6684927);
+	__poke(map+97, 6697728);
+	__poke(map+98, 6697779);
+	__poke(map+99, 6697830);
+	__poke(map+100, 6697881);
+	__poke(map+101, 6697932);
+	__poke(map+102, 6697983);
+	__poke(map+103, 6710784);
+	__poke(map+104, 6710835);
+	__poke(map+105, 6710886);
+	__poke(map+106, 6710937);
+	__poke(map+107, 6711039);
+	__poke(map+108, 6723840);
+	__poke(map+109, 6723891);
+	__poke(map+110, 6723942);
+	__poke(map+111, 6723993);
+	__poke(map+112, 6724044);
+	__poke(map+113, 6724095);
+	__poke(map+114, 6736896);
+	__poke(map+115, 6736947);
+	__poke(map+116, 6736998);
+	__poke(map+117, 6737049);
+	__poke(map+118, 6737100);
+	__poke(map+119, 6737151);
+	__poke(map+120, 6749952);
+	__poke(map+121, 6750003);
+	__poke(map+122, 6750054);
+	__poke(map+123, 6750105);
+	__poke(map+124, 6750156);
+	__poke(map+125, 6750207);
+	__poke(map+126, 10027008);
+	__poke(map+127, 10027059);
+	__poke(map+128, 10027161);
+	__poke(map+129, 10027212);
+	__poke(map+130, 10027263);
+	__poke(map+131, 10040064);
+	__poke(map+132, 10040115);
+	__poke(map+133, 10040166);
+	__poke(map+134, 10040217);
+	__poke(map+135, 10040268);
+	__poke(map+136, 10040319);
+	__poke(map+137, 10053120);
+	__poke(map+138, 10053171);
+	__poke(map+139, 10053222);
+	__poke(map+140, 10053273);
+	__poke(map+141, 10053375);
+	__poke(map+142, 10066176);
+	__poke(map+143, 10066227);
+	__poke(map+144, 10066278);
+	__poke(map+145, 10066329);
+	__poke(map+146, 10066380);
+	__poke(map+147, 10079232);
+	__poke(map+148, 10079283);
+	__poke(map+149, 10079334);
+	__poke(map+150, 10079385);
+	__poke(map+151, 10079436);
+	__poke(map+152, 10079487);
+	__poke(map+153, 10092288);
+	__poke(map+154, 10092339);
+	__poke(map+155, 10092390);
+	__poke(map+156, 10092441);
+	__poke(map+157, 10092492);
+	__poke(map+158, 10092543);
+	__poke(map+159, 13369344);
+	__poke(map+160, 13369395);
+	__poke(map+161, 13369446);
+	__poke(map+162, 13369497);
+	__poke(map+163, 13369548);
+	__poke(map+164, 13369599);
+	__poke(map+165, 13382400);
+	__poke(map+166, 13382451);
+	__poke(map+167, 13382502);
+	__poke(map+168, 13382553);
+	__poke(map+169, 13382604);
+	__poke(map+170, 13382655);
+	__poke(map+171, 13395456);
+	__poke(map+172, 13395507);
+	__poke(map+173, 13395558);
+	__poke(map+174, 13395609);
+	__poke(map+175, 13395660);
+	__poke(map+176, 13395711);
+	__poke(map+177, 13408512);
+	__poke(map+178, 13408563);
+	__poke(map+179, 13408665);
+	__poke(map+180, 13408716);
+	__poke(map+181, 13408767);
+	__poke(map+182, 13421568);
+	__poke(map+183, 13421619);
+	__poke(map+184, 13421670);
+	__poke(map+185, 13421721);
+	__poke(map+186, 13421772);
+	__poke(map+187, 13434624);
+	__poke(map+188, 13434675);
+	__poke(map+189, 13434726);
+	__poke(map+190, 13434777);
+	__poke(map+191, 13434828);
+	__poke(map+192, 13434879);
+	__poke(map+193, 16711731);
+	__poke(map+194, 16711782);
+	__poke(map+195, 16711833);
+	__poke(map+196, 16711884);
+	__poke(map+197, 16724736);
+	__poke(map+198, 16724787);
+	__poke(map+199, 16724838);
+	__poke(map+200, 16724889);
+	__poke(map+201, 16724940);
+	__poke(map+202, 16724991);
+	__poke(map+203, 16737792);
+	__poke(map+204, 16737894);
+	__poke(map+205, 16737945);
+	__poke(map+206, 16738047);
+	__poke(map+207, 16750848);
+	__poke(map+208, 16750899);
+	__poke(map+209, 16750950);
+	__poke(map+210, 16751001);
+	__poke(map+211, 16751052);
+	__poke(map+212, 16751103);
+	__poke(map+213, 16763904);
+	__poke(map+214, 16763955);
+	__poke(map+215, 16764006);
+	__poke(map+216, 16764057);
+	__poke(map+217, 16764108);
+	__poke(map+218, 16764159);
+	__poke(map+219, 16777011);
+	__poke(map+220, 16777062);
+	__poke(map+221, 16777113);
+	__poke(map+222, 16777164);
+	__poke(map+223, 13408614);
+	__poke(map+224, 16737843);
+	__poke(map+225, 4364967);
+	__poke(map+226, 14140);
+	__poke(map+227, 39423);
+	__poke(map+228, 3355494);
+	__poke(map+229, 8388608);
+	__poke(map+230, 16737996);
+	__poke(map+231, 10027110);
+	__poke(map+232, 10053324);
+	__poke(map+233, 2236962);
+	__poke(map+234, 13421823);
+	__poke(map+235, 10066431);
+	__poke(map+236, 6710988);
+	__poke(map+237, 3407769);
+	__poke(map+238, 16777164);
+	__poke(map+239, 13408614);
+	__poke(map+240, 16737843);
+	__poke(map+241, 4364967);
+	__poke(map+242, 14140);
+	__poke(map+243, 39423);
+	__poke(map+244, 3355494);
+	__poke(map+245, 8388608);
+	__poke(map+246, 16776176);
+	__poke(map+247, 10526884);
+	__poke(map+248, 8421504);
+	__poke(map+249, 16711680);
+	__poke(map+250, 65280);
+	__poke(map+251, 16776960);
+	__poke(map+252, 255);
+	__poke(map+253, 16711935);
+	__poke(map+254, 65535);
+	__poke(map+255, 8388608);
+	return 0;
+}
+var GifWriter__writeFile(var __this, var file, var data, var w, var h) {
+	if (0!=((((w<1)?-1:0))|(((h<1)?-1:0)))) {
+		return 0;
+	}
+
+	__poke(fp__, File__new(file, -1));
+	GifWriter__start(__this, w, h, 0, 2);
+	GifWriter__frame_(__this, data, 4, 0);
+	GifWriter__end(__this);
+	File__dispose(__peek(fp__));
+	__poke(fp__, 0);
+	return -1;
+}
+#undef fp__
+#undef palette__
+#undef width__
+#undef height__
+#undef repeat__
+#undef numColors__
+#undef palSize__
+#undef frame__
+#undef numBits__
+#undef curBits__
+#undef outBits__
+#undef idx__
+#undef buf__
+#endif
+
+#ifdef JACK_IMPLEMENTATION
+var Gif___str0[] = {32,0};
+#define fd__ (__this+0)
+#define in__ (__this+1)
+#define in_pos__ (__this+2)
+#define w__ (__this+3)
+#define h__ (__this+4)
+#define out__ (__this+5)
+#define background__ (__this+6)
+#define history__ (__this+7)
+#define flags__ (__this+8)
+#define bgindex__ (__this+9)
+#define ratio__ (__this+10)
+#define transparent__ (__this+11)
+#define eflags__ (__this+12)
+#define pal__ (__this+13)
+#define lpal__ (__this+14)
+#define codes__ (__this+15)
+#define color_table__ (__this+16)
+#define parse__ (__this+17)
+#define step__ (__this+18)
+#define lflags__ (__this+19)
+#define start_x__ (__this+20)
+#define start_y__ (__this+21)
+#define max_x__ (__this+22)
+#define max_y__ (__this+23)
+#define cur_x__ (__this+24)
+#define cur_y__ (__this+25)
+#define line_size__ (__this+26)
+#define delay__ (__this+27)
+#define version__ (__this+28)
+#define comp__ (__this+29)
+var Gif__new() {
+	var __this;
+	var i;
+	__this = Memory__alloc(30);
+	__poke(in_pos__, 0);
+	__poke(fd__, 0);
+	__poke(in__, 0);
+	__poke(w__, 0);
+	__poke(h__, 0);
+	__poke(out__, 0);
+	__poke(background__, 0);
+	__poke(history__, 0);
+	__poke(flags__, 0);
+	__poke(bgindex__, 0);
+	__poke(ratio__, 0);
+	__poke(transparent__, 0);
+	__poke(eflags__, 0);
+	__poke(pal__, Array__new(256));
+	__poke(lpal__, Array__new(256));
+	i = 0;
+	while (-1==(((i<256)?-1:0))) {
+		__poke(__peek(pal__)+i, 0);
+		__poke(__peek(lpal__)+i, 0);
+		i = i+1;
+	}
+	__poke(codes__, Array__new(8192));
+	__poke(version__, 0);
+	__poke(comp__, 0);
+	i = 0;
+	while (-1==(((i<8192)?-1:0))) {
+		__poke(__peek(codes__)+i, GifLzw__new());
+		i = i+1;
+	}
+	__poke(color_table__, 0);
+	__poke(parse__, 0);
+	__poke(step__, 0);
+	__poke(lflags__, 0);
+	__poke(start_x__, 0);
+	__poke(start_y__, 0);
+	__poke(max_x__, 0);
+	__poke(max_y__, 0);
+	__poke(cur_x__, 0);
+	__poke(cur_y__, 0);
+	__poke(line_size__, 0);
+	__poke(delay__, 0);
+	return __this;
+}
+var Gif__dispose(var __this) {
+	var i;
+	var g;
+	if (0!=(__peek(fd__))) {
+		File__dispose(__peek(fd__));
+	}
+
+	if (0!=(__peek(out__))) {
+		Buffer__dispose(__peek(out__));
+		Buffer__dispose(__peek(history__));
+		Buffer__dispose(__peek(background__));
+	}
+
+	Array__dispose(__peek(pal__));
+	i = 0;
+	while (-1==(((i<8192)?-1:0))) {
+		g = __peek(__peek(codes__)+i);
+		GifLzw__dispose(g);
+		i = i+1;
+	}
+	Array__dispose(__peek(codes__));
+	Memory__deAlloc(__this);
+	return 0;
+}
+var Gif__get8(var __this) {
+	var r;
+	if (0!=(__peek(fd__))) {
+		return File__readByte(__peek(fd__));
+	}
+
+	if (0!=(__peek(in__))) {
+		r = __peek(__peek(in__)+__peek(in_pos__));
+		__poke(in_pos__, __peek(in_pos__)+1);
+		return r;
+	}
+
+	return -1;
+}
+var Gif__get16le(var __this) {
+	var r;
+	r = Gif__get8(__this);
+	r = r+(Gif__get8(__this)*256);
+	return r;
+}
+var Gif__parseColortable(var __this, var pal_, var num_entries, var transp) {
+	var i;
+	var n;
+	var o;
+	i = 0;
+	while (-1==(((i<num_entries)?-1:0))) {
+		n = Gif__get8(__this)*65536;
+		n = n+(Gif__get8(__this)*256);
+		n = n+Gif__get8(__this);
+		if (0!=(((transp==i)?-1:0))) {
+			o = 255;
+			n = n+(o*16777216);
+		}
+
+		__poke(pal_+i, n);
+		i = i+1;
+	}
+	return 0;
+}
+var Gif__header(var __this) {
+	if (0!=(Gif__testRaw(__this))) {
+		__poke(w__, Gif__get16le(__this));
+		__poke(h__, Gif__get16le(__this));
+		__poke(flags__, Gif__get8(__this));
+		__poke(bgindex__, Gif__get8(__this));
+		__poke(ratio__, Gif__get8(__this));
+		__poke(transparent__, -1);
+		if (0!=((((__peek(w__)>100000)?-1:0))|(((__peek(h__)>10000)?-1:0)))) {
+			return 0;
+		}
+
+		__poke(comp__, 4);
+		if (0!=(__peek(flags__)&128)) {
+			Gif__parseColortable(__this, __peek(pal__), Math__shiftLeft(2, (__peek(flags__)&7)), -1);
+		}
+
+		return -1;
+	}
+
+	return 0;
+}
+var Gif__testRaw(var __this) {
+	if (0!=((((Gif__get8(__this)==71)?-1:0))&(((Gif__get8(__this)==73)?-1:0))&(((Gif__get8(__this)==70)?-1:0))&(((Gif__get8(__this)==56)?-1:0)))) {
+		__poke(version__, Gif__get8(__this));
+		if (0!=((((__peek(version__)==55)?-1:0))|(((__peek(version__)==57)?-1:0)))) {
+			if (0!=(((Gif__get8(__this)==97)?-1:0))) {
+				return -1;
 			}
 
 		}
 
-		if (0!=(doit)) {
-			File__writeString(dst, b);
-		}
-
-		l = File__readLine(src_, b);
 	}
-	String__dispose(s);
-	String__dispose(b);
-	File__dispose(src_);
+
 	return 0;
 }
-var JackCompiler__link(var __this, var dir, var files) {
-	var i;
-	var l;
-	var s;
-	var dst;
-	var sr;
-	s = String__copy(dir);
-	l = String__length(s);
-	if (0!=(((String__charAt(s, l-1)==47)?-1:0))) {
-		String__setCharAt(s, l-1, 0);
+var Gif__outGifCode(var __this, var code) {
+	var idx;
+	var g;
+	g = __peek(__peek(codes__)+code);
+	if (0!=(((GifLzw__getPrefix(g)>(-1))?-1:0))) {
+		Gif__outGifCode(__this, GifLzw__getPrefix(g));
 	}
 
-	s = String__appendString(s, Memory__getString(JackCompiler___str4));
-	dst = File__new(s, -1);
-	String__dispose(s);
-	i = 0;
-	File__writeByte(dst, 10);
-	File__writeString(dst, Memory__getString(JackCompiler___str5));
-	File__writeByte(dst, 10);
-	if (0!=(__peek(hack__))) {
-		File__writeString(dst, Memory__getString(JackCompiler___str6));
-		File__writeByte(dst, 10);
-		File__writeString(dst, Memory__getString(JackCompiler___str7));
-		File__writeByte(dst, 10);
-		File__writeString(dst, Memory__getString(JackCompiler___str8));
-		File__writeByte(dst, 10);
-		File__writeString(dst, Memory__getString(JackCompiler___str9));
-		File__writeByte(dst, 10);
-	} else {
-		File__writeString(dst, Memory__getString(JackCompiler___str10));
-		File__writeByte(dst, 10);
-		File__writeString(dst, Memory__getString(JackCompiler___str11));
-		File__writeByte(dst, 10);
-		File__writeString(dst, Memory__getString(JackCompiler___str12));
-		File__writeByte(dst, 10);
-		File__writeString(dst, Memory__getString(JackCompiler___str13));
-		File__writeByte(dst, 10);
-		File__writeString(dst, Memory__getString(JackCompiler___str14));
-		File__writeByte(dst, 10);
-		File__writeString(dst, Memory__getString(JackCompiler___str15));
-		File__writeByte(dst, 10);
-		File__writeString(dst, Memory__getString(JackCompiler___str16));
-		File__writeByte(dst, 10);
-		File__writeString(dst, Memory__getString(JackCompiler___str17));
-		File__writeByte(dst, 10);
-		File__writeString(dst, Memory__getString(JackCompiler___str18));
-		File__writeByte(dst, 10);
+	if (0!=(((__peek(cur_y__)>(__peek(max_y__)-1))?-1:0))) {
+		return 0;
 	}
-	File__writeString(dst, Memory__getString(JackCompiler___str19));
-	File__writeByte(dst, 10);
-	while (-1==(((i<Buffer__getSize(files))?-1:0))) {
-		s = Buffer__getAt(files, i);
-		s = String__copy(s);
-		s = String__appendString(s, Memory__getString(JackCompiler___str20));
-		JackCompiler__copyHead(__this, dst, s);
-		File__writeByte(dst, 10);
-		String__dispose(s);
-		i = i+1;
+
+	idx = __peek(cur_x__)+__peek(cur_y__);
+	Buffer__setAt(__peek(history__), idx, 1);
+	Buffer__setAt(__peek(out__), idx, __peek(__peek(color_table__)+GifLzw__getSuffix(g)));
+	__poke(cur_x__, __peek(cur_x__)+1);
+	if (0!=(((__peek(cur_x__)>(__peek(max_x__)-1))?-1:0))) {
+		__poke(cur_x__, __peek(start_x__));
+		__poke(cur_y__, __peek(cur_y__)+__peek(step__));
+		while (-1==((((__peek(cur_y__)>(__peek(max_y__)-1))?-1:0))&(((__peek(parse__)>0)?-1:0)))) {
+			__poke(step__, Math__shiftLeft(1, __peek(parse__))+__peek(line_size__));
+			__poke(cur_y__, __peek(start_y__)+Math__shiftRight(__peek(step__), 1));
+			__poke(parse__, __peek(parse__)-1);
+		}
 	}
-	i = 0;
-	File__writeString(dst, Memory__getString(JackCompiler___str21));
-	File__writeByte(dst, 10);
-	s = String__copy(dir);
-	s = String__appendString(s, Memory__getString(JackCompiler___str22));
-	JackCompiler__copy(__this, dst, s);
-	String__dispose(s);
-	s = String__copy(dir);
-	s = String__appendString(s, Memory__getString(JackCompiler___str23));
-	JackCompiler__copy(__this, dst, s);
-	String__dispose(s);
-	s = String__copy(dir);
-	s = String__appendString(s, Memory__getString(JackCompiler___str24));
-	JackCompiler__copy(__this, dst, s);
-	String__dispose(s);
-	s = String__copy(dir);
-	s = String__appendString(s, Memory__getString(JackCompiler___str25));
-	JackCompiler__copy(__this, dst, s);
-	String__dispose(s);
-	s = String__copy(dir);
-	s = String__appendString(s, Memory__getString(JackCompiler___str26));
-	JackCompiler__copy(__this, dst, s);
-	String__dispose(s);
-	s = String__copy(dir);
-	s = String__appendString(s, Memory__getString(JackCompiler___str27));
-	JackCompiler__copy(__this, dst, s);
-	String__dispose(s);
-	while (-1==(((i<Buffer__getSize(files))?-1:0))) {
-		s = Buffer__getAt(files, i);
-		s = String__copy(s);
-		s = String__appendString(s, Memory__getString(JackCompiler___str28));
-		JackCompiler__copyBody(__this, dst, s);
-		File__writeByte(dst, 10);
-		sr = File__new(s, 0);
-		File__remove(sr);
-		File__dispose(sr);
-		String__dispose(s);
-		i = i+1;
-	}
-	File__dispose(dst);
-	return -1;
+
+	return 0;
 }
-#undef src__
-#undef x__
-#undef t__
+var Gif__skip(var __this, var len) {
+	while (-1==(((len>0)?-1:0))) {
+		len = len-1;
+		Gif__get8(__this);
+	}
+	return 0;
+}
+var Gif__processGifRaster(var __this) {
+	var lzw_cs;
+	var len;
+	var init_code;
+	var first;
+	var codesize;
+	var codemask;
+	var avail;
+	var oldcode;
+	var bits;
+	var valid_bits;
+	var clear;
+	var p;
+	var g;
+	var code_;
+	oldcode = 0;
+	lzw_cs = Gif__get8(__this);
+	if (0!=(((lzw_cs>12)?-1:0))) {
+		return 0;
+	}
+
+	clear = Math__shiftLeft(1, lzw_cs);
+	first = 1;
+	codesize = lzw_cs+1;
+	codemask = Math__shiftLeft(1, codesize)-1;
+	bits = 0;
+	valid_bits = 0;
+	init_code = 0;
+	while (-1==(((init_code<clear)?-1:0))) {
+		g = __peek(__peek(codes__)+init_code);
+		GifLzw__setPrefix(g, -1);
+		GifLzw__setFirst(g, init_code);
+		GifLzw__setSuffix(g, init_code);
+		init_code = init_code+1;
+	}
+	avail = clear+2;
+	oldcode = -1;
+	len = 0;
+	while (-1==(-1)) {
+		if (0!=(((valid_bits<codesize)?-1:0))) {
+			if (0!=(((len==0)?-1:0))) {
+				len = Gif__get8(__this);
+				if (0!=(((len==0)?-1:0))) {
+					return __peek(out__);
+				}
+
+			}
+
+			len = len-1;
+			bits = bits|Math__shiftLeft(Gif__get8(__this), valid_bits);
+			valid_bits = valid_bits+8;
+		} else {
+			code_ = bits&codemask;
+			bits = Math__shiftRight(bits, codesize);
+			valid_bits = valid_bits-codesize;
+			if (0!=(((code_==clear)?-1:0))) {
+				codesize = lzw_cs+1;
+				codemask = Math__shiftLeft(1, codesize)-1;
+				avail = clear+2;
+				oldcode = -1;
+				first = 0;
+			} else {
+				if (0!=(((code_==(clear+1))?-1:0))) {
+					Gif__skip(__this, len);
+					len = Gif__get8(__this);
+					while (-1==(((len>0)?-1:0))) {
+						Gif__skip(__this, len);
+						len = Gif__get8(__this);
+					}
+					return __peek(out__);
+				} else {
+					if (0!=(((code_<(avail+1))?-1:0))) {
+						if (0!=(first)) {
+							return 0;
+						}
+
+						if (0!=(((oldcode>-1)?-1:0))) {
+							p = __peek(__peek(codes__)+avail);
+							avail = avail+1;
+							if (0!=(((avail>8192)?-1:0))) {
+								return 0;
+							}
+
+							GifLzw__setPrefix(p, oldcode);
+							g = __peek(__peek(codes__)+oldcode);
+							GifLzw__setFirst(p, GifLzw__getFirst(g));
+							if (0!=(((code_==avail)?-1:0))) {
+								GifLzw__setSuffix(p, GifLzw__getFirst(p));
+							} else {
+								g = __peek(__peek(codes__)+code_);
+								GifLzw__setSuffix(p, GifLzw__getFirst(g));
+							}
+						} else {
+							if (0!=(((code_==avail)?-1:0))) {
+								return 0;
+							}
+
+						}
+						Gif__outGifCode(__this, code_);
+						if (0!=(((((avail&codemask)==0)?-1:0))&(((avail<4096)?-1:0)))) {
+							codesize = codesize+1;
+							codemask = Math__shiftLeft(1, codesize)-1;
+						}
+
+						oldcode = code_;
+					} else {
+						return 0;
+					}
+				}
+			}
+		}
+	}
+	return 0;
+}
+var Gif__loadNext(var __this, var two_back) {
+	var dispose_;
+	var first_frame;
+	var pi;
+	var pcount;
+	var i;
+	var tag;
+	var count;
+	var len;
+	var ext;
+	var x_;
+	var y_;
+	var w_;
+	var h_;
+	var o;
+	var tmp;
+	var BREAK;
+	o = 0;
+	i = 0;
+	count = 0;
+	if (0!=(((__peek(out__)==0)?-1:0))) {
+		pcount = __peek(w__)*__peek(h__);
+		__poke(out__, Buffer__new(pcount, 0));
+		__poke(background__, Buffer__new(pcount, 0));
+		__poke(history__, Buffer__new(pcount, 0));
+		while (-1==(((i<pcount)?-1:0))) {
+			Buffer__setAt(__peek(out__), i, 0);
+			Buffer__setAt(__peek(background__), i, 0);
+			Buffer__setAt(__peek(history__), i, 0);
+			i = i+1;
+		}
+		first_frame = 1;
+	} else {
+		dispose_ = Math__shiftRight((__peek(eflags__)&28), 2);
+		pcount = __peek(w__)*__peek(h__);
+		if (0!=((((dispose_==3)?-1:0))&(((two_back==0)?-1:0)))) {
+			dispose_ = 2;
+		}
+
+		if (0!=((((dispose_==3)?-1:0))&two_back)) {
+			i = 0;
+			while (-1==(((i<pcount)?-1:0))) {
+				Buffer__setAt(__peek(out__), i, Buffer__getAt(two_back, i));
+				i = i+1;
+			}
+		} else {
+			if (0!=(((dispose_==2)?-1:0))) {
+				pi = 0;
+				while (-1==(((pi<count)?-1:0))) {
+					Buffer__setAt(__peek(out__), pi, Buffer__getAt(__peek(background__), i));
+					pi = pi+1;
+				}
+			}
+
+		}
+		i = 0;
+		while (-1==(((i<pcount)?-1:0))) {
+			Buffer__setAt(__peek(background__), i, Buffer__getAt(__peek(out__), i));
+			i = i+1;
+		}
+	}
+	i = 0;
+	pcount = __peek(w__)*__peek(h__);
+	while (-1==(((i<pcount)?-1:0))) {
+		Buffer__setAt(__peek(history__), i, 0);
+		i = i+1;
+	}
+	while (-1==(-1)) {
+		BREAK = -1;
+		tag = Gif__get8(__this);
+		if (0!=(((tag==44)?-1:0))) {
+			x_ = Gif__get16le(__this);
+			y_ = Gif__get16le(__this);
+			w_ = Gif__get16le(__this);
+			h_ = Gif__get16le(__this);
+			if (0!=(((((x_+w_)>__peek(w__))?-1:0))|((((y_+h_)>__peek(h__))?-1:0)))) {
+				return 0;
+			}
+
+			__poke(line_size__, __peek(w__));
+			__poke(start_x__, x_);
+			__poke(start_y__, y_*__peek(line_size__));
+			__poke(max_x__, __peek(start_x__)+__peek(w__));
+			__poke(max_y__, __peek(start_y__)+(__peek(h__)*__peek(line_size__)));
+			__poke(cur_x__, __peek(start_x__));
+			__poke(cur_y__, __peek(start_y__));
+			if (0!=(((w_==0)?-1:0))) {
+				__poke(cur_y__, __peek(max_y__));
+			}
+
+			__poke(lflags__, Gif__get8(__this));
+			if (0!=(__peek(lflags__)&64)) {
+				__poke(step__, 2*__peek(line_size__));
+				__poke(parse__, 3);
+			} else {
+				__poke(step__, __peek(line_size__));
+				__poke(parse__, 0);
+			}
+			if (0!=(__peek(lflags__)&128)) {
+				tmp = -1;
+				if (0!=(__peek(eflags__)&1)) {
+					tmp = __peek(transparent__);
+				}
+
+				Gif__parseColortable(__this, __peek(lpal__), Math__shiftLeft(2, __peek(lflags__)&7), tmp);
+				__poke(color_table__, __peek(lpal__));
+			} else {
+				if (0!=(__peek(flags__)&128)) {
+					__poke(color_table__, __peek(pal__));
+				} else {
+					return 0;
+				}
+			}
+			o = Gif__processGifRaster(__this);
+			if (0!=(((o==0)?-1:0))) {
+				return 0;
+			}
+
+			pcount = __peek(w__)*__peek(h__);
+			if (0!=((((0==(((first_frame==0)?-1:0)))?-1:0))&(((__peek(bgindex__)>0)?-1:0)))) {
+				pi = 0;
+				while (-1==(((pi<pcount)?-1:0))) {
+					if (0!=(((__peek(__peek(history__)+pi)==0)?-1:0))) {
+						__poke(__peek(pal__)+__peek(bgindex__), __peek(__peek(pal__)+__peek(bgindex__))|4278190080);
+						Buffer__setAt(__peek(out__), pi, __peek(__peek(pal__)+__peek(bgindex__)));
+					}
+
+					pi = pi+1;
+				}
+			}
+
+			return o;
+		} else {
+			if (0!=(((tag==33)?-1:0))) {
+				ext = Gif__get8(__this);
+				if (0!=(((ext==249)?-1:0))) {
+					len = Gif__get8(__this);
+					if (0!=(((len==4)?-1:0))) {
+						__poke(eflags__, Gif__get8(__this));
+						__poke(delay__, 10*Gif__get16le(__this));
+						if (0!=(((__peek(transparent__)>-1)?-1:0))) {
+							__poke(__peek(pal__)+__peek(transparent__), __peek(__peek(pal__)+__peek(transparent__))|4278190080);
+						}
+
+						if (0!=(__peek(eflags__)&1)) {
+							__poke(transparent__, Gif__get8(__this));
+							if (0!=(((__peek(transparent__)>-1)?-1:0))) {
+								__poke(__peek(pal__)+__peek(transparent__), __peek(__peek(pal__)+__peek(transparent__))&4278190080);
+							} else {
+								Gif__skip(__this, 1);
+								__poke(transparent__, -1);
+							}
+						} else {
+							Gif__skip(__this, len);
+							BREAK = 0;
+						}
+					}
+
+					if (0!=(BREAK)) {
+						len = Gif__get8(__this);
+						while (-1==(((0==(((len==0)?-1:0)))?-1:0))) {
+							Gif__skip(__this, len);
+							len = Gif__get8(__this);
+						}
+						BREAK = 0;
+					}
+
+				}
+
+			} else {
+				if (0!=(((tag==59)?-1:0))) {
+					return o;
+				} else {
+					i = i;
+					return 0;
+				}
+			}
+		}
+	}
+	return __peek(out__);
+}
+var Gif__error(var __this, var e, var d, var a) {
+	Output__printString(a);
+	Output__printInt(e);
+	Output__printString(Memory__getString(Gif___str0));
+	Output__printInt(d);
+	Output__println();
+	return 0;
+}
+var Gif__loadMain(var __this) {
+	var o;
+	o = 0;
+	if (0!=(Gif__header(__this))) {
+		o = Gif__loadNext(__this, 0);
+	}
+
+	return o;
+}
+var Gif__getW(var __this) {
+	return __peek(w__);
+}
+var Gif__getH(var __this) {
+	return __peek(h__);
+}
+var Gif__readFile(var __this, var f) {
+	var r;
+	__poke(fd__, File__new(f, 0));
+	r = Gif__loadMain(__this);
+	File__dispose(__peek(fd__));
+	__poke(fd__, 0);
+	return r;
+}
+var Gif__WriteFile(var __this, var f) {
+	return 0;
+}
+var Gif__readArray(var __this, var a) {
+	return 0;
+}
+var Gif__WriteArray(var __this, var src, var dest) {
+	return 0;
+}
+#undef fd__
+#undef in__
+#undef in_pos__
+#undef w__
+#undef h__
+#undef out__
+#undef background__
+#undef history__
+#undef flags__
+#undef bgindex__
+#undef ratio__
+#undef transparent__
+#undef eflags__
+#undef pal__
+#undef lpal__
+#undef codes__
+#undef color_table__
+#undef parse__
+#undef step__
+#undef lflags__
+#undef start_x__
+#undef start_y__
+#undef max_x__
+#undef max_y__
+#undef cur_x__
+#undef cur_y__
+#undef line_size__
+#undef delay__
+#undef version__
 #undef comp__
-#undef hack__
+#endif
+
+#ifdef JACK_IMPLEMENTATION
+var Xml___str0[] = {37,114,111,111,116,37,0};
+var Xml___str1[] = {38,108,116,59,0};
+var Xml___str2[] = {38,97,109,112,59,0};
+var Xml___str3[] = {38,113,117,111,116,59,0};
+var Xml___str4[] = {38,103,116,59,0};
+var Xml___str5[] = {38,97,112,111,115,59,0};
+#define root__ (__this+0)
+#define current__ (__this+1)
+#define esca__ (__this+2)
+#define strings__ (__this+3)
+var Xml__new() {
+	var __this;
+	__this = Memory__alloc(4);
+	__poke(strings__, Buffer__newString(1024));
+	__poke(esca__, String__new(32));
+	__poke(root__, XmlNode__new(__this, 0, Memory__getString(Xml___str0), 0));
+	__poke(current__, __peek(root__));
+	return __this;
+}
+var Xml__dispose(var __this) {
+	XmlNode__dispose(__peek(root__));
+	String__dispose(__peek(esca__));
+	Buffer__dispose(__peek(strings__));
+	Memory__deAlloc(__this);
+	return 0;
+}
+var Xml__clear(var __this) {
+	XmlNode__clear(__peek(root__));
+	__poke(current__, __peek(root__));
+	return 0;
+}
+var Xml__getStringNoCreate(var __this, var s) {
+	var i;
+	i = Buffer__indexOfStr(__peek(strings__), s);
+	if (0!=(((i>-1)?-1:0))) {
+		return Buffer__getAt(__peek(strings__), i);
+	}
+
+	return 0;
+}
+var Xml__getString(var __this, var s) {
+	var i;
+	i = Buffer__indexOfStr(__peek(strings__), s);
+	if (0!=(((i>-1)?-1:0))) {
+		return Buffer__getAt(__peek(strings__), i);
+	}
+
+	s = String__copy(s);
+	Buffer__insertSortedStr(__peek(strings__), s);
+	return s;
+}
+var Xml__addElement(var __this, var tag) {
+	__poke(current__, XmlNode__addElement(__peek(current__), __this, tag));
+	return 0;
+}
+var Xml__addAttribute(var __this, var name, var value) {
+	XmlNode__addAttribute(__peek(current__), __this, name, value);
+	return 0;
+}
+var Xml__addContent(var __this, var txt) {
+	XmlNode__addContent(__peek(current__), __this, txt);
+	return 0;
+}
+var Xml__closeElement(var __this, var tag) {
+	__poke(current__, XmlNode__closeElement(__peek(current__), __this, tag));
+	return 0;
+}
+var Xml__closeCurrent(var __this) {
+	__poke(current__, XmlNode__closeElement(__peek(current__), __this, XmlNode__getTag(__peek(current__))));
+	return 0;
+}
+var Xml__getCurrent(var __this) {
+	return __peek(current__);
+}
+var Xml__disposeCurrent(var __this) {
+	var o;
+	o = __peek(current__);
+	__poke(current__, XmlNode__getParent(__peek(current__)));
+	if (0!=(__peek(current__))) {
+		o = XmlNode__removeElement(__peek(current__), __this, o);
+		if (0!=(o)) {
+			XmlNode__dispose(o);
+		}
+
+	}
+
+	return 0;
+}
+var Xml__dump(var __this, var f) {
+	XmlNode__dump(__peek(root__), __this, f, 0);
+	return 0;
+}
+var Xml__escape(var __this, var o) {
+	var i;
+	var l;
+	var c;
+	var s;
+	s = __peek(esca__);
+	String__setCharAt(s, 0, 0);
+	l = String__length(o);
+	i = 0;
+	while (-1==(((i<l)?-1:0))) {
+		c = String__charAt(o, i);
+		if (0!=(((c==60)?-1:0))) {
+			s = String__appendString(s, Memory__getString(Xml___str1));
+		} else {
+			if (0!=(((c==38)?-1:0))) {
+				s = String__appendString(s, Memory__getString(Xml___str2));
+			} else {
+				if (0!=(((c==34)?-1:0))) {
+					s = String__appendString(s, Memory__getString(Xml___str3));
+				} else {
+					if (0!=(((c==62)?-1:0))) {
+						s = String__appendString(s, Memory__getString(Xml___str4));
+					} else {
+						if (0!=(((c==39)?-1:0))) {
+							s = String__appendString(s, Memory__getString(Xml___str5));
+						} else {
+							s = String__appendChar(s, c);
+						}
+					}
+				}
+			}
+		}
+		i = i+1;
+	}
+	__poke(esca__, s);
+	return s;
+}
+#undef root__
+#undef current__
+#undef esca__
+#undef strings__
+#endif
+
+#ifdef JACK_IMPLEMENTATION
+var Const___str0[] = {32,0};
+var Const___str1[] = {32,0};
+var Const___str2[] = {32,0};
+var Const___str3[] = {32,0};
+var Const___str4[] = {32,0};
+var Const___str5[] = {32,0};
+var Const___str6[] = {32,0};
+var Const___str7[] = {32,0};
+var Const___str8[] = {32,0};
+var Const___str9[] = {32,0};
+var Const___str10[] = {32,0};
+var Const___str11[] = {32,0};
+var Const___str12[] = {32,0};
+var Const___str13[] = {32,0};
+var Const___str14[] = {32,0};
+var Const___str15[] = {32,0};
+var Const___str16[] = {32,0};
+var Const___str17[] = {32,0};
+var Const___str18[] = {32,0};
+var Const___str19[] = {32,0};
+var Const___str20[] = {32,0};
+var Const___str21[] = {32,0};
+var Const___str22[] = {32,0};
+var Const___str23[] = {32,0};
+var Const___str24[] = {32,0};
+var Const___str25[] = {32,0};
+var Const___str26[] = {32,0};
+var Const___str27[] = {32,0};
+var Const___str28[] = {32,0};
+var Const___str29[] = {32,0};
+var Const___str30[] = {32,0};
+var Const___str31[] = {32,0};
+var Const___str32[] = {32,0};
+var Const___str33[] = {33,0};
+var Const___str34[] = {32,0};
+var Const___str35[] = {35,0};
+var Const___str36[] = {36,0};
+var Const___str37[] = {37,0};
+var Const___str38[] = {38,0};
+var Const___str39[] = {39,0};
+var Const___str40[] = {40,0};
+var Const___str41[] = {41,0};
+var Const___str42[] = {42,0};
+var Const___str43[] = {43,0};
+var Const___str44[] = {44,0};
+var Const___str45[] = {45,0};
+var Const___str46[] = {46,0};
+var Const___str47[] = {47,0};
+var Const___str48[] = {48,0};
+var Const___str49[] = {49,0};
+var Const___str50[] = {50,0};
+var Const___str51[] = {51,0};
+var Const___str52[] = {52,0};
+var Const___str53[] = {53,0};
+var Const___str54[] = {54,0};
+var Const___str55[] = {55,0};
+var Const___str56[] = {56,0};
+var Const___str57[] = {57,0};
+var Const___str58[] = {58,0};
+var Const___str59[] = {59,0};
+var Const___str60[] = {60,0};
+var Const___str61[] = {61,0};
+var Const___str62[] = {62,0};
+var Const___str63[] = {63,0};
+var Const___str64[] = {64,0};
+var Const___str65[] = {65,0};
+var Const___str66[] = {66,0};
+var Const___str67[] = {67,0};
+var Const___str68[] = {68,0};
+var Const___str69[] = {69,0};
+var Const___str70[] = {70,0};
+var Const___str71[] = {71,0};
+var Const___str72[] = {72,0};
+var Const___str73[] = {73,0};
+var Const___str74[] = {74,0};
+var Const___str75[] = {75,0};
+var Const___str76[] = {76,0};
+var Const___str77[] = {77,0};
+var Const___str78[] = {78,0};
+var Const___str79[] = {79,0};
+var Const___str80[] = {80,0};
+var Const___str81[] = {81,0};
+var Const___str82[] = {82,0};
+var Const___str83[] = {83,0};
+var Const___str84[] = {84,0};
+var Const___str85[] = {85,0};
+var Const___str86[] = {86,0};
+var Const___str87[] = {87,0};
+var Const___str88[] = {88,0};
+var Const___str89[] = {89,0};
+var Const___str90[] = {90,0};
+var Const___str91[] = {91,0};
+var Const___str92[] = {92,0};
+var Const___str93[] = {93,0};
+var Const___str94[] = {94,0};
+var Const___str95[] = {95,0};
+var Const___str96[] = {96,0};
+var Const___str97[] = {97,0};
+var Const___str98[] = {98,0};
+var Const___str99[] = {99,0};
+var Const___str100[] = {100,0};
+var Const___str101[] = {101,0};
+var Const___str102[] = {102,0};
+var Const___str103[] = {103,0};
+var Const___str104[] = {104,0};
+var Const___str105[] = {105,0};
+var Const___str106[] = {106,0};
+var Const___str107[] = {107,0};
+var Const___str108[] = {108,0};
+var Const___str109[] = {109,0};
+var Const___str110[] = {110,0};
+var Const___str111[] = {111,0};
+var Const___str112[] = {112,0};
+var Const___str113[] = {113,0};
+var Const___str114[] = {114,0};
+var Const___str115[] = {115,0};
+var Const___str116[] = {116,0};
+var Const___str117[] = {117,0};
+var Const___str118[] = {118,0};
+var Const___str119[] = {119,0};
+var Const___str120[] = {120,0};
+var Const___str121[] = {121,0};
+var Const___str122[] = {122,0};
+var Const___str123[] = {123,0};
+var Const___str124[] = {124,0};
+var Const___str125[] = {125,0};
+var Const___str126[] = {126,0};
+var Const___str127[] = {32,0};
+var Const___str128[] = {105,110,118,97,108,105,100,0};
+var Const___str129[] = {110,117,108,108,0};
+var Const___str130[] = {110,111,110,101,0};
+var Const___str131[] = {107,101,121,119,111,114,100,0};
+var Const___str132[] = {115,121,109,98,111,108,0};
+var Const___str133[] = {105,100,101,110,116,105,102,105,101,114,0};
+var Const___str134[] = {105,110,116,95,99,111,110,115,116,0};
+var Const___str135[] = {115,116,114,105,110,103,95,99,111,110,115,116,0};
+var Const___str136[] = {99,108,97,115,115,0};
+var Const___str137[] = {109,101,116,104,111,100,0};
+var Const___str138[] = {102,117,110,99,116,105,111,110,0};
+var Const___str139[] = {99,111,110,115,116,114,117,99,116,111,114,0};
+var Const___str140[] = {99,97,108,108,98,97,99,107,0};
+var Const___str141[] = {105,110,116,0};
+var Const___str142[] = {98,111,111,108,101,97,110,0};
+var Const___str143[] = {99,104,97,114,0};
+var Const___str144[] = {118,111,105,100,0};
+var Const___str145[] = {118,97,114,0};
+var Const___str146[] = {115,116,97,116,105,99,0};
+var Const___str147[] = {102,105,101,108,100,0};
+var Const___str148[] = {108,101,116,0};
+var Const___str149[] = {100,111,0};
+var Const___str150[] = {105,102,0};
+var Const___str151[] = {101,108,115,101,0};
+var Const___str152[] = {119,104,105,108,101,0};
+var Const___str153[] = {114,101,116,117,114,110,0};
+var Const___str154[] = {116,114,117,101,0};
+var Const___str155[] = {102,97,108,115,101,0};
+var Const___str156[] = {110,117,108,108,0};
+var Const___str157[] = {116,104,105,115,0};
+var Const___str158[] = {97,115,109,0};
+var Const___str159[] = {112,108,117,115,0};
+var Const___str160[] = {109,105,110,117,115,0};
+var Const___str161[] = {109,117,108,116,105,112,108,121,0};
+var Const___str162[] = {100,105,118,0};
+var Const___str163[] = {97,110,100,0};
+var Const___str164[] = {111,114,0};
+var Const___str165[] = {103,114,101,97,116,101,114,0};
+var Const___str166[] = {108,101,115,115,0};
+var Const___str167[] = {101,113,117,97,108,0};
+var Const___str168[] = {114,111,111,116,0};
+var Const___str169[] = {101,120,112,114,0};
+var Const___str170[] = {99,97,108,108,0};
+var Const___str171[] = {99,108,97,115,115,110,97,109,101,0};
+var Const___str172[] = {97,114,103,115,0};
+var Const___str173[] = {118,97,114,110,97,109,101,0};
+var Const___str174[] = {97,114,114,97,121,0};
+var Const___str175[] = {97,115,115,105,103,110,0};
+var Const___str176[] = {115,116,97,116,101,109,101,110,116,115,0};
+var Const___str177[] = {112,97,114,97,109,115,0};
+var Const___str178[] = {118,97,114,115,0};
+var Const___str179[] = {116,121,112,101,0};
+var Const___str180[] = {115,116,114,105,110,103,0};
+var Const___str181[] = {97,114,114,97,121,118,97,114,0};
+var Const___str182[] = {112,97,114,97,110,0};
+var Const___str183[] = {117,110,97,114,121,111,112,0};
+var Const___str184[] = {116,101,114,109,0};
+var Const___str185[] = {111,112,0};
+var Const___str186[] = {100,111,116,0};
+var Const___str187[] = {98,111,100,121,0};
+var Const___str188[] = {115,117,98,114,111,117,116,105,110,101,110,97,109,101,0};
+var Const___str189[] = {117,110,97,114,121,109,105,110,117,115,0};
+var Const___str190[] = {117,110,97,114,121,112,108,117,115,0};
+var Const___str191[] = {117,110,97,114,121,116,105,108,100,101,0};
+var Const___str192[] = {115,117,98,114,111,117,116,105,110,101,99,97,108,108,0};
+var Const___str193[] = {99,108,97,115,115,111,114,118,97,114,110,97,109,101,0};
+var Const___str194[] = {110,101,120,116,95,102,114,101,101,95,99,111,110,115,116,97,110,116,0};
+var Const__getList() {
+	var b;
+	var s;
+	b = Buffer__new(256, 0);
+	s = Memory__getString(Const___str0);
+	String__setCharAt(s, 0, 0);
+	Buffer__append(b, s);
+	s = Memory__getString(Const___str1);
+	String__setCharAt(s, 0, 1);
+	Buffer__append(b, s);
+	s = Memory__getString(Const___str2);
+	String__setCharAt(s, 0, 2);
+	Buffer__append(b, s);
+	s = Memory__getString(Const___str3);
+	String__setCharAt(s, 0, 3);
+	Buffer__append(b, s);
+	s = Memory__getString(Const___str4);
+	String__setCharAt(s, 0, 4);
+	Buffer__append(b, s);
+	s = Memory__getString(Const___str5);
+	String__setCharAt(s, 0, 5);
+	Buffer__append(b, s);
+	s = Memory__getString(Const___str6);
+	String__setCharAt(s, 0, 6);
+	Buffer__append(b, s);
+	s = Memory__getString(Const___str7);
+	String__setCharAt(s, 0, 7);
+	Buffer__append(b, s);
+	s = Memory__getString(Const___str8);
+	String__setCharAt(s, 0, 8);
+	Buffer__append(b, s);
+	s = Memory__getString(Const___str9);
+	String__setCharAt(s, 0, 9);
+	Buffer__append(b, s);
+	s = Memory__getString(Const___str10);
+	String__setCharAt(s, 0, 10);
+	Buffer__append(b, s);
+	s = Memory__getString(Const___str11);
+	String__setCharAt(s, 0, 11);
+	Buffer__append(b, s);
+	s = Memory__getString(Const___str12);
+	String__setCharAt(s, 0, 12);
+	Buffer__append(b, s);
+	s = Memory__getString(Const___str13);
+	String__setCharAt(s, 0, 13);
+	Buffer__append(b, s);
+	s = Memory__getString(Const___str14);
+	String__setCharAt(s, 0, 14);
+	Buffer__append(b, s);
+	s = Memory__getString(Const___str15);
+	String__setCharAt(s, 0, 15);
+	Buffer__append(b, s);
+	s = Memory__getString(Const___str16);
+	String__setCharAt(s, 0, 16);
+	Buffer__append(b, s);
+	s = Memory__getString(Const___str17);
+	String__setCharAt(s, 0, 17);
+	Buffer__append(b, s);
+	s = Memory__getString(Const___str18);
+	String__setCharAt(s, 0, 18);
+	Buffer__append(b, s);
+	s = Memory__getString(Const___str19);
+	String__setCharAt(s, 0, 19);
+	Buffer__append(b, s);
+	s = Memory__getString(Const___str20);
+	String__setCharAt(s, 0, 20);
+	Buffer__append(b, s);
+	s = Memory__getString(Const___str21);
+	String__setCharAt(s, 0, 21);
+	Buffer__append(b, s);
+	s = Memory__getString(Const___str22);
+	String__setCharAt(s, 0, 22);
+	Buffer__append(b, s);
+	s = Memory__getString(Const___str23);
+	String__setCharAt(s, 0, 23);
+	Buffer__append(b, s);
+	s = Memory__getString(Const___str24);
+	String__setCharAt(s, 0, 24);
+	Buffer__append(b, s);
+	s = Memory__getString(Const___str25);
+	String__setCharAt(s, 0, 25);
+	Buffer__append(b, s);
+	s = Memory__getString(Const___str26);
+	String__setCharAt(s, 0, 26);
+	Buffer__append(b, s);
+	s = Memory__getString(Const___str27);
+	String__setCharAt(s, 0, 27);
+	Buffer__append(b, s);
+	s = Memory__getString(Const___str28);
+	String__setCharAt(s, 0, 28);
+	Buffer__append(b, s);
+	s = Memory__getString(Const___str29);
+	String__setCharAt(s, 0, 29);
+	Buffer__append(b, s);
+	s = Memory__getString(Const___str30);
+	String__setCharAt(s, 0, 30);
+	Buffer__append(b, s);
+	s = Memory__getString(Const___str31);
+	String__setCharAt(s, 0, 31);
+	Buffer__append(b, s);
+	Buffer__append(b, Memory__getString(Const___str32));
+	Buffer__append(b, Memory__getString(Const___str33));
+	s = Memory__getString(Const___str34);
+	String__setCharAt(s, 0, 34);
+	Buffer__append(b, s);
+	Buffer__append(b, Memory__getString(Const___str35));
+	Buffer__append(b, Memory__getString(Const___str36));
+	Buffer__append(b, Memory__getString(Const___str37));
+	Buffer__append(b, Memory__getString(Const___str38));
+	Buffer__append(b, Memory__getString(Const___str39));
+	Buffer__append(b, Memory__getString(Const___str40));
+	Buffer__append(b, Memory__getString(Const___str41));
+	Buffer__append(b, Memory__getString(Const___str42));
+	Buffer__append(b, Memory__getString(Const___str43));
+	Buffer__append(b, Memory__getString(Const___str44));
+	Buffer__append(b, Memory__getString(Const___str45));
+	Buffer__append(b, Memory__getString(Const___str46));
+	Buffer__append(b, Memory__getString(Const___str47));
+	Buffer__append(b, Memory__getString(Const___str48));
+	Buffer__append(b, Memory__getString(Const___str49));
+	Buffer__append(b, Memory__getString(Const___str50));
+	Buffer__append(b, Memory__getString(Const___str51));
+	Buffer__append(b, Memory__getString(Const___str52));
+	Buffer__append(b, Memory__getString(Const___str53));
+	Buffer__append(b, Memory__getString(Const___str54));
+	Buffer__append(b, Memory__getString(Const___str55));
+	Buffer__append(b, Memory__getString(Const___str56));
+	Buffer__append(b, Memory__getString(Const___str57));
+	Buffer__append(b, Memory__getString(Const___str58));
+	Buffer__append(b, Memory__getString(Const___str59));
+	Buffer__append(b, Memory__getString(Const___str60));
+	Buffer__append(b, Memory__getString(Const___str61));
+	Buffer__append(b, Memory__getString(Const___str62));
+	Buffer__append(b, Memory__getString(Const___str63));
+	Buffer__append(b, Memory__getString(Const___str64));
+	Buffer__append(b, Memory__getString(Const___str65));
+	Buffer__append(b, Memory__getString(Const___str66));
+	Buffer__append(b, Memory__getString(Const___str67));
+	Buffer__append(b, Memory__getString(Const___str68));
+	Buffer__append(b, Memory__getString(Const___str69));
+	Buffer__append(b, Memory__getString(Const___str70));
+	Buffer__append(b, Memory__getString(Const___str71));
+	Buffer__append(b, Memory__getString(Const___str72));
+	Buffer__append(b, Memory__getString(Const___str73));
+	Buffer__append(b, Memory__getString(Const___str74));
+	Buffer__append(b, Memory__getString(Const___str75));
+	Buffer__append(b, Memory__getString(Const___str76));
+	Buffer__append(b, Memory__getString(Const___str77));
+	Buffer__append(b, Memory__getString(Const___str78));
+	Buffer__append(b, Memory__getString(Const___str79));
+	Buffer__append(b, Memory__getString(Const___str80));
+	Buffer__append(b, Memory__getString(Const___str81));
+	Buffer__append(b, Memory__getString(Const___str82));
+	Buffer__append(b, Memory__getString(Const___str83));
+	Buffer__append(b, Memory__getString(Const___str84));
+	Buffer__append(b, Memory__getString(Const___str85));
+	Buffer__append(b, Memory__getString(Const___str86));
+	Buffer__append(b, Memory__getString(Const___str87));
+	Buffer__append(b, Memory__getString(Const___str88));
+	Buffer__append(b, Memory__getString(Const___str89));
+	Buffer__append(b, Memory__getString(Const___str90));
+	Buffer__append(b, Memory__getString(Const___str91));
+	Buffer__append(b, Memory__getString(Const___str92));
+	Buffer__append(b, Memory__getString(Const___str93));
+	Buffer__append(b, Memory__getString(Const___str94));
+	Buffer__append(b, Memory__getString(Const___str95));
+	Buffer__append(b, Memory__getString(Const___str96));
+	Buffer__append(b, Memory__getString(Const___str97));
+	Buffer__append(b, Memory__getString(Const___str98));
+	Buffer__append(b, Memory__getString(Const___str99));
+	Buffer__append(b, Memory__getString(Const___str100));
+	Buffer__append(b, Memory__getString(Const___str101));
+	Buffer__append(b, Memory__getString(Const___str102));
+	Buffer__append(b, Memory__getString(Const___str103));
+	Buffer__append(b, Memory__getString(Const___str104));
+	Buffer__append(b, Memory__getString(Const___str105));
+	Buffer__append(b, Memory__getString(Const___str106));
+	Buffer__append(b, Memory__getString(Const___str107));
+	Buffer__append(b, Memory__getString(Const___str108));
+	Buffer__append(b, Memory__getString(Const___str109));
+	Buffer__append(b, Memory__getString(Const___str110));
+	Buffer__append(b, Memory__getString(Const___str111));
+	Buffer__append(b, Memory__getString(Const___str112));
+	Buffer__append(b, Memory__getString(Const___str113));
+	Buffer__append(b, Memory__getString(Const___str114));
+	Buffer__append(b, Memory__getString(Const___str115));
+	Buffer__append(b, Memory__getString(Const___str116));
+	Buffer__append(b, Memory__getString(Const___str117));
+	Buffer__append(b, Memory__getString(Const___str118));
+	Buffer__append(b, Memory__getString(Const___str119));
+	Buffer__append(b, Memory__getString(Const___str120));
+	Buffer__append(b, Memory__getString(Const___str121));
+	Buffer__append(b, Memory__getString(Const___str122));
+	Buffer__append(b, Memory__getString(Const___str123));
+	Buffer__append(b, Memory__getString(Const___str124));
+	Buffer__append(b, Memory__getString(Const___str125));
+	Buffer__append(b, Memory__getString(Const___str126));
+	s = Memory__getString(Const___str127);
+	String__setCharAt(s, 0, 127);
+	Buffer__append(b, s);
+	Buffer__append(b, Memory__getString(Const___str128));
+	Buffer__append(b, Memory__getString(Const___str129));
+	Buffer__append(b, Memory__getString(Const___str130));
+	Buffer__append(b, Memory__getString(Const___str131));
+	Buffer__append(b, Memory__getString(Const___str132));
+	Buffer__append(b, Memory__getString(Const___str133));
+	Buffer__append(b, Memory__getString(Const___str134));
+	Buffer__append(b, Memory__getString(Const___str135));
+	Buffer__append(b, Memory__getString(Const___str136));
+	Buffer__append(b, Memory__getString(Const___str137));
+	Buffer__append(b, Memory__getString(Const___str138));
+	Buffer__append(b, Memory__getString(Const___str139));
+	Buffer__append(b, Memory__getString(Const___str140));
+	Buffer__append(b, Memory__getString(Const___str141));
+	Buffer__append(b, Memory__getString(Const___str142));
+	Buffer__append(b, Memory__getString(Const___str143));
+	Buffer__append(b, Memory__getString(Const___str144));
+	Buffer__append(b, Memory__getString(Const___str145));
+	Buffer__append(b, Memory__getString(Const___str146));
+	Buffer__append(b, Memory__getString(Const___str147));
+	Buffer__append(b, Memory__getString(Const___str148));
+	Buffer__append(b, Memory__getString(Const___str149));
+	Buffer__append(b, Memory__getString(Const___str150));
+	Buffer__append(b, Memory__getString(Const___str151));
+	Buffer__append(b, Memory__getString(Const___str152));
+	Buffer__append(b, Memory__getString(Const___str153));
+	Buffer__append(b, Memory__getString(Const___str154));
+	Buffer__append(b, Memory__getString(Const___str155));
+	Buffer__append(b, Memory__getString(Const___str156));
+	Buffer__append(b, Memory__getString(Const___str157));
+	Buffer__append(b, Memory__getString(Const___str158));
+	Buffer__append(b, Memory__getString(Const___str159));
+	Buffer__append(b, Memory__getString(Const___str160));
+	Buffer__append(b, Memory__getString(Const___str161));
+	Buffer__append(b, Memory__getString(Const___str162));
+	Buffer__append(b, Memory__getString(Const___str163));
+	Buffer__append(b, Memory__getString(Const___str164));
+	Buffer__append(b, Memory__getString(Const___str165));
+	Buffer__append(b, Memory__getString(Const___str166));
+	Buffer__append(b, Memory__getString(Const___str167));
+	Buffer__append(b, Memory__getString(Const___str168));
+	Buffer__append(b, Memory__getString(Const___str169));
+	Buffer__append(b, Memory__getString(Const___str170));
+	Buffer__append(b, Memory__getString(Const___str171));
+	Buffer__append(b, Memory__getString(Const___str172));
+	Buffer__append(b, Memory__getString(Const___str173));
+	Buffer__append(b, Memory__getString(Const___str174));
+	Buffer__append(b, Memory__getString(Const___str175));
+	Buffer__append(b, Memory__getString(Const___str176));
+	Buffer__append(b, Memory__getString(Const___str177));
+	Buffer__append(b, Memory__getString(Const___str178));
+	Buffer__append(b, Memory__getString(Const___str179));
+	Buffer__append(b, Memory__getString(Const___str180));
+	Buffer__append(b, Memory__getString(Const___str181));
+	Buffer__append(b, Memory__getString(Const___str182));
+	Buffer__append(b, Memory__getString(Const___str183));
+	Buffer__append(b, Memory__getString(Const___str184));
+	Buffer__append(b, Memory__getString(Const___str185));
+	Buffer__append(b, Memory__getString(Const___str186));
+	Buffer__append(b, Memory__getString(Const___str187));
+	Buffer__append(b, Memory__getString(Const___str188));
+	Buffer__append(b, Memory__getString(Const___str189));
+	Buffer__append(b, Memory__getString(Const___str190));
+	Buffer__append(b, Memory__getString(Const___str191));
+	Buffer__append(b, Memory__getString(Const___str192));
+	Buffer__append(b, Memory__getString(Const___str193));
+	Buffer__append(b, Memory__getString(Const___str194));
+	return b;
+}
+#endif
+
+#ifdef JACK_IMPLEMENTATION
+#define prefix__ (__this+0)
+#define first__ (__this+1)
+#define suffix__ (__this+2)
+var GifLzw__new() {
+	var __this;
+	__this = Memory__alloc(3);
+	__poke(prefix__, 0);
+	__poke(first__, 0);
+	__poke(suffix__, 0);
+	return __this;
+}
+var GifLzw__dispose(var __this) {
+	Memory__deAlloc(__this);
+	return 0;
+}
+var GifLzw__getPrefix(var __this) {
+	return __peek(prefix__);
+}
+var GifLzw__setPrefix(var __this, var v) {
+	__poke(prefix__, v);
+	return 0;
+}
+var GifLzw__getFirst(var __this) {
+	return __peek(first__);
+}
+var GifLzw__setFirst(var __this, var v) {
+	__poke(first__, v);
+	return 0;
+}
+var GifLzw__getSuffix(var __this) {
+	return __peek(suffix__);
+}
+var GifLzw__setSuffix(var __this, var v) {
+	__poke(suffix__, v);
+	return 0;
+}
+#undef prefix__
+#undef first__
+#undef suffix__
 #endif
 
 #ifdef JACK_IMPLEMENTATION
@@ -9175,477 +10094,22 @@ var JackParser__compileExpressionList(var __this) {
 #endif
 
 #ifdef JACK_IMPLEMENTATION
-var JackTokenizer___str0[] = {99,108,97,115,115,0};
-var JackTokenizer___str1[] = {109,101,116,104,111,100,0};
-var JackTokenizer___str2[] = {102,117,110,99,116,105,111,110,0};
-var JackTokenizer___str3[] = {99,111,110,115,116,114,117,99,116,111,114,0};
-var JackTokenizer___str4[] = {99,97,108,108,98,97,99,107,0};
-var JackTokenizer___str5[] = {105,110,116,0};
-var JackTokenizer___str6[] = {98,111,111,108,101,97,110,0};
-var JackTokenizer___str7[] = {99,104,97,114,0};
-var JackTokenizer___str8[] = {118,111,105,100,0};
-var JackTokenizer___str9[] = {118,97,114,0};
-var JackTokenizer___str10[] = {115,116,97,116,105,99,0};
-var JackTokenizer___str11[] = {102,105,101,108,100,0};
-var JackTokenizer___str12[] = {108,101,116,0};
-var JackTokenizer___str13[] = {100,111,0};
-var JackTokenizer___str14[] = {105,102,0};
-var JackTokenizer___str15[] = {101,108,115,101,0};
-var JackTokenizer___str16[] = {119,104,105,108,101,0};
-var JackTokenizer___str17[] = {114,101,116,117,114,110,0};
-var JackTokenizer___str18[] = {116,114,117,101,0};
-var JackTokenizer___str19[] = {102,97,108,115,101,0};
-var JackTokenizer___str20[] = {110,117,108,108,0};
-var JackTokenizer___str21[] = {116,104,105,115,0};
-var JackTokenizer___str22[] = {35,0};
-var JackTokenizer___str23[] = {43,0};
-var JackTokenizer___str24[] = {45,0};
-var JackTokenizer___str25[] = {42,0};
-var JackTokenizer___str26[] = {47,0};
-var JackTokenizer___str27[] = {38,0};
-var JackTokenizer___str28[] = {124,0};
-var JackTokenizer___str29[] = {62,0};
-var JackTokenizer___str30[] = {60,0};
-var JackTokenizer___str31[] = {61,0};
-var JackTokenizer___str32[] = {44,0};
-var JackTokenizer___str33[] = {126,0};
-var JackTokenizer___str34[] = {59,0};
-var JackTokenizer___str35[] = {46,0};
-var JackTokenizer___str36[] = {123,0};
-var JackTokenizer___str37[] = {125,0};
-var JackTokenizer___str38[] = {40,0};
-var JackTokenizer___str39[] = {41,0};
-var JackTokenizer___str40[] = {91,0};
-var JackTokenizer___str41[] = {93,0};
-var JackTokenizer___str42[] = {67,111,109,109,101,110,116,32,116,111,119,97,114,100,32,101,110,100,32,111,102,32,102,105,108,101,46,0};
-var JackTokenizer___str43[] = {108,105,110,101,0};
-var JackTokenizer___str44[] = {102,105,108,101,0};
-var JackTokenizer___str45[] = {110,101,119,108,105,110,101,32,105,110,32,115,116,114,105,110,103,0};
-var JackTokenizer___str46[] = {87,104,105,116,101,32,115,112,97,99,101,0};
-var JackTokenizer___str47[] = {67,111,109,109,101,110,116,32,116,111,119,97,114,100,32,101,110,100,32,111,102,32,102,105,108,101,46,0};
-var JackTokenizer___str48[] = {82,101,97,99,104,101,100,32,101,110,100,32,111,102,32,102,105,108,101,32,116,111,107,101,110,46,0};
-var JackTokenizer___str49[] = {76,101,120,101,114,32,101,114,114,111,114,44,32,105,110,32,0};
-var JackTokenizer___str50[] = {32,117,110,101,120,112,101,99,116,101,100,32,39,0};
-var JackTokenizer___str51[] = {39,32,97,116,32,108,105,110,101,32,0};
-#define src__ (__this+0)
-#define x__ (__this+1)
-#define tbl__ (__this+2)
-#define token__ (__this+3)
-#define c__ (__this+4)
-#define ahead__ (__this+5)
-#define token_type__ (__this+6)
-#define key_word__ (__this+7)
-#define int_val__ (__this+8)
-#define line__ (__this+9)
-#define last_line__ (__this+10)
-#define new_file__ (__this+11)
-#define symbol___ (__this+12)
-#define gen_xml__ (__this+13)
-var JackTokenizer__new(var destination) {
+var Callback__callback(var __this, var a, var b) {
+	return 0;
+}
+var Callback__new() {
 	var __this;
-	__this = Memory__alloc(14);
-	__poke(src__, 0);
-	__poke(x__, destination);
-	__poke(token__, String__new(256));
-	__poke(new_file__, 0);
-	__poke(c__, 0);
-	__poke(line__, 0);
-	__poke(last_line__, -1);
-	__poke(ahead__, 0);
-	__poke(token_type__, -1);
-	__poke(key_word__, 0);
-	__poke(symbol___, 0);
-	__poke(int_val__, 0);
-	__poke(gen_xml__, 0);
-	__poke(tbl__, JackTokenizer__getSymbolHash(__this));
+	__this = Memory__alloc(1);
+	(__peek(__this+0)) = (var)Callback__callback;
 	return __this;
 }
-var JackTokenizer__dispose(var __this) {
-	Hash__dispose(__peek(tbl__));
-	String__dispose(__peek(token__));
+var Callback__dispose(var __this) {
 	Memory__deAlloc(__this);
 	return 0;
 }
-var JackTokenizer__init(var __this, var source, var generate_xml) {
-	__poke(src__, source);
-	if (0!=(__peek(src__))) {
-		__poke(new_file__, File__getName(__peek(src__)));
-	}
-
-	__poke(gen_xml__, generate_xml);
-	__poke(c__, 0);
-	__poke(ahead__, 0);
-	__poke(token_type__, -1);
-	__poke(key_word__, 0);
-	__poke(int_val__, 0);
-	__poke(line__, 0);
-	__poke(last_line__, -1);
-	return 0;
+var Callback__invoke(var __this, var a, var b) {
+	return ((var(*)(var,var,var))(__peek(__this)))(__this, a, b);
 }
-var JackTokenizer__getSymbolHash(var __this) {
-	var h;
-	h = Hash__new(256, 0);
-	Hash__add(h, Memory__getString(JackTokenizer___str0), C__CLASS());
-	Hash__add(h, Memory__getString(JackTokenizer___str1), C__METHOD());
-	Hash__add(h, Memory__getString(JackTokenizer___str2), C__FUNCTION());
-	Hash__add(h, Memory__getString(JackTokenizer___str3), C__CONSTRUCTOR());
-	Hash__add(h, Memory__getString(JackTokenizer___str4), C__CALLBACK());
-	Hash__add(h, Memory__getString(JackTokenizer___str5), C__INT());
-	Hash__add(h, Memory__getString(JackTokenizer___str6), C__BOOLEAN());
-	Hash__add(h, Memory__getString(JackTokenizer___str7), C__CHAR());
-	Hash__add(h, Memory__getString(JackTokenizer___str8), C__VOID());
-	Hash__add(h, Memory__getString(JackTokenizer___str9), C__VAR());
-	Hash__add(h, Memory__getString(JackTokenizer___str10), C__STATIC());
-	Hash__add(h, Memory__getString(JackTokenizer___str11), C__FIELD());
-	Hash__add(h, Memory__getString(JackTokenizer___str12), C__LET());
-	Hash__add(h, Memory__getString(JackTokenizer___str13), C__DO());
-	Hash__add(h, Memory__getString(JackTokenizer___str14), C__IF());
-	Hash__add(h, Memory__getString(JackTokenizer___str15), C__ELSE());
-	Hash__add(h, Memory__getString(JackTokenizer___str16), C__WHILE());
-	Hash__add(h, Memory__getString(JackTokenizer___str17), C__RETURN());
-	Hash__add(h, Memory__getString(JackTokenizer___str18), C__TRUE());
-	Hash__add(h, Memory__getString(JackTokenizer___str19), C__FALSE());
-	Hash__add(h, Memory__getString(JackTokenizer___str20), C__NULL());
-	Hash__add(h, Memory__getString(JackTokenizer___str21), C__THIS());
-	Hash__add(h, Memory__getString(JackTokenizer___str22), C__ASM());
-	Hash__add(h, Memory__getString(JackTokenizer___str23), C__PLUS());
-	Hash__add(h, Memory__getString(JackTokenizer___str24), C__MINUS());
-	Hash__add(h, Memory__getString(JackTokenizer___str25), C__MULTIPLY());
-	Hash__add(h, Memory__getString(JackTokenizer___str26), C__DIV());
-	Hash__add(h, Memory__getString(JackTokenizer___str27), C__AND());
-	Hash__add(h, Memory__getString(JackTokenizer___str28), C__OR());
-	Hash__add(h, Memory__getString(JackTokenizer___str29), C__GREATER());
-	Hash__add(h, Memory__getString(JackTokenizer___str30), C__LESS());
-	Hash__add(h, Memory__getString(JackTokenizer___str31), C__EQUAL());
-	Hash__add(h, Memory__getString(JackTokenizer___str32), C__COMMA());
-	Hash__add(h, Memory__getString(JackTokenizer___str33), C__TILDE());
-	Hash__add(h, Memory__getString(JackTokenizer___str34), C__SEMICOLON());
-	Hash__add(h, Memory__getString(JackTokenizer___str35), C__DOT());
-	Hash__add(h, Memory__getString(JackTokenizer___str36), C__LEFT_CURLY_BRACKET());
-	Hash__add(h, Memory__getString(JackTokenizer___str37), C__RIGHT_CURLY_BRACKET());
-	Hash__add(h, Memory__getString(JackTokenizer___str38), C__LEFT_PARENTHESIS());
-	Hash__add(h, Memory__getString(JackTokenizer___str39), C__RIGHT_PARENTHESIS());
-	Hash__add(h, Memory__getString(JackTokenizer___str40), C__LEFT_SQUARE_BRACKET());
-	Hash__add(h, Memory__getString(JackTokenizer___str41), C__RIGHT_SQUARE_BRACKET());
-	return h;
-}
-var JackTokenizer__hasMoreTokens(var __this) {
-	var in_comment;
-	var ignore_line;
-	var start;
-	if (0!=(((__peek(token_type__)==-1)?-1:0))) {
-		__poke(c__, File__readUtf8(__peek(src__)));
-		__poke(ahead__, File__readUtf8(__peek(src__)));
-		__poke(token_type__, 0);
-	}
-
-	in_comment = 0;
-	ignore_line = 0;
-	start = __peek(line__);
-	while (-1==((((__peek(c__)>0)?-1:0))&(((__peek(c__)<1114112)?-1:0)))) {
-		if (0!=(ignore_line)) {
-			if (0!=(((__peek(c__)==10)?-1:0))) {
-				ignore_line = 0;
-			}
-
-		} else {
-			if (0!=(in_comment)) {
-				if (0!=(((__peek(c__)==42)?-1:0))) {
-					if (0!=(((__peek(ahead__)==47)?-1:0))) {
-						in_comment = 0;
-						JackTokenizer__next(__this);
-					}
-
-				}
-
-			} else {
-				if (0!=(((__peek(c__)==47)?-1:0))) {
-					if (0!=(((__peek(ahead__)==42)?-1:0))) {
-						start = __peek(line__);
-						in_comment = -1;
-					} else {
-						if (0!=(((__peek(ahead__)==47)?-1:0))) {
-							ignore_line = -1;
-						} else {
-							return -1;
-						}
-					}
-				} else {
-					if (0!=((((__peek(c__)==9)?-1:0))|(((__peek(c__)==10)?-1:0))|(((__peek(c__)==13)?-1:0))|(((__peek(c__)==32)?-1:0)))) {
-						__poke(c__, __peek(c__));
-					} else {
-						return -1;
-					}
-				}
-			}
-		}
-		JackTokenizer__next(__this);
-	}
-	if (0!=(in_comment)) {
-		JackTokenizer__error(__this, start, Memory__getString(JackTokenizer___str42));
-	}
-
-	__poke(token_type__, 0);
-	return 0;
-}
-var JackTokenizer__next(var __this) {
-	if (0!=(((__peek(c__)==10)?-1:0))) {
-		__poke(line__, __peek(line__)+1);
-	}
-
-	__poke(c__, __peek(ahead__));
-	__poke(ahead__, File__readUtf8(__peek(src__)));
-	return 0;
-}
-var JackTokenizer__addLine(var __this) {
-	var u;
-	if (0!=(((__peek(line__)>__peek(last_line__))?-1:0))) {
-		u = String__new(8);
-		u = String__setInt(u, __peek(line__)+1);
-		Xml__addAttribute(__peek(x__), Memory__getString(JackTokenizer___str43), u);
-		String__dispose(u);
-		__poke(last_line__, __peek(line__));
-	}
-
-	if (0!=(__peek(new_file__))) {
-		Xml__addAttribute(__peek(x__), Memory__getString(JackTokenizer___str44), __peek(new_file__));
-		__poke(new_file__, 0);
-	}
-
-	return 0;
-}
-var JackTokenizer__getFileName(var __this) {
-	return __peek(new_file__);
-}
-var JackTokenizer__getTokenConst(var __this, var s) {
-	return Hash__get(__peek(tbl__), s);
-}
-var JackTokenizer__advance(var __this) {
-	var start;
-	var l;
-	var k;
-	var key_or_id;
-	var in_string;
-	var in_int;
-	var in_asm;
-	var in_escape;
-	l = 0;
-	key_or_id = 0;
-	in_string = 0;
-	in_int = 0;
-	in_asm = 0;
-	in_escape = 0;
-	String__setCharAt(__peek(token__), 0, 0);
-	start = __peek(line__);
-	while (-1==((((__peek(c__)>0)?-1:0))&(((__peek(c__)<1114112)?-1:0)))) {
-		if (0!=(in_string&(((__peek(c__)==34)?-1:0))&(~in_escape))) {
-			__poke(token_type__, C__STRING_CONST());
-			if (0!=(__peek(gen_xml__))) {
-				Xml__addElement(__peek(x__), __peek(token_type__));
-				Xml__addContent(__peek(x__), __peek(token__));
-				JackTokenizer__addLine(__this);
-				Xml__closeCurrent(__peek(x__));
-			}
-
-			JackTokenizer__next(__this);
-			return 0;
-		} else {
-			if (0!=(in_int)) {
-				if (0!=(((((__peek(c__)>47)?-1:0))&(((__peek(c__)<58)?-1:0))))) {
-					__poke(token__, String__appendChar(__peek(token__), __peek(c__)));
-					l = l+1;
-				} else {
-					__poke(token_type__, C__INT_CONST());
-					if (0!=(__peek(gen_xml__))) {
-						Xml__addElement(__peek(x__), __peek(token_type__));
-						Xml__addContent(__peek(x__), __peek(token__));
-						JackTokenizer__addLine(__this);
-						Xml__closeCurrent(__peek(x__));
-					}
-
-					return 0;
-				}
-			} else {
-				if (0!=(in_string)) {
-					if (0!=(in_escape)) {
-						in_escape = 0;
-						if (0!=(((__peek(c__)==92)?-1:0))) {
-							__poke(c__, 92);
-						}
-
-						if (0!=(((__peek(c__)==34)?-1:0))) {
-							__poke(c__, 34);
-						}
-
-						if (0!=(((__peek(c__)==110)?-1:0))) {
-							__poke(c__, 10);
-						}
-
-					} else {
-						if (0!=(((__peek(c__)==10)?-1:0))) {
-							JackTokenizer__error(__this, __peek(line__), Memory__getString(JackTokenizer___str45));
-							return 0;
-						} else {
-							if (0!=(((__peek(c__)==92)?-1:0))) {
-								in_escape = -1;
-								__poke(c__, 0);
-							}
-
-						}
-					}
-					if (0!=(__peek(c__))) {
-						__poke(token__, String__appendChar(__peek(token__), __peek(c__)));
-						l = l+1;
-					}
-
-				} else {
-					if (0!=(in_asm)) {
-						__poke(token__, String__appendChar(__peek(token__), __peek(c__)));
-						l = l+1;
-						if (0!=(((__peek(c__)==10)?-1:0))) {
-							__poke(token_type__, C__ASM());
-							if (0!=(__peek(gen_xml__))) {
-								Xml__addElement(__peek(x__), __peek(token_type__));
-								Xml__addContent(__peek(x__), __peek(token__));
-								JackTokenizer__addLine(__this);
-								Xml__closeCurrent(__peek(x__));
-							}
-
-							JackTokenizer__next(__this);
-							return 0;
-						}
-
-					} else {
-						if (0!=(((__peek(c__)==34)?-1:0))) {
-							in_string = -1;
-						} else {
-							if (0!=(((((__peek(c__)>64)?-1:0))&(((__peek(c__)<91)?-1:0)))|((((__peek(c__)>96)?-1:0))&(((__peek(c__)<123)?-1:0)))|(((__peek(c__)==95)?-1:0))|((((__peek(c__)>47)?-1:0))&(((__peek(c__)<58)?-1:0))&(((l>0)?-1:0))))) {
-								key_or_id = -1;
-								__poke(token__, String__appendChar(__peek(token__), __peek(c__)));
-								l = l+1;
-							} else {
-								if (0!=(key_or_id)) {
-									k = JackTokenizer__getTokenConst(__this, __peek(token__));
-									if (0!=((((k==C__CLASS())?-1:0))|(((k==C__METHOD())?-1:0))|(((k==C__FUNCTION())?-1:0))|(((k==C__CONSTRUCTOR())?-1:0))|(((k==C__CALLBACK())?-1:0))|(((k==C__INT())?-1:0))|(((k==C__BOOLEAN())?-1:0))|(((k==C__CHAR())?-1:0))|(((k==C__VOID())?-1:0))|(((k==C__VAR())?-1:0))|(((k==C__STATIC())?-1:0))|(((k==C__FIELD())?-1:0))|(((k==C__LET())?-1:0))|(((k==C__DO())?-1:0))|(((k==C__IF())?-1:0))|(((k==C__ELSE())?-1:0))|(((k==C__WHILE())?-1:0))|(((k==C__RETURN())?-1:0))|(((k==C__TRUE())?-1:0))|(((k==C__FALSE())?-1:0))|(((k==C__NULL())?-1:0))|(((k==C__THIS())?-1:0)))) {
-										__poke(token_type__, C__KEYWORD());
-										__poke(key_word__, k);
-									} else {
-										__poke(token_type__, C__IDENTIFIER());
-									}
-									if (0!=(__peek(gen_xml__))) {
-										Xml__addElement(__peek(x__), __peek(token_type__));
-										Xml__addContent(__peek(x__), __peek(token__));
-										JackTokenizer__addLine(__this);
-										Xml__closeCurrent(__peek(x__));
-									}
-
-									return 0;
-								} else {
-									if (0!=(((((__peek(c__)>47)?-1:0))&(((__peek(c__)<58)?-1:0))))) {
-										__poke(token__, String__appendChar(__peek(token__), __peek(c__)));
-										l = l+1;
-										in_int = -1;
-									} else {
-										__poke(token__, String__appendChar(__peek(token__), __peek(c__)));
-										__poke(c__, JackTokenizer__getTokenConst(__this, __peek(token__)));
-										if (0!=((((__peek(c__)==C__LEFT_CURLY_BRACKET())?-1:0))|(((__peek(c__)==C__RIGHT_CURLY_BRACKET())?-1:0))|(((__peek(c__)==C__LEFT_PARENTHESIS())?-1:0))|(((__peek(c__)==C__RIGHT_PARENTHESIS())?-1:0))|(((__peek(c__)==C__LEFT_SQUARE_BRACKET())?-1:0))|(((__peek(c__)==C__RIGHT_SQUARE_BRACKET())?-1:0))|(((__peek(c__)==C__DOT())?-1:0))|(((__peek(c__)==C__COMMA())?-1:0))|(((__peek(c__)==C__SEMICOLON())?-1:0))|(((__peek(c__)==C__PLUS())?-1:0))|(((__peek(c__)==C__MINUS())?-1:0))|(((__peek(c__)==C__MULTIPLY())?-1:0))|(((__peek(c__)==C__DIV())?-1:0))|(((__peek(c__)==C__AND())?-1:0))|(((__peek(c__)==C__OR())?-1:0))|(((__peek(c__)==C__GREATER())?-1:0))|(((__peek(c__)==C__LESS())?-1:0))|(((__peek(c__)==C__EQUAL())?-1:0))|(((__peek(c__)==C__TILDE())?-1:0)))) {
-											__poke(token_type__, C__SYMBOL());
-											__poke(symbol___, __peek(c__));
-											if (0!=(__peek(gen_xml__))) {
-												Xml__addElement(__peek(x__), __peek(token_type__));
-												Xml__addContent(__peek(x__), __peek(token__));
-												JackTokenizer__addLine(__this);
-												Xml__closeCurrent(__peek(x__));
-											}
-
-											JackTokenizer__next(__this);
-											return 0;
-										} else {
-											if (0!=((((__peek(c__)==9)?-1:0))|(((__peek(c__)==10)?-1:0))|(((__peek(c__)==13)?-1:0))|(((__peek(c__)==32)?-1:0)))) {
-												JackTokenizer__error(__this, __peek(line__), Memory__getString(JackTokenizer___str46));
-												__poke(line__, __peek(line__));
-											} else {
-												if (0!=(((__peek(c__)==C__ASM())?-1:0))) {
-													__poke(token__, String__appendChar(__peek(token__), __peek(c__)));
-													in_asm = -1;
-													String__setCharAt(__peek(token__), 0, 0);
-												} else {
-													__poke(token__, String__appendChar(__peek(token__), __peek(c__)));
-													JackTokenizer__error(__this, __peek(line__), __peek(token__));
-													JackTokenizer__next(__this);
-													return 0;
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-		JackTokenizer__next(__this);
-	}
-	if (0!=(in_string)) {
-		JackTokenizer__error(__this, start, Memory__getString(JackTokenizer___str47));
-	}
-
-	if (0!=(in_int|key_or_id)) {
-		JackTokenizer__error(__this, start, Memory__getString(JackTokenizer___str48));
-	}
-
-	return 0;
-}
-var JackTokenizer__error(var __this, var line_, var w) {
-	Output__printString(Memory__getString(JackTokenizer___str49));
-	Output__printString(File__getName(__peek(src__)));
-	Output__printString(Memory__getString(JackTokenizer___str50));
-	Output__printString(w);
-	Output__printString(Memory__getString(JackTokenizer___str51));
-	Output__printInt(line_+1);
-	Output__println();
-	__poke(c__, 0);
-	return 0;
-}
-var JackTokenizer__getXml(var __this) {
-	return __peek(x__);
-}
-var JackTokenizer__getLine(var __this) {
-	return __peek(line__)+1;
-}
-var JackTokenizer__tokenType(var __this) {
-	return __peek(token_type__);
-}
-var JackTokenizer__keyWord(var __this) {
-	return __peek(key_word__);
-}
-var JackTokenizer__symbol(var __this) {
-	return __peek(symbol___);
-}
-var JackTokenizer__identifier(var __this) {
-	return __peek(token__);
-}
-var JackTokenizer__intVal(var __this) {
-	return String__intValue(__peek(token__));
-}
-var JackTokenizer__stringVal(var __this) {
-	return __peek(token__);
-}
-#undef src__
-#undef x__
-#undef tbl__
-#undef token__
-#undef c__
-#undef ahead__
-#undef token_type__
-#undef key_word__
-#undef int_val__
-#undef line__
-#undef last_line__
-#undef new_file__
-#undef symbol___
-#undef gen_xml__
 #endif
 
 #ifdef JACK_IMPLEMENTATION
@@ -9660,412 +10124,6 @@ var SymbolTable__dispose(var __this) {
 	return 0;
 }
 #undef src__
-#endif
-
-#ifdef JACK_IMPLEMENTATION
-var Sys2__args_;
-var Sys2__init() {
-	return 0;
-}
-var Sys2__deInit() {
-	var b;
-	if (0!=(Sys2__args_)) {
-		b = Sys2__args_;
-		Buffer__dispose(b);
-		Sys2__args_ = 0;
-	}
-
-	return 0;
-}
-var Sys2__args() {
-	var a;
-	var s;
-	var i;
-	var isq;
-	var b;
-	if (0!=(Sys2__args_)) {
-		return Sys2__args_;
-	}
-
-	Sys2__args_ = Buffer__newString(1);
-	i = 0;
- 	isq = Sys__argc__;
-	while (-1==(((i<isq)?-1:0))) {
- 		a = (var)Sys__argv__[i];
-		s = String__new(255);
-		s = String__appendFromNative(s, a);
-		b = Sys2__args_;
-		Buffer__append(b, s);
-		i = i+1;
-	}
-	return Sys2__args_;
-}
-#endif
-
-#ifdef JACK_IMPLEMENTATION
-var Xml___str0[] = {37,114,111,111,116,37,0};
-var Xml___str1[] = {38,108,116,59,0};
-var Xml___str2[] = {38,97,109,112,59,0};
-var Xml___str3[] = {38,113,117,111,116,59,0};
-var Xml___str4[] = {38,103,116,59,0};
-var Xml___str5[] = {38,97,112,111,115,59,0};
-#define root__ (__this+0)
-#define current__ (__this+1)
-#define esca__ (__this+2)
-#define strings__ (__this+3)
-var Xml__new() {
-	var __this;
-	__this = Memory__alloc(4);
-	__poke(strings__, Buffer__newString(1024));
-	__poke(esca__, String__new(32));
-	__poke(root__, XmlNode__new(__this, 0, Memory__getString(Xml___str0), 0));
-	__poke(current__, __peek(root__));
-	return __this;
-}
-var Xml__dispose(var __this) {
-	XmlNode__dispose(__peek(root__));
-	String__dispose(__peek(esca__));
-	Buffer__dispose(__peek(strings__));
-	Memory__deAlloc(__this);
-	return 0;
-}
-var Xml__clear(var __this) {
-	XmlNode__clear(__peek(root__));
-	__poke(current__, __peek(root__));
-	return 0;
-}
-var Xml__getStringNoCreate(var __this, var s) {
-	var i;
-	i = Buffer__indexOfStr(__peek(strings__), s);
-	if (0!=(((i>-1)?-1:0))) {
-		return Buffer__getAt(__peek(strings__), i);
-	}
-
-	return 0;
-}
-var Xml__getString(var __this, var s) {
-	var i;
-	i = Buffer__indexOfStr(__peek(strings__), s);
-	if (0!=(((i>-1)?-1:0))) {
-		return Buffer__getAt(__peek(strings__), i);
-	}
-
-	s = String__copy(s);
-	Buffer__insertSortedStr(__peek(strings__), s);
-	return s;
-}
-var Xml__addElement(var __this, var tag) {
-	__poke(current__, XmlNode__addElement(__peek(current__), __this, tag));
-	return 0;
-}
-var Xml__addAttribute(var __this, var name, var value) {
-	XmlNode__addAttribute(__peek(current__), __this, name, value);
-	return 0;
-}
-var Xml__addContent(var __this, var txt) {
-	XmlNode__addContent(__peek(current__), __this, txt);
-	return 0;
-}
-var Xml__closeElement(var __this, var tag) {
-	__poke(current__, XmlNode__closeElement(__peek(current__), __this, tag));
-	return 0;
-}
-var Xml__closeCurrent(var __this) {
-	__poke(current__, XmlNode__closeElement(__peek(current__), __this, XmlNode__getTag(__peek(current__))));
-	return 0;
-}
-var Xml__getCurrent(var __this) {
-	return __peek(current__);
-}
-var Xml__disposeCurrent(var __this) {
-	var o;
-	o = __peek(current__);
-	__poke(current__, XmlNode__getParent(__peek(current__)));
-	if (0!=(__peek(current__))) {
-		o = XmlNode__removeElement(__peek(current__), __this, o);
-		if (0!=(o)) {
-			XmlNode__dispose(o);
-		}
-
-	}
-
-	return 0;
-}
-var Xml__dump(var __this, var f) {
-	XmlNode__dump(__peek(root__), __this, f, 0);
-	return 0;
-}
-var Xml__escape(var __this, var o) {
-	var i;
-	var l;
-	var c;
-	var s;
-	s = __peek(esca__);
-	String__setCharAt(s, 0, 0);
-	l = String__length(o);
-	i = 0;
-	while (-1==(((i<l)?-1:0))) {
-		c = String__charAt(o, i);
-		if (0!=(((c==60)?-1:0))) {
-			s = String__appendString(s, Memory__getString(Xml___str1));
-		} else {
-			if (0!=(((c==38)?-1:0))) {
-				s = String__appendString(s, Memory__getString(Xml___str2));
-			} else {
-				if (0!=(((c==34)?-1:0))) {
-					s = String__appendString(s, Memory__getString(Xml___str3));
-				} else {
-					if (0!=(((c==62)?-1:0))) {
-						s = String__appendString(s, Memory__getString(Xml___str4));
-					} else {
-						if (0!=(((c==39)?-1:0))) {
-							s = String__appendString(s, Memory__getString(Xml___str5));
-						} else {
-							s = String__appendChar(s, c);
-						}
-					}
-				}
-			}
-		}
-		i = i+1;
-	}
-	__poke(esca__, s);
-	return s;
-}
-#undef root__
-#undef current__
-#undef esca__
-#undef strings__
-#endif
-
-#ifdef JACK_IMPLEMENTATION
-#define tag__ (__this+0)
-#define att_values__ (__this+1)
-#define att_names__ (__this+2)
-#define elements__ (__this+3)
-#define parent__ (__this+4)
-#define is_content___ (__this+5)
-var XmlNode__new(var x, var parent_, var tag_, var is_txt) {
-	var __this;
-	__this = Memory__alloc(6);
-	if (0!=(is_txt)) {
-		__poke(tag__, String__copy(tag_));
-	} else {
-		__poke(tag__, Xml__getString(x, tag_));
-	}
-	__poke(parent__, parent_);
-	__poke(is_content___, is_txt);
-	__poke(att_values__, 0);
-	__poke(att_names__, 0);
-	__poke(elements__, 0);
-	return __this;
-}
-var XmlNode__dispose(var __this) {
-	var x;
-	x = __this;
-	XmlNode__clear(x);
-	Memory__deAlloc(__this);
-	return 0;
-}
-var XmlNode__clear(var __this) {
-	if (0!=(__peek(att_values__))) {
-		Buffer__dispose(__peek(att_values__));
-		Buffer__dispose(__peek(att_names__));
-		__poke(att_values__, 0);
-		__poke(att_names__, 0);
-	}
-
-	if (0!=(__peek(is_content___))) {
-		if (0!=(__peek(tag__))) {
-			String__dispose(__peek(tag__));
-			__poke(tag__, 0);
-		}
-
-	}
-
-	if (0!=(__peek(elements__))) {
-		Buffer__dispose(__peek(elements__));
-		__poke(elements__, 0);
-	}
-
-	return 0;
-}
-var XmlNode__closeElement(var __this, var x, var tag_) {
-	var e;
-	var p;
-	var s;
-	var t;
-	s = Xml__getString(x, tag_);
-	e = __this;
-	p = XmlNode__getParent(e);
-	while (-1==((((((p==0)?-1:0))==0)?-1:0))) {
-		t = XmlNode__getTag(e);
-		if (0!=(((t==s)?-1:0))) {
-			return p;
-		}
-
-		e = p;
-		p = XmlNode__getParent(p);
-	}
-	return e;
-}
-var XmlNode__removeElement(var __this, var x, var e) {
-	if (0!=(((__peek(elements__)==0)?-1:0))) {
-		return 0;
-	}
-
-	Buffer__remove(__peek(elements__), e);
-	return e;
-}
-var XmlNode__addElement(var __this, var x, var tag_) {
-	var e;
-	var cb;
-	e = XmlNode__new(x, __this, tag_, 0);
-	if (0!=(((__peek(elements__)==0)?-1:0))) {
-		cb = CallbackXmlNodeDispose__new();
-		__poke(elements__, Buffer__new(1, cb));
-	}
-
-	Buffer__append(__peek(elements__), e);
-	return e;
-}
-var XmlNode__addAttribute(var __this, var x, var name, var value) {
-	var i;
-	var s;
-	if (0!=(((__peek(att_values__)==0)?-1:0))) {
-		__poke(att_values__, Buffer__newString(1));
-		__poke(att_names__, Buffer__new(1, 0));
-	}
-
-	i = Buffer__indexOfStr(__peek(att_names__), name);
-	s = String__copy(value);
-	if (0!=(((i>-1)?-1:0))) {
-		s = Buffer__setAt(__peek(att_values__), i, s);
-		String__dispose(s);
-	} else {
-		Buffer__append(__peek(att_values__), s);
-		s = Xml__getString(x, name);
-		Buffer__append(__peek(att_names__), s);
-	}
-	return 0;
-}
-var XmlNode__addContent(var __this, var x, var txt) {
-	var e;
-	var cb;
-	e = XmlNode__new(x, __this, txt, -1);
-	if (0!=(((__peek(elements__)==0)?-1:0))) {
-		cb = CallbackXmlNodeDispose__new();
-		__poke(elements__, Buffer__new(1, cb));
-	}
-
-	Buffer__append(__peek(elements__), e);
-	return 0;
-}
-var XmlNode__isContent(var __this) {
-	return __peek(is_content___);
-}
-var XmlNode__getElements(var __this) {
-	return __peek(elements__);
-}
-var XmlNode__getAttributesNames(var __this) {
-	return __peek(att_names__);
-}
-var XmlNode__getAttributesValues(var __this) {
-	return __peek(att_values__);
-}
-var XmlNode__getParent(var __this) {
-	return __peek(parent__);
-}
-var XmlNode__getTag(var __this) {
-	return __peek(tag__);
-}
-var XmlNode__dump(var __this, var x, var f, var depth) {
-	var d;
-	var i;
-	var s;
-	var e;
-	if (0!=(__peek(is_content___))) {
-		s = Xml__escape(x, __peek(tag__));
-		File__writeString(f, s);
-		return 0;
-	}
-
-	if (0!=(depth)) {
-		d = depth;
-		File__writeUtf8(f, 60);
-		File__writeString(f, __peek(tag__));
-		d = 0;
-		if (0!=(__peek(att_names__))) {
-			d = Buffer__getSize(__peek(att_names__));
-		}
-
-		i = 0;
-		while (-1==(((i<d)?-1:0))) {
-			File__writeUtf8(f, 32);
-			s = Buffer__getAt(__peek(att_names__), i);
-			if (0!=(s)) {
-				File__writeString(f, s);
-			}
-
-			s = Buffer__getAt(__peek(att_values__), i);
-			if (0!=(s)) {
-				File__writeUtf8(f, 61);
-				File__writeUtf8(f, 34);
-				s = Xml__escape(x, s);
-				File__writeString(f, s);
-				File__writeUtf8(f, 34);
-			}
-
-			i = i+1;
-		}
-		if (0!=(((__peek(elements__)==0)?-1:0))) {
-			File__writeUtf8(f, 47);
-		}
-
-		File__writeUtf8(f, 62);
-	}
-
-	if (0!=(__peek(elements__))) {
-		d = Buffer__getSize(__peek(elements__));
-		i = 0;
-		while (-1==(((i<d)?-1:0))) {
-			e = Buffer__getAt(__peek(elements__), i);
-			if (0!=(e)) {
-				XmlNode__dump(e, x, f, (depth+1));
-			}
-
-			i = i+1;
-		}
-	}
-
-	if (0!=((((depth>0)?-1:0))&(((0==(((__peek(elements__)==0)?-1:0)))?-1:0)))) {
-		d = depth;
-		File__writeUtf8(f, 60);
-		File__writeUtf8(f, 47);
-		File__writeString(f, __peek(tag__));
-		File__writeUtf8(f, 62);
-	}
-
-	return 0;
-}
-#undef tag__
-#undef att_values__
-#undef att_names__
-#undef elements__
-#undef parent__
-#undef is_content___
-#endif
-
-#ifdef JACK_IMPLEMENTATION
-var Array__new(var size) {
-	var a;
-	a = Memory__alloc(size);
-	return a;
-}
-var Array__dispose(var __this) {
-	Memory__deAlloc(__this);
-	return 0;
-}
 #endif
 
 #ifdef JACK_IMPLEMENTATION
@@ -10655,6 +10713,1024 @@ var Font__get(var __this, var c) {
 #endif
 
 #ifdef JACK_IMPLEMENTATION
+var Array__new(var size) {
+	var a;
+	a = Memory__alloc(size);
+	return a;
+}
+var Array__dispose(var __this) {
+	Memory__deAlloc(__this);
+	return 0;
+}
+#endif
+
+#ifdef JACK_IMPLEMENTATION
+var Output__x;
+var Output__y;
+var Output__f;
+var Output__init() {
+	Output__x = 0;
+	Output__y = 0;
+	Output__f = Font__new();
+	return 0;
+}
+var Output__deInit() {
+	return 0;
+}
+var Output__moveCursor(var row, var col) {
+	var xx;
+	var yy;
+	Output__x = col;
+	Output__y = row;
+	if (0!=(((Output__x<0)?-1:0))) {
+		Output__x = 0;
+	}
+
+	if (0!=(((Output__x>63)?-1:0))) {
+		Output__x = 63;
+	}
+
+	if (0!=(((Output__y<0)?-1:0))) {
+		Output__y = 0;
+	}
+
+	if (0!=(((Output__y>22)?-1:0))) {
+		Output__y = 22;
+	}
+
+	xx = Output__x;
+	yy = Output__y;
+	Output__printChar(32);
+	Output__x = xx;
+	Output__y = yy;
+ 	printf("\033[%ld;%ldf ", (long)yy + 1, (long)xx + 1);
+ 	fflush(stdout);
+	return 0;
+}
+var Output__printString(var s) {
+	var i;
+	var l;
+	var c;
+	i = 0;
+	l = String__length(s);
+	while (-1==(((i<l)?-1:0))) {
+		c = String__charAt(s, i);
+ 	//printf(" '%c' ",c);
+		Output__printChar(c);
+		i = i+1;
+	}
+	return 0;
+}
+var Output__println() {
+	Output__y = Output__y+1;
+	if (0!=(((Output__y>22)?-1:0))) {
+		Output__y = 22;
+	}
+
+	Output__x = 0;
+ 	putc('\n', stdout);
+	return 0;
+}
+var Output__printChar(var c) {
+	var xx;
+	var yy;
+	var i;
+	var j;
+	var l;
+	var p;
+	var chr;
+	var a;
+	var m;
+	if (0!=((((c>1114111)?-1:0))|(((c<0)?-1:0)))) {
+		return 0;
+	}
+
+	if (0!=((((c<32)?-1:0))|(((c>126)?-1:0)))) {
+ 	//printf("(%d)", c);
+		c = 32;
+	}
+
+	xx = Output__x;
+	yy = Output__y;
+	chr = Font__get(Output__f, c);
+	if (0!=(xx&1)) {
+		m = 255;
+	} else {
+		m = 255*256;
+	}
+	i = 0;
+	j = 0;
+	while (-1==(((i<11)?-1:0))) {
+		l = ((yy*11)+i)*32;
+		l = l+(xx/2);
+		l = l+16384;
+		p = Memory__peek(l);
+		if (0!=((xx&1))) {
+			p = (p&m)|(__peek(chr+j)*256);
+		} else {
+			p = (p&m)|(__peek(chr+j)&255);
+		}
+		Memory__poke(l, p);
+		l = l+32;
+		if (0!=(((i<10)?-1:0))) {
+			p = Memory__peek(l);
+			if (0!=(xx&1)) {
+				p = (p&m)|(__peek(chr+j)&~m);
+			} else {
+				p = (p&m)|((__peek(chr+j)/256)&255);
+			}
+			Memory__poke(l, p);
+		}
+
+		i = i+2;
+		j = j+1;
+	}
+ 	printf("%c", (char)c);
+ 	fflush(stdout);
+	Output__x = Output__x+1;
+	if (0!=(((Output__x>63)?-1:0))) {
+		Output__x = 0;
+		Output__y = Output__y+1;
+		if (0!=(((Output__y>22)?-1:0))) {
+			Output__y = 22;
+		}
+
+	}
+
+	return 0;
+}
+var Output__printInt(var c) {
+	var s;
+	s = String__new(8);
+	s = String__setInt(s, c);
+	Output__printString(s);
+	String__dispose(s);
+	return 0;
+}
+var Output__backSpace() {
+	var xx;
+	var yy;
+	Output__x = Output__x-1;
+	if (0!=(((Output__x<0)?-1:0))) {
+		Output__x = 0;
+	}
+
+	xx = Output__x;
+	yy = Output__y;
+	Output__printChar(8);
+	Output__x = xx;
+	Output__y = yy;
+	return 0;
+}
+#endif
+
+#ifdef JACK_IMPLEMENTATION
+var Sys___str0[] = {69,114,114,111,114,40,0};
+var Sys___str1[] = {41,0};
+var Sys__in_error;
+var Sys__init() {
+	Sys__in_error = 0;
+	Memory__init();
+ #ifndef JACK_HACK
+ 	Sys2__init();
+ #endif
+	Math__init();
+	Output__init();
+	Screen__init();
+	Keyboard__init();
+	Main__main();
+	return 0;
+}
+var Sys__deInit() {
+	Math__deInit();
+	Output__deInit();
+	Screen__deInit();
+	Keyboard__deInit();
+	Memory__deInit();
+	return 0;
+}
+var Sys__halt() {
+ 	exit(0);
+	return 0;
+}
+var Sys__error(var errorCode) {
+	if (0!=(Sys__in_error)) {
+		return 0;
+	}
+
+	Sys__in_error = -1;
+	Output__printString(Memory__getString(Sys___str0));
+	Output__printInt(errorCode);
+	Output__printString(Memory__getString(Sys___str1));
+	Output__println();
+ 	errorCode = 1 / (errorCode - errorCode);
+ 	exit(errorCode);
+	Sys__in_error = 0;
+	return 0;
+}
+var Sys__wait(var duration) {
+	Screen__processEvents();
+ #ifdef _WIN32
+ 	Sleep(duration);
+ #else
+ 	usleep(duration * 1000);
+ #endif
+	return 0;
+}
+#endif
+
+#ifdef JACK_IMPLEMENTATION
+var Screen__color;
+var Screen__init() {
+	return 0;
+}
+var Screen__deInit() {
+	return 0;
+}
+var Screen__clearScreen() {
+	var i;
+	i = 16384;
+	while (-1==(((i<24576)?-1:0))) {
+		Memory__poke(i, 0);
+		i = i+1;
+	}
+ 	puts("\033[2J");
+	return 0;
+}
+var Screen__setColor(var b) {
+	Screen__color = b;
+	return 0;
+}
+var Screen__drawPixel(var x, var y) {
+	var b;
+	var i;
+	var r;
+	var p;
+	i = (x/16)+(y*(512/16))+16384;
+	b = Memory__peek(i);
+	r = x-((x/16)*16);
+	p = 1;
+	while (-1==(((r>0)?-1:0))) {
+		p = p*2;
+		r = r-1;
+	}
+	if (0!=(Screen__color)) {
+		b = b|p;
+	} else {
+		b = b&p;
+	}
+	Memory__poke(i, b);
+	return 0;
+}
+var Screen__drawLine(var x, var y, var x2, var y2) {
+	var a;
+	var b;
+	var dx;
+	var dy;
+	var adyMinusbdx;
+	dx = x2-x;
+	dy = y2-y;
+	if (0!=((((dx<1)?-1:0)))) {
+		if (0!=((((dy<1)?-1:0)))) {
+			return 0;
+		}
+
+		b = y;
+		while (-1==(((b<y2)?-1:0))) {
+			Screen__drawPixel(x, b);
+			b = b+1;
+		}
+		return 0;
+	}
+
+	if (0!=((((dy<1)?-1:0)))) {
+		a = x;
+		while (-1==(((a<x2)?-1:0))) {
+			Screen__drawPixel(a, y);
+			a = a+1;
+		}
+		return 0;
+	}
+
+	a = 0;
+	b = 0;
+	adyMinusbdx = 0;
+	while (-1==((((dx>a)?-1:0))&(((dy>b)?-1:0)))) {
+		Screen__drawPixel(x+a, y+b);
+		if (0!=(adyMinusbdx)) {
+			a = a+1;
+			adyMinusbdx = adyMinusbdx+dy;
+		} else {
+			b = b+1;
+			adyMinusbdx = adyMinusbdx-dx;
+		}
+	}
+	return 0;
+}
+var Screen__drawRectangle(var x, var y, var x2, var y2) {
+	var i;
+	i = y;
+	while (-1==(((i<y2)?-1:0))) {
+		Screen__drawLine(x, i, x2, i);
+		i = i+1;
+	}
+	return 0;
+}
+var Screen__drawCircle(var x, var y, var r) {
+	var dy;
+	var s;
+	dy = -r;
+	if (0!=(((x>512)?-1:0))) {
+		return 0;
+	}
+
+	if (0!=(((y>256)?-1:0))) {
+		return 0;
+	}
+
+	while (-1==(((r>dy)?-1:0))) {
+		s = Math__sqrt((r*r)-(dy*dy));
+		Screen__drawLine(x-s, y+dy, x+s, y+dy);
+		dy = dy+1;
+	}
+	return 0;
+}
+#endif
+
+#ifdef JACK_IMPLEMENTATION
+var Math__init() {
+	return 0;
+}
+var Math__deInit() {
+	return 0;
+}
+var Math__abs(var a) {
+	if (0!=(((a<0)?-1:0))) {
+		return -a;
+	}
+
+	return a;
+}
+var Math__multiply(var x, var y) {
+	var sum;
+	var j;
+	var b;
+	var shiftedX;
+	sum = 0;
+	shiftedX = x;
+	if (0!=((((x<1)?-1:0))|(((y<1)?-1:0)))) {
+		return 0;
+	}
+
+	j = 0;
+	b = 1;
+	while (-1==(((j<16)?-1:0))) {
+		if (0!=(x&b)) {
+			sum = sum+shiftedX;
+		}
+
+		b = b+b;
+		shiftedX = shiftedX+shiftedX;
+		j = j+1;
+	}
+	return sum;
+}
+var Math__divide(var x, var y) {
+	var q;
+	if (0!=((((x<0)?-1:0))|(((y<1)?-1:0)))) {
+		return 0;
+	}
+
+	if (0!=(((y>x)?-1:0))) {
+		return 0;
+	}
+
+	q = Math__divide(x, y+y);
+	if (0!=((((x-((q+q)*y))<y)?-1:0))) {
+		return q+q;
+	}
+
+	return (q+q)+1;
+}
+var Math__min(var x, var y) {
+	if (0!=(((x<y)?-1:0))) {
+		return x;
+	}
+
+	return y;
+}
+var Math__max(var x, var y) {
+	if (0!=(((x>y)?-1:0))) {
+		return x;
+	}
+
+	return y;
+}
+var Math__sqrt(var x) {
+	var y;
+	var j;
+	var j2;
+	if (0!=(((x<1)?-1:0))) {
+		return 0;
+	}
+
+	y = 0;
+	j2 = 16384;
+	j = (15/2)-1;
+	while (-1==(((j>-1)?-1:0))) {
+		if (0!=(((x>(y+j2))?-1:0))) {
+			y = y+j2;
+		}
+
+		j2 = j2/2;
+		j = j-1;
+	}
+	return y;
+}
+var Math__shiftLeft(var value, var shift) {
+	while (-1==(((shift>0)?-1:0))) {
+		value = value*2;
+		shift = shift-1;
+	}
+	return value;
+}
+var Math__shiftRight(var value, var shift) {
+	while (-1==(((shift>0)?-1:0))) {
+		value = value/2;
+		shift = shift-1;
+	}
+	return value;
+}
+var Math__rem(var a, var b) {
+	var c;
+	if (0!=(((b==0)?-1:0))) {
+		return 0;
+	}
+
+	c = a/b;
+	c = c*b;
+	return a-c;
+}
+var Math__xor(var a, var b) {
+	var c;
+	c = a|b;
+	c = c&(~((a)&(b)));
+	return c;
+}
+var Math__log2(var n) {
+	var r;
+	r = 0;
+	if (0!=(((n==0)?-1:0))) {
+		return -1;
+	}
+
+	while (-1==(((n>1)?-1:0))) {
+		n = Math__shiftRight(n, 1);
+		r = r+1;
+	}
+	return r;
+}
+var Math__sizeOfInt() {
+	var s;
+ 	s = sizeof(var);
+	return s;
+}
+var Math__isBigEndian() {
+	var s;
+ 	int x = 1;
+ 	char *y = (char*)&x;
+ 	s = 0;
+ 	if (!y[0]) { s = -1;}
+	return s;
+}
+var Math__isWindows() {
+	var s;
+	s = 0;
+ #ifdef _WIN32
+ 	s = -1;
+ #endif
+	return s;
+}
+#endif
+
+#ifdef JACK_IMPLEMENTATION
+var String___str0[] = {45,0};
+#define str__ (__this+0)
+#define size__ (__this+1)
+var String__new(var maxLength) {
+	var __this;
+	__this = Memory__alloc(2);
+	__poke(str__, Array__new(maxLength+1));
+	__poke(__peek(str__)+0, 0);
+	__poke(size__, maxLength);
+	return __this;
+}
+var String__dispose(var __this) {
+	Array__dispose(__peek(str__));
+	Memory__deAlloc(__this);
+	return 0;
+}
+var String__length(var __this) {
+	var s;
+	var l;
+	l = 0;
+	s = __peek(str__);
+	if (0!=(((s==0)?-1:0))) {
+		return 0;
+	}
+
+	while (-1==(((0==(((__peek(s+l)==0)?-1:0)))?-1:0))) {
+		l = l+1;
+	}
+	return l;
+}
+var String__charAt(var __this, var a) {
+	var s;
+	var ret;
+	s = __peek(str__);
+	ret = __peek(__peek(str__)+a);
+	return ret;
+}
+var String__setCharAt(var __this, var j, var c) {
+	var s;
+	s = __peek(str__);
+	__poke(s+j, c);
+	return 0;
+}
+var String__getArray(var __this) {
+	return __peek(str__);
+}
+var String__appendChar(var __this, var c) {
+	var l;
+	var i;
+	var nl;
+	var max;
+	var b;
+	var d;
+	d = __peek(str__);
+	if (0!=(((__peek(size__)<1)?-1:0))) {
+		Sys__error(12);
+	}
+
+	max = __peek(size__);
+	l = String__length(__this);
+	if (0!=(((l<(max-1))?-1:0))) {
+		__poke(__peek(str__)+l, c);
+		__poke(__peek(str__)+l+1, 0);
+ //printf("%d %ld OOKK %d %d<\n", c, __this, max, l);
+		return __this;
+	}
+
+	nl = (l*2)+4;
+	b = Array__new(nl+1);
+	i = 0;
+	while (-1==(((i<l)?-1:0))) {
+		__poke(b+i, __peek(d+i));
+		i = i+1;
+	}
+	__poke(b+l, c);
+	__poke(b+l+1, 0);
+	Array__dispose(__peek(str__));
+	__poke(size__, nl);
+	__poke(str__, b);
+	return __this;
+}
+var String__eraseLastChar(var __this) {
+	var l;
+	var s;
+	s = __peek(str__);
+	l = String__length(__this);
+	if (0!=(((l>0)?-1:0))) {
+		__poke(s+l-1, 0);
+	}
+
+	return 0;
+}
+var String__intValue(var __this) {
+	var v;
+	var s;
+	var d;
+	var i;
+	var o;
+	o = __peek(str__);
+	v = 0;
+	s = 1;
+	d = __peek(o+0);
+	i = 1;
+	if (0!=(((d==45)?-1:0))) {
+		s = -1;
+		d = __peek(o+i);
+		i = i+1;
+	}
+
+	while (-1==((((d>47)?-1:0))&(((d<58)?-1:0)))) {
+		v = v*10;
+		v = v+d-48;
+		d = __peek(o+i);
+		i = i+1;
+	}
+	return v*s;
+}
+var String__setInt(var __this, var j) {
+	var n;
+	var k;
+	var s;
+	var p;
+	p = 0;
+	s = __this;
+	String__setCharAt(s, 0, 0);
+	if (0!=(((j<0)?-1:0))) {
+		j = -j;
+		s = String__appendString(s, Memory__getString(String___str0));
+	}
+
+	n = 10000;
+ 	if (sizeof(var) == 8) {
+ 		n = n * n * n * n * 100;
+ 	} else if (sizeof(var) == 4) {
+ 		n = n * n * 10; 
+ 	} 
+	while (-1==(((n>0)?-1:0))) {
+		k = j/n;
+		if (0!=(((k>0)?-1:0))) {
+			p = -1;
+		}
+
+		if (0!=(p)) {
+			s = String__appendChar(s, k+48);
+		}
+
+		j = Math__rem(j, n);
+		n = n/10;
+	}
+	if (0!=(((p==0)?-1:0))) {
+		s = String__appendChar(s, 48);
+	}
+
+	return __this;
+}
+var String__appendFromNative(var __this, var native) {
+	var l;
+	var i;
+	var c;
+	var n;
+	var s;
+	s = __this;
+	n = native;
+	i = 0;
+ #ifdef JACK_HACK 
+ 	n = 0;
+ 	l = n;
+ #else
+ #ifdef _WIN32
+ 	l = (var)wcslen((wchar_t*)n);
+ #else
+ 	l = strlen((char*)n);
+ #endif 
+ #endif 
+	while (-1==(((i<l)?-1:0))) {
+ #ifdef JACK_HACK 
+ 	c = 0;
+ #else
+ #ifdef _WIN32
+ 		c = (var)((wchar_t*)n)[i];// FIXME UTF16
+ #else
+ 		c = (var)(((char*)n)[i]) & 255; // FIXME UTF8
+ #endif 
+ #endif 
+		s = String__appendChar(s, c);
+		i = i+1;
+	}
+	return __this;
+}
+var String__ord(var s) {
+	return __peek(s+0);
+}
+var String__backSpace() {
+	return 8;
+}
+var String__doubleQuote() {
+	return 34;
+}
+var String__newLine() {
+	return 10;
+}
+var String__copy(var __this) {
+	var s;
+	var j;
+	var l;
+	j = 0;
+	l = String__length(__this);
+	s = String__new(l+1);
+	while (-1==(((j<l)?-1:0))) {
+		s = String__appendChar(s, String__charAt(__this, j));
+		j = j+1;
+	}
+	return s;
+}
+var String__appendString(var __this, var p) {
+	var j;
+	var l;
+	var s;
+	s = __this;
+	j = 0;
+	l = String__length(p);
+	while (-1==(((j<l)?-1:0))) {
+		s = String__appendChar(s, String__charAt(p, j));
+		j = j+1;
+	}
+	return __this;
+}
+var String__compare(var __this, var s) {
+	var p;
+	var j;
+	var lp;
+	var ls;
+	var r;
+	p = __this;
+	lp = String__length(p);
+	ls = String__length(s);
+	j = 0;
+	while (-1==((((j<lp)?-1:0))&(((j<ls)?-1:0)))) {
+		r = String__charAt(p, j)-String__charAt(s, j);
+		if (0!=(r)) {
+			return r;
+		}
+
+		j = j+1;
+	}
+	return lp-ls;
+}
+#undef str__
+#undef size__
+#endif
+
+#ifdef JACK_IMPLEMENTATION
+var Memory___str0[] = {65,108,108,111,99,32,97,114,101,110,97,32,105,115,32,110,111,116,32,102,114,101,101,33,32,112,61,0};
+var Memory___str1[] = {32,112,91,48,93,61,0};
+var Memory___str2[] = {85,110,101,115,112,101,99,101,100,32,112,48,32,112,61,0};
+var Memory___str3[] = {83,105,122,101,32,116,111,111,32,115,109,97,108,108,32,105,110,32,97,108,108,111,99,33,0};
+var Memory___str4[] = {69,114,114,111,114,32,105,110,32,97,108,108,111,99,33,0};
+var Memory___str5[] = {32,112,61,0};
+var Memory___str6[] = {32,97,114,101,110,97,61,0};
+var Memory___str7[] = {32,101,110,100,61,0};
+var Memory___str8[] = {32,112,91,48,93,61,0};
+var Memory___str9[] = {69,114,114,111,114,32,105,110,32,97,108,108,111,99,33,0};
+var Memory___str10[] = {32,112,91,48,93,61,0};
+var Memory___str11[] = {32,97,114,101,110,97,61,0};
+var Memory___str12[] = {32,97,115,105,122,101,61,0};
+var Memory___str13[] = {100,101,65,108,108,111,99,32,101,114,114,111,114,58,32,97,114,101,110,97,61,0};
+var Memory___str14[] = {32,112,61,0};
+var Memory___str15[] = {69,114,114,111,114,32,105,110,32,100,101,65,108,108,111,99,33,0};
+var Memory___str16[] = {32,97,115,105,122,101,61,0};
+var Memory__arena;
+var Memory__asize;
+var Memory__freep;
+var Memory__mem;
+var Memory__init() {
+	var i;
+	Memory__mem = 0;
+ #ifndef JACK_HACK
+ 	return 0;
+ #endif
+	i = 0;
+	while (-1==(((i<24576)?-1:0))) {
+		Memory__poke(i, 0);
+		i = i+1;
+	}
+	Memory__arena = Math__abs(__peek(Memory__mem+0));
+	Memory__arena = 0;
+	Memory__asize = 16384;
+	__poke(Memory__arena+0, Memory__asize);
+	Memory__freep = Memory__arena;
+	return 0;
+}
+var Memory__deInit() {
+	return 0;
+}
+var Memory__peek(var addr) {
+ 	//return ((var*)((addr)*sizeof(var)))[0];
+	if (0!=(((addr<0)?-1:0))) {
+		Sys__error(27);
+	}
+
+	if (0!=(((addr>24576)?-1:0))) {
+		Sys__error(28);
+	}
+
+	if (0!=(((addr==24576)?-1:0))) {
+		addr = addr;
+	}
+
+ 	if (addr == 24576) {
+ 		Screen__processEvents();
+	}
+ 	return Memory__memory[addr];
+	return __peek(Memory__mem+addr);
+}
+var Memory__poke(var addr, var value) {
+ 	//((var*)((addr)*sizeof(var)))[0] = value;
+   	//return 0;
+	if (0!=(((addr<0)?-1:0))) {
+		Sys__error(29);
+	}
+
+	if (0!=(((addr>24576)?-1:0))) {
+		Sys__error(30);
+	}
+
+	if (0!=((((addr>16383)?-1:0))&(((addr<24576)?-1:0)))) {
+		Screen__refresh();
+	}
+
+ 	//printf("poke %d, %d\n", (int)addr, (int)value);
+ 	return Memory__memory[addr] = value;
+	__poke(Memory__mem+addr, value);
+	return 0;
+}
+var Memory__defrag() {
+	var p;
+	var q;
+	var end;
+	end = Memory__arena+Memory__asize;
+	p = Memory__arena;
+	while (-1==(((p<end)?-1:0))) {
+		if (0!=(((__peek(p+0)>0)?-1:0))) {
+			q = p+__peek(p+0);
+			while (-1==((((q<end)?-1:0))&(((__peek(q+0)>0)?-1:0)))) {
+				__poke(p+0, q-p);
+				q = q+__peek(q+0);
+			}
+		} else {
+			if (0!=(((__peek(p+0)==0)?-1:0))) {
+				return 0;
+			}
+
+		}
+		p = p+Math__abs(__peek(p+0));
+	}
+	return 0;
+}
+var Memory__checkEmpty() {
+	var ok;
+	var p;
+	var end;
+ 	return -1;
+	end = Memory__arena+Memory__asize;
+	p = Memory__arena;
+	ok = -1;
+	while (-1==(((p<end)?-1:0))) {
+		if (0!=(((__peek(p+0)<0)?-1:0))) {
+			Output__printString(Memory__getString(Memory___str0));
+			Output__printInt(p);
+			Output__printString(Memory__getString(Memory___str1));
+			Output__printInt(__peek(p+0));
+			Output__println();
+			ok = 0;
+		} else {
+			if (0!=(((__peek(p+0)==0)?-1:0))) {
+				Output__printString(Memory__getString(Memory___str2));
+				Output__printInt(p);
+				Output__println();
+				return 0;
+			}
+
+		}
+		p = p+Math__abs(__peek(p+0));
+	}
+	return ok;
+}
+var Memory__alloc(var size) {
+	var p;
+	var end;
+	var k;
+	var tries;
+	var i;
+	var j;
+	var doit;
+ #ifndef JACK_HACK
+ 	p = (var) malloc(sizeof(var)* (size+1));
+ 	((var*)p)[0] = -(size+1);
+ //	return ((var)(((var*)p+1))) / 1;
+ 	return ((var)(((var*)p+1))) / sizeof(var);
+ #endif
+	tries = 0;
+	i = 0;
+	j = 0;
+	if (0!=(((size<1)?-1:0))) {
+		Output__printString(Memory__getString(Memory___str3));
+		Output__printInt(size);
+		Output__println();
+		Sys__error(24);
+		return 0;
+	}
+
+	while (-1==(((tries<3)?-1:0))) {
+		end = Memory__arena+Memory__asize;
+		p = Memory__freep;
+		doit = -1;
+		while (-1==(doit|((((((p==Memory__freep)?-1:0))==0)?-1:0)))) {
+			doit = 0;
+			if (0!=(((__peek(p+0)>size)?-1:0))) {
+				if (0!=((((size+1)==__peek(p+0))?-1:0))) {
+					__poke(p+0, -__peek(p+0));
+				} else {
+					k = __peek(p+0);
+					__poke(p+0, -(size+1));
+					__poke(p+size+1, (k-size)-1);
+				}
+				Memory__freep = p;
+ 	//printf("alloc [%d] %d\n", (int)p, (int) size);
+				return p+1;
+			}
+
+			p = p+Math__abs(__peek(p+0));
+			if (0!=(((p==end)?-1:0))) {
+				p = Memory__arena;
+			}
+
+			if (0!=((((p<Memory__arena)?-1:0))|(((p>(end-1))?-1:0))|(((__peek(p+0)==0)?-1:0)))) {
+				Output__printString(Memory__getString(Memory___str4));
+				Output__printString(Memory__getString(Memory___str5));
+				Output__printInt(p);
+				Output__printString(Memory__getString(Memory___str6));
+				Output__printInt(Memory__arena);
+				Output__printString(Memory__getString(Memory___str7));
+				Output__printInt(end);
+				Output__printString(Memory__getString(Memory___str8));
+				Output__printInt(__peek(p+0));
+				Output__println();
+				Sys__error(23);
+			}
+
+		}
+		if (0!=(((tries==0)?-1:0))) {
+			Memory__defrag();
+		} else {
+			k = Memory__asize;
+			Memory__asize = Memory__asize+(size*8)+64;
+			i = 0;
+			j = Memory__arena+k;
+			while (-1==(((i<j)?-1:0))) {
+				i = i+1;
+			}
+			__poke(end+0, Memory__asize-k);
+			__poke(Memory__arena+Memory__asize-1, 0);
+		}
+		tries = tries+1;
+	}
+	Output__printString(Memory__getString(Memory___str9));
+	Output__println();
+	Sys__error(26);
+	return 0;
+}
+var Memory__log(var msg, var p, var q) {
+	return 0;
+	Output__printString(msg);
+	Output__printInt(p);
+	Output__printString(Memory__getString(Memory___str10));
+	Output__printInt(q);
+	Output__printString(Memory__getString(Memory___str11));
+	Output__printInt(Memory__arena);
+	Output__printString(Memory__getString(Memory___str12));
+	Output__printInt(Memory__asize);
+}
+var Memory__deAlloc(var p) {
+	var pi;
+ #ifndef JACK_HACK
+ 	//free((void*)(((var)(((var*)p)-1)) * 1));
+ 	free(((var*)(p* sizeof(var)))-1);
+ 	return 0;
+ #endif
+	if (0!=(((p<Memory__arena)?-1:0))) {
+		Output__printString(Memory__getString(Memory___str13));
+		Output__printInt(Memory__arena);
+		Output__printString(Memory__getString(Memory___str14));
+		Output__printInt(p);
+		Output__println();
+		Sys__error(25);
+		return 0;
+	}
+
+	pi = p;
+	if (0!=((((pi<Memory__arena)?-1:0))|((((Memory__arena+Memory__asize)<pi)?-1:0))|(((__peek(Memory__mem+pi-1)>(-1))?-1:0)))) {
+		Output__println();
+		Output__printInt(Memory__arena);
+		Output__printString(Memory__getString(Memory___str15));
+		Output__printInt(pi);
+		Output__printString(Memory__getString(Memory___str16));
+		Output__printInt(Memory__asize);
+		Output__println();
+		return 0;
+	}
+
+	pi = pi-1;
+	Memory__poke(pi, -Memory__peek(pi));
+	return 0;
+}
+#endif
+
+#ifdef JACK_IMPLEMENTATION
 var Keyboard___str0[] = {75,69,89,32,0};
 var Keyboard__exit() {
  #ifndef _WIN32
@@ -10938,1012 +12014,6 @@ var Keyboard__F11() {
 }
 var Keyboard__F12() {
 	return 152;
-}
-#endif
-
-#ifdef JACK_IMPLEMENTATION
-var Math__init() {
-	return 0;
-}
-var Math__deInit() {
-	return 0;
-}
-var Math__abs(var a) {
-	if (0!=(((a<0)?-1:0))) {
-		return -a;
-	}
-
-	return a;
-}
-var Math__multiply(var x, var y) {
-	var sum;
-	var j;
-	var b;
-	var shiftedX;
-	sum = 0;
-	shiftedX = x;
-	if (0!=((((x<1)?-1:0))|(((y<1)?-1:0)))) {
-		return 0;
-	}
-
-	j = 0;
-	b = 1;
-	while (-1==(((j<16)?-1:0))) {
-		if (0!=(x&b)) {
-			sum = sum+shiftedX;
-		}
-
-		b = b+b;
-		shiftedX = shiftedX+shiftedX;
-		j = j+1;
-	}
-	return sum;
-}
-var Math__divide(var x, var y) {
-	var q;
-	if (0!=((((x<0)?-1:0))|(((y<1)?-1:0)))) {
-		return 0;
-	}
-
-	if (0!=(((y>x)?-1:0))) {
-		return 0;
-	}
-
-	q = Math__divide(x, y+y);
-	if (0!=((((x-((q+q)*y))<y)?-1:0))) {
-		return q+q;
-	}
-
-	return (q+q)+1;
-}
-var Math__min(var x, var y) {
-	if (0!=(((x<y)?-1:0))) {
-		return x;
-	}
-
-	return y;
-}
-var Math__max(var x, var y) {
-	if (0!=(((x>y)?-1:0))) {
-		return x;
-	}
-
-	return y;
-}
-var Math__sqrt(var x) {
-	var y;
-	var j;
-	var j2;
-	if (0!=(((x<1)?-1:0))) {
-		return 0;
-	}
-
-	y = 0;
-	j2 = 16384;
-	j = (15/2)-1;
-	while (-1==(((j>-1)?-1:0))) {
-		if (0!=(((x>(y+j2))?-1:0))) {
-			y = y+j2;
-		}
-
-		j2 = j2/2;
-		j = j-1;
-	}
-	return y;
-}
-var Math__shiftLeft(var value, var shift) {
-	while (-1==(((shift>0)?-1:0))) {
-		value = value*2;
-		shift = shift-1;
-	}
-	return value;
-}
-var Math__shiftRight(var value, var shift) {
-	while (-1==(((shift>0)?-1:0))) {
-		value = value/2;
-		shift = shift-1;
-	}
-	return value;
-}
-var Math__rem(var a, var b) {
-	var c;
-	if (0!=(((b==0)?-1:0))) {
-		return 0;
-	}
-
-	c = a/b;
-	c = c*b;
-	return a-c;
-}
-var Math__xor(var a, var b) {
-	var c;
-	c = a|b;
-	c = c&(~((a)&(b)));
-	return c;
-}
-var Math__log2(var n) {
-	var r;
-	r = 0;
-	if (0!=(((n==0)?-1:0))) {
-		return -1;
-	}
-
-	while (-1==(((n>1)?-1:0))) {
-		n = Math__shiftRight(n, 1);
-		r = r+1;
-	}
-	return r;
-}
-var Math__sizeOfInt() {
-	var s;
- 	s = sizeof(var);
-	return s;
-}
-var Math__isBigEndian() {
-	var s;
- 	int x = 1;
- 	char *y = (char*)&x;
- 	s = 0;
- 	if (!y[0]) { s = -1;}
-	return s;
-}
-var Math__isWindows() {
-	var s;
-	s = 0;
- #ifdef _WIN32
- 	s = -1;
- #endif
-	return s;
-}
-#endif
-
-#ifdef JACK_IMPLEMENTATION
-var Memory___str0[] = {65,108,108,111,99,32,97,114,101,110,97,32,105,115,32,110,111,116,32,102,114,101,101,33,32,112,61,0};
-var Memory___str1[] = {32,112,91,48,93,61,0};
-var Memory___str2[] = {85,110,101,115,112,101,99,101,100,32,112,48,32,112,61,0};
-var Memory___str3[] = {83,105,122,101,32,116,111,111,32,115,109,97,108,108,32,105,110,32,97,108,108,111,99,33,0};
-var Memory___str4[] = {69,114,114,111,114,32,105,110,32,97,108,108,111,99,33,0};
-var Memory___str5[] = {32,112,61,0};
-var Memory___str6[] = {32,97,114,101,110,97,61,0};
-var Memory___str7[] = {32,101,110,100,61,0};
-var Memory___str8[] = {32,112,91,48,93,61,0};
-var Memory___str9[] = {69,114,114,111,114,32,105,110,32,97,108,108,111,99,33,0};
-var Memory___str10[] = {32,112,91,48,93,61,0};
-var Memory___str11[] = {32,97,114,101,110,97,61,0};
-var Memory___str12[] = {32,97,115,105,122,101,61,0};
-var Memory___str13[] = {100,101,65,108,108,111,99,32,101,114,114,111,114,58,32,97,114,101,110,97,61,0};
-var Memory___str14[] = {32,112,61,0};
-var Memory___str15[] = {69,114,114,111,114,32,105,110,32,100,101,65,108,108,111,99,33,0};
-var Memory___str16[] = {32,97,115,105,122,101,61,0};
-var Memory__arena;
-var Memory__asize;
-var Memory__freep;
-var Memory__mem;
-var Memory__init() {
-	var i;
-	Memory__mem = 0;
- #ifndef JACK_HACK
- 	return 0;
- #endif
-	i = 0;
-	while (-1==(((i<24576)?-1:0))) {
-		Memory__poke(i, 0);
-		i = i+1;
-	}
-	Memory__arena = Math__abs(__peek(Memory__mem+0));
-	Memory__arena = 0;
-	Memory__asize = 16384;
-	__poke(Memory__arena+0, Memory__asize);
-	Memory__freep = Memory__arena;
-	return 0;
-}
-var Memory__deInit() {
-	return 0;
-}
-var Memory__peek(var addr) {
- 	//return ((var*)((addr)*sizeof(var)))[0];
-	if (0!=(((addr<0)?-1:0))) {
-		Sys__error(27);
-	}
-
-	if (0!=(((addr>24576)?-1:0))) {
-		Sys__error(28);
-	}
-
-	if (0!=(((addr==24576)?-1:0))) {
-		addr = addr;
-	}
-
- 	if (addr == 24576) {
- 		Screen__processEvents();
-	}
- 	return Memory__memory[addr];
-	return __peek(Memory__mem+addr);
-}
-var Memory__poke(var addr, var value) {
- 	//((var*)((addr)*sizeof(var)))[0] = value;
-   	//return 0;
-	if (0!=(((addr<0)?-1:0))) {
-		Sys__error(29);
-	}
-
-	if (0!=(((addr>24576)?-1:0))) {
-		Sys__error(30);
-	}
-
-	if (0!=((((addr>16383)?-1:0))&(((addr<24576)?-1:0)))) {
-		Screen__refresh();
-	}
-
- 	//printf("poke %d, %d\n", (int)addr, (int)value);
- 	return Memory__memory[addr] = value;
-	__poke(Memory__mem+addr, value);
-	return 0;
-}
-var Memory__defrag() {
-	var p;
-	var q;
-	var end;
-	end = Memory__arena+Memory__asize;
-	p = Memory__arena;
-	while (-1==(((p<end)?-1:0))) {
-		if (0!=(((__peek(p+0)>0)?-1:0))) {
-			q = p+__peek(p+0);
-			while (-1==((((q<end)?-1:0))&(((__peek(q+0)>0)?-1:0)))) {
-				__poke(p+0, q-p);
-				q = q+__peek(q+0);
-			}
-		} else {
-			if (0!=(((__peek(p+0)==0)?-1:0))) {
-				return 0;
-			}
-
-		}
-		p = p+Math__abs(__peek(p+0));
-	}
-	return 0;
-}
-var Memory__checkEmpty() {
-	var ok;
-	var p;
-	var end;
- 	return -1;
-	end = Memory__arena+Memory__asize;
-	p = Memory__arena;
-	ok = -1;
-	while (-1==(((p<end)?-1:0))) {
-		if (0!=(((__peek(p+0)<0)?-1:0))) {
-			Output__printString(Memory__getString(Memory___str0));
-			Output__printInt(p);
-			Output__printString(Memory__getString(Memory___str1));
-			Output__printInt(__peek(p+0));
-			Output__println();
-			ok = 0;
-		} else {
-			if (0!=(((__peek(p+0)==0)?-1:0))) {
-				Output__printString(Memory__getString(Memory___str2));
-				Output__printInt(p);
-				Output__println();
-				return 0;
-			}
-
-		}
-		p = p+Math__abs(__peek(p+0));
-	}
-	return ok;
-}
-var Memory__alloc(var size) {
-	var p;
-	var end;
-	var k;
-	var tries;
-	var i;
-	var j;
-	var doit;
- #ifndef JACK_HACK
- 	p = (var) malloc(sizeof(var)* (size+1));
- 	((var*)p)[0] = -(size+1);
- //	return ((var)(((var*)p+1))) / 1;
- 	return ((var)(((var*)p+1))) / sizeof(var);
- #endif
-	tries = 0;
-	i = 0;
-	j = 0;
-	if (0!=(((size<1)?-1:0))) {
-		Output__printString(Memory__getString(Memory___str3));
-		Output__printInt(size);
-		Output__println();
-		Sys__error(24);
-		return 0;
-	}
-
-	while (-1==(((tries<3)?-1:0))) {
-		end = Memory__arena+Memory__asize;
-		p = Memory__freep;
-		doit = -1;
-		while (-1==(doit|((((((p==Memory__freep)?-1:0))==0)?-1:0)))) {
-			doit = 0;
-			if (0!=(((__peek(p+0)>size)?-1:0))) {
-				if (0!=((((size+1)==__peek(p+0))?-1:0))) {
-					__poke(p+0, -__peek(p+0));
-				} else {
-					k = __peek(p+0);
-					__poke(p+0, -(size+1));
-					__poke(p+size+1, (k-size)-1);
-				}
-				Memory__freep = p;
- 	//printf("alloc [%d] %d\n", (int)p, (int) size);
-				return p+1;
-			}
-
-			p = p+Math__abs(__peek(p+0));
-			if (0!=(((p==end)?-1:0))) {
-				p = Memory__arena;
-			}
-
-			if (0!=((((p<Memory__arena)?-1:0))|(((p>(end-1))?-1:0))|(((__peek(p+0)==0)?-1:0)))) {
-				Output__printString(Memory__getString(Memory___str4));
-				Output__printString(Memory__getString(Memory___str5));
-				Output__printInt(p);
-				Output__printString(Memory__getString(Memory___str6));
-				Output__printInt(Memory__arena);
-				Output__printString(Memory__getString(Memory___str7));
-				Output__printInt(end);
-				Output__printString(Memory__getString(Memory___str8));
-				Output__printInt(__peek(p+0));
-				Output__println();
-				Sys__error(23);
-			}
-
-		}
-		if (0!=(((tries==0)?-1:0))) {
-			Memory__defrag();
-		} else {
-			k = Memory__asize;
-			Memory__asize = Memory__asize+(size*8)+64;
-			i = 0;
-			j = Memory__arena+k;
-			while (-1==(((i<j)?-1:0))) {
-				i = i+1;
-			}
-			__poke(end+0, Memory__asize-k);
-			__poke(Memory__arena+Memory__asize-1, 0);
-		}
-		tries = tries+1;
-	}
-	Output__printString(Memory__getString(Memory___str9));
-	Output__println();
-	Sys__error(26);
-	return 0;
-}
-var Memory__log(var msg, var p, var q) {
-	return 0;
-	Output__printString(msg);
-	Output__printInt(p);
-	Output__printString(Memory__getString(Memory___str10));
-	Output__printInt(q);
-	Output__printString(Memory__getString(Memory___str11));
-	Output__printInt(Memory__arena);
-	Output__printString(Memory__getString(Memory___str12));
-	Output__printInt(Memory__asize);
-}
-var Memory__deAlloc(var p) {
-	var pi;
- #ifndef JACK_HACK
- 	//free((void*)(((var)(((var*)p)-1)) * 1));
- 	free(((var*)(p* sizeof(var)))-1);
- 	return 0;
- #endif
-	if (0!=(((p<Memory__arena)?-1:0))) {
-		Output__printString(Memory__getString(Memory___str13));
-		Output__printInt(Memory__arena);
-		Output__printString(Memory__getString(Memory___str14));
-		Output__printInt(p);
-		Output__println();
-		Sys__error(25);
-		return 0;
-	}
-
-	pi = p;
-	if (0!=((((pi<Memory__arena)?-1:0))|((((Memory__arena+Memory__asize)<pi)?-1:0))|(((__peek(Memory__mem+pi-1)>(-1))?-1:0)))) {
-		Output__println();
-		Output__printInt(Memory__arena);
-		Output__printString(Memory__getString(Memory___str15));
-		Output__printInt(pi);
-		Output__printString(Memory__getString(Memory___str16));
-		Output__printInt(Memory__asize);
-		Output__println();
-		return 0;
-	}
-
-	pi = pi-1;
-	Memory__poke(pi, -Memory__peek(pi));
-	return 0;
-}
-#endif
-
-#ifdef JACK_IMPLEMENTATION
-var Output__x;
-var Output__y;
-var Output__f;
-var Output__init() {
-	Output__x = 0;
-	Output__y = 0;
-	Output__f = Font__new();
-	return 0;
-}
-var Output__deInit() {
-	return 0;
-}
-var Output__moveCursor(var row, var col) {
-	var xx;
-	var yy;
-	Output__x = col;
-	Output__y = row;
-	if (0!=(((Output__x<0)?-1:0))) {
-		Output__x = 0;
-	}
-
-	if (0!=(((Output__x>63)?-1:0))) {
-		Output__x = 63;
-	}
-
-	if (0!=(((Output__y<0)?-1:0))) {
-		Output__y = 0;
-	}
-
-	if (0!=(((Output__y>22)?-1:0))) {
-		Output__y = 22;
-	}
-
-	xx = Output__x;
-	yy = Output__y;
-	Output__printChar(32);
-	Output__x = xx;
-	Output__y = yy;
- 	printf("\033[%ld;%ldf ", (long)yy + 1, (long)xx + 1);
- 	fflush(stdout);
-	return 0;
-}
-var Output__printString(var s) {
-	var i;
-	var l;
-	var c;
-	i = 0;
-	l = String__length(s);
-	while (-1==(((i<l)?-1:0))) {
-		c = String__charAt(s, i);
- 	//printf(" '%c' ",c);
-		Output__printChar(c);
-		i = i+1;
-	}
-	return 0;
-}
-var Output__println() {
-	Output__y = Output__y+1;
-	if (0!=(((Output__y>22)?-1:0))) {
-		Output__y = 22;
-	}
-
-	Output__x = 0;
- 	putc('\n', stdout);
-	return 0;
-}
-var Output__printChar(var c) {
-	var xx;
-	var yy;
-	var i;
-	var j;
-	var l;
-	var p;
-	var chr;
-	var a;
-	var m;
-	if (0!=((((c>1114111)?-1:0))|(((c<0)?-1:0)))) {
-		return 0;
-	}
-
-	if (0!=((((c<32)?-1:0))|(((c>126)?-1:0)))) {
- 	//printf("(%d)", c);
-		c = 32;
-	}
-
-	xx = Output__x;
-	yy = Output__y;
-	chr = Font__get(Output__f, c);
-	if (0!=(xx&1)) {
-		m = 255;
-	} else {
-		m = 255*256;
-	}
-	i = 0;
-	j = 0;
-	while (-1==(((i<11)?-1:0))) {
-		l = ((yy*11)+i)*32;
-		l = l+(xx/2);
-		l = l+16384;
-		p = Memory__peek(l);
-		if (0!=((xx&1))) {
-			p = (p&m)|(__peek(chr+j)*256);
-		} else {
-			p = (p&m)|(__peek(chr+j)&255);
-		}
-		Memory__poke(l, p);
-		l = l+32;
-		if (0!=(((i<10)?-1:0))) {
-			p = Memory__peek(l);
-			if (0!=(xx&1)) {
-				p = (p&m)|(__peek(chr+j)&~m);
-			} else {
-				p = (p&m)|((__peek(chr+j)/256)&255);
-			}
-			Memory__poke(l, p);
-		}
-
-		i = i+2;
-		j = j+1;
-	}
- 	printf("%c", (char)c);
- 	fflush(stdout);
-	Output__x = Output__x+1;
-	if (0!=(((Output__x>63)?-1:0))) {
-		Output__x = 0;
-		Output__y = Output__y+1;
-		if (0!=(((Output__y>22)?-1:0))) {
-			Output__y = 22;
-		}
-
-	}
-
-	return 0;
-}
-var Output__printInt(var c) {
-	var s;
-	s = String__new(8);
-	s = String__setInt(s, c);
-	Output__printString(s);
-	String__dispose(s);
-	return 0;
-}
-var Output__backSpace() {
-	var xx;
-	var yy;
-	Output__x = Output__x-1;
-	if (0!=(((Output__x<0)?-1:0))) {
-		Output__x = 0;
-	}
-
-	xx = Output__x;
-	yy = Output__y;
-	Output__printChar(8);
-	Output__x = xx;
-	Output__y = yy;
-	return 0;
-}
-#endif
-
-#ifdef JACK_IMPLEMENTATION
-var Screen__color;
-var Screen__init() {
-	return 0;
-}
-var Screen__deInit() {
-	return 0;
-}
-var Screen__clearScreen() {
-	var i;
-	i = 16384;
-	while (-1==(((i<24576)?-1:0))) {
-		Memory__poke(i, 0);
-		i = i+1;
-	}
- 	puts("\033[2J");
-	return 0;
-}
-var Screen__setColor(var b) {
-	Screen__color = b;
-	return 0;
-}
-var Screen__drawPixel(var x, var y) {
-	var b;
-	var i;
-	var r;
-	var p;
-	i = (x/16)+(y*(512/16))+16384;
-	b = Memory__peek(i);
-	r = x-((x/16)*16);
-	p = 1;
-	while (-1==(((r>0)?-1:0))) {
-		p = p*2;
-		r = r-1;
-	}
-	if (0!=(Screen__color)) {
-		b = b|p;
-	} else {
-		b = b&p;
-	}
-	Memory__poke(i, b);
-	return 0;
-}
-var Screen__drawLine(var x, var y, var x2, var y2) {
-	var a;
-	var b;
-	var dx;
-	var dy;
-	var adyMinusbdx;
-	dx = x2-x;
-	dy = y2-y;
-	if (0!=((((dx<1)?-1:0)))) {
-		if (0!=((((dy<1)?-1:0)))) {
-			return 0;
-		}
-
-		b = y;
-		while (-1==(((b<y2)?-1:0))) {
-			Screen__drawPixel(x, b);
-			b = b+1;
-		}
-		return 0;
-	}
-
-	if (0!=((((dy<1)?-1:0)))) {
-		a = x;
-		while (-1==(((a<x2)?-1:0))) {
-			Screen__drawPixel(a, y);
-			a = a+1;
-		}
-		return 0;
-	}
-
-	a = 0;
-	b = 0;
-	adyMinusbdx = 0;
-	while (-1==((((dx>a)?-1:0))&(((dy>b)?-1:0)))) {
-		Screen__drawPixel(x+a, y+b);
-		if (0!=(adyMinusbdx)) {
-			a = a+1;
-			adyMinusbdx = adyMinusbdx+dy;
-		} else {
-			b = b+1;
-			adyMinusbdx = adyMinusbdx-dx;
-		}
-	}
-	return 0;
-}
-var Screen__drawRectangle(var x, var y, var x2, var y2) {
-	var i;
-	i = y;
-	while (-1==(((i<y2)?-1:0))) {
-		Screen__drawLine(x, i, x2, i);
-		i = i+1;
-	}
-	return 0;
-}
-var Screen__drawCircle(var x, var y, var r) {
-	var dy;
-	var s;
-	dy = -r;
-	if (0!=(((x>512)?-1:0))) {
-		return 0;
-	}
-
-	if (0!=(((y>256)?-1:0))) {
-		return 0;
-	}
-
-	while (-1==(((r>dy)?-1:0))) {
-		s = Math__sqrt((r*r)-(dy*dy));
-		Screen__drawLine(x-s, y+dy, x+s, y+dy);
-		dy = dy+1;
-	}
-	return 0;
-}
-#endif
-
-#ifdef JACK_IMPLEMENTATION
-var String___str0[] = {45,0};
-#define str__ (__this+0)
-#define size__ (__this+1)
-var String__new(var maxLength) {
-	var __this;
-	__this = Memory__alloc(2);
-	__poke(str__, Array__new(maxLength+1));
-	__poke(__peek(str__)+0, 0);
-	__poke(size__, maxLength);
-	return __this;
-}
-var String__dispose(var __this) {
-	Array__dispose(__peek(str__));
-	Memory__deAlloc(__this);
-	return 0;
-}
-var String__length(var __this) {
-	var s;
-	var l;
-	l = 0;
-	s = __peek(str__);
-	if (0!=(((s==0)?-1:0))) {
-		return 0;
-	}
-
-	while (-1==(((0==(((__peek(s+l)==0)?-1:0)))?-1:0))) {
-		l = l+1;
-	}
-	return l;
-}
-var String__charAt(var __this, var a) {
-	var s;
-	var ret;
-	s = __peek(str__);
-	ret = __peek(__peek(str__)+a);
-	return ret;
-}
-var String__setCharAt(var __this, var j, var c) {
-	var s;
-	s = __peek(str__);
-	__poke(s+j, c);
-	return 0;
-}
-var String__getArray(var __this) {
-	return __peek(str__);
-}
-var String__appendChar(var __this, var c) {
-	var l;
-	var i;
-	var nl;
-	var max;
-	var b;
-	var d;
-	d = __peek(str__);
-	if (0!=(((__peek(size__)<1)?-1:0))) {
-		Sys__error(12);
-	}
-
-	max = __peek(size__);
-	l = String__length(__this);
-	if (0!=(((l<(max-1))?-1:0))) {
-		__poke(__peek(str__)+l, c);
-		__poke(__peek(str__)+l+1, 0);
- //printf("%d %ld OOKK %d %d<\n", c, __this, max, l);
-		return __this;
-	}
-
-	nl = (l*2)+4;
-	b = Array__new(nl+1);
-	i = 0;
-	while (-1==(((i<l)?-1:0))) {
-		__poke(b+i, __peek(d+i));
-		i = i+1;
-	}
-	__poke(b+l, c);
-	__poke(b+l+1, 0);
-	Array__dispose(__peek(str__));
-	__poke(size__, nl);
-	__poke(str__, b);
-	return __this;
-}
-var String__eraseLastChar(var __this) {
-	var l;
-	var s;
-	s = __peek(str__);
-	l = String__length(__this);
-	if (0!=(((l>0)?-1:0))) {
-		__poke(s+l-1, 0);
-	}
-
-	return 0;
-}
-var String__intValue(var __this) {
-	var v;
-	var s;
-	var d;
-	var i;
-	var o;
-	o = __peek(str__);
-	v = 0;
-	s = 1;
-	d = __peek(o+0);
-	i = 1;
-	if (0!=(((d==45)?-1:0))) {
-		s = -1;
-		d = __peek(o+i);
-		i = i+1;
-	}
-
-	while (-1==((((d>47)?-1:0))&(((d<58)?-1:0)))) {
-		v = v*10;
-		v = v+d-48;
-		d = __peek(o+i);
-		i = i+1;
-	}
-	return v*s;
-}
-var String__setInt(var __this, var j) {
-	var n;
-	var k;
-	var s;
-	var p;
-	p = 0;
-	s = __this;
-	String__setCharAt(s, 0, 0);
-	if (0!=(((j<0)?-1:0))) {
-		j = -j;
-		s = String__appendString(s, Memory__getString(String___str0));
-	}
-
-	n = 10000;
- 	if (sizeof(var) == 8) {
- 		n = n * n * n * n * 100;
- 	} else if (sizeof(var) == 4) {
- 		n = n * n * 10; 
- 	} 
-	while (-1==(((n>0)?-1:0))) {
-		k = j/n;
-		if (0!=(((k>0)?-1:0))) {
-			p = -1;
-		}
-
-		if (0!=(p)) {
-			s = String__appendChar(s, k+48);
-		}
-
-		j = Math__rem(j, n);
-		n = n/10;
-	}
-	if (0!=(((p==0)?-1:0))) {
-		s = String__appendChar(s, 48);
-	}
-
-	return __this;
-}
-var String__appendFromNative(var __this, var native) {
-	var l;
-	var i;
-	var c;
-	var n;
-	var s;
-	s = __this;
-	n = native;
-	i = 0;
- #ifdef JACK_HACK 
- 	n = 0;
- 	l = n;
- #else
- #ifdef _WIN32
- 	l = (var)wcslen((wchar_t*)n);
- #else
- 	l = strlen((char*)n);
- #endif 
- #endif 
-	while (-1==(((i<l)?-1:0))) {
- #ifdef JACK_HACK 
- 	c = 0;
- #else
- #ifdef _WIN32
- 		c = (var)((wchar_t*)n)[i];// FIXME UTF16
- #else
- 		c = (var)(((char*)n)[i]) & 255; // FIXME UTF8
- #endif 
- #endif 
-		s = String__appendChar(s, c);
-		i = i+1;
-	}
-	return __this;
-}
-var String__ord(var s) {
-	return __peek(s+0);
-}
-var String__backSpace() {
-	return 8;
-}
-var String__doubleQuote() {
-	return 34;
-}
-var String__newLine() {
-	return 10;
-}
-var String__copy(var __this) {
-	var s;
-	var j;
-	var l;
-	j = 0;
-	l = String__length(__this);
-	s = String__new(l+1);
-	while (-1==(((j<l)?-1:0))) {
-		s = String__appendChar(s, String__charAt(__this, j));
-		j = j+1;
-	}
-	return s;
-}
-var String__appendString(var __this, var p) {
-	var j;
-	var l;
-	var s;
-	s = __this;
-	j = 0;
-	l = String__length(p);
-	while (-1==(((j<l)?-1:0))) {
-		s = String__appendChar(s, String__charAt(p, j));
-		j = j+1;
-	}
-	return __this;
-}
-var String__compare(var __this, var s) {
-	var p;
-	var j;
-	var lp;
-	var ls;
-	var r;
-	p = __this;
-	lp = String__length(p);
-	ls = String__length(s);
-	j = 0;
-	while (-1==((((j<lp)?-1:0))&(((j<ls)?-1:0)))) {
-		r = String__charAt(p, j)-String__charAt(s, j);
-		if (0!=(r)) {
-			return r;
-		}
-
-		j = j+1;
-	}
-	return lp-ls;
-}
-#undef str__
-#undef size__
-#endif
-
-#ifdef JACK_IMPLEMENTATION
-var Sys___str0[] = {69,114,114,111,114,40,0};
-var Sys___str1[] = {41,0};
-var Sys__in_error;
-var Sys__init() {
-	Sys__in_error = 0;
-	Memory__init();
- #ifndef JACK_HACK
- 	Sys2__init();
- #endif
-	Math__init();
-	Output__init();
-	Screen__init();
-	Keyboard__init();
-	Main__main();
-	return 0;
-}
-var Sys__deInit() {
-	Math__deInit();
-	Output__deInit();
-	Screen__deInit();
-	Keyboard__deInit();
-	Memory__deInit();
-	return 0;
-}
-var Sys__halt() {
- 	exit(0);
-	return 0;
-}
-var Sys__error(var errorCode) {
-	if (0!=(Sys__in_error)) {
-		return 0;
-	}
-
-	Sys__in_error = -1;
-	Output__printString(Memory__getString(Sys___str0));
-	Output__printInt(errorCode);
-	Output__printString(Memory__getString(Sys___str1));
-	Output__println();
- 	errorCode = 1 / (errorCode - errorCode);
- 	exit(errorCode);
-	Sys__in_error = 0;
-	return 0;
-}
-var Sys__wait(var duration) {
-	Screen__processEvents();
- #ifdef _WIN32
- 	Sleep(duration);
- #else
- 	usleep(duration * 1000);
- #endif
-	return 0;
 }
 #endif
 
