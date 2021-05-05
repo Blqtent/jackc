@@ -23,7 +23,7 @@ jobs:
       - name: Build x86
         working-directory: ${{env.GITHUB_WORKSPACE}}
         run: msbuild /m /p:Configuration=Release /p:Platform=x86
-      - uses: jossef/action-latest-release@v1.1.0
+      - uses: jossef/action-latest-release-info@v1.1.0
         id: create_release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
