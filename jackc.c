@@ -2033,10 +2033,11 @@ extern id const NSDefaultRunLoopMode;
 #define objc_msgSend_stret objc_msgSend
 #define objc_msgSend_fpret objc_msgSend
 #endif
-#define objc_msgSend ((id)(*)(id,SEL,...))objc_msgSend
+#define objc_msgSend ((id(*)(id,SEL,...))objc_msgSend)
 
 #ifdef JACK_IMPLEMENTATION
 
+int windowCount = 0;
 int width = 512;
 int height = 256;
 var refresh_ = 0;
@@ -2393,6 +2394,8 @@ void init()
 	updateSel = sel_registerName("update");
 	makeCurrentContextSel = sel_registerName("makeCurrentContext");
 	flushBufferSel = sel_registerName("flushBuffer");
+	return;
+}
 
 void check_events()
 {
