@@ -53,6 +53,146 @@ SEL allocSel;
 SEL initSel;
 GLuint tex = 1;
 id pool;
+Class NSAutoreleasePoolClass;
+id poolAlloc;
+Class NSApplicationClass;
+SEL sharedApplicationSel;
+SEL setActivationPolicySel;
+Class NSObjectClass;
+Class AppDelegateClass;
+Protocol* NSApplicationDelegateProtocol;
+bool resultAddProtoc;
+SEL applicationShouldTerminateSel;
+bool resultAddMethod;
+id dgAlloc;
+id dg;
+SEL autoreleaseSel;
+SEL setDelegateSel;
+SEL finishLaunchingSel;
+Class NSMenuClass;
+id menubarAlloc;
+id menubar;
+Class NSMenuItemClass;
+id appMenuItemAlloc;
+id appMenuItem;
+SEL addItemSel;
+SEL setMainMenuSel;
+id appMenuAlloc;
+id appMenu;
+Class NSProcessInfoClass;
+SEL processInfoSel;
+id processInfo;
+SEL processNameSel;
+id appName;
+Class NSStringClass;
+SEL stringWithUTF8StringSel;
+id quitTitlePrefixString;
+SEL stringByAppendingStringSel;
+id quitTitle;
+id quitMenuItemKey;
+id quitMenuItemAlloc;
+SEL initWithTitleSel;
+SEL terminateSel;
+id quitMenuItem;
+SEL setSubmenuSel;
+NSRect rect = {{0, 0}, {512, 256}};
+Class NSWindowClass;
+id windowAlloc;
+SEL initWithContentRectSel;
+id window;
+SEL setReleasedWhenClosedSel;
+Class WindowDelegateClass;
+Protocol* NSWindowDelegateProtocol;
+SEL windowWillCloseSel;
+id wdgAlloc;
+id wdg;
+SEL contentViewSel;
+id contentView;
+SEL setWantsBestResolutionOpenGLSurfaceSel;
+NSPoint point = {20, 20};
+SEL cascadeTopLeftFromPointSel;
+id titleString;
+SEL setTitleSel;
+uint32_t glAttributes[] =
+{
+	8, 24,
+	11, 8,
+	5,
+	73,
+	72,
+	55, 1,
+	56, 4,
+	99, 0x1000, // or 0x3200
+	0
+};
+
+Class NSOpenGLPixelFormatClass;
+id pixelFormatAlloc;
+SEL initWithAttributesSel;
+id pixelFormat;
+Class NSOpenGLContextClass;
+id openGLContextAlloc;
+SEL initWithFormatSel;
+id openGLContext;
+SEL setViewSel;
+SEL makeKeyAndOrderFrontSel;
+SEL setAcceptsMouseMovedEventsSel;
+Class NSColorClass;
+id blackColor;
+SEL setBackgroundColorSel;
+SEL activateIgnoringOtherAppsSel;
+Class NSDateClass;
+SEL distantPastSel;
+SEL nextEventMatchingMaskSel;
+SEL frameSel;
+SEL typeSel;
+SEL buttonNumberSel;
+SEL keyCodeSel;
+SEL keyWindowSel;
+SEL mouseLocationOutsideOfEventStreamSel;
+SEL convertRectToBackingSel;
+SEL scrollingDeltaXSel;
+SEL scrollingDeltaYSel;
+SEL hasPreciseScrollingDeltasSel;
+SEL modifierFlagsSel;
+SEL charactersSel;
+SEL UTF8StringSel;
+SEL sendEventSel;
+SEL updateWindowsSel;
+SEL updateSel;
+SEL makeCurrentContextSel;
+SEL flushBufferSel;
+id distantPast;
+id event;
+NSUInteger eventType;
+id currentWindow;
+id currentWindowContentView;
+NSRect adjustFrame;
+NSPoint p;
+NSRect r = {0, 0, 0, 0};
+NSInteger number;
+CGFloat deltaX;
+CGFloat deltaY;
+BOOL precisionScrolling;
+NSUInteger modifiers;
+struct {
+	union {
+		struct {
+			uint8_t alpha_shift:1;
+			uint8_t shift:1;
+			uint8_t control:1;
+			uint8_t alternate:1;
+			uint8_t command:1;
+			uint8_t numeric_pad:1;
+			uint8_t help:1;
+			uint8_t function:1;
+		};
+		uint8_t mask;
+	};
+} keys;
+id inputText;
+const char * inputTextUTF8;
+uint16_t keyCode;
 
 void display()
 {
@@ -83,45 +223,7 @@ void display()
 
 void deInit()
 {
-	objc_msgSend(pool, s		id distantPast = objc_msgSend((id)NSDateClass, distantPastSel);
-		id event = objc_msgSend(NSApp, nextEventMatchingMaskSel, NSUIntegerMax, distantPast, NSDefaultRunLoopMode, YES);
-
-		if(event)
-		{
-			NSUInteger eventType = (NSUInteger)objc_msgSend(event, typeSel);
-
-			switch(eventType)
-			{
-				//case NSMouseMoved:
-				//case NSLeftMouseDragged:
-				//case NSRightMouseDragged:
-				//case NSOtherMouseDragged:
-				case 5:
-				case 6:
-				case 7:
-				case 27:
-				{
-					id currentWindow = objc_msgSend(NSApp, keyWindowSel);
-
-					id currentWindowContentView = objc_msgSend(currentWindow, contentViewSel);
-					NSRect adjustFrame = (NSRect)objc_msgSend_stret(currentWindowContentView, frameSel);
-
-					NSPoint p = (NSPoint)objc_msgSend(currentWindow, mouseLocationOutsideOfEventStreamSel);
-
-					if(p.x < 0) p.x = 0;
-					else if(p.x > adjustFrame.size.width) p.x = adjustFrame.size.width;
-					if(p.y < 0) p.y = 0;
-					else if(p.y > adjustFrame.size.height) p.y = adjustFrame.size.height;
-
-					NSRect r = {p.x, p.y, 0, 0};
-					r = (NSRect)objc_msgSend_stret(currentWindowContentView, convertRectToBackingSel, r);
-					p = r.origin;
-
-					break;
-				}
-				//case NSLeftMouseDown:
-				case 1:
-	el_registerName("drain"));
+	objc_msgSend(pool, sel_registerName("drain"));
 }
 
 NSUInteger applicationShouldTerminate(id self, SEL _sel, id sender)
@@ -138,192 +240,179 @@ void init()
 	allocSel = sel_registerName("alloc");
 	initSel = sel_registerName("init");
 
-	Class NSAutoreleasePoolClass = objc_getClass("NSAutoreleasePool");
-	id poolAlloc = objc_msgSend((id)NSAutoreleasePoolClass, allocSel);
+	NSAutoreleasePoolClass = objc_getClass("NSAutoreleasePool");
+	poolAlloc = objc_msgSend((id)NSAutoreleasePoolClass, allocSel);
 	pool = objc_msgSend(poolAlloc, initSel);
 
-	Class NSApplicationClass = objc_getClass("NSApplication");
-	SEL sharedApplicationSel = sel_registerName("sharedApplication");
+	NSApplicationClass = objc_getClass("NSApplication");
+	sharedApplicationSel = sel_registerName("sharedApplication");
 	objc_msgSend((id)NSApplicationClass, sharedApplicationSel);
 
-	SEL setActivationPolicySel = sel_registerName("setActivationPolicy:");
+	setActivationPolicySel = sel_registerName("setActivationPolicy:");
 	objc_msgSend(NSApp, setActivationPolicySel, 0);
 
-	Class NSObjectClass = objc_getClass("NSObject");
-	Class AppDelegateClass = objc_allocateClassPair(NSObjectClass, "AppDelegate", 0);
-	Protocol* NSApplicationDelegateProtocol = objc_getProtocol("NSApplicationDelegate");
-	bool resultAddProtoc = class_addProtocol(AppDelegateClass, NSApplicationDelegateProtocol);
-	SEL applicationShouldTerminateSel = sel_registerName("applicationShouldTerminate:");
-	bool resultAddMethod = class_addMethod(AppDelegateClass, applicationShouldTerminateSel, (IMP)applicationShouldTerminate, EncodeNSUInteger "@:@");
-	id dgAlloc = objc_msgSend((id)AppDelegateClass, allocSel);
-	id dg = objc_msgSend(dgAlloc, initSel);
+	NSObjectClass = objc_getClass("NSObject");
+	AppDelegateClass = objc_allocateClassPair(NSObjectClass, "AppDelegate", 0);
+	NSApplicationDelegateProtocol = objc_getProtocol("NSApplicationDelegate");
+	resultAddProtoc = class_addProtocol(AppDelegateClass, NSApplicationDelegateProtocol);
+	applicationShouldTerminateSel = sel_registerName("applicationShouldTerminate:");
+	resultAddMethod = class_addMethod(AppDelegateClass, applicationShouldTerminateSel, (IMP)applicationShouldTerminate, EncodeNSUInteger "@:@");
+	dgAlloc = objc_msgSend((id)AppDelegateClass, allocSel);
+	dg = objc_msgSend(dgAlloc, initSel);
 
-	SEL autoreleaseSel = sel_registerName("autorelease");
+	autoreleaseSel = sel_registerName("autorelease");
 	objc_msgSend(dg, autoreleaseSel);
 
-	SEL setDelegateSel = sel_registerName("setDelegate:");
+	setDelegateSel = sel_registerName("setDelegate:");
 	objc_msgSend(NSApp, setDelegateSel, dg);
 
-	SEL finishLaunchingSel = sel_registerName("finishLaunching");
+	finishLaunchingSel = sel_registerName("finishLaunching");
 	objc_msgSend(NSApp, finishLaunchingSel);
 
-	Class NSMenuClass = objc_getClass("NSMenu");
-	id menubarAlloc = objc_msgSend((id)NSMenuClass, allocSel);
-	id menubar = objc_msgSend(menubarAlloc, initSel);
+	NSMenuClass = objc_getClass("NSMenu");
+	menubarAlloc = objc_msgSend((id)NSMenuClass, allocSel);
+	menubar = objc_msgSend(menubarAlloc, initSel);
 	objc_msgSend(menubar, autoreleaseSel);
 
-	Class NSMenuItemClass = objc_getClass("NSMenuItem");
-	id appMenuItemAlloc = objc_msgSend((id)NSMenuItemClass, allocSel);
-	id appMenuItem = objc_msgSend(appMenuItemAlloc, initSel);
+	NSMenuItemClass = objc_getClass("NSMenuItem");
+	appMenuItemAlloc = objc_msgSend((id)NSMenuItemClass, allocSel);
+	appMenuItem = objc_msgSend(appMenuItemAlloc, initSel);
 	objc_msgSend(appMenuItem, autoreleaseSel);
 
-	SEL addItemSel = sel_registerName("addItem:");
+	addItemSel = sel_registerName("addItem:");
 	objc_msgSend(menubar, addItemSel, appMenuItem);
 
-	SEL setMainMenuSel = sel_registerName("setMainMenu:");
+	setMainMenuSel = sel_registerName("setMainMenu:");
 	objc_msgSend(NSApp, setMainMenuSel, menubar);
 
-	id appMenuAlloc = objc_msgSend((id)NSMenuClass, allocSel);
-	id appMenu = objc_msgSend(appMenuAlloc, initSel);
+	appMenuAlloc = objc_msgSend((id)NSMenuClass, allocSel);
+	appMenu = objc_msgSend(appMenuAlloc, initSel);
 	objc_msgSend(appMenu, autoreleaseSel);
 
-	Class NSProcessInfoClass = objc_getClass("NSProcessInfo");
-	SEL processInfoSel = sel_registerName("processInfo");
-	id processInfo = objc_msgSend((id)NSProcessInfoClass, processInfoSel);
-	SEL processNameSel = sel_registerName("processName");
-	id appName = objc_msgSend(processInfo, processNameSel);
+	NSProcessInfoClass = objc_getClass("NSProcessInfo");
+	processInfoSel = sel_registerName("processInfo");
+	processInfo = objc_msgSend((id)NSProcessInfoClass, processInfoSel);
+	processNameSel = sel_registerName("processName");
+	appName = objc_msgSend(processInfo, processNameSel);
 
-	Class NSStringClass = objc_getClass("NSString");
-	SEL stringWithUTF8StringSel = sel_registerName("stringWithUTF8String:");
-	id quitTitlePrefixString = objc_msgSend((id)NSStringClass, stringWithUTF8StringSel, "Quit ");
-	SEL stringByAppendingStringSel = sel_registerName("stringByAppendingString:");
-	id quitTitle = objc_msgSend(quitTitlePrefixString, stringByAppendingStringSel, appName);
+	NSStringClass = objc_getClass("NSString");
+	stringWithUTF8StringSel = sel_registerName("stringWithUTF8String:");
+	quitTitlePrefixString = objc_msgSend((id)NSStringClass, stringWithUTF8StringSel, "Quit ");
+	stringByAppendingStringSel = sel_registerName("stringByAppendingString:");
+	quitTitle = objc_msgSend(quitTitlePrefixString, stringByAppendingStringSel, appName);
 
-	id quitMenuItemKey = objc_msgSend((id)NSStringClass, stringWithUTF8StringSel, "q");
-	id quitMenuItemAlloc = objc_msgSend((id)NSMenuItemClass, allocSel);
-	SEL initWithTitleSel = sel_registerName("initWithTitle:action:keyEquivalent:");
-	SEL terminateSel = sel_registerName("terminate:");
-	id quitMenuItem = objc_msgSend(quitMenuItemAlloc, initWithTitleSel, quitTitle, terminateSel, quitMenuItemKey);
+	quitMenuItemKey = objc_msgSend((id)NSStringClass, stringWithUTF8StringSel, "q");
+	quitMenuItemAlloc = objc_msgSend((id)NSMenuItemClass, allocSel);
+	initWithTitleSel = sel_registerName("initWithTitle:action:keyEquivalent:");
+	terminateSel = sel_registerName("terminate:");
+	quitMenuItem = objc_msgSend(quitMenuItemAlloc, initWithTitleSel, quitTitle, terminateSel, quitMenuItemKey);
 	objc_msgSend(quitMenuItem, autoreleaseSel);
 
 	objc_msgSend(appMenu, addItemSel, quitMenuItem);
 
-	SEL setSubmenuSel = sel_registerName("setSubmenu:");
+	setSubmenuSel = sel_registerName("setSubmenu:");
 	objc_msgSend(appMenuItem, setSubmenuSel, appMenu);
 
-	NSRect rect = {{0, 0}, {512, 256}};
-	Class NSWindowClass = objc_getClass("NSWindow");
-	id windowAlloc = objc_msgSend((id)NSWindowClass, allocSel);
-	SEL initWithContentRectSel = sel_registerName("initWithContentRect:styleMask:backing:defer:");
-	id window = objc_msgSend(windowAlloc, initWithContentRectSel, rect, 15, 2, NO);
+	rect = {{0, 0}, {512, 256}};
+	NSWindowClass = objc_getClass("NSWindow");
+	windowAlloc = objc_msgSend((id)NSWindowClass, allocSel);
+	initWithContentRectSel = sel_registerName("initWithContentRect:styleMask:backing:defer:");
+	window = objc_msgSend(windowAlloc, initWithContentRectSel, rect, 15, 2, NO);
 	objc_msgSend(window, autoreleaseSel);
 
-	SEL setReleasedWhenClosedSel = sel_registerName("setReleasedWhenClosed:");
+	setReleasedWhenClosedSel = sel_registerName("setReleasedWhenClosed:");
 	objc_msgSend(window, setReleasedWhenClosedSel, NO);
 
 	windowCount = 1;
 
-	Class WindowDelegateClass = objc_allocateClassPair(NSObjectClass, "WindowDelegate", 0);
-	Protocol* NSWindowDelegateProtocol = objc_getProtocol("NSWindowDelegate");
+	WindowDelegateClass = objc_allocateClassPair(NSObjectClass, "WindowDelegate", 0);
+	NSWindowDelegateProtocol = objc_getProtocol("NSWindowDelegate");
 	resultAddProtoc = class_addProtocol(WindowDelegateClass, NSWindowDelegateProtocol);
-	SEL windowWillCloseSel = sel_registerName("windowWillClose:");
+	windowWillCloseSel = sel_registerName("windowWillClose:");
 	resultAddMethod = class_addMethod(WindowDelegateClass, windowWillCloseSel, (IMP)windowWillClose,  "v@:@");
-	id wdgAlloc = objc_msgSend((id)WindowDelegateClass, allocSel);
-	id wdg = objc_msgSend(wdgAlloc, initSel);
+	wdgAlloc = objc_msgSend((id)WindowDelegateClass, allocSel);
+	wdg = objc_msgSend(wdgAlloc, initSel);
 	objc_msgSend(wdg, autoreleaseSel);
 
 	objc_msgSend(window, setDelegateSel, wdg);
 
-	SEL contentViewSel = sel_registerName("contentView");
-	id contentView = objc_msgSend(window, contentViewSel);
+	contentViewSel = sel_registerName("contentView");
+	contentView = objc_msgSend(window, contentViewSel);
 
-	SEL setWantsBestResolutionOpenGLSurfaceSel = sel_registerName("setWantsBestResolutionOpenGLSurface:");
+	setWantsBestResolutionOpenGLSurfaceSel = sel_registerName("setWantsBestResolutionOpenGLSurface:");
 	objc_msgSend(contentView, setWantsBestResolutionOpenGLSurfaceSel, YES);
 
-	NSPoint point = {20, 20};
-	SEL cascadeTopLeftFromPointSel = sel_registerName("cascadeTopLeftFromPoint:");
+	point = {20, 20};
+	cascadeTopLeftFromPointSel = sel_registerName("cascadeTopLeftFromPoint:");
 	objc_msgSend(window, cascadeTopLeftFromPointSel, point);
 
-	id titleString = ((id (*)(Class, SEL, const char*))objc_msgSend)(NSStringClass, stringWithUTF8StringSel, "sup from C");
-	SEL setTitleSel = sel_registerName("setTitle:");
+	titleString = ((id (*)(Class, SEL, const char*))objc_msgSend)(NSStringClass, stringWithUTF8StringSel, "sup from C");
+	setTitleSel = sel_registerName("setTitle:");
 	objc_msgSend(window, setTitleSel, titleString);
 
-	uint32_t glAttributes[] =
-	{
-		8, 24,
-		11, 8,
-		5,
-		73,
-		72,
-		55, 1,
-		56, 4,
-		99, 0x1000, // or 0x3200
-		0
-	};
-
-	Class NSOpenGLPixelFormatClass = objc_getClass("NSOpenGLPixelFormat");
-	id pixelFormatAlloc = objc_msgSend((id)NSOpenGLPixelFormatClass, allocSel);
-	SEL initWithAttributesSel = sel_registerName("initWithAttributes:");
-	id pixelFormat = objc_msgSend(pixelFormatAlloc, initWithAttributesSel, glAttributes);
+	NSOpenGLPixelFormatClass = objc_getClass("NSOpenGLPixelFormat");
+	pixelFormatAlloc = objc_msgSend((id)NSOpenGLPixelFormatClass, allocSel);
+	initWithAttributesSel = sel_registerName("initWithAttributes:");
+	pixelFormat = objc_msgSend(pixelFormatAlloc, initWithAttributesSel, glAttributes);
 	objc_msgSend(pixelFormat, autoreleaseSel);
 
-	Class NSOpenGLContextClass = objc_getClass("NSOpenGLContext");
-	id openGLContextAlloc = objc_msgSend((id)NSOpenGLContextClass, allocSel);
-	SEL initWithFormatSel = sel_registerName("initWithFormat:shareContext:");
-	id openGLContext = objc_msgSend(openGLContextAlloc, initWithFormatSel, pixelFormat, nil);
+	NSOpenGLContextClass = objc_getClass("NSOpenGLContext");
+	openGLContextAlloc = objc_msgSend((id)NSOpenGLContextClass, allocSel);
+	initWithFormatSel = sel_registerName("initWithFormat:shareContext:");
+	openGLContext = objc_msgSend(openGLContextAlloc, initWithFormatSel, pixelFormat, nil);
 	objc_msgSend(openGLContext, autoreleaseSel);
 
-	SEL setViewSel = sel_registerName("setView:");
+	setViewSel = sel_registerName("setView:");
 	objc_msgSend(openGLContext, setViewSel, contentView);
 
-	SEL makeKeyAndOrderFrontSel = sel_registerName("makeKeyAndOrderFront:");
+	makeKeyAndOrderFrontSel = sel_registerName("makeKeyAndOrderFront:");
 	objc_msgSend(window, makeKeyAndOrderFrontSel, window);
 
-	SEL setAcceptsMouseMovedEventsSel = sel_registerName("setAcceptsMouseMovedEvents:");
+	setAcceptsMouseMovedEventsSel = sel_registerName("setAcceptsMouseMovedEvents:");
 	objc_msgSend(window, setAcceptsMouseMovedEventsSel, YES);
 
-	Class NSColorClass = objc_getClass("NSColor");
-	id blackColor = ((id (*)(Class, SEL))objc_msgSend)(NSColorClass, sel_registerName("blackColor"));
-	SEL setBackgroundColorSel = sel_registerName("setBackgroundColor:");
+	NSColorClass = objc_getClass("NSColor");
+	blackColor = ((id (*)(Class, SEL))objc_msgSend)(NSColorClass, sel_registerName("blackColor"));
+	setBackgroundColorSel = sel_registerName("setBackgroundColor:");
 	objc_msgSend(window, setBackgroundColorSel, blackColor);
 
-	SEL activateIgnoringOtherAppsSel = sel_registerName("activateIgnoringOtherApps:");
+	activateIgnoringOtherAppsSel = sel_registerName("activateIgnoringOtherApps:");
 	objc_msgSend(NSApp, activateIgnoringOtherAppsSel, YES);
 
 
-	Class NSDateClass = objc_getClass("NSDate");
-	SEL distantPastSel = sel_registerName("distantPast");
-	SEL nextEventMatchingMaskSel = sel_registerName("nextEventMatchingMask:untilDate:inMode:dequeue:");
-	SEL frameSel = sel_registerName("frame");
-	SEL typeSel = sel_registerName("type");
-	SEL buttonNumberSel = sel_registerName("buttonNumber");
-	SEL keyCodeSel = sel_registerName("keyCode");
-	SEL keyWindowSel = sel_registerName("keyWindow");
-	SEL mouseLocationOutsideOfEventStreamSel = sel_registerName("mouseLocationOutsideOfEventStream");
-	SEL convertRectToBackingSel = sel_registerName("convertRectToBacking:");
-	SEL scrollingDeltaXSel = sel_registerName("scrollingDeltaX");
-	SEL scrollingDeltaYSel = sel_registerName("scrollingDeltaY");
-	SEL hasPreciseScrollingDeltasSel = sel_registerName("hasPreciseScrollingDeltas");
-	SEL modifierFlagsSel = sel_registerName("modifierFlags");
-	SEL charactersSel = sel_registerName("characters");
-	SEL UTF8StringSel = sel_registerName("UTF8String");
-	SEL sendEventSel = sel_registerName("sendEvent:");
-	SEL updateWindowsSel = sel_registerName("updateWindows");
-	SEL updateSel = sel_registerName("update");
-	SEL makeCurrentContextSel = sel_registerName("makeCurrentContext");
-	SEL flushBufferSel = sel_registerName("flushBuffer");
+	NSDateClass = objc_getClass("NSDate");
+	distantPastSel = sel_registerName("distantPast");
+	nextEventMatchingMaskSel = sel_registerName("nextEventMatchingMask:untilDate:inMode:dequeue:");
+	frameSel = sel_registerName("frame");
+	typeSel = sel_registerName("type");
+	buttonNumberSel = sel_registerName("buttonNumber");
+	keyCodeSel = sel_registerName("keyCode");
+	keyWindowSel = sel_registerName("keyWindow");
+	mouseLocationOutsideOfEventStreamSel = sel_registerName("mouseLocationOutsideOfEventStream");
+	convertRectToBackingSel = sel_registerName("convertRectToBacking:");
+	scrollingDeltaXSel = sel_registerName("scrollingDeltaX");
+	scrollingDeltaYSel = sel_registerName("scrollingDeltaY");
+	hasPreciseScrollingDeltasSel = sel_registerName("hasPreciseScrollingDeltas");
+	modifierFlagsSel = sel_registerName("modifierFlags");
+	charactersSel = sel_registerName("characters");
+	UTF8StringSel = sel_registerName("UTF8String");
+	sendEventSel = sel_registerName("sendEvent:");
+	updateWindowsSel = sel_registerName("updateWindows");
+	updateSel = sel_registerName("update");
+	makeCurrentContextSel = sel_registerName("makeCurrentContext");
+	flushBufferSel = sel_registerName("flushBuffer");
 
 void check_events()
 {
 
 	while(!terminated)
 	{
-		id distantPast = objc_msgSend((id)NSDateClass, distantPastSel);
-		id event = objc_msgSend(NSApp, nextEventMatchingMaskSel, NSUIntegerMax, distantPast, NSDefaultRunLoopMode, YES);
+		distantPast = objc_msgSend((id)NSDateClass, distantPastSel);
+		event = objc_msgSend(NSApp, nextEventMatchingMaskSel, NSUIntegerMax, distantPast, NSDefaultRunLoopMode, YES);
 
 		if(event)
 		{
-			NSUInteger eventType = (NSUInteger)objc_msgSend(event, typeSel);
+			eventType = (NSUInteger)objc_msgSend(event, typeSel);
 
 			switch(eventType)
 			{
@@ -336,19 +425,19 @@ void check_events()
 				case 7:
 				case 27:
 				{
-					id currentWindow = objc_msgSend(NSApp, keyWindowSel);
+					currentWindow = objc_msgSend(NSApp, keyWindowSel);
 
-					id currentWindowContentView = objc_msgSend(currentWindow, contentViewSel);
-					NSRect adjustFrame = (NSRect)objc_msgSend_stret(currentWindowContentView, frameSel);
+					currentWindowContentView = objc_msgSend(currentWindow, contentViewSel);
+					adjustFrame = (NSRect)objc_msgSend_stret(currentWindowContentView, frameSel);
 
-					NSPoint p = (NSPoint)objc_msgSend(currentWindow, mouseLocationOutsideOfEventStreamSel);
+					p = (NSPoint)objc_msgSend(currentWindow, mouseLocationOutsideOfEventStreamSel);
 
 					if(p.x < 0) p.x = 0;
 					else if(p.x > adjustFrame.size.width) p.x = adjustFrame.size.width;
 					if(p.y < 0) p.y = 0;
 					else if(p.y > adjustFrame.size.height) p.y = adjustFrame.size.height;
 
-					NSRect r = {p.x, p.y, 0, 0};
+					r = {p.x, p.y, 0, 0};
 					r = (NSRect)objc_msgSend_stret(currentWindowContentView, convertRectToBackingSel, r);
 					p = r.origin;
 
@@ -369,23 +458,23 @@ void check_events()
 				//case NSOtherMouseDown:
 				case 25:
 				{
-					NSInteger number = (NSInteger)objc_msgSend(event, buttonNumberSel);
+					number = (NSInteger)objc_msgSend(event, buttonNumberSel);
 					break;
 				}
 				//case NSOtherMouseUp:
 				case 26:
 				{
-					NSInteger number = (NSInteger)objc_msgSend(event, buttonNumberSel);
+					number = (NSInteger)objc_msgSend(event, buttonNumberSel);
 					break;
 				}
 				//case NSScrollWheel:
 				case 22:
 				{
-					CGFloat deltaX = (CGFloat)objc_msgSend_fpret(event, scrollingDeltaXSel);
+					deltaX = (CGFloat)objc_msgSend_fpret(event, scrollingDeltaXSel);
 
-					CGFloat deltaY = (CGFloat)objc_msgSend_fpret(event, scrollingDeltaYSel);
+					deltaY = (CGFloat)objc_msgSend_fpret(event, scrollingDeltaYSel);
 
-					BOOL precisionScrolling = (BOOL)objc_msgSend(event, hasPreciseScrollingDeltasSel);
+					precisionScrolling = (BOOL)objc_msgSend(event, hasPreciseScrollingDeltasSel);
 
 					if(precisionScrolling)
 					{
@@ -401,39 +490,18 @@ void check_events()
 				//case NSFlagsChanged:
 				case 12:
 				{
-					NSUInteger modifiers = (NSUInteger)objc_msgSend(event, modifierFlagsSel);
-
-					struct
-					{
-						union
-						{
-							struct
-							{
-								uint8_t alpha_shift:1;
-								uint8_t shift:1;
-								uint8_t control:1;
-								uint8_t alternate:1;
-								uint8_t command:1;
-								uint8_t numeric_pad:1;
-								uint8_t help:1;
-								uint8_t function:1;
-							};
-							uint8_t mask;
-						};
-					} keys;
-
+					modifiers = (NSUInteger)objc_msgSend(event, modifierFlagsSel);
 					keys.mask = (modifiers & 0xffff0000UL) >> 16;
-
 					break;
 				}
 				//case NSKeyDown:
 				case 10:
 				{
-					id inputText = objc_msgSend(event, charactersSel);
+					inputText = objc_msgSend(event, charactersSel);
 
-					const char * inputTextUTF8 = (const char*)objc_msgSend(inputText, UTF8StringSel);
+					inputTextUTF8 = (const char*)objc_msgSend(inputText, UTF8StringSel);
 
-					uint16_t keyCode = (unsigned short)objc_msgSend(event, keyCodeSel);
+					keyCode = (unsigned short)objc_msgSend(event, keyCodeSel);
 
 					break;
 				}
@@ -459,7 +527,7 @@ void check_events()
 
 		objc_msgSend(openGLContext, makeCurrentContextSel);
 
-		NSRect rect = (NSRect)objc_msgSend_stret(contentView, frameSel);
+		rect = (NSRect)objc_msgSend_stret(contentView, frameSel);
 
 		rect = (NSRect)objc_msgSend_stret(contentView, convertRectToBackingSel, rect);
 
@@ -478,9 +546,9 @@ void check_events()
 
 		objc_msgSend(openGLContext, flushBufferSel);
 	}
+	return 0;
 }
 
-	return 0;
 
 var Screen__refresh() 
 {
