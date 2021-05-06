@@ -33,6 +33,8 @@
 #include <OpenGL/glu.h>
 #include <CoreGraphics/CGBase.h>
 #include <CoreGraphics/CGGeometry.h>
+#include <HIToolbox/Events.h>
+
 typedef CGPoint NSPoint;
 typedef CGRect NSRect;
 extern id NSApp;
@@ -451,6 +453,87 @@ void initgl()
 	glLoadIdentity();
 }
 
+var getKey(var k)
+{
+	var key = 0;
+	switch (k) {
+	case kVK_LeftArrow:
+		key = Keyboard__LEFT_ARROW();
+		break;
+	case kVK_RightArrow:
+		key = Keyboard__RIGHT_ARROW();
+		break;
+	case kVK_UpArrow:
+		key = Keyboard__UP_ARROW();
+		break;
+	case kVK_DownArrow:
+		key = Keyboard__DOWN_ARROW();
+		break;
+	case kVK_Return:
+		key = Keyboard__NEWLINE();
+		break;
+	case VK_Delete:
+		key = Keyboard__BACKSPACE();
+		break;
+	case kVK_Home:
+		key = Keyboard__HOME();
+		break;
+	case kVK_PageUp:
+		key = Keyboard__PAGE_UP();
+		break;
+	case kVK_PageDown:
+		key = Keyboard__PAGE_DOWN();
+		break;
+	case kVK_Insert:
+		key = Keyboard__INSERT();
+		break;
+	case kVK_ForwardDelete:
+		key = Keyboard__DELETE();
+		break;
+	case kVK_Escape:
+		key = Keyboard__ESC();
+		break;
+	case kVK_F1:
+		key = Keyboard__F1();
+		break
+	case kVK_F2:
+		key = Keyboard__F2();
+		break
+	case kVK_F3:
+		key = Keyboard__F3();
+		break
+	case kVK_F4:
+		key = Keyboard__F4();
+		break
+	case kVK_F5:
+		key = Keyboard__F5();
+		break
+	case kVK_F6:
+		key = Keyboard__F6();
+		break
+	case kVK_F7:
+		key = Keyboard__F7();
+		break
+	case kVK_F8:
+		key = Keyboard__F8();
+		break
+	case kVK_F9:
+		key = Keyboard__F9();
+		break
+	case kVK_F10:
+		key = Keyboard__F10();
+		break
+	case kVK_F11:
+		key = Keyboard__F11();
+		break
+	case kVK_F12:
+		key = Keyboard__F12();
+		break
+	}
+
+	return key;	
+}
+
 int check_event()
 {
 
@@ -551,11 +634,11 @@ int check_event()
 			inputTextUTF8 = (const char*)objc_msgSend(inputText, UTF8StringSel);
 
 			keyCode = (unsigned short)objc_msgSend(event, keyCodeSel);
-		
-			if (inputTextUTF8) {
+	
+			key = getKey(keyCode);
+
+			if (!key && inputTextUTF8) {
 				key = inputTextUTF8[0];
-			} else {
-				key = keyCode;
 			}
 			Memory__poke(24576, key);
 			break;
