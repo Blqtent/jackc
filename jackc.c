@@ -2463,7 +2463,7 @@ var getKey(var k)
 	case kVK_Return:
 		key = Keyboard__NEWLINE();
 		break;
-	case VK_Delete:
+	case kVK_Delete:
 		key = Keyboard__BACKSPACE();
 		break;
 	case kVK_Home:
@@ -2475,7 +2475,7 @@ var getKey(var k)
 	case kVK_PageDown:
 		key = Keyboard__PAGE_DOWN();
 		break;
-	case kVK_Insert:
+	case 0x72:
 		key = Keyboard__INSERT();
 		break;
 	case kVK_ForwardDelete:
@@ -2486,40 +2486,40 @@ var getKey(var k)
 		break;
 	case kVK_F1:
 		key = Keyboard__F1();
-		break
+		break;
 	case kVK_F2:
 		key = Keyboard__F2();
-		break
+		break;
 	case kVK_F3:
 		key = Keyboard__F3();
-		break
+		break;
 	case kVK_F4:
 		key = Keyboard__F4();
-		break
+		break;
 	case kVK_F5:
 		key = Keyboard__F5();
-		break
+		break;
 	case kVK_F6:
 		key = Keyboard__F6();
-		break
+		break;
 	case kVK_F7:
 		key = Keyboard__F7();
-		break
+		break;
 	case kVK_F8:
 		key = Keyboard__F8();
-		break
+		break;
 	case kVK_F9:
 		key = Keyboard__F9();
-		break
+		break;
 	case kVK_F10:
 		key = Keyboard__F10();
-		break
+		break;
 	case kVK_F11:
 		key = Keyboard__F11();
-		break
+		break;
 	case kVK_F12:
 		key = Keyboard__F12();
-		break
+		break;
 	}
 
 	return key;	
