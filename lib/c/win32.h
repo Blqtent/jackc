@@ -56,12 +56,17 @@ void deInit()
 	ReleaseDC(hWnd, hDC);
 	wglDeleteContext(hRC);
 	DestroyWindow(hWnd);
+	exit(0);
 }
 
 LONG WINAPI WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
+	RECT r;
+
 	switch(uMsg) {
 	case WM_PAINT:
+		GetClientRect(hWnd, &r);
+		glViewport(0, 0, r.right, r.bottom);
 		screen2rgba(width, height);
 		display();
 		BeginPaint(hWnd, &ps);
@@ -69,7 +74,6 @@ LONG WINAPI WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		refresh = 0;
 		return 0;
 	case WM_SIZE:
-		glViewport(0, 0, LOWORD(lParam), HIWORD(lParam));
 		if (!refresh) {
 			PostMessage(hWnd, WM_PAINT, 0, 0);
 		}
@@ -131,9 +135,10 @@ LONG WINAPI WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		return 0;
 	case WM_QUIT:
 		deInit();
+		return 0;
 		break;
 	case WM_CLOSE:
-		PostQuitMessage(0);
+		deInit();
 		return 0;
 	}
 	return DefWindowProc(hWnd, uMsg, wParam, lParam);
@@ -145,7 +150,8 @@ void init()
 	int pf;
 	WNDCLASSW wc;
 	PIXELFORMATDESCRIPTOR pfd;
-
+	RECT r;
+	DWORD s;
 	if (hWnd) {
 		return;
 	}
@@ -166,16 +172,20 @@ void init()
 			return;
 		}
 	}
-	hWnd = CreateWindowW(L"Jack App", L"Jack application",
-			WS_OVERLAPPEDWINDOW |
-			WS_CLIPSIBLINGS |
-			WS_CLIPCHILDREN,
-			0, 0, width, height,
+	r.top = 0;
+	r.left = 0;
+	r.bottom = height;
+	r.right = width;
+	s = WS_OVERLAPPEDWINDOW | WS_CLIPSIBLINGS | WS_CLIPCHILDREN;
+	AdjustWindowRect(&r, s, FALSE);
+	hWnd = CreateWindowW(L"Jack App", L"Jack application", s,
+			r.left, r.top, r.right - r.left , r.bottom - r.top,
 			NULL, NULL, hInstance, NULL);
 	if (hWnd == NULL) {
 		printf("Cannot Create Window!!\n");
 		return;
 	}
+	GetClientRect(hWnd, &r);
 	
 	hDC = GetDC(hWnd);
 	memset(&pfd, 0, sizeof(pfd));
@@ -229,7 +239,7 @@ void init()
 	glLoadIdentity();
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	glViewport(0, 0, width, height);
+	//glViewport(0, 0, width, height);
 }
 
 var Screen__refresh() 
@@ -237,7 +247,6 @@ var Screen__refresh()
 	if (refresh) return 0;
 	refresh = -1;
 	init();
-	PostMessage(hWnd, WM_PAINT, 0, 0);
 	return 0;
 }
 
@@ -257,6 +266,9 @@ var Screen__processEvents()
 		if (key) {
 			k = key;
 		}
+	}
+	if (refresh) {
+		PostMessage(hWnd, WM_PAINT, 0, 0);
 	}
 	Sys__wait(20);
 	in_proc = 0;

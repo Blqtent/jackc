@@ -122,13 +122,31 @@ void init()
 	wm_del = XInternAtom(display, "WM_DELETE_WINDOW", False);
 	XSetWMProtocols(display, window, &wm_del, 1);
 	XMapWindow(display, window);	
-	glWindowPos2i(0, 0);
+
 	glViewport(0, 0, width, height);
+	glClearColor(1,1,1,1);
+	glClearDepth(1);
+	glGenTextures(1, &tex);
+	glBindTexture(GL_TEXTURE_2D, tex);
+	glTexImage2D(
+		GL_TEXTURE_2D,
+		0,
+		3,
+		width,
+		height,
+		0,
+		GL_RGBA,
+		GL_UNSIGNED_BYTE,
+		image32);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+	glEnable(GL_TEXTURE_2D);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(0, width, height, 0, -1, 1);
-	glPixelZoom(1, -1);
-	Screen__clear();
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
 }
 
 void deInit()
@@ -142,21 +160,32 @@ void deInit()
 	}
 }
 
-void drawImage()
+void display()
 {
-	XGetWindowAttributes(display, window, &gwa);
-	glXMakeCurrent(display, window, glc);
-	glDisable(GL_TEXTURE_2D);
-	//glRasterPos2i(-1, -1);
-	//glViewport(0, 0, gwa.width, gwa.height);
-	//glViewport(0, 0, gwa.width, gwa.height);
-//	glMatrixMode(GL_PROJECTION);
-//	glLoadIdentity();
-//	glOrtho(0, width, height, 0, -1, 1);
-	glRasterPos2i(0, 0);
-	glDrawPixels(width, height, GL_RGBA, GL_UNSIGNED_BYTE, image32);
-	//glRasterPos2i(0, 11);
+	glClear(GL_COLOR_BUFFER_BIT);
+	glClearColor(0,0,0,1);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glBindTexture(GL_TEXTURE_2D, tex);
+	glTexImage2D(
+		GL_TEXTURE_2D,
+		0,
+		3,
+		width,
+		height,
+		0,
+		GL_RGBA,
+		GL_UNSIGNED_BYTE,
+		image32);
+	glLoadIdentity();
+	glBegin(GL_QUADS);
+	glTexCoord2f(0,0); glVertex3f(-1,1, -1);
+	glTexCoord2f(1,0); glVertex3f( 1,1, -1);
+	glTexCoord2f(1,1); glVertex3f( 1, -1, -1);
+	glTexCoord2f(0,1); glVertex3f(-1, -1, -1);
+	glEnd();
+	glBindTexture(GL_TEXTURE_2D, 0);
 }
+
 
 var dump_font(var c);
 
@@ -235,39 +264,10 @@ var processEvent()
 		}
 		break;
 	case Expose:
-		for (c = 32; !done && c < 127; c++) {
-			Screen__clear();
-			drawImage();
-			text[0] = c;
-		glColor4b(0x00, 0xFF, 0xFF, 0x00);
-			glRasterPos2f(0, 11);
-			glListBase(base);
-			glCallLists(1, GL_UNSIGNED_BYTE, text);
-			glReadPixels(0, 0, width, height, GL_RGBA, 
-				GL_UNSIGNED_BYTE, image32);
-			dump_font(c);
-		}	
 		done = 1;
-		drawImage();
-		/*glColor4b(0x00, 0xFF, 0xFF, 0x00);
-		for (y = 0; y < 23; y++) {
-			for (x = 0; x < 64; x++) {
-				c = consoleb[x + y * 64];
-				if (c) {
-					text[0] = (char)c;
-					//glRasterPos2f(x*fx-1.0, 1.0-(y+1)*fy);
-					glRasterPos2f(x * 8, (y+1) *11);
-					glListBase(base);
-					glCallLists(1, GL_UNSIGNED_BYTE, text); 
-				}
-			}
-		}*/
-		//glRasterPos2i(0, 0);
-		//glReadPixels(0, 0, width, height, GL_RGBA, 
-		//		GL_UNSIGNED_BYTE, image32);
-		//dump_font(dump);
+		glXMakeCurrent(display, window, glc);
+		display();
 		glXSwapBuffers(display, window);	
-		//dump_font(dump);
 		isfirst = 0;	
 		break;
 	case ButtonPress:
