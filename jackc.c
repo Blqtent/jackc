@@ -2212,7 +2212,7 @@ void display()
 	glTexCoord2f(0,1); glVertex3f(-1, -1, -1);
 	glEnd();
 	glBindTexture(GL_TEXTURE_2D, 0);
-//	SwapBuffers(hDC);
+	glSwapBuffers();
 }
 
 void deInit()
@@ -2229,6 +2229,7 @@ NSUInteger applicationShouldTerminate(id self, SEL _sel, id sender)
 void windowWillClose(id self, SEL _sel, id notification)
 {
 	deInit();
+	terminate = -1;
 }
 
 void init()
@@ -2414,6 +2415,7 @@ void initgl()
 
 	rect = ((NSRect(*)(id,SEL,NSRect))objc_msgSend_stret)(contentView, convertRectToBackingSel, rect);
 
+	glViewport(0, 0, rect.size.width, rect.size.height);
 	glClearColor(1,1,1,1);
 	glClearDepth(1);
 	glGenTextures(1, &tex);
@@ -2438,7 +2440,6 @@ void initgl()
 	glLoadIdentity();
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	glViewport(0, 0, rect.size.width, rect.size.height);
 }
 
 int check_event()
@@ -2541,7 +2542,12 @@ int check_event()
 			inputTextUTF8 = (const char*)objc_msgSend(inputText, UTF8StringSel);
 
 			keyCode = (unsigned short)objc_msgSend(event, keyCodeSel);
-			key = keyCode;
+		
+			if (inputTextUTF8) {
+				key = inputTextUTF8[0];
+			} else {
+				key = keyCode;
+			}
 			Memory__poke(24576, key);
 			break;
 		}
@@ -2605,6 +2611,9 @@ var Screen__processEvents()
 		if (key) {
 			k = key;
 		}
+	}
+	if (terminate) {
+		exit(0);
 	}
 	Sys__wait(20);
 	in_proc = 0;
