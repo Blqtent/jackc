@@ -2572,7 +2572,7 @@ void update()
 	rect = ((NSRect(*)(id,SEL,NSRect))objc_msgSend_stret)(contentView, convertRectToBackingSel, rect);
 
 	glViewport(0, 0, rect.size.width, rect.size.height);
-	screen2rgba();
+	screen2rgba(width, height);
 	display();
 	objc_msgSend(openGLContext, flushBufferSel);
 }
