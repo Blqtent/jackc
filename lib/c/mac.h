@@ -33,7 +33,7 @@
 #include <OpenGL/glu.h>
 #include <CoreGraphics/CGBase.h>
 #include <CoreGraphics/CGGeometry.h>
-#include <HIToolbox/Events.h>
+#include <Carbon/Carbon.h>
 
 typedef CGPoint NSPoint;
 typedef CGRect NSRect;
