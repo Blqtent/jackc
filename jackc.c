@@ -2338,7 +2338,8 @@ void init()
 	cascadeTopLeftFromPointSel = sel_registerName("cascadeTopLeftFromPoint:");
 	objc_msgSend(window, cascadeTopLeftFromPointSel, point);
 
-	titleString = ((id (*)(Class, SEL, const char*))objc_msgSend)(NSStringClass, stringWithUTF8StringSel, "sup from C");
+	titleString = objc_msgSend((id)NSStringClass, 
+			stringWithUTF8StringSel, "JACK Application");
 	setTitleSel = sel_registerName("setTitle:");
 	objc_msgSend(window, setTitleSel, titleString);
 
@@ -2396,154 +2397,184 @@ void init()
 	return;
 }
 
-int check_events()
+void initgl()
 {
 
-	while(!terminated)
-	{
-		distantPast = objc_msgSend((id)NSDateClass, distantPastSel);
-		event = objc_msgSend(NSApp, nextEventMatchingMaskSel, NSUIntegerMax, distantPast, NSDefaultRunLoopMode, YES);
+	objc_msgSend(NSApp, updateWindowsSel);
 
-		if(event)
+	objc_msgSend(openGLContext, updateSel);
+
+	objc_msgSend(openGLContext, makeCurrentContextSel);
+
+	rect = ((NSRect(*)(id,SEL))objc_msgSend_stret)(contentView, frameSel);
+
+	rect = ((NSRect(*)(id,SEL,NSRect))objc_msgSend_stret)(contentView, convertRectToBackingSel, rect);
+
+	glClearColor(1,1,1,1);
+	glClearDepth(1);
+	glGenTextures(1, &tex);
+	glBindTexture(GL_TEXTURE_2D, tex);
+	glTexImage2D(
+		GL_TEXTURE_2D,
+		0,
+		3,
+		width,
+		height,
+		0,
+		GL_RGBA,
+		GL_UNSIGNED_BYTE,
+		image32);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+	//glBindTexture(GL_TEXTURE_2D, 0);
+	glEnable(GL_TEXTURE_2D);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	glViewport(0, 0, rect.size.width, rect.size.height);
+}
+
+int check_event()
+{
+
+	distantPast = objc_msgSend((id)NSDateClass, distantPastSel);
+	event = objc_msgSend(NSApp, nextEventMatchingMaskSel, 
+				NSUIntegerMax, distantPast, 
+				NSDefaultRunLoopMode, YES);
+	if (!event) return 0;
+	eventType = (NSUInteger)objc_msgSend(event, typeSel);
+
+	switch(eventType) {
+		//case NSMouseMoved:
+		//case NSLeftMouseDragged:
+		//case NSRightMouseDragged:
+		//case NSOtherMouseDragged:
+		case 5:
+		case 6:
+		case 7:
+		case 27:
 		{
-			eventType = (NSUInteger)objc_msgSend(event, typeSel);
+			currentWindow = objc_msgSend(NSApp, keyWindowSel);
 
-			switch(eventType)
+			currentWindowContentView = objc_msgSend(currentWindow, contentViewSel);
+			adjustFrame = ((NSRect(*)(id,SEL))objc_msgSend_stret)(currentWindowContentView, frameSel);
+
+			p = ((NSPoint(*)(id,SEL))objc_msgSend)(currentWindow, mouseLocationOutsideOfEventStreamSel);
+
+			if(p.x < 0) p.x = 0;
+			else if(p.x > adjustFrame.size.width) p.x = adjustFrame.size.width;
+			if(p.y < 0) p.y = 0;
+			else if(p.y > adjustFrame.size.height) p.y = adjustFrame.size.height;
+
+			r.origin.x = p.x;
+			r.origin.y = p.y;
+			r.size.width = 0;
+			r.size.height = 0;
+			r = ((NSRect(*)(id,SEL,NSRect))objc_msgSend_stret)(currentWindowContentView, convertRectToBackingSel, r);
+			p = r.origin;
+
+			break;
+		}
+		//case NSLeftMouseDown:
+		case 1:
+			break;
+		//case NSLeftMouseUp:
+		case 2:
+			break;
+		//case NSRightMouseDown:
+		case 3:
+			break;
+		//case NSRightMouseUp:
+		case 4:
+			break;
+		//case NSOtherMouseDown:
+		case 25:
+		{
+			number = (NSInteger)objc_msgSend(event, buttonNumberSel);
+			break;
+		}
+		//case NSOtherMouseUp:
+		case 26:
+		{
+			number = (NSInteger)objc_msgSend(event, buttonNumberSel);
+			break;
+		}
+		//case NSScrollWheel:
+		case 22:
+		{
+			deltaX = ((CGFloat(*)(id,SEL))objc_msgSend_fpret)(event, scrollingDeltaXSel);
+
+			deltaY = ((CGFloat(*)(id,SEL))objc_msgSend_fpret)(event, scrollingDeltaYSel);
+
+			precisionScrolling = (BOOL)objc_msgSend(event, hasPreciseScrollingDeltasSel);
+
+			if(precisionScrolling)
 			{
-				//case NSMouseMoved:
-				//case NSLeftMouseDragged:
-				//case NSRightMouseDragged:
-				//case NSOtherMouseDragged:
-				case 5:
-				case 6:
-				case 7:
-				case 27:
-				{
-					currentWindow = objc_msgSend(NSApp, keyWindowSel);
-
-					currentWindowContentView = objc_msgSend(currentWindow, contentViewSel);
-					adjustFrame = ((NSRect(*)(id,SEL))objc_msgSend_stret)(currentWindowContentView, frameSel);
-
-					p = ((NSPoint(*)(id,SEL))objc_msgSend)(currentWindow, mouseLocationOutsideOfEventStreamSel);
-
-					if(p.x < 0) p.x = 0;
-					else if(p.x > adjustFrame.size.width) p.x = adjustFrame.size.width;
-					if(p.y < 0) p.y = 0;
-					else if(p.y > adjustFrame.size.height) p.y = adjustFrame.size.height;
-
-					r.origin.x = p.x;
-					r.origin.y = p.y;
-					r.size.width = 0;
-					r.size.height = 0;
-					r = ((NSRect(*)(id,SEL,NSRect))objc_msgSend_stret)(currentWindowContentView, convertRectToBackingSel, r);
-					p = r.origin;
-
-					break;
-				}
-				//case NSLeftMouseDown:
-				case 1:
-					break;
-				//case NSLeftMouseUp:
-				case 2:
-					break;
-				//case NSRightMouseDown:
-				case 3:
-					break;
-				//case NSRightMouseUp:
-				case 4:
-					break;
-				//case NSOtherMouseDown:
-				case 25:
-				{
-					number = (NSInteger)objc_msgSend(event, buttonNumberSel);
-					break;
-				}
-				//case NSOtherMouseUp:
-				case 26:
-				{
-					number = (NSInteger)objc_msgSend(event, buttonNumberSel);
-					break;
-				}
-				//case NSScrollWheel:
-				case 22:
-				{
-					deltaX = ((CGFloat(*)(id,SEL))objc_msgSend_fpret)(event, scrollingDeltaXSel);
-
-					deltaY = ((CGFloat(*)(id,SEL))objc_msgSend_fpret)(event, scrollingDeltaYSel);
-
-					precisionScrolling = (BOOL)objc_msgSend(event, hasPreciseScrollingDeltasSel);
-
-					if(precisionScrolling)
-					{
-						deltaX *= 0.1f; // similar to glfw
-						deltaY *= 0.1f;
-					}
-
-					if(fabs(deltaX) > 0.0f || fabs(deltaY) > 0.0f)
-					{
-					}
-					break;
-				}
-				//case NSFlagsChanged:
-				case 12:
-				{
-					modifiers = (NSUInteger)objc_msgSend(event, modifierFlagsSel);
-					keys.mask = (modifiers & 0xffff0000UL) >> 16;
-					break;
-				}
-				//case NSKeyDown:
-				case 10:
-				{
-					inputText = objc_msgSend(event, charactersSel);
-
-					inputTextUTF8 = (const char*)objc_msgSend(inputText, UTF8StringSel);
-
-					keyCode = (unsigned short)objc_msgSend(event, keyCodeSel);
-
-					break;
-				}
-				//case NSKeyUp:
-				case 11:
-				{
-					uint16_t keyCode = (unsigned short)objc_msgSend(event, keyCodeSel);
-					break;
-				}
-				default:
-					break;
+				deltaX *= 0.1f; // similar to glfw
+				deltaY *= 0.1f;
 			}
 
-			objc_msgSend(NSApp, sendEventSel, event);
-
-			if(terminated)
-				break;
-
-			objc_msgSend(NSApp, updateWindowsSel);
+			if(fabs(deltaX) > 0.0f || fabs(deltaY) > 0.0f)
+			{
+			}
+			break;
 		}
-
-		objc_msgSend(openGLContext, updateSel);
-
-		objc_msgSend(openGLContext, makeCurrentContextSel);
-
-		rect = ((NSRect(*)(id,SEL))objc_msgSend_stret)(contentView, frameSel);
-
-		rect = ((NSRect(*)(id,SEL,NSRect))objc_msgSend_stret)(contentView, convertRectToBackingSel, rect);
-
-		glViewport(0, 0, rect.size.width, rect.size.height);
-
-		glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
-		glColor3f(1.0f, 0.85f, 0.35f);
-		glBegin(GL_TRIANGLES);
+		//case NSFlagsChanged:
+		case 12:
 		{
-			glVertex3f(  0.0f,  0.6f, 0.0f);
-			glVertex3f( -0.2f, -0.3f, 0.0f);
-			glVertex3f(  0.2f, -0.3f ,0.0f);
+			modifiers = (NSUInteger)objc_msgSend(event, modifierFlagsSel);
+			keys.mask = (modifiers & 0xffff0000UL) >> 16;
+			break;
 		}
-		glEnd();
+		//case NSKeyDown:
+		case 10:
+		{
+			inputText = objc_msgSend(event, charactersSel);
 
-		objc_msgSend(openGLContext, flushBufferSel);
+			inputTextUTF8 = (const char*)objc_msgSend(inputText, UTF8StringSel);
+
+			keyCode = (unsigned short)objc_msgSend(event, keyCodeSel);
+			key = keyCode;
+			Memory__poke(24576, key);
+			break;
+		}
+		//case NSKeyUp:
+		case 11:
+		{
+			uint16_t keyCode = (unsigned short)objc_msgSend(event, keyCodeSel);
+			key = 0;
+			Memory__poke(24576, 0);
+			break;
+		}
+		default:
+			break;
 	}
-	return 0;
+
+	objc_msgSend(NSApp, sendEventSel, event);
+	initgl();
+	return 1;
+}
+
+void update()
+{
+
+	objc_msgSend(NSApp, updateWindowsSel);
+
+	objc_msgSend(openGLContext, updateSel);
+
+	objc_msgSend(openGLContext, makeCurrentContextSel);
+
+	rect = ((NSRect(*)(id,SEL))objc_msgSend_stret)(contentView, frameSel);
+
+	rect = ((NSRect(*)(id,SEL,NSRect))objc_msgSend_stret)(contentView, convertRectToBackingSel, rect);
+
+	glViewport(0, 0, rect.size.width, rect.size.height);
+	screen2rgba();
+	display();
+	objc_msgSend(openGLContext, flushBufferSel);
 }
 
 
@@ -2552,6 +2583,7 @@ var Screen__refresh()
 	if (refresh_) return 0;
 	refresh_ = -1;
 	init();
+	update();
 	return 0;
 }
 
@@ -2565,10 +2597,11 @@ var Screen__processEvents()
 	in_proc = -1;
 	init();
 	key = 0;
-	check_events();
+	while (check_event()) {
 		if (key) {
 			k = key;
 		}
+	}
 	Sys__wait(20);
 	in_proc = 0;
 	return k;
