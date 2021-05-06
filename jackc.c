@@ -2187,6 +2187,7 @@ struct {
 id inputText;
 const char * inputTextUTF8;
 uint16_t keyCode;
+int terminate = 0;
 
 void display()
 {
@@ -2212,7 +2213,6 @@ void display()
 	glTexCoord2f(0,1); glVertex3f(-1, -1, -1);
 	glEnd();
 	glBindTexture(GL_TEXTURE_2D, 0);
-	glSwapBuffers();
 }
 
 void deInit()
@@ -2615,6 +2615,7 @@ var Screen__processEvents()
 	if (terminate) {
 		exit(0);
 	}
+	update();
 	Sys__wait(20);
 	in_proc = 0;
 	return k;
