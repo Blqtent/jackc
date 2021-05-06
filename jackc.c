@@ -2043,7 +2043,7 @@ int width = 512;
 int height = 256;
 var refresh_ = 0;
 var key = 0;
-SEL allocSel;
+SEL allocSel = 0;
 SEL initSel;
 GLuint tex = 1;
 id pool;
@@ -2222,15 +2222,19 @@ void deInit()
 
 NSUInteger applicationShouldTerminate(id self, SEL _sel, id sender)
 {
+	exit(0);
 	return 0;
 }
 
 void windowWillClose(id self, SEL _sel, id notification)
 {
+	deInit();
 }
 
 void init()
 {
+	if (allocSel) return;
+
 	allocSel = sel_registerName("alloc");
 	initSel = sel_registerName("init");
 
