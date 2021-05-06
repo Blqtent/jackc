@@ -1366,7 +1366,7 @@ class JackAstToC {
 				let s = getTypeOf(d);
 				do dst.writeString(s);	
 				let thi = clas.copy();
-				let thi = thi.appendString("__");
+				let thi = thi.appendString("___");
 				let thi = thi.appendString(d.getData());
 				let free_thi = true;
 				let s = null;
@@ -1543,7 +1543,7 @@ class JackAstToC {
 				if (s) {
 					if (s.length() > 0) {
 						do dst.writeString(s);
-						do dst.writeString("__");
+						do dst.writeString("___");
 					}
 				}
 				do dst.writeString(c.getData());

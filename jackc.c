@@ -3333,11 +3333,11 @@ var Http__new(var url) {
 #endif
 
 #ifdef JACK_IMPLEMENTATION
-var Bytes__addressmask;
-var Bytes__bytesize;
-var Bytes__isbig;
-var Bytes__iswin;
-var Bytes__log2;
+var Bytes___addressmask;
+var Bytes___bytesize;
+var Bytes___isbig;
+var Bytes___iswin;
+var Bytes___log2;
 #define buf__ (__this+0)
 #define size__ (__this+1)
 #define pos__ (__this+2)
@@ -3347,17 +3347,17 @@ var Bytes__new(var size_in_byte) {
 	var i;
 	var s;
 	__this = Memory__alloc(4);
-	Bytes__isbig = Math__isBigEndian();
-	Bytes__iswin = Math__isWindows();
+	Bytes___isbig = Math__isBigEndian();
+	Bytes___iswin = Math__isWindows();
 	__poke(pos__, 0);
-	Bytes__bytesize = Math__sizeOfInt();
-	Bytes__addressmask = Bytes__bytesize-1;
-	Bytes__log2 = Math__log2(Bytes__bytesize);
-	if (0!=(((Bytes__log2<0)?-1:0))) {
-		Bytes__log2 = 0;
+	Bytes___bytesize = Math__sizeOfInt();
+	Bytes___addressmask = Bytes___bytesize-1;
+	Bytes___log2 = Math__log2(Bytes___bytesize);
+	if (0!=(((Bytes___log2<0)?-1:0))) {
+		Bytes___log2 = 0;
 	}
 
-	__poke(size__, Math__shiftRight((size_in_byte+Bytes__addressmask), Bytes__log2)+1);
+	__poke(size__, Math__shiftRight((size_in_byte+Bytes___addressmask), Bytes___log2)+1);
 	__poke(buf__, Array__new(__peek(size__)));
 	i = 0;
 	while (-1==(((i<__peek(size__))?-1:0))) {
@@ -3382,7 +3382,7 @@ var Bytes__alloc(var __this, var s) {
 	var l;
 	var nbuf;
 	var b;
-	nsize = Math__shiftRight(s+Bytes__bytesize, Bytes__log2)+1;
+	nsize = Math__shiftRight(s+Bytes___bytesize, Bytes___log2)+1;
 	nbuf = Array__new(nsize);
 	l = __peek(size__);
 	i = 0;
@@ -3415,8 +3415,8 @@ var Bytes__getByte(var __this, var address) {
 	var s;
 	var a;
 	var v;
-	s = Math__shiftLeft(address&Bytes__addressmask, 3);
-	a = Math__shiftRight(address, Bytes__log2);
+	s = Math__shiftLeft(address&Bytes___addressmask, 3);
+	a = Math__shiftRight(address, Bytes___log2);
 	v = __peek(__peek(buf__)+a);
 	v = Math__shiftRight(v, s)&255;
 	return v;
@@ -3426,15 +3426,15 @@ var Bytes__setByte(var __this, var address, var b) {
 	var a;
 	var v;
 	var m;
-	s = Math__shiftLeft(address&Bytes__addressmask, 3);
-	a = Math__shiftRight(address, Bytes__log2);
+	s = Math__shiftLeft(address&Bytes___addressmask, 3);
+	a = Math__shiftRight(address, Bytes___log2);
 	m = Math__shiftLeft(255, s);
 	v = Math__shiftLeft(b&255, s);
 	__poke(__peek(buf__)+a, (__peek(__peek(buf__)+a)&(~m))|v);
 	return 0;
 }
 var Bytes__appendByte(var __this, var b) {
-	if (0!=(((__peek(size__)<(Math__shiftRight(__peek(pos__)+Bytes__bytesize, Bytes__log2)+1))?-1:0))) {
+	if (0!=(((__peek(size__)<(Math__shiftRight(__peek(pos__)+Bytes___bytesize, Bytes___log2)+1))?-1:0))) {
 		Bytes__alloc(__this, __peek(pos__)+256);
 	}
 
@@ -3473,8 +3473,8 @@ var Bytes__append64bitBig(var __this, var b) {
 	return 0;
 }
 var Bytes__appendInt(var __this, var b) {
-	if (0!=(((Bytes__bytesize==8)?-1:0))) {
-		if (0!=(Bytes__isbig)) {
+	if (0!=(((Bytes___bytesize==8)?-1:0))) {
+		if (0!=(Bytes___isbig)) {
 			Bytes__append64bitBig(__this, b);
 		} else {
 			Bytes__append64bit(__this, b);
@@ -3482,8 +3482,8 @@ var Bytes__appendInt(var __this, var b) {
 		return 0;
 	}
 
-	if (0!=(((Bytes__bytesize==4)?-1:0))) {
-		if (0!=(Bytes__isbig)) {
+	if (0!=(((Bytes___bytesize==4)?-1:0))) {
+		if (0!=(Bytes___isbig)) {
 			Bytes__append32bitBig(__this, b);
 		} else {
 			Bytes__append32bit(__this, b);
@@ -3491,7 +3491,7 @@ var Bytes__appendInt(var __this, var b) {
 		return 0;
 	}
 
-	if (0!=(Bytes__isbig)) {
+	if (0!=(Bytes___isbig)) {
 		Bytes__append16bitBig(__this, b);
 	} else {
 		Bytes__append16bit(__this, b);
@@ -3515,7 +3515,7 @@ var Bytes__appendUtf16(var __this, var codepoint) {
 	return 0;
 }
 var Bytes__appendNativeChar(var __this, var codepoint) {
-	if (0!=(Bytes__iswin)) {
+	if (0!=(Bytes___iswin)) {
 		Bytes__appendUtf16(__this, codepoint);
 	} else {
 		Bytes__appendUtf8(__this, codepoint);
@@ -4197,7 +4197,7 @@ var JackAstToC___str123[] = {0};
 var JackAstToC___str124[] = {116,101,120,116,51,0};
 var JackAstToC___str125[] = {72,72,72,0};
 var JackAstToC___str126[] = {32,0};
-var JackAstToC___str127[] = {95,95,0};
+var JackAstToC___str127[] = {95,95,95,0};
 var JackAstToC___str128[] = {95,95,112,101,101,107,40,0};
 var JackAstToC___str129[] = {95,95,41,0};
 var JackAstToC___str130[] = {95,95,0};
@@ -4224,7 +4224,7 @@ var JackAstToC___str150[] = {32,0};
 var JackAstToC___str151[] = {59,0};
 var JackAstToC___str152[] = {118,97,114,0};
 var JackAstToC___str153[] = {118,97,114,0};
-var JackAstToC___str154[] = {95,95,0};
+var JackAstToC___str154[] = {95,95,95,0};
 var JackAstToC___str155[] = {95,95,112,101,101,107,40,0};
 var JackAstToC___str156[] = {95,95,41,0};
 var JackAstToC___str157[] = {95,95,0};
@@ -5854,16 +5854,16 @@ var JackAstToC__coVarName(var __this, var c, var isassign) {
 #endif
 
 #ifdef JACK_IMPLEMENTATION
-var Sys2__args_;
+var Sys2___args_;
 var Sys2__init() {
 	return 0;
 }
 var Sys2__deInit() {
 	var b;
-	if (0!=(Sys2__args_)) {
-		b = Sys2__args_;
+	if (0!=(Sys2___args_)) {
+		b = Sys2___args_;
 		Buffer__dispose(b);
-		Sys2__args_ = 0;
+		Sys2___args_ = 0;
 	}
 
 	return 0;
@@ -5874,22 +5874,22 @@ var Sys2__args() {
 	var i;
 	var isq;
 	var b;
-	if (0!=(Sys2__args_)) {
-		return Sys2__args_;
+	if (0!=(Sys2___args_)) {
+		return Sys2___args_;
 	}
 
-	Sys2__args_ = Buffer__newString(1);
+	Sys2___args_ = Buffer__newString(1);
 	i = 0;
  	isq = Sys__argc__;
 	while (-1==(((i<isq)?-1:0))) {
  		a = (var)Sys__argv__[i];
 		s = String__new(255);
 		s = String__appendFromNative(s, a);
-		b = Sys2__args_;
+		b = Sys2___args_;
 		Buffer__append(b, s);
 		i = i+1;
 	}
-	return Sys2__args_;
+	return Sys2___args_;
 }
 #endif
 
@@ -11341,13 +11341,13 @@ var Array__dispose(var __this) {
 #endif
 
 #ifdef JACK_IMPLEMENTATION
-var Output__x;
-var Output__y;
-var Output__f;
+var Output___x;
+var Output___y;
+var Output___f;
 var Output__init() {
-	Output__x = 0;
-	Output__y = 0;
-	Output__f = Font__new();
+	Output___x = 0;
+	Output___y = 0;
+	Output___f = Font__new();
 	return 0;
 }
 var Output__deInit() {
@@ -11356,29 +11356,29 @@ var Output__deInit() {
 var Output__moveCursor(var row, var col) {
 	var xx;
 	var yy;
-	Output__x = col;
-	Output__y = row;
-	if (0!=(((Output__x<0)?-1:0))) {
-		Output__x = 0;
+	Output___x = col;
+	Output___y = row;
+	if (0!=(((Output___x<0)?-1:0))) {
+		Output___x = 0;
 	}
 
-	if (0!=(((Output__x>63)?-1:0))) {
-		Output__x = 63;
+	if (0!=(((Output___x>63)?-1:0))) {
+		Output___x = 63;
 	}
 
-	if (0!=(((Output__y<0)?-1:0))) {
-		Output__y = 0;
+	if (0!=(((Output___y<0)?-1:0))) {
+		Output___y = 0;
 	}
 
-	if (0!=(((Output__y>22)?-1:0))) {
-		Output__y = 22;
+	if (0!=(((Output___y>22)?-1:0))) {
+		Output___y = 22;
 	}
 
-	xx = Output__x;
-	yy = Output__y;
+	xx = Output___x;
+	yy = Output___y;
 	Output__printChar(32);
-	Output__x = xx;
-	Output__y = yy;
+	Output___x = xx;
+	Output___y = yy;
  	printf("\033[%ld;%ldf ", (long)yy + 1, (long)xx + 1);
  	fflush(stdout);
 	return 0;
@@ -11398,12 +11398,12 @@ var Output__printString(var s) {
 	return 0;
 }
 var Output__println() {
-	Output__y = Output__y+1;
-	if (0!=(((Output__y>22)?-1:0))) {
-		Output__y = 22;
+	Output___y = Output___y+1;
+	if (0!=(((Output___y>22)?-1:0))) {
+		Output___y = 22;
 	}
 
-	Output__x = 0;
+	Output___x = 0;
  	putc('\n', stdout);
 	return 0;
 }
@@ -11426,9 +11426,9 @@ var Output__printChar(var c) {
 		c = 32;
 	}
 
-	xx = Output__x;
-	yy = Output__y;
-	chr = Font__get(Output__f, c);
+	xx = Output___x;
+	yy = Output___y;
+	chr = Font__get(Output___f, c);
 	if (0!=(xx&1)) {
 		m = 255;
 	} else {
@@ -11463,12 +11463,12 @@ var Output__printChar(var c) {
 	}
  	printf("%c", (char)c);
  	fflush(stdout);
-	Output__x = Output__x+1;
-	if (0!=(((Output__x>63)?-1:0))) {
-		Output__x = 0;
-		Output__y = Output__y+1;
-		if (0!=(((Output__y>22)?-1:0))) {
-			Output__y = 22;
+	Output___x = Output___x+1;
+	if (0!=(((Output___x>63)?-1:0))) {
+		Output___x = 0;
+		Output___y = Output___y+1;
+		if (0!=(((Output___y>22)?-1:0))) {
+			Output___y = 22;
 		}
 
 	}
@@ -11486,16 +11486,16 @@ var Output__printInt(var c) {
 var Output__backSpace() {
 	var xx;
 	var yy;
-	Output__x = Output__x-1;
-	if (0!=(((Output__x<0)?-1:0))) {
-		Output__x = 0;
+	Output___x = Output___x-1;
+	if (0!=(((Output___x<0)?-1:0))) {
+		Output___x = 0;
 	}
 
-	xx = Output__x;
-	yy = Output__y;
+	xx = Output___x;
+	yy = Output___y;
 	Output__printChar(8);
-	Output__x = xx;
-	Output__y = yy;
+	Output___x = xx;
+	Output___y = yy;
 	return 0;
 }
 #endif
@@ -11503,9 +11503,9 @@ var Output__backSpace() {
 #ifdef JACK_IMPLEMENTATION
 var Sys___str0[] = {69,114,114,111,114,40,0};
 var Sys___str1[] = {41,0};
-var Sys__in_error;
+var Sys___in_error;
 var Sys__init() {
-	Sys__in_error = 0;
+	Sys___in_error = 0;
 	Memory__init();
  #ifndef JACK_HACK
  	Sys2__init();
@@ -11530,18 +11530,18 @@ var Sys__halt() {
 	return 0;
 }
 var Sys__error(var errorCode) {
-	if (0!=(Sys__in_error)) {
+	if (0!=(Sys___in_error)) {
 		return 0;
 	}
 
-	Sys__in_error = -1;
+	Sys___in_error = -1;
 	Output__printString(Memory__getString(Sys___str0));
 	Output__printInt(errorCode);
 	Output__printString(Memory__getString(Sys___str1));
 	Output__println();
  	errorCode = 1 / (errorCode - errorCode);
  	exit(errorCode);
-	Sys__in_error = 0;
+	Sys___in_error = 0;
 	return 0;
 }
 var Sys__wait(var duration) {
@@ -11556,7 +11556,7 @@ var Sys__wait(var duration) {
 #endif
 
 #ifdef JACK_IMPLEMENTATION
-var Screen__color;
+var Screen___color;
 var Screen__init() {
 	return 0;
 }
@@ -11574,7 +11574,7 @@ var Screen__clearScreen() {
 	return 0;
 }
 var Screen__setColor(var b) {
-	Screen__color = b;
+	Screen___color = b;
 	return 0;
 }
 var Screen__drawPixel(var x, var y) {
@@ -11590,7 +11590,7 @@ var Screen__drawPixel(var x, var y) {
 		p = p*2;
 		r = r-1;
 	}
-	if (0!=(Screen__color)) {
+	if (0!=(Screen___color)) {
 		b = b|p;
 	} else {
 		b = b&p;
@@ -12099,13 +12099,13 @@ var Memory___str13[] = {100,101,65,108,108,111,99,32,101,114,114,111,114,58,32,9
 var Memory___str14[] = {32,112,61,0};
 var Memory___str15[] = {69,114,114,111,114,32,105,110,32,100,101,65,108,108,111,99,33,0};
 var Memory___str16[] = {32,97,115,105,122,101,61,0};
-var Memory__arena;
-var Memory__asize;
-var Memory__freep;
-var Memory__mem;
+var Memory___arena;
+var Memory___asize;
+var Memory___freep;
+var Memory___mem;
 var Memory__init() {
 	var i;
-	Memory__mem = 0;
+	Memory___mem = 0;
  #ifndef JACK_HACK
  	return 0;
  #endif
@@ -12114,11 +12114,11 @@ var Memory__init() {
 		Memory__poke(i, 0);
 		i = i+1;
 	}
-	Memory__arena = Math__abs(__peek(Memory__mem+0));
-	Memory__arena = 0;
-	Memory__asize = 16384;
-	__poke(Memory__arena+0, Memory__asize);
-	Memory__freep = Memory__arena;
+	Memory___arena = Math__abs(__peek(Memory___mem+0));
+	Memory___arena = 0;
+	Memory___asize = 16384;
+	__poke(Memory___arena+0, Memory___asize);
+	Memory___freep = Memory___arena;
 	return 0;
 }
 var Memory__deInit() {
@@ -12142,7 +12142,7 @@ var Memory__peek(var addr) {
  		Screen__processEvents();
 	}
  	return Memory__memory[addr];
-	return __peek(Memory__mem+addr);
+	return __peek(Memory___mem+addr);
 }
 var Memory__poke(var addr, var value) {
  	//((var*)((addr)*sizeof(var)))[0] = value;
@@ -12161,15 +12161,15 @@ var Memory__poke(var addr, var value) {
 
  	//printf("poke %d, %d\n", (int)addr, (int)value);
  	return Memory__memory[addr] = value;
-	__poke(Memory__mem+addr, value);
+	__poke(Memory___mem+addr, value);
 	return 0;
 }
 var Memory__defrag() {
 	var p;
 	var q;
 	var end;
-	end = Memory__arena+Memory__asize;
-	p = Memory__arena;
+	end = Memory___arena+Memory___asize;
+	p = Memory___arena;
 	while (-1==(((p<end)?-1:0))) {
 		if (0!=(((__peek(p+0)>0)?-1:0))) {
 			q = p+__peek(p+0);
@@ -12192,8 +12192,8 @@ var Memory__checkEmpty() {
 	var p;
 	var end;
  	return -1;
-	end = Memory__arena+Memory__asize;
-	p = Memory__arena;
+	end = Memory___arena+Memory___asize;
+	p = Memory___arena;
 	ok = -1;
 	while (-1==(((p<end)?-1:0))) {
 		if (0!=(((__peek(p+0)<0)?-1:0))) {
@@ -12242,10 +12242,10 @@ var Memory__alloc(var size) {
 	}
 
 	while (-1==(((tries<3)?-1:0))) {
-		end = Memory__arena+Memory__asize;
-		p = Memory__freep;
+		end = Memory___arena+Memory___asize;
+		p = Memory___freep;
 		doit = -1;
-		while (-1==(doit|((((((p==Memory__freep)?-1:0))==0)?-1:0)))) {
+		while (-1==(doit|((((((p==Memory___freep)?-1:0))==0)?-1:0)))) {
 			doit = 0;
 			if (0!=(((__peek(p+0)>size)?-1:0))) {
 				if (0!=((((size+1)==__peek(p+0))?-1:0))) {
@@ -12255,22 +12255,22 @@ var Memory__alloc(var size) {
 					__poke(p+0, -(size+1));
 					__poke(p+size+1, (k-size)-1);
 				}
-				Memory__freep = p;
+				Memory___freep = p;
  	//printf("alloc [%d] %d\n", (int)p, (int) size);
 				return p+1;
 			}
 
 			p = p+Math__abs(__peek(p+0));
 			if (0!=(((p==end)?-1:0))) {
-				p = Memory__arena;
+				p = Memory___arena;
 			}
 
-			if (0!=((((p<Memory__arena)?-1:0))|(((p>(end-1))?-1:0))|(((__peek(p+0)==0)?-1:0)))) {
+			if (0!=((((p<Memory___arena)?-1:0))|(((p>(end-1))?-1:0))|(((__peek(p+0)==0)?-1:0)))) {
 				Output__printString(Memory__getString(Memory___str4));
 				Output__printString(Memory__getString(Memory___str5));
 				Output__printInt(p);
 				Output__printString(Memory__getString(Memory___str6));
-				Output__printInt(Memory__arena);
+				Output__printInt(Memory___arena);
 				Output__printString(Memory__getString(Memory___str7));
 				Output__printInt(end);
 				Output__printString(Memory__getString(Memory___str8));
@@ -12283,15 +12283,15 @@ var Memory__alloc(var size) {
 		if (0!=(((tries==0)?-1:0))) {
 			Memory__defrag();
 		} else {
-			k = Memory__asize;
-			Memory__asize = Memory__asize+(size*8)+64;
+			k = Memory___asize;
+			Memory___asize = Memory___asize+(size*8)+64;
 			i = 0;
-			j = Memory__arena+k;
+			j = Memory___arena+k;
 			while (-1==(((i<j)?-1:0))) {
 				i = i+1;
 			}
-			__poke(end+0, Memory__asize-k);
-			__poke(Memory__arena+Memory__asize-1, 0);
+			__poke(end+0, Memory___asize-k);
+			__poke(Memory___arena+Memory___asize-1, 0);
 		}
 		tries = tries+1;
 	}
@@ -12307,9 +12307,9 @@ var Memory__log(var msg, var p, var q) {
 	Output__printString(Memory__getString(Memory___str10));
 	Output__printInt(q);
 	Output__printString(Memory__getString(Memory___str11));
-	Output__printInt(Memory__arena);
+	Output__printInt(Memory___arena);
 	Output__printString(Memory__getString(Memory___str12));
-	Output__printInt(Memory__asize);
+	Output__printInt(Memory___asize);
 }
 var Memory__deAlloc(var p) {
 	var pi;
@@ -12318,9 +12318,9 @@ var Memory__deAlloc(var p) {
  	free(((var*)(p* sizeof(var)))-1);
  	return 0;
  #endif
-	if (0!=(((p<Memory__arena)?-1:0))) {
+	if (0!=(((p<Memory___arena)?-1:0))) {
 		Output__printString(Memory__getString(Memory___str13));
-		Output__printInt(Memory__arena);
+		Output__printInt(Memory___arena);
 		Output__printString(Memory__getString(Memory___str14));
 		Output__printInt(p);
 		Output__println();
@@ -12329,13 +12329,13 @@ var Memory__deAlloc(var p) {
 	}
 
 	pi = p;
-	if (0!=((((pi<Memory__arena)?-1:0))|((((Memory__arena+Memory__asize)<pi)?-1:0))|(((__peek(Memory__mem+pi-1)>(-1))?-1:0)))) {
+	if (0!=((((pi<Memory___arena)?-1:0))|((((Memory___arena+Memory___asize)<pi)?-1:0))|(((__peek(Memory___mem+pi-1)>(-1))?-1:0)))) {
 		Output__println();
-		Output__printInt(Memory__arena);
+		Output__printInt(Memory___arena);
 		Output__printString(Memory__getString(Memory___str15));
 		Output__printInt(pi);
 		Output__printString(Memory__getString(Memory___str16));
-		Output__printInt(Memory__asize);
+		Output__printInt(Memory___asize);
 		Output__println();
 		return 0;
 	}
