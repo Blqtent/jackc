@@ -260,15 +260,15 @@ var Screen__processEvents()
 	in_proc = -1;
 	init();
 	key = 0;
+	if (refresh) {
+		PostMessage(hWnd, WM_PAINT, 0, 0);
+	}
 	while (PeekMessage(&msg, hWnd, 0, 0, PM_REMOVE)) {
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
 		if (key) {
 			k = key;
 		}
-	}
-	if (refresh) {
-		PostMessage(hWnd, WM_PAINT, 0, 0);
 	}
 	Sys__wait(20);
 	in_proc = 0;

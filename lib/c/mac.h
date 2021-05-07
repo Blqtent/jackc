@@ -1,5 +1,12 @@
-// git clone git@github.com:jimon/osx_app_in_plain_c.git
-
+/*
+ *                          Apple MacOS support
+ *
+ *                      7 may MMXXI PUBLIC DOMAIN
+ *           The author disclaims copyright to this source code.
+ *
+ *  This source code is vastly inspired by that work :
+ *  https://github.com:/jimon/osx_app_in_plain_c
+ */
 
 #ifndef JACK_MAC_H
 #define JACK_MAC_H
@@ -23,8 +30,6 @@
 #define EncodeNSUInteger "I"
 #endif
 #include <stdio.h>
-#include <math.h>
-#include <limits.h>
 #include <objc/objc.h>
 #include <objc/runtime.h>
 #include <objc/message.h>
@@ -34,6 +39,88 @@
 #include <CoreGraphics/CGBase.h>
 #include <CoreGraphics/CGGeometry.h>
 #include <Carbon/Carbon.h>
+
+#define kVK_Insert 0x72
+
+enum  {   
+    	NSEventTypeLeftMouseDown             = 1,
+    	NSEventTypeLeftMouseUp               = 2,
+    	NSEventTypeRightMouseDown            = 3,
+    	NSEventTypeRightMouseUp              = 4,
+    	NSEventTypeMouseMoved                = 5,
+    	NSEventTypeLeftMouseDragged          = 6,
+    	NSEventTypeRightMouseDragged         = 7,
+    	NSEventTypeMouseEntered              = 8,
+    	NSEventTypeMouseExited               = 9,
+    	NSEventTypeKeyDown                   = 10,
+    	NSEventTypeKeyUp                     = 11,
+    	NSEventTypeFlagsChanged              = 12,
+    	NSEventTypeAppKitDefined             = 13,
+    	NSEventTypeSystemDefined             = 14,
+    	NSEventTypeApplicationDefined        = 15,
+    	NSEventTypePeriodic                  = 16,
+    	NSEventTypeCursorUpdate              = 17,
+    	NSEventTypeScrollWheel               = 22,
+    	NSEventTypeTabletPoint               = 23,
+    	NSEventTypeTabletProximity           = 24,
+    	NSEventTypeOtherMouseDown            = 25,
+    	NSEventTypeOtherMouseUp              = 26,
+    	NSEventTypeOtherMouseDragged         = 27,
+    	NSEventTypeGesture  		     = 29,
+    	NSEventTypeMagnify 		     = 30,
+    	NSEventTypeSwipe   		     = 31,
+    	NSEventTypeRotate  		     = 18,
+    	NSEventTypeBeginGesture   	     = 19,
+    	NSEventTypeEndGesture 		     = 20,
+    	NSEventTypeSmartMagnify		     = 32,
+    	NSEventTypeQuickLook 		     = 33,
+    	NSEventTypePressure 		     = 34,
+    	NSEventTypeDirectTouch 		     = 37,
+	NSEventTypeChangeMode 		     = 38
+};
+
+enum {
+    	NSOpenGLPFAAllRenderers           =   1,
+    	NSOpenGLPFATripleBuffer           =   3,
+    	NSOpenGLPFADoubleBuffer           =   5,	
+    	NSOpenGLPFAAuxBuffers             =   7,	
+    	NSOpenGLPFAColorSize              =   8,	
+    	NSOpenGLPFAAlphaSize              =  11,	
+    	NSOpenGLPFADepthSize              =  12,	
+    	NSOpenGLPFAStencilSize            =  13,	
+    	NSOpenGLPFAAccumSize              =  14,
+    	NSOpenGLPFAMinimumPolicy          =  51,	
+    	NSOpenGLPFAMaximumPolicy          =  52,	
+    	NSOpenGLPFASampleBuffers          =  55,	
+    	NSOpenGLPFASamples                =  56,	
+    	NSOpenGLPFAAuxDepthStencil        =  57,	
+    	NSOpenGLPFAColorFloat             =  58,	
+    	NSOpenGLPFAMultisample            =  59,    
+    	NSOpenGLPFASupersample            =  60,    
+    	NSOpenGLPFASampleAlpha            =  61,    
+    	NSOpenGLPFARendererID             =  70,	
+    	NSOpenGLPFANoRecovery             =  72,	
+    	NSOpenGLPFAAccelerated            =  73,	
+    	NSOpenGLPFAClosestPolicy          =  74,	
+    	NSOpenGLPFABackingStore           =  76,	
+    	NSOpenGLPFAScreenMask             =  84,	
+    	NSOpenGLPFAAllowOfflineRenderers  =  96,  
+    	NSOpenGLPFAAcceleratedCompute     =  97,	
+    	NSOpenGLPFAOpenGLProfile          =  99,  
+    	NSOpenGLPFAVirtualScreenCount     = 128,	
+    	NSOpenGLPFAStereo                 =   6,
+    	NSOpenGLPFAOffScreen              =  53,
+    	NSOpenGLPFAFullScreen             =  54,
+    	NSOpenGLPFASingleRenderer         =  71,
+    	NSOpenGLPFARobust                 =  75,
+    	NSOpenGLPFAMPSafe                 =  78,
+    	NSOpenGLPFAWindow                 =  80,
+    	NSOpenGLPFAMultiScreen            =  81,
+    	NSOpenGLPFACompliant              =  83,
+    	NSOpenGLPFAPixelBuffer            =  90,
+    	NSOpenGLPFARemotePixelBuffer      =  91,
+};
+
 
 typedef CGPoint NSPoint;
 typedef CGRect NSRect;
@@ -118,19 +205,11 @@ NSPoint point = {20, 20};
 SEL cascadeTopLeftFromPointSel;
 id titleString;
 SEL setTitleSel;
-uint32_t glAttributes[] =
-{
-	8, 24,
-	11, 8,
-	5,
-	73,
-	72,
-	55, 1,
-	56, 4,
-	99, 0x1000, // or 0x3200
-	0
-};
-
+uint32_t glAttributes[] = { 
+	NSOpenGLPFADoubleBuffer,
+	NSOpenGLPFAColorSize, 24,
+	NSOpenGLPFAAlphaSize, 8,
+	0};
 Class NSOpenGLPixelFormatClass;
 id pixelFormatAlloc;
 SEL initWithAttributesSel;
@@ -180,21 +259,6 @@ CGFloat deltaX;
 CGFloat deltaY;
 BOOL precisionScrolling;
 NSUInteger modifiers;
-struct {
-	union {
-		struct {
-			uint8_t alpha_shift:1;
-			uint8_t shift:1;
-			uint8_t control:1;
-			uint8_t alternate:1;
-			uint8_t command:1;
-			uint8_t numeric_pad:1;
-			uint8_t help:1;
-			uint8_t function:1;
-		};
-		uint8_t mask;
-	};
-} keys;
 id inputText;
 const char * inputTextUTF8;
 uint16_t keyCode;
@@ -262,11 +326,18 @@ void init()
 	objc_msgSend(NSApp, setActivationPolicySel, 0);
 
 	NSObjectClass = objc_getClass("NSObject");
-	AppDelegateClass = objc_allocateClassPair(NSObjectClass, "AppDelegate", 0);
-	NSApplicationDelegateProtocol = objc_getProtocol("NSApplicationDelegate");
-	resultAddProtoc = class_addProtocol(AppDelegateClass, NSApplicationDelegateProtocol);
-	applicationShouldTerminateSel = sel_registerName("applicationShouldTerminate:");
-	resultAddMethod = class_addMethod(AppDelegateClass, applicationShouldTerminateSel, (IMP)applicationShouldTerminate, EncodeNSUInteger "@:@");
+	AppDelegateClass = objc_allocateClassPair(
+			NSObjectClass, "AppDelegate", 0);
+	NSApplicationDelegateProtocol = objc_getProtocol(
+			"NSApplicationDelegate");
+	resultAddProtoc = class_addProtocol(
+			AppDelegateClass, NSApplicationDelegateProtocol);
+	applicationShouldTerminateSel = sel_registerName(
+			"applicationShouldTerminate:");
+	resultAddMethod = class_addMethod(
+			AppDelegateClass, applicationShouldTerminateSel, 
+			(IMP)applicationShouldTerminate, 
+			EncodeNSUInteger "@:@");
 	dgAlloc = objc_msgSend((id)AppDelegateClass, allocSel);
 	dg = objc_msgSend(dgAlloc, initSel);
 
@@ -307,15 +378,22 @@ void init()
 
 	NSStringClass = objc_getClass("NSString");
 	stringWithUTF8StringSel = sel_registerName("stringWithUTF8String:");
-	quitTitlePrefixString = objc_msgSend((id)NSStringClass, stringWithUTF8StringSel, "Quit ");
-	stringByAppendingStringSel = sel_registerName("stringByAppendingString:");
-	quitTitle = objc_msgSend(quitTitlePrefixString, stringByAppendingStringSel, appName);
+	quitTitlePrefixString = objc_msgSend(
+			(id)NSStringClass, stringWithUTF8StringSel, "Quit ");
+	stringByAppendingStringSel = sel_registerName(
+			"stringByAppendingString:");
+	quitTitle = objc_msgSend(quitTitlePrefixString, 
+			stringByAppendingStringSel, appName);
 
-	quitMenuItemKey = objc_msgSend((id)NSStringClass, stringWithUTF8StringSel, "q");
+	quitMenuItemKey = objc_msgSend((id)NSStringClass, 
+			stringWithUTF8StringSel, "q");
 	quitMenuItemAlloc = objc_msgSend((id)NSMenuItemClass, allocSel);
-	initWithTitleSel = sel_registerName("initWithTitle:action:keyEquivalent:");
+	initWithTitleSel = sel_registerName(
+			"initWithTitle:action:keyEquivalent:");
 	terminateSel = sel_registerName("terminate:");
-	quitMenuItem = objc_msgSend(quitMenuItemAlloc, initWithTitleSel, quitTitle, terminateSel, quitMenuItemKey);
+	quitMenuItem = objc_msgSend(quitMenuItemAlloc, 
+			initWithTitleSel, quitTitle, 
+			terminateSel, quitMenuItemKey);
 	objc_msgSend(quitMenuItem, autoreleaseSel);
 
 	objc_msgSend(appMenu, addItemSel, quitMenuItem);
@@ -325,8 +403,10 @@ void init()
 
 	NSWindowClass = objc_getClass("NSWindow");
 	windowAlloc = objc_msgSend((id)NSWindowClass, allocSel);
-	initWithContentRectSel = sel_registerName("initWithContentRect:styleMask:backing:defer:");
-	window = objc_msgSend(windowAlloc, initWithContentRectSel, rect, 15, 2, NO);
+	initWithContentRectSel = sel_registerName(
+			"initWithContentRect:styleMask:backing:defer:");
+	window = objc_msgSend(windowAlloc, initWithContentRectSel, 
+			rect, 15, 2, NO);
 	objc_msgSend(window, autoreleaseSel);
 
 	setReleasedWhenClosedSel = sel_registerName("setReleasedWhenClosed:");
@@ -334,11 +414,15 @@ void init()
 
 	windowCount = 1;
 
-	WindowDelegateClass = objc_allocateClassPair(NSObjectClass, "WindowDelegate", 0);
+	WindowDelegateClass = objc_allocateClassPair(
+			NSObjectClass, "WindowDelegate", 0);
 	NSWindowDelegateProtocol = objc_getProtocol("NSWindowDelegate");
-	resultAddProtoc = class_addProtocol(WindowDelegateClass, NSWindowDelegateProtocol);
+	resultAddProtoc = class_addProtocol(
+			WindowDelegateClass, NSWindowDelegateProtocol);
 	windowWillCloseSel = sel_registerName("windowWillClose:");
-	resultAddMethod = class_addMethod(WindowDelegateClass, windowWillCloseSel, (IMP)windowWillClose,  "v@:@");
+	resultAddMethod = class_addMethod(
+			WindowDelegateClass, windowWillCloseSel, 
+			(IMP)windowWillClose,  "v@:@");
 	wdgAlloc = objc_msgSend((id)WindowDelegateClass, allocSel);
 	wdg = objc_msgSend(wdgAlloc, initSel);
 	objc_msgSend(wdg, autoreleaseSel);
@@ -348,10 +432,12 @@ void init()
 	contentViewSel = sel_registerName("contentView");
 	contentView = objc_msgSend(window, contentViewSel);
 
-	setWantsBestResolutionOpenGLSurfaceSel = sel_registerName("setWantsBestResolutionOpenGLSurface:");
-	objc_msgSend(contentView, setWantsBestResolutionOpenGLSurfaceSel, YES);
-
-	cascadeTopLeftFromPointSel = sel_registerName("cascadeTopLeftFromPoint:");
+	setWantsBestResolutionOpenGLSurfaceSel = sel_registerName(
+			"setWantsBestResolutionOpenGLSurface:");
+	objc_msgSend(contentView, 
+			setWantsBestResolutionOpenGLSurfaceSel, YES);
+	cascadeTopLeftFromPointSel = sel_registerName(
+			"cascadeTopLeftFromPoint:");
 	objc_msgSend(window, cascadeTopLeftFromPointSel, point);
 
 	titleString = objc_msgSend((id)NSStringClass, 
@@ -360,15 +446,18 @@ void init()
 	objc_msgSend(window, setTitleSel, titleString);
 
 	NSOpenGLPixelFormatClass = objc_getClass("NSOpenGLPixelFormat");
-	pixelFormatAlloc = objc_msgSend((id)NSOpenGLPixelFormatClass, allocSel);
+	pixelFormatAlloc = objc_msgSend(
+			(id)NSOpenGLPixelFormatClass, allocSel);
 	initWithAttributesSel = sel_registerName("initWithAttributes:");
-	pixelFormat = objc_msgSend(pixelFormatAlloc, initWithAttributesSel, glAttributes);
+	pixelFormat = objc_msgSend(pixelFormatAlloc, 
+			initWithAttributesSel, glAttributes);
 	objc_msgSend(pixelFormat, autoreleaseSel);
 
 	NSOpenGLContextClass = objc_getClass("NSOpenGLContext");
 	openGLContextAlloc = objc_msgSend((id)NSOpenGLContextClass, allocSel);
 	initWithFormatSel = sel_registerName("initWithFormat:shareContext:");
-	openGLContext = objc_msgSend(openGLContextAlloc, initWithFormatSel, pixelFormat, nil);
+	openGLContext = objc_msgSend(openGLContextAlloc, 
+			initWithFormatSel, pixelFormat, nil);
 	objc_msgSend(openGLContext, autoreleaseSel);
 
 	setViewSel = sel_registerName("setView:");
@@ -377,31 +466,37 @@ void init()
 	makeKeyAndOrderFrontSel = sel_registerName("makeKeyAndOrderFront:");
 	objc_msgSend(window, makeKeyAndOrderFrontSel, window);
 
-	setAcceptsMouseMovedEventsSel = sel_registerName("setAcceptsMouseMovedEvents:");
+	setAcceptsMouseMovedEventsSel = sel_registerName(
+			"setAcceptsMouseMovedEvents:");
 	objc_msgSend(window, setAcceptsMouseMovedEventsSel, YES);
 
 	NSColorClass = objc_getClass("NSColor");
-	blackColor = ((id (*)(Class, SEL))objc_msgSend)(NSColorClass, sel_registerName("blackColor"));
+	blackColor = ((id (*)(Class, SEL))objc_msgSend)(
+			NSColorClass, sel_registerName("blackColor"));
 	setBackgroundColorSel = sel_registerName("setBackgroundColor:");
 	objc_msgSend(window, setBackgroundColorSel, blackColor);
 
-	activateIgnoringOtherAppsSel = sel_registerName("activateIgnoringOtherApps:");
+	activateIgnoringOtherAppsSel = sel_registerName(
+			"activateIgnoringOtherApps:");
 	objc_msgSend(NSApp, activateIgnoringOtherAppsSel, YES);
 
 
 	NSDateClass = objc_getClass("NSDate");
 	distantPastSel = sel_registerName("distantPast");
-	nextEventMatchingMaskSel = sel_registerName("nextEventMatchingMask:untilDate:inMode:dequeue:");
+	nextEventMatchingMaskSel = sel_registerName(
+			"nextEventMatchingMask:untilDate:inMode:dequeue:");
 	frameSel = sel_registerName("frame");
 	typeSel = sel_registerName("type");
 	buttonNumberSel = sel_registerName("buttonNumber");
 	keyCodeSel = sel_registerName("keyCode");
 	keyWindowSel = sel_registerName("keyWindow");
-	mouseLocationOutsideOfEventStreamSel = sel_registerName("mouseLocationOutsideOfEventStream");
+	mouseLocationOutsideOfEventStreamSel = sel_registerName(
+			"mouseLocationOutsideOfEventStream");
 	convertRectToBackingSel = sel_registerName("convertRectToBacking:");
 	scrollingDeltaXSel = sel_registerName("scrollingDeltaX");
 	scrollingDeltaYSel = sel_registerName("scrollingDeltaY");
-	hasPreciseScrollingDeltasSel = sel_registerName("hasPreciseScrollingDeltas");
+	hasPreciseScrollingDeltasSel = sel_registerName(
+			"hasPreciseScrollingDeltas");
 	modifierFlagsSel = sel_registerName("modifierFlags");
 	charactersSel = sel_registerName("characters");
 	UTF8StringSel = sel_registerName("UTF8String");
@@ -424,7 +519,8 @@ void initgl()
 
 	rect = ((NSRect(*)(id,SEL))objc_msgSend_stret)(contentView, frameSel);
 
-	rect = ((NSRect(*)(id,SEL,NSRect))objc_msgSend_stret)(contentView, convertRectToBackingSel, rect);
+	rect = ((NSRect(*)(id,SEL,NSRect))objc_msgSend_stret)(
+			contentView, convertRectToBackingSel, rect);
 
 	glViewport(0, 0, rect.size.width, rect.size.height);
 	glClearColor(1,1,1,1);
@@ -445,7 +541,6 @@ void initgl()
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
-	//glBindTexture(GL_TEXTURE_2D, 0);
 	glEnable(GL_TEXTURE_2D);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
@@ -484,7 +579,7 @@ var getKey(var k)
 	case kVK_PageDown:
 		key = Keyboard__PAGE_DOWN();
 		break;
-	case 0x72:
+	case kVK_Insert:
 		key = Keyboard__INSERT();
 		break;
 	case kVK_ForwardDelete:
@@ -544,115 +639,88 @@ int check_event()
 	if (!event) return 0;
 	eventType = (NSUInteger)objc_msgSend(event, typeSel);
 
-	switch(eventType) {
-		//case NSMouseMoved:
-		//case NSLeftMouseDragged:
-		//case NSRightMouseDragged:
-		//case NSOtherMouseDragged:
-		case 5:
-		case 6:
-		case 7:
-		case 27:
-		{
-			currentWindow = objc_msgSend(NSApp, keyWindowSel);
-
-			currentWindowContentView = objc_msgSend(currentWindow, contentViewSel);
-			adjustFrame = ((NSRect(*)(id,SEL))objc_msgSend_stret)(currentWindowContentView, frameSel);
-
-			p = ((NSPoint(*)(id,SEL))objc_msgSend)(currentWindow, mouseLocationOutsideOfEventStreamSel);
-
-			if(p.x < 0) p.x = 0;
-			else if(p.x > adjustFrame.size.width) p.x = adjustFrame.size.width;
-			if(p.y < 0) p.y = 0;
-			else if(p.y > adjustFrame.size.height) p.y = adjustFrame.size.height;
-
-			r.origin.x = p.x;
-			r.origin.y = p.y;
-			r.size.width = 0;
-			r.size.height = 0;
-			r = ((NSRect(*)(id,SEL,NSRect))objc_msgSend_stret)(currentWindowContentView, convertRectToBackingSel, r);
-			p = r.origin;
-
-			break;
+	switch (eventType) {
+	case NSEventTypeMouseMoved:
+	case NSEventTypeLeftMouseDragged:
+	case NSEventTypeRightMouseDragged:
+	case NSEventTypeOtherMouseDragged:
+		currentWindow = objc_msgSend(NSApp, keyWindowSel);
+		currentWindowContentView = objc_msgSend(
+				currentWindow, contentViewSel);
+		adjustFrame = ((NSRect(*)(id,SEL))objc_msgSend_stret)(
+				currentWindowContentView, frameSel);
+		p = ((NSPoint(*)(id,SEL))objc_msgSend)(
+				currentWindow, 
+				mouseLocationOutsideOfEventStreamSel);
+		if (p.x < 0) {
+			p.x = 0;
+		} else if (p.x > adjustFrame.size.width) {
+			p.x = adjustFrame.size.width;
 		}
-		//case NSLeftMouseDown:
-		case 1:
-			break;
-		//case NSLeftMouseUp:
-		case 2:
-			break;
-		//case NSRightMouseDown:
-		case 3:
-			break;
-		//case NSRightMouseUp:
-		case 4:
-			break;
-		//case NSOtherMouseDown:
-		case 25:
-		{
-			number = (NSInteger)objc_msgSend(event, buttonNumberSel);
-			break;
+		if (p.y < 0) {
+			p.y = 0;
+		} else if (p.y > adjustFrame.size.height) {
+		       	p.y = adjustFrame.size.height;
 		}
-		//case NSOtherMouseUp:
-		case 26:
-		{
-			number = (NSInteger)objc_msgSend(event, buttonNumberSel);
-			break;
+		r.origin.x = p.x;
+		r.origin.y = p.y;
+		r.size.width = 0;
+		r.size.height = 0;
+		r = ((NSRect(*)(id,SEL,NSRect))objc_msgSend_stret)(
+				currentWindowContentView, 
+				convertRectToBackingSel, r);
+		p = r.origin;
+
+		break;
+	case NSEventTypeLeftMouseDown:
+		break;
+	case NSEventTypeLeftMouseUp:
+		break;
+	case NSEventTypeRightMouseDown:
+		break;
+	case NSEventTypeRightMouseUp:
+		break;
+	case NSEventTypeOtherMouseDown:
+		number = (NSInteger)objc_msgSend(event, buttonNumberSel);
+		break;
+	case NSEventTypeOtherMouseUp:
+		number = (NSInteger)objc_msgSend(event, buttonNumberSel);
+		break;
+	case NSEventTypeScrollWheel:
+		deltaX = ((CGFloat(*)(id,SEL))objc_msgSend_fpret)(
+				event, scrollingDeltaXSel);
+		deltaY = ((CGFloat(*)(id,SEL))objc_msgSend_fpret)(
+				event, scrollingDeltaYSel);
+		precisionScrolling = (BOOL)objc_msgSend(
+				event, hasPreciseScrollingDeltasSel);
+
+		if (precisionScrolling) {
+			deltaX *= 0.1f; 
+			deltaY *= 0.1f;
 		}
-		//case NSScrollWheel:
-		case 22:
-		{
-			deltaX = ((CGFloat(*)(id,SEL))objc_msgSend_fpret)(event, scrollingDeltaXSel);
+		break;
+	case NSEventTypeFlagsChanged:
+		modifiers = (NSUInteger)objc_msgSend(event, modifierFlagsSel);
+		break;
+	case NSEventTypeKeyDown:
+		inputText = objc_msgSend(event, charactersSel);
+		inputTextUTF8 = (const char*)objc_msgSend(
+				inputText, UTF8StringSel);
+		keyCode = (unsigned short)objc_msgSend(event, keyCodeSel);
+		key = getKey(keyCode);
 
-			deltaY = ((CGFloat(*)(id,SEL))objc_msgSend_fpret)(event, scrollingDeltaYSel);
-
-			precisionScrolling = (BOOL)objc_msgSend(event, hasPreciseScrollingDeltasSel);
-
-			if(precisionScrolling)
-			{
-				deltaX *= 0.1f; // similar to glfw
-				deltaY *= 0.1f;
-			}
-
-			if(fabs(deltaX) > 0.0f || fabs(deltaY) > 0.0f)
-			{
-			}
-			break;
+		if (!key && inputTextUTF8) {
+			key = inputTextUTF8[0]; // FIXME
 		}
-		//case NSFlagsChanged:
-		case 12:
-		{
-			modifiers = (NSUInteger)objc_msgSend(event, modifierFlagsSel);
-			keys.mask = (modifiers & 0xffff0000UL) >> 16;
-			break;
-		}
-		//case NSKeyDown:
-		case 10:
-		{
-			inputText = objc_msgSend(event, charactersSel);
-
-			inputTextUTF8 = (const char*)objc_msgSend(inputText, UTF8StringSel);
-
-			keyCode = (unsigned short)objc_msgSend(event, keyCodeSel);
-	
-			key = getKey(keyCode);
-
-			if (!key && inputTextUTF8) {
-				key = inputTextUTF8[0];
-			}
-			Memory__poke(24576, key);
-			break;
-		}
-		//case NSKeyUp:
-		case 11:
-		{
-			uint16_t keyCode = (unsigned short)objc_msgSend(event, keyCodeSel);
-			key = 0;
-			Memory__poke(24576, 0);
-			break;
-		}
-		default:
-			break;
+		Memory__poke(24576, key);
+		break;
+	case NSEventTypeKeyUp:
+		keyCode = (unsigned short)objc_msgSend(event, keyCodeSel);
+		key = 0;
+		Memory__poke(24576, 0);
+		break;
+	default:
+		break;
 	}
 
 	objc_msgSend(NSApp, sendEventSel, event);
@@ -671,7 +739,8 @@ void update()
 
 	rect = ((NSRect(*)(id,SEL))objc_msgSend_stret)(contentView, frameSel);
 
-	rect = ((NSRect(*)(id,SEL,NSRect))objc_msgSend_stret)(contentView, convertRectToBackingSel, rect);
+	rect = ((NSRect(*)(id,SEL,NSRect))objc_msgSend_stret)(
+			contentView, convertRectToBackingSel, rect);
 
 	glViewport(0, 0, rect.size.width, rect.size.height);
 	screen2rgba(width, height);
