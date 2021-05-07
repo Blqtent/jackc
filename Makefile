@@ -10,6 +10,10 @@ all:
 	#i686-w64-mingw32-gcc -g -municode  -static -lwsock32 -lopengl32 -lwinspool -lshell32 -luuid jackc.c -o jack32.exe 
 	#x86_64-w64-mingw32-gcc -g -municode  -static -lwsock32 -lopengl32 -lwinspool -lshell32 -luuid jackc.c -o jack64.exe 
 
+mac:
+	scp jml@192.168.43.93:src/jack/jackc.c .
+	xcodebuild
+
 win:
 	rm -rf jackc/lib
 	cp -r lib jackc/
