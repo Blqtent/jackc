@@ -135,7 +135,6 @@ extern id const NSDefaultRunLoopMode;
 
 #ifdef JACK_IMPLEMENTATION
 
-bool terminated = false;
 int windowCount = 0;
 int width = 512;
 int height = 256;
