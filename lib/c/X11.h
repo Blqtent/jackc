@@ -16,7 +16,7 @@
 
 #ifdef JACK_IMPLEMENTATION
 var Screen__need_refresh = -1;
-Display *display = NULL;
+Display *__display = NULL;
 XImage *ximage;
 int width = 512;
 int height = 256;
@@ -30,6 +30,7 @@ XSetWindowAttributes swa;
 XWindowAttributes gwa;
 GLXFBConfig *fbc;
 GLuint base;
+GLuint tex = 1;
 Atom wm_del;
 var isfirst = -1;
 var dump = 0;
@@ -81,47 +82,47 @@ void init()
 	Font id;
 	unsigned int first,last;
 	int fbcount;
-	if (display != NULL) {
+	if (__display != NULL) {
 		return;
 	}
-	display = XOpenDisplay(NULL);
-	root = DefaultRootWindow(display);
-	fbc = glXChooseFBConfig(display, DefaultScreen(display), att, &fbcount);
+	__display = XOpenDisplay(NULL);
+	root = DefaultRootWindow(__display);
+	fbc = glXChooseFBConfig(__display, DefaultScreen(__display), att, &fbcount);
 	if (fbc == NULL) {
 		printf("\n Failed to get config.\n");
 		return;
 	}
 	//vi = glXChooseVisual(display, 0, att);
-	vi = glXGetVisualFromFBConfig(display, fbc[0]);
+	vi = glXGetVisualFromFBConfig(__display, fbc[0]);
 	if (vi == NULL) {
 		printf("\n No GL visual found.\n");
 		return;
 	}
 	//visual = XDefaultVisual(display, 0);
-	cmap = XCreateColormap(display, root, vi->visual, AllocNone);
+	cmap = XCreateColormap(__display, root, vi->visual, AllocNone);
 	swa.colormap = cmap;
 	swa.event_mask = ButtonPressMask|ExposureMask|KeyPressMask
 		|KeyReleaseMask;
-	window = XCreateWindow(display, root, 
+	window = XCreateWindow(__display, root, 
 			0, 0, width, height, 0, vi->depth, InputOutput,
 			vi->visual, CWColormap|CWEventMask, &swa);  
 
-	XMapWindow(display, window);
-	XStoreName(display, window, "JACK Application");
+	XMapWindow(__display, window);
+	XStoreName(__display, window, "JACK Application");
 
-	glc = glXCreateContext(display, vi, NULL, GL_TRUE);
-	glXMakeCurrent(display, window, glc);
+	glc = glXCreateContext(__display, vi, NULL, GL_TRUE);
+	glXMakeCurrent(__display, window, glc);
 	//glEnable(GL_DEPTH_TEST);
 
-	fontInfo = XLoadQueryFont(display, "fixed");
+	fontInfo = XLoadQueryFont(__display, "fixed");
 	id = fontInfo->fid;
 	first = fontInfo->min_char_or_byte2;
 	last = fontInfo->max_char_or_byte2;
 	base = glGenLists(last + 1);
 	glXUseXFont(id, first, last-first+1, base+first);
-	wm_del = XInternAtom(display, "WM_DELETE_WINDOW", False);
-	XSetWMProtocols(display, window, &wm_del, 1);
-	XMapWindow(display, window);	
+	wm_del = XInternAtom(__display, "WM_DELETE_WINDOW", False);
+	XSetWMProtocols(__display, window, &wm_del, 1);
+	XMapWindow(__display, window);	
 
 	glViewport(0, 0, width, height);
 	glClearColor(1,1,1,1);
@@ -151,12 +152,12 @@ void init()
 
 void deInit()
 {
-	if (display != NULL) {
-		glXMakeCurrent(display, None, NULL);
-		glXDestroyContext(display, glc);
-		XDestroyWindow(display, window);
-		XCloseDisplay(display);
-		display = NULL;
+	if (__display != NULL) {
+		glXMakeCurrent(__display, None, NULL);
+		glXDestroyContext(__display, glc);
+		XDestroyWindow(__display, window);
+		XCloseDisplay(__display);
+		__display = NULL;
 	}
 }
 
@@ -202,8 +203,8 @@ var processEvent()
 	fx = 8.0 * 2.0 / width;
 	fy = 11.0 * 2.0 / height;
 
-	XNextEvent(display, &ev);
-	gc = DefaultGC(display, 0);
+	XNextEvent(__display, &ev);
+	gc = DefaultGC(__display, 0);
 	switch (ev.type) {
 	case KeyRelease:
 		Memory__poke(24576, 0);
@@ -265,9 +266,9 @@ var processEvent()
 		break;
 	case Expose:
 		done = 1;
-		glXMakeCurrent(display, window, glc);
+		glXMakeCurrent(__display, window, glc);
 		display();
-		glXSwapBuffers(display, window);	
+		glXSwapBuffers(__display, window);	
 		isfirst = 0;	
 		break;
 	case ButtonPress:
@@ -344,7 +345,7 @@ var refresh()
 	memset(&ev, 0, sizeof(ev));
 	ev.type = Expose;
 	ev.xexpose.window = window;
-	XSendEvent(display, window, True,ExposureMask, &ev);
+	XSendEvent(__display, window, True,ExposureMask, &ev);
 	return 0;
 }
 
@@ -422,7 +423,7 @@ var Screen__processEvents()
 		refresh();
 		Screen__need_refresh = 0;
 	}
-	while (XPending(display)) {
+	while (XPending(__display)) {
 		e = processEvent();
 		if (e) {
 			r = e;

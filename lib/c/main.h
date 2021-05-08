@@ -26,6 +26,7 @@ struct __stat64 File__status;
 HANDLE File__hFind;
 WIN32_FIND_DATAW File__FindFileData;
 LPWSTR *Sys__argv__;
+int _nCmdShow = 0;
 #endif
 int Keyboard__flags;
 int Sys__argc__;
@@ -48,6 +49,7 @@ int main(int argc, char *argv[]) {
 int main(int argc, char *argv[]) {
 #else
 int WINAPI wWinMain(HINSTANCE hi,HINSTANCE prev,LPWSTR cmd,int nCmdShow) {
+	_nCmdShow = nCmdShow;
 	Sys__argv__ = CommandLineToArgvW(GetCommandLineW(), &Sys__argc__);
 #endif
 #endif

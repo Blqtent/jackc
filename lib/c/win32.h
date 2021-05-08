@@ -66,17 +66,16 @@ LONG WINAPI WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	switch(uMsg) {
 	case WM_PAINT:
 		GetClientRect(hWnd, &r);
-		glViewport(0, 0, r.right, r.bottom);
-		screen2rgba(width, height);
-		display();
 		BeginPaint(hWnd, &ps);
 		EndPaint(hWnd, &ps);
+		glViewport(0, 0, r.right, r.bottom);
+		wglMakeCurrent(hDC, hRC);
+		screen2rgba(width, height);
+		display();
 		refresh = 0;
 		return 0;
 	case WM_SIZE:
-		if (!refresh) {
-			PostMessage(hWnd, WM_PAINT, 0, 0);
-		}
+		PostMessage(hWnd, WM_PAINT, 0, 0);
 		return 0;
 	case WM_KEYUP:
 		key = 0;
@@ -179,7 +178,8 @@ void init()
 	s = WS_OVERLAPPEDWINDOW | WS_CLIPSIBLINGS | WS_CLIPCHILDREN;
 	AdjustWindowRect(&r, s, FALSE);
 	hWnd = CreateWindowW(L"Jack App", L"Jack application", s,
-			r.left, r.top, r.right - r.left , r.bottom - r.top,
+			CW_USEDEFAULT, CW_USEDEFAULT, 
+			r.right - r.left , r.bottom - r.top,
 			NULL, NULL, hInstance, NULL);
 	if (hWnd == NULL) {
 		printf("Cannot Create Window!!\n");
@@ -213,7 +213,7 @@ void init()
 	hRC = wglCreateContext(hDC);
 	wglMakeCurrent(hDC, hRC);
 
-	ShowWindow(hWnd, 1);
+	ShowWindow(hWnd, _nCmdShow);
 
 	glClearColor(1,1,1,1);
 	glClearDepth(1);
