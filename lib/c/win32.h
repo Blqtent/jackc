@@ -154,6 +154,7 @@ void init()
 	if (hWnd) {
 		return;
 	}
+	FreeConsole();
 	if (!hInstance) {
 		hInstance = GetModuleHandle(NULL);
 		wc.style = CS_OWNDC;
