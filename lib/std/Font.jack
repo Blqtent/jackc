@@ -10,39 +10,39 @@ class Font {
 		let fnt[4] = 0;
 		let fnt[5] = 0;
 		// ! (33)
-		let fnt[6] = 0;
-		let fnt[7] = 6168;
+		let fnt[6] = 2048;
+		let fnt[7] = 2056;
 		let fnt[8] = 2056;
-		let fnt[9] = 6144;
+		let fnt[9] = 2048;
 		let fnt[10] = 0;
 		let fnt[11] = 0;
 		// " (34)
 		let fnt[12] = 0;
-		let fnt[13] = 6168;
+		let fnt[13] = 10280;
 		let fnt[14] = 0;
 		let fnt[15] = 0;
 		let fnt[16] = 0;
 		let fnt[17] = 0;
 		// # (35)
-		let fnt[18] = 6144;
-		let fnt[19] = 6168;
-		let fnt[20] = 15420;
-		let fnt[21] = 5144;
+		let fnt[18] = -24576;
+		let fnt[19] = 31824;
+		let fnt[20] = 15908;
+		let fnt[21] = 2580;
 		let fnt[22] = 0;
 		let fnt[23] = 0;
 		// $ (36)
 		let fnt[24] = 2048;
-		let fnt[25] = 1084;
-		let fnt[26] = 12300;
-		let fnt[27] = 7204;
+		let fnt[25] = 2602;
+		let fnt[26] = 10252;
+		let fnt[27] = 7210;
 		let fnt[28] = 8;
 		let fnt[29] = 0;
 		// % (37)
-		let fnt[30] = 7168;
-		let fnt[31] = 7188;
-		let fnt[32] = 15408;
-		let fnt[33] = 14376;
-		let fnt[34] = 0;
+		let fnt[30] = 3584;
+		let fnt[31] = 11850;
+		let fnt[32] = 1032;
+		let fnt[33] = 10298;
+		let fnt[34] = 56;
 		let fnt[35] = 0;
 		// & (38)
 		let fnt[36] = 0;
@@ -116,9 +116,9 @@ class Font {
 		let fnt[95] = 0;
 		// 0 (48)
 		let fnt[96] = 14336;
-		let fnt[97] = 9252;
-		let fnt[98] = 9284;
-		let fnt[99] = 14372;
+		let fnt[97] = 17476;
+		let fnt[98] = 17476;
+		let fnt[99] = 14404;
 		let fnt[100] = 0;
 		let fnt[101] = 0;
 		// 1 (49)
@@ -319,9 +319,9 @@ class Font {
 		let fnt[269] = 0;
 		// M (77)
 		let fnt[270] = 26112;
-		let fnt[271] = 23652;
-		let fnt[272] = 21596;
-		let fnt[273] = -6588;
+		let fnt[271] = 23138;
+		let fnt[272] = 16986;
+		let fnt[273] = -15550;
 		let fnt[274] = 0;
 		let fnt[275] = 0;
 		// N (78)
@@ -544,8 +544,8 @@ class Font {
 		// m (109)
 		let fnt[462] = 0;
 		let fnt[463] = 15872;
-		let fnt[464] = 19026;
-		let fnt[465] = 22090;
+		let fnt[464] = 19018;
+		let fnt[465] = 16970;
 		let fnt[466] = 0;
 		let fnt[467] = 0;
 		// n (110)
