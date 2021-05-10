@@ -10,6 +10,14 @@ all:
 	#i686-w64-mingw32-gcc -g -municode  -static -lwsock32 -lopengl32 -lwinspool -lshell32 -luuid jackc.c -o jack32.exe 
 	#x86_64-w64-mingw32-gcc -g -municode  -static -lwsock32 -lopengl32 -lwinspool -lshell32 -luuid jackc.c -o jack64.exe 
 
+mkfont: mkfont.c font.h 
+	gcc mkfont.c -lm -o mkfont
+	./mkfont > Font.jack
+
+font.h: font.xpm 
+	gcc mkfont.c -lm -o mkfont
+	# ./mkfont 32 11 "/usr/share/fonts/truetype/tuffy/Tuffy.ttf" > font.h 
+
 mac:
 	scp jml@192.168.43.93:src/jack/jackc.c .
 	xcodebuild

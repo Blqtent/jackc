@@ -33,7 +33,6 @@ GLuint base;
 GLuint tex = 1;
 Atom wm_del;
 var isfirst = -1;
-var dump = 0;
 
 var need_update = -1;
 GLint att[] = {GLX_RENDER_TYPE, GLX_RGBA_BIT, 
@@ -114,16 +113,11 @@ void init()
 	glXMakeCurrent(__display, window, glc);
 	//glEnable(GL_DEPTH_TEST);
 
-	fontInfo = XLoadQueryFont(__display, "fixed");
-	id = fontInfo->fid;
-	first = fontInfo->min_char_or_byte2;
-	last = fontInfo->max_char_or_byte2;
-	base = glGenLists(last + 1);
-	glXUseXFont(id, first, last-first+1, base+first);
 	wm_del = XInternAtom(__display, "WM_DELETE_WINDOW", False);
 	XSetWMProtocols(__display, window, &wm_del, 1);
 	XMapWindow(__display, window);	
-
+	
+	glWindowPos2i(0, 0);
 	glViewport(0, 0, width, height);
 	glClearColor(1,1,1,1);
 	glClearDepth(1);
@@ -148,7 +142,10 @@ void init()
 	glLoadIdentity();
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+	glBindTexture(GL_TEXTURE_2D, 0);
 }
+
+var dump_font(var c);
 
 void deInit()
 {
@@ -163,9 +160,10 @@ void deInit()
 
 void display()
 {
-	glClear(GL_COLOR_BUFFER_BIT);
-	glClearColor(0,0,0,1);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//glClearColor(1,0,0,1);
+	//glClear(GL_COLOR_BUFFER_BIT);
+	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, tex);
 	glTexImage2D(
 		GL_TEXTURE_2D,
@@ -179,16 +177,112 @@ void display()
 		image32);
 	glLoadIdentity();
 	glBegin(GL_QUADS);
+	glColor4f(1, 1, 1, 1);
 	glTexCoord2f(0,0); glVertex3f(-1,1, -1);
 	glTexCoord2f(1,0); glVertex3f( 1,1, -1);
 	glTexCoord2f(1,1); glVertex3f( 1, -1, -1);
 	glTexCoord2f(0,1); glVertex3f(-1, -1, -1);
+	glTexCoord2f(0,0); glVertex3f(-1,1, -1);
+	glColor4f(0, 0, 0, 1);
 	glEnd();
 	glBindTexture(GL_TEXTURE_2D, 0);
+//	dump_font('A');
 }
 
 
-var dump_font(var c);
+var dump_font(var c)
+{
+	FILE *f;
+	int x, y, xx, i, l;
+	char text[255];
+	var p;
+	if (!c) {
+		return 0;
+	}
+	Screen__clear();
+	display();
+	text[0] = c;
+	glDisable(GL_TEXTURE_2D);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glOrtho(0, width, height, 0, -1, 1);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	glRasterPos2i(0, 11);
+//	glBegin(GL_QUADS);
+//	glColor4f(0, 0, 0, 1);
+//	glEnd();
+	glListBase(base);
+	glCallLists(1, GL_UNSIGNED_BYTE, text);
+	glReadPixels(0, 0, width, height, GL_RGBA, 
+			GL_UNSIGNED_BYTE, image32);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	i = (c - 32) * 6;
+	f = fopen("Font.jack", "a+w");
+	fprintf(f, "\t\t// %c (%d)\n", c, c);
+	for (y = 0; y < 11; y++) {
+		x = 0;
+		l =  (height - y - 1) * width + (x << 4);
+		c = 0;
+		for (xx = 0; xx < 8; xx++) {
+			if (!image32[(l+xx)*4+1]) {
+				 c = c | (1 << xx);
+			}
+		}
+		y++;
+		l =  (height - y - 1) * width + (x << 4);
+		if (y < 11) {
+			for (xx = 0; xx < 8; xx++) {
+				if (!image32[(l+xx)*4+1]) {
+					 c = c | (256 << xx);
+				}
+			}
+		}
+		if (c > 32767) {
+			if (c = 32768) {
+				fprintf(f, "\t\tlet v[%d] = 32767 + 1;\n", i);
+			} else {
+				fprintf(f, "\t\tlet v[%d] = -%d;\n", i,
+					((~c) + 1) & 0x7FFF);
+			}
+		} else {
+			fprintf(f, "\t\tlet v[%d] = %d;\n", i, c);
+		}
+		i++;
+	}
+	fclose(f);
+	return 0;
+}
+
+
+void make_font()
+{
+	var c;
+	FILE *f;
+	XFontStruct *fontInfo;
+	Font id;
+	unsigned int first,last;
+	fontInfo = XLoadQueryFont(__display, "*-24-*");
+	id = fontInfo->fid;
+	first = fontInfo->min_char_or_byte2;
+	last = fontInfo->max_char_or_byte2;
+	base = glGenLists(last + 1);
+	glXUseXFont(id, first, last-first+1, base+first);
+	f = fopen("Font.jack", "a+w");
+	fprintf(f, "class Font {\n");
+	fprintf(f, "\tfield Array v;\n");
+	fprintf(f, "\tconstructor Font new() {\n");
+	fprintf(f, "\t\tlet v = Array.new(570);\n");
+	fclose(f);
+	for (c = 32; c < 127; c++) {
+		dump_font(c);
+	}
+	Screen__clear();
+	display();
+}
 
 var processEvent()
 {
@@ -200,6 +294,8 @@ var processEvent()
 	var c;
 	float fx, fy;
 	static int done = 0;
+	XWindowAttributes a;
+
 	fx = 8.0 * 2.0 / width;
 	fy = 11.0 * 2.0 / height;
 
@@ -265,9 +361,14 @@ var processEvent()
 		}
 		break;
 	case Expose:
-		done = 1;
+		XGetWindowAttributes(__display, window, &a);	
+		glViewport(0, 0, a.width, a.height);
 		glXMakeCurrent(__display, window, glc);
 		display();
+		//if (!done) {	
+		//	make_font();
+		//}
+		done = 1;
 		glXSwapBuffers(__display, window);	
 		isfirst = 0;	
 		break;
@@ -281,59 +382,6 @@ var processEvent()
 		}
 		break;
 	}
-	return 0;
-}
-
-var Screen__dumpFont(var c)
-{
-	dump = c;
-}
-
-var dump_font(var c)
-{
-	FILE *f;
-	int x, y, xx, i, l;
-	var p;
-	if (!c) {
-		return 0;
-	}
-	if (dump == c) {
-	       dump = 0;
-	}
-	i = (c - 32) * 6;
-	f = fopen("Font.jack", "a+w");
-	fprintf(f, "\t\t// %c (%d)\n", c, c);
-	for (y = 0; y < 11; y++) {
-		x = 0;
-		l =  (height - y - 1) * width + (x << 4);
-		c = 0;
-		for (xx = 0; xx < 8; xx++) {
-			if (!image32[(l+xx)*4+1]) {
-				 c = c | (1 << xx);
-			}
-		}
-		y++;
-		l =  (height - y - 1) * width + (x << 4);
-		if (y < 11) {
-			for (xx = 0; xx < 8; xx++) {
-				if (!image32[(l+xx)*4+1]) {
-					 c = c | (256 << xx);
-				}
-			}
-		}
-		if (c > 32767) {
-			if (c = 32768) {
-				fprintf(f, "\t\tlet v[%d] = 32767 + 1;\n", i);
-			} else {
-				fprintf(f, "\t\tlet v[%d] = -%d;\n", i,
-					((~c) + 1) & 0x7FFF);
-			}
-		} else {
-			fprintf(f, "\t\tlet v[%d] = %d;\n", i, c);
-		}
-		i++;
-	}
-	fclose(f);
 	return 0;
 }
 

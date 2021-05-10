@@ -19,6 +19,7 @@ class Screen {
 			do Memory.poke(i, 0);
 			let i = i + 1;
 		}
+		do Screen.setColor(true);
 #c 	puts("\033[2J");
 #py 	global tk
 #py 	if (tk == None):
@@ -60,10 +61,8 @@ class Screen {
 		var int adyMinusbdx;
 		let dx = x2 - x;
 		let dy = y2 - y;
+
 		if ((dx < 1)) {
-			if ((dy < 1)) {
-				return;
-			}
 			let b = y;
 			while (b < y2) {
 				do Screen.drawPixel(x, b);

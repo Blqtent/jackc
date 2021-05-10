@@ -144,7 +144,6 @@ class Keyboard {
 
 	function char getChar() {
 		var int x;
-	//	let x = 0;
 #c #ifndef _WIN32
 #c 	//fd_set rd;
 #c 	int flags;
@@ -189,13 +188,6 @@ class Keyboard {
 #py 		keyindex = 1
 #py 	termios.tcsetattr(sys.stdin.fileno(), termios.TCSADRAIN, ts)
 
-		if (x) {
-			do Output.println();
-			do Output.printString("KEY ");
-			do Output.printInt(x);
-			do Output.println();
-			do Output.println();
-		}
 		return x;
 	}
 
