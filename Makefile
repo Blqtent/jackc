@@ -12,11 +12,10 @@ all:
 
 mkfont: mkfont.c font.h 
 	gcc mkfont.c -lm -o mkfont
+	# ./mkfont 32 11 "/usr/share/fonts/truetype/tuffy/Tuffy.ttf" > font.h 
+	gcc mkfont.c -lm -o mkfont
 	./mkfont > Font.jack
 
-font.h: font.xpm 
-	gcc mkfont.c -lm -o mkfont
-	# ./mkfont 32 11 "/usr/share/fonts/truetype/tuffy/Tuffy.ttf" > font.h 
 
 mac:
 	scp jml@192.168.43.93:src/jack/jackc.c .

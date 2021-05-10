@@ -1,7 +1,7 @@
 #include <stdio.h>
 #define STB_TRUETYPE_IMPLEMENTATION  // force following include to generate implementation
 #include "../stb/stb_truetype.h"
-#include "font.xpm"
+//#include "font.xpm"
 #include "font.h"
 
 char ttf_buffer[1<<25];
@@ -12,7 +12,11 @@ int jack()
 	int i = 0;
 	int v = 0;
 	int j, k, m;
-   	printf("class Font {\n");
+   	printf("// ");
+	for (c = 32; c < 127; c++) {
+		putchar(c);
+	}
+   	printf("\nclass Font {\n");
    	printf("\tfield Array fnt;\n");
    	printf("\tconstructor Font new() {\n");
    	printf("\t\tlet fnt = Array.new(570);\n");
@@ -68,6 +72,7 @@ int main(int argc, char **argv)
    stbtt_InitFont(&font, ttf_buffer, stbtt_GetFontOffsetForIndex(ttf_buffer,0));
    printf("char *fnt[] = {\n");
    for (c = 32; c < 127; c++) {	
+	/*
 	w = 6;
 	if (c >= '0' && c < '[') {
 		w = 7;
@@ -93,17 +98,21 @@ int main(int argc, char **argv)
 	putchar(',');
 	putchar('\n');
 	lw += w;
-	continue;
-   	bitmap = stbtt_GetCodepointBitmap(&font, c,
-			0, stbtt_ScaleForPixelHeight(&font, 11), 
-			&w, &h, &xoff, &yoff);
-   	stbtt_GetCodepointBitmapBox(&font, c,
-			0, stbtt_ScaleForPixelHeight(&font, 11), 
-		       &ix0, &iy0, 0, 0);	
-
-//	xoff += ix0;	
-//	yoff = yoff + iy0 + 10;
+	continue;*/
+   	bitmap = stbtt_GetCodepointBitmap(&font, 
+			0, stbtt_ScaleForPixelHeight(&font, 12), 
+			c, &w, &h, &xoff, &yoff);
 	printf("// %c (%d)\n", c, c);
+   	stbtt_GetCodepointBitmapBox(&font,
+			0, stbtt_ScaleForPixelHeight(&font, 12), 
+		       c, &ix0, &iy0, 0, 0);	
+
+	xoff = (8 - w) / 2;	
+	yoff = 10 + yoff -2;
+	if (yoff + h > 11) {
+		yoff = 11 - h;
+	}
+	printf("// %d %d %d %d\n", xoff, yoff, ix0, iy0);
 	for (j = 0; j < yoff; j++) {
 		printf("\"        \"\n");
 	}
@@ -115,7 +124,7 @@ int main(int argc, char **argv)
 		}
       		for (i=0; i < w; ++i) {
 			if (bitmap[j*w+i] > 64) {
-				putchar('*');
+				putchar('+');
 			} else {
 				putchar(' ');
 			}
@@ -129,6 +138,8 @@ int main(int argc, char **argv)
 	for (j = 0; j < (11 - h - yoff); j++) {
 		printf("\"        \"\n");
 	}
+	putchar(',');
+	putchar('\n');
    }
 	putchar('"');
 	putchar('"');
