@@ -198,6 +198,11 @@ class Keyboard {
 			do Sys.wait(50);
 			let k = Keyboard.keyPressed();
 		}
+		do Memory.poke(24576, 0);
+		while (Keyboard.keyPressed()) {
+			do Sys.wait(50);
+		}
+		do Memory.poke(24576, 0);
 		return k;
 	}
 

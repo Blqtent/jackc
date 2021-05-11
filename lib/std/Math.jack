@@ -26,7 +26,7 @@ class Math {
 		let j = 0;
 		let b = 1;
 		while (j < 16) {
-			if (x & b) {
+			if (y & b) {
 				let sum = sum + shiftedX;
 			}
 			let b = b + b;
@@ -66,18 +66,21 @@ class Math {
 	}
 
 	function int sqrt(int x) {
-		var int y, j, j2;
+		var int y, j, y2j, n2, xp;
 		if (x < 1) {
 			return 0;
 		}
+		let xp = x + 1;
 		let y = 0;
-		let j2 = 16384;
-		let j = (15 / 2) - 1;
+		let n2 = 128;
+		let j = 7;
 		while (j > -1) {
-			if (x > (y + j2)) {
-				let y = y + j2;
+			let y2j = y + n2;
+			let y2j = y2j * y2j;
+			if (y2j < xp) {
+				let y = y + n2;
 			}
-			let j2 = j2 / 2;	
+			let n2 = n2 / 2;
 			let j = j - 1;
 		}
 		return y;

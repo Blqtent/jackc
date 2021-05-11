@@ -8,6 +8,7 @@ class UnitMath {
 		if (i = 5) {
 			let ok = true;
 		}
+		//do Output.printInt(i);
 		do Unit.log(l + 1, "Math.sqrt...", ok);
 		let ok = false;
 		let i = Math.divide(25, 2);

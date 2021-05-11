@@ -3,6 +3,7 @@ class Screen {
 	static boolean color;
 
 	function void init() {
+		let color = true;
 #py 	global tk
 #py 	tk = None
 		return;
@@ -50,19 +51,24 @@ class Screen {
 		if (color) {
 			let b = b | p;
 		} else {
-			let b = b & p;
+			let b = b & ~p;
 		}
 		do Memory.poke(i, b); 
 		return;
 	}
 
 	function void drawLine(int x, int y, int x2, int y2) {
-		var int a, b, dx, dy;
+		var int a, b, dx, dy, ax, ay;
 		var int adyMinusbdx;
 		let dx = x2 - x;
 		let dy = y2 - y;
 
-		if ((dx < 1)) {
+		if (dx = 0) {
+			if (y > y2) {
+				let a = y2;
+				let y2 = y;
+				let y = a;
+			}
 			let b = y;
 			while (b < y2) {
 				do Screen.drawPixel(x, b);
@@ -71,7 +77,12 @@ class Screen {
 			return;
 		}
 
-		if ((dy < 1)) {
+		if (dy = 0) {
+			if (x > x2) {
+				let a = x2;
+				let x2 = x;
+				let x = a;
+			}
 			let a = x;
 			while (a < x2) {
 				do Screen.drawPixel(a, y);
@@ -79,12 +90,35 @@ class Screen {
 			}
 			return;
 		}
+		let ax = 0;
+		let ay = 0;
+		if ((dx < 0) & (dy < 0)) {
+			let dx = -dx;
+			let dy = -dy;
+			let x = x2;
+			let y = y2;
+		} else {if ((dx > 0) & (dy < 0)) {
+			let dy = -dy;
+			let y = y2;
+			let ay = dy;
+		} else {if ((dx < 0) & (dy > 0)) {
+			let dx = -dx;
+			let x = x2;
+			let y = y2;
+			let ay = -dy;
+		}}}
 		let a = 0;
 		let b = 0;
 		let adyMinusbdx = 0;
 		while ((dx > a) & (dy > b)) {
-			do Screen.drawPixel(x + a, y + b);
-			if (adyMinusbdx) {
+			if (ay) {
+				do Screen.drawPixel(x + a, y - b);
+			} else { if (ax) {
+				do Screen.drawPixel(x - a, y + b);
+			} else { 
+				do Screen.drawPixel(x + a, y + b);
+			}}
+			if (adyMinusbdx < 0) {
 				let a = a + 1;
 				let adyMinusbdx = adyMinusbdx + dy;
 			} else {
@@ -107,7 +141,7 @@ class Screen {
 
 	function void drawCircle(int x, int y, int r) {
 		var int dy;
-		var int s;
+		var int s, r2;
 		let dy = -r;
 		if (x > 512) {
 			return;
@@ -115,8 +149,9 @@ class Screen {
 		if (y > 256) {
 			return;
 		}
+		let r2 = r * r;
 		while (r > dy) {
-			let s = Math.sqrt((r * r) - (dy * dy)); 
+			let s = Math.sqrt(r2 - (dy * dy)); 
 			do Screen.drawLine(x - s, y + dy, x + s, y + dy);
 			let dy = dy + 1;
 		}

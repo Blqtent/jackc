@@ -83,7 +83,6 @@ class Output {
 			return;
 		}
 		if ((c < 32) | (c > 126)) {
-#c 	//printf("(%d)", c);
 			let c = 32;
 		}
 		let xx = x;
