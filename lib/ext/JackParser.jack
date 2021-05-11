@@ -972,17 +972,14 @@ class JackParser {
 		var JackAst parent, left;
 		let c = jt.symbol();
 		if (c > 0) {
-			do astAddType();
 			let parent = current.getParent();
-			let left = parent.getChild();
-			if (left) {
-				if (left.getNext() = current) {
-					do left.setParent(current);
-					do left.setNext(null);
-					do current.setLeft(left);
-					do parent.setChild(current);
-				}
-			}
+			let left = current;
+			do astAddType();
+			// setup the left child
+			do left.removeChild(current);
+			do parent.replaceChild(left, current);
+			do left.setParent(current);
+			do current.setLeft(left);
 		}
 		if (c = C.PLUS()) {
 			return true;

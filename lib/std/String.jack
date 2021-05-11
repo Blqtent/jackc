@@ -39,9 +39,7 @@ class String {
 	}
 
 	method char charAt(int a) {
-		var Array s;
 		var char ret;
-		let s = str;
 		let ret = str[a];
 		return ret;
 	}

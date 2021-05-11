@@ -9,6 +9,21 @@ class UnitMath {
 			let ok = true;
 		}
 		do Unit.log(l + 1, "Math.sqrt...", ok);
+		let ok = false;
+		let i = Math.divide(25, 2);
+		if (i = 12) {
+			let ok = true;
+		}
+		do Unit.log(l + 1, "Math.divide...", ok);
+
+		let ok = false;
+		let i = Math.multiply(5, 5);
+		if (i = 25) {
+			let ok = true;
+		}
+		do Unit.log(l + 1, "Math.multyply...", ok);
+	
+
 		return Memory.checkEmpty();
 	}
 	

@@ -129,16 +129,30 @@ class JackAst {
 		return a;
 	}
 
-	method JackAst pop() {
+	method JackAst removeChild(JackAst old) {
 		var JackAst c, d;
 		let c = child;
 		if (c = null) {
 			return null;
-		} else {
-			let d = c;
-			let child = c.getNext();
+		} 
+		if (old = child) {
+			let child = child.getNext();
+			do old.setNext(null);
+			do old.setParent(null);
+			return old;
 		}
-		return d;
+		let d = c.getNext();
+		while (~(d = null)) {
+			if (d = old) {
+				do c.setNext(d.getNext());
+				do old.setNext(null);
+				do old.setParent(null);
+				return old;
+			}
+			let c = d;
+			let c = c.getNext();
+		}
+		return null;
 	}
 
 	method JackAst replaceChild(JackAst old, JackAst new_) {

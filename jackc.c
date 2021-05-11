@@ -12,6 +12,7 @@
 #endif
 
 #if 0
+
 #endif
 #ifndef var
 #ifdef _WIN64
@@ -41,6 +42,7 @@ var Buffer__getSize(var __this);
 
 
 #if 0
+
 #endif
 #ifndef var
 #ifdef _WIN64
@@ -77,6 +79,7 @@ var JackTokenizer__stringVal(var __this);
 
 
 #if 0
+
 #endif
 #ifndef var
 #ifdef _WIN64
@@ -95,6 +98,7 @@ var Http__new(var url);
 
 
 #if 0
+
 #endif
 #ifndef var
 #ifdef _WIN64
@@ -132,6 +136,7 @@ var Bytes__setStringToNative(var __this, var name);
 
 
 #if 0
+
 #endif
 #ifndef var
 #ifdef _WIN64
@@ -150,6 +155,7 @@ var Canavas__draw(var x, var y);
 
 
 #if 0
+
 #endif
 #ifndef var
 #ifdef _WIN64
@@ -168,6 +174,7 @@ var CallbackXmlNodeDispose__new();
 
 
 #if 0
+
 #endif
 #ifndef var
 #ifdef _WIN64
@@ -190,7 +197,7 @@ var JackAst__add(var __this, var tag_, var data_);
 var JackAst__addop(var __this, var data_, var left_);
 var JackAst__set(var __this, var tag_, var data_);
 var JackAst__append(var __this, var a);
-var JackAst__pop(var __this);
+var JackAst__removeChild(var __this, var old);
 var JackAst__replaceChild(var __this, var old, var new_);
 var JackAst__setId(var __this, var n);
 var JackAst__getId(var __this);
@@ -211,6 +218,7 @@ var JackAst__getNext(var __this);
 
 
 #if 0
+
 #endif
 #ifndef var
 #ifdef _WIN64
@@ -235,6 +243,7 @@ var JackCompiler__link(var __this, var dir, var files);
 
 
 #if 0
+
 #endif
 #ifndef var
 #ifdef _WIN64
@@ -300,6 +309,7 @@ var JackAstToC__coVarName(var __this, var c, var isassign);
 
 
 #if 0
+
 #endif
 #ifndef var
 #ifdef _WIN64
@@ -320,6 +330,7 @@ var Sys2__args();
 
 
 #if 0
+
 #endif
 #ifndef var
 #ifdef _WIN64
@@ -358,6 +369,7 @@ var File__list(var __this);
 
 
 #if 0
+
 #endif
 #ifndef var
 #ifdef _WIN64
@@ -381,6 +393,7 @@ var Hash__get(var __this, var k);
 
 
 #if 0
+
 #endif
 #ifndef var
 #ifdef _WIN64
@@ -399,6 +412,7 @@ var CallbackStringDispose__new();
 
 
 #if 0
+
 #endif
 #ifndef var
 #ifdef _WIN64
@@ -431,6 +445,7 @@ var XmlNode__dump(var __this, var x, var f, var depth);
 
 
 #if 0
+
 #endif
 #ifndef var
 #ifdef _WIN64
@@ -643,6 +658,7 @@ var C__NEXT_FREE_CONSTANT();
 
 
 #if 0
+
 #endif
 #ifndef var
 #ifdef _WIN64
@@ -672,6 +688,7 @@ var GifWriter__writeFile(var __this, var file, var data, var w, var h);
 
 
 #if 0
+
 #endif
 #ifndef var
 #ifdef _WIN64
@@ -708,6 +725,7 @@ var Gif__WriteArray(var __this, var src, var dest);
 
 
 #if 0
+
 #endif
 #ifndef var
 #ifdef _WIN64
@@ -739,6 +757,7 @@ var Xml__escape(var __this, var o);
 
 
 #if 0
+
 #endif
 #ifndef var
 #ifdef _WIN64
@@ -757,6 +776,7 @@ var Const__getList();
 
 
 #if 0
+
 #endif
 #ifndef var
 #ifdef _WIN64
@@ -782,6 +802,7 @@ var GifLzw__setSuffix(var __this, var v);
 
 
 #if 0
+
 #endif
 #ifndef var
 #ifdef _WIN64
@@ -840,6 +861,7 @@ var JackParser__compileExpressionList(var __this);
 
 
 #if 0
+
 #endif
 #ifndef var
 #ifdef _WIN64
@@ -860,6 +882,7 @@ var Callback__invoke(var __this, var a, var b);
 
 
 #if 0
+
 #endif
 #ifndef var
 #ifdef _WIN64
@@ -879,6 +902,7 @@ var SymbolTable__dispose(var __this);
 
 
 #if 0
+
 #endif
 #ifndef var
 #ifdef _WIN64
@@ -898,6 +922,7 @@ var Font__get(var __this, var c);
 
 
 #if 0
+
 #endif
 #ifndef var
 #ifdef _WIN64
@@ -917,6 +942,7 @@ var Array__dispose(var __this);
 
 
 #if 0
+
 #endif
 #ifndef var
 #ifdef _WIN64
@@ -942,6 +968,7 @@ var Output__backSpace();
 
 
 #if 0
+
 #endif
 #ifndef var
 #ifdef _WIN64
@@ -964,6 +991,7 @@ var Sys__wait(var duration);
 
 
 #if 0
+
 #endif
 #ifndef var
 #ifdef _WIN64
@@ -989,6 +1017,7 @@ var Screen__drawCircle(var x, var y, var r);
 
 
 #if 0
+
 #endif
 #ifndef var
 #ifdef _WIN64
@@ -1022,6 +1051,7 @@ var Math__isWindows();
 
 
 #if 0
+
 #endif
 #ifndef var
 #ifdef _WIN64
@@ -1057,6 +1087,7 @@ var String__compare(var __this, var s);
 
 
 #if 0
+
 #endif
 #ifndef var
 #ifdef _WIN64
@@ -1083,6 +1114,7 @@ var Memory__deAlloc(var p);
 
 
 #if 0
+
 #endif
 #ifndef var
 #ifdef _WIN64
@@ -1135,6 +1167,7 @@ var Keyboard__F12();
 
 
 #if 0
+
 #endif
 #ifndef var
 #ifdef _WIN64
@@ -1349,9 +1382,6 @@ var Screen__clear()
 
 void init() 
 {
-	XFontStruct *fontInfo;
-	Font id;
-	unsigned int first,last;
 	int fbcount;
 	if (__display != NULL) {
 		return;
@@ -1467,7 +1497,6 @@ var dump_font(var c)
 	FILE *f;
 	int x, y, xx, i, l;
 	char text[255];
-	var p;
 	if (!c) {
 		return 0;
 	}
@@ -1494,7 +1523,7 @@ var dump_font(var c)
 	glLoadIdentity();
 	i = (c - 32) * 6;
 	f = fopen("Font.jack", "a+w");
-	fprintf(f, "\t\t// %c (%d)\n", c, c);
+	fprintf(f, "\t\t// %c (%d)\n", (int)c, (int)c);
 	for (y = 0; y < 11; y++) {
 		x = 0;
 		l =  (height - y - 1) * width + (x << 4);
@@ -1514,14 +1543,14 @@ var dump_font(var c)
 			}
 		}
 		if (c > 32767) {
-			if (c = 32768) {
+			if (c == 32768) {
 				fprintf(f, "\t\tlet v[%d] = 32767 + 1;\n", i);
 			} else {
 				fprintf(f, "\t\tlet v[%d] = -%d;\n", i,
-					((~c) + 1) & 0x7FFF);
+					((~(int)c) + 1) & 0x7FFF);
 			}
 		} else {
-			fprintf(f, "\t\tlet v[%d] = %d;\n", i, c);
+			fprintf(f, "\t\tlet v[%d] = %d;\n", i, (int)c);
 		}
 		i++;
 	}
@@ -1562,14 +1591,9 @@ var processEvent()
 	KeySym key;
 	char text[255];
 	int r;
-	int x, y;
 	var c;
-	float fx, fy;
-	static int done = 0;
-	XWindowAttributes a;
 
-	fx = 8.0 * 2.0 / width;
-	fy = 11.0 * 2.0 / height;
+	XWindowAttributes a;
 
 	XNextEvent(__display, &ev);
 	gc = DefaultGC(__display, 0);
@@ -1640,7 +1664,6 @@ var processEvent()
 		//if (!done) {	
 		//	make_font();
 		//}
-		done = 1;
 		glXSwapBuffers(__display, window);	
 		isfirst = 0;	
 		break;
@@ -2856,7 +2879,7 @@ var Buffer__new(var initial, var disposeCb) {
 	__poke(size__, initial);
 	__poke(pos__, 0);
 	i = 0;
-	while (-1==(((i<initial)?-1:0))) {
+	while (-1==((((i)<(initial))?-1:0))) {
 		__poke(__peek(buffer__)+i, 0);
 		i = i+1;
 	}
@@ -2872,7 +2895,7 @@ var Buffer__dispose(var __this) {
 	var i;
 	i = 0;
 	if (0!=(__peek(dispCb__))) {
-		while (-1==(((i<__peek(pos__))?-1:0))) {
+		while (-1==((((i)<(__peek(pos__)))?-1:0))) {
 			s = __peek(__peek(buffer__)+i);
 			if (0!=(s)) {
 				Callback__invoke(__peek(dispCb__), s, 0);
@@ -2916,9 +2939,9 @@ var Buffer__remove(var __this, var q) {
 	var j;
 	i = 0;
 	j = 0;
-	while (-1==(((i<__peek(pos__))?-1:0))) {
+	while (-1==((((i)<(__peek(pos__)))?-1:0))) {
 		s = __peek(__peek(buffer__)+i);
-		if (0!=(((s==q)?-1:0))) {
+		if (0!=((((s)==(q))?-1:0))) {
 			j = j-1;
 		}
 
@@ -2927,7 +2950,7 @@ var Buffer__remove(var __this, var q) {
 		j = j+1;
 	}
 	__poke(pos__, i);
-	if (0!=(((i==j)?-1:0))) {
+	if (0!=((((i)==(j))?-1:0))) {
 		return 0;
 	}
 
@@ -2937,9 +2960,9 @@ var Buffer__indexOfStr(var __this, var q) {
 	var s;
 	var i;
 	i = 0;
-	while (-1==(((i<__peek(pos__))?-1:0))) {
+	while (-1==((((i)<(__peek(pos__)))?-1:0))) {
 		s = __peek(__peek(buffer__)+i);
-		if (0!=(((String__compare(s, q)==0)?-1:0))) {
+		if (0!=((((String__compare(s, q))==(0))?-1:0))) {
 			return i;
 		}
 
@@ -2951,15 +2974,15 @@ var Buffer__checkSize(var __this, var idx) {
 	var b;
 	var i;
 	var ns;
-	if (0!=(((idx>(__peek(size__)-1))?-1:0))) {
+	if (0!=((((idx)>((__peek(size__)-1)))?-1:0))) {
 		ns = __peek(size__)+idx+32;
 		b = Array__new(ns);
 		i = 0;
-		while (-1==(((i<__peek(pos__))?-1:0))) {
+		while (-1==((((i)<(__peek(pos__)))?-1:0))) {
 			__poke(b+i, __peek(__peek(buffer__)+i));
 			i = i+1;
 		}
-		while (-1==(((i<ns)?-1:0))) {
+		while (-1==((((i)<(ns))?-1:0))) {
 			__poke(b+i, 0);
 			i = i+1;
 		}
@@ -3141,7 +3164,7 @@ var JackTokenizer__hasMoreTokens(var __this) {
 	var in_comment;
 	var ignore_line;
 	var start;
-	if (0!=(((__peek(token_type__)==-1)?-1:0))) {
+	if (0!=((((__peek(token_type__))==(-1))?-1:0))) {
 		__poke(c__, File__readUtf8(__peek(src__)));
 		__poke(ahead__, File__readUtf8(__peek(src__)));
 		__poke(token_type__, 0);
@@ -3150,16 +3173,16 @@ var JackTokenizer__hasMoreTokens(var __this) {
 	in_comment = 0;
 	ignore_line = 0;
 	start = __peek(line__);
-	while (-1==((((__peek(c__)>0)?-1:0))&(((__peek(c__)<1114112)?-1:0)))) {
+	while (-1==(((((__peek(c__))>(0))?-1:0))&((((__peek(c__))<(1114112))?-1:0)))) {
 		if (0!=(ignore_line)) {
-			if (0!=(((__peek(c__)==10)?-1:0))) {
+			if (0!=((((__peek(c__))==(10))?-1:0))) {
 				ignore_line = 0;
 			}
 
 		} else {
 			if (0!=(in_comment)) {
-				if (0!=(((__peek(c__)==42)?-1:0))) {
-					if (0!=(((__peek(ahead__)==47)?-1:0))) {
+				if (0!=((((__peek(c__))==(42))?-1:0))) {
+					if (0!=((((__peek(ahead__))==(47))?-1:0))) {
 						in_comment = 0;
 						JackTokenizer__next(__this);
 					}
@@ -3167,19 +3190,19 @@ var JackTokenizer__hasMoreTokens(var __this) {
 				}
 
 			} else {
-				if (0!=(((__peek(c__)==47)?-1:0))) {
-					if (0!=(((__peek(ahead__)==42)?-1:0))) {
+				if (0!=((((__peek(c__))==(47))?-1:0))) {
+					if (0!=((((__peek(ahead__))==(42))?-1:0))) {
 						start = __peek(line__);
 						in_comment = -1;
 					} else {
-						if (0!=(((__peek(ahead__)==47)?-1:0))) {
+						if (0!=((((__peek(ahead__))==(47))?-1:0))) {
 							ignore_line = -1;
 						} else {
 							return -1;
 						}
 					}
 				} else {
-					if (0!=((((__peek(c__)==9)?-1:0))|(((__peek(c__)==10)?-1:0))|(((__peek(c__)==13)?-1:0))|(((__peek(c__)==32)?-1:0)))) {
+					if (0!=(((((__peek(c__))==(9))?-1:0))|((((__peek(c__))==(10))?-1:0))|((((__peek(c__))==(13))?-1:0))|((((__peek(c__))==(32))?-1:0)))) {
 						__poke(c__, __peek(c__));
 					} else {
 						return -1;
@@ -3197,7 +3220,7 @@ var JackTokenizer__hasMoreTokens(var __this) {
 	return 0;
 }
 var JackTokenizer__next(var __this) {
-	if (0!=(((__peek(c__)==10)?-1:0))) {
+	if (0!=((((__peek(c__))==(10))?-1:0))) {
 		__poke(line__, __peek(line__)+1);
 	}
 
@@ -3207,7 +3230,7 @@ var JackTokenizer__next(var __this) {
 }
 var JackTokenizer__addLine(var __this) {
 	var u;
-	if (0!=(((__peek(line__)>__peek(last_line__))?-1:0))) {
+	if (0!=((((__peek(line__))>(__peek(last_line__)))?-1:0))) {
 		u = String__new(8);
 		u = String__setInt(u, __peek(line__)+1);
 		Xml__addAttribute(__peek(x__), Memory__getString(JackTokenizer___str43), u);
@@ -3245,8 +3268,8 @@ var JackTokenizer__advance(var __this) {
 	in_escape = 0;
 	String__setCharAt(__peek(token__), 0, 0);
 	start = __peek(line__);
-	while (-1==((((__peek(c__)>0)?-1:0))&(((__peek(c__)<1114112)?-1:0)))) {
-		if (0!=(in_string&(((__peek(c__)==34)?-1:0))&(~in_escape))) {
+	while (-1==(((((__peek(c__))>(0))?-1:0))&((((__peek(c__))<(1114112))?-1:0)))) {
+		if (0!=(in_string&((((__peek(c__))==(34))?-1:0))&(~in_escape))) {
 			__poke(token_type__, C__STRING_CONST());
 			if (0!=(__peek(gen_xml__))) {
 				Xml__addElement(__peek(x__), __peek(token_type__));
@@ -3259,7 +3282,7 @@ var JackTokenizer__advance(var __this) {
 			return 0;
 		} else {
 			if (0!=(in_int)) {
-				if (0!=(((((__peek(c__)>47)?-1:0))&(((__peek(c__)<58)?-1:0))))) {
+				if (0!=((((((__peek(c__))>(47))?-1:0))&((((__peek(c__))<(58))?-1:0))))) {
 					__poke(token__, String__appendChar(__peek(token__), __peek(c__)));
 					l = l+1;
 				} else {
@@ -3277,24 +3300,24 @@ var JackTokenizer__advance(var __this) {
 				if (0!=(in_string)) {
 					if (0!=(in_escape)) {
 						in_escape = 0;
-						if (0!=(((__peek(c__)==92)?-1:0))) {
+						if (0!=((((__peek(c__))==(92))?-1:0))) {
 							__poke(c__, 92);
 						}
 
-						if (0!=(((__peek(c__)==34)?-1:0))) {
+						if (0!=((((__peek(c__))==(34))?-1:0))) {
 							__poke(c__, 34);
 						}
 
-						if (0!=(((__peek(c__)==110)?-1:0))) {
+						if (0!=((((__peek(c__))==(110))?-1:0))) {
 							__poke(c__, 10);
 						}
 
 					} else {
-						if (0!=(((__peek(c__)==10)?-1:0))) {
+						if (0!=((((__peek(c__))==(10))?-1:0))) {
 							JackTokenizer__error(__this, __peek(line__), Memory__getString(JackTokenizer___str45));
 							return 0;
 						} else {
-							if (0!=(((__peek(c__)==92)?-1:0))) {
+							if (0!=((((__peek(c__))==(92))?-1:0))) {
 								in_escape = -1;
 								__poke(c__, 0);
 							}
@@ -3310,7 +3333,7 @@ var JackTokenizer__advance(var __this) {
 					if (0!=(in_asm)) {
 						__poke(token__, String__appendChar(__peek(token__), __peek(c__)));
 						l = l+1;
-						if (0!=(((__peek(c__)==10)?-1:0))) {
+						if (0!=((((__peek(c__))==(10))?-1:0))) {
 							__poke(token_type__, C__ASM());
 							if (0!=(__peek(gen_xml__))) {
 								Xml__addElement(__peek(x__), __peek(token_type__));
@@ -3324,17 +3347,17 @@ var JackTokenizer__advance(var __this) {
 						}
 
 					} else {
-						if (0!=(((__peek(c__)==34)?-1:0))) {
+						if (0!=((((__peek(c__))==(34))?-1:0))) {
 							in_string = -1;
 						} else {
-							if (0!=(((((__peek(c__)>64)?-1:0))&(((__peek(c__)<91)?-1:0)))|((((__peek(c__)>96)?-1:0))&(((__peek(c__)<123)?-1:0)))|(((__peek(c__)==95)?-1:0))|((((__peek(c__)>47)?-1:0))&(((__peek(c__)<58)?-1:0))&(((l>0)?-1:0))))) {
+							if (0!=((((((__peek(c__))>(64))?-1:0))&((((__peek(c__))<(91))?-1:0)))|(((((__peek(c__))>(96))?-1:0))&((((__peek(c__))<(123))?-1:0)))|((((__peek(c__))==(95))?-1:0))|(((((__peek(c__))>(47))?-1:0))&((((__peek(c__))<(58))?-1:0))&((((l)>(0))?-1:0))))) {
 								key_or_id = -1;
 								__poke(token__, String__appendChar(__peek(token__), __peek(c__)));
 								l = l+1;
 							} else {
 								if (0!=(key_or_id)) {
 									k = JackTokenizer__getTokenConst(__this, __peek(token__));
-									if (0!=((((k==C__CLASS())?-1:0))|(((k==C__METHOD())?-1:0))|(((k==C__FUNCTION())?-1:0))|(((k==C__CONSTRUCTOR())?-1:0))|(((k==C__CALLBACK())?-1:0))|(((k==C__INT())?-1:0))|(((k==C__BOOLEAN())?-1:0))|(((k==C__CHAR())?-1:0))|(((k==C__VOID())?-1:0))|(((k==C__VAR())?-1:0))|(((k==C__STATIC())?-1:0))|(((k==C__FIELD())?-1:0))|(((k==C__LET())?-1:0))|(((k==C__DO())?-1:0))|(((k==C__IF())?-1:0))|(((k==C__ELSE())?-1:0))|(((k==C__WHILE())?-1:0))|(((k==C__RETURN())?-1:0))|(((k==C__TRUE())?-1:0))|(((k==C__FALSE())?-1:0))|(((k==C__NULL())?-1:0))|(((k==C__THIS())?-1:0)))) {
+									if (0!=(((((k)==(C__CLASS()))?-1:0))|((((k)==(C__METHOD()))?-1:0))|((((k)==(C__FUNCTION()))?-1:0))|((((k)==(C__CONSTRUCTOR()))?-1:0))|((((k)==(C__CALLBACK()))?-1:0))|((((k)==(C__INT()))?-1:0))|((((k)==(C__BOOLEAN()))?-1:0))|((((k)==(C__CHAR()))?-1:0))|((((k)==(C__VOID()))?-1:0))|((((k)==(C__VAR()))?-1:0))|((((k)==(C__STATIC()))?-1:0))|((((k)==(C__FIELD()))?-1:0))|((((k)==(C__LET()))?-1:0))|((((k)==(C__DO()))?-1:0))|((((k)==(C__IF()))?-1:0))|((((k)==(C__ELSE()))?-1:0))|((((k)==(C__WHILE()))?-1:0))|((((k)==(C__RETURN()))?-1:0))|((((k)==(C__TRUE()))?-1:0))|((((k)==(C__FALSE()))?-1:0))|((((k)==(C__NULL()))?-1:0))|((((k)==(C__THIS()))?-1:0)))) {
 										__poke(token_type__, C__KEYWORD());
 										__poke(key_word__, k);
 									} else {
@@ -3349,14 +3372,14 @@ var JackTokenizer__advance(var __this) {
 
 									return 0;
 								} else {
-									if (0!=(((((__peek(c__)>47)?-1:0))&(((__peek(c__)<58)?-1:0))))) {
+									if (0!=((((((__peek(c__))>(47))?-1:0))&((((__peek(c__))<(58))?-1:0))))) {
 										__poke(token__, String__appendChar(__peek(token__), __peek(c__)));
 										l = l+1;
 										in_int = -1;
 									} else {
 										__poke(token__, String__appendChar(__peek(token__), __peek(c__)));
 										__poke(c__, JackTokenizer__getTokenConst(__this, __peek(token__)));
-										if (0!=((((__peek(c__)==C__LEFT_CURLY_BRACKET())?-1:0))|(((__peek(c__)==C__RIGHT_CURLY_BRACKET())?-1:0))|(((__peek(c__)==C__LEFT_PARENTHESIS())?-1:0))|(((__peek(c__)==C__RIGHT_PARENTHESIS())?-1:0))|(((__peek(c__)==C__LEFT_SQUARE_BRACKET())?-1:0))|(((__peek(c__)==C__RIGHT_SQUARE_BRACKET())?-1:0))|(((__peek(c__)==C__DOT())?-1:0))|(((__peek(c__)==C__COMMA())?-1:0))|(((__peek(c__)==C__SEMICOLON())?-1:0))|(((__peek(c__)==C__PLUS())?-1:0))|(((__peek(c__)==C__MINUS())?-1:0))|(((__peek(c__)==C__MULTIPLY())?-1:0))|(((__peek(c__)==C__DIV())?-1:0))|(((__peek(c__)==C__AND())?-1:0))|(((__peek(c__)==C__OR())?-1:0))|(((__peek(c__)==C__GREATER())?-1:0))|(((__peek(c__)==C__LESS())?-1:0))|(((__peek(c__)==C__EQUAL())?-1:0))|(((__peek(c__)==C__TILDE())?-1:0)))) {
+										if (0!=(((((__peek(c__))==(C__LEFT_CURLY_BRACKET()))?-1:0))|((((__peek(c__))==(C__RIGHT_CURLY_BRACKET()))?-1:0))|((((__peek(c__))==(C__LEFT_PARENTHESIS()))?-1:0))|((((__peek(c__))==(C__RIGHT_PARENTHESIS()))?-1:0))|((((__peek(c__))==(C__LEFT_SQUARE_BRACKET()))?-1:0))|((((__peek(c__))==(C__RIGHT_SQUARE_BRACKET()))?-1:0))|((((__peek(c__))==(C__DOT()))?-1:0))|((((__peek(c__))==(C__COMMA()))?-1:0))|((((__peek(c__))==(C__SEMICOLON()))?-1:0))|((((__peek(c__))==(C__PLUS()))?-1:0))|((((__peek(c__))==(C__MINUS()))?-1:0))|((((__peek(c__))==(C__MULTIPLY()))?-1:0))|((((__peek(c__))==(C__DIV()))?-1:0))|((((__peek(c__))==(C__AND()))?-1:0))|((((__peek(c__))==(C__OR()))?-1:0))|((((__peek(c__))==(C__GREATER()))?-1:0))|((((__peek(c__))==(C__LESS()))?-1:0))|((((__peek(c__))==(C__EQUAL()))?-1:0))|((((__peek(c__))==(C__TILDE()))?-1:0)))) {
 											__poke(token_type__, C__SYMBOL());
 											__poke(symbol___, __peek(c__));
 											if (0!=(__peek(gen_xml__))) {
@@ -3369,11 +3392,11 @@ var JackTokenizer__advance(var __this) {
 											JackTokenizer__next(__this);
 											return 0;
 										} else {
-											if (0!=((((__peek(c__)==9)?-1:0))|(((__peek(c__)==10)?-1:0))|(((__peek(c__)==13)?-1:0))|(((__peek(c__)==32)?-1:0)))) {
+											if (0!=(((((__peek(c__))==(9))?-1:0))|((((__peek(c__))==(10))?-1:0))|((((__peek(c__))==(13))?-1:0))|((((__peek(c__))==(32))?-1:0)))) {
 												JackTokenizer__error(__this, __peek(line__), Memory__getString(JackTokenizer___str46));
 												__poke(line__, __peek(line__));
 											} else {
-												if (0!=(((__peek(c__)==C__ASM())?-1:0))) {
+												if (0!=((((__peek(c__))==(C__ASM()))?-1:0))) {
 													__poke(token__, String__appendChar(__peek(token__), __peek(c__)));
 													in_asm = -1;
 													String__setCharAt(__peek(token__), 0, 0);
@@ -3485,14 +3508,14 @@ var Bytes__new(var size_in_byte) {
 	Bytes___bytesize = Math__sizeOfInt();
 	Bytes___addressmask = Bytes___bytesize-1;
 	Bytes___log2 = Math__log2(Bytes___bytesize);
-	if (0!=(((Bytes___log2<0)?-1:0))) {
+	if (0!=((((Bytes___log2)<(0))?-1:0))) {
 		Bytes___log2 = 0;
 	}
 
 	__poke(size__, Math__shiftRight((size_in_byte+Bytes___addressmask), Bytes___log2)+1);
 	__poke(buf__, Array__new(__peek(size__)));
 	i = 0;
-	while (-1==(((i<__peek(size__))?-1:0))) {
+	while (-1==((((i)<(__peek(size__)))?-1:0))) {
 		__poke(__peek(buf__)+i, 0);
 		i = i+1;
 	}
@@ -3519,16 +3542,16 @@ var Bytes__alloc(var __this, var s) {
 	l = __peek(size__);
 	i = 0;
 	b = __peek(buf__);
-	if (0!=(((nsize<__peek(size__))?-1:0))) {
+	if (0!=((((nsize)<(__peek(size__)))?-1:0))) {
 		return 0;
 	}
 
-	while (-1==(((i<l)?-1:0))) {
+	while (-1==((((i)<(l))?-1:0))) {
 		__poke(nbuf+i, __peek(b+i));
 		i = i+1;
 	}
 	l = nsize;
-	while (-1==(((i<l)?-1:0))) {
+	while (-1==((((i)<(l))?-1:0))) {
 		__poke(nbuf+i, 0);
 		i = i+1;
 	}
@@ -3566,7 +3589,7 @@ var Bytes__setByte(var __this, var address, var b) {
 	return 0;
 }
 var Bytes__appendByte(var __this, var b) {
-	if (0!=(((__peek(size__)<(Math__shiftRight(__peek(pos__)+Bytes___bytesize, Bytes___log2)+1))?-1:0))) {
+	if (0!=((((__peek(size__))<((Math__shiftRight(__peek(pos__)+Bytes___bytesize, Bytes___log2)+1)))?-1:0))) {
 		Bytes__alloc(__this, __peek(pos__)+256);
 	}
 
@@ -3605,7 +3628,7 @@ var Bytes__append64bitBig(var __this, var b) {
 	return 0;
 }
 var Bytes__appendInt(var __this, var b) {
-	if (0!=(((Bytes___bytesize==8)?-1:0))) {
+	if (0!=((((Bytes___bytesize)==(8))?-1:0))) {
 		if (0!=(Bytes___isbig)) {
 			Bytes__append64bitBig(__this, b);
 		} else {
@@ -3614,7 +3637,7 @@ var Bytes__appendInt(var __this, var b) {
 		return 0;
 	}
 
-	if (0!=(((Bytes___bytesize==4)?-1:0))) {
+	if (0!=((((Bytes___bytesize)==(4))?-1:0))) {
 		if (0!=(Bytes___isbig)) {
 			Bytes__append32bitBig(__this, b);
 		} else {
@@ -3631,7 +3654,7 @@ var Bytes__appendInt(var __this, var b) {
 	return 0;
 }
 var Bytes__appendUtf8(var __this, var codepoint) {
-	if (0!=(((codepoint<128)?-1:0))) {
+	if (0!=((((codepoint)<(128))?-1:0))) {
 		Bytes__appendByte(__this, codepoint);
 		return 0;
 	}
@@ -3639,7 +3662,7 @@ var Bytes__appendUtf8(var __this, var codepoint) {
 	return 0;
 }
 var Bytes__appendUtf16(var __this, var codepoint) {
-	if (0!=(((codepoint<65536)?-1:0))) {
+	if (0!=((((codepoint)<(65536))?-1:0))) {
 		Bytes__append16bit(__this, codepoint);
 		return 0;
 	}
@@ -3659,7 +3682,7 @@ var Bytes__getStringNativePointer(var __this) {
 	var c;
 	b = __peek(buf__);
 	c = __peek(string__);
- 	b = b * sizeof(var);
+ 	b = b * sizeof(var) + c - c;
 	return b;
 }
 var Bytes__setStringToNative(var __this, var name) {
@@ -3673,12 +3696,12 @@ var Bytes__setStringToNative(var __this, var name) {
 	__poke(pos__, 0);
 	n = __peek(string__);
 	l = String__length(name);
-	if (0!=(((l<0)?-1:0))) {
+	if (0!=((((l)<(0))?-1:0))) {
 		return 0;
 	}
 
 	i = 0;
-	while (-1==(((i<l)?-1:0))) {
+	while (-1==((((i)<(l))?-1:0))) {
 		c = String__charAt(name, i);
 		Bytes__appendNativeChar(b, c);
 		i = i+1;
@@ -3748,7 +3771,7 @@ var JackAst__dispose(var __this) {
 	var d;
 	String__dispose(__peek(data__));
 	c = __peek(child__);
-	while (-1==(~(((c==0)?-1:0)))) {
+	while (-1==(~((((c)==(0))?-1:0)))) {
 		d = JackAst__getNext(c);
 		JackAst__dispose(c);
 		c = d;
@@ -3766,7 +3789,7 @@ var JackAst__setLine(var __this, var line_, var file_) {
 	return 0;
 }
 var JackAst__ident(var __this, var f, var level) {
-	while (-1==(((level>0)?-1:0))) {
+	while (-1==((((level)>(0))?-1:0))) {
 		level = level-1;
 		File__writeString(f, Memory__getString(JackAst___str1));
 	}
@@ -3790,7 +3813,7 @@ var JackAst__process(var __this, var f, var level, var par) {
 	}
 
 	c = __peek(child__);
-	while (-1==(~(((c==0)?-1:0)))) {
+	while (-1==(~((((c)==(0))?-1:0)))) {
 		JackAst__process(c, f, level, par);
 		d = JackAst__getNext(c);
 		c = d;
@@ -3812,8 +3835,8 @@ var JackAst__addop(var __this, var data_, var left_) {
 var JackAst__set(var __this, var tag_, var data_) {
 	var c;
 	c = __peek(child__);
-	while (-1==(~(((c==0)?-1:0)))) {
-		if (0!=((((JackAst__getTag(c)==tag_)?-1:0))&(((0==String__compare(data_, JackAst__getData(c)))?-1:0)))) {
+	while (-1==(~((((c)==(0))?-1:0)))) {
+		if (0!=(((((JackAst__getTag(c))==(tag_))?-1:0))&((((0)==(String__compare(data_, JackAst__getData(c))))?-1:0)))) {
 			return c;
 		}
 
@@ -3824,37 +3847,54 @@ var JackAst__set(var __this, var tag_, var data_) {
 var JackAst__append(var __this, var a) {
 	var c;
 	c = __peek(child__);
-	if (0!=(((c==0)?-1:0))) {
+	if (0!=((((c)==(0))?-1:0))) {
 		__poke(child__, a);
 	} else {
-		while (-1==(~(((JackAst__getNext(c)==0)?-1:0)))) {
+		while (-1==(~((((JackAst__getNext(c))==(0))?-1:0)))) {
 			c = JackAst__getNext(c);
 		}
 		JackAst__setNext(c, a);
 	}
 	return a;
 }
-var JackAst__pop(var __this) {
+var JackAst__removeChild(var __this, var old) {
 	var c;
 	var d;
 	c = __peek(child__);
-	if (0!=(((c==0)?-1:0))) {
+	if (0!=((((c)==(0))?-1:0))) {
 		return 0;
-	} else {
-		d = c;
-		__poke(child__, JackAst__getNext(c));
 	}
-	return d;
+
+	if (0!=((((old)==(__peek(child__)))?-1:0))) {
+		__poke(child__, JackAst__getNext(__peek(child__)));
+		JackAst__setNext(old, 0);
+		JackAst__setParent(old, 0);
+		return old;
+	}
+
+	d = JackAst__getNext(c);
+	while (-1==(~((((d)==(0))?-1:0)))) {
+		if (0!=((((d)==(old))?-1:0))) {
+			JackAst__setNext(c, JackAst__getNext(d));
+			JackAst__setNext(old, 0);
+			JackAst__setParent(old, 0);
+			return old;
+		}
+
+		c = d;
+		c = JackAst__getNext(c);
+	}
+	return 0;
 }
 var JackAst__replaceChild(var __this, var old, var new_) {
 	var c;
 	var n;
-	if (0!=(((__peek(child__)==0)?-1:0))) {
+	if (0!=((((__peek(child__))==(0))?-1:0))) {
 		return 0;
 	}
 
 	c = __peek(child__);
-	if (0!=(((c==old)?-1:0))) {
+	if (0!=((((c)==(old))?-1:0))) {
 		JackAst__setNext(new_, JackAst__getNext(c));
 		JackAst__setNext(c, 0);
 		__poke(child__, new_);
@@ -3863,8 +3903,8 @@ var JackAst__replaceChild(var __this, var old, var new_) {
 	}
 
 	n = JackAst__getNext(c);
-	while (-1==(~(((n==0)?-1:0)))) {
-		if (0!=(((n==old)?-1:0))) {
+	while (-1==(~((((n)==(0))?-1:0)))) {
+		if (0!=((((n)==(old))?-1:0))) {
 			JackAst__setNext(new_, JackAst__getNext(n));
 			JackAst__setNext(n, 0);
 			JackAst__setNext(c, new_);
@@ -4030,9 +4070,9 @@ var JackCompiler__copyHead(var __this, var dst, var source) {
 	s = String__appendChar(s, 10);
 	b = String__new(1024);
 	l = File__readLine(src_, b);
-	while (-1==(~(((l==0)?-1:0)))) {
+	while (-1==(~((((l)==(0))?-1:0)))) {
 		b = l;
-		if (0!=(((String__compare(s, b)==0)?-1:0))) {
+		if (0!=((((String__compare(s, b))==(0))?-1:0))) {
 			l = 0;
 		} else {
 			File__writeString(dst, b);
@@ -4051,7 +4091,7 @@ var JackCompiler__copy(var __this, var dst, var source) {
 	src_ = File__new(source, 0);
 	b = String__new(1024);
 	l = File__readLine(src_, b);
-	while (-1==(~(((l==0)?-1:0)))) {
+	while (-1==(~((((l)==(0))?-1:0)))) {
 		b = l;
 		File__writeString(dst, b);
 		l = File__readLine(src_, b);
@@ -4073,10 +4113,10 @@ var JackCompiler__copyBody(var __this, var dst, var source) {
 	s = String__appendChar(s, 10);
 	b = String__new(1024);
 	l = File__readLine(src_, b);
-	while (-1==(~(((l==0)?-1:0)))) {
+	while (-1==(~((((l)==(0))?-1:0)))) {
 		b = l;
-		if (0!=(((doit==0)?-1:0))) {
-			if (0!=(((String__compare(s, b)==0)?-1:0))) {
+		if (0!=((((doit)==(0))?-1:0))) {
+			if (0!=((((String__compare(s, b))==(0))?-1:0))) {
 				doit = -1;
 			}
 
@@ -4101,7 +4141,7 @@ var JackCompiler__link(var __this, var dir, var files) {
 	var sr;
 	s = String__copy(dir);
 	l = String__length(s);
-	if (0!=(((String__charAt(s, l-1)==47)?-1:0))) {
+	if (0!=((((String__charAt(s, l-1))==(47))?-1:0))) {
 		String__setCharAt(s, l-1, 0);
 	}
 
@@ -4143,7 +4183,7 @@ var JackCompiler__link(var __this, var dir, var files) {
 	}
 	File__writeString(dst, Memory__getString(JackCompiler___str19));
 	File__writeByte(dst, 10);
-	while (-1==(((i<Buffer__getSize(files))?-1:0))) {
+	while (-1==((((i)<(Buffer__getSize(files)))?-1:0))) {
 		s = Buffer__getAt(files, i);
 		s = String__copy(s);
 		s = String__appendString(s, Memory__getString(JackCompiler___str20));
@@ -4179,7 +4219,7 @@ var JackCompiler__link(var __this, var dir, var files) {
 	s = String__appendString(s, Memory__getString(JackCompiler___str27));
 	JackCompiler__copy(__this, dst, s);
 	String__dispose(s);
-	while (-1==(((i<Buffer__getSize(files))?-1:0))) {
+	while (-1==((((i)<(Buffer__getSize(files)))?-1:0))) {
 		s = Buffer__getAt(files, i);
 		s = String__copy(s);
 		s = String__appendString(s, Memory__getString(JackCompiler___str28));
@@ -4314,15 +4354,15 @@ var JackAstToC___str108[] = {43,0};
 var JackAstToC___str109[] = {45,0};
 var JackAstToC___str110[] = {42,0};
 var JackAstToC___str111[] = {47,0};
-var JackAstToC___str112[] = {40,40,0};
-var JackAstToC___str113[] = {60,0};
-var JackAstToC___str114[] = {41,63,45,49,58,48,41,0};
-var JackAstToC___str115[] = {40,40,0};
-var JackAstToC___str116[] = {62,0};
-var JackAstToC___str117[] = {41,63,45,49,58,48,41,0};
-var JackAstToC___str118[] = {40,40,0};
-var JackAstToC___str119[] = {61,61,0};
-var JackAstToC___str120[] = {41,63,45,49,58,48,41,0};
+var JackAstToC___str112[] = {40,40,40,0};
+var JackAstToC___str113[] = {41,60,40,0};
+var JackAstToC___str114[] = {41,41,63,45,49,58,48,41,0};
+var JackAstToC___str115[] = {40,40,40,0};
+var JackAstToC___str116[] = {41,62,40,0};
+var JackAstToC___str117[] = {41,41,63,45,49,58,48,41,0};
+var JackAstToC___str118[] = {40,40,40,0};
+var JackAstToC___str119[] = {41,61,61,40,0};
+var JackAstToC___str120[] = {41,41,63,45,49,58,48,41,0};
 var JackAstToC___str121[] = {85,110,101,120,112,101,99,116,101,100,32,116,101,114,109,0};
 var JackAstToC___str122[] = {0};
 var JackAstToC___str123[] = {0};
@@ -4391,6 +4431,7 @@ var JackAstToC__compile(var __this, var dst_) {
 	JackAstToC__nl(__this);
 	File__writeString(__peek(dst__), Memory__getString(JackAstToC___str0));
 	JackAstToC__nl(__this);
+	JackAstToC__nl(__this);
 	File__writeString(__peek(dst__), Memory__getString(JackAstToC___str1));
 	JackAstToC__nl(__this);
 	__poke(stringid__, 0);
@@ -4430,10 +4471,10 @@ var JackAstToC__compile(var __this, var dst_) {
 	File__writeString(__peek(dst__), Memory__getString(JackAstToC___str15));
 	__poke(hack__, -1);
 	JackAstToC__nl(__this);
-	while (-1==(~(((__peek(current__)==0)?-1:0)))) {
+	while (-1==(~((((__peek(current__))==(0))?-1:0)))) {
 		c = JackAst__getChild(__peek(current__));
 		if (0!=(c)) {
-			if (0!=(((JackAst__getTag(c)==C__CLASS())?-1:0))) {
+			if (0!=((((JackAst__getTag(c))==(C__CLASS()))?-1:0))) {
 				JackAstToC__coClass(__this, c);
 			}
 
@@ -4456,15 +4497,15 @@ var JackAstToC__coClass(var __this, var c) {
 	File__writeString(__peek(dst__), Memory__getString(JackAstToC___str19));
 	JackAstToC__nl(__this);
 	d = JackAst__getChild(c);
-	while (-1==(~(((d==0)?-1:0)))) {
+	while (-1==(~((((d)==(0))?-1:0)))) {
 		t = JackAst__getTag(d);
-		if (0!=(((t==C__FUNCTION())?-1:0))) {
+		if (0!=((((t)==(C__FUNCTION()))?-1:0))) {
 			JackAstToC__coFunctionPre(__this, d);
 		} else {
-			if (0!=(((t==C__METHOD())?-1:0))) {
+			if (0!=((((t)==(C__METHOD()))?-1:0))) {
 				JackAstToC__coMethodPre(__this, d);
 			} else {
-				if (0!=(((t==C__CONSTRUCTOR())?-1:0))) {
+				if (0!=((((t)==(C__CONSTRUCTOR()))?-1:0))) {
 					JackAstToC__coConstructorPre(__this, d);
 				}
 
@@ -4482,24 +4523,24 @@ var JackAstToC__coClass(var __this, var c) {
 	}
 
 	d = JackAst__getChild(c);
-	while (-1==(~(((d==0)?-1:0)))) {
+	while (-1==(~((((d)==(0))?-1:0)))) {
 		t = JackAst__getTag(d);
-		if (0!=(((t==C__FUNCTION())?-1:0))) {
+		if (0!=((((t)==(C__FUNCTION()))?-1:0))) {
 			JackAstToC__coFunction(__this, d);
 		} else {
-			if (0!=(((t==C__METHOD())?-1:0))) {
+			if (0!=((((t)==(C__METHOD()))?-1:0))) {
 				JackAstToC__coMethod(__this, d);
 			} else {
-				if (0!=(((t==C__CONSTRUCTOR())?-1:0))) {
+				if (0!=((((t)==(C__CONSTRUCTOR()))?-1:0))) {
 					JackAstToC__coConstructor(__this, d);
 				} else {
-					if (0!=(((t==C__CALLBACK())?-1:0))) {
+					if (0!=((((t)==(C__CALLBACK()))?-1:0))) {
 						JackAstToC__coCallback(__this, d);
 					} else {
-						if (0!=(((t==C__FIELD())?-1:0))) {
+						if (0!=((((t)==(C__FIELD()))?-1:0))) {
 							JackAstToC__coField(__this, d);
 						} else {
-							if (0!=(((t==C__STATIC())?-1:0))) {
+							if (0!=((((t)==(C__STATIC()))?-1:0))) {
 								JackAstToC__coStatic(__this, d);
 							} else {
 								JackAstToC__error(__this, Memory__getString(JackAstToC___str22), d);
@@ -4512,9 +4553,9 @@ var JackAstToC__coClass(var __this, var c) {
 		d = JackAst__getNext(d);
 	}
 	d = JackAst__getChild(c);
-	while (-1==(~(((d==0)?-1:0)))) {
+	while (-1==(~((((d)==(0))?-1:0)))) {
 		t = JackAst__getTag(d);
-		if (0!=(((t==C__FIELD())?-1:0))) {
+		if (0!=((((t)==(C__FIELD()))?-1:0))) {
 			JackAstToC__coFieldUndef(__this, d);
 		}
 
@@ -4530,7 +4571,7 @@ var JackAstToC__genStrings(var __this, var a) {
 	var i;
 	var l;
 	var n;
-	if (0!=(((JackAst__getTag(a)==C__STRING_CONST())?-1:0))) {
+	if (0!=((((JackAst__getTag(a))==(C__STRING_CONST()))?-1:0))) {
 		File__writeString(__peek(dst__), Memory__getString(JackAstToC___str24));
 		File__writeString(__peek(dst__), __peek(clas__));
 		File__writeString(__peek(dst__), Memory__getString(JackAstToC___str25));
@@ -4541,7 +4582,7 @@ var JackAstToC__genStrings(var __this, var a) {
 		o = JackAst__getData(a);
 		l = String__length(o);
 		i = 0;
-		while (-1==(((i<l)?-1:0))) {
+		while (-1==((((i)<(l))?-1:0))) {
 			n = String__charAt(o, i);
 			s = String__setInt(s, n);
 			File__writeString(__peek(dst__), s);
@@ -4572,7 +4613,7 @@ var JackAstToC__genStrings(var __this, var a) {
 var JackAstToC__spc(var __this) {
 	var i;
 	i = 0;
-	while (-1==(((i<__peek(sp__))?-1:0))) {
+	while (-1==((((i)<(__peek(sp__)))?-1:0))) {
 		i = i+1;
 		File__writeString(__peek(dst__), Memory__getString(JackAstToC___str29));
 	}
@@ -4594,14 +4635,14 @@ var JackAstToC__coAsm(var __this, var c) {
 	z = Memory__getString(JackAstToC___str30);
 	s = JackAst__getData(c);
 	l = String__length(s);
-	while (-1==(((String__charAt(s, i)==String__charAt(z, i))?-1:0))) {
+	while (-1==((((String__charAt(s, i))==(String__charAt(z, i)))?-1:0))) {
 		i = i+1;
-		if (0!=(((i==l)?-1:0))) {
+		if (0!=((((i)==(l))?-1:0))) {
 			return 0;
 		}
 
-		if (0!=(((i==String__length(z))?-1:0))) {
-			while (-1==(((i<l)?-1:0))) {
+		if (0!=((((i)==(String__length(z)))?-1:0))) {
+			while (-1==((((i)<(l))?-1:0))) {
 				File__writeUtf8(__peek(dst__), String__charAt(s, i));
 				i = i+1;
 			}
@@ -4657,7 +4698,7 @@ var JackAstToC__coMethodPre(var __this, var c) {
 	var d;
 	var t;
 	d = JackAst__getChild(c);
-	while (-1==(~(((d==0)?-1:0)))) {
+	while (-1==(~((((d)==(0))?-1:0)))) {
 		t = JackAst__getTag(d);
 		if (0!=(JackAstToC__isType(__this, t))) {
 			JackAstToC__coFunctionHead(__this, d, -1);
@@ -4674,7 +4715,7 @@ var JackAstToC__coConstructorPre(var __this, var c) {
 	var d;
 	var t;
 	d = JackAst__getChild(c);
-	while (-1==(~(((d==0)?-1:0)))) {
+	while (-1==(~((((d)==(0))?-1:0)))) {
 		t = JackAst__getTag(d);
 		if (0!=(JackAstToC__isType(__this, t))) {
 			JackAstToC__coFunctionHead(__this, d, 0);
@@ -4693,7 +4734,7 @@ var JackAstToC__coMethod(var __this, var c) {
 	var l;
 	d = JackAst__getChild(c);
 	l = 0;
-	while (-1==(~(((d==0)?-1:0)))) {
+	while (-1==(~((((d)==(0))?-1:0)))) {
 		t = JackAst__getTag(d);
 		if (0!=(JackAstToC__isType(__this, t))) {
 			JackAstToC__coFunctionHead(__this, d, -1);
@@ -4702,12 +4743,12 @@ var JackAstToC__coMethod(var __this, var c) {
 			__poke(sp__, __peek(sp__)+1);
 		}
 
-		if (0!=(((t==C__VAR())?-1:0))) {
+		if (0!=((((t)==(C__VAR()))?-1:0))) {
 			JackAstToC__coVarDec(__this, d);
 			l = l+1;
 		}
 
-		if (0!=(((t==C__STATEMENTS())?-1:0))) {
+		if (0!=((((t)==(C__STATEMENTS()))?-1:0))) {
 			JackAstToC__coStatements(__this, d);
 			__poke(sp__, __peek(sp__)-1);
 			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str42));
@@ -4725,7 +4766,7 @@ var JackAstToC__coConstructor(var __this, var c) {
 	var s;
 	d = JackAst__getChild(c);
 	l = 0;
-	while (-1==(~(((d==0)?-1:0)))) {
+	while (-1==(~((((d)==(0))?-1:0)))) {
 		t = JackAst__getTag(d);
 		if (0!=(JackAstToC__isType(__this, t))) {
 			JackAstToC__coFunctionHead(__this, d, 0);
@@ -4734,8 +4775,8 @@ var JackAstToC__coConstructor(var __this, var c) {
 			__poke(sp__, __peek(sp__)+1);
 		}
 
-		if (0!=(((t==C__VAR())?-1:0))) {
-			if (0!=(((l==0)?-1:0))) {
+		if (0!=((((t)==(C__VAR()))?-1:0))) {
+			if (0!=((((l)==(0))?-1:0))) {
 				JackAstToC__spc(__this);
 				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str44));
 				JackAstToC__nl(__this);
@@ -4745,9 +4786,9 @@ var JackAstToC__coConstructor(var __this, var c) {
 			l = l+1;
 		}
 
-		if (0!=(((t==C__STATEMENTS())?-1:0))) {
+		if (0!=((((t)==(C__STATEMENTS()))?-1:0))) {
 			t = t;
-			if (0!=(((l==0)?-1:0))) {
+			if (0!=((((l)==(0))?-1:0))) {
 				JackAstToC__spc(__this);
 				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str45));
 				JackAstToC__nl(__this);
@@ -4756,7 +4797,7 @@ var JackAstToC__coConstructor(var __this, var c) {
 			JackAstToC__spc(__this);
 			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str46));
 			s = String__new(8);
-			if (0!=(((__peek(nb_field__)<1)?-1:0))) {
+			if (0!=((((__peek(nb_field__))<(1))?-1:0))) {
 				s = String__setInt(s, 1);
 			} else {
 				s = String__setInt(s, __peek(nb_field__));
@@ -4793,7 +4834,7 @@ var JackAstToC__coFunctionPre(var __this, var c) {
 	var d;
 	var t;
 	d = JackAst__getChild(c);
-	while (-1==(~(((d==0)?-1:0)))) {
+	while (-1==(~((((d)==(0))?-1:0)))) {
 		t = JackAst__getTag(d);
 		if (0!=(JackAstToC__isType(__this, t))) {
 			JackAstToC__coFunctionHead(__this, d, 0);
@@ -4807,7 +4848,7 @@ var JackAstToC__coFunctionPre(var __this, var c) {
 	return 0;
 }
 var JackAstToC__isType(var __this, var t) {
-	if (0!=((((t==C__CLASSNAME())?-1:0))|(((t==C__VOID())?-1:0))|(((t==C__INT())?-1:0))|(((t==C__BOOLEAN())?-1:0))|(((t==C__CHAR())?-1:0)))) {
+	if (0!=(((((t)==(C__CLASSNAME()))?-1:0))|((((t)==(C__VOID()))?-1:0))|((((t)==(C__INT()))?-1:0))|((((t)==(C__BOOLEAN()))?-1:0))|((((t)==(C__CHAR()))?-1:0)))) {
 		return -1;
 	}
 
@@ -4817,7 +4858,7 @@ var JackAstToC__coFunction(var __this, var c) {
 	var d;
 	var t;
 	d = JackAst__getChild(c);
-	while (-1==(~(((d==0)?-1:0)))) {
+	while (-1==(~((((d)==(0))?-1:0)))) {
 		t = JackAst__getTag(d);
 		if (0!=(JackAstToC__isType(__this, t))) {
 			JackAstToC__coFunctionHead(__this, d, 0);
@@ -4826,11 +4867,11 @@ var JackAstToC__coFunction(var __this, var c) {
 			__poke(sp__, __peek(sp__)+1);
 		}
 
-		if (0!=(((t==C__VAR())?-1:0))) {
+		if (0!=((((t)==(C__VAR()))?-1:0))) {
 			JackAstToC__coVarDec(__this, d);
 		}
 
-		if (0!=(((t==C__STATEMENTS())?-1:0))) {
+		if (0!=((((t)==(C__STATEMENTS()))?-1:0))) {
 			t = t;
 			JackAstToC__coStatements(__this, d);
 			__poke(sp__, __peek(sp__)-1);
@@ -4843,7 +4884,7 @@ var JackAstToC__coFunction(var __this, var c) {
 	return 0;
 }
 var JackAstToC__error(var __this, var txt, var c) {
-	if (0!=(((String__length(txt)<1)?-1:0))) {
+	if (0!=((((String__length(txt))<(1))?-1:0))) {
 		return 0;
 	}
 
@@ -4881,24 +4922,24 @@ var JackAstToC__coStatement(var __this, var c) {
 	var newline;
 	newline = -1;
 	t = JackAst__getTag(c);
-	if (0!=(((t==C__ASSIGN())?-1:0))) {
+	if (0!=((((t)==(C__ASSIGN()))?-1:0))) {
 		JackAstToC__coAssign(__this, c);
 	} else {
-		if (0!=(((t==C__WHILE())?-1:0))) {
+		if (0!=((((t)==(C__WHILE()))?-1:0))) {
 			JackAstToC__coWhile(__this, c);
 		} else {
-			if (0!=(((t==C__IF())?-1:0))) {
+			if (0!=((((t)==(C__IF()))?-1:0))) {
 				JackAstToC__coIf(__this, c);
 			} else {
-				if (0!=(((t==C__SUBROUTINECALL())?-1:0))) {
+				if (0!=((((t)==(C__SUBROUTINECALL()))?-1:0))) {
 					JackAstToC__spc(__this);
 					JackAstToC__coSubroutineCall(__this, c);
 					File__writeString(__peek(dst__), Memory__getString(JackAstToC___str61));
 				} else {
-					if (0!=(((t==C__RETURN())?-1:0))) {
+					if (0!=((((t)==(C__RETURN()))?-1:0))) {
 						JackAstToC__coReturn(__this, c);
 					} else {
-						if (0!=(((t==C__ASM())?-1:0))) {
+						if (0!=((((t)==(C__ASM()))?-1:0))) {
 							JackAstToC__coAsm(__this, c);
 							newline = 0;
 						} else {
@@ -4952,12 +4993,12 @@ var JackAstToC__coIf(var __this, var c) {
 	JackAstToC__nl(__this);
 	__poke(sp__, __peek(sp__)+1);
 	d = JackAst__getNext(d);
-	if (0!=(((d==0)?-1:0))) {
+	if (0!=((((d)==(0))?-1:0))) {
 		JackAstToC__error(__this, Memory__getString(JackAstToC___str70), c);
 		return 0;
 	}
 
-	if (0!=((((((JackAst__getTag(d)==C__STATEMENTS())?-1:0))==0)?-1:0))) {
+	if (0!=((((((((JackAst__getTag(d))==(C__STATEMENTS()))?-1:0)))==(0))?-1:0))) {
 		JackAstToC__error(__this, Memory__getString(JackAstToC___str71), d);
 		return 0;
 	}
@@ -4965,14 +5006,14 @@ var JackAstToC__coIf(var __this, var c) {
 	JackAstToC__coStatements(__this, d);
 	d = JackAst__getNext(d);
 	__poke(sp__, __peek(sp__)-1);
-	if (0!=(((d==0)?-1:0))) {
+	if (0!=((((d)==(0))?-1:0))) {
 		JackAstToC__spc(__this);
 		File__writeString(__peek(dst__), Memory__getString(JackAstToC___str72));
 		JackAstToC__nl(__this);
 		return 0;
 	}
 
-	if (0!=((((((JackAst__getTag(d)==C__ELSE())?-1:0))==0)?-1:0))) {
+	if (0!=((((((((JackAst__getTag(d))==(C__ELSE()))?-1:0)))==(0))?-1:0))) {
 		JackAstToC__error(__this, Memory__getString(JackAstToC___str73), c);
 		return 0;
 	}
@@ -4983,7 +5024,7 @@ var JackAstToC__coIf(var __this, var c) {
 	__poke(sp__, __peek(sp__)+1);
 	c = d;
 	d = JackAst__getChild(d);
-	if (0!=(((d==0)?-1:0))) {
+	if (0!=((((d)==(0))?-1:0))) {
 		JackAstToC__error(__this, Memory__getString(JackAstToC___str75), c);
 		return 0;
 	}
@@ -5012,7 +5053,7 @@ var JackAstToC__coAssign(var __this, var c) {
 	var is_hack_field;
 	is_hack_field = 0;
 	d = JackAst__getLeft(c);
-	if (0!=(((d==0)?-1:0))) {
+	if (0!=((((d)==(0))?-1:0))) {
 		return 0;
 	}
 
@@ -5053,10 +5094,10 @@ var JackAstToC__coVarNameOrIndexed(var __this, var c, var isassign) {
 	dohack = __peek(hack__);
 	if (0!=(d)) {
 		if (0!=(dohack)) {
-			if (0!=(((isassign==0)?-1:0))) {
+			if (0!=((((isassign)==(0))?-1:0))) {
 				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str85));
 				JackAstToC__coVarName(__this, c, 0);
-				if (0!=(JackAstToC__isField(__this, c)&(((0==JackAst__getChild(c))?-1:0)))) {
+				if (0!=(JackAstToC__isField(__this, c)&((((0)==(JackAst__getChild(c)))?-1:0)))) {
 					File__writeString(__peek(dst__), Memory__getString(JackAstToC___str86));
 				}
 
@@ -5068,19 +5109,16 @@ var JackAstToC__coVarNameOrIndexed(var __this, var c, var isassign) {
 			JackAstToC__coVarName(__this, c, 0);
 			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str88));
 		}
-		if (0!=(((JackAst__getTag(d)==C__LEFT_SQUARE_BRACKET())?-1:0))) {
-			if (0!=(((dohack==0)?-1:0))) {
+		if (0!=((((JackAst__getTag(d))==(C__LEFT_SQUARE_BRACKET()))?-1:0))) {
+			if (0!=((((dohack)==(0))?-1:0))) {
 				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str89));
 			} else {
 				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str90));
 			}
 			d = JackAst__getChild(d);
-			if (0!=(((JackAst__getTag(d)==C__EXPR())?-1:0))) {
-				JackAstToC__coExpr(__this, d, 0);
-			}
-
+			JackAstToC__coExpr(__this, d, 0);
 			if (0!=(dohack)) {
-				if (0!=(((isassign==0)?-1:0))) {
+				if (0!=((((isassign)==(0))?-1:0))) {
 					File__writeString(__peek(dst__), Memory__getString(JackAstToC___str91));
 				}
 
@@ -5101,43 +5139,43 @@ var JackAstToC__isParentExprBool(var __this, var c) {
 	var d;
 	d = JackAst__getParent(c);
 	t = JackAst__getTag(d);
-	if (0!=((((t==C__LEFT_PARENTHESIS())?-1:0)))) {
+	if (0!=(((((t)==(C__LEFT_PARENTHESIS()))?-1:0)))) {
 		return JackAstToC__isParentExprBool(__this, d);
 	}
 
-	if (0!=((((t==C__EXPR())?-1:0)))) {
+	if (0!=(((((t)==(C__EXPR()))?-1:0)))) {
 		return JackAstToC__isParentExprBool(__this, d);
 	}
 
-	if (0!=((((t==C__UNARYTILDE())?-1:0)))) {
+	if (0!=(((((t)==(C__UNARYTILDE()))?-1:0)))) {
 		return JackAstToC__isParentExprBool(__this, d);
 	}
 
-	if (0!=((((t==C__OR())?-1:0)))) {
+	if (0!=(((((t)==(C__OR()))?-1:0)))) {
 		return JackAstToC__isParentExprBool(__this, d);
 	}
 
-	if (0!=((((t==C__AND())?-1:0)))) {
+	if (0!=(((((t)==(C__AND()))?-1:0)))) {
 		return JackAstToC__isParentExprBool(__this, d);
 	}
 
-	if (0!=(((t==C__MULTIPLY())?-1:0))) {
+	if (0!=((((t)==(C__MULTIPLY()))?-1:0))) {
 		return 0;
 	}
 
-	if (0!=(((t==C__PLUS())?-1:0))) {
+	if (0!=((((t)==(C__PLUS()))?-1:0))) {
 		return 0;
 	}
 
-	if (0!=(((t==C__DIV())?-1:0))) {
+	if (0!=((((t)==(C__DIV()))?-1:0))) {
 		return 0;
 	}
 
-	if (0!=(((t==C__MINUS())?-1:0))) {
+	if (0!=((((t)==(C__MINUS()))?-1:0))) {
 		return 0;
 	}
 
-	if (0!=(((t==C__ASSIGN())?-1:0))) {
+	if (0!=((((t)==(C__ASSIGN()))?-1:0))) {
 		return 0;
 	}
 
@@ -5150,19 +5188,19 @@ var JackAstToC__isInt(var __this, var c) {
 	d = c;
 	if (0!=(d)) {
 		t = JackAst__getTag(d);
-		if (0!=((((t==C__LEFT_PARENTHESIS())?-1:0)))) {
+		if (0!=(((((t)==(C__LEFT_PARENTHESIS()))?-1:0)))) {
 			return JackAstToC__isInt(__this, JackAst__getChild(d));
 		}
 
-		if (0!=(((t==C__EXPR())?-1:0))) {
+		if (0!=((((t)==(C__EXPR()))?-1:0))) {
 			return JackAstToC__isInt(__this, JackAst__getChild(d));
 		}
 
-		if (0!=(((t==C__UNARYTILDE())?-1:0))) {
+		if (0!=((((t)==(C__UNARYTILDE()))?-1:0))) {
 			return JackAstToC__isInt(__this, JackAst__getChild(d));
 		}
 
-		if (0!=(((t==C__AND())?-1:0))) {
+		if (0!=((((t)==(C__AND()))?-1:0))) {
 			if (0!=(JackAstToC__isInt(__this, JackAst__getLeft(d)))) {
 				return -1;
 			}
@@ -5170,7 +5208,7 @@ var JackAstToC__isInt(var __this, var c) {
 			return JackAstToC__isInt(__this, JackAst__getChild(d));
 		}
 
-		if (0!=(((t==C__OR())?-1:0))) {
+		if (0!=((((t)==(C__OR()))?-1:0))) {
 			if (0!=(JackAstToC__isInt(__this, JackAst__getLeft(d)))) {
 				return -1;
 			}
@@ -5178,44 +5216,44 @@ var JackAstToC__isInt(var __this, var c) {
 			return JackAstToC__isInt(__this, JackAst__getChild(d));
 		}
 
-		if (0!=(((t==C__MULTIPLY())?-1:0))) {
+		if (0!=((((t)==(C__MULTIPLY()))?-1:0))) {
 			return -1;
 		}
 
-		if (0!=(((t==C__PLUS())?-1:0))) {
+		if (0!=((((t)==(C__PLUS()))?-1:0))) {
 			return -1;
 		}
 
-		if (0!=(((t==C__DIV())?-1:0))) {
+		if (0!=((((t)==(C__DIV()))?-1:0))) {
 			return -1;
 		}
 
-		if (0!=(((t==C__MINUS())?-1:0))) {
+		if (0!=((((t)==(C__MINUS()))?-1:0))) {
 			return -1;
 		}
 
-		if (0!=(((t==C__INT_CONST())?-1:0))) {
+		if (0!=((((t)==(C__INT_CONST()))?-1:0))) {
 			return -1;
 		}
 
-		if (0!=(((t==C__VARNAME())?-1:0))) {
+		if (0!=((((t)==(C__VARNAME()))?-1:0))) {
 			s = JackAstToC__getTypeOf(__this, d);
-			if (0!=(((0==String__compare(s, Memory__getString(JackAstToC___str94)))?-1:0))) {
+			if (0!=((((0)==(String__compare(s, Memory__getString(JackAstToC___str94))))?-1:0))) {
 				return -1;
 			} else {
 				return 0;
 			}
 		}
 
-		if (0!=(((t==C__LESS())?-1:0))) {
+		if (0!=((((t)==(C__LESS()))?-1:0))) {
 			return 0;
 		}
 
-		if (0!=(((t==C__GREATER())?-1:0))) {
+		if (0!=((((t)==(C__GREATER()))?-1:0))) {
 			return 0;
 		}
 
-		if (0!=(((t==C__EQUAL())?-1:0))) {
+		if (0!=((((t)==(C__EQUAL()))?-1:0))) {
 			return 0;
 		}
 
@@ -5228,78 +5266,78 @@ var JackAstToC__coExpr(var __this, var c, var isterm) {
 	var ok;
 	var t;
 	var s;
-	if (0!=(((JackAst__getTag(c)==C__EXPR())?-1:0))) {
+	if (0!=((((JackAst__getTag(c))==(C__EXPR()))?-1:0))) {
 		d = JackAst__getChild(c);
 	} else {
 		d = c;
 	}
-	while (-1==(~(((d==0)?-1:0)))) {
+	while (-1==(~((((d)==(0))?-1:0)))) {
 		ok = 0;
 		t = JackAst__getTag(d);
-		if (0!=(((t==C__SUBROUTINECALL())?-1:0))) {
+		if (0!=((((t)==(C__SUBROUTINECALL()))?-1:0))) {
 			JackAstToC__coSubroutineCall(__this, d);
 			ok = -1;
 		}
 
-		if (0!=(((t==C__UNARYMINUS())?-1:0))) {
+		if (0!=((((t)==(C__UNARYMINUS()))?-1:0))) {
 			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str95));
 			JackAstToC__coExpr(__this, JackAst__getChild(d), -1);
 			ok = -1;
 		}
 
-		if (0!=(((t==C__UNARYTILDE())?-1:0))) {
+		if (0!=((((t)==(C__UNARYTILDE()))?-1:0))) {
 			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str96));
 			JackAstToC__coExpr(__this, JackAst__getChild(d), -1);
 			ok = -1;
 		}
 
-		if (0!=(((t==C__AND())?-1:0))) {
+		if (0!=((((t)==(C__AND()))?-1:0))) {
 			JackAstToC__coExpr(__this, JackAst__getLeft(d), 0);
 			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str97));
 			JackAstToC__coExpr(__this, JackAst__getChild(d), 0);
 			ok = -1;
 		}
 
-		if (0!=(((t==C__OR())?-1:0))) {
+		if (0!=((((t)==(C__OR()))?-1:0))) {
 			JackAstToC__coExpr(__this, JackAst__getLeft(d), 0);
 			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str98));
 			JackAstToC__coExpr(__this, JackAst__getChild(d), 0);
 			ok = -1;
 		}
 
-		if (0!=(((t==C__NULL())?-1:0))) {
+		if (0!=((((t)==(C__NULL()))?-1:0))) {
 			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str99));
 			ok = -1;
 		}
 
-		if (0!=(((t==C__THIS())?-1:0))) {
+		if (0!=((((t)==(C__THIS()))?-1:0))) {
 			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str100));
 			ok = -1;
 		}
 
-		if (0!=(((t==C__FALSE())?-1:0))) {
+		if (0!=((((t)==(C__FALSE()))?-1:0))) {
 			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str101));
 			ok = -1;
 		}
 
-		if (0!=(((t==C__TRUE())?-1:0))) {
+		if (0!=((((t)==(C__TRUE()))?-1:0))) {
 			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str102));
 			ok = -1;
 		}
 
-		if (0!=(((t==C__LEFT_PARENTHESIS())?-1:0))) {
+		if (0!=((((t)==(C__LEFT_PARENTHESIS()))?-1:0))) {
 			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str103));
 			JackAstToC__coExpr(__this, JackAst__getChild(d), 0);
 			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str104));
 			ok = -1;
 		}
 
-		if (0!=(((t==C__INT_CONST())?-1:0))) {
+		if (0!=((((t)==(C__INT_CONST()))?-1:0))) {
 			File__writeString(__peek(dst__), JackAst__getData(d));
 			ok = -1;
 		}
 
-		if (0!=(((t==C__STRING_CONST())?-1:0))) {
+		if (0!=((((t)==(C__STRING_CONST()))?-1:0))) {
 			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str105));
 			File__writeString(__peek(dst__), __peek(clas__));
 			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str106));
@@ -5312,35 +5350,35 @@ var JackAstToC__coExpr(var __this, var c, var isterm) {
 			ok = -1;
 		}
 
-		if (0!=(((t==C__PLUS())?-1:0))) {
+		if (0!=((((t)==(C__PLUS()))?-1:0))) {
 			JackAstToC__coExpr(__this, JackAst__getLeft(d), 0);
 			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str108));
 			JackAstToC__coExpr(__this, JackAst__getChild(d), 0);
 			ok = -1;
 		}
 
-		if (0!=(((t==C__MINUS())?-1:0))) {
+		if (0!=((((t)==(C__MINUS()))?-1:0))) {
 			JackAstToC__coExpr(__this, JackAst__getLeft(d), 0);
 			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str109));
 			JackAstToC__coExpr(__this, JackAst__getChild(d), 0);
 			ok = -1;
 		}
 
-		if (0!=(((t==C__MULTIPLY())?-1:0))) {
+		if (0!=((((t)==(C__MULTIPLY()))?-1:0))) {
 			JackAstToC__coExpr(__this, JackAst__getLeft(d), 0);
 			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str110));
 			JackAstToC__coExpr(__this, JackAst__getChild(d), 0);
 			ok = -1;
 		}
 
-		if (0!=(((t==C__DIV())?-1:0))) {
+		if (0!=((((t)==(C__DIV()))?-1:0))) {
 			JackAstToC__coExpr(__this, JackAst__getLeft(d), 0);
 			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str111));
 			JackAstToC__coExpr(__this, JackAst__getChild(d), 0);
 			ok = -1;
 		}
 
-		if (0!=(((t==C__LESS())?-1:0))) {
+		if (0!=((((t)==(C__LESS()))?-1:0))) {
 			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str112));
 			JackAstToC__coExpr(__this, JackAst__getLeft(d), 0);
 			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str113));
@@ -5349,7 +5387,7 @@ var JackAstToC__coExpr(var __this, var c, var isterm) {
 			ok = -1;
 		}
 
-		if (0!=(((t==C__GREATER())?-1:0))) {
+		if (0!=((((t)==(C__GREATER()))?-1:0))) {
 			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str115));
 			JackAstToC__coExpr(__this, JackAst__getLeft(d), 0);
 			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str116));
@@ -5358,7 +5396,7 @@ var JackAstToC__coExpr(var __this, var c, var isterm) {
 			ok = -1;
 		}
 
-		if (0!=(((t==C__EQUAL())?-1:0))) {
+		if (0!=((((t)==(C__EQUAL()))?-1:0))) {
 			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str118));
 			JackAstToC__coExpr(__this, JackAst__getLeft(d), 0);
 			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str119));
@@ -5367,20 +5405,20 @@ var JackAstToC__coExpr(var __this, var c, var isterm) {
 			ok = -1;
 		}
 
-		if (0!=(((t==C__VARNAME())?-1:0))) {
+		if (0!=((((t)==(C__VARNAME()))?-1:0))) {
 			JackAstToC__coVarNameOrIndexed(__this, d, 0);
 			ok = -1;
 		}
 
-		if (0!=(((t==C__EXPR())?-1:0))) {
-			if (0!=((((((d==c)?-1:0))==0)?-1:0))) {
+		if (0!=((((t)==(C__EXPR()))?-1:0))) {
+			if (0!=((((((((d)==(c))?-1:0)))==(0))?-1:0))) {
 				JackAstToC__coExpr(__this, d, 0);
 			}
 
 			ok = -1;
 		}
 
-		if (0!=(((ok==0)?-1:0))) {
+		if (0!=((((ok)==(0))?-1:0))) {
 			JackAstToC__error(__this, Memory__getString(JackAstToC___str121), d);
 		}
 
@@ -5388,24 +5426,25 @@ var JackAstToC__coExpr(var __this, var c, var isterm) {
 			return 0;
 		}
 
+		return 0;
 		d = JackAst__getNext(d);
 	}
 	return 0;
 }
 var JackAstToC__isSubroutine(var __this, var t) {
-	if (0!=(((t==C__FUNCTION())?-1:0))) {
+	if (0!=((((t)==(C__FUNCTION()))?-1:0))) {
 		return -1;
 	}
 
-	if (0!=(((t==C__METHOD())?-1:0))) {
+	if (0!=((((t)==(C__METHOD()))?-1:0))) {
 		return -1;
 	}
 
-	if (0!=(((t==C__CONSTRUCTOR())?-1:0))) {
+	if (0!=((((t)==(C__CONSTRUCTOR()))?-1:0))) {
 		return -1;
 	}
 
-	if (0!=(((t==C__CALLBACK())?-1:0))) {
+	if (0!=((((t)==(C__CALLBACK()))?-1:0))) {
 		return -1;
 	}
 
@@ -5419,7 +5458,7 @@ var JackAstToC__isVarnameSet(var __this, var c, var s) {
 	}
 
 	if (0!=(d)) {
-		if (0!=(((String__compare(s, JackAst__getData(d))==0)?-1:0))) {
+		if (0!=((((String__compare(s, JackAst__getData(d)))==(0))?-1:0))) {
 			return -1;
 		}
 
@@ -5431,17 +5470,17 @@ var JackAstToC__getTypeOfVarname(var __this, var c, var s) {
 	var d;
 	var t;
 	d = JackAst__getChild(c);
-	if (0!=(((d==0)?-1:0))) {
+	if (0!=((((d)==(0))?-1:0))) {
 		return 0;
 	}
 
-	if (0!=(((JackAst__getData(d)==0)?-1:0))) {
+	if (0!=((((JackAst__getData(d))==(0))?-1:0))) {
 		return 0;
 	}
 
-	if (0!=(((String__compare(s, JackAst__getData(d))==0)?-1:0))) {
+	if (0!=((((String__compare(s, JackAst__getData(d)))==(0))?-1:0))) {
 		t = JackAst__getTag(c);
-		if (0!=((((t==C__VOID())?-1:0))|(((t==C__INT())?-1:0))|(((t==C__BOOLEAN())?-1:0))|(((t==C__CHAR())?-1:0)))) {
+		if (0!=(((((t)==(C__VOID()))?-1:0))|((((t)==(C__INT()))?-1:0))|((((t)==(C__BOOLEAN()))?-1:0))|((((t)==(C__CHAR()))?-1:0)))) {
 			return JackAstToC__str(__this, t);
 		}
 
@@ -5460,12 +5499,12 @@ var JackAstToC__functionGetClassOf(var __this, var c, var s) {
 	if (0!=(JackAstToC__isType(__this, t))) {
 		n = JackAst__getChild(d);
 		t = JackAst__getTag(n);
-		if (0!=(((t==C__SUBROUTINENAME())?-1:0))) {
+		if (0!=((((t)==(C__SUBROUTINENAME()))?-1:0))) {
 			n = JackAst__getChild(n);
 			t = JackAst__getTag(n);
-			if (0!=(((t==C__PARAMS())?-1:0))) {
+			if (0!=((((t)==(C__PARAMS()))?-1:0))) {
 				n = JackAst__getChild(n);
-				while (-1==(~(((n==0)?-1:0)))) {
+				while (-1==(~((((n)==(0))?-1:0)))) {
 					r = JackAstToC__isVarnameSet(__this, n, s);
 					if (0!=(r)) {
 						return Memory__getString(JackAstToC___str122);
@@ -5479,9 +5518,9 @@ var JackAstToC__functionGetClassOf(var __this, var c, var s) {
 
 	}
 
-	while (-1==(~(((d==0)?-1:0)))) {
+	while (-1==(~((((d)==(0))?-1:0)))) {
 		t = JackAst__getTag(d);
-		if (0!=(((t==C__VAR())?-1:0))) {
+		if (0!=((((t)==(C__VAR()))?-1:0))) {
 			n = JackAst__getChild(d);
 			if (0!=(n)) {
 				r = JackAstToC__isVarnameSet(__this, n, s);
@@ -5503,17 +5542,17 @@ var JackAstToC__functionGetTypeOf(var __this, var c, var s) {
 	var t;
 	var r;
 	d = JackAst__getChild(c);
-	while (-1==(~(((d==0)?-1:0)))) {
+	while (-1==(~((((d)==(0))?-1:0)))) {
 		t = JackAst__getTag(d);
 		if (0!=(JackAstToC__isType(__this, t))) {
 			n = JackAst__getChild(d);
 			t = JackAst__getTag(n);
-			if (0!=(((t==C__SUBROUTINENAME())?-1:0))) {
+			if (0!=((((t)==(C__SUBROUTINENAME()))?-1:0))) {
 				n = JackAst__getChild(n);
 				t = JackAst__getTag(n);
-				if (0!=(((t==C__PARAMS())?-1:0))) {
+				if (0!=((((t)==(C__PARAMS()))?-1:0))) {
 					n = JackAst__getChild(n);
-					while (-1==(~(((n==0)?-1:0)))) {
+					while (-1==(~((((n)==(0))?-1:0)))) {
 						r = JackAstToC__getTypeOfVarname(__this, n, s);
 						if (0!=(r)) {
 							return r;
@@ -5527,7 +5566,7 @@ var JackAstToC__functionGetTypeOf(var __this, var c, var s) {
 
 		}
 
-		if (0!=(((t==C__VAR())?-1:0))) {
+		if (0!=((((t)==(C__VAR()))?-1:0))) {
 			n = JackAst__getChild(d);
 			if (0!=(n)) {
 				r = JackAstToC__getTypeOfVarname(__this, n, s);
@@ -5549,12 +5588,12 @@ var JackAstToC__classGetClassOf(var __this, var c, var s) {
 	var r;
 	var u;
 	d = JackAst__getChild(c);
-	while (-1==(~(((d==0)?-1:0)))) {
+	while (-1==(~((((d)==(0))?-1:0)))) {
 		t = JackAst__getTag(d);
-		if (0!=((((t==C__FIELD())?-1:0))|(((t==C__STATIC())?-1:0)))) {
+		if (0!=(((((t)==(C__FIELD()))?-1:0))|((((t)==(C__STATIC()))?-1:0)))) {
 			r = JackAstToC__isVarnameSet(__this, d, s);
 			u = Memory__getString(JackAstToC___str124);
-			if (0!=(((String__compare(u, s)==0)?-1:0))) {
+			if (0!=((((String__compare(u, s))==(0))?-1:0))) {
 				Output__printString(Memory__getString(JackAstToC___str125));
 				Output__printString(__peek(clas__));
 				Output__printString(Memory__getString(JackAstToC___str126));
@@ -5577,9 +5616,9 @@ var JackAstToC__classGetTypeOf(var __this, var c, var s) {
 	var t;
 	var r;
 	d = JackAst__getChild(c);
-	while (-1==(~(((d==0)?-1:0)))) {
+	while (-1==(~((((d)==(0))?-1:0)))) {
 		t = JackAst__getTag(d);
-		if (0!=((((t==C__FIELD())?-1:0))|(((t==C__STATIC())?-1:0)))) {
+		if (0!=(((((t)==(C__FIELD()))?-1:0))|((((t)==(C__STATIC()))?-1:0)))) {
 			r = JackAstToC__getTypeOfVarname(__this, JackAst__getChild(d), s);
 			if (0!=(r)) {
 				return r;
@@ -5599,14 +5638,14 @@ var JackAstToC__getTypeOf(var __this, var c) {
 	s = JackAst__getData(c);
 	d = JackAst__getParent(c);
 	t = JackAst__getTag(d);
-	while (-1==(((((((d==0)?-1:0))==0)?-1:0))&(((JackAstToC__isSubroutine(__this, t)==0)?-1:0)))) {
+	while (-1==(((((((((d)==(0))?-1:0)))==(0))?-1:0))&((((JackAstToC__isSubroutine(__this, t))==(0))?-1:0)))) {
 		d = JackAst__getParent(d);
 		if (0!=(d)) {
 			t = JackAst__getTag(d);
 		}
 
 	}
-	if (0!=(((d==0)?-1:0))) {
+	if (0!=((((d)==(0))?-1:0))) {
 		return 0;
 	}
 
@@ -5615,14 +5654,14 @@ var JackAstToC__getTypeOf(var __this, var c) {
 		return r;
 	}
 
-	while (-1==(((((((d==0)?-1:0))==0)?-1:0))&((((((t==C__CLASS())?-1:0))==0)?-1:0)))) {
+	while (-1==(((((((((d)==(0))?-1:0)))==(0))?-1:0))&((((((((t)==(C__CLASS()))?-1:0)))==(0))?-1:0)))) {
 		d = JackAst__getParent(d);
 		if (0!=(d)) {
 			t = JackAst__getTag(d);
 		}
 
 	}
-	if (0!=(((d==0)?-1:0))) {
+	if (0!=((((d)==(0))?-1:0))) {
 		return 0;
 	}
 
@@ -5641,24 +5680,24 @@ var JackAstToC__isStatic(var __this, var c) {
 	s = JackAst__getData(c);
 	d = JackAst__getParent(c);
 	t = JackAst__getTag(d);
-	while (-1==(((((((d==0)?-1:0))==0)?-1:0))&((((((t==C__CLASS())?-1:0))==0)?-1:0)))) {
+	while (-1==(((((((((d)==(0))?-1:0)))==(0))?-1:0))&((((((((t)==(C__CLASS()))?-1:0)))==(0))?-1:0)))) {
 		d = JackAst__getParent(d);
 		if (0!=(d)) {
 			t = JackAst__getTag(d);
 		}
 
 	}
-	if (0!=(((d==0)?-1:0))) {
+	if (0!=((((d)==(0))?-1:0))) {
 		return 0;
 	}
 
 	d = JackAst__getChild(d);
-	while (-1==(~(((d==0)?-1:0)))) {
-		if (0!=(((JackAst__getTag(d)==C__STATIC())?-1:0))) {
+	while (-1==(~((((d)==(0))?-1:0)))) {
+		if (0!=((((JackAst__getTag(d))==(C__STATIC()))?-1:0))) {
 			n = JackAst__getChild(d);
 			if (0!=(n)) {
 				n = JackAst__getChild(n);
-				if (0!=(((String__compare(s, JackAst__getData(n))==0)?-1:0))) {
+				if (0!=((((String__compare(s, JackAst__getData(n)))==(0))?-1:0))) {
 					return -1;
 				}
 
@@ -5678,24 +5717,24 @@ var JackAstToC__isField(var __this, var c) {
 	s = JackAst__getData(c);
 	d = JackAst__getParent(c);
 	t = JackAst__getTag(d);
-	while (-1==(((((((d==0)?-1:0))==0)?-1:0))&((((((t==C__CLASS())?-1:0))==0)?-1:0)))) {
+	while (-1==(((((((((d)==(0))?-1:0)))==(0))?-1:0))&((((((((t)==(C__CLASS()))?-1:0)))==(0))?-1:0)))) {
 		d = JackAst__getParent(d);
 		if (0!=(d)) {
 			t = JackAst__getTag(d);
 		}
 
 	}
-	if (0!=(((d==0)?-1:0))) {
+	if (0!=((((d)==(0))?-1:0))) {
 		return 0;
 	}
 
 	d = JackAst__getChild(d);
-	while (-1==(~(((d==0)?-1:0)))) {
-		if (0!=(((JackAst__getTag(d)==C__FIELD())?-1:0))) {
+	while (-1==(~((((d)==(0))?-1:0)))) {
+		if (0!=((((JackAst__getTag(d))==(C__FIELD()))?-1:0))) {
 			n = JackAst__getChild(d);
 			if (0!=(n)) {
 				n = JackAst__getChild(n);
-				if (0!=(((String__compare(s, JackAst__getData(n))==0)?-1:0))) {
+				if (0!=((((String__compare(s, JackAst__getData(n)))==(0))?-1:0))) {
 					return -1;
 				}
 
@@ -5715,14 +5754,14 @@ var JackAstToC__getClassOf(var __this, var c) {
 	s = JackAst__getData(c);
 	d = JackAst__getParent(c);
 	t = JackAst__getTag(d);
-	while (-1==(((((((d==0)?-1:0))==0)?-1:0))&(((JackAstToC__isSubroutine(__this, t)==0)?-1:0)))) {
+	while (-1==(((((((((d)==(0))?-1:0)))==(0))?-1:0))&((((JackAstToC__isSubroutine(__this, t))==(0))?-1:0)))) {
 		d = JackAst__getParent(d);
 		if (0!=(d)) {
 			t = JackAst__getTag(d);
 		}
 
 	}
-	if (0!=(((d==0)?-1:0))) {
+	if (0!=((((d)==(0))?-1:0))) {
 		return 0;
 	}
 
@@ -5731,14 +5770,14 @@ var JackAstToC__getClassOf(var __this, var c) {
 		return r;
 	}
 
-	while (-1==(((((((d==0)?-1:0))==0)?-1:0))&((((((t==C__CLASS())?-1:0))==0)?-1:0)))) {
+	while (-1==(((((((((d)==(0))?-1:0)))==(0))?-1:0))&((((((((t)==(C__CLASS()))?-1:0)))==(0))?-1:0)))) {
 		d = JackAst__getParent(d);
 		if (0!=(d)) {
 			t = JackAst__getTag(d);
 		}
 
 	}
-	if (0!=(((d==0)?-1:0))) {
+	if (0!=((((d)==(0))?-1:0))) {
 		return 0;
 	}
 
@@ -5761,7 +5800,7 @@ var JackAstToC__coSubroutineCall(var __this, var c) {
 	thi = 0;
 	d = JackAst__getChild(c);
 	t = JackAst__getTag(d);
-	if (0!=((((t==C__CLASSORVARNAME())?-1:0)))) {
+	if (0!=(((((t)==(C__CLASSORVARNAME()))?-1:0)))) {
 		if (0!=(JackAstToC__isStatic(__this, d))) {
 			s = JackAstToC__getTypeOf(__this, d);
 			File__writeString(__peek(dst__), s);
@@ -5774,7 +5813,7 @@ var JackAstToC__coSubroutineCall(var __this, var c) {
 			s = JackAstToC__getTypeOf(__this, d);
 		}
 		if (0!=(s)) {
-			if (0!=(((String__length(s)>0)?-1:0))) {
+			if (0!=((((String__length(s))>(0))?-1:0))) {
 				File__writeString(__peek(dst__), s);
 				if (0!=(__peek(hack__)&JackAstToC__isField(__this, d))) {
 					thi = String__new(20);
@@ -5789,7 +5828,7 @@ var JackAstToC__coSubroutineCall(var __this, var c) {
 				File__writeString(__peek(dst__), JackAst__getData(d));
 			}
 		} else {
-			if (0!=(((free_thi==0)?-1:0))) {
+			if (0!=((((free_thi)==(0))?-1:0))) {
 				File__writeString(__peek(dst__), JackAst__getData(d));
 			}
 
@@ -5798,17 +5837,17 @@ var JackAstToC__coSubroutineCall(var __this, var c) {
 		File__writeString(__peek(dst__), Memory__getString(JackAstToC___str130));
 		File__writeString(__peek(dst__), JackAst__getData(d));
 	} else {
-		if (0!=((((t==C__CLASSNAME())?-1:0)))) {
+		if (0!=(((((t)==(C__CLASSNAME()))?-1:0)))) {
 			File__writeString(__peek(dst__), JackAst__getData(d));
 			d = JackAst__getChild(d);
 			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str131));
 			File__writeString(__peek(dst__), JackAst__getData(d));
 		} else {
-			if (0!=(((t==C__CALLBACK())?-1:0))) {
+			if (0!=((((t)==(C__CALLBACK()))?-1:0))) {
 				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str132));
 				thi = Memory__getString(JackAstToC___str133);
 			} else {
-				if (0!=(((t==C__SUBROUTINENAME())?-1:0))) {
+				if (0!=((((t)==(C__SUBROUTINENAME()))?-1:0))) {
 					File__writeString(__peek(dst__), __peek(clas__));
 					File__writeString(__peek(dst__), Memory__getString(JackAstToC___str134));
 					File__writeString(__peek(dst__), JackAst__getData(d));
@@ -5829,8 +5868,8 @@ var JackAstToC__coSubroutineCall(var __this, var c) {
 	}
 
 	d = JackAst__getChild(d);
-	while (-1==(~(((d==0)?-1:0)))) {
-		if (0!=(((first==0)?-1:0))) {
+	while (-1==(~((((d)==(0))?-1:0)))) {
+		if (0!=((((first)==(0))?-1:0))) {
 			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str137));
 		}
 
@@ -5844,7 +5883,7 @@ var JackAstToC__coSubroutineCall(var __this, var c) {
 var JackAstToC__coStatements(var __this, var c) {
 	var d;
 	d = JackAst__getChild(c);
-	while (-1==(~(((d==0)?-1:0)))) {
+	while (-1==(~((((d)==(0))?-1:0)))) {
 		JackAstToC__coStatement(__this, d);
 		d = JackAst__getNext(d);
 	}
@@ -5855,11 +5894,11 @@ var JackAstToC__coFunctionHead(var __this, var c, var add_this) {
 	var t;
 	d = JackAst__getChild(c);
 	t = JackAst__getTag(c);
-	if (0!=(((d==0)?-1:0))) {
+	if (0!=((((d)==(0))?-1:0))) {
 		return 0;
 	}
 
-	if (0!=(((t==C__CLASSNAME())?-1:0))) {
+	if (0!=((((t)==(C__CLASSNAME()))?-1:0))) {
 		File__writeString(__peek(dst__), Memory__getString(JackAstToC___str139));
 	} else {
 		File__writeString(__peek(dst__), Memory__getString(JackAstToC___str140));
@@ -5867,14 +5906,14 @@ var JackAstToC__coFunctionHead(var __this, var c, var add_this) {
 	File__writeString(__peek(dst__), Memory__getString(JackAstToC___str141));
 	File__writeString(__peek(dst__), __peek(clas__));
 	File__writeString(__peek(dst__), Memory__getString(JackAstToC___str142));
-	if (0!=(((JackAst__getTag(d)==C__SUBROUTINENAME())?-1:0))) {
+	if (0!=((((JackAst__getTag(d))==(C__SUBROUTINENAME()))?-1:0))) {
 		File__writeString(__peek(dst__), JackAst__getData(d));
 		d = JackAst__getChild(d);
 	} else {
 		JackAstToC__error(__this, Memory__getString(JackAstToC___str143), c);
 		return 0;
 	}
-	if (0!=(((JackAst__getTag(d)==C__PARAMS())?-1:0))) {
+	if (0!=((((JackAst__getTag(d))==(C__PARAMS()))?-1:0))) {
 		JackAstToC__coParams(__this, d, add_this);
 	}
 
@@ -5892,7 +5931,7 @@ var JackAstToC__coParams(var __this, var d, var add_this) {
 
 	}
 
-	while (-1==(~(((d==0)?-1:0)))) {
+	while (-1==(~((((d)==(0))?-1:0)))) {
 		JackAstToC__coType(__this, d);
 		File__writeString(__peek(dst__), Memory__getString(JackAstToC___str147));
 		n = JackAst__getChild(d);
@@ -5910,7 +5949,7 @@ var JackAstToC__coVarDec(var __this, var c) {
 	var d;
 	var n;
 	d = JackAst__getChild(c);
-	while (-1==(~(((d==0)?-1:0)))) {
+	while (-1==(~((((d)==(0))?-1:0)))) {
 		JackAstToC__spc(__this);
 		JackAstToC__coType(__this, d);
 		n = JackAst__getChild(d);
@@ -5928,7 +5967,7 @@ var JackAstToC__coVarDec(var __this, var c) {
 var JackAstToC__coType(var __this, var c) {
 	var t;
 	t = JackAst__getTag(c);
-	if (0!=(((t==C__CLASSNAME())?-1:0))) {
+	if (0!=((((t)==(C__CLASSNAME()))?-1:0))) {
 		File__writeString(__peek(dst__), Memory__getString(JackAstToC___str152));
 	} else {
 		File__writeString(__peek(dst__), Memory__getString(JackAstToC___str153));
@@ -5939,15 +5978,15 @@ var JackAstToC__coVarName(var __this, var c, var isassign) {
 	var s;
 	var t;
 	t = JackAst__getTag(c);
-	if (0!=((((t==C__VARNAME())?-1:0))|(((t==C__CLASSORVARNAME())?-1:0)))) {
-		if (0!=(((JackAstToC__isField(__this, c)==0)?-1:0))) {
+	if (0!=(((((t)==(C__VARNAME()))?-1:0))|((((t)==(C__CLASSORVARNAME()))?-1:0)))) {
+		if (0!=((((JackAstToC__isField(__this, c))==(0))?-1:0))) {
 			if (0!=(JackAstToC__isStatic(__this, c))) {
 				s = __peek(clas__);
 			} else {
 				s = JackAstToC__getClassOf(__this, c);
 			}
 			if (0!=(s)) {
-				if (0!=(((String__length(s)>0)?-1:0))) {
+				if (0!=((((String__length(s))>(0))?-1:0))) {
 					File__writeString(__peek(dst__), s);
 					File__writeString(__peek(dst__), Memory__getString(JackAstToC___str154));
 				}
@@ -5956,13 +5995,13 @@ var JackAstToC__coVarName(var __this, var c, var isassign) {
 
 			File__writeString(__peek(dst__), JackAst__getData(c));
 		} else {
-			if (0!=((((__peek(hack__)==-1)?-1:0))&(((isassign==0)?-1:0)))) {
+			if (0!=(((((__peek(hack__))==(-1))?-1:0))&((((isassign)==(0))?-1:0)))) {
 				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str155));
 				File__writeString(__peek(dst__), JackAst__getData(c));
 				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str156));
 			} else {
 				File__writeString(__peek(dst__), JackAst__getData(c));
-				if (0!=(((__peek(hack__)==-1)?-1:0))) {
+				if (0!=((((__peek(hack__))==(-1))?-1:0))) {
 					File__writeString(__peek(dst__), Memory__getString(JackAstToC___str157));
 				}
 
@@ -6013,7 +6052,7 @@ var Sys2__args() {
 	Sys2___args_ = Buffer__newString(1);
 	i = 0;
  	isq = Sys__argc__;
-	while (-1==(((i<isq)?-1:0))) {
+	while (-1==((((i)<(isq))?-1:0))) {
  		a = (var)Sys__argv__[i];
 		s = String__new(255);
 		s = String__appendFromNative(s, a);
@@ -6038,7 +6077,7 @@ var File__new(var path, var writeing) {
 	__poke(fd__, -1);
 	__poke(is_write__, writeing);
 	l = String__length(path);
-	if (0!=(((l<0)?-1:0))) {
+	if (0!=((((l)<(0))?-1:0))) {
 		Output__printString(Memory__getString(File___str0));
 		Sys__error(-1);
 		return __this;
@@ -6054,7 +6093,7 @@ var File__dispose(var __this) {
 		String__dispose(__peek(name__));
 	}
 
-	if (0!=(((__peek(fd__)<0)?-1:0))) {
+	if (0!=((((__peek(fd__))<(0))?-1:0))) {
 		Memory__deAlloc(__this);
 		return 0;
 	}
@@ -6072,7 +6111,7 @@ var File__isdir(var __this) {
 	var f;
 	var b;
 	l = String__length(__peek(name__));
-	if (0!=(((l<1)?-1:0))) {
+	if (0!=((((l)<(1))?-1:0))) {
 		return 0;
 	}
 
@@ -6105,13 +6144,13 @@ var File__open(var __this) {
 	var f;
 	var writing;
 	var b;
-	if (0!=(((__peek(fd__)>-1)?-1:0))) {
+	if (0!=((((__peek(fd__))>(-1))?-1:0))) {
 		return 0;
 	}
 
 	writing = __peek(is_write__);
 	l = String__length(__peek(name__));
-	if (0!=(((l<1)?-1:0))) {
+	if (0!=((((l)<(1))?-1:0))) {
 		return 0;
 	}
 
@@ -6143,10 +6182,10 @@ var File__readByte(var __this) {
 	var b;
 	var f;
 	f = __peek(fd__);
-	if (0!=(((f<0)?-1:0))) {
+	if (0!=((((f)<(0))?-1:0))) {
 		File__open(__this);
 		f = __peek(fd__);
-		if (0!=(((f<0)?-1:0))) {
+		if (0!=((((f)<(0))?-1:0))) {
 			return -1;
 		}
 
@@ -6163,10 +6202,10 @@ var File__seek(var __this, var position) {
 	var p;
 	f = __peek(fd__);
 	p = position;
-	if (0!=(((f<0)?-1:0))) {
+	if (0!=((((f)<(0))?-1:0))) {
 		File__open(__this);
 		f = __peek(fd__);
-		if (0!=(((f<0)?-1:0))) {
+		if (0!=((((f)<(0))?-1:0))) {
 			return -1;
 		}
 
@@ -6180,9 +6219,9 @@ var File__writeByte(var __this, var data) {
 	var f;
 	var b;
 	b = data;
-	if (0!=(((__peek(fd__)<0)?-1:0))) {
+	if (0!=((((__peek(fd__))<(0))?-1:0))) {
 		File__open(__this);
-		if (0!=(((__peek(fd__)<0)?-1:0))) {
+		if (0!=((((__peek(fd__))<(0))?-1:0))) {
 			return -1;
 		}
 
@@ -6198,7 +6237,7 @@ var File__writeString(var __this, var s) {
 	var c;
 	i = 0;
 	l = String__length(s);
-	while (-1==(((i<l)?-1:0))) {
+	while (-1==((((i)<(l))?-1:0))) {
 		c = String__charAt(s, i);
 		File__writeUtf8(__this, c);
 		i = i+1;
@@ -6208,14 +6247,14 @@ var File__writeString(var __this, var s) {
 var File__readLine(var __this, var buff) {
 	var c;
 	c = File__readUtf8(__this);
-	if (0!=(((c==0)?-1:0))) {
+	if (0!=((((c)==(0))?-1:0))) {
 		return 0;
 	}
 
 	String__setCharAt(buff, 0, 0);
-	while (-1==((((c>0)?-1:0)))) {
+	while (-1==(((((c)>(0))?-1:0)))) {
 		buff = String__appendChar(buff, c);
-		if (0!=(((c==10)?-1:0))) {
+		if (0!=((((c)==(10))?-1:0))) {
 			c = 0;
 		} else {
 			c = File__readUtf8(__this);
@@ -6227,23 +6266,23 @@ var File__readUtf8(var __this) {
 	var c;
 	var b;
 	c = File__readByte(__this);
-	if (0!=((((c<1)?-1:0))|(((c>255)?-1:0)))) {
+	if (0!=(((((c)<(1))?-1:0))|((((c)>(255))?-1:0)))) {
 		return 0;
 	}
 
-	if (0!=(((c<128)?-1:0))) {
+	if (0!=((((c)<(128))?-1:0))) {
 		return c;
 	} else {
-		if (0!=(((c<192)?-1:0))) {
+		if (0!=((((c)<(192))?-1:0))) {
 			return c;
 		} else {
-			if (0!=(((c<224)?-1:0))) {
+			if (0!=((((c)<(224))?-1:0))) {
 				c = c&31;
 				b = File__readByte(__this)&63;
 				c = b+(c*64);
 				return c;
 			} else {
-				if (0!=(((c<240)?-1:0))) {
+				if (0!=((((c)<(240))?-1:0))) {
 					c = c&15;
 					b = File__readByte(__this)&63;
 					c = (b*64)+(c*4096);
@@ -6251,7 +6290,7 @@ var File__readUtf8(var __this) {
 					c = c+b;
 					return c;
 				} else {
-					if (0!=(((c<248)?-1:0))) {
+					if (0!=((((c)<(248))?-1:0))) {
 						c = c&7;
 						b = File__readByte(__this)&63;
 						c = (b*4096)+(c*262144);
@@ -6261,7 +6300,7 @@ var File__readUtf8(var __this) {
 						c = c+b;
 						return c;
 					} else {
-						if (0!=(((c<252)?-1:0))) {
+						if (0!=((((c)<(252))?-1:0))) {
 							c = c&3;
 							b = File__readByte(__this)&63;
 							c = (b*262144)+(c*16777216);
@@ -6302,25 +6341,25 @@ var File__writeUtf8(var __this, var data) {
 		File__writeByte(__this, ((data/64)&63)|128);
 		File__writeByte(__this, ((data)&63)|128);
 	} else {
-		if (0!=(((data>2097152)?-1:0))) {
+		if (0!=((((data)>(2097152))?-1:0))) {
 			File__writeByte(__this, ((data/16777216)&3)|248);
 			File__writeByte(__this, ((data/262144)&63)|128);
 			File__writeByte(__this, ((data/4096)&63)|128);
 			File__writeByte(__this, ((data/64)&63)|128);
 			File__writeByte(__this, ((data)&63)|128);
 		} else {
-			if (0!=(((data>65535)?-1:0))) {
+			if (0!=((((data)>(65535))?-1:0))) {
 				File__writeByte(__this, ((data/262144)&7)|240);
 				File__writeByte(__this, ((data/4096)&63)|128);
 				File__writeByte(__this, ((data/64)&63)|128);
 				File__writeByte(__this, ((data)&63)|128);
 			} else {
-				if (0!=(((data>2047)?-1:0))) {
+				if (0!=((((data)>(2047))?-1:0))) {
 					File__writeByte(__this, ((data/4096)&15)|224);
 					File__writeByte(__this, ((data/64)&63)|128);
 					File__writeByte(__this, ((data)&63)|128);
 				} else {
-					if (0!=(((data>127)?-1:0))) {
+					if (0!=((((data)>(127))?-1:0))) {
 						File__writeByte(__this, ((data/64)&31)|192);
 						File__writeByte(__this, ((data)&63)|128);
 					} else {
@@ -6367,19 +6406,19 @@ var File__remove(var __this) {
 	var m;
 	var b;
 	var s;
-	if (0!=(((__peek(name__)==0)?-1:0))) {
+	if (0!=((((__peek(name__))==(0))?-1:0))) {
 		return 0;
 	}
 
 	l = String__length(__peek(name__));
-	if (0!=(((l<1)?-1:0))) {
+	if (0!=((((l)<(1))?-1:0))) {
 		return 0;
 	}
 
 	b = Bytes__new(256);
 	Bytes__setStringToNative(b, __peek(name__));
 	s = Bytes__getStringNativePointer(b);
-	if (0!=(((File__isdir(__this)==0)?-1:0))) {
+	if (0!=((((File__isdir(__this))==(0))?-1:0))) {
  #ifdef _WIN32
  	m = (var)_wremove((wchar_t*)s);
  #else
@@ -6393,19 +6432,19 @@ var File__remove(var __this) {
  #endif
 	}
 	Bytes__dispose(b);
-	return (((m==0)?-1:0));
+	return ((((m)==(0))?-1:0));
 }
 var File__mkdir(var __this) {
 	var l;
 	var m;
 	var s;
 	var b;
-	if (0!=(((__peek(name__)==0)?-1:0))) {
+	if (0!=((((__peek(name__))==(0))?-1:0))) {
 		return 0;
 	}
 
 	l = String__length(__peek(name__));
-	if (0!=(((l<1)?-1:0))) {
+	if (0!=((((l)<(1))?-1:0))) {
 		return 0;
 	}
 
@@ -6417,7 +6456,7 @@ var File__mkdir(var __this) {
  #else
  	m = (var)mkdir((char*)s, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
  #endif
-	return (((m==0)?-1:0));
+	return ((((m)==(0))?-1:0));
 }
 var File__list(var __this) {
 	var i;
@@ -6428,17 +6467,17 @@ var File__list(var __this) {
 	var n;
 	var a;
 	var str;
-	if (0!=(((__peek(name__)==0)?-1:0))) {
+	if (0!=((((__peek(name__))==(0))?-1:0))) {
 		return 0;
 	}
 
 	l = String__length(__peek(name__));
-	if (0!=(((l<1)?-1:0))) {
+	if (0!=((((l)<(1))?-1:0))) {
 		return 0;
 	}
 
 	na = String__copy(__peek(name__));
-	if (0!=((((((String__charAt(na, l-1)==47)?-1:0))==0)?-1:0))) {
+	if (0!=((((((((String__charAt(na, l-1))==(47))?-1:0)))==(0))?-1:0))) {
 		na = String__appendChar(na, 47);
 	}
 
@@ -6533,7 +6572,7 @@ var Hash__new(var size, var disposeCb) {
 	__poke(mask__, __peek(size___)-1);
 	__poke(table__, Array__new(__peek(size___)));
 	i = 0;
-	while (-1==(((i<__peek(size___))?-1:0))) {
+	while (-1==((((i)<(__peek(size___)))?-1:0))) {
 		__poke(__peek(table__)+i, 0);
 		i = i+1;
 	}
@@ -6546,7 +6585,7 @@ var Hash__dispose(var __this) {
 	var next;
 	var i;
 	i = 0;
-	while (-1==(((i<__peek(size___))?-1:0))) {
+	while (-1==((((i)<(__peek(size___)))?-1:0))) {
 		n = __peek(__peek(table__)+i);
 		while (-1==(n)) {
 			next = __peek(n+0);
@@ -6581,10 +6620,10 @@ var Hash__stats(var __this) {
 	var depth;
 	i = 0;
 	max = 0;
-	while (-1==(((i<__peek(size___))?-1:0))) {
+	while (-1==((((i)<(__peek(size___)))?-1:0))) {
 		n = __peek(__peek(table__)+i);
 		depth = 0;
-		while (-1==(((0==(((n==0)?-1:0)))?-1:0))) {
+		while (-1==((((0)==(((((n)==(0))?-1:0))))?-1:0))) {
 			depth = depth+1;
 			next = __peek(n+0);
 			s = __peek(n+2);
@@ -6596,7 +6635,7 @@ var Hash__stats(var __this) {
 			Output__println();
 			n = next;
 		}
-		if (0!=(((depth>max)?-1:0))) {
+		if (0!=((((depth)>(max))?-1:0))) {
 			max = depth;
 		}
 
@@ -6618,11 +6657,11 @@ var Hash__hash(var __this, var k) {
 	i = 1;
 	h = 0;
 	l = String__length(k);
-	if (0!=(((l>0)?-1:0))) {
+	if (0!=((((l)>(0))?-1:0))) {
 		h = String__charAt(k, 0);
 	}
 
-	while (-1==(((i<l)?-1:0))) {
+	while (-1==((((i)<(l))?-1:0))) {
 		i = i+1;
 		t = String__charAt(k, i);
 		h = Math__xor(Math__shiftLeft(h, 3), t);
@@ -6641,26 +6680,26 @@ var Hash__add(var __this, var k, var val) {
 	p = hhh&__peek(mask__);
 	a = __peek(__peek(table__)+p);
 	r = 0;
-	if (0!=(((a==0)?-1:0))) {
+	if (0!=((((a)==(0))?-1:0))) {
 		r = Array__new(4);
 		__poke(r+0, 0);
 		__poke(__peek(table__)+p, r);
 	} else {
 		n = a;
 		prev = 0;
-		while (-1==((((r==0)?-1:0))&((((((n==0)?-1:0))==0)?-1:0)))) {
-			if (0!=(((__peek(n+1)==hhh)?-1:0))) {
+		while (-1==(((((r)==(0))?-1:0))&((((((((n)==(0))?-1:0)))==(0))?-1:0)))) {
+			if (0!=((((__peek(n+1))==(hhh))?-1:0))) {
 				cmp = String__compare(k, __peek(n+2));
-				if (0!=(((cmp>0)?-1:0))) {
+				if (0!=((((cmp)>(0))?-1:0))) {
 					r = Array__new(4);
 					__poke(r+0, n);
-					if (0!=(((prev==0)?-1:0))) {
+					if (0!=((((prev)==(0))?-1:0))) {
 						__poke(__peek(table__)+p, r);
 					} else {
 						__poke(prev+0, r);
 					}
 				} else {
-					if (0!=(((cmp==0)?-1:0))) {
+					if (0!=((((cmp)==(0))?-1:0))) {
 						if (0!=(__peek(cb__))) {
 							if (0!=(__peek(n+3))) {
 								Callback__invoke(__peek(cb__), __peek(n+3), 0);
@@ -6674,10 +6713,10 @@ var Hash__add(var __this, var k, var val) {
 
 				}
 			} else {
-				if (0!=(((hhh>__peek(n+1))?-1:0))) {
+				if (0!=((((hhh)>(__peek(n+1)))?-1:0))) {
 					r = Array__new(4);
 					__poke(r+0, n);
-					if (0!=(((prev==0)?-1:0))) {
+					if (0!=((((prev)==(0))?-1:0))) {
 						__poke(__peek(table__)+p, r);
 					} else {
 						__poke(prev+0, r);
@@ -6686,7 +6725,7 @@ var Hash__add(var __this, var k, var val) {
 
 			}
 			prev = n;
-			if (0!=((((r==0)?-1:0))&(((__peek(n+0)==0)?-1:0)))) {
+			if (0!=(((((r)==(0))?-1:0))&((((__peek(n+0))==(0))?-1:0)))) {
 				r = Array__new(4);
 				__poke(r+0, 0);
 				__poke(n+0, r);
@@ -6714,23 +6753,23 @@ var Hash__get(var __this, var k) {
 	p = h&__peek(mask__);
 	a = __peek(table__)+p;
 	a = __peek(__peek(table__)+p);
-	if (0!=(((a==0)?-1:0))) {
+	if (0!=((((a)==(0))?-1:0))) {
 		return -1;
 	} else {
 		n = a;
-		while (-1==(((0==(((n==0)?-1:0)))?-1:0))) {
-			if (0!=(((__peek(n+1)==h)?-1:0))) {
+		while (-1==((((0)==(((((n)==(0))?-1:0))))?-1:0))) {
+			if (0!=((((__peek(n+1))==(h))?-1:0))) {
 				cmp = String__compare(k, __peek(n+2));
-				if (0!=(((cmp>0)?-1:0))) {
+				if (0!=((((cmp)>(0))?-1:0))) {
 					return -1;
 				} else {
-					if (0!=(((cmp==0)?-1:0))) {
+					if (0!=((((cmp)==(0))?-1:0))) {
 						return __peek(n+3);
 					}
 
 				}
 			} else {
-				if (0!=(((h>__peek(n+1))?-1:0))) {
+				if (0!=((((h)>(__peek(n+1)))?-1:0))) {
 					return -1;
 				}
 
@@ -6819,9 +6858,9 @@ var XmlNode__closeElement(var __this, var x, var tag_) {
 	s = Xml__getString(x, tag_);
 	e = __this;
 	p = XmlNode__getParent(e);
-	while (-1==((((((p==0)?-1:0))==0)?-1:0))) {
+	while (-1==((((((((p)==(0))?-1:0)))==(0))?-1:0))) {
 		t = XmlNode__getTag(e);
-		if (0!=(((t==s)?-1:0))) {
+		if (0!=((((t)==(s))?-1:0))) {
 			return p;
 		}
 
@@ -6831,7 +6870,7 @@ var XmlNode__closeElement(var __this, var x, var tag_) {
 	return e;
 }
 var XmlNode__removeElement(var __this, var x, var e) {
-	if (0!=(((__peek(elements__)==0)?-1:0))) {
+	if (0!=((((__peek(elements__))==(0))?-1:0))) {
 		return 0;
 	}
 
@@ -6842,7 +6881,7 @@ var XmlNode__addElement(var __this, var x, var tag_) {
 	var e;
 	var cb;
 	e = XmlNode__new(x, __this, tag_, 0);
-	if (0!=(((__peek(elements__)==0)?-1:0))) {
+	if (0!=((((__peek(elements__))==(0))?-1:0))) {
 		cb = CallbackXmlNodeDispose__new();
 		__poke(elements__, Buffer__new(1, cb));
 	}
@@ -6853,14 +6892,14 @@ var XmlNode__addElement(var __this, var x, var tag_) {
 var XmlNode__addAttribute(var __this, var x, var name, var value) {
 	var i;
 	var s;
-	if (0!=(((__peek(att_values__)==0)?-1:0))) {
+	if (0!=((((__peek(att_values__))==(0))?-1:0))) {
 		__poke(att_values__, Buffer__newString(1));
 		__poke(att_names__, Buffer__new(1, 0));
 	}
 
 	i = Buffer__indexOfStr(__peek(att_names__), name);
 	s = String__copy(value);
-	if (0!=(((i>-1)?-1:0))) {
+	if (0!=((((i)>(-1))?-1:0))) {
 		s = Buffer__setAt(__peek(att_values__), i, s);
 		String__dispose(s);
 	} else {
@@ -6874,7 +6913,7 @@ var XmlNode__addContent(var __this, var x, var txt) {
 	var e;
 	var cb;
 	e = XmlNode__new(x, __this, txt, -1);
-	if (0!=(((__peek(elements__)==0)?-1:0))) {
+	if (0!=((((__peek(elements__))==(0))?-1:0))) {
 		cb = CallbackXmlNodeDispose__new();
 		__poke(elements__, Buffer__new(1, cb));
 	}
@@ -6921,7 +6960,7 @@ var XmlNode__dump(var __this, var x, var f, var depth) {
 		}
 
 		i = 0;
-		while (-1==(((i<d)?-1:0))) {
+		while (-1==((((i)<(d))?-1:0))) {
 			File__writeUtf8(f, 32);
 			s = Buffer__getAt(__peek(att_names__), i);
 			if (0!=(s)) {
@@ -6939,7 +6978,7 @@ var XmlNode__dump(var __this, var x, var f, var depth) {
 
 			i = i+1;
 		}
-		if (0!=(((__peek(elements__)==0)?-1:0))) {
+		if (0!=((((__peek(elements__))==(0))?-1:0))) {
 			File__writeUtf8(f, 47);
 		}
 
@@ -6949,7 +6988,7 @@ var XmlNode__dump(var __this, var x, var f, var depth) {
 	if (0!=(__peek(elements__))) {
 		d = Buffer__getSize(__peek(elements__));
 		i = 0;
-		while (-1==(((i<d)?-1:0))) {
+		while (-1==((((i)<(d))?-1:0))) {
 			e = Buffer__getAt(__peek(elements__), i);
 			if (0!=(e)) {
 				XmlNode__dump(e, x, f, (depth+1));
@@ -6959,7 +6998,7 @@ var XmlNode__dump(var __this, var x, var f, var depth) {
 		}
 	}
 
-	if (0!=((((depth>0)?-1:0))&(((0==(((__peek(elements__)==0)?-1:0)))?-1:0)))) {
+	if (0!=(((((depth)>(0))?-1:0))&((((0)==(((((__peek(elements__))==(0))?-1:0))))?-1:0)))) {
 		d = depth;
 		File__writeUtf8(f, 60);
 		File__writeUtf8(f, 47);
@@ -7589,7 +7628,7 @@ var GifWriter__new() {
 	__poke(fp__, 0);
 	__poke(palette__, Array__new(768));
 	i = 0;
-	while (-1==(((i<768)?-1:0))) {
+	while (-1==((((i)<(768))?-1:0))) {
 		__poke(__peek(palette__)+i, 0);
 		i = i+1;
 	}
@@ -7636,16 +7675,16 @@ var GifWriter__lzwWrite(var __this, var code) {
 	idx_ = __peek(idx__);
 	outBits_ = __peek(outBits__)|Math__shiftLeft(code, __peek(curBits__));
 	curBits_ = __peek(curBits__)+__peek(numBits__);
-	while (-1==(((curBits_>7)?-1:0))) {
+	while (-1==((((curBits_)>(7))?-1:0))) {
 		__poke(buf_+idx_, outBits_&255);
 		idx_ = idx_+1;
 		outBits_ = Math__shiftRight(outBits_, 8);
 		curBits_ = curBits_-8;
-		if (0!=(((idx_>254)?-1:0))) {
+		if (0!=((((idx_)>(254))?-1:0))) {
 			GifWriter__out8(__this, idx_);
 			i = 0;
 			j = idx_;
-			while (-1==(((i<j)?-1:0))) {
+			while (-1==((((i)<(j))?-1:0))) {
 				GifWriter__out8(__this, __peek(buf_+i));
 				i = i+1;
 			}
@@ -7679,7 +7718,7 @@ var GifWriter__lzwEncode(var __this, var in_, var len) {
 	codetab = Array__new(hashSize);
 	hashTbl = Array__new(hashSize);
 	i = 0;
-	while (-1==(((i<hashSize)?-1:0))) {
+	while (-1==((((i)<(hashSize))?-1:0))) {
 		__poke(hashTbl+i, -1);
 		i = i+1;
 	}
@@ -7689,7 +7728,7 @@ var GifWriter__lzwEncode(var __this, var in_, var len) {
 	ent = __peek(in_+inp);
 	inp = inp+1;
 	len = len-1;
-	while (-1==(((len>0)?-1:0))) {
+	while (-1==((((len)>(0))?-1:0))) {
 		CONTINUE = -1;
 		c = __peek(in_+inp);
 		inp = inp+1;
@@ -7697,15 +7736,15 @@ var GifWriter__lzwEncode(var __this, var in_, var len) {
 		key = Math__shiftLeft(c, 4);
 		key = Math__xor(ent, key);
 		kk = __peek(hashTbl+key);
-		while (-1==(CONTINUE&(((kk>-1)?-1:0)))) {
-			if (0!=(((kk==fcode)?-1:0))) {
+		while (-1==(CONTINUE&((((kk)>(-1))?-1:0)))) {
+			if (0!=((((kk)==(fcode))?-1:0))) {
 				ent = __peek(codetab+key);
 				CONTINUE = 0;
 			}
 
 			if (0!=(CONTINUE)) {
 				key = key+1;
-				if (0!=((((key>(hashSize-1))?-1:0)))) {
+				if (0!=(((((key)>((hashSize-1)))?-1:0)))) {
 					key = key-hashSize;
 				}
 
@@ -7716,10 +7755,10 @@ var GifWriter__lzwEncode(var __this, var in_, var len) {
 		if (0!=(CONTINUE)) {
 			GifWriter__lzwWrite(__this, ent);
 			ent = c;
-			if (0!=(((free_ent<4096)?-1:0))) {
-				if (0!=(((free_ent>maxcode)?-1:0))) {
+			if (0!=((((free_ent)<(4096))?-1:0))) {
+				if (0!=((((free_ent)>(maxcode))?-1:0))) {
 					__poke(numBits__, __peek(numBits__)+1);
-					if (0!=(((__peek(numBits__)==12)?-1:0))) {
+					if (0!=((((__peek(numBits__))==(12))?-1:0))) {
 						maxcode = 4096;
 					} else {
 						maxcode = Math__shiftLeft(1, __peek(numBits__))-1;
@@ -7731,7 +7770,7 @@ var GifWriter__lzwEncode(var __this, var in_, var len) {
 				__poke(hashTbl+key, fcode);
 			} else {
 				i = 0;
-				while (-1==(((i<hashSize)?-1:0))) {
+				while (-1==((((i)<(hashSize))?-1:0))) {
 					__poke(hashTbl+i, -1);
 					i = i+1;
 				}
@@ -7750,7 +7789,7 @@ var GifWriter__lzwEncode(var __this, var in_, var len) {
 	if (0!=(__peek(idx__))) {
 		GifWriter__out8(__this, __peek(idx__));
 		i = 0;
-		while (-1==(((i<__peek(idx__))?-1:0))) {
+		while (-1==((((i)<(__peek(idx__)))?-1:0))) {
 			GifWriter__out8(__this, __peek(__peek(buf__)+i));
 			i = i+1;
 		}
@@ -7760,10 +7799,10 @@ var GifWriter__lzwEncode(var __this, var in_, var len) {
 	return 0;
 }
 var GifWriter__start(var __this, var w, var h, var repeat_, var numColors_) {
-	if (0!=(((numColors_>255)?-1:0))) {
+	if (0!=((((numColors_)>(255))?-1:0))) {
 		numColors_ = 255;
 	} else {
-		if (0!=(((numColors_<2)?-1:0))) {
+		if (0!=((((numColors_)<(2))?-1:0))) {
 			numColors_ = 2;
 		}
 
@@ -7812,16 +7851,16 @@ var GifWriter__frame_(var __this, var rgba, var delayCsec, var localPalette) {
 	size_ = __peek(width__)*__peek(height__);
 	localPalTbl = Array__new(768);
 	i = 0;
-	while (-1==(((i<768)?-1:0))) {
+	while (-1==((((i)<(768))?-1:0))) {
 		__poke(localPalTbl+i, 0);
 		i = i+1;
 	}
-	if (0!=((((__peek(frame__)==0)?-1:0))|(((0==(localPalette))?-1:0)))) {
+	if (0!=(((((__peek(frame__))==(0))?-1:0))|((((0)==((localPalette)))?-1:0)))) {
 		palette_ = __peek(palette__);
 	} else {
 		palette_ = localPalTbl;
 	}
-	if (0!=((((__peek(frame__)==0)?-1:0))|localPalette)) {
+	if (0!=(((((__peek(frame__))==(0))?-1:0))|localPalette)) {
 		GifWriter__quantize(__this, rgba, size_, 1, __peek(palette__), __peek(numColors__));
 	}
 
@@ -7833,7 +7872,7 @@ var GifWriter__frame_(var __this, var rgba, var delayCsec, var localPalette) {
 	Output__printInt(size_);
 	Output__println();
 	c = __peek(numColors__);
-	while (-1==(((k<size_)?-1:0))) {
+	while (-1==((((k)<(size_))?-1:0))) {
 		bestd = 2147483647;
 		best = -1;
 		i = 0;
@@ -7841,13 +7880,13 @@ var GifWriter__frame_(var __this, var rgba, var delayCsec, var localPalette) {
 		rgb0 = rgb&255;
 		rgb1 = (rgb/256)&255;
 		rgb2 = (rgb/65536)&255;
-		while (-1==(((i<c)?-1:0))) {
+		while (-1==((((i)<(c))?-1:0))) {
 			p = __peek(palette_+i);
 			bb = (p&255)-rgb0;
 			gg = (Math__shiftRight(p, 8)&255)-rgb1;
 			rr = (Math__shiftRight(p, 16)&255)-rgb2;
 			d = (bb*bb)+(gg*gg)+(rr*rr);
-			if (0!=(((d<bestd)?-1:0))) {
+			if (0!=((((d)<(bestd))?-1:0))) {
 				bestd = d;
 				best = i;
 			}
@@ -7857,10 +7896,10 @@ var GifWriter__frame_(var __this, var rgba, var delayCsec, var localPalette) {
 		__poke(indexedPixels+k, best);
 		k = k+1;
 	}
-	if (0!=(((__peek(frame__)==0)?-1:0))) {
+	if (0!=((((__peek(frame__))==(0))?-1:0))) {
 		i = 0;
 		j = Math__shiftLeft(1, __peek(palSize__)+1);
-		while (-1==(((i<j)?-1:0))) {
+		while (-1==((((i)<(j))?-1:0))) {
 			d = __peek(__peek(palette__)+i);
 			GifWriter__out8(__this, d&255);
 			d = d/256;
@@ -7869,7 +7908,7 @@ var GifWriter__frame_(var __this, var rgba, var delayCsec, var localPalette) {
 			GifWriter__out8(__this, d&255);
 			i = i+1;
 		}
-		if (0!=(((__peek(repeat__)>-1)?-1:0))) {
+		if (0!=((((__peek(repeat__))>(-1))?-1:0))) {
 			GifWriter__out8(__this, 33);
 			GifWriter__out8(__this, 255);
 			GifWriter__out8(__this, 11);
@@ -7905,13 +7944,13 @@ var GifWriter__frame_(var __this, var rgba, var delayCsec, var localPalette) {
 	GifWriter__out8(__this, 0);
 	GifWriter__out16le(__this, __peek(width__));
 	GifWriter__out16le(__this, __peek(height__));
-	if (0!=((((__peek(frame__)==0)?-1:0))|(((0==localPalette)?-1:0)))) {
+	if (0!=(((((__peek(frame__))==(0))?-1:0))|((((0)==(localPalette))?-1:0)))) {
 		GifWriter__out8(__this, 0);
 	} else {
 		GifWriter__out8(__this, 128|__peek(palSize__));
 		i = 0;
 		j = Math__shiftLeft(1, __peek(palSize__)+1);
-		while (-1==(((i<j)?-1:0))) {
+		while (-1==((((i)<(j))?-1:0))) {
 			d = __peek(__peek(palette__)+i);
 			GifWriter__out8(__this, d&255);
 			d = d/256;
@@ -7936,11 +7975,11 @@ var GifWriter__frame_(var __this, var rgba, var delayCsec, var localPalette) {
 	return -1;
 }
 var GifWriter__clamp(var a, var b, var c) {
-	if (0!=(((a<b)?-1:0))) {
+	if (0!=((((a)<(b))?-1:0))) {
 		return b;
 	}
 
-	if (0!=(((a>c)?-1:0))) {
+	if (0!=((((a)>(c))?-1:0))) {
 		return c;
 	}
 
@@ -8206,7 +8245,7 @@ var GifWriter__quantize(var __this, var rgba, var rgbaSize, var sample, var map,
 	return 0;
 }
 var GifWriter__writeFile(var __this, var file, var data, var w, var h) {
-	if (0!=((((w<1)?-1:0))|(((h<1)?-1:0)))) {
+	if (0!=(((((w)<(1))?-1:0))|((((h)<(1))?-1:0)))) {
 		return 0;
 	}
 
@@ -8285,7 +8324,7 @@ var Gif__new() {
 	__poke(pal__, Array__new(256));
 	__poke(lpal__, Array__new(256));
 	i = 0;
-	while (-1==(((i<256)?-1:0))) {
+	while (-1==((((i)<(256))?-1:0))) {
 		__poke(__peek(pal__)+i, 0);
 		__poke(__peek(lpal__)+i, 0);
 		i = i+1;
@@ -8294,7 +8333,7 @@ var Gif__new() {
 	__poke(version__, 0);
 	__poke(comp__, 0);
 	i = 0;
-	while (-1==(((i<8192)?-1:0))) {
+	while (-1==((((i)<(8192))?-1:0))) {
 		__poke(__peek(codes__)+i, GifLzw__new());
 		i = i+1;
 	}
@@ -8327,7 +8366,7 @@ var Gif__dispose(var __this) {
 
 	Array__dispose(__peek(pal__));
 	i = 0;
-	while (-1==(((i<8192)?-1:0))) {
+	while (-1==((((i)<(8192))?-1:0))) {
 		g = __peek(__peek(codes__)+i);
 		GifLzw__dispose(g);
 		i = i+1;
@@ -8361,11 +8400,11 @@ var Gif__parseColortable(var __this, var pal_, var num_entries, var transp) {
 	var n;
 	var o;
 	i = 0;
-	while (-1==(((i<num_entries)?-1:0))) {
+	while (-1==((((i)<(num_entries))?-1:0))) {
 		n = Gif__get8(__this)*65536;
 		n = n+(Gif__get8(__this)*256);
 		n = n+Gif__get8(__this);
-		if (0!=(((transp==i)?-1:0))) {
+		if (0!=((((transp)==(i))?-1:0))) {
 			o = 255;
 			n = n+(o*16777216);
 		}
@@ -8383,7 +8422,7 @@ var Gif__header(var __this) {
 		__poke(bgindex__, Gif__get8(__this));
 		__poke(ratio__, Gif__get8(__this));
 		__poke(transparent__, -1);
-		if (0!=((((__peek(w__)>100000)?-1:0))|(((__peek(h__)>10000)?-1:0)))) {
+		if (0!=(((((__peek(w__))>(100000))?-1:0))|((((__peek(h__))>(10000))?-1:0)))) {
 			return 0;
 		}
 
@@ -8398,10 +8437,10 @@ var Gif__header(var __this) {
 	return 0;
 }
 var Gif__testRaw(var __this) {
-	if (0!=((((Gif__get8(__this)==71)?-1:0))&(((Gif__get8(__this)==73)?-1:0))&(((Gif__get8(__this)==70)?-1:0))&(((Gif__get8(__this)==56)?-1:0)))) {
+	if (0!=(((((Gif__get8(__this))==(71))?-1:0))&((((Gif__get8(__this))==(73))?-1:0))&((((Gif__get8(__this))==(70))?-1:0))&((((Gif__get8(__this))==(56))?-1:0)))) {
 		__poke(version__, Gif__get8(__this));
-		if (0!=((((__peek(version__)==55)?-1:0))|(((__peek(version__)==57)?-1:0)))) {
-			if (0!=(((Gif__get8(__this)==97)?-1:0))) {
+		if (0!=(((((__peek(version__))==(55))?-1:0))|((((__peek(version__))==(57))?-1:0)))) {
+			if (0!=((((Gif__get8(__this))==(97))?-1:0))) {
 				return -1;
 			}
 
@@ -8415,11 +8454,11 @@ var Gif__outGifCode(var __this, var code) {
 	var idx;
 	var g;
 	g = __peek(__peek(codes__)+code);
-	if (0!=(((GifLzw__getPrefix(g)>(-1))?-1:0))) {
+	if (0!=((((GifLzw__getPrefix(g))>((-1)))?-1:0))) {
 		Gif__outGifCode(__this, GifLzw__getPrefix(g));
 	}
 
-	if (0!=(((__peek(cur_y__)>(__peek(max_y__)-1))?-1:0))) {
+	if (0!=((((__peek(cur_y__))>((__peek(max_y__)-1)))?-1:0))) {
 		return 0;
 	}
 
@@ -8427,10 +8466,10 @@ var Gif__outGifCode(var __this, var code) {
 	Buffer__setAt(__peek(history__), idx, 1);
 	Buffer__setAt(__peek(out__), idx, __peek(__peek(color_table__)+GifLzw__getSuffix(g)));
 	__poke(cur_x__, __peek(cur_x__)+1);
-	if (0!=(((__peek(cur_x__)>(__peek(max_x__)-1))?-1:0))) {
+	if (0!=((((__peek(cur_x__))>((__peek(max_x__)-1)))?-1:0))) {
 		__poke(cur_x__, __peek(start_x__));
 		__poke(cur_y__, __peek(cur_y__)+__peek(step__));
-		while (-1==((((__peek(cur_y__)>(__peek(max_y__)-1))?-1:0))&(((__peek(parse__)>0)?-1:0)))) {
+		while (-1==(((((__peek(cur_y__))>((__peek(max_y__)-1)))?-1:0))&((((__peek(parse__))>(0))?-1:0)))) {
 			__poke(step__, Math__shiftLeft(1, __peek(parse__))+__peek(line_size__));
 			__poke(cur_y__, __peek(start_y__)+Math__shiftRight(__peek(step__), 1));
 			__poke(parse__, __peek(parse__)-1);
@@ -8440,7 +8479,7 @@ var Gif__outGifCode(var __this, var code) {
 	return 0;
 }
 var Gif__skip(var __this, var len) {
-	while (-1==(((len>0)?-1:0))) {
+	while (-1==((((len)>(0))?-1:0))) {
 		len = len-1;
 		Gif__get8(__this);
 	}
@@ -8463,7 +8502,7 @@ var Gif__processGifRaster(var __this) {
 	var code_;
 	oldcode = 0;
 	lzw_cs = Gif__get8(__this);
-	if (0!=(((lzw_cs>12)?-1:0))) {
+	if (0!=((((lzw_cs)>(12))?-1:0))) {
 		return 0;
 	}
 
@@ -8474,7 +8513,7 @@ var Gif__processGifRaster(var __this) {
 	bits = 0;
 	valid_bits = 0;
 	init_code = 0;
-	while (-1==(((init_code<clear)?-1:0))) {
+	while (-1==((((init_code)<(clear))?-1:0))) {
 		g = __peek(__peek(codes__)+init_code);
 		GifLzw__setPrefix(g, -1);
 		GifLzw__setFirst(g, init_code);
@@ -8485,10 +8524,10 @@ var Gif__processGifRaster(var __this) {
 	oldcode = -1;
 	len = 0;
 	while (-1==(-1)) {
-		if (0!=(((valid_bits<codesize)?-1:0))) {
-			if (0!=(((len==0)?-1:0))) {
+		if (0!=((((valid_bits)<(codesize))?-1:0))) {
+			if (0!=((((len)==(0))?-1:0))) {
 				len = Gif__get8(__this);
-				if (0!=(((len==0)?-1:0))) {
+				if (0!=((((len)==(0))?-1:0))) {
 					return __peek(out__);
 				}
 
@@ -8501,51 +8540,51 @@ var Gif__processGifRaster(var __this) {
 			code_ = bits&codemask;
 			bits = Math__shiftRight(bits, codesize);
 			valid_bits = valid_bits-codesize;
-			if (0!=(((code_==clear)?-1:0))) {
+			if (0!=((((code_)==(clear))?-1:0))) {
 				codesize = lzw_cs+1;
 				codemask = Math__shiftLeft(1, codesize)-1;
 				avail = clear+2;
 				oldcode = -1;
 				first = 0;
 			} else {
-				if (0!=(((code_==(clear+1))?-1:0))) {
+				if (0!=((((code_)==((clear+1)))?-1:0))) {
 					Gif__skip(__this, len);
 					len = Gif__get8(__this);
-					while (-1==(((len>0)?-1:0))) {
+					while (-1==((((len)>(0))?-1:0))) {
 						Gif__skip(__this, len);
 						len = Gif__get8(__this);
 					}
 					return __peek(out__);
 				} else {
-					if (0!=(((code_<(avail+1))?-1:0))) {
+					if (0!=((((code_)<((avail+1)))?-1:0))) {
 						if (0!=(first)) {
 							return 0;
 						}
 
-						if (0!=(((oldcode>-1)?-1:0))) {
+						if (0!=((((oldcode)>(-1))?-1:0))) {
 							p = __peek(__peek(codes__)+avail);
 							avail = avail+1;
-							if (0!=(((avail>8192)?-1:0))) {
+							if (0!=((((avail)>(8192))?-1:0))) {
 								return 0;
 							}
 
 							GifLzw__setPrefix(p, oldcode);
 							g = __peek(__peek(codes__)+oldcode);
 							GifLzw__setFirst(p, GifLzw__getFirst(g));
-							if (0!=(((code_==avail)?-1:0))) {
+							if (0!=((((code_)==(avail))?-1:0))) {
 								GifLzw__setSuffix(p, GifLzw__getFirst(p));
 							} else {
 								g = __peek(__peek(codes__)+code_);
 								GifLzw__setSuffix(p, GifLzw__getFirst(g));
 							}
 						} else {
-							if (0!=(((code_==avail)?-1:0))) {
+							if (0!=((((code_)==(avail))?-1:0))) {
 								return 0;
 							}
 
 						}
 						Gif__outGifCode(__this, code_);
-						if (0!=(((((avail&codemask)==0)?-1:0))&(((avail<4096)?-1:0)))) {
+						if (0!=((((((avail&codemask))==(0))?-1:0))&((((avail)<(4096))?-1:0)))) {
 							codesize = codesize+1;
 							codemask = Math__shiftLeft(1, codesize)-1;
 						}
@@ -8580,12 +8619,12 @@ var Gif__loadNext(var __this, var two_back) {
 	o = 0;
 	i = 0;
 	count = 0;
-	if (0!=(((__peek(out__)==0)?-1:0))) {
+	if (0!=((((__peek(out__))==(0))?-1:0))) {
 		pcount = __peek(w__)*__peek(h__);
 		__poke(out__, Buffer__new(pcount, 0));
 		__poke(background__, Buffer__new(pcount, 0));
 		__poke(history__, Buffer__new(pcount, 0));
-		while (-1==(((i<pcount)?-1:0))) {
+		while (-1==((((i)<(pcount))?-1:0))) {
 			Buffer__setAt(__peek(out__), i, 0);
 			Buffer__setAt(__peek(background__), i, 0);
 			Buffer__setAt(__peek(history__), i, 0);
@@ -8595,20 +8634,20 @@ var Gif__loadNext(var __this, var two_back) {
 	} else {
 		dispose_ = Math__shiftRight((__peek(eflags__)&28), 2);
 		pcount = __peek(w__)*__peek(h__);
-		if (0!=((((dispose_==3)?-1:0))&(((two_back==0)?-1:0)))) {
+		if (0!=(((((dispose_)==(3))?-1:0))&((((two_back)==(0))?-1:0)))) {
 			dispose_ = 2;
 		}
 
-		if (0!=((((dispose_==3)?-1:0))&two_back)) {
+		if (0!=(((((dispose_)==(3))?-1:0))&two_back)) {
 			i = 0;
-			while (-1==(((i<pcount)?-1:0))) {
+			while (-1==((((i)<(pcount))?-1:0))) {
 				Buffer__setAt(__peek(out__), i, Buffer__getAt(two_back, i));
 				i = i+1;
 			}
 		} else {
-			if (0!=(((dispose_==2)?-1:0))) {
+			if (0!=((((dispose_)==(2))?-1:0))) {
 				pi = 0;
-				while (-1==(((pi<count)?-1:0))) {
+				while (-1==((((pi)<(count))?-1:0))) {
 					Buffer__setAt(__peek(out__), pi, Buffer__getAt(__peek(background__), i));
 					pi = pi+1;
 				}
@@ -8616,26 +8655,26 @@ var Gif__loadNext(var __this, var two_back) {
 
 		}
 		i = 0;
-		while (-1==(((i<pcount)?-1:0))) {
+		while (-1==((((i)<(pcount))?-1:0))) {
 			Buffer__setAt(__peek(background__), i, Buffer__getAt(__peek(out__), i));
 			i = i+1;
 		}
 	}
 	i = 0;
 	pcount = __peek(w__)*__peek(h__);
-	while (-1==(((i<pcount)?-1:0))) {
+	while (-1==((((i)<(pcount))?-1:0))) {
 		Buffer__setAt(__peek(history__), i, 0);
 		i = i+1;
 	}
 	while (-1==(-1)) {
 		BREAK = -1;
 		tag = Gif__get8(__this);
-		if (0!=(((tag==44)?-1:0))) {
+		if (0!=((((tag)==(44))?-1:0))) {
 			x_ = Gif__get16le(__this);
 			y_ = Gif__get16le(__this);
 			w_ = Gif__get16le(__this);
 			h_ = Gif__get16le(__this);
-			if (0!=(((((x_+w_)>__peek(w__))?-1:0))|((((y_+h_)>__peek(h__))?-1:0)))) {
+			if (0!=((((((x_+w_))>(__peek(w__)))?-1:0))|(((((y_+h_))>(__peek(h__)))?-1:0)))) {
 				return 0;
 			}
 
@@ -8646,7 +8685,7 @@ var Gif__loadNext(var __this, var two_back) {
 			__poke(max_y__, __peek(start_y__)+(__peek(h__)*__peek(line_size__)));
 			__poke(cur_x__, __peek(start_x__));
 			__poke(cur_y__, __peek(start_y__));
-			if (0!=(((w_==0)?-1:0))) {
+			if (0!=((((w_)==(0))?-1:0))) {
 				__poke(cur_y__, __peek(max_y__));
 			}
 
@@ -8674,15 +8713,15 @@ var Gif__loadNext(var __this, var two_back) {
 				}
 			}
 			o = Gif__processGifRaster(__this);
-			if (0!=(((o==0)?-1:0))) {
+			if (0!=((((o)==(0))?-1:0))) {
 				return 0;
 			}
 
 			pcount = __peek(w__)*__peek(h__);
-			if (0!=((((0==(((first_frame==0)?-1:0)))?-1:0))&(((__peek(bgindex__)>0)?-1:0)))) {
+			if (0!=(((((0)==(((((first_frame)==(0))?-1:0))))?-1:0))&((((__peek(bgindex__))>(0))?-1:0)))) {
 				pi = 0;
-				while (-1==(((pi<pcount)?-1:0))) {
-					if (0!=(((__peek(__peek(history__)+pi)==0)?-1:0))) {
+				while (-1==((((pi)<(pcount))?-1:0))) {
+					if (0!=((((__peek(__peek(history__)+pi))==(0))?-1:0))) {
 						__poke(__peek(pal__)+__peek(bgindex__), __peek(__peek(pal__)+__peek(bgindex__))|4278190080);
 						Buffer__setAt(__peek(out__), pi, __peek(__peek(pal__)+__peek(bgindex__)));
 					}
@@ -8693,20 +8732,20 @@ var Gif__loadNext(var __this, var two_back) {
 
 			return o;
 		} else {
-			if (0!=(((tag==33)?-1:0))) {
+			if (0!=((((tag)==(33))?-1:0))) {
 				ext = Gif__get8(__this);
-				if (0!=(((ext==249)?-1:0))) {
+				if (0!=((((ext)==(249))?-1:0))) {
 					len = Gif__get8(__this);
-					if (0!=(((len==4)?-1:0))) {
+					if (0!=((((len)==(4))?-1:0))) {
 						__poke(eflags__, Gif__get8(__this));
 						__poke(delay__, 10*Gif__get16le(__this));
-						if (0!=(((__peek(transparent__)>-1)?-1:0))) {
+						if (0!=((((__peek(transparent__))>(-1))?-1:0))) {
 							__poke(__peek(pal__)+__peek(transparent__), __peek(__peek(pal__)+__peek(transparent__))|4278190080);
 						}
 
 						if (0!=(__peek(eflags__)&1)) {
 							__poke(transparent__, Gif__get8(__this));
-							if (0!=(((__peek(transparent__)>-1)?-1:0))) {
+							if (0!=((((__peek(transparent__))>(-1))?-1:0))) {
 								__poke(__peek(pal__)+__peek(transparent__), __peek(__peek(pal__)+__peek(transparent__))&4278190080);
 							} else {
 								Gif__skip(__this, 1);
@@ -8720,7 +8759,7 @@ var Gif__loadNext(var __this, var two_back) {
 
 					if (0!=(BREAK)) {
 						len = Gif__get8(__this);
-						while (-1==(((0==(((len==0)?-1:0)))?-1:0))) {
+						while (-1==((((0)==(((((len)==(0))?-1:0))))?-1:0))) {
 							Gif__skip(__this, len);
 							len = Gif__get8(__this);
 						}
@@ -8730,7 +8769,7 @@ var Gif__loadNext(var __this, var two_back) {
 				}
 
 			} else {
-				if (0!=(((tag==59)?-1:0))) {
+				if (0!=((((tag)==(59))?-1:0))) {
 					return o;
 				} else {
 					i = i;
@@ -8848,7 +8887,7 @@ var Xml__clear(var __this) {
 var Xml__getStringNoCreate(var __this, var s) {
 	var i;
 	i = Buffer__indexOfStr(__peek(strings__), s);
-	if (0!=(((i>-1)?-1:0))) {
+	if (0!=((((i)>(-1))?-1:0))) {
 		return Buffer__getAt(__peek(strings__), i);
 	}
 
@@ -8857,7 +8896,7 @@ var Xml__getStringNoCreate(var __this, var s) {
 var Xml__getString(var __this, var s) {
 	var i;
 	i = Buffer__indexOfStr(__peek(strings__), s);
-	if (0!=(((i>-1)?-1:0))) {
+	if (0!=((((i)>(-1))?-1:0))) {
 		return Buffer__getAt(__peek(strings__), i);
 	}
 
@@ -8915,21 +8954,21 @@ var Xml__escape(var __this, var o) {
 	String__setCharAt(s, 0, 0);
 	l = String__length(o);
 	i = 0;
-	while (-1==(((i<l)?-1:0))) {
+	while (-1==((((i)<(l))?-1:0))) {
 		c = String__charAt(o, i);
-		if (0!=(((c==60)?-1:0))) {
+		if (0!=((((c)==(60))?-1:0))) {
 			s = String__appendString(s, Memory__getString(Xml___str1));
 		} else {
-			if (0!=(((c==38)?-1:0))) {
+			if (0!=((((c)==(38))?-1:0))) {
 				s = String__appendString(s, Memory__getString(Xml___str2));
 			} else {
-				if (0!=(((c==34)?-1:0))) {
+				if (0!=((((c)==(34))?-1:0))) {
 					s = String__appendString(s, Memory__getString(Xml___str3));
 				} else {
-					if (0!=(((c==62)?-1:0))) {
+					if (0!=((((c)==(62))?-1:0))) {
 						s = String__appendString(s, Memory__getString(Xml___str4));
 					} else {
-						if (0!=(((c==39)?-1:0))) {
+						if (0!=((((c)==(39))?-1:0))) {
 							s = String__appendString(s, Memory__getString(Xml___str5));
 						} else {
 							s = String__appendChar(s, c);
@@ -9600,8 +9639,8 @@ var JackParser__matchKeyword(var __this, var k, var eat) {
 	}
 
 	t = JackTokenizer__tokenType(__peek(jt__));
-	if (0!=(((t==C__KEYWORD())?-1:0))) {
-		if (0!=(((JackTokenizer__keyWord(__peek(jt__))==k)?-1:0))) {
+	if (0!=((((t)==(C__KEYWORD()))?-1:0))) {
+		if (0!=((((JackTokenizer__keyWord(__peek(jt__)))==(k))?-1:0))) {
 			JackParser__matched(__this, k, 0);
 			return -1;
 		}
@@ -9619,8 +9658,8 @@ var JackParser__matchSymbol(var __this, var k, var eat) {
 		}
 	}
 
-	if (0!=(((JackTokenizer__tokenType(__peek(jt__))==C__SYMBOL())?-1:0))) {
-		if (0!=(((JackTokenizer__symbol(__peek(jt__))==k)?-1:0))) {
+	if (0!=((((JackTokenizer__tokenType(__peek(jt__)))==(C__SYMBOL()))?-1:0))) {
+		if (0!=((((JackTokenizer__symbol(__peek(jt__)))==(k))?-1:0))) {
 			JackParser__matched(__this, C__SYMBOL(), k);
 			return -1;
 		}
@@ -9638,7 +9677,7 @@ var JackParser__matchIntegerConstant(var __this, var eat) {
 		}
 	}
 
-	if (0!=(((JackTokenizer__tokenType(__peek(jt__))==C__INT_CONST())?-1:0))) {
+	if (0!=((((JackTokenizer__tokenType(__peek(jt__)))==(C__INT_CONST()))?-1:0))) {
 		JackParser__matched(__this, C__INT_CONST(), 0);
 		return -1;
 	}
@@ -9654,7 +9693,7 @@ var JackParser__matchStringConstant(var __this, var eat) {
 		}
 	}
 
-	if (0!=(((JackTokenizer__tokenType(__peek(jt__))==C__STRING_CONST())?-1:0))) {
+	if (0!=((((JackTokenizer__tokenType(__peek(jt__)))==(C__STRING_CONST()))?-1:0))) {
 		JackParser__matched(__this, JackTokenizer__stringVal(__peek(jt__)), 0);
 		return -1;
 	}
@@ -9670,7 +9709,7 @@ var JackParser__matchIdentifier(var __this, var eat) {
 		}
 	}
 
-	if (0!=(((JackTokenizer__tokenType(__peek(jt__))==C__IDENTIFIER())?-1:0))) {
+	if (0!=((((JackTokenizer__tokenType(__peek(jt__)))==(C__IDENTIFIER()))?-1:0))) {
 		JackParser__matched(__this, JackTokenizer__identifier(__peek(jt__)), 0);
 		return -1;
 	}
@@ -9680,7 +9719,7 @@ var JackParser__matchIdentifier(var __this, var eat) {
 var JackParser__error(var __this, var w) {
 	var s;
 	__poke(nberror__, __peek(nberror__)+1);
-	if (0!=(((__peek(nberror__)>__peek(maxerror__))?-1:0))) {
+	if (0!=((((__peek(nberror__))>(__peek(maxerror__)))?-1:0))) {
 		return 0;
 	}
 
@@ -9702,42 +9741,42 @@ var JackParser__error(var __this, var w) {
 var JackParser__getData(var __this) {
 	var s;
 	s = 0;
-	if (0!=(((JackTokenizer__tokenType(__peek(jt__))==C__KEYWORD())?-1:0))) {
+	if (0!=((((JackTokenizer__tokenType(__peek(jt__)))==(C__KEYWORD()))?-1:0))) {
 		s = JackParser__getConst(__this, JackTokenizer__keyWord(__peek(jt__)));
 		s = String__copy(s);
 	}
 
-	if (0!=(((JackTokenizer__tokenType(__peek(jt__))==C__SYMBOL())?-1:0))) {
+	if (0!=((((JackTokenizer__tokenType(__peek(jt__)))==(C__SYMBOL()))?-1:0))) {
 		s = String__new(8);
 		s = String__appendString(s, JackParser__getConst(__this, JackTokenizer__symbol(__peek(jt__))));
 	}
 
-	if (0!=(((JackTokenizer__tokenType(__peek(jt__))==C__INT_CONST())?-1:0))) {
+	if (0!=((((JackTokenizer__tokenType(__peek(jt__)))==(C__INT_CONST()))?-1:0))) {
 		s = String__new(8);
 		s = String__setInt(s, JackTokenizer__intVal(__peek(jt__)));
 	}
 
-	if (0!=(((JackTokenizer__tokenType(__peek(jt__))==C__STRING_CONST())?-1:0))) {
+	if (0!=((((JackTokenizer__tokenType(__peek(jt__)))==(C__STRING_CONST()))?-1:0))) {
 		s = JackTokenizer__stringVal(__peek(jt__));
 		s = String__copy(s);
 	}
 
-	if (0!=(((JackTokenizer__tokenType(__peek(jt__))==C__IDENTIFIER())?-1:0))) {
+	if (0!=((((JackTokenizer__tokenType(__peek(jt__)))==(C__IDENTIFIER()))?-1:0))) {
 		s = JackTokenizer__identifier(__peek(jt__));
 		s = String__copy(s);
 	}
 
-	if (0!=(((JackTokenizer__tokenType(__peek(jt__))==C__ASM())?-1:0))) {
+	if (0!=((((JackTokenizer__tokenType(__peek(jt__)))==(C__ASM()))?-1:0))) {
 		s = JackTokenizer__identifier(__peek(jt__));
 		s = String__copy(s);
 	}
 
-	if (0!=(((JackTokenizer__tokenType(__peek(jt__))==0)?-1:0))) {
+	if (0!=((((JackTokenizer__tokenType(__peek(jt__)))==(0))?-1:0))) {
 		s = Memory__getString(JackParser___str8);
 		s = String__copy(s);
 	}
 
-	if (0!=(((s==0)?-1:0))) {
+	if (0!=((((s)==(0))?-1:0))) {
 		s = String__new(1);
 	}
 
@@ -9760,10 +9799,10 @@ var JackParser__astAdd(var __this, var c) {
 	return 0;
 }
 var JackParser__astAddType(var __this) {
-	if (0!=(((JackTokenizer__tokenType(__peek(jt__))==C__KEYWORD())?-1:0))) {
+	if (0!=((((JackTokenizer__tokenType(__peek(jt__)))==(C__KEYWORD()))?-1:0))) {
 		JackParser__astAdd(__this, JackTokenizer__keyWord(__peek(jt__)));
 	} else {
-		if (0!=(((JackTokenizer__tokenType(__peek(jt__))==C__SYMBOL())?-1:0))) {
+		if (0!=((((JackTokenizer__tokenType(__peek(jt__)))==(C__SYMBOL()))?-1:0))) {
 			JackParser__astAdd(__this, JackTokenizer__symbol(__peek(jt__)));
 		} else {
 			JackParser__astAdd(__this, JackTokenizer__tokenType(__peek(jt__)));
@@ -9777,7 +9816,7 @@ var JackParser__astAddLike(var __this, var prim, var type) {
 	c = __peek(current__);
 	__poke(current__, JackAst__getParent(prim));
 	d = prim;
-	while (-1==(~(((JackAst__getChild(d)==0)?-1:0)))) {
+	while (-1==(~((((JackAst__getChild(d))==(0))?-1:0)))) {
 		__poke(current__, JackAst__add(__peek(current__), JackAst__getTag(d), JackAst__getData(d)));
 		d = JackAst__getChild(d);
 	}
@@ -9791,36 +9830,36 @@ var JackParser__compileClass(var __this, var tk, var dst_) {
 	save = __peek(current__);
 	__poke(jt__, tk);
 	doit = -1;
-	if (0!=(((0==JackParser__matchKeyword(__this, C__CLASS(), -1))?-1:0))) {
+	if (0!=((((0)==(JackParser__matchKeyword(__this, C__CLASS(), -1)))?-1:0))) {
 		JackParser__error(__this, Memory__getString(JackParser___str9));
 		return 0;
 	}
 
-	if (0!=(((0==JackParser__matchIdentifier(__this, -1))?-1:0))) {
+	if (0!=((((0)==(JackParser__matchIdentifier(__this, -1)))?-1:0))) {
 		JackParser__error(__this, Memory__getString(JackParser___str10));
 		return 0;
 	}
 
 	JackParser__astAdd(__this, C__CLASS());
-	if (0!=(((0==JackParser__matchSymbol(__this, C__LEFT_CURLY_BRACKET(), -1))?-1:0))) {
+	if (0!=((((0)==(JackParser__matchSymbol(__this, C__LEFT_CURLY_BRACKET(), -1)))?-1:0))) {
 		JackParser__error(__this, Memory__getString(JackParser___str11));
 		return 0;
 	}
 
 	JackParser__advance(__this);
-	while (-1==(~(((JackParser__compileClassVarDec(__this)==0)?-1:0)))) {
+	while (-1==(~((((JackParser__compileClassVarDec(__this))==(0))?-1:0)))) {
 		doit = doit;
 	}
 	JackParser__compileCallbackDec(__this);
-	while (-1==(~(((JackParser__compileSubroutine(__this)==0)?-1:0)))) {
+	while (-1==(~((((JackParser__compileSubroutine(__this))==(0))?-1:0)))) {
 		doit = doit;
 	}
-	if (0!=(((0==JackParser__matchSymbol(__this, C__RIGHT_CURLY_BRACKET(), 0))?-1:0))) {
+	if (0!=((((0)==(JackParser__matchSymbol(__this, C__RIGHT_CURLY_BRACKET(), 0)))?-1:0))) {
 		JackParser__error(__this, Memory__getString(JackParser___str12));
 		return 0;
 	}
 
-	if (0!=(((0==(((JackTokenizer__hasMoreTokens(__peek(jt__))==0)?-1:0)))?-1:0))) {
+	if (0!=((((0)==(((((JackTokenizer__hasMoreTokens(__peek(jt__)))==(0))?-1:0))))?-1:0))) {
 		JackParser__error(__this, Memory__getString(JackParser___str13));
 		return 0;
 	}
@@ -9835,7 +9874,7 @@ var JackParser__compileClassVarDec(var __this) {
 	save = __peek(current__);
 	z = JackParser__matchKeyword(__this, C__STATIC(), 0);
 	z = z|JackParser__matchKeyword(__this, C__FIELD(), 0);
-	if (0!=(((0==z)?-1:0))) {
+	if (0!=((((0)==(z))?-1:0))) {
 		return 0;
 	}
 
@@ -9850,26 +9889,26 @@ var JackParser__compileClassVarDec(var __this) {
 		z = z|JackParser__matchIdentifier(__this, 0);
 		JackParser__astAdd(__this, C__CLASSNAME());
 	}
-	if (0!=(((0==z)?-1:0))) {
+	if (0!=((((0)==(z))?-1:0))) {
 		JackParser__error(__this, Memory__getString(JackParser___str14));
 		return 0;
 	}
 
 	z = JackParser__matchIdentifier(__this, -1);
-	if (0!=(((0==z)?-1:0))) {
+	if (0!=((((0)==(z))?-1:0))) {
 		JackParser__error(__this, Memory__getString(JackParser___str15));
 		return 0;
 	}
 
 	JackParser__astAdd(__this, C__VARNAME());
 	z = JackParser__matchSymbol(__this, C__COMMA(), -1);
-	while (-1==(~(((z==0)?-1:0)))) {
+	while (-1==(~((((z)==(0))?-1:0)))) {
 		__poke(current__, save);
 		z = JackParser__matchIdentifier(__this, -1);
 		if (0!=(z)) {
 			JackParser__astAddLike(__this, primary, C__VARNAME());
 			z = JackParser__matchSymbol(__this, C__COMMA(), -1);
-			if (0!=(((0==z)?-1:0))) {
+			if (0!=((((0)==(z))?-1:0))) {
 				z = JackParser__matchSymbol(__this, C__SEMICOLON(), 0);
 				if (0!=(z)) {
 					JackParser__advance(__this);
@@ -9932,28 +9971,28 @@ var JackParser__compileCallbackDec(var __this) {
 	var body;
 	save = __peek(current__);
 	z = JackParser__matchKeyword(__this, C__CALLBACK(), 0);
-	if (0!=(((0==z)?-1:0))) {
+	if (0!=((((0)==(z))?-1:0))) {
 		return 0;
 	}
 
 	JackParser__astAdd(__this, C__CALLBACK());
 	body = __peek(current__);
 	z = JackParser__matchKeyword(__this, C__INT(), -1);
-	if (0!=(((0==z)?-1:0))) {
+	if (0!=((((0)==(z))?-1:0))) {
 		JackParser__error(__this, Memory__getString(JackParser___str21));
 		return 0;
 	}
 
 	JackParser__astAdd(__this, C__INT());
 	z = JackParser__matchKeyword(__this, C__CALLBACK(), -1);
-	if (0!=(((0==z)?-1:0))) {
+	if (0!=((((0)==(z))?-1:0))) {
 		JackParser__error(__this, Memory__getString(JackParser___str22));
 		return 0;
 	}
 
 	JackParser__astAdd(__this, C__SUBROUTINENAME());
 	z = JackParser__matchSymbol(__this, C__LEFT_PARENTHESIS(), -1);
-	if (0!=(((0==z)?-1:0))) {
+	if (0!=((((0)==(z))?-1:0))) {
 		JackParser__error(__this, Memory__getString(JackParser___str23));
 		return 0;
 	}
@@ -9962,7 +10001,7 @@ var JackParser__compileCallbackDec(var __this) {
 	JackParser__astAdd(__this, C__PARAMS());
 	JackParser__compileParameter(__this);
 	z = JackParser__matchSymbol(__this, C__COMMA(), 0);
-	if (0!=(((0==z)?-1:0))) {
+	if (0!=((((0)==(z))?-1:0))) {
 		JackParser__error(__this, Memory__getString(JackParser___str24));
 		return 0;
 	}
@@ -9989,7 +10028,7 @@ var JackParser__compileSubroutine(var __this) {
 	z = JackParser__matchKeyword(__this, C__CONSTRUCTOR(), 0);
 	z = z|JackParser__matchKeyword(__this, C__FUNCTION(), 0);
 	z = z|JackParser__matchKeyword(__this, C__METHOD(), 0);
-	if (0!=(((0==z)?-1:0))) {
+	if (0!=((((0)==(z))?-1:0))) {
 		return 0;
 	}
 
@@ -10005,27 +10044,27 @@ var JackParser__compileSubroutine(var __this) {
 		z = z|JackParser__matchIdentifier(__this, 0);
 		JackParser__astAdd(__this, C__CLASSNAME());
 	}
-	if (0!=(((0==z)?-1:0))) {
+	if (0!=((((0)==(z))?-1:0))) {
 		JackParser__error(__this, Memory__getString(JackParser___str26));
 		return 0;
 	}
 
 	z = JackParser__matchIdentifier(__this, -1);
-	if (0!=(((0==z)?-1:0))) {
+	if (0!=((((0)==(z))?-1:0))) {
 		JackParser__error(__this, Memory__getString(JackParser___str27));
 		return 0;
 	}
 
 	JackParser__astAdd(__this, C__SUBROUTINENAME());
 	z = JackParser__matchSymbol(__this, C__LEFT_PARENTHESIS(), -1);
-	if (0!=(((0==z)?-1:0))) {
+	if (0!=((((0)==(z))?-1:0))) {
 		JackParser__error(__this, Memory__getString(JackParser___str28));
 		return 0;
 	}
 
 	JackParser__advance(__this);
 	z = JackParser__compileParameterList(__this);
-	if (0!=(((0==z)?-1:0))) {
+	if (0!=((((0)==(z))?-1:0))) {
 		return 0;
 	}
 
@@ -10078,10 +10117,10 @@ var JackParser__compileParameterList(var __this) {
 	save = __peek(current__);
 	z = -1;
 	JackParser__astAdd(__this, C__PARAMS());
-	while (-1==(~(((JackTokenizer__hasMoreTokens(__peek(jt__))==0)?-1:0)))) {
+	while (-1==(~((((JackTokenizer__hasMoreTokens(__peek(jt__)))==(0))?-1:0)))) {
 		z = JackParser__compileParameter(__this);
 		z = JackParser__matchSymbol(__this, C__COMMA(), 0);
-		if (0!=(((0==z)?-1:0))) {
+		if (0!=((((0)==(z))?-1:0))) {
 			__poke(current__, save);
 			return -1;
 		}
@@ -10097,7 +10136,7 @@ var JackParser__compileVarDecVarList(var __this, var primary) {
 	save = __peek(current__);
 	i = 0;
 	z = JackParser__matchIdentifier(__this, -1);
-	while (-1==(~(((z==0)?-1:0)))) {
+	while (-1==(~((((z)==(0))?-1:0)))) {
 		if (0!=(i)) {
 			JackParser__astAddLike(__this, primary, C__VARNAME());
 		} else {
@@ -10105,9 +10144,9 @@ var JackParser__compileVarDecVarList(var __this, var primary) {
 		}
 		__poke(current__, save);
 		z = JackParser__matchSymbol(__this, C__COMMA(), -1);
-		if (0!=(((0==z)?-1:0))) {
+		if (0!=((((0)==(z))?-1:0))) {
 			z = JackParser__matchSymbol(__this, C__SEMICOLON(), 0);
-			if (0!=(((0==z)?-1:0))) {
+			if (0!=((((0)==(z))?-1:0))) {
 				JackParser__error(__this, Memory__getString(JackParser___str31));
 				return 0;
 			}
@@ -10116,7 +10155,7 @@ var JackParser__compileVarDecVarList(var __this, var primary) {
 			z = 0;
 		} else {
 			z = JackParser__matchIdentifier(__this, -1);
-			if (0!=(((0==z)?-1:0))) {
+			if (0!=((((0)==(z))?-1:0))) {
 				JackParser__error(__this, Memory__getString(JackParser___str32));
 				return 0;
 			}
@@ -10136,11 +10175,11 @@ var JackParser__compileVarDec(var __this) {
 	save = __peek(current__);
 	z = -1;
 	z = JackParser__matchKeyword(__this, C__VAR(), 0);
-	if (0!=(((0==z)?-1:0))) {
+	if (0!=((((0)==(z))?-1:0))) {
 		return 0;
 	}
 
-	while (-1==(~(((z==0)?-1:0)))) {
+	while (-1==(~((((z)==(0))?-1:0)))) {
 		JackParser__astAdd(__this, C__VAR());
 		primary = __peek(current__);
 		z = JackParser__matchKeyword(__this, C__INT(), -1);
@@ -10192,7 +10231,7 @@ var JackParser__compileStatements(var __this) {
 						if (0!=(JackParser__matchKeyword(__this, C__RETURN(), 0))) {
 							JackParser__compileReturn(__this);
 						} else {
-							if (0!=(((JackTokenizer__tokenType(__peek(jt__))==C__ASM())?-1:0))) {
+							if (0!=((((JackTokenizer__tokenType(__peek(jt__)))==(C__ASM()))?-1:0))) {
 								JackParser__astAdd(__this, C__ASM());
 								JackParser__advance(__this);
 								__poke(current__, begin);
@@ -10215,12 +10254,12 @@ var JackParser__compileDo(var __this) {
 	var l;
 	var save;
 	save = __peek(current__);
-	if (0!=(((0==JackParser__matchKeyword(__this, C__DO(), 0))?-1:0))) {
+	if (0!=((((0)==(JackParser__matchKeyword(__this, C__DO(), 0)))?-1:0))) {
 		JackParser__error(__this, Memory__getString(JackParser___str34));
 		return 0;
 	}
 
-	if (0!=(((0==JackParser__matchIdentifier(__this, -1))?-1:0))) {
+	if (0!=((((0)==(JackParser__matchIdentifier(__this, -1)))?-1:0))) {
 		JackParser__error(__this, Memory__getString(JackParser___str35));
 		return 0;
 	}
@@ -10232,7 +10271,7 @@ var JackParser__compileDo(var __this) {
 	JackParser__subroutineCall(__this, s, l);
 	String__dispose(s);
 	z = JackParser__matchSymbol(__this, C__SEMICOLON(), 0);
-	if (0!=(((0==z)?-1:0))) {
+	if (0!=((((0)==(z))?-1:0))) {
 		JackParser__error(__this, Memory__getString(JackParser___str36));
 		return 0;
 	}
@@ -10245,28 +10284,28 @@ var JackParser__callbackCall(var __this) {
 	var z;
 	var save;
 	save = __peek(current__);
-	if (0!=(((0==JackParser__matchKeyword(__this, C__CALLBACK(), 0))?-1:0))) {
+	if (0!=((((0)==(JackParser__matchKeyword(__this, C__CALLBACK(), 0)))?-1:0))) {
 		return 0;
 	}
 
 	JackParser__astAdd(__this, C__SUBROUTINECALL());
 	JackParser__astAdd(__this, C__CALLBACK());
 	z = JackParser__matchSymbol(__this, C__LEFT_PARENTHESIS(), -1);
-	if (0!=(((0==z)?-1:0))) {
+	if (0!=((((0)==(z))?-1:0))) {
 		JackParser__error(__this, Memory__getString(JackParser___str37));
 	}
 
 	JackParser__advance(__this);
 	JackParser__compileExpression(__this);
 	z = JackParser__matchSymbol(__this, C__COMMA(), 0);
-	if (0!=(((0==z)?-1:0))) {
+	if (0!=((((0)==(z))?-1:0))) {
 		JackParser__error(__this, Memory__getString(JackParser___str38));
 	}
 
 	JackParser__advance(__this);
 	JackParser__compileExpression(__this);
 	z = JackParser__matchSymbol(__this, C__RIGHT_PARENTHESIS(), 0);
-	if (0!=(((0==z)?-1:0))) {
+	if (0!=((((0)==(z))?-1:0))) {
 		JackParser__error(__this, Memory__getString(JackParser___str39));
 	}
 
@@ -10285,7 +10324,7 @@ var JackParser__subroutineCall(var __this, var subroutineName, var tokenLine) {
 		JackParser__advance(__this);
 		JackParser__compileExpressionList(__this);
 		z = JackParser__matchSymbol(__this, C__RIGHT_PARENTHESIS(), 0);
-		if (0!=(((0==z)?-1:0))) {
+		if (0!=((((0)==(z))?-1:0))) {
 			JackParser__error(__this, Memory__getString(JackParser___str40));
 			return 0;
 		}
@@ -10296,21 +10335,21 @@ var JackParser__subroutineCall(var __this, var subroutineName, var tokenLine) {
 	}
 
 	z = JackParser__matchSymbol(__this, C__DOT(), 0);
-	if (0!=(((0==z)?-1:0))) {
+	if (0!=((((0)==(z))?-1:0))) {
 		JackParser__error(__this, Memory__getString(JackParser___str41));
 		return 0;
 	}
 
 	JackAst__setTag(__peek(current__), C__CLASSORVARNAME());
 	z = JackParser__matchIdentifier(__this, -1);
-	if (0!=(((0==z)?-1:0))) {
+	if (0!=((((0)==(z))?-1:0))) {
 		JackParser__error(__this, Memory__getString(JackParser___str42));
 		return 0;
 	}
 
 	JackParser__astAdd(__this, C__SUBROUTINENAME());
 	z = JackParser__matchSymbol(__this, C__LEFT_PARENTHESIS(), -1);
-	if (0!=(((0==z)?-1:0))) {
+	if (0!=((((0)==(z))?-1:0))) {
 		JackParser__error(__this, Memory__getString(JackParser___str43));
 		return 0;
 	}
@@ -10332,13 +10371,13 @@ var JackParser__compileLet(var __this) {
 	var save;
 	var last;
 	save = __peek(current__);
-	if (0!=(((0==JackParser__matchKeyword(__this, C__LET(), 0))?-1:0))) {
+	if (0!=((((0)==(JackParser__matchKeyword(__this, C__LET(), 0)))?-1:0))) {
 		JackParser__error(__this, Memory__getString(JackParser___str45));
 		return 0;
 	}
 
 	z = JackParser__matchIdentifier(__this, -1);
-	if (0!=(((0==z)?-1:0))) {
+	if (0!=((((0)==(z))?-1:0))) {
 		JackParser__error(__this, Memory__getString(JackParser___str46));
 		return 0;
 	}
@@ -10351,7 +10390,7 @@ var JackParser__compileLet(var __this) {
 		JackParser__advance(__this);
 		JackParser__compileExpression(__this);
 		z = JackParser__matchSymbol(__this, C__RIGHT_SQUARE_BRACKET(), 0);
-		if (0!=(((0==z)?-1:0))) {
+		if (0!=((((0)==(z))?-1:0))) {
 			JackParser__error(__this, Memory__getString(JackParser___str47));
 			return 0;
 		}
@@ -10361,7 +10400,7 @@ var JackParser__compileLet(var __this) {
 
 	__poke(current__, last);
 	z = JackParser__matchSymbol(__this, C__EQUAL(), 0);
-	if (0!=(((0==z)?-1:0))) {
+	if (0!=((((0)==(z))?-1:0))) {
 		JackParser__error(__this, Memory__getString(JackParser___str48));
 		return 0;
 	}
@@ -10370,7 +10409,7 @@ var JackParser__compileLet(var __this) {
 	JackParser__advance(__this);
 	JackParser__compileExpression(__this);
 	z = JackParser__matchSymbol(__this, C__SEMICOLON(), 0);
-	if (0!=(((0==z)?-1:0))) {
+	if (0!=((((0)==(z))?-1:0))) {
 		JackParser__error(__this, Memory__getString(JackParser___str49));
 		return 0;
 	}
@@ -10383,14 +10422,14 @@ var JackParser__compileWhile(var __this) {
 	var z;
 	var save;
 	save = __peek(current__);
-	if (0!=(((0==JackParser__matchKeyword(__this, C__WHILE(), 0))?-1:0))) {
+	if (0!=((((0)==(JackParser__matchKeyword(__this, C__WHILE(), 0)))?-1:0))) {
 		JackParser__error(__this, Memory__getString(JackParser___str50));
 		return 0;
 	}
 
 	JackParser__astAddType(__this);
 	z = JackParser__matchSymbol(__this, C__LEFT_PARENTHESIS(), -1);
-	if (0!=(((0==z)?-1:0))) {
+	if (0!=((((0)==(z))?-1:0))) {
 		JackParser__error(__this, Memory__getString(JackParser___str51));
 		return 0;
 	}
@@ -10398,13 +10437,13 @@ var JackParser__compileWhile(var __this) {
 	JackParser__advance(__this);
 	JackParser__compileExpression(__this);
 	z = JackParser__matchSymbol(__this, C__RIGHT_PARENTHESIS(), 0);
-	if (0!=(((0==z)?-1:0))) {
+	if (0!=((((0)==(z))?-1:0))) {
 		JackParser__error(__this, Memory__getString(JackParser___str52));
 		return 0;
 	}
 
 	z = JackParser__matchSymbol(__this, C__LEFT_CURLY_BRACKET(), -1);
-	if (0!=(((0==z)?-1:0))) {
+	if (0!=((((0)==(z))?-1:0))) {
 		JackParser__error(__this, Memory__getString(JackParser___str53));
 		return 0;
 	}
@@ -10412,7 +10451,7 @@ var JackParser__compileWhile(var __this) {
 	JackParser__advance(__this);
 	JackParser__compileStatements(__this);
 	z = JackParser__matchSymbol(__this, C__RIGHT_CURLY_BRACKET(), 0);
-	if (0!=(((0==z)?-1:0))) {
+	if (0!=((((0)==(z))?-1:0))) {
 		JackParser__error(__this, Memory__getString(JackParser___str54));
 		return 0;
 	}
@@ -10425,7 +10464,7 @@ var JackParser__compileReturn(var __this) {
 	var z;
 	var save;
 	save = __peek(current__);
-	if (0!=(((0==JackParser__matchKeyword(__this, C__RETURN(), 0))?-1:0))) {
+	if (0!=((((0)==(JackParser__matchKeyword(__this, C__RETURN(), 0)))?-1:0))) {
 		JackParser__error(__this, Memory__getString(JackParser___str55));
 		return 0;
 	}
@@ -10442,7 +10481,7 @@ var JackParser__compileReturn(var __this) {
 
 	JackParser__compileExpression(__this);
 	z = JackParser__matchSymbol(__this, C__SEMICOLON(), 0);
-	if (0!=(((0==z)?-1:0))) {
+	if (0!=((((0)==(z))?-1:0))) {
 		JackParser__error(__this, Memory__getString(JackParser___str56));
 		return 0;
 	}
@@ -10456,7 +10495,7 @@ var JackParser__compileIf(var __this) {
 	var save;
 	var begin;
 	save = __peek(current__);
-	if (0!=(((0==JackParser__matchKeyword(__this, C__IF(), 0))?-1:0))) {
+	if (0!=((((0)==(JackParser__matchKeyword(__this, C__IF(), 0)))?-1:0))) {
 		JackParser__error(__this, Memory__getString(JackParser___str57));
 		return 0;
 	}
@@ -10464,7 +10503,7 @@ var JackParser__compileIf(var __this) {
 	JackParser__astAddType(__this);
 	begin = __peek(current__);
 	z = JackParser__matchSymbol(__this, C__LEFT_PARENTHESIS(), -1);
-	if (0!=(((0==z)?-1:0))) {
+	if (0!=((((0)==(z))?-1:0))) {
 		JackParser__error(__this, Memory__getString(JackParser___str58));
 		return 0;
 	}
@@ -10472,13 +10511,13 @@ var JackParser__compileIf(var __this) {
 	JackParser__advance(__this);
 	JackParser__compileExpression(__this);
 	z = JackParser__matchSymbol(__this, C__RIGHT_PARENTHESIS(), 0);
-	if (0!=(((0==z)?-1:0))) {
+	if (0!=((((0)==(z))?-1:0))) {
 		JackParser__error(__this, Memory__getString(JackParser___str59));
 		return 0;
 	}
 
 	z = JackParser__matchSymbol(__this, C__LEFT_CURLY_BRACKET(), -1);
-	if (0!=(((0==z)?-1:0))) {
+	if (0!=((((0)==(z))?-1:0))) {
 		JackParser__error(__this, Memory__getString(JackParser___str60));
 		return 0;
 	}
@@ -10486,13 +10525,13 @@ var JackParser__compileIf(var __this) {
 	JackParser__advance(__this);
 	JackParser__compileStatements(__this);
 	z = JackParser__matchSymbol(__this, C__RIGHT_CURLY_BRACKET(), 0);
-	if (0!=(((0==z)?-1:0))) {
+	if (0!=((((0)==(z))?-1:0))) {
 		JackParser__error(__this, Memory__getString(JackParser___str61));
 		return 0;
 	}
 
 	z = JackParser__matchKeyword(__this, C__ELSE(), -1);
-	if (0!=(((0==z)?-1:0))) {
+	if (0!=((((0)==(z))?-1:0))) {
 		__poke(current__, save);
 		return 0;
 	}
@@ -10500,7 +10539,7 @@ var JackParser__compileIf(var __this) {
 	__poke(current__, begin);
 	JackParser__astAddType(__this);
 	z = JackParser__matchSymbol(__this, C__LEFT_CURLY_BRACKET(), -1);
-	if (0!=(((0==z)?-1:0))) {
+	if (0!=((((0)==(z))?-1:0))) {
 		JackParser__error(__this, Memory__getString(JackParser___str62));
 		return 0;
 	}
@@ -10508,7 +10547,7 @@ var JackParser__compileIf(var __this) {
 	JackParser__advance(__this);
 	JackParser__compileStatements(__this);
 	z = JackParser__matchSymbol(__this, C__RIGHT_CURLY_BRACKET(), 0);
-	if (0!=(((0==z)?-1:0))) {
+	if (0!=((((0)==(z))?-1:0))) {
 		JackParser__error(__this, Memory__getString(JackParser___str63));
 		return 0;
 	}
@@ -10533,55 +10572,49 @@ var JackParser__astAddOp(var __this) {
 	var parent;
 	var left;
 	c = JackTokenizer__symbol(__peek(jt__));
-	if (0!=(((c>0)?-1:0))) {
-		JackParser__astAddType(__this);
+	if (0!=((((c)>(0))?-1:0))) {
 		parent = JackAst__getParent(__peek(current__));
-		left = JackAst__getChild(parent);
-		if (0!=(left)) {
-			if (0!=(((JackAst__getNext(left)==__peek(current__))?-1:0))) {
-				JackAst__setParent(left, __peek(current__));
-				JackAst__setNext(left, 0);
-				JackAst__setLeft(__peek(current__), left);
-				JackAst__setChild(parent, __peek(current__));
-			}
-
-		}
-
+		left = __peek(current__);
+		JackParser__astAddType(__this);
+		JackAst__removeChild(left, __peek(current__));
+		JackAst__replaceChild(parent, left, __peek(current__));
+		JackAst__setParent(left, __peek(current__));
+		JackAst__setLeft(__peek(current__), left);
 	}
 
-	if (0!=(((c==C__PLUS())?-1:0))) {
+	if (0!=((((c)==(C__PLUS()))?-1:0))) {
 		return -1;
 	}
 
-	if (0!=(((c==C__MINUS())?-1:0))) {
+	if (0!=((((c)==(C__MINUS()))?-1:0))) {
 		return -1;
 	}
 
-	if (0!=(((c==C__MULTIPLY())?-1:0))) {
+	if (0!=((((c)==(C__MULTIPLY()))?-1:0))) {
 		return -1;
 	}
 
-	if (0!=(((c==C__DIV())?-1:0))) {
+	if (0!=((((c)==(C__DIV()))?-1:0))) {
 		return -1;
 	}
 
-	if (0!=(((c==C__AND())?-1:0))) {
+	if (0!=((((c)==(C__AND()))?-1:0))) {
 		return -1;
 	}
 
-	if (0!=(((c==C__OR())?-1:0))) {
+	if (0!=((((c)==(C__OR()))?-1:0))) {
 		return -1;
 	}
 
-	if (0!=(((c==C__GREATER())?-1:0))) {
+	if (0!=((((c)==(C__GREATER()))?-1:0))) {
 		return -1;
 	}
 
-	if (0!=(((c==C__LESS())?-1:0))) {
+	if (0!=((((c)==(C__LESS()))?-1:0))) {
 		return -1;
 	}
 
-	if (0!=(((c==C__EQUAL())?-1:0))) {
+	if (0!=((((c)==(C__EQUAL()))?-1:0))) {
 		return -1;
 	}
 
@@ -10615,13 +10648,13 @@ var JackParser__compileExpression(var __this) {
 			return 0;
 		}
 
-		if (0!=(((JackTokenizer__tokenType(__peek(jt__))==C__SYMBOL())?-1:0))) {
-			if (0!=(((JackParser__astAddOp(__this)==0)?-1:0))) {
+		if (0!=((((JackTokenizer__tokenType(__peek(jt__)))==(C__SYMBOL()))?-1:0))) {
+			if (0!=((((JackParser__astAddOp(__this))==(0))?-1:0))) {
 				JackParser__error(__this, Memory__getString(JackParser___str65));
 				return 0;
 			}
 
-			if (0!=(((0==JackParser__advance(__this))?-1:0))) {
+			if (0!=((((0)==(JackParser__advance(__this)))?-1:0))) {
 				JackParser__error(__this, Memory__getString(JackParser___str66));
 				return 0;
 			}
@@ -10666,7 +10699,7 @@ var JackParser__compileTerm(var __this, var expr) {
 		return 0;
 	}
 
-	if (0!=(((JackTokenizer__tokenType(__peek(jt__))==C__KEYWORD())?-1:0))) {
+	if (0!=((((JackTokenizer__tokenType(__peek(jt__)))==(C__KEYWORD()))?-1:0))) {
 		if (0!=(JackParser__matchKeyword(__this, C__TRUE(), 0))) {
 			if (0!=(expr)) {
 				JackParser__astAdd(__this, C__EXPR());
@@ -10773,7 +10806,7 @@ var JackParser__compileTerm(var __this, var expr) {
 	}
 
 	z = JackParser__matchIdentifier(__this, 0);
-	if (0!=(((0==z)?-1:0))) {
+	if (0!=((((0)==(z))?-1:0))) {
 		JackParser__error(__this, Memory__getString(JackParser___str68));
 		return 0;
 	}
@@ -10794,7 +10827,7 @@ var JackParser__compileTerm(var __this, var expr) {
 		JackParser__advance(__this);
 		JackParser__compileExpression(__this);
 		z = JackParser__matchSymbol(__this, C__RIGHT_SQUARE_BRACKET(), 0);
-		if (0!=(((0==z)?-1:0))) {
+		if (0!=((((0)==(z))?-1:0))) {
 			JackParser__error(__this, Memory__getString(JackParser___str69));
 			return 0;
 		}
@@ -10806,7 +10839,7 @@ var JackParser__compileTerm(var __this, var expr) {
 
 	z = JackParser__matchSymbol(__this, C__DOT(), 0);
 	z = z|JackParser__matchSymbol(__this, C__LEFT_PARENTHESIS(), 0);
-	if (0!=(((0==z)?-1:0))) {
+	if (0!=((((0)==(z))?-1:0))) {
 		JackParser__astAddName(__this, C__VARNAME(), s, l);
 		String__dispose(s);
 		__poke(current__, save);
@@ -10822,7 +10855,7 @@ var JackParser__compileExpressionList(var __this) {
 	var save;
 	save = __peek(current__);
 	JackParser__compileExpression(__this);
-	while (-1==(~(((JackParser__matchSymbol(__this, C__COMMA(), 0)==0)?-1:0)))) {
+	while (-1==(~((((JackParser__matchSymbol(__this, C__COMMA(), 0))==(0))?-1:0)))) {
 		JackParser__advance(__this);
 		JackParser__compileExpression(__this);
 	}
@@ -10881,575 +10914,575 @@ var Font__new() {
 	__this = Memory__alloc(1);
 	__poke(fnt__, Array__new(570));
 	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 6168);
-	__poke(__peek(fnt__)+0, 4112);
-	__poke(__peek(fnt__)+0, 24);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 6168);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 24);
-	__poke(__peek(fnt__)+0, 6168);
-	__poke(__peek(fnt__)+0, 15420);
-	__poke(__peek(fnt__)+0, 6184);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 16);
-	__poke(__peek(fnt__)+0, 15392);
-	__poke(__peek(fnt__)+0, 12300);
-	__poke(__peek(fnt__)+0, 9272);
-	__poke(__peek(fnt__)+0, 4096);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 56);
-	__poke(__peek(fnt__)+0, 10296);
-	__poke(__peek(fnt__)+0, 3132);
-	__poke(__peek(fnt__)+0, 5148);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 4136);
-	__poke(__peek(fnt__)+0, 4148);
-	__poke(__peek(fnt__)+0, 10300);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 6160);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 2064);
-	__poke(__peek(fnt__)+0, 4112);
-	__poke(__peek(fnt__)+0, 4112);
-	__poke(__peek(fnt__)+0, 4104);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 4112);
-	__poke(__peek(fnt__)+0, 2056);
-	__poke(__peek(fnt__)+0, 2056);
-	__poke(__peek(fnt__)+0, 4112);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 4148);
-	__poke(__peek(fnt__)+0, 6184);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 4112);
-	__poke(__peek(fnt__)+0, 15376);
-	__poke(__peek(fnt__)+0, 4096);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 6160);
-	__poke(__peek(fnt__)+0, 4096);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 60);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 6168);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 4);
-	__poke(__peek(fnt__)+0, 2056);
-	__poke(__peek(fnt__)+0, 2064);
-	__poke(__peek(fnt__)+0, 4128);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 28);
-	__poke(__peek(fnt__)+0, 9252);
-	__poke(__peek(fnt__)+0, 8740);
-	__poke(__peek(fnt__)+0, 9244);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 24);
-	__poke(__peek(fnt__)+0, 2056);
-	__poke(__peek(fnt__)+0, 2056);
-	__poke(__peek(fnt__)+0, 2108);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 28);
-	__poke(__peek(fnt__)+0, 9220);
-	__poke(__peek(fnt__)+0, 1032);
-	__poke(__peek(fnt__)+0, 4156);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 28);
-	__poke(__peek(fnt__)+0, 1028);
-	__poke(__peek(fnt__)+0, 3076);
-	__poke(__peek(fnt__)+0, 1084);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 12);
-	__poke(__peek(fnt__)+0, 5140);
-	__poke(__peek(fnt__)+0, 9276);
-	__poke(__peek(fnt__)+0, 1036);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 60);
-	__poke(__peek(fnt__)+0, 8248);
-	__poke(__peek(fnt__)+0, 1026);
-	__poke(__peek(fnt__)+0, 1084);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 12);
-	__poke(__peek(fnt__)+0, 4128);
-	__poke(__peek(fnt__)+0, 15396);
-	__poke(__peek(fnt__)+0, 9244);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 60);
-	__poke(__peek(fnt__)+0, 1028);
-	__poke(__peek(fnt__)+0, 2056);
-	__poke(__peek(fnt__)+0, 2064);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 28);
-	__poke(__peek(fnt__)+0, 9252);
-	__poke(__peek(fnt__)+0, 7204);
-	__poke(__peek(fnt__)+0, 9244);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 28);
-	__poke(__peek(fnt__)+0, 9252);
-	__poke(__peek(fnt__)+0, 7172);
-	__poke(__peek(fnt__)+0, 1080);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 24);
-	__poke(__peek(fnt__)+0, 6144);
-	__poke(__peek(fnt__)+0, 6168);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 24);
-	__poke(__peek(fnt__)+0, 6144);
-	__poke(__peek(fnt__)+0, 24);
-	__poke(__peek(fnt__)+0, 4112);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 1560);
-	__poke(__peek(fnt__)+0, 24600);
-	__poke(__peek(fnt__)+0, 1536);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 62);
-	__poke(__peek(fnt__)+0, 62);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 8216);
-	__poke(__peek(fnt__)+0, 1548);
-	__poke(__peek(fnt__)+0, 12288);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 24);
-	__poke(__peek(fnt__)+0, 9220);
-	__poke(__peek(fnt__)+0, 3088);
-	__poke(__peek(fnt__)+0, 6168);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 28);
-	__poke(__peek(fnt__)+0, 9260);
-	__poke(__peek(fnt__)+0, 13356);
-	__poke(__peek(fnt__)+0, 8208);
-	__poke(__peek(fnt__)+0, 3072);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 56);
-	__poke(__peek(fnt__)+0, 6164);
-	__poke(__peek(fnt__)+0, 9276);
-	__poke(__peek(fnt__)+0, 8823);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 124);
-	__poke(__peek(fnt__)+0, 8738);
-	__poke(__peek(fnt__)+0, 15394);
-	__poke(__peek(fnt__)+0, 8830);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 30);
-	__poke(__peek(fnt__)+0, 8736);
-	__poke(__peek(fnt__)+0, 16416);
-	__poke(__peek(fnt__)+0, 8732);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 60);
-	__poke(__peek(fnt__)+0, 8738);
-	__poke(__peek(fnt__)+0, 8738);
-	__poke(__peek(fnt__)+0, 8764);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 126);
-	__poke(__peek(fnt__)+0, 8738);
-	__poke(__peek(fnt__)+0, 14368);
-	__poke(__peek(fnt__)+0, 8830);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 62);
-	__poke(__peek(fnt__)+0, 8744);
-	__poke(__peek(fnt__)+0, 14368);
-	__poke(__peek(fnt__)+0, 8248);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 30);
-	__poke(__peek(fnt__)+0, 8768);
-	__poke(__peek(fnt__)+0, 16462);
-	__poke(__peek(fnt__)+0, 8734);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 54);
-	__poke(__peek(fnt__)+0, 9252);
-	__poke(__peek(fnt__)+0, 15396);
-	__poke(__peek(fnt__)+0, 9270);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 62);
-	__poke(__peek(fnt__)+0, 2056);
-	__poke(__peek(fnt__)+0, 2056);
-	__poke(__peek(fnt__)+0, 2110);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 30);
-	__poke(__peek(fnt__)+0, 1028);
-	__poke(__peek(fnt__)+0, 1060);
-	__poke(__peek(fnt__)+0, 9272);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 118);
-	__poke(__peek(fnt__)+0, 9256);
-	__poke(__peek(fnt__)+0, 14372);
-	__poke(__peek(fnt__)+0, 9330);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 120);
-	__poke(__peek(fnt__)+0, 8224);
-	__poke(__peek(fnt__)+0, 8226);
-	__poke(__peek(fnt__)+0, 8830);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 102);
-	__poke(__peek(fnt__)+0, 9786);
-	__poke(__peek(fnt__)+0, 14890);
-	__poke(__peek(fnt__)+0, 8807);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 102);
-	__poke(__peek(fnt__)+0, 12850);
-	__poke(__peek(fnt__)+0, 10794);
-	__poke(__peek(fnt__)+0, 9842);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 28);
-	__poke(__peek(fnt__)+0, 8770);
-	__poke(__peek(fnt__)+0, 16962);
-	__poke(__peek(fnt__)+0, 8732);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 124);
-	__poke(__peek(fnt__)+0, 8738);
-	__poke(__peek(fnt__)+0, 7200);
-	__poke(__peek(fnt__)+0, 8312);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 28);
-	__poke(__peek(fnt__)+0, 8770);
-	__poke(__peek(fnt__)+0, 16962);
-	__poke(__peek(fnt__)+0, 8732);
-	__poke(__peek(fnt__)+0, 6150);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 124);
-	__poke(__peek(fnt__)+0, 8738);
-	__poke(__peek(fnt__)+0, 15396);
-	__poke(__peek(fnt__)+0, 9330);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 28);
-	__poke(__peek(fnt__)+0, 8736);
-	__poke(__peek(fnt__)+0, 7170);
-	__poke(__peek(fnt__)+0, 8764);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 62);
-	__poke(__peek(fnt__)+0, 10762);
-	__poke(__peek(fnt__)+0, 2056);
-	__poke(__peek(fnt__)+0, 2108);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 118);
-	__poke(__peek(fnt__)+0, 8738);
-	__poke(__peek(fnt__)+0, 8738);
-	__poke(__peek(fnt__)+0, 9244);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 119);
-	__poke(__peek(fnt__)+0, 8740);
-	__poke(__peek(fnt__)+0, 9236);
-	__poke(__peek(fnt__)+0, 6152);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 119);
-	__poke(__peek(fnt__)+0, 16938);
-	__poke(__peek(fnt__)+0, 14902);
-	__poke(__peek(fnt__)+0, 13348);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 54);
-	__poke(__peek(fnt__)+0, 13336);
-	__poke(__peek(fnt__)+0, 2068);
-	__poke(__peek(fnt__)+0, 9334);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 118);
-	__poke(__peek(fnt__)+0, 9236);
-	__poke(__peek(fnt__)+0, 6152);
-	__poke(__peek(fnt__)+0, 2108);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 60);
-	__poke(__peek(fnt__)+0, 9256);
-	__poke(__peek(fnt__)+0, 2064);
-	__poke(__peek(fnt__)+0, 9276);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 6160);
-	__poke(__peek(fnt__)+0, 4112);
-	__poke(__peek(fnt__)+0, 4112);
-	__poke(__peek(fnt__)+0, 4120);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 32);
-	__poke(__peek(fnt__)+0, 8208);
-	__poke(__peek(fnt__)+0, 4104);
-	__poke(__peek(fnt__)+0, 2052);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 6152);
-	__poke(__peek(fnt__)+0, 2056);
-	__poke(__peek(fnt__)+0, 2056);
-	__poke(__peek(fnt__)+0, 2072);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 24);
-	__poke(__peek(fnt__)+0, 10240);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 126);
-	__poke(__peek(fnt__)+0, 32);
-	__poke(__peek(fnt__)+0, 6144);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 56);
-	__poke(__peek(fnt__)+0, 1084);
-	__poke(__peek(fnt__)+0, 9278);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 96);
-	__poke(__peek(fnt__)+0, 8252);
-	__poke(__peek(fnt__)+0, 9250);
-	__poke(__peek(fnt__)+0, 9340);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 60);
-	__poke(__peek(fnt__)+0, 9280);
-	__poke(__peek(fnt__)+0, 8252);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 12);
-	__poke(__peek(fnt__)+0, 1084);
-	__poke(__peek(fnt__)+0, 9284);
-	__poke(__peek(fnt__)+0, 9278);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 60);
-	__poke(__peek(fnt__)+0, 9276);
-	__poke(__peek(fnt__)+0, 8252);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 12);
-	__poke(__peek(fnt__)+0, 4156);
-	__poke(__peek(fnt__)+0, 4112);
-	__poke(__peek(fnt__)+0, 4156);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 62);
-	__poke(__peek(fnt__)+0, 9252);
-	__poke(__peek(fnt__)+0, 9244);
-	__poke(__peek(fnt__)+0, 1048);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 32);
-	__poke(__peek(fnt__)+0, 8252);
-	__poke(__peek(fnt__)+0, 9252);
-	__poke(__peek(fnt__)+0, 9270);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 8);
-	__poke(__peek(fnt__)+0, 48);
-	__poke(__peek(fnt__)+0, 4112);
-	__poke(__peek(fnt__)+0, 4156);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 8);
-	__poke(__peek(fnt__)+0, 60);
-	__poke(__peek(fnt__)+0, 1028);
-	__poke(__peek(fnt__)+0, 1032);
-	__poke(__peek(fnt__)+0, 2104);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 32);
-	__poke(__peek(fnt__)+0, 8236);
-	__poke(__peek(fnt__)+0, 10288);
-	__poke(__peek(fnt__)+0, 10278);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 48);
-	__poke(__peek(fnt__)+0, 4112);
-	__poke(__peek(fnt__)+0, 4112);
-	__poke(__peek(fnt__)+0, 4156);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 124);
-	__poke(__peek(fnt__)+0, 19026);
-	__poke(__peek(fnt__)+0, 21098);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 60);
-	__poke(__peek(fnt__)+0, 9252);
-	__poke(__peek(fnt__)+0, 9270);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 60);
-	__poke(__peek(fnt__)+0, 9282);
-	__poke(__peek(fnt__)+0, 9276);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 124);
-	__poke(__peek(fnt__)+0, 9250);
-	__poke(__peek(fnt__)+0, 8764);
-	__poke(__peek(fnt__)+0, 8304);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 62);
-	__poke(__peek(fnt__)+0, 17476);
-	__poke(__peek(fnt__)+0, 17468);
-	__poke(__peek(fnt__)+0, 1038);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 62);
-	__poke(__peek(fnt__)+0, 4112);
-	__poke(__peek(fnt__)+0, 4152);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 60);
-	__poke(__peek(fnt__)+0, 9276);
-	__poke(__peek(fnt__)+0, 9276);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 32);
-	__poke(__peek(fnt__)+0, 31776);
-	__poke(__peek(fnt__)+0, 8220);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 108);
-	__poke(__peek(fnt__)+0, 9252);
-	__poke(__peek(fnt__)+0, 9278);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 110);
-	__poke(__peek(fnt__)+0, 9256);
-	__poke(__peek(fnt__)+0, 6168);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 102);
-	__poke(__peek(fnt__)+0, 17468);
-	__poke(__peek(fnt__)+0, 15396);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 62);
-	__poke(__peek(fnt__)+0, 6152);
-	__poke(__peek(fnt__)+0, 5238);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 102);
-	__poke(__peek(fnt__)+0, 9240);
-	__poke(__peek(fnt__)+0, 6160);
-	__poke(__peek(fnt__)+0, 4208);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 60);
-	__poke(__peek(fnt__)+0, 10248);
-	__poke(__peek(fnt__)+0, 5180);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 3080);
-	__poke(__peek(fnt__)+0, 2064);
-	__poke(__peek(fnt__)+0, 4104);
-	__poke(__peek(fnt__)+0, 2060);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 4112);
-	__poke(__peek(fnt__)+0, 4112);
-	__poke(__peek(fnt__)+0, 4112);
-	__poke(__peek(fnt__)+0, 4112);
-	__poke(__peek(fnt__)+0, 4112);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 12304);
-	__poke(__peek(fnt__)+0, 4104);
-	__poke(__peek(fnt__)+0, 2064);
-	__poke(__peek(fnt__)+0, 4144);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 15360);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
-	__poke(__peek(fnt__)+0, 0);
+	__poke(__peek(fnt__)+1, 0);
+	__poke(__peek(fnt__)+2, 0);
+	__poke(__peek(fnt__)+3, 0);
+	__poke(__peek(fnt__)+4, 0);
+	__poke(__peek(fnt__)+5, 0);
+	__poke(__peek(fnt__)+6, 6144);
+	__poke(__peek(fnt__)+7, 6168);
+	__poke(__peek(fnt__)+8, 6168);
+	__poke(__peek(fnt__)+9, 6144);
+	__poke(__peek(fnt__)+10, 24);
+	__poke(__peek(fnt__)+11, 0);
+	__poke(__peek(fnt__)+12, 5140);
+	__poke(__peek(fnt__)+13, 20);
+	__poke(__peek(fnt__)+14, 0);
+	__poke(__peek(fnt__)+15, 0);
+	__poke(__peek(fnt__)+16, 0);
+	__poke(__peek(fnt__)+17, 0);
+	__poke(__peek(fnt__)+18, 20480);
+	__poke(__peek(fnt__)+19, -472);
+	__poke(__peek(fnt__)+20, 32548);
+	__poke(__peek(fnt__)+21, 2580);
+	__poke(__peek(fnt__)+22, 0);
+	__poke(__peek(fnt__)+23, 0);
+	__poke(__peek(fnt__)+24, 11272);
+	__poke(__peek(fnt__)+25, 2634);
+	__poke(__peek(fnt__)+26, 10268);
+	__poke(__peek(fnt__)+27, 6697);
+	__poke(__peek(fnt__)+28, 8);
+	__poke(__peek(fnt__)+29, 0);
+	__poke(__peek(fnt__)+30, 17920);
+	__poke(__peek(fnt__)+31, 5673);
+	__poke(__peek(fnt__)+32, 13320);
+	__poke(__peek(fnt__)+33, 12618);
+	__poke(__peek(fnt__)+34, 0);
+	__poke(__peek(fnt__)+35, 0);
+	__poke(__peek(fnt__)+36, 17436);
+	__poke(__peek(fnt__)+37, 9284);
+	__poke(__peek(fnt__)+38, 16924);
+	__poke(__peek(fnt__)+39, -1660);
+	__poke(__peek(fnt__)+40, 0);
+	__poke(__peek(fnt__)+41, 0);
+	__poke(__peek(fnt__)+42, 4096);
+	__poke(__peek(fnt__)+43, 4112);
+	__poke(__peek(fnt__)+44, 0);
+	__poke(__peek(fnt__)+45, 0);
+	__poke(__peek(fnt__)+46, 0);
+	__poke(__peek(fnt__)+47, 0);
+	__poke(__peek(fnt__)+48, 1032);
+	__poke(__peek(fnt__)+49, 514);
+	__poke(__peek(fnt__)+50, 513);
+	__poke(__peek(fnt__)+51, 1026);
+	__poke(__peek(fnt__)+52, 8);
+	__poke(__peek(fnt__)+53, 0);
+	__poke(__peek(fnt__)+54, 513);
+	__poke(__peek(fnt__)+55, 1028);
+	__poke(__peek(fnt__)+56, 1032);
+	__poke(__peek(fnt__)+57, 516);
+	__poke(__peek(fnt__)+58, 1);
+	__poke(__peek(fnt__)+59, 0);
+	__poke(__peek(fnt__)+60, 0);
+	__poke(__peek(fnt__)+61, 18688);
+	__poke(__peek(fnt__)+62, 7210);
+	__poke(__peek(fnt__)+63, 10780);
+	__poke(__peek(fnt__)+64, 73);
+	__poke(__peek(fnt__)+65, 0);
+	__poke(__peek(fnt__)+66, 0);
+	__poke(__peek(fnt__)+67, 2056);
+	__poke(__peek(fnt__)+68, 2110);
+	__poke(__peek(fnt__)+69, 8);
+	__poke(__peek(fnt__)+70, 0);
+	__poke(__peek(fnt__)+71, 0);
+	__poke(__peek(fnt__)+72, 0);
+	__poke(__peek(fnt__)+73, 0);
+	__poke(__peek(fnt__)+74, 0);
+	__poke(__peek(fnt__)+75, 6144);
+	__poke(__peek(fnt__)+76, 1032);
+	__poke(__peek(fnt__)+77, 0);
+	__poke(__peek(fnt__)+78, 0);
+	__poke(__peek(fnt__)+79, 0);
+	__poke(__peek(fnt__)+80, 124);
+	__poke(__peek(fnt__)+81, 0);
+	__poke(__peek(fnt__)+82, 0);
+	__poke(__peek(fnt__)+83, 0);
+	__poke(__peek(fnt__)+84, 0);
+	__poke(__peek(fnt__)+85, 0);
+	__poke(__peek(fnt__)+86, 0);
+	__poke(__peek(fnt__)+87, 6144);
+	__poke(__peek(fnt__)+88, 24);
+	__poke(__peek(fnt__)+89, 0);
+	__poke(__peek(fnt__)+90, 0);
+	__poke(__peek(fnt__)+91, 8256);
+	__poke(__peek(fnt__)+92, 2064);
+	__poke(__peek(fnt__)+93, 516);
+	__poke(__peek(fnt__)+94, 1);
+	__poke(__peek(fnt__)+95, 0);
+	__poke(__peek(fnt__)+96, 23552);
+	__poke(__peek(fnt__)+97, 12834);
+	__poke(__peek(fnt__)+98, 9770);
+	__poke(__peek(fnt__)+99, 7458);
+	__poke(__peek(fnt__)+100, 0);
+	__poke(__peek(fnt__)+101, 0);
+	__poke(__peek(fnt__)+102, 6144);
+	__poke(__peek(fnt__)+103, 4112);
+	__poke(__peek(fnt__)+104, 4112);
+	__poke(__peek(fnt__)+105, 4112);
+	__poke(__peek(fnt__)+106, 0);
+	__poke(__peek(fnt__)+107, 0);
+	__poke(__peek(fnt__)+108, 15360);
+	__poke(__peek(fnt__)+109, 8228);
+	__poke(__peek(fnt__)+110, 3088);
+	__poke(__peek(fnt__)+111, 15876);
+	__poke(__peek(fnt__)+112, 0);
+	__poke(__peek(fnt__)+113, 0);
+	__poke(__peek(fnt__)+114, 15360);
+	__poke(__peek(fnt__)+115, 8224);
+	__poke(__peek(fnt__)+116, 8248);
+	__poke(__peek(fnt__)+117, 15392);
+	__poke(__peek(fnt__)+118, 0);
+	__poke(__peek(fnt__)+119, 0);
+	__poke(__peek(fnt__)+120, 4096);
+	__poke(__peek(fnt__)+121, 5144);
+	__poke(__peek(fnt__)+122, 15890);
+	__poke(__peek(fnt__)+123, 4112);
+	__poke(__peek(fnt__)+124, 0);
+	__poke(__peek(fnt__)+125, 0);
+	__poke(__peek(fnt__)+126, 15360);
+	__poke(__peek(fnt__)+127, 7172);
+	__poke(__peek(fnt__)+128, 8244);
+	__poke(__peek(fnt__)+129, 15396);
+	__poke(__peek(fnt__)+130, 0);
+	__poke(__peek(fnt__)+131, 0);
+	__poke(__peek(fnt__)+132, 12288);
+	__poke(__peek(fnt__)+133, 3080);
+	__poke(__peek(fnt__)+134, 16956);
+	__poke(__peek(fnt__)+135, 15426);
+	__poke(__peek(fnt__)+136, 0);
+	__poke(__peek(fnt__)+137, 0);
+	__poke(__peek(fnt__)+138, 15872);
+	__poke(__peek(fnt__)+139, 12320);
+	__poke(__peek(fnt__)+140, 6160);
+	__poke(__peek(fnt__)+141, 2056);
+	__poke(__peek(fnt__)+142, 0);
+	__poke(__peek(fnt__)+143, 0);
+	__poke(__peek(fnt__)+144, 15360);
+	__poke(__peek(fnt__)+145, 9282);
+	__poke(__peek(fnt__)+146, 16956);
+	__poke(__peek(fnt__)+147, 15426);
+	__poke(__peek(fnt__)+148, 0);
+	__poke(__peek(fnt__)+149, 0);
+	__poke(__peek(fnt__)+150, 15360);
+	__poke(__peek(fnt__)+151, 9252);
+	__poke(__peek(fnt__)+152, 4156);
+	__poke(__peek(fnt__)+153, 2072);
+	__poke(__peek(fnt__)+154, 0);
+	__poke(__peek(fnt__)+155, 0);
+	__poke(__peek(fnt__)+156, 0);
+	__poke(__peek(fnt__)+157, 6144);
+	__poke(__peek(fnt__)+158, 24);
+	__poke(__peek(fnt__)+159, 6144);
+	__poke(__peek(fnt__)+160, 24);
+	__poke(__peek(fnt__)+161, 0);
+	__poke(__peek(fnt__)+162, 0);
+	__poke(__peek(fnt__)+163, 6144);
+	__poke(__peek(fnt__)+164, 24);
+	__poke(__peek(fnt__)+165, 6144);
+	__poke(__peek(fnt__)+166, 1032);
+	__poke(__peek(fnt__)+167, 0);
+	__poke(__peek(fnt__)+168, 16384);
+	__poke(__peek(fnt__)+169, 1040);
+	__poke(__peek(fnt__)+170, 1025);
+	__poke(__peek(fnt__)+171, 16400);
+	__poke(__peek(fnt__)+172, 0);
+	__poke(__peek(fnt__)+173, 0);
+	__poke(__peek(fnt__)+174, 0);
+	__poke(__peek(fnt__)+175, 0);
+	__poke(__peek(fnt__)+176, 126);
+	__poke(__peek(fnt__)+177, 126);
+	__poke(__peek(fnt__)+178, 0);
+	__poke(__peek(fnt__)+179, 0);
+	__poke(__peek(fnt__)+180, 0);
+	__poke(__peek(fnt__)+181, 1025);
+	__poke(__peek(fnt__)+182, 16400);
+	__poke(__peek(fnt__)+183, 1040);
+	__poke(__peek(fnt__)+184, 1);
+	__poke(__peek(fnt__)+185, 0);
+	__poke(__peek(fnt__)+186, 7176);
+	__poke(__peek(fnt__)+187, 4146);
+	__poke(__peek(fnt__)+188, 2072);
+	__poke(__peek(fnt__)+189, 6144);
+	__poke(__peek(fnt__)+190, 24);
+	__poke(__peek(fnt__)+191, 0);
+	__poke(__peek(fnt__)+192, 15360);
+	__poke(__peek(fnt__)+193, -25278);
+	__poke(__peek(fnt__)+194, 31141);
+	__poke(__peek(fnt__)+195, 15362);
+	__poke(__peek(fnt__)+196, 0);
+	__poke(__peek(fnt__)+197, 0);
+	__poke(__peek(fnt__)+198, 3072);
+	__poke(__peek(fnt__)+199, 7180);
+	__poke(__peek(fnt__)+200, 7702);
+	__poke(__peek(fnt__)+201, 9010);
+	__poke(__peek(fnt__)+202, 0);
+	__poke(__peek(fnt__)+203, 0);
+	__poke(__peek(fnt__)+204, 15872);
+	__poke(__peek(fnt__)+205, 13862);
+	__poke(__peek(fnt__)+206, 9790);
+	__poke(__peek(fnt__)+207, 15910);
+	__poke(__peek(fnt__)+208, 0);
+	__poke(__peek(fnt__)+209, 0);
+	__poke(__peek(fnt__)+210, 15376);
+	__poke(__peek(fnt__)+211, 1540);
+	__poke(__peek(fnt__)+212, 1542);
+	__poke(__peek(fnt__)+213, 15428);
+	__poke(__peek(fnt__)+214, 0);
+	__poke(__peek(fnt__)+215, 0);
+	__poke(__peek(fnt__)+216, 15872);
+	__poke(__peek(fnt__)+217, 26150);
+	__poke(__peek(fnt__)+218, 26182);
+	__poke(__peek(fnt__)+219, 15910);
+	__poke(__peek(fnt__)+220, 0);
+	__poke(__peek(fnt__)+221, 0);
+	__poke(__peek(fnt__)+222, 15872);
+	__poke(__peek(fnt__)+223, 1542);
+	__poke(__peek(fnt__)+224, 1598);
+	__poke(__peek(fnt__)+225, 15878);
+	__poke(__peek(fnt__)+226, 0);
+	__poke(__peek(fnt__)+227, 0);
+	__poke(__peek(fnt__)+228, 15872);
+	__poke(__peek(fnt__)+229, 1542);
+	__poke(__peek(fnt__)+230, 1598);
+	__poke(__peek(fnt__)+231, 1542);
+	__poke(__peek(fnt__)+232, 0);
+	__poke(__peek(fnt__)+233, 0);
+	__poke(__peek(fnt__)+234, 7680);
+	__poke(__peek(fnt__)+235, 770);
+	__poke(__peek(fnt__)+236, 13115);
+	__poke(__peek(fnt__)+237, 7714);
+	__poke(__peek(fnt__)+238, 0);
+	__poke(__peek(fnt__)+239, 0);
+	__poke(__peek(fnt__)+240, 26112);
+	__poke(__peek(fnt__)+241, 26214);
+	__poke(__peek(fnt__)+242, 26238);
+	__poke(__peek(fnt__)+243, 26214);
+	__poke(__peek(fnt__)+244, 0);
+	__poke(__peek(fnt__)+245, 0);
+	__poke(__peek(fnt__)+246, 4096);
+	__poke(__peek(fnt__)+247, 4112);
+	__poke(__peek(fnt__)+248, 4112);
+	__poke(__peek(fnt__)+249, 4112);
+	__poke(__peek(fnt__)+250, 0);
+	__poke(__peek(fnt__)+251, 0);
+	__poke(__peek(fnt__)+252, 8192);
+	__poke(__peek(fnt__)+253, 8224);
+	__poke(__peek(fnt__)+254, 8736);
+	__poke(__peek(fnt__)+255, 7204);
+	__poke(__peek(fnt__)+256, 0);
+	__poke(__peek(fnt__)+257, 0);
+	__poke(__peek(fnt__)+258, 13056);
+	__poke(__peek(fnt__)+259, 3867);
+	__poke(__peek(fnt__)+260, 2823);
+	__poke(__peek(fnt__)+261, 13075);
+	__poke(__peek(fnt__)+262, 0);
+	__poke(__peek(fnt__)+263, 0);
+	__poke(__peek(fnt__)+264, 1536);
+	__poke(__peek(fnt__)+265, 1542);
+	__poke(__peek(fnt__)+266, 1542);
+	__poke(__peek(fnt__)+267, 15878);
+	__poke(__peek(fnt__)+268, 0);
+	__poke(__peek(fnt__)+269, 0);
+	__poke(__peek(fnt__)+270, 17152);
+	__poke(__peek(fnt__)+271, 26467);
+	__poke(__peek(fnt__)+272, 24423);
+	__poke(__peek(fnt__)+273, 23387);
+	__poke(__peek(fnt__)+274, 0);
+	__poke(__peek(fnt__)+275, 0);
+	__poke(__peek(fnt__)+276, 17920);
+	__poke(__peek(fnt__)+277, 20046);
+	__poke(__peek(fnt__)+278, 30294);
+	__poke(__peek(fnt__)+279, 26214);
+	__poke(__peek(fnt__)+280, 0);
+	__poke(__peek(fnt__)+281, 0);
+	__poke(__peek(fnt__)+282, 7680);
+	__poke(__peek(fnt__)+283, 8994);
+	__poke(__peek(fnt__)+284, 8995);
+	__poke(__peek(fnt__)+285, 7714);
+	__poke(__peek(fnt__)+286, 0);
+	__poke(__peek(fnt__)+287, 0);
+	__poke(__peek(fnt__)+288, 15872);
+	__poke(__peek(fnt__)+289, 9766);
+	__poke(__peek(fnt__)+290, 1566);
+	__poke(__peek(fnt__)+291, 1542);
+	__poke(__peek(fnt__)+292, 0);
+	__poke(__peek(fnt__)+293, 0);
+	__poke(__peek(fnt__)+294, 7688);
+	__poke(__peek(fnt__)+295, 8994);
+	__poke(__peek(fnt__)+296, 8995);
+	__poke(__peek(fnt__)+297, 15922);
+	__poke(__peek(fnt__)+298, 0);
+	__poke(__peek(fnt__)+299, 0);
+	__poke(__peek(fnt__)+300, 15872);
+	__poke(__peek(fnt__)+301, 9766);
+	__poke(__peek(fnt__)+302, 5662);
+	__poke(__peek(fnt__)+303, 9782);
+	__poke(__peek(fnt__)+304, 0);
+	__poke(__peek(fnt__)+305, 0);
+	__poke(__peek(fnt__)+306, 15360);
+	__poke(__peek(fnt__)+307, 3078);
+	__poke(__peek(fnt__)+308, 8216);
+	__poke(__peek(fnt__)+309, 15394);
+	__poke(__peek(fnt__)+310, 0);
+	__poke(__peek(fnt__)+311, 0);
+	__poke(__peek(fnt__)+312, 32256);
+	__poke(__peek(fnt__)+313, 4112);
+	__poke(__peek(fnt__)+314, 4112);
+	__poke(__peek(fnt__)+315, 4112);
+	__poke(__peek(fnt__)+316, 0);
+	__poke(__peek(fnt__)+317, 0);
+	__poke(__peek(fnt__)+318, 17920);
+	__poke(__peek(fnt__)+319, 17990);
+	__poke(__peek(fnt__)+320, 17990);
+	__poke(__peek(fnt__)+321, 15396);
+	__poke(__peek(fnt__)+322, 0);
+	__poke(__peek(fnt__)+323, 0);
+	__poke(__peek(fnt__)+324, 17920);
+	__poke(__peek(fnt__)+325, 9316);
+	__poke(__peek(fnt__)+326, 14380);
+	__poke(__peek(fnt__)+327, 6168);
+	__poke(__peek(fnt__)+328, 0);
+	__poke(__peek(fnt__)+329, 0);
+	__poke(__peek(fnt__)+330, -9472);
+	__poke(__peek(fnt__)+331, 23131);
+	__poke(__peek(fnt__)+332, 30302);
+	__poke(__peek(fnt__)+333, 26214);
+	__poke(__peek(fnt__)+334, 0);
+	__poke(__peek(fnt__)+335, 0);
+	__poke(__peek(fnt__)+336, 25600);
+	__poke(__peek(fnt__)+337, 6180);
+	__poke(__peek(fnt__)+338, 6168);
+	__poke(__peek(fnt__)+339, 26148);
+	__poke(__peek(fnt__)+340, 0);
+	__poke(__peek(fnt__)+341, 0);
+	__poke(__peek(fnt__)+342, 9216);
+	__poke(__peek(fnt__)+343, 6196);
+	__poke(__peek(fnt__)+344, 6168);
+	__poke(__peek(fnt__)+345, 6168);
+	__poke(__peek(fnt__)+346, 0);
+	__poke(__peek(fnt__)+347, 0);
+	__poke(__peek(fnt__)+348, 15872);
+	__poke(__peek(fnt__)+349, 6160);
+	__poke(__peek(fnt__)+350, 1032);
+	__poke(__peek(fnt__)+351, 15878);
+	__poke(__peek(fnt__)+352, 0);
+	__poke(__peek(fnt__)+353, 0);
+	__poke(__peek(fnt__)+354, 3096);
+	__poke(__peek(fnt__)+355, 3084);
+	__poke(__peek(fnt__)+356, 3084);
+	__poke(__peek(fnt__)+357, 3084);
+	__poke(__peek(fnt__)+358, 24);
+	__poke(__peek(fnt__)+359, 0);
+	__poke(__peek(fnt__)+360, 1028);
+	__poke(__peek(fnt__)+361, 2056);
+	__poke(__peek(fnt__)+362, 4120);
+	__poke(__peek(fnt__)+363, 8240);
+	__poke(__peek(fnt__)+364, 0);
+	__poke(__peek(fnt__)+365, 0);
+	__poke(__peek(fnt__)+366, 6168);
+	__poke(__peek(fnt__)+367, 4112);
+	__poke(__peek(fnt__)+368, 4112);
+	__poke(__peek(fnt__)+369, 6160);
+	__poke(__peek(fnt__)+370, 24);
+	__poke(__peek(fnt__)+371, 0);
+	__poke(__peek(fnt__)+372, 7168);
+	__poke(__peek(fnt__)+373, 20);
+	__poke(__peek(fnt__)+374, 0);
+	__poke(__peek(fnt__)+375, 0);
+	__poke(__peek(fnt__)+376, 0);
+	__poke(__peek(fnt__)+377, 0);
+	__poke(__peek(fnt__)+378, 0);
+	__poke(__peek(fnt__)+379, 0);
+	__poke(__peek(fnt__)+380, 0);
+	__poke(__peek(fnt__)+381, 0);
+	__poke(__peek(fnt__)+382, 126);
+	__poke(__peek(fnt__)+383, 0);
+	__poke(__peek(fnt__)+384, 2052);
+	__poke(__peek(fnt__)+385, 0);
+	__poke(__peek(fnt__)+386, 0);
+	__poke(__peek(fnt__)+387, 0);
+	__poke(__peek(fnt__)+388, 0);
+	__poke(__peek(fnt__)+389, 0);
+	__poke(__peek(fnt__)+390, 0);
+	__poke(__peek(fnt__)+391, 7168);
+	__poke(__peek(fnt__)+392, 7704);
+	__poke(__peek(fnt__)+393, 7190);
+	__poke(__peek(fnt__)+394, 0);
+	__poke(__peek(fnt__)+395, 0);
+	__poke(__peek(fnt__)+396, 1536);
+	__poke(__peek(fnt__)+397, 15886);
+	__poke(__peek(fnt__)+398, 9766);
+	__poke(__peek(fnt__)+399, 7734);
+	__poke(__peek(fnt__)+400, 0);
+	__poke(__peek(fnt__)+401, 0);
+	__poke(__peek(fnt__)+402, 0);
+	__poke(__peek(fnt__)+403, 7176);
+	__poke(__peek(fnt__)+404, 518);
+	__poke(__peek(fnt__)+405, 7174);
+	__poke(__peek(fnt__)+406, 0);
+	__poke(__peek(fnt__)+407, 0);
+	__poke(__peek(fnt__)+408, 8192);
+	__poke(__peek(fnt__)+409, 15416);
+	__poke(__peek(fnt__)+410, 12854);
+	__poke(__peek(fnt__)+411, 15414);
+	__poke(__peek(fnt__)+412, 0);
+	__poke(__peek(fnt__)+413, 0);
+	__poke(__peek(fnt__)+414, 0);
+	__poke(__peek(fnt__)+415, 7176);
+	__poke(__peek(fnt__)+416, 15926);
+	__poke(__peek(fnt__)+417, 7174);
+	__poke(__peek(fnt__)+418, 0);
+	__poke(__peek(fnt__)+419, 0);
+	__poke(__peek(fnt__)+420, 6144);
+	__poke(__peek(fnt__)+421, 6168);
+	__poke(__peek(fnt__)+422, 2056);
+	__poke(__peek(fnt__)+423, 2056);
+	__poke(__peek(fnt__)+424, 0);
+	__poke(__peek(fnt__)+425, 0);
+	__poke(__peek(fnt__)+426, 0);
+	__poke(__peek(fnt__)+427, 15368);
+	__poke(__peek(fnt__)+428, 12854);
+	__poke(__peek(fnt__)+429, 15414);
+	__poke(__peek(fnt__)+430, 7216);
+	__poke(__peek(fnt__)+431, 0);
+	__poke(__peek(fnt__)+432, 1536);
+	__poke(__peek(fnt__)+433, 7694);
+	__poke(__peek(fnt__)+434, 9766);
+	__poke(__peek(fnt__)+435, 9766);
+	__poke(__peek(fnt__)+436, 0);
+	__poke(__peek(fnt__)+437, 0);
+	__poke(__peek(fnt__)+438, 4096);
+	__poke(__peek(fnt__)+439, 6144);
+	__poke(__peek(fnt__)+440, 6168);
+	__poke(__peek(fnt__)+441, 6168);
+	__poke(__peek(fnt__)+442, 0);
+	__poke(__peek(fnt__)+443, 0);
+	__poke(__peek(fnt__)+444, 4096);
+	__poke(__peek(fnt__)+445, 4096);
+	__poke(__peek(fnt__)+446, 4112);
+	__poke(__peek(fnt__)+447, 4112);
+	__poke(__peek(fnt__)+448, 7184);
+	__poke(__peek(fnt__)+449, 0);
+	__poke(__peek(fnt__)+450, 1536);
+	__poke(__peek(fnt__)+451, 7686);
+	__poke(__peek(fnt__)+452, 3598);
+	__poke(__peek(fnt__)+453, 5662);
+	__poke(__peek(fnt__)+454, 0);
+	__poke(__peek(fnt__)+455, 0);
+	__poke(__peek(fnt__)+456, 3072);
+	__poke(__peek(fnt__)+457, 3084);
+	__poke(__peek(fnt__)+458, 3084);
+	__poke(__peek(fnt__)+459, 2060);
+	__poke(__peek(fnt__)+460, 0);
+	__poke(__peek(fnt__)+461, 0);
+	__poke(__peek(fnt__)+462, 0);
+	__poke(__peek(fnt__)+463, 32548);
+	__poke(__peek(fnt__)+464, 19291);
+	__poke(__peek(fnt__)+465, 19275);
+	__poke(__peek(fnt__)+466, 0);
+	__poke(__peek(fnt__)+467, 0);
+	__poke(__peek(fnt__)+468, 0);
+	__poke(__peek(fnt__)+469, 7688);
+	__poke(__peek(fnt__)+470, 9766);
+	__poke(__peek(fnt__)+471, 9766);
+	__poke(__peek(fnt__)+472, 0);
+	__poke(__peek(fnt__)+473, 0);
+	__poke(__peek(fnt__)+474, 0);
+	__poke(__peek(fnt__)+475, 7176);
+	__poke(__peek(fnt__)+476, 9766);
+	__poke(__peek(fnt__)+477, 7206);
+	__poke(__peek(fnt__)+478, 0);
+	__poke(__peek(fnt__)+479, 0);
+	__poke(__peek(fnt__)+480, 0);
+	__poke(__peek(fnt__)+481, 15880);
+	__poke(__peek(fnt__)+482, 9766);
+	__poke(__peek(fnt__)+483, 7734);
+	__poke(__peek(fnt__)+484, 1542);
+	__poke(__peek(fnt__)+485, 0);
+	__poke(__peek(fnt__)+486, 0);
+	__poke(__peek(fnt__)+487, 15368);
+	__poke(__peek(fnt__)+488, 12854);
+	__poke(__peek(fnt__)+489, 15414);
+	__poke(__peek(fnt__)+490, 8224);
+	__poke(__peek(fnt__)+491, 0);
+	__poke(__peek(fnt__)+492, 0);
+	__poke(__peek(fnt__)+493, 7184);
+	__poke(__peek(fnt__)+494, 3084);
+	__poke(__peek(fnt__)+495, 3084);
+	__poke(__peek(fnt__)+496, 0);
+	__poke(__peek(fnt__)+497, 0);
+	__poke(__peek(fnt__)+498, 0);
+	__poke(__peek(fnt__)+499, 7176);
+	__poke(__peek(fnt__)+500, 7174);
+	__poke(__peek(fnt__)+501, 7184);
+	__poke(__peek(fnt__)+502, 0);
+	__poke(__peek(fnt__)+503, 0);
+	__poke(__peek(fnt__)+504, 2048);
+	__poke(__peek(fnt__)+505, 6152);
+	__poke(__peek(fnt__)+506, 2056);
+	__poke(__peek(fnt__)+507, 6152);
+	__poke(__peek(fnt__)+508, 0);
+	__poke(__peek(fnt__)+509, 0);
+	__poke(__peek(fnt__)+510, 0);
+	__poke(__peek(fnt__)+511, 9728);
+	__poke(__peek(fnt__)+512, 9766);
+	__poke(__peek(fnt__)+513, 15412);
+	__poke(__peek(fnt__)+514, 0);
+	__poke(__peek(fnt__)+515, 0);
+	__poke(__peek(fnt__)+516, 0);
+	__poke(__peek(fnt__)+517, 13824);
+	__poke(__peek(fnt__)+518, 5140);
+	__poke(__peek(fnt__)+519, 2076);
+	__poke(__peek(fnt__)+520, 0);
+	__poke(__peek(fnt__)+521, 0);
+	__poke(__peek(fnt__)+522, 0);
+	__poke(__peek(fnt__)+523, 27392);
+	__poke(__peek(fnt__)+524, 13870);
+	__poke(__peek(fnt__)+525, 5686);
+	__poke(__peek(fnt__)+526, 0);
+	__poke(__peek(fnt__)+527, 0);
+	__poke(__peek(fnt__)+528, 0);
+	__poke(__peek(fnt__)+529, 5632);
+	__poke(__peek(fnt__)+530, 3084);
+	__poke(__peek(fnt__)+531, 5660);
+	__poke(__peek(fnt__)+532, 0);
+	__poke(__peek(fnt__)+533, 0);
+	__poke(__peek(fnt__)+534, 0);
+	__poke(__peek(fnt__)+535, 9728);
+	__poke(__peek(fnt__)+536, 9766);
+	__poke(__peek(fnt__)+537, 15412);
+	__poke(__peek(fnt__)+538, 7200);
+	__poke(__peek(fnt__)+539, 0);
+	__poke(__peek(fnt__)+540, 0);
+	__poke(__peek(fnt__)+541, 7168);
+	__poke(__peek(fnt__)+542, 2072);
+	__poke(__peek(fnt__)+543, 7684);
+	__poke(__peek(fnt__)+544, 0);
+	__poke(__peek(fnt__)+545, 0);
+	__poke(__peek(fnt__)+546, 6160);
+	__poke(__peek(fnt__)+547, 2056);
+	__poke(__peek(fnt__)+548, 2060);
+	__poke(__peek(fnt__)+549, 6152);
+	__poke(__peek(fnt__)+550, 16);
+	__poke(__peek(fnt__)+551, 0);
+	__poke(__peek(fnt__)+552, 6144);
+	__poke(__peek(fnt__)+553, 6168);
+	__poke(__peek(fnt__)+554, 6168);
+	__poke(__peek(fnt__)+555, 6168);
+	__poke(__peek(fnt__)+556, 0);
+	__poke(__peek(fnt__)+557, 0);
+	__poke(__peek(fnt__)+558, 6152);
+	__poke(__peek(fnt__)+559, 4120);
+	__poke(__peek(fnt__)+560, 4112);
+	__poke(__peek(fnt__)+561, 6168);
+	__poke(__peek(fnt__)+562, 8);
+	__poke(__peek(fnt__)+563, 0);
+	__poke(__peek(fnt__)+564, 0);
+	__poke(__peek(fnt__)+565, 0);
+	__poke(__peek(fnt__)+566, 60);
+	__poke(__peek(fnt__)+567, 0);
+	__poke(__peek(fnt__)+568, 0);
+	__poke(__peek(fnt__)+569, 0);
 	return __this;
 }
 var Font__get(var __this, var c) {
@@ -11490,19 +11523,19 @@ var Output__moveCursor(var row, var col) {
 	var yy;
 	Output___x = col;
 	Output___y = row;
-	if (0!=(((Output___x<0)?-1:0))) {
+	if (0!=((((Output___x)<(0))?-1:0))) {
 		Output___x = 0;
 	}
 
-	if (0!=(((Output___x>63)?-1:0))) {
+	if (0!=((((Output___x)>(63))?-1:0))) {
 		Output___x = 63;
 	}
 
-	if (0!=(((Output___y<0)?-1:0))) {
+	if (0!=((((Output___y)<(0))?-1:0))) {
 		Output___y = 0;
 	}
 
-	if (0!=(((Output___y>22)?-1:0))) {
+	if (0!=((((Output___y)>(22))?-1:0))) {
 		Output___y = 22;
 	}
 
@@ -11521,7 +11554,7 @@ var Output__printString(var s) {
 	var c;
 	i = 0;
 	l = String__length(s);
-	while (-1==(((i<l)?-1:0))) {
+	while (-1==((((i)<(l))?-1:0))) {
 		c = String__charAt(s, i);
  	//printf(" '%c' ",c);
 		Output__printChar(c);
@@ -11531,7 +11564,7 @@ var Output__printString(var s) {
 }
 var Output__println() {
 	Output___y = Output___y+1;
-	if (0!=(((Output___y>22)?-1:0))) {
+	if (0!=((((Output___y)>(22))?-1:0))) {
 		Output___y = 22;
 	}
 
@@ -11547,13 +11580,12 @@ var Output__printChar(var c) {
 	var l;
 	var p;
 	var chr;
-	var a;
 	var m;
-	if (0!=((((c>1114111)?-1:0))|(((c<0)?-1:0)))) {
+	if (0!=(((((c)>(1114111))?-1:0))|((((c)<(0))?-1:0)))) {
 		return 0;
 	}
 
-	if (0!=((((c<32)?-1:0))|(((c>126)?-1:0)))) {
+	if (0!=(((((c)<(32))?-1:0))|((((c)>(126))?-1:0)))) {
  	//printf("(%d)", c);
 		c = 32;
 	}
@@ -11568,7 +11600,7 @@ var Output__printChar(var c) {
 	}
 	i = 0;
 	j = 0;
-	while (-1==(((i<11)?-1:0))) {
+	while (-1==((((i)<(11))?-1:0))) {
 		l = ((yy*11)+i)*32;
 		l = l+(xx/2);
 		l = l+16384;
@@ -11580,7 +11612,7 @@ var Output__printChar(var c) {
 		}
 		Memory__poke(l, p);
 		l = l+32;
-		if (0!=(((i<10)?-1:0))) {
+		if (0!=((((i)<(10))?-1:0))) {
 			p = Memory__peek(l);
 			if (0!=(xx&1)) {
 				p = (p&m)|(__peek(chr+j)&~m);
@@ -11596,10 +11628,10 @@ var Output__printChar(var c) {
  	printf("%c", (char)c);
  	fflush(stdout);
 	Output___x = Output___x+1;
-	if (0!=(((Output___x>63)?-1:0))) {
+	if (0!=((((Output___x)>(63))?-1:0))) {
 		Output___x = 0;
 		Output___y = Output___y+1;
-		if (0!=(((Output___y>22)?-1:0))) {
+		if (0!=((((Output___y)>(22))?-1:0))) {
 			Output___y = 22;
 		}
 
@@ -11619,7 +11651,7 @@ var Output__backSpace() {
 	var xx;
 	var yy;
 	Output___x = Output___x-1;
-	if (0!=(((Output___x<0)?-1:0))) {
+	if (0!=((((Output___x)<(0))?-1:0))) {
 		Output___x = 0;
 	}
 
@@ -11698,7 +11730,7 @@ var Screen__deInit() {
 var Screen__clearScreen() {
 	var i;
 	i = 16384;
-	while (-1==(((i<24576)?-1:0))) {
+	while (-1==((((i)<(24576))?-1:0))) {
 		Memory__poke(i, 0);
 		i = i+1;
 	}
@@ -11719,7 +11751,7 @@ var Screen__drawPixel(var x, var y) {
 	b = Memory__peek(i);
 	r = x-((x/16)*16);
 	p = 1;
-	while (-1==(((r>0)?-1:0))) {
+	while (-1==((((r)>(0))?-1:0))) {
 		p = p*2;
 		r = r-1;
 	}
@@ -11739,18 +11771,18 @@ var Screen__drawLine(var x, var y, var x2, var y2) {
 	var adyMinusbdx;
 	dx = x2-x;
 	dy = y2-y;
-	if (0!=((((dx<1)?-1:0)))) {
+	if (0!=(((((dx)<(1))?-1:0)))) {
 		b = y;
-		while (-1==(((b<y2)?-1:0))) {
+		while (-1==((((b)<(y2))?-1:0))) {
 			Screen__drawPixel(x, b);
 			b = b+1;
 		}
 		return 0;
 	}
 
-	if (0!=((((dy<1)?-1:0)))) {
+	if (0!=(((((dy)<(1))?-1:0)))) {
 		a = x;
-		while (-1==(((a<x2)?-1:0))) {
+		while (-1==((((a)<(x2))?-1:0))) {
 			Screen__drawPixel(a, y);
 			a = a+1;
 		}
@@ -11760,7 +11792,7 @@ var Screen__drawLine(var x, var y, var x2, var y2) {
 	a = 0;
 	b = 0;
 	adyMinusbdx = 0;
-	while (-1==((((dx>a)?-1:0))&(((dy>b)?-1:0)))) {
+	while (-1==(((((dx)>(a))?-1:0))&((((dy)>(b))?-1:0)))) {
 		Screen__drawPixel(x+a, y+b);
 		if (0!=(adyMinusbdx)) {
 			a = a+1;
@@ -11775,7 +11807,7 @@ var Screen__drawLine(var x, var y, var x2, var y2) {
 var Screen__drawRectangle(var x, var y, var x2, var y2) {
 	var i;
 	i = y;
-	while (-1==(((i<y2)?-1:0))) {
+	while (-1==((((i)<(y2))?-1:0))) {
 		Screen__drawLine(x, i, x2, i);
 		i = i+1;
 	}
@@ -11785,15 +11817,15 @@ var Screen__drawCircle(var x, var y, var r) {
 	var dy;
 	var s;
 	dy = -r;
-	if (0!=(((x>512)?-1:0))) {
+	if (0!=((((x)>(512))?-1:0))) {
 		return 0;
 	}
 
-	if (0!=(((y>256)?-1:0))) {
+	if (0!=((((y)>(256))?-1:0))) {
 		return 0;
 	}
 
-	while (-1==(((r>dy)?-1:0))) {
+	while (-1==((((r)>(dy))?-1:0))) {
 		s = Math__sqrt((r*r)-(dy*dy));
 		Screen__drawLine(x-s, y+dy, x+s, y+dy);
 		dy = dy+1;
@@ -11810,7 +11842,7 @@ var Math__deInit() {
 	return 0;
 }
 var Math__abs(var a) {
-	if (0!=(((a<0)?-1:0))) {
+	if (0!=((((a)<(0))?-1:0))) {
 		return -a;
 	}
 
@@ -11823,13 +11855,13 @@ var Math__multiply(var x, var y) {
 	var shiftedX;
 	sum = 0;
 	shiftedX = x;
-	if (0!=((((x<1)?-1:0))|(((y<1)?-1:0)))) {
+	if (0!=(((((x)<(1))?-1:0))|((((y)<(1))?-1:0)))) {
 		return 0;
 	}
 
 	j = 0;
 	b = 1;
-	while (-1==(((j<16)?-1:0))) {
+	while (-1==((((j)<(16))?-1:0))) {
 		if (0!=(x&b)) {
 			sum = sum+shiftedX;
 		}
@@ -11842,30 +11874,30 @@ var Math__multiply(var x, var y) {
 }
 var Math__divide(var x, var y) {
 	var q;
-	if (0!=((((x<0)?-1:0))|(((y<1)?-1:0)))) {
+	if (0!=(((((x)<(0))?-1:0))|((((y)<(1))?-1:0)))) {
 		return 0;
 	}
 
-	if (0!=(((y>x)?-1:0))) {
+	if (0!=((((y)>(x))?-1:0))) {
 		return 0;
 	}
 
 	q = Math__divide(x, y+y);
-	if (0!=((((x-((q+q)*y))<y)?-1:0))) {
+	if (0!=(((((x-((q+q)*y)))<(y))?-1:0))) {
 		return q+q;
 	}
 
 	return (q+q)+1;
 }
 var Math__min(var x, var y) {
-	if (0!=(((x<y)?-1:0))) {
+	if (0!=((((x)<(y))?-1:0))) {
 		return x;
 	}
 
 	return y;
 }
 var Math__max(var x, var y) {
-	if (0!=(((x>y)?-1:0))) {
+	if (0!=((((x)>(y))?-1:0))) {
 		return x;
 	}
 
@@ -11875,15 +11907,15 @@ var Math__sqrt(var x) {
 	var y;
 	var j;
 	var j2;
-	if (0!=(((x<1)?-1:0))) {
+	if (0!=((((x)<(1))?-1:0))) {
 		return 0;
 	}
 
 	y = 0;
 	j2 = 16384;
 	j = (15/2)-1;
-	while (-1==(((j>-1)?-1:0))) {
-		if (0!=(((x>(y+j2))?-1:0))) {
+	while (-1==((((j)>(-1))?-1:0))) {
+		if (0!=((((x)>((y+j2)))?-1:0))) {
 			y = y+j2;
 		}
 
@@ -11893,14 +11925,14 @@ var Math__sqrt(var x) {
 	return y;
 }
 var Math__shiftLeft(var value, var shift) {
-	while (-1==(((shift>0)?-1:0))) {
+	while (-1==((((shift)>(0))?-1:0))) {
 		value = value*2;
 		shift = shift-1;
 	}
 	return value;
 }
 var Math__shiftRight(var value, var shift) {
-	while (-1==(((shift>0)?-1:0))) {
+	while (-1==((((shift)>(0))?-1:0))) {
 		value = value/2;
 		shift = shift-1;
 	}
@@ -11908,7 +11940,7 @@ var Math__shiftRight(var value, var shift) {
 }
 var Math__rem(var a, var b) {
 	var c;
-	if (0!=(((b==0)?-1:0))) {
+	if (0!=((((b)==(0))?-1:0))) {
 		return 0;
 	}
 
@@ -11925,11 +11957,11 @@ var Math__xor(var a, var b) {
 var Math__log2(var n) {
 	var r;
 	r = 0;
-	if (0!=(((n==0)?-1:0))) {
+	if (0!=((((n)==(0))?-1:0))) {
 		return -1;
 	}
 
-	while (-1==(((n>1)?-1:0))) {
+	while (-1==((((n)>(1))?-1:0))) {
 		n = Math__shiftRight(n, 1);
 		r = r+1;
 	}
@@ -11980,19 +12012,17 @@ var String__length(var __this) {
 	var l;
 	l = 0;
 	s = __peek(str__);
-	if (0!=(((s==0)?-1:0))) {
+	if (0!=((((s)==(0))?-1:0))) {
 		return 0;
 	}
 
-	while (-1==(((0==(((__peek(s+l)==0)?-1:0)))?-1:0))) {
+	while (-1==((((0)==(((((__peek(s+l))==(0))?-1:0))))?-1:0))) {
 		l = l+1;
 	}
 	return l;
 }
 var String__charAt(var __this, var a) {
-	var s;
 	var ret;
-	s = __peek(str__);
 	ret = __peek(__peek(str__)+a);
 	return ret;
 }
@@ -12013,13 +12043,13 @@ var String__appendChar(var __this, var c) {
 	var b;
 	var d;
 	d = __peek(str__);
-	if (0!=(((__peek(size__)<1)?-1:0))) {
+	if (0!=((((__peek(size__))<(1))?-1:0))) {
 		Sys__error(12);
 	}
 
 	max = __peek(size__);
 	l = String__length(__this);
-	if (0!=(((l<(max-1))?-1:0))) {
+	if (0!=((((l)<((max-1)))?-1:0))) {
 		__poke(__peek(str__)+l, c);
 		__poke(__peek(str__)+l+1, 0);
  //printf("%d %ld OOKK %d %d<\n", c, __this, max, l);
@@ -12029,7 +12059,7 @@ var String__appendChar(var __this, var c) {
 	nl = (l*2)+4;
 	b = Array__new(nl+1);
 	i = 0;
-	while (-1==(((i<l)?-1:0))) {
+	while (-1==((((i)<(l))?-1:0))) {
 		__poke(b+i, __peek(d+i));
 		i = i+1;
 	}
@@ -12045,7 +12075,7 @@ var String__eraseLastChar(var __this) {
 	var s;
 	s = __peek(str__);
 	l = String__length(__this);
-	if (0!=(((l>0)?-1:0))) {
+	if (0!=((((l)>(0))?-1:0))) {
 		__poke(s+l-1, 0);
 	}
 
@@ -12062,13 +12092,13 @@ var String__intValue(var __this) {
 	s = 1;
 	d = __peek(o+0);
 	i = 1;
-	if (0!=(((d==45)?-1:0))) {
+	if (0!=((((d)==(45))?-1:0))) {
 		s = -1;
 		d = __peek(o+i);
 		i = i+1;
 	}
 
-	while (-1==((((d>47)?-1:0))&(((d<58)?-1:0)))) {
+	while (-1==(((((d)>(47))?-1:0))&((((d)<(58))?-1:0)))) {
 		v = v*10;
 		v = v+d-48;
 		d = __peek(o+i);
@@ -12084,7 +12114,7 @@ var String__setInt(var __this, var j) {
 	p = 0;
 	s = __this;
 	String__setCharAt(s, 0, 0);
-	if (0!=(((j<0)?-1:0))) {
+	if (0!=((((j)<(0))?-1:0))) {
 		j = -j;
 		s = String__appendString(s, Memory__getString(String___str0));
 	}
@@ -12095,9 +12125,9 @@ var String__setInt(var __this, var j) {
  	} else if (sizeof(var) == 4) {
  		n = n * n * 10; 
  	} 
-	while (-1==(((n>0)?-1:0))) {
+	while (-1==((((n)>(0))?-1:0))) {
 		k = j/n;
-		if (0!=(((k>0)?-1:0))) {
+		if (0!=((((k)>(0))?-1:0))) {
 			p = -1;
 		}
 
@@ -12108,7 +12138,7 @@ var String__setInt(var __this, var j) {
 		j = Math__rem(j, n);
 		n = n/10;
 	}
-	if (0!=(((p==0)?-1:0))) {
+	if (0!=((((p)==(0))?-1:0))) {
 		s = String__appendChar(s, 48);
 	}
 
@@ -12133,7 +12163,7 @@ var String__appendFromNative(var __this, var native) {
  	l = strlen((char*)n);
  #endif 
  #endif 
-	while (-1==(((i<l)?-1:0))) {
+	while (-1==((((i)<(l))?-1:0))) {
  #ifdef JACK_HACK 
  	c = 0;
  #else
@@ -12167,7 +12197,7 @@ var String__copy(var __this) {
 	j = 0;
 	l = String__length(__this);
 	s = String__new(l+1);
-	while (-1==(((j<l)?-1:0))) {
+	while (-1==((((j)<(l))?-1:0))) {
 		s = String__appendChar(s, String__charAt(__this, j));
 		j = j+1;
 	}
@@ -12180,7 +12210,7 @@ var String__appendString(var __this, var p) {
 	s = __this;
 	j = 0;
 	l = String__length(p);
-	while (-1==(((j<l)?-1:0))) {
+	while (-1==((((j)<(l))?-1:0))) {
 		s = String__appendChar(s, String__charAt(p, j));
 		j = j+1;
 	}
@@ -12196,7 +12226,7 @@ var String__compare(var __this, var s) {
 	lp = String__length(p);
 	ls = String__length(s);
 	j = 0;
-	while (-1==((((j<lp)?-1:0))&(((j<ls)?-1:0)))) {
+	while (-1==(((((j)<(lp))?-1:0))&((((j)<(ls))?-1:0)))) {
 		r = String__charAt(p, j)-String__charAt(s, j);
 		if (0!=(r)) {
 			return r;
@@ -12239,7 +12269,7 @@ var Memory__init() {
  	return 0;
  #endif
 	i = 0;
-	while (-1==(((i<24576)?-1:0))) {
+	while (-1==((((i)<(24576))?-1:0))) {
 		Memory__poke(i, 0);
 		i = i+1;
 	}
@@ -12255,15 +12285,15 @@ var Memory__deInit() {
 }
 var Memory__peek(var addr) {
  	//return ((var*)((addr)*sizeof(var)))[0];
-	if (0!=(((addr<0)?-1:0))) {
+	if (0!=((((addr)<(0))?-1:0))) {
 		Sys__error(27);
 	}
 
-	if (0!=(((addr>24576)?-1:0))) {
+	if (0!=((((addr)>(24576))?-1:0))) {
 		Sys__error(28);
 	}
 
-	if (0!=(((addr==24576)?-1:0))) {
+	if (0!=((((addr)==(24576))?-1:0))) {
 		addr = addr;
 	}
 
@@ -12276,15 +12306,15 @@ var Memory__peek(var addr) {
 var Memory__poke(var addr, var value) {
  	//((var*)((addr)*sizeof(var)))[0] = value;
    	//return 0;
-	if (0!=(((addr<0)?-1:0))) {
+	if (0!=((((addr)<(0))?-1:0))) {
 		Sys__error(29);
 	}
 
-	if (0!=(((addr>24576)?-1:0))) {
+	if (0!=((((addr)>(24576))?-1:0))) {
 		Sys__error(30);
 	}
 
-	if (0!=((((addr>16383)?-1:0))&(((addr<24576)?-1:0)))) {
+	if (0!=(((((addr)>(16383))?-1:0))&((((addr)<(24576))?-1:0)))) {
 		Screen__refresh();
 	}
 
@@ -12299,15 +12329,15 @@ var Memory__defrag() {
 	var end;
 	end = Memory___arena+Memory___asize;
 	p = Memory___arena;
-	while (-1==(((p<end)?-1:0))) {
-		if (0!=(((__peek(p+0)>0)?-1:0))) {
+	while (-1==((((p)<(end))?-1:0))) {
+		if (0!=((((__peek(p+0))>(0))?-1:0))) {
 			q = p+__peek(p+0);
-			while (-1==((((q<end)?-1:0))&(((__peek(q+0)>0)?-1:0)))) {
+			while (-1==(((((q)<(end))?-1:0))&((((__peek(q+0))>(0))?-1:0)))) {
 				__poke(p+0, q-p);
 				q = q+__peek(q+0);
 			}
 		} else {
-			if (0!=(((__peek(p+0)==0)?-1:0))) {
+			if (0!=((((__peek(p+0))==(0))?-1:0))) {
 				return 0;
 			}
 
@@ -12324,8 +12354,8 @@ var Memory__checkEmpty() {
 	end = Memory___arena+Memory___asize;
 	p = Memory___arena;
 	ok = -1;
-	while (-1==(((p<end)?-1:0))) {
-		if (0!=(((__peek(p+0)<0)?-1:0))) {
+	while (-1==((((p)<(end))?-1:0))) {
+		if (0!=((((__peek(p+0))<(0))?-1:0))) {
 			Output__printString(Memory__getString(Memory___str0));
 			Output__printInt(p);
 			Output__printString(Memory__getString(Memory___str1));
@@ -12333,7 +12363,7 @@ var Memory__checkEmpty() {
 			Output__println();
 			ok = 0;
 		} else {
-			if (0!=(((__peek(p+0)==0)?-1:0))) {
+			if (0!=((((__peek(p+0))==(0))?-1:0))) {
 				Output__printString(Memory__getString(Memory___str2));
 				Output__printInt(p);
 				Output__println();
@@ -12362,7 +12392,7 @@ var Memory__alloc(var size) {
 	tries = 0;
 	i = 0;
 	j = 0;
-	if (0!=(((size<1)?-1:0))) {
+	if (0!=((((size)<(1))?-1:0))) {
 		Output__printString(Memory__getString(Memory___str3));
 		Output__printInt(size);
 		Output__println();
@@ -12370,14 +12400,14 @@ var Memory__alloc(var size) {
 		return 0;
 	}
 
-	while (-1==(((tries<3)?-1:0))) {
+	while (-1==((((tries)<(3))?-1:0))) {
 		end = Memory___arena+Memory___asize;
 		p = Memory___freep;
 		doit = -1;
-		while (-1==(doit|((((((p==Memory___freep)?-1:0))==0)?-1:0)))) {
+		while (-1==(doit|((((((((p)==(Memory___freep))?-1:0)))==(0))?-1:0)))) {
 			doit = 0;
-			if (0!=(((__peek(p+0)>size)?-1:0))) {
-				if (0!=((((size+1)==__peek(p+0))?-1:0))) {
+			if (0!=((((__peek(p+0))>(size))?-1:0))) {
+				if (0!=(((((size+1))==(__peek(p+0)))?-1:0))) {
 					__poke(p+0, -__peek(p+0));
 				} else {
 					k = __peek(p+0);
@@ -12390,11 +12420,11 @@ var Memory__alloc(var size) {
 			}
 
 			p = p+Math__abs(__peek(p+0));
-			if (0!=(((p==end)?-1:0))) {
+			if (0!=((((p)==(end))?-1:0))) {
 				p = Memory___arena;
 			}
 
-			if (0!=((((p<Memory___arena)?-1:0))|(((p>(end-1))?-1:0))|(((__peek(p+0)==0)?-1:0)))) {
+			if (0!=(((((p)<(Memory___arena))?-1:0))|((((p)>((end-1)))?-1:0))|((((__peek(p+0))==(0))?-1:0)))) {
 				Output__printString(Memory__getString(Memory___str4));
 				Output__printString(Memory__getString(Memory___str5));
 				Output__printInt(p);
@@ -12409,14 +12439,14 @@ var Memory__alloc(var size) {
 			}
 
 		}
-		if (0!=(((tries==0)?-1:0))) {
+		if (0!=((((tries)==(0))?-1:0))) {
 			Memory__defrag();
 		} else {
 			k = Memory___asize;
 			Memory___asize = Memory___asize+(size*8)+64;
 			i = 0;
 			j = Memory___arena+k;
-			while (-1==(((i<j)?-1:0))) {
+			while (-1==((((i)<(j))?-1:0))) {
 				i = i+1;
 			}
 			__poke(end+0, Memory___asize-k);
@@ -12447,7 +12477,7 @@ var Memory__deAlloc(var p) {
  	free(((var*)(p* sizeof(var)))-1);
  	return 0;
  #endif
-	if (0!=(((p<Memory___arena)?-1:0))) {
+	if (0!=((((p)<(Memory___arena))?-1:0))) {
 		Output__printString(Memory__getString(Memory___str13));
 		Output__printInt(Memory___arena);
 		Output__printString(Memory__getString(Memory___str14));
@@ -12458,7 +12488,7 @@ var Memory__deAlloc(var p) {
 	}
 
 	pi = p;
-	if (0!=((((pi<Memory___arena)?-1:0))|((((Memory___arena+Memory___asize)<pi)?-1:0))|(((__peek(Memory___mem+pi-1)>(-1))?-1:0)))) {
+	if (0!=(((((pi)<(Memory___arena))?-1:0))|(((((Memory___arena+Memory___asize))<(pi))?-1:0))|((((__peek(Memory___mem+pi-1))>((-1)))?-1:0)))) {
 		Output__println();
 		Output__printInt(Memory___arena);
 		Output__printString(Memory__getString(Memory___str15));
@@ -12519,93 +12549,93 @@ var Keyboard__keyPressed() {
 var Keyboard__getKey() {
 	var x;
 	x = Keyboard__getChar();
-	if (0!=(((x==10)?-1:0))) {
+	if (0!=((((x)==(10))?-1:0))) {
 		return 128;
 	}
 
-	if (0!=(((x==127)?-1:0))) {
+	if (0!=((((x)==(127))?-1:0))) {
 		return 129;
 	}
 
-	if (0!=(((x==27)?-1:0))) {
+	if (0!=((((x)==(27))?-1:0))) {
 		x = Keyboard__getChar();
-		if (0!=(((x==0)?-1:0))) {
+		if (0!=((((x)==(0))?-1:0))) {
 			return 140;
 		}
 
-		if (0!=(((x==91)?-1:0))) {
+		if (0!=((((x)==(91))?-1:0))) {
 			x = Keyboard__getChar();
-			if (0!=(((x==65)?-1:0))) {
+			if (0!=((((x)==(65))?-1:0))) {
 				x = 131;
 			}
 
-			if (0!=(((x==66)?-1:0))) {
+			if (0!=((((x)==(66))?-1:0))) {
 				x = 133;
 			}
 
-			if (0!=(((x==67)?-1:0))) {
+			if (0!=((((x)==(67))?-1:0))) {
 				x = 132;
 			}
 
-			if (0!=(((x==68)?-1:0))) {
+			if (0!=((((x)==(68))?-1:0))) {
 				x = 130;
 			}
 
-			if (0!=(((x==53)?-1:0))) {
+			if (0!=((((x)==(53))?-1:0))) {
 				x = Keyboard__getChar();
-				if (0!=(((x==126)?-1:0))) {
+				if (0!=((((x)==(126))?-1:0))) {
 					x = 136;
 				}
 
 			}
 
-			if (0!=(((x==54)?-1:0))) {
+			if (0!=((((x)==(54))?-1:0))) {
 				x = Keyboard__getChar();
-				if (0!=(((x==126)?-1:0))) {
+				if (0!=((((x)==(126))?-1:0))) {
 					x = 137;
 				}
 
 			}
 
-			if (0!=(((x==50)?-1:0))) {
+			if (0!=((((x)==(50))?-1:0))) {
 				x = Keyboard__getChar();
-				if (0!=(((x==126)?-1:0))) {
+				if (0!=((((x)==(126))?-1:0))) {
 					x = 138;
 				}
 
-				if (0!=(((x==52)?-1:0))) {
+				if (0!=((((x)==(52))?-1:0))) {
 					x = Keyboard__getChar();
 					x = (x-125)+150;
 				}
 
 			}
 
-			if (0!=(((x==51)?-1:0))) {
+			if (0!=((((x)==(51))?-1:0))) {
 				x = Keyboard__getChar();
-				if (0!=(((x==126)?-1:0))) {
+				if (0!=((((x)==(126))?-1:0))) {
 					x = 139;
 				}
 
 			}
 
-			if (0!=(((x==91)?-1:0))) {
+			if (0!=((((x)==(91))?-1:0))) {
 				x = Keyboard__getChar();
-				if (0!=(((x==70)?-1:0))) {
+				if (0!=((((x)==(70))?-1:0))) {
 					x = 135;
 				}
 
 			}
 
-			if (0!=(((x==91)?-1:0))) {
+			if (0!=((((x)==(91))?-1:0))) {
 				x = Keyboard__getChar();
-				if (0!=(((x==72)?-1:0))) {
+				if (0!=((((x)==(72))?-1:0))) {
 					x = 134;
 				}
 
 			}
 
 		} else {
-			if (0!=(((x==79)?-1:0))) {
+			if (0!=((((x)==(79))?-1:0))) {
 				x = Keyboard__getChar();
 				x = (x-80)+141;
 			}
@@ -12646,7 +12676,7 @@ var Keyboard__getChar() {
 var Keyboard__readChar() {
 	var k;
 	k = Keyboard__keyPressed();
-	while (-1==(((k==0)?-1:0))) {
+	while (-1==((((k)==(0))?-1:0))) {
 		Sys__wait(50);
 		k = Keyboard__keyPressed();
 	}
@@ -12658,7 +12688,7 @@ var Keyboard__readLine(var message) {
 	s = String__new(256);
 	Output__printString(message);
 	k = Keyboard__readChar();
-	while (-1==((((((k==10)?-1:0))==0)?-1:0))) {
+	while (-1==((((((((k)==(10))?-1:0)))==(0))?-1:0))) {
 		s = String__appendChar(s, k);
 		k = Keyboard__readChar();
 	}
@@ -12670,7 +12700,7 @@ var Keyboard__readInt(var message) {
 	Output__printString(message);
 	i = 0;
 	k = Keyboard__readChar();
-	while (-1==((((k>47)?-1:0))&(((k<58)?-1:0)))) {
+	while (-1==(((((k)>(47))?-1:0))&((((k)<(58))?-1:0)))) {
 		i = (k-48)+(i*10);
 		k = Keyboard__readChar();
 	}
@@ -12776,43 +12806,43 @@ var Main__getJackFiles(var lst, var dir) {
 	f = File__new(dir, 0);
 	if (0!=(f)) {
 		d = File__list(f);
-		if (0!=(((d==0)?-1:0))) {
+		if (0!=((((d)==(0))?-1:0))) {
 			File__dispose(f);
 			return 0;
 		}
 
 	}
 
-	while (-1==(((i<Buffer__getSize(d))?-1:0))) {
+	while (-1==((((i)<(Buffer__getSize(d)))?-1:0))) {
 		p = Buffer__getAt(d, i);
 		l = String__length(p);
 		doit = 0;
-		if (0!=(((l>0)?-1:0))) {
-			if (0!=(((String__charAt(p, l-1)==47)?-1:0))) {
+		if (0!=((((l)>(0))?-1:0))) {
+			if (0!=((((String__charAt(p, l-1))==(47))?-1:0))) {
 				doit = -1;
 			}
 
 		}
 
 		if (0!=(doit)) {
-			if (0!=((((((String__charAt(p, 0)==46)?-1:0))==0)?-1:0))) {
+			if (0!=((((((((String__charAt(p, 0))==(46))?-1:0)))==(0))?-1:0))) {
 				Main__getJackFiles(lst, p);
 			}
 
 			String__dispose(p);
 		} else {
-			if (0!=(((l>5)?-1:0))) {
+			if (0!=((((l)>(5))?-1:0))) {
 				c = Memory__getString(Main___str0);
 				j = 5;
-				while (-1==(((j>0)?-1:0))) {
+				while (-1==((((j)>(0))?-1:0))) {
 					j = j-1;
 					l = l-1;
-					if (0!=((((((String__charAt(p, l)==String__charAt(c, j))?-1:0))==0)?-1:0))) {
+					if (0!=((((((((String__charAt(p, l))==(String__charAt(c, j)))?-1:0)))==(0))?-1:0))) {
 						j = -1;
 					}
 
 				}
-				if (0!=(((j==0)?-1:0))) {
+				if (0!=((((j)==(0))?-1:0))) {
 					Buffer__append(lst, p);
 				} else {
 					String__dispose(p);
@@ -12838,14 +12868,14 @@ var Main__main() {
 	var hack;
 	hack = 0;
 	args = Sys2__args();
-	if (0!=(((Buffer__getSize(args)<2)?-1:0))) {
+	if (0!=((((Buffer__getSize(args))<(2))?-1:0))) {
 		Output__printString(Memory__getString(Main___str1));
 		Sys__error(-1);
 	}
 
-	if (0!=(((Buffer__getSize(args)==3)?-1:0))) {
+	if (0!=((((Buffer__getSize(args))==(3))?-1:0))) {
 		s = Buffer__getAt(args, 1);
-		if (0!=(((String__compare(s, Memory__getString(Main___str2))==0)?-1:0))) {
+		if (0!=((((String__compare(s, Memory__getString(Main___str2)))==(0))?-1:0))) {
 			hack = -1;
 		}
 
@@ -12857,7 +12887,7 @@ var Main__main() {
 	if (0!=(dir)) {
 		dir = String__copy(dir);
 		l = String__length(dir);
-		if (0!=((((((String__charAt(dir, l-1)==47)?-1:0))==0)?-1:0))) {
+		if (0!=((((((((String__charAt(dir, l-1))==(47))?-1:0)))==(0))?-1:0))) {
 			dir = String__appendChar(dir, 47);
 		}
 
@@ -12868,7 +12898,7 @@ var Main__main() {
 	}
 	i = 0;
 	cpl = JackCompiler__new(hack);
-	while (-1==(((i<Buffer__getSize(files))?-1:0))) {
+	while (-1==((((i)<(Buffer__getSize(files)))?-1:0))) {
 		s = Buffer__getAt(files, i);
 		Output__printString(Memory__getString(Main___str4));
 		Output__printString(s);

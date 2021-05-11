@@ -34,7 +34,7 @@ class JackAstToC {
 		do dst.writeString("#if 0");
 		do nl();
 		//do ast.process(dst, 0, parser);
-		//do nl();
+		do nl();
 		do dst.writeString("#endif");
 		do nl();
 
@@ -159,7 +159,6 @@ class JackAstToC {
 		do dst.writeString("#endif");
 		do nl();
 	
-		//do c.process(dst, 0, parser);
 
 		return;
 	}
@@ -711,9 +710,9 @@ class JackAstToC {
 					do dst.writeString("+");
 				}
 				let d = d.getChild();
-				if (d.getTag() = C.EXPR()) {
+				//if (d.getTag() = C.EXPR()) {
 					do coExpr(d, false);
-				}
+				//}
 				if (dohack) {
 					if (isassign = false) {
 						do dst.writeString(")");
@@ -972,29 +971,29 @@ class JackAstToC {
 				let ok = true;
 			}
 			if (t = C.LESS()) {
-				do dst.writeString("((");
+				do dst.writeString("(((");
 				do coExpr(d.getLeft(), false);
-				do dst.writeString("<");
+				do dst.writeString(")<(");
 				do coExpr(d.getChild(), false);
-				do dst.writeString(")?-1:0)");
+				do dst.writeString("))?-1:0)");
 				let ok = true;
 			}
 
 			if (t = C.GREATER()) {
-				do dst.writeString("((");
+				do dst.writeString("(((");
 				do coExpr(d.getLeft(), false);
-				do dst.writeString(">");
+				do dst.writeString(")>(");
 				do coExpr(d.getChild(), false);
-				do dst.writeString(")?-1:0)");
+				do dst.writeString("))?-1:0)");
 				let ok = true;
 			}
 
 			if (t = C.EQUAL()) {
-				do dst.writeString("((");
+				do dst.writeString("(((");
 				do coExpr(d.getLeft(), false);
-				do dst.writeString("==");
+				do dst.writeString(")==(");
 				do coExpr(d.getChild(), false);
-				do dst.writeString(")?-1:0)");
+				do dst.writeString("))?-1:0)");
 				let ok = true;
 			}
 
@@ -1014,6 +1013,7 @@ class JackAstToC {
 			if (isterm) {
 				return;
 			}
+			return;
 			let d = d.getNext();
 		}
 		return;

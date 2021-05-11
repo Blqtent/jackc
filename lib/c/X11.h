@@ -77,9 +77,6 @@ var Screen__clear()
 
 void init() 
 {
-	XFontStruct *fontInfo;
-	Font id;
-	unsigned int first,last;
 	int fbcount;
 	if (__display != NULL) {
 		return;
@@ -195,7 +192,6 @@ var dump_font(var c)
 	FILE *f;
 	int x, y, xx, i, l;
 	char text[255];
-	var p;
 	if (!c) {
 		return 0;
 	}
@@ -222,7 +218,7 @@ var dump_font(var c)
 	glLoadIdentity();
 	i = (c - 32) * 6;
 	f = fopen("Font.jack", "a+w");
-	fprintf(f, "\t\t// %c (%d)\n", c, c);
+	fprintf(f, "\t\t// %c (%d)\n", (int)c, (int)c);
 	for (y = 0; y < 11; y++) {
 		x = 0;
 		l =  (height - y - 1) * width + (x << 4);
@@ -242,14 +238,14 @@ var dump_font(var c)
 			}
 		}
 		if (c > 32767) {
-			if (c = 32768) {
+			if (c == 32768) {
 				fprintf(f, "\t\tlet v[%d] = 32767 + 1;\n", i);
 			} else {
 				fprintf(f, "\t\tlet v[%d] = -%d;\n", i,
-					((~c) + 1) & 0x7FFF);
+					((~(int)c) + 1) & 0x7FFF);
 			}
 		} else {
-			fprintf(f, "\t\tlet v[%d] = %d;\n", i, c);
+			fprintf(f, "\t\tlet v[%d] = %d;\n", i, (int)c);
 		}
 		i++;
 	}
@@ -290,14 +286,9 @@ var processEvent()
 	KeySym key;
 	char text[255];
 	int r;
-	int x, y;
 	var c;
-	float fx, fy;
-	static int done = 0;
-	XWindowAttributes a;
 
-	fx = 8.0 * 2.0 / width;
-	fy = 11.0 * 2.0 / height;
+	XWindowAttributes a;
 
 	XNextEvent(__display, &ev);
 	gc = DefaultGC(__display, 0);
@@ -368,7 +359,6 @@ var processEvent()
 		//if (!done) {	
 		//	make_font();
 		//}
-		done = 1;
 		glXSwapBuffers(__display, window);	
 		isfirst = 0;	
 		break;

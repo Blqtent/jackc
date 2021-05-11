@@ -77,7 +77,6 @@ class Output {
 		var int xx, yy;
 		var int i, j, l, p;
 		var Array chr;
-		var Array a;
 		var int m;
 		
 		if ((c > 1114111) | (c < 0)) {
