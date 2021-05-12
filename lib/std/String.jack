@@ -69,8 +69,6 @@ class String {
 		if (l < (max - 1)) {
 			let str[l] = c;
 			let str[l + 1] = 0;
-	//	do Output.printString(this);
-#c //printf("%d %ld OOKK %d %d<\n", c, __this, max, l);
 			return this;
 		}
 		let nl = (l * 2) + 4;
@@ -133,11 +131,13 @@ class String {
 			let s = s.appendString("-");
 		}
 		let n = 10000;
-#c 	if (sizeof(var) == 8) {
-#c 		n = n * n * n * n * 100;
-#c 	} else if (sizeof(var) == 4) {
-#c 		n = n * n * 10; 
-#c 	} 
+/*#c
+ 	if (sizeof(var) == 8) {
+ 		n = n * n * n * n * 100;
+ 	} else if (sizeof(var) == 4) {
+ 		n = n * n * 10; 
+ 	} 
+#*/
 		while (n > 0) {
 			let k = j / n;
 			if (k > 0) {
@@ -163,29 +163,34 @@ class String {
 		let s = this;
 		let n = native;
 		let i = 0;
-#c #ifdef JACK_HACK 
-#c 	n = 0;
-#c 	l = n;
-#c #else
-#c #ifdef _WIN32
-#c 	l = (var)wcslen((wchar_t*)n);
-#c #else
-#c 	l = strlen((char*)n);
-#c #endif 
-#c #endif 
-#py 	l = len(n)
+/*#c 
+#ifdef JACK_HACK 
+ 	n = 0;
+ 	l = n;
+#else
+#ifdef _WIN32
+ 	l = (var)wcslen((wchar_t*)n);
+#else
+	l = strlen((char*)n);
+#endif 
+#endif 
+#*/
+
+//#py 	l = len(n)
 		while (i < l) {
-#c #ifdef JACK_HACK 
-#c 	c = 0;
-#c #else
-#c #ifdef _WIN32
-#c 		c = (var)((wchar_t*)n)[i];// FIXME UTF16
-#c #else
-#c 		c = (var)(((char*)n)[i]) & 255; // FIXME UTF8
-#c #endif 
-#c #endif 
-#py 		c = ord(n[i])
-#py 		#print("JJJJ" + str(s) + "  " + str(c))
+/*#c 
+#ifdef JACK_HACK 
+ 	c = 0;
+#else
+#ifdef _WIN32
+ 		c = (var)((wchar_t*)n)[i];// FIXME UTF16
+#else
+ 		c = (var)(((char*)n)[i]) & 255; // FIXME UTF8
+#endif 
+#endif 
+#*/
+//#py 		c = ord(n[i])
+//#py 		#print("JJJJ" + str(s) + "  " + str(c))
 			let s = s.appendChar(c);
 			let i = i + 1;
 		}

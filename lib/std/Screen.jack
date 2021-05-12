@@ -4,8 +4,8 @@ class Screen {
 
 	function void init() {
 		let color = true;
-#py 	global tk
-#py 	tk = None
+//#py 	global tk
+//#py 	tk = None
 		return;
 	}
 
@@ -21,14 +21,16 @@ class Screen {
 			let i = i + 1;
 		}
 		//do Screen.setColor(true);
-#c 	puts("\033[2J");
-#py 	global tk
-#py 	if (tk == None):
-#py 		tk = tkinter.Tk()
-#py 		p = tkinter.PhotoImage(file ="screen.gif")
-#py 		lbl = tkinter.Label(tk, image = p)
-#py 		lbl.image = p
-#py 		lbl.grid(row=0, column=0)
+//#c 	puts("\033[2J");
+/*#py
+ 	global tk
+	if (tk == None):
+		tk = tkinter.Tk()
+		p = tkinter.PhotoImage(file ="screen.gif")
+		lbl = tkinter.Label(tk, image = p)
+		lbl.image = p
+ 		lbl.grid(row=0, column=0)
+#*/
 		return;
 	}
 

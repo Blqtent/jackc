@@ -13,9 +13,11 @@ class Sys {
 	function void init() {
 		let in_error = false;
 		do Memory.init();
-#c #ifndef JACK_HACK
-#c 	Sys2__init();
-#c #endif
+/*#c 
+#ifndef JACK_HACK
+ 	Sys2__init();
+#endif
+#*/
 		do Math.init();
 		do Output.init();
 		do Screen.init();
@@ -30,13 +32,13 @@ class Sys {
 		do Screen.deInit();
 		do Keyboard.deInit();
 		do Memory.deInit();
-#py 	Sys__disposeStrings()
+//#py 	Sys__disposeStrings()
 		return;
 	}
 	
 	function void halt() {
-#c 	exit(0);
-#py 	exit(0)
+//#c 	exit(0);
+//#py 	exit(0)
 		return;
 	}
 
@@ -49,10 +51,12 @@ class Sys {
 		do Output.printInt(errorCode);
 		do Output.printString(")");
 		do Output.println();
-#c 	errorCode = 0;
-#c 	errorCode = 1 / (errorCode);
-#c 	exit(errorCode);
-#py 	exit(errorCode)
+/*#c
+ 	errorCode = 0;
+ 	errorCode = 1 / (errorCode);
+ 	exit(errorCode);
+#*/
+//#py 	exit(errorCode)
 
 		let in_error = false;
 		return;
@@ -60,12 +64,15 @@ class Sys {
 
 	function void wait(int duration) {
 		do Screen.processEvents();
-#c #ifdef _WIN32
-#c 	Sleep(duration);
-#c #else
-#c 	usleep(duration * 1000);
-#c #endif
-#py 	time.sleep(duration / 1000.0)
+/*#c 
+#ifdef _WIN32
+ 	Sleep(duration);
+#else
+ 	usleep(duration * 1000);
+#endif
+#*/
+
+//#py 	time.sleep(duration / 1000.0)
 		return;
 	}
 }

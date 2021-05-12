@@ -1,14 +1,14 @@
 
 class Keyboard {
 	function void exit() {
-#c #ifndef _WIN32
-#c 	Keyboard__term.c_lflag |= (ICANON | ECHO);
-#c 	tcsetattr(0, TCSANOW, &Keyboard__term);
-#c	exit(0);
-#c #endif
-#py 	global ts
-#py 	if (sys.stdin.closed == 0):
-#py 		termios.tcsetattr(sys.stdin.fileno(), termios.TCSADRAIN, ts)
+//#c #ifndef _WIN32
+//#c 	Keyboard__term.c_lflag |= (ICANON | ECHO);
+//#c 	tcsetattr(0, TCSANOW, &Keyboard__term);
+//#c	exit(0);
+//#c #endif
+//#py 	global ts
+//#py 	if (sys.stdin.closed == 0):
+//#py 		termios.tcsetattr(sys.stdin.fileno(), termios.TCSADRAIN, ts)
 		return;
 	}
 
@@ -18,28 +18,32 @@ class Keyboard {
 	}
 
 	function void init() {
-#c #ifndef _WIN32
-#c 	struct sigaction act;
-#c 	memset(&act, 0, sizeof(act));
-#c 	sigemptyset(&act.sa_mask);
-#c 	atexit((void(*)())Keyboard__exits);
-#c 	tcgetattr(0, &Keyboard__term);
-#c 	act.sa_handler = ((void(*)(int))Keyboard__exits);
-#c 	act.sa_flags = 0;
-#c 	sigaction(SIGINT, &act, NULL); 
-#c 	sigaction(SIGTSTP, &act, NULL); 
-#c 	Keyboard__term.c_lflag &= ~(ICANON);
-#c 	tcsetattr(0, TCSANOW, &Keyboard__term);
-#c #endif
-#py 	global keybuf
-#py 	global keyindex
-#py 	global ts
-#py 	ts = termios.tcgetattr(sys.stdin.fileno())
-#py 	keybuf=""
-#py 	keyindex = 0;
-#py 	atexit.register(Keyboard__exit)
-#py 	signal.signal(signal.SIGINT, Keyboard__exits) # ctlr + c
-#py 	signal.signal(signal.SIGTSTP, Keyboard__exits) # ctlr + z
+/*#c 
+#ifndef _WIN32
+ 	struct sigaction act;
+ 	memset(&act, 0, sizeof(act));
+ 	sigemptyset(&act.sa_mask);
+ 	atexit((void(*)())Keyboard__exits);
+ 	tcgetattr(0, &Keyboard__term);
+ 	act.sa_handler = ((void(*)(int))Keyboard__exits);
+ 	act.sa_flags = 0;
+ 	sigaction(SIGINT, &act, NULL); 
+ 	sigaction(SIGTSTP, &act, NULL); 
+ 	Keyboard__term.c_lflag &= ~(ICANON);
+ 	tcsetattr(0, TCSANOW, &Keyboard__term);
+#endif
+#*/
+
+/*#py 	global keybuf
+	global keyindex
+ 	global ts
+	ts = termios.tcgetattr(sys.stdin.fileno())
+	keybuf=""
+	keyindex = 0;
+	atexit.register(Keyboard__exit)
+	signal.signal(signal.SIGINT, Keyboard__exits) # ctlr + c
+	signal.signal(signal.SIGTSTP, Keyboard__exits) # ctlr + z
+#*/
 		return;
 	}
 
@@ -144,49 +148,52 @@ class Keyboard {
 
 	function char getChar() {
 		var int x;
-#c #ifndef _WIN32
-#c 	//fd_set rd;
-#c 	int flags;
-#c 	flags = fcntl(STDIN_FILENO, F_GETFL, 0);
-#c 	fcntl(STDIN_FILENO, F_SETFL, flags | O_NONBLOCK);
-#c 	//struct timeval tv = {0};
-#c 	//tv.tv_usec = 1000;
-#c 	//FD_ZERO(&rd);
-#c 	//FD_SET(STDIN_FILENO, &rd);
-#c 	//x = select(1, &rd, NULL, NULL, &tv);
-#c	x = getchar();
-#c 	//ioctl(STDIN_FILENO, FIONREAD, ((int*)&x)); // crash on linux 64bit
-#c 	if (x > 0) {
-#c 		x = x;
-#c 	} else {
-#c 		x = 0;
-#c 	}
-#c 	//printf("KKEY %d\n",(int) x);
-#c #else
-#c 	x = 0;
-#c 	if (_kbhit()) {
-#c 		x = _getch();
-#c 	}
-#c #endif
-#py 	global keybuf
-#py 	global keyindex
-#py 	global ts
-#py 	global tk
-#py 	x = 0
-#py 	if (len(keybuf) > keyindex):
-#py 		x = ord(keybuf[keyindex])
-#py 		keyindex = keyindex + 1
-#py 		return x
-#py 	if (tk != None):
-#py 		tk.update()
-#py 	tty.setcbreak(sys.stdin.fileno())
-#py 	n = select.select([sys.stdin],[],[],.01)[0]
-#py 	if (n):
-#py 		keybuf = sys.stdin.buffer.peek(1)
-#py 		keybuf = (sys.stdin.read(len(keybuf)))
-#py 		x = ord(keybuf[0])
-#py 		keyindex = 1
-#py 	termios.tcsetattr(sys.stdin.fileno(), termios.TCSADRAIN, ts)
+/*#c 
+#ifndef _WIN32
+ 	//fd_set rd;
+ 	int flags;
+ 	flags = fcntl(STDIN_FILENO, F_GETFL, 0);
+ 	fcntl(STDIN_FILENO, F_SETFL, flags | O_NONBLOCK);
+ 	//struct timeval tv = {0};
+ 	//tv.tv_usec = 1000;
+ 	//FD_ZERO(&rd);
+ 	//FD_SET(STDIN_FILENO, &rd);
+ 	//x = select(1, &rd, NULL, NULL, &tv);
+	x = getchar();
+ 	//ioctl(STDIN_FILENO, FIONREAD, ((int*)&x)); // crash on linux 64bit
+ 	if (x > 0) {
+ 		x = x;
+ 	} else {
+ 		x = 0;
+ 	}
+ 	//printf("KKEY %d\n",(int) x);
+#else
+ 	x = 0;
+ 	if (_kbhit()) {
+ 		x = _getch();
+ 	}
+#endif
+#*/
+
+//#py 	global keybuf
+//#py 	global keyindex
+//#py 	global ts
+//#py 	global tk
+//#py 	x = 0
+//#py 	if (len(keybuf) > keyindex):
+//#py 		x = ord(keybuf[keyindex])
+//#py 		keyindex = keyindex + 1
+//#py 		return x
+//#py 	if (tk != None):
+//#py 		tk.update()
+//#py 	tty.setcbreak(sys.stdin.fileno())
+//#py 	n = select.select([sys.stdin],[],[],.01)[0]
+//#py 	if (n):
+//#py 		keybuf = sys.stdin.buffer.peek(1)
+//#py 		keybuf = (sys.stdin.read(len(keybuf)))
+//#py 		x = ord(keybuf[0])
+//#py 		keyindex = 1
+//#py 	termios.tcsetattr(sys.stdin.fileno(), termios.TCSADRAIN, ts)
 
 		return x;
 	}

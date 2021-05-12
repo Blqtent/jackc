@@ -418,16 +418,12 @@ class JackTokenizer {
 			{
 				do error(line, "White space");
 				let line = line;
-			} else { if (c = C.ASM()) {
-				let token = token.appendChar(c);
-				let in_asm = true;
-				do token.setCharAt(0, 0);
 			} else {
 				let token = token.appendChar(c);
 				do error(line, token);
 				do next();
 				return;
-			}}}}}}}}}}}}
+			}}}}}}}}}}}
 				  	
 			do next();				
 		}

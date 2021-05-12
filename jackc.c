@@ -3148,16 +3148,10 @@ var JackTokenizer__advance(var __this) {
 													JackTokenizer__error(__this, __peek(line__), Memory__getString(JackTokenizer___str46));
 													__poke(line__, __peek(line__));
 												} else {
-													if (((__peek(c__))==(C__ASM()))) {
-														__poke(token__, String__appendChar(__peek(token__), __peek(c__)));
-														in_asm = -1;
-														String__setCharAt(__peek(token__), 0, 0);
-													} else {
-														__poke(token__, String__appendChar(__peek(token__), __peek(c__)));
-														JackTokenizer__error(__this, __peek(line__), __peek(token__));
-														JackTokenizer__next(__this);
-														return 0;
-													}
+													__poke(token__, String__appendChar(__peek(token__), __peek(c__)));
+													JackTokenizer__error(__this, __peek(line__), __peek(token__));
+													JackTokenizer__next(__this);
+													return 0;
 												}
 											}
 										}
@@ -6238,9 +6232,10 @@ var File__list(var __this) {
 	n = Bytes__getStringNativePointer(str);
 	b = Buffer__new(10, 0);
 	i = 0;
+ // C code
  	i = i + 1;
- #ifdef _WIN32
- 	l = wcslen((wchar_t*)n);
+#ifdef _WIN32
+	l = wcslen((wchar_t*)n);
 	if (((wchar_t*)n)[l - 1] != L'*') {
 		Bytes__appendNativeChar(str, L'*');
  		n = Bytes__getStringNativePointer(str);
@@ -6273,7 +6268,7 @@ var File__list(var __this) {
 		} while(FindNextFileW(File__hFind, &File__FindFileData));
  		FindClose(File__hFind);
 	}
- #else
+#else
  	//n = n * sizeof(var);
  	//printf("OPNE %s\n", n);
  	if((File__dir = opendir((char*)n)) != 0){
@@ -6295,7 +6290,8 @@ var File__list(var __this) {
      		}
      		closedir(File__dir);
  	}
- #endif
+#endif
+
 	Bytes__dispose(str);
 	String__dispose(na);
 	return b;
@@ -11431,9 +11427,11 @@ var Sys___in_error = 0;
 var Sys__init() {
 	Sys___in_error = 0;
 	Memory__init();
- #ifndef JACK_HACK
+ 
+#ifndef JACK_HACK
  	Sys2__init();
- #endif
+#endif
+
 	Math__init();
 	Output__init();
 	Screen__init();
@@ -11463,19 +11461,23 @@ var Sys__error(var errorCode) {
 	Output__printInt(errorCode);
 	Output__printString(Memory__getString(Sys___str1));
 	Output__println();
+
  	errorCode = 0;
  	errorCode = 1 / (errorCode);
  	exit(errorCode);
+
 	Sys___in_error = 0;
 	return 0;
 }
 var Sys__wait(var duration) {
 	Screen__processEvents();
- #ifdef _WIN32
+ 
+#ifdef _WIN32
  	Sleep(duration);
- #else
+#else
  	usleep(duration * 1000);
- #endif
+#endif
+
 	return 0;
 }
 #endif
@@ -11896,7 +11898,6 @@ var String__appendChar(var __this, var c) {
 	if (((l)<((max-1)))) {
 		__poke(__peek(str__)+l, c);
 		__poke(__peek(str__)+l+1, 0);
- //printf("%d %ld OOKK %d %d<\n", c, __this, max, l);
 		return __this;
 	}
 
@@ -11964,11 +11965,13 @@ var String__setInt(var __this, var j) {
 	}
 
 	n = 10000;
+
  	if (sizeof(var) == 8) {
  		n = n * n * n * n * 100;
  	} else if (sizeof(var) == 4) {
  		n = n * n * 10; 
  	} 
+
 	while (((n)>(0))) {
 		k = j/n;
 		if (((k)>(0))) {
@@ -11997,26 +12000,30 @@ var String__appendFromNative(var __this, var native) {
 	s = __this;
 	n = native;
 	i = 0;
- #ifdef JACK_HACK 
+ 
+#ifdef JACK_HACK 
  	n = 0;
  	l = n;
- #else
- #ifdef _WIN32
+#else
+#ifdef _WIN32
  	l = (var)wcslen((wchar_t*)n);
- #else
- 	l = strlen((char*)n);
- #endif 
- #endif 
+#else
+	l = strlen((char*)n);
+#endif 
+#endif 
+
 	while (((i)<(l))) {
- #ifdef JACK_HACK 
+ 
+#ifdef JACK_HACK 
  	c = 0;
- #else
- #ifdef _WIN32
+#else
+#ifdef _WIN32
  		c = (var)((wchar_t*)n)[i];// FIXME UTF16
- #else
+#else
  		c = (var)(((char*)n)[i]) & 255; // FIXME UTF8
- #endif 
- #endif 
+#endif 
+#endif 
+
 		s = String__appendChar(s, c);
 		i = i+1;
 	}
@@ -12128,7 +12135,6 @@ var Memory__deInit() {
 	return 0;
 }
 var Memory__peek(var addr) {
- 	//return ((var*)((addr)*sizeof(var)))[0];
 	if (((addr)<(0))) {
 		Sys__error(27);
 	}
@@ -12148,8 +12154,6 @@ var Memory__peek(var addr) {
 	return __peek(Memory___mem+addr);
 }
 var Memory__poke(var addr, var value) {
- 	//((var*)((addr)*sizeof(var)))[0] = value;
-   	//return 0;
 	if (((addr)<(0))) {
 		Sys__error(29);
 	}
@@ -12162,7 +12166,6 @@ var Memory__poke(var addr, var value) {
 		Screen__refresh();
 	}
 
- 	//printf("poke %d, %d\n", (int)addr, (int)value);
  	return Memory__memory[addr] = value;
 	__poke(Memory___mem+addr, value);
 	return 0;
@@ -12230,7 +12233,6 @@ var Memory__alloc(var size) {
  #ifndef JACK_HACK
  	p = (var) malloc(sizeof(var)* (size+1));
  	((var*)p)[0] = -(size+1);
- //	return ((var)(((var*)p+1))) / 1;
  	return ((var)(((var*)p+1))) / sizeof(var);
  #endif
 	tries = 0;
@@ -12259,7 +12261,6 @@ var Memory__alloc(var size) {
 					__poke(p+size+1, (k-size)-1);
 				}
 				Memory___freep = p;
- 	//printf("alloc [%d] %d\n", (int)p, (int) size);
 				return p+1;
 			}
 
@@ -12317,7 +12318,6 @@ var Memory__log(var msg, var p, var q) {
 var Memory__deAlloc(var p) {
 	var pi = 0;
  #ifndef JACK_HACK
- 	//free((void*)(((var)(((var*)p)-1)) * 1));
  	free(((var*)(p* sizeof(var)))-1);
  	return 0;
  #endif
@@ -12363,7 +12363,8 @@ var Keyboard__exits(var a, var b) {
 	return 0;
 }
 var Keyboard__init() {
- #ifndef _WIN32
+ 
+#ifndef _WIN32
  	struct sigaction act;
  	memset(&act, 0, sizeof(act));
  	sigemptyset(&act.sa_mask);
@@ -12375,7 +12376,8 @@ var Keyboard__init() {
  	sigaction(SIGTSTP, &act, NULL); 
  	Keyboard__term.c_lflag &= ~(ICANON);
  	tcsetattr(0, TCSANOW, &Keyboard__term);
- #endif
+#endif
+
 	return 0;
 }
 var Keyboard__deInit() {
@@ -12491,7 +12493,8 @@ var Keyboard__getKey() {
 }
 var Keyboard__getChar() {
 	var x = 0;
- #ifndef _WIN32
+ 
+#ifndef _WIN32
  	//fd_set rd;
  	int flags;
  	flags = fcntl(STDIN_FILENO, F_GETFL, 0);
@@ -12509,12 +12512,13 @@ var Keyboard__getChar() {
  		x = 0;
  	}
  	//printf("KKEY %d\n",(int) x);
- #else
+#else
  	x = 0;
  	if (_kbhit()) {
  		x = _getch();
  	}
- #endif
+#endif
+
 	return x;
 }
 var Keyboard__readChar() {

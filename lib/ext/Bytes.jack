@@ -30,7 +30,7 @@ class Bytes {
 			let i = i + 1;
 		}
 		let s = 0;
-#py 	s = "";
+//#py 	s = "";
 		let string = s;
 		return this;
 	}
@@ -38,7 +38,7 @@ class Bytes {
 	method void dispose() {
 		var Array s;
 		let s = 0;
-#py 	s = None;
+//#py 	s = None;
 		let string = s;
 		do buf.dispose();
 		do Memory.deAlloc(this);
@@ -200,8 +200,8 @@ class Bytes {
 		var Array b, c;
 		let b = buf;
 		let c = string;
-#c 	b = b * sizeof(var) + c - c;
-#py 	b = c
+//#c 	b = b * sizeof(var) + c - c;
+//#py 	b = c
 		return b;
 	}
 
@@ -213,7 +213,7 @@ class Bytes {
 		let b = this;
 		let pos = 0;
 		let n = string;
-#py 	n = ""
+//#py 	n = ""
 		let l = name.length();
 		if (l < 0) {
 			return;
@@ -222,7 +222,7 @@ class Bytes {
 		while (i < l) {
 			let c = name.charAt(i);
 			do b.appendNativeChar(c);
-#py 		n = n + chr(c) 
+//#py 		n = n + chr(c) 
 			let i = i + 1;
 		}
 		let string = n;

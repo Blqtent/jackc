@@ -42,9 +42,9 @@ class Output {
 		do Output.printChar(32);
 		let x = xx;
 		let y = yy;
-#c 	printf("\033[%ld;%ldf ", (long)yy + 1, (long)xx + 1);
-#c 	fflush(stdout);
-#py 	sys.stdout.write("\033[%d;%dH" % (col, row))
+//#c 	printf("\033[%ld;%ldf ", (long)yy + 1, (long)xx + 1);
+//#c 	fflush(stdout);
+//#py 	sys.stdout.write("\033[%d;%dH" % (col, row))
 		return;
 	}
 
@@ -67,8 +67,8 @@ class Output {
 			let y = 22;
 		}
 		let x = 0;
-#c 	putc('\n', stdout);
-#py 	sys.stdout.write("\n")
+//#c 	putc('\n', stdout);
+//#py 	sys.stdout.write("\n")
 		return;
 	}
 	
@@ -121,9 +121,9 @@ class Output {
 			let j = j + 1;
 		}
 			
-#c 	printf("%c", (char)c);
-#c 	fflush(stdout);
-#py 	sys.stdout.write(chr(c))
+//#c 	printf("%c", (char)c);
+//#c 	fflush(stdout);
+//#py 	sys.stdout.write(chr(c))
 		let x = x + 1;
 		if (x > 63) {
 			let x = 0;
