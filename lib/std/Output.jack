@@ -55,7 +55,6 @@ class Output {
 		let l = s.length();
 		while (i < l) {
 			let c = s.charAt(i);
-#c 	//printf(" '%c' ",c);
 			do Output.printChar(c);
 			let i = i + 1;
 		}

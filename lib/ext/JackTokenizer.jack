@@ -14,8 +14,11 @@ class JackTokenizer {
 	field String new_file;
 	field char symbol_;
 	field boolean gen_xml;
+	field boolean inasm;
+	field boolean inasmmulti;
+	field boolean hack;
 
-	constructor JackTokeniser new(Xml destination) {
+	constructor JackTokeniser new(Xml destination, boolean ishack) {
 		let src = null;
 		let x = destination;
 		let token = String.new(256);
@@ -29,7 +32,10 @@ class JackTokenizer {
 		let symbol_ = 0;
 		let int_val = 0;
 		let gen_xml = false;
+		let inasm = false;
+		let inasmmulti = false;
 		let tbl = getSymbolHash();
+		let hack = ishack;
 		return this;
 	}
 
@@ -119,6 +125,8 @@ class JackTokenizer {
 
 		let in_comment = false;
 		let ignore_line = false;
+		let inasm = false;
+		let inasmmulti = false;
 		let start = line;
 		while ((c > 0) & (c < 1114112)) { // U+0001 to U+00110000
 			if (ignore_line) {
@@ -135,10 +143,26 @@ class JackTokenizer {
 			} else {
 				if (c = 47) { // /
 					if (ahead = 42) { // *
-						let start = line;
-						let in_comment = true;
-					} else { if (ahead = 47) {
-						let ignore_line = true;
+						do next();
+						if (ahead = 35) { // #
+							let inasmmulti = true;
+							do next();
+							do next();
+							return true;
+						} else { 
+							let start = line;
+							let in_comment = true;
+						}
+					} else { if (ahead = 47) { //
+						do next();
+						if (ahead = 35) { // #
+							let inasm = true;
+							do next();
+							do next();
+							return true;
+						} else {
+							let ignore_line = true;
+						}
 					} else {
 						return true;
 					}}
@@ -201,15 +225,17 @@ class JackTokenizer {
 		var boolean in_string;
 		var boolean in_int;
 		var boolean in_asm;
+		var boolean in_asm_multi;
 		var boolean in_escape;
 		let l = 0;
 		let key_or_id = false;
 		let in_string = false;
 		let in_int = false;
-		let in_asm = false;
+		let in_asm = inasm;
+		let in_asm_multi = inasmmulti;
 		let in_escape = false;
 		do token.setCharAt(0, 0);
-		let start = line;			
+		let start = line;
 		while ((c > 0) & (c < 1114112)) { // U+0001 to U+00110000
 	
 			if (in_string & (c = 34) & (~in_escape)) {
@@ -245,17 +271,16 @@ class JackTokenizer {
 					if (c = 34) {
 						let c = 34;
 					}
-					if (c = 110) {
-						let c = 10;
-					}
 				} else {
 					if (c = 10) {
 						do error(line, 
 							"newline in string");
 						return;
 					} else { if (c = 92) {
-						let in_escape = true;
-						let c = 0;
+						if (hack) {
+							let in_escape = true;
+							let c = 0;
+						}
 					}}
 				}
 				if (c) {
@@ -274,7 +299,29 @@ class JackTokenizer {
 						do x.closeCurrent();
 					}
 					do next();
+					let inasm = false;
 					return;
+				}
+			} else { if (in_asm_multi) {
+				if ((c = 35) & (ahead = 42)) { // #*
+					do next();
+					if (ahead = 47) { // /
+						let token_type = C.ASM();
+						let token = 
+							token.appendChar(10);
+						let l = l + 1;
+						do next();
+						do next();
+						let inasmmulti = false;
+						return;
+					}
+					let token = token.appendChar(35);
+					let l = l + 1;
+					let token = token.appendChar(42);
+					let l = l + 1;
+				} else {
+					let token = token.appendChar(c);
+					let l = l + 1;
 				}
 			} else { if (c = 34) {
 				let in_string = true;	
@@ -380,9 +427,12 @@ class JackTokenizer {
 				do error(line, token);
 				do next();
 				return;
-			}}}}}}}}}}}
+			}}}}}}}}}}}}
 				  	
 			do next();				
+		}
+		if (in_asm | in_asm_multi) {
+			do error(start, "Assembly text toward end of file.");
 		}	
 		if (in_string) {
 			do error(start, "Comment toward end of file.");

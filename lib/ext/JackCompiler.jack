@@ -9,7 +9,7 @@ class JackCompiler {
 	constructor JackCompiler new(boolean hack_mode) {
 		let src = null;
 		let x = Xml.new();
-		let t = JackTokenizer.new(x);
+		let t = JackTokenizer.new(x, hack_mode);
 		let comp = JackParser.new(t);
 		let hack = hack_mode;
 		return this;

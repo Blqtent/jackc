@@ -38,7 +38,7 @@ var Buffer__getSize(var __this);
 
 #ifndef JACK_JackTokenizer_H
 #define JACK_JackTokenizer_H
-var JackTokenizer__new(var destination);
+var JackTokenizer__new(var destination, var ishack);
 var JackTokenizer__dispose(var __this);
 var JackTokenizer__init(var __this, var source, var generate_xml);
 var JackTokenizer__getSymbolHash(var __this);
@@ -2756,11 +2756,12 @@ var JackTokenizer___str43[] = {108,105,110,101,0};
 var JackTokenizer___str44[] = {102,105,108,101,0};
 var JackTokenizer___str45[] = {110,101,119,108,105,110,101,32,105,110,32,115,116,114,105,110,103,0};
 var JackTokenizer___str46[] = {87,104,105,116,101,32,115,112,97,99,101,0};
-var JackTokenizer___str47[] = {67,111,109,109,101,110,116,32,116,111,119,97,114,100,32,101,110,100,32,111,102,32,102,105,108,101,46,0};
-var JackTokenizer___str48[] = {82,101,97,99,104,101,100,32,101,110,100,32,111,102,32,102,105,108,101,32,116,111,107,101,110,46,0};
-var JackTokenizer___str49[] = {76,101,120,101,114,32,101,114,114,111,114,44,32,105,110,32,0};
-var JackTokenizer___str50[] = {32,117,110,101,120,112,101,99,116,101,100,32,39,0};
-var JackTokenizer___str51[] = {39,32,97,116,32,108,105,110,101,32,0};
+var JackTokenizer___str47[] = {65,115,115,101,109,98,108,121,32,116,101,120,116,32,116,111,119,97,114,100,32,101,110,100,32,111,102,32,102,105,108,101,46,0};
+var JackTokenizer___str48[] = {67,111,109,109,101,110,116,32,116,111,119,97,114,100,32,101,110,100,32,111,102,32,102,105,108,101,46,0};
+var JackTokenizer___str49[] = {82,101,97,99,104,101,100,32,101,110,100,32,111,102,32,102,105,108,101,32,116,111,107,101,110,46,0};
+var JackTokenizer___str50[] = {76,101,120,101,114,32,101,114,114,111,114,44,32,105,110,32,0};
+var JackTokenizer___str51[] = {32,117,110,101,120,112,101,99,116,101,100,32,39,0};
+var JackTokenizer___str52[] = {39,32,97,116,32,108,105,110,101,32,0};
 #define src__ (__this+0)
 #define x__ (__this+1)
 #define tbl__ (__this+2)
@@ -2775,9 +2776,12 @@ var JackTokenizer___str51[] = {39,32,97,116,32,108,105,110,101,32,0};
 #define new_file__ (__this+11)
 #define symbol___ (__this+12)
 #define gen_xml__ (__this+13)
-var JackTokenizer__new(var destination) {
+#define inasm__ (__this+14)
+#define inasmmulti__ (__this+15)
+#define hack__ (__this+16)
+var JackTokenizer__new(var destination, var ishack) {
 	var __this;
-	__this = Memory__alloc(14);
+	__this = Memory__alloc(17);
 	__poke(src__, 0);
 	__poke(x__, destination);
 	__poke(token__, String__new(256));
@@ -2791,7 +2795,10 @@ var JackTokenizer__new(var destination) {
 	__poke(symbol___, 0);
 	__poke(int_val__, 0);
 	__poke(gen_xml__, 0);
+	__poke(inasm__, 0);
+	__poke(inasmmulti__, 0);
 	__poke(tbl__, JackTokenizer__getSymbolHash(__this));
+	__poke(hack__, ishack);
 	return __this;
 }
 var JackTokenizer__dispose(var __this) {
@@ -2875,6 +2882,8 @@ var JackTokenizer__hasMoreTokens(var __this) {
 
 	in_comment = 0;
 	ignore_line = 0;
+	__poke(inasm__, 0);
+	__poke(inasmmulti__, 0);
 	start = __peek(line__);
 	while ((((__peek(c__))>(0)))&&(((__peek(c__))<(1114112)))) {
 		if (ignore_line) {
@@ -2895,11 +2904,27 @@ var JackTokenizer__hasMoreTokens(var __this) {
 			} else {
 				if (((__peek(c__))==(47))) {
 					if (((__peek(ahead__))==(42))) {
-						start = __peek(line__);
-						in_comment = -1;
+						JackTokenizer__next(__this);
+						if (((__peek(ahead__))==(35))) {
+							__poke(inasmmulti__, -1);
+							JackTokenizer__next(__this);
+							JackTokenizer__next(__this);
+							return -1;
+						} else {
+							start = __peek(line__);
+							in_comment = -1;
+						}
 					} else {
 						if (((__peek(ahead__))==(47))) {
-							ignore_line = -1;
+							JackTokenizer__next(__this);
+							if (((__peek(ahead__))==(35))) {
+								__poke(inasm__, -1);
+								JackTokenizer__next(__this);
+								JackTokenizer__next(__this);
+								return -1;
+							} else {
+								ignore_line = -1;
+							}
 						} else {
 							return -1;
 						}
@@ -2962,12 +2987,14 @@ var JackTokenizer__advance(var __this) {
 	var in_string = 0;
 	var in_int = 0;
 	var in_asm = 0;
+	var in_asm_multi = 0;
 	var in_escape = 0;
 	l = 0;
 	key_or_id = 0;
 	in_string = 0;
 	in_int = 0;
-	in_asm = 0;
+	in_asm = __peek(inasm__);
+	in_asm_multi = __peek(inasmmulti__);
 	in_escape = 0;
 	String__setCharAt(__peek(token__), 0, 0);
 	start = __peek(line__);
@@ -3011,18 +3038,17 @@ var JackTokenizer__advance(var __this) {
 							__poke(c__, 34);
 						}
 
-						if (((__peek(c__))==(110))) {
-							__poke(c__, 10);
-						}
-
 					} else {
 						if (((__peek(c__))==(10))) {
 							JackTokenizer__error(__this, __peek(line__), Memory__getString(JackTokenizer___str45));
 							return 0;
 						} else {
 							if (((__peek(c__))==(92))) {
-								in_escape = -1;
-								__poke(c__, 0);
+								if (__peek(hack__)) {
+									in_escape = -1;
+									__poke(c__, 0);
+								}
+
 							}
 
 						}
@@ -3046,68 +3072,92 @@ var JackTokenizer__advance(var __this) {
 							}
 
 							JackTokenizer__next(__this);
+							__poke(inasm__, 0);
 							return 0;
 						}
 
 					} else {
-						if (((__peek(c__))==(34))) {
-							in_string = -1;
-						} else {
-							if (((((__peek(c__))>(64)))&&(((__peek(c__))<(91))))||((((__peek(c__))>(96)))&&(((__peek(c__))<(123))))||(((__peek(c__))==(95)))||((((__peek(c__))>(47)))&&(((__peek(c__))<(58)))&&(((l)>(0))))) {
-								key_or_id = -1;
-								__poke(token__, String__appendChar(__peek(token__), __peek(c__)));
+						if (in_asm_multi) {
+							if ((((__peek(c__))==(35)))&&(((__peek(ahead__))==(42)))) {
+								JackTokenizer__next(__this);
+								if (((__peek(ahead__))==(47))) {
+									__poke(token_type__, C__ASM());
+									__poke(token__, String__appendChar(__peek(token__), 10));
+									l = l+1;
+									JackTokenizer__next(__this);
+									JackTokenizer__next(__this);
+									__poke(inasmmulti__, 0);
+									return 0;
+								}
+
+								__poke(token__, String__appendChar(__peek(token__), 35));
+								l = l+1;
+								__poke(token__, String__appendChar(__peek(token__), 42));
 								l = l+1;
 							} else {
-								if (key_or_id) {
-									k = JackTokenizer__getTokenConst(__this, __peek(token__));
-									if ((((k)==(C__CLASS())))||(((k)==(C__METHOD())))||(((k)==(C__FUNCTION())))||(((k)==(C__CONSTRUCTOR())))||(((k)==(C__CALLBACK())))||(((k)==(C__INT())))||(((k)==(C__BOOLEAN())))||(((k)==(C__CHAR())))||(((k)==(C__VOID())))||(((k)==(C__VAR())))||(((k)==(C__STATIC())))||(((k)==(C__FIELD())))||(((k)==(C__LET())))||(((k)==(C__DO())))||(((k)==(C__IF())))||(((k)==(C__ELSE())))||(((k)==(C__WHILE())))||(((k)==(C__RETURN())))||(((k)==(C__TRUE())))||(((k)==(C__FALSE())))||(((k)==(C__NULL())))||(((k)==(C__THIS())))) {
-										__poke(token_type__, C__KEYWORD());
-										__poke(key_word__, k);
-									} else {
-										__poke(token_type__, C__IDENTIFIER());
-									}
-									if (__peek(gen_xml__)) {
-										Xml__addElement(__peek(x__), __peek(token_type__));
-										Xml__addContent(__peek(x__), __peek(token__));
-										JackTokenizer__addLine(__this);
-										Xml__closeCurrent(__peek(x__));
-									}
-
-									return 0;
+								__poke(token__, String__appendChar(__peek(token__), __peek(c__)));
+								l = l+1;
+							}
+						} else {
+							if (((__peek(c__))==(34))) {
+								in_string = -1;
+							} else {
+								if (((((__peek(c__))>(64)))&&(((__peek(c__))<(91))))||((((__peek(c__))>(96)))&&(((__peek(c__))<(123))))||(((__peek(c__))==(95)))||((((__peek(c__))>(47)))&&(((__peek(c__))<(58)))&&(((l)>(0))))) {
+									key_or_id = -1;
+									__poke(token__, String__appendChar(__peek(token__), __peek(c__)));
+									l = l+1;
 								} else {
-									if (((((__peek(c__))>(47)))&&(((__peek(c__))<(58))))) {
-										__poke(token__, String__appendChar(__peek(token__), __peek(c__)));
-										l = l+1;
-										in_int = -1;
-									} else {
-										__poke(token__, String__appendChar(__peek(token__), __peek(c__)));
-										__poke(c__, JackTokenizer__getTokenConst(__this, __peek(token__)));
-										if ((((__peek(c__))==(C__LEFT_CURLY_BRACKET())))||(((__peek(c__))==(C__RIGHT_CURLY_BRACKET())))||(((__peek(c__))==(C__LEFT_PARENTHESIS())))||(((__peek(c__))==(C__RIGHT_PARENTHESIS())))||(((__peek(c__))==(C__LEFT_SQUARE_BRACKET())))||(((__peek(c__))==(C__RIGHT_SQUARE_BRACKET())))||(((__peek(c__))==(C__DOT())))||(((__peek(c__))==(C__COMMA())))||(((__peek(c__))==(C__SEMICOLON())))||(((__peek(c__))==(C__PLUS())))||(((__peek(c__))==(C__MINUS())))||(((__peek(c__))==(C__MULTIPLY())))||(((__peek(c__))==(C__DIV())))||(((__peek(c__))==(C__AND())))||(((__peek(c__))==(C__OR())))||(((__peek(c__))==(C__GREATER())))||(((__peek(c__))==(C__LESS())))||(((__peek(c__))==(C__EQUAL())))||(((__peek(c__))==(C__TILDE())))) {
-											__poke(token_type__, C__SYMBOL());
-											__poke(symbol___, __peek(c__));
-											if (__peek(gen_xml__)) {
-												Xml__addElement(__peek(x__), __peek(token_type__));
-												Xml__addContent(__peek(x__), __peek(token__));
-												JackTokenizer__addLine(__this);
-												Xml__closeCurrent(__peek(x__));
-											}
-
-											JackTokenizer__next(__this);
-											return 0;
+									if (key_or_id) {
+										k = JackTokenizer__getTokenConst(__this, __peek(token__));
+										if ((((k)==(C__CLASS())))||(((k)==(C__METHOD())))||(((k)==(C__FUNCTION())))||(((k)==(C__CONSTRUCTOR())))||(((k)==(C__CALLBACK())))||(((k)==(C__INT())))||(((k)==(C__BOOLEAN())))||(((k)==(C__CHAR())))||(((k)==(C__VOID())))||(((k)==(C__VAR())))||(((k)==(C__STATIC())))||(((k)==(C__FIELD())))||(((k)==(C__LET())))||(((k)==(C__DO())))||(((k)==(C__IF())))||(((k)==(C__ELSE())))||(((k)==(C__WHILE())))||(((k)==(C__RETURN())))||(((k)==(C__TRUE())))||(((k)==(C__FALSE())))||(((k)==(C__NULL())))||(((k)==(C__THIS())))) {
+											__poke(token_type__, C__KEYWORD());
+											__poke(key_word__, k);
 										} else {
-											if ((((__peek(c__))==(9)))||(((__peek(c__))==(10)))||(((__peek(c__))==(13)))||(((__peek(c__))==(32)))) {
-												JackTokenizer__error(__this, __peek(line__), Memory__getString(JackTokenizer___str46));
-												__poke(line__, __peek(line__));
+											__poke(token_type__, C__IDENTIFIER());
+										}
+										if (__peek(gen_xml__)) {
+											Xml__addElement(__peek(x__), __peek(token_type__));
+											Xml__addContent(__peek(x__), __peek(token__));
+											JackTokenizer__addLine(__this);
+											Xml__closeCurrent(__peek(x__));
+										}
+
+										return 0;
+									} else {
+										if (((((__peek(c__))>(47)))&&(((__peek(c__))<(58))))) {
+											__poke(token__, String__appendChar(__peek(token__), __peek(c__)));
+											l = l+1;
+											in_int = -1;
+										} else {
+											__poke(token__, String__appendChar(__peek(token__), __peek(c__)));
+											__poke(c__, JackTokenizer__getTokenConst(__this, __peek(token__)));
+											if ((((__peek(c__))==(C__LEFT_CURLY_BRACKET())))||(((__peek(c__))==(C__RIGHT_CURLY_BRACKET())))||(((__peek(c__))==(C__LEFT_PARENTHESIS())))||(((__peek(c__))==(C__RIGHT_PARENTHESIS())))||(((__peek(c__))==(C__LEFT_SQUARE_BRACKET())))||(((__peek(c__))==(C__RIGHT_SQUARE_BRACKET())))||(((__peek(c__))==(C__DOT())))||(((__peek(c__))==(C__COMMA())))||(((__peek(c__))==(C__SEMICOLON())))||(((__peek(c__))==(C__PLUS())))||(((__peek(c__))==(C__MINUS())))||(((__peek(c__))==(C__MULTIPLY())))||(((__peek(c__))==(C__DIV())))||(((__peek(c__))==(C__AND())))||(((__peek(c__))==(C__OR())))||(((__peek(c__))==(C__GREATER())))||(((__peek(c__))==(C__LESS())))||(((__peek(c__))==(C__EQUAL())))||(((__peek(c__))==(C__TILDE())))) {
+												__poke(token_type__, C__SYMBOL());
+												__poke(symbol___, __peek(c__));
+												if (__peek(gen_xml__)) {
+													Xml__addElement(__peek(x__), __peek(token_type__));
+													Xml__addContent(__peek(x__), __peek(token__));
+													JackTokenizer__addLine(__this);
+													Xml__closeCurrent(__peek(x__));
+												}
+
+												JackTokenizer__next(__this);
+												return 0;
 											} else {
-												if (((__peek(c__))==(C__ASM()))) {
-													__poke(token__, String__appendChar(__peek(token__), __peek(c__)));
-													in_asm = -1;
-													String__setCharAt(__peek(token__), 0, 0);
+												if ((((__peek(c__))==(9)))||(((__peek(c__))==(10)))||(((__peek(c__))==(13)))||(((__peek(c__))==(32)))) {
+													JackTokenizer__error(__this, __peek(line__), Memory__getString(JackTokenizer___str46));
+													__poke(line__, __peek(line__));
 												} else {
-													__poke(token__, String__appendChar(__peek(token__), __peek(c__)));
-													JackTokenizer__error(__this, __peek(line__), __peek(token__));
-													JackTokenizer__next(__this);
-													return 0;
+													if (((__peek(c__))==(C__ASM()))) {
+														__poke(token__, String__appendChar(__peek(token__), __peek(c__)));
+														in_asm = -1;
+														String__setCharAt(__peek(token__), 0, 0);
+													} else {
+														__poke(token__, String__appendChar(__peek(token__), __peek(c__)));
+														JackTokenizer__error(__this, __peek(line__), __peek(token__));
+														JackTokenizer__next(__this);
+														return 0;
+													}
 												}
 											}
 										}
@@ -3121,22 +3171,26 @@ var JackTokenizer__advance(var __this) {
 		}
 		JackTokenizer__next(__this);
 	}
-	if (in_string) {
+	if (in_asm||in_asm_multi) {
 		JackTokenizer__error(__this, start, Memory__getString(JackTokenizer___str47));
 	}
 
-	if (in_int||key_or_id) {
+	if (in_string) {
 		JackTokenizer__error(__this, start, Memory__getString(JackTokenizer___str48));
+	}
+
+	if (in_int||key_or_id) {
+		JackTokenizer__error(__this, start, Memory__getString(JackTokenizer___str49));
 	}
 
 	return 0;
 }
 var JackTokenizer__error(var __this, var line_, var w) {
-	Output__printString(Memory__getString(JackTokenizer___str49));
-	Output__printString(File__getName(__peek(src__)));
 	Output__printString(Memory__getString(JackTokenizer___str50));
-	Output__printString(w);
+	Output__printString(File__getName(__peek(src__)));
 	Output__printString(Memory__getString(JackTokenizer___str51));
+	Output__printString(w);
+	Output__printString(Memory__getString(JackTokenizer___str52));
 	Output__printInt(line_+1);
 	Output__println();
 	__poke(c__, 0);
@@ -3180,6 +3234,9 @@ var JackTokenizer__stringVal(var __this) {
 #undef new_file__
 #undef symbol___
 #undef gen_xml__
+#undef inasm__
+#undef inasmmulti__
+#undef hack__
 #endif
 
 #ifdef JACK_IMPLEMENTATION
@@ -3722,7 +3779,7 @@ var JackCompiler__new(var hack_mode) {
 	__this = Memory__alloc(5);
 	__poke(src__, 0);
 	__poke(x__, Xml__new());
-	__poke(t__, JackTokenizer__new(__peek(x__)));
+	__poke(t__, JackTokenizer__new(__peek(x__), hack_mode));
 	__poke(comp__, JackParser__new(__peek(t__)));
 	__poke(hack__, hack_mode);
 	return __this;
@@ -8776,7 +8833,7 @@ var Const___str88[] = {88,0};
 var Const___str89[] = {89,0};
 var Const___str90[] = {90,0};
 var Const___str91[] = {91,0};
-var Const___str92[] = {92,0};
+var Const___str92[] = {92,92,0};
 var Const___str93[] = {93,0};
 var Const___str94[] = {94,0};
 var Const___str95[] = {95,0};
@@ -11261,7 +11318,6 @@ var Output__printString(var s) {
 	l = String__length(s);
 	while (((i)<(l))) {
 		c = String__charAt(s, i);
- 	//printf(" '%c' ",c);
 		Output__printChar(c);
 		i = i+1;
 	}
