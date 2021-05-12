@@ -4274,7 +4274,7 @@ var JackAstToC___str28[] = {48,125,59,0};
 var JackAstToC___str29[] = {9,0};
 var JackAstToC___str30[] = {99,0};
 var JackAstToC___str31[] = {118,97,114,32,0};
-var JackAstToC___str32[] = {59,0};
+var JackAstToC___str32[] = {32,61,32,48,59,0};
 var JackAstToC___str33[] = {35,117,110,100,101,102,32,0};
 var JackAstToC___str34[] = {35,100,101,102,105,110,101,32,0};
 var JackAstToC___str35[] = {32,40,95,95,116,104,105,115,43,0};
@@ -4393,7 +4393,7 @@ var JackAstToC___str147[] = {32,0};
 var JackAstToC___str148[] = {44,32,0};
 var JackAstToC___str149[] = {41,0};
 var JackAstToC___str150[] = {32,0};
-var JackAstToC___str151[] = {59,0};
+var JackAstToC___str151[] = {32,61,32,48,59,0};
 var JackAstToC___str152[] = {118,97,114,0};
 var JackAstToC___str153[] = {118,97,114,0};
 var JackAstToC___str154[] = {95,95,95,0};
@@ -11586,7 +11586,6 @@ var Output__printChar(var c) {
 	}
 
 	if (0!=(((((c)<(32))?-1:0))|((((c)>(126))?-1:0)))) {
- 	//printf("(%d)", c);
 		c = 32;
 	}
 
@@ -11722,6 +11721,7 @@ var Sys__wait(var duration) {
 #ifdef JACK_IMPLEMENTATION
 var Screen___color;
 var Screen__init() {
+	Screen___color = -1;
 	return 0;
 }
 var Screen__deInit() {
@@ -11734,7 +11734,6 @@ var Screen__clearScreen() {
 		Memory__poke(i, 0);
 		i = i+1;
 	}
-	Screen__setColor(-1);
  	puts("\033[2J");
 	return 0;
 }
@@ -11758,7 +11757,7 @@ var Screen__drawPixel(var x, var y) {
 	if (0!=(Screen___color)) {
 		b = b|p;
 	} else {
-		b = b&p;
+		b = b&~p;
 	}
 	Memory__poke(i, b);
 	return 0;
@@ -11768,38 +11767,87 @@ var Screen__drawLine(var x, var y, var x2, var y2) {
 	var b;
 	var dx;
 	var dy;
+	var ax;
+	var ay;
 	var adyMinusbdx;
 	dx = x2-x;
 	dy = y2-y;
-	if (0!=(((((dx)<(1))?-1:0)))) {
+	if (0!=((((dx)==(0))?-1:0))) {
+		if (0!=((((y)>(y2))?-1:0))) {
+			a = y2;
+			y2 = y;
+			y = a;
+		}
+
 		b = y;
+		y2 = y2+1;
+		Screen__drawPixel(x, b);
 		while (-1==((((b)<(y2))?-1:0))) {
-			Screen__drawPixel(x, b);
 			b = b+1;
+			Screen__drawPixel(x, b);
 		}
 		return 0;
 	}
 
-	if (0!=(((((dy)<(1))?-1:0)))) {
+	if (0!=((((dy)==(0))?-1:0))) {
+		if (0!=((((x)>(x2))?-1:0))) {
+			a = x2;
+			x2 = x;
+			x = a;
+		}
+
 		a = x;
+		x2 = x2+1;
+		Screen__drawPixel(a, y);
 		while (-1==((((a)<(x2))?-1:0))) {
-			Screen__drawPixel(a, y);
 			a = a+1;
+			Screen__drawPixel(a, y);
 		}
 		return 0;
 	}
 
+	ax = 0;
+	ay = 0;
+	if (0!=(((((dx)<(0))?-1:0))&((((dy)<(0))?-1:0)))) {
+		dx = -dx;
+		dy = -dy;
+		x = x2;
+		y = y2;
+	} else {
+		if (0!=(((((dx)>(0))?-1:0))&((((dy)<(0))?-1:0)))) {
+			dy = -dy;
+			y = y2;
+			ay = dy;
+		} else {
+			if (0!=(((((dx)<(0))?-1:0))&((((dy)>(0))?-1:0)))) {
+				dx = -dx;
+				x = x2;
+				y = y2;
+				ay = -dy;
+			}
+
+		}
+	}
 	a = 0;
 	b = 0;
 	adyMinusbdx = 0;
+	Screen__drawPixel(x, y);
 	while (-1==(((((dx)>(a))?-1:0))&((((dy)>(b))?-1:0)))) {
-		Screen__drawPixel(x+a, y+b);
-		if (0!=(adyMinusbdx)) {
+		if (0!=((((adyMinusbdx)<(0))?-1:0))) {
 			a = a+1;
 			adyMinusbdx = adyMinusbdx+dy;
 		} else {
 			b = b+1;
 			adyMinusbdx = adyMinusbdx-dx;
+		}
+		if (0!=(ay)) {
+			Screen__drawPixel(x+a, y-b);
+		} else {
+			if (0!=(ax)) {
+				Screen__drawPixel(x-a, y+b);
+			} else {
+				Screen__drawPixel(x+a, y+b);
+			}
 		}
 	}
 	return 0;
@@ -11807,27 +11855,56 @@ var Screen__drawLine(var x, var y, var x2, var y2) {
 var Screen__drawRectangle(var x, var y, var x2, var y2) {
 	var i;
 	i = y;
+	Screen__drawLine(x, i, x2, i);
 	while (-1==((((i)<(y2))?-1:0))) {
-		Screen__drawLine(x, i, x2, i);
 		i = i+1;
+		Screen__drawLine(x, i, x2, i);
 	}
 	return 0;
 }
 var Screen__drawCircle(var x, var y, var r) {
 	var dy;
 	var s;
+	var r2;
+	var x0;
+	var x1;
+	var y0;
 	dy = -r;
-	if (0!=((((x)>(512))?-1:0))) {
+	if (0!=(((((r)>(181))?-1:0))|((((r)<(0))?-1:0)))) {
 		return 0;
 	}
 
-	if (0!=((((y)>(256))?-1:0))) {
-		return 0;
-	}
-
+	r2 = r*r;
 	while (-1==((((r)>(dy))?-1:0))) {
-		s = Math__sqrt((r*r)-(dy*dy));
-		Screen__drawLine(x-s, y+dy, x+s, y+dy);
+		s = Math__sqrt(r2-(dy*dy));
+		x0 = x-s;
+		y0 = y+dy;
+		x1 = x+s;
+		if (0!=((((x0)<(0))?-1:0))) {
+			x0 = 0;
+		}
+
+		if (0!=((((x0)>(511))?-1:0))) {
+			x0 = 511;
+		}
+
+		if (0!=((((x1)<(0))?-1:0))) {
+			x1 = 0;
+		}
+
+		if (0!=((((x1)>(511))?-1:0))) {
+			x1 = 511;
+		}
+
+		if (0!=((((y0)<(0))?-1:0))) {
+			y0 = 0;
+		}
+
+		if (0!=((((y0)>(255))?-1:0))) {
+			y0 = 255;
+		}
+
+		Screen__drawLine(x0, y0, x1, y0);
 		dy = dy+1;
 	}
 	return 0;
@@ -11862,7 +11939,7 @@ var Math__multiply(var x, var y) {
 	j = 0;
 	b = 1;
 	while (-1==((((j)<(16))?-1:0))) {
-		if (0!=(x&b)) {
+		if (0!=(y&b)) {
 			sum = sum+shiftedX;
 		}
 
@@ -11906,20 +11983,25 @@ var Math__max(var x, var y) {
 var Math__sqrt(var x) {
 	var y;
 	var j;
-	var j2;
+	var y2j;
+	var n2;
+	var xp;
 	if (0!=((((x)<(1))?-1:0))) {
 		return 0;
 	}
 
+	xp = x+1;
 	y = 0;
-	j2 = 16384;
-	j = (15/2)-1;
+	n2 = 128;
+	j = 7;
 	while (-1==((((j)>(-1))?-1:0))) {
-		if (0!=((((x)>((y+j2)))?-1:0))) {
-			y = y+j2;
+		y2j = y+n2;
+		y2j = y2j*y2j;
+		if (0!=((((y2j)<(xp))?-1:0))) {
+			y = y+n2;
 		}
 
-		j2 = j2/2;
+		n2 = n2/2;
 		j = j-1;
 	}
 	return y;
@@ -12680,6 +12762,11 @@ var Keyboard__readChar() {
 		Sys__wait(50);
 		k = Keyboard__keyPressed();
 	}
+	Memory__poke(24576, 0);
+	while (-1==(Keyboard__keyPressed())) {
+		Sys__wait(50);
+	}
+	Memory__poke(24576, 0);
 	return k;
 }
 var Keyboard__readLine(var message) {
