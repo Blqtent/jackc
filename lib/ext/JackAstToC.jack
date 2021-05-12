@@ -223,7 +223,11 @@ class JackAstToC {
 		do dst.writeString("var ");
 		let c = c.getChild();
 		do coVarName(c, true);
-		do dst.writeString(" = 0;");
+		if (hack) {
+			do dst.writeString(" = 0;");
+		} else {
+			do dst.writeString(";");
+		}
 		do nl();
 		let nb_static = nb_static + 1;
 		return;
@@ -1487,7 +1491,11 @@ class JackAstToC {
 			if (n) {
 				do dst.writeString(" ");
 				do coVarName(n, true);
-				do dst.writeString(" = 0;");
+				if (hack) {
+					do dst.writeString(" = 0;");
+				} else {
+					do dst.writeString(";");
+				}
 				do nl();
 			}
 			let d = d.getNext();
