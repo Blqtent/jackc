@@ -43,37 +43,6 @@ class JackAstToC {
 		let nb_field = 0;
 		let nb_static = 0;
 		let has_callback = false;
-		do dst.writeString("#ifndef var");
-		do nl();
-		if (hack) {
-			do dst.writeString("#define JACK_HACK");
-			do nl();
-			do dst.writeString("#define var short");
-			do nl();
-			do dst.writeString("#define __poke Memory__poke");
-			do nl();
-			do dst.writeString("#define __peek Memory__peek");
-			do nl();
-		} else {
-			do dst.writeString("#ifdef _WIN64");
-			do nl();
-			do dst.writeString("#include <windows.h>");
-			do nl();
-			do dst.writeString("#define var __int64");
-			do nl();
-			do dst.writeString("#else");
-			do nl();
-			do dst.writeString("#define var long");
-			do nl();
-			do dst.writeString("#endif");
-			do nl();
-			do dst.writeString("#define __poke Memory__poke");
-			do nl();
-			do dst.writeString("#define __peek Memory__peek");
-			do nl();
-		}
-		do dst.writeString("#endif");
-		let hack = true;
 		do nl();
 		while (~(current = null)) {
 			let c = current.getChild();
@@ -278,21 +247,12 @@ class JackAstToC {
 		do dst.writeString("#define ");
 		let c = c.getChild();
 		do coVarName(c, true);
-		if (hack) {
-			do dst.writeString(" (__this+");
-			//do dst.writeString(" (var)(((var*)__this)+");
-		} else {
-			do dst.writeString(" ((var*)__this)[");
-		}
+		do dst.writeString(" (__this+");
 		let s = String.new(8);
 		let s = s.setInt(nb_field);
 		do dst.writeString(s);
 		do s.dispose();
-		if (hack) {
-			do dst.writeString(")");
-		} else {
-			do dst.writeString("]");
-		}
+		do dst.writeString(")");
 		do nl();
 	
 		let nb_field = nb_field + 1;
@@ -655,11 +615,9 @@ class JackAstToC {
 			return;
 		}
 		do spc();
-		if (hack) {
-			if (d.getChild() | isField(d)) { // indexed
-				do dst.writeString("__poke(");
-				let is_hack_field = true;
-			}
+		if (d.getChild() | isField(d)) { // indexed
+			do dst.writeString("__poke(");
+			let is_hack_field = true;
 		}
 		do coVarNameOrIndexed(d, true);
 		if (is_hack_field) {
@@ -681,44 +639,23 @@ class JackAstToC {
 
 	method void coVarNameOrIndexed(JackAst c, boolean isassign) {
 		var JackAst d;
-		var boolean dohack;
 		let d = c.getChild();
-		let dohack = hack;
 		if (d) {
-			if (dohack) {
-				if (isassign = false) {
-					do dst.writeString("__peek(");
-					do coVarName(c, false);
-					if (isField(c) & (0=c.getChild())) {
-						do dst.writeString("__");
-					}
-				} else {
-					do coVarName(c, false);
-				//	if (isField(c)) {
-				//		do dst.writeString("__");
-				//	}
+			if (isassign = false) {
+				do dst.writeString("__peek(");
+				do coVarName(c, false);
+				if (isField(c) & (0=c.getChild())) {
+					do dst.writeString("__");
 				}
 			} else {
-				do dst.writeString("((var*)");
 				do coVarName(c, false);
-				do dst.writeString(")");
 			}
 			if (d.getTag() = C.LEFT_SQUARE_BRACKET()) {
-				if (dohack = false) {
-					do dst.writeString("[");
-				} else {
-					do dst.writeString("+");
-				}
+				do dst.writeString("+");
 				let d = d.getChild();
-				//if (d.getTag() = C.EXPR()) {
-					do coExpr(d, false);
-				//}
-				if (dohack) {
-					if (isassign = false) {
-						do dst.writeString(")");
-					}
-				} else {
-					do dst.writeString("]");
+				do coExpr(d, false);
+				if (isassign = false) {
+					do dst.writeString(")");
 				}
 			} else {
 				do error("'[' expected", d);
@@ -1376,7 +1313,7 @@ class JackAstToC {
 			if (s) {
 				if (s.length() > 0) {
 					do dst.writeString(s);	
-					if (hack & isField(d)) {
+					if (isField(d)) {
 						let thi = String.new(20);
 						let thi = thi.appendString(
 							"__peek(");
@@ -1548,16 +1485,14 @@ class JackAstToC {
 				}
 				do dst.writeString(c.getData());
 			} else {
-				if ((hack = true) & (isassign = false)) {
+				if (isassign = false) {
 					do dst.writeString("__peek(");
 					do dst.writeString(c.getData());
 					do dst.writeString("__)");
 					
 				} else {
 					do dst.writeString(c.getData());
-					if (hack = true) {
-						do dst.writeString("__");
-					}
+					do dst.writeString("__");
 				}
 			}
 		}
