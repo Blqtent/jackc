@@ -33,7 +33,7 @@ class JackAstToC {
 		do nl();
 		do dst.writeString("#if 0");
 		do nl();
-		//do ast.process(dst, 0, parser);
+		//do ast.process(dst, 0, parser); // uncomment to dump AST
 		do nl();
 		do dst.writeString("#endif");
 		do nl();

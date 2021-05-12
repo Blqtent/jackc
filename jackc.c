@@ -2872,7 +2872,7 @@ var Screen__processEvents()
 #define dispCb__ (__this+3)
 var Buffer__new(var initial, var disposeCb) {
 	var __this;
-	var i;
+	var i = 0;
 	__this = Memory__alloc(4);
 	__poke(dispCb__, disposeCb);
 	__poke(buffer__, Array__new(initial));
@@ -2886,13 +2886,13 @@ var Buffer__new(var initial, var disposeCb) {
 	return __this;
 }
 var Buffer__newString(var initial) {
-	var cb;
+	var cb = 0;
 	cb = CallbackStringDispose__new();
 	return Buffer__new(initial, cb);
 }
 var Buffer__dispose(var __this) {
-	var s;
-	var i;
+	var s = 0;
+	var i = 0;
 	i = 0;
 	if (0!=(__peek(dispCb__))) {
 		while (-1==((((i)<(__peek(pos__)))?-1:0))) {
@@ -2914,14 +2914,14 @@ var Buffer__getAt(var __this, var p) {
 	return __peek(__peek(buffer__)+p);
 }
 var Buffer__setAt(var __this, var p, var data) {
-	var r;
+	var r = 0;
 	Buffer__checkSize(__this, p);
 	r = __peek(__peek(buffer__)+p);
 	__poke(__peek(buffer__)+p, data);
 	return r;
 }
 var Buffer__append(var __this, var data) {
-	var i;
+	var i = 0;
 	i = __peek(pos__);
 	Buffer__checkSize(__this, __peek(pos__));
 	__poke(__peek(buffer__)+__peek(pos__), data);
@@ -2929,14 +2929,14 @@ var Buffer__append(var __this, var data) {
 	return i;
 }
 var Buffer__insertSortedStr(var __this, var q) {
-	var i;
+	var i = 0;
 	i = Buffer__append(__this, q);
 	return i;
 }
 var Buffer__remove(var __this, var q) {
-	var s;
-	var i;
-	var j;
+	var s = 0;
+	var i = 0;
+	var j = 0;
 	i = 0;
 	j = 0;
 	while (-1==((((i)<(__peek(pos__)))?-1:0))) {
@@ -2957,8 +2957,8 @@ var Buffer__remove(var __this, var q) {
 	return q;
 }
 var Buffer__indexOfStr(var __this, var q) {
-	var s;
-	var i;
+	var s = 0;
+	var i = 0;
 	i = 0;
 	while (-1==((((i)<(__peek(pos__)))?-1:0))) {
 		s = __peek(__peek(buffer__)+i);
@@ -2971,9 +2971,9 @@ var Buffer__indexOfStr(var __this, var q) {
 	return -1;
 }
 var Buffer__checkSize(var __this, var idx) {
-	var b;
-	var i;
-	var ns;
+	var b = 0;
+	var i = 0;
+	var ns = 0;
 	if (0!=((((idx)>((__peek(size__)-1)))?-1:0))) {
 		ns = __peek(size__)+idx+32;
 		b = Array__new(ns);
@@ -3114,7 +3114,7 @@ var JackTokenizer__init(var __this, var source, var generate_xml) {
 	return 0;
 }
 var JackTokenizer__getSymbolHash(var __this) {
-	var h;
+	var h = 0;
 	h = Hash__new(256, 0);
 	Hash__add(h, Memory__getString(JackTokenizer___str0), C__CLASS());
 	Hash__add(h, Memory__getString(JackTokenizer___str1), C__METHOD());
@@ -3161,9 +3161,9 @@ var JackTokenizer__getSymbolHash(var __this) {
 	return h;
 }
 var JackTokenizer__hasMoreTokens(var __this) {
-	var in_comment;
-	var ignore_line;
-	var start;
+	var in_comment = 0;
+	var ignore_line = 0;
+	var start = 0;
 	if (0!=((((__peek(token_type__))==(-1))?-1:0))) {
 		__poke(c__, File__readUtf8(__peek(src__)));
 		__poke(ahead__, File__readUtf8(__peek(src__)));
@@ -3229,7 +3229,7 @@ var JackTokenizer__next(var __this) {
 	return 0;
 }
 var JackTokenizer__addLine(var __this) {
-	var u;
+	var u = 0;
 	if (0!=((((__peek(line__))>(__peek(last_line__)))?-1:0))) {
 		u = String__new(8);
 		u = String__setInt(u, __peek(line__)+1);
@@ -3252,14 +3252,14 @@ var JackTokenizer__getTokenConst(var __this, var s) {
 	return Hash__get(__peek(tbl__), s);
 }
 var JackTokenizer__advance(var __this) {
-	var start;
-	var l;
-	var k;
-	var key_or_id;
-	var in_string;
-	var in_int;
-	var in_asm;
-	var in_escape;
+	var start = 0;
+	var l = 0;
+	var k = 0;
+	var key_or_id = 0;
+	var in_string = 0;
+	var in_int = 0;
+	var in_asm = 0;
+	var in_escape = 0;
 	l = 0;
 	key_or_id = 0;
 	in_string = 0;
@@ -3488,19 +3488,19 @@ var Http__new(var url) {
 #endif
 
 #ifdef JACK_IMPLEMENTATION
-var Bytes___addressmask;
-var Bytes___bytesize;
-var Bytes___isbig;
-var Bytes___iswin;
-var Bytes___log2;
+var Bytes___addressmask = 0;
+var Bytes___bytesize = 0;
+var Bytes___isbig = 0;
+var Bytes___iswin = 0;
+var Bytes___log2 = 0;
 #define buf__ (__this+0)
 #define size__ (__this+1)
 #define pos__ (__this+2)
 #define string__ (__this+3)
 var Bytes__new(var size_in_byte) {
 	var __this;
-	var i;
-	var s;
+	var i = 0;
+	var s = 0;
 	__this = Memory__alloc(4);
 	Bytes___isbig = Math__isBigEndian();
 	Bytes___iswin = Math__isWindows();
@@ -3524,7 +3524,7 @@ var Bytes__new(var size_in_byte) {
 	return __this;
 }
 var Bytes__dispose(var __this) {
-	var s;
+	var s = 0;
 	s = 0;
 	__poke(string__, s);
 	Array__dispose(__peek(buf__));
@@ -3532,11 +3532,11 @@ var Bytes__dispose(var __this) {
 	return 0;
 }
 var Bytes__alloc(var __this, var s) {
-	var nsize;
-	var i;
-	var l;
-	var nbuf;
-	var b;
+	var nsize = 0;
+	var i = 0;
+	var l = 0;
+	var nbuf = 0;
+	var b = 0;
 	nsize = Math__shiftRight(s+Bytes___bytesize, Bytes___log2)+1;
 	nbuf = Array__new(nsize);
 	l = __peek(size__);
@@ -3567,9 +3567,9 @@ var Bytes__length(var __this) {
 	return __peek(pos__);
 }
 var Bytes__getByte(var __this, var address) {
-	var s;
-	var a;
-	var v;
+	var s = 0;
+	var a = 0;
+	var v = 0;
 	s = Math__shiftLeft(address&Bytes___addressmask, 3);
 	a = Math__shiftRight(address, Bytes___log2);
 	v = __peek(__peek(buf__)+a);
@@ -3577,10 +3577,10 @@ var Bytes__getByte(var __this, var address) {
 	return v;
 }
 var Bytes__setByte(var __this, var address, var b) {
-	var s;
-	var a;
-	var v;
-	var m;
+	var s = 0;
+	var a = 0;
+	var v = 0;
+	var m = 0;
 	s = Math__shiftLeft(address&Bytes___addressmask, 3);
 	a = Math__shiftRight(address, Bytes___log2);
 	m = Math__shiftLeft(255, s);
@@ -3678,20 +3678,20 @@ var Bytes__appendNativeChar(var __this, var codepoint) {
 	return 0;
 }
 var Bytes__getStringNativePointer(var __this) {
-	var b;
-	var c;
+	var b = 0;
+	var c = 0;
 	b = __peek(buf__);
 	c = __peek(string__);
  	b = b * sizeof(var) + c - c;
 	return b;
 }
 var Bytes__setStringToNative(var __this, var name) {
-	var i;
-	var l;
-	var c;
-	var p;
-	var n;
-	var b;
+	var i = 0;
+	var l = 0;
+	var c = 0;
+	var p = 0;
+	var n = 0;
+	var b = 0;
 	b = __this;
 	__poke(pos__, 0);
 	n = __peek(string__);
@@ -3767,8 +3767,8 @@ var JackAst__new(var tag_, var data_, var parent_) {
 	return __this;
 }
 var JackAst__dispose(var __this) {
-	var c;
-	var d;
+	var c = 0;
+	var d = 0;
 	String__dispose(__peek(data__));
 	c = __peek(child__);
 	while (-1==(~((((c)==(0))?-1:0)))) {
@@ -3796,8 +3796,8 @@ var JackAst__ident(var __this, var f, var level) {
 	return 0;
 }
 var JackAst__process(var __this, var f, var level, var par) {
-	var c;
-	var d;
+	var c = 0;
+	var d = 0;
 	JackAst__ident(__this, f, level);
 	File__writeString(f, Memory__getString(JackAst___str2));
 	File__writeString(f, JackParser__getConst(par, __peek(tag__)));
@@ -3821,19 +3821,19 @@ var JackAst__process(var __this, var f, var level, var par) {
 	return 0;
 }
 var JackAst__add(var __this, var tag_, var data_) {
-	var a;
+	var a = 0;
 	a = JackAst__new(tag_, data_, __this);
 	JackAst__append(__this, a);
 	return a;
 }
 var JackAst__addop(var __this, var data_, var left_) {
-	var a;
+	var a = 0;
 	a = JackAst__new(C__OP(), data_, __this);
 	JackAst__setLeft(a, left_);
 	return a;
 }
 var JackAst__set(var __this, var tag_, var data_) {
-	var c;
+	var c = 0;
 	c = __peek(child__);
 	while (-1==(~((((c)==(0))?-1:0)))) {
 		if (0!=(((((JackAst__getTag(c))==(tag_))?-1:0))&((((0)==(String__compare(data_, JackAst__getData(c))))?-1:0)))) {
@@ -3845,7 +3845,7 @@ var JackAst__set(var __this, var tag_, var data_) {
 	return JackAst__add(__this, tag_, data_);
 }
 var JackAst__append(var __this, var a) {
-	var c;
+	var c = 0;
 	c = __peek(child__);
 	if (0!=((((c)==(0))?-1:0))) {
 		__poke(child__, a);
@@ -3858,8 +3858,8 @@ var JackAst__append(var __this, var a) {
 	return a;
 }
 var JackAst__removeChild(var __this, var old) {
-	var c;
-	var d;
+	var c = 0;
+	var d = 0;
 	c = __peek(child__);
 	if (0!=((((c)==(0))?-1:0))) {
 		return 0;
@@ -3887,8 +3887,8 @@ var JackAst__removeChild(var __this, var old) {
 	return 0;
 }
 var JackAst__replaceChild(var __this, var old, var new_) {
-	var c;
-	var n;
+	var c = 0;
+	var n = 0;
 	if (0!=((((__peek(child__))==(0))?-1:0))) {
 		return 0;
 	}
@@ -4035,10 +4035,10 @@ var JackCompiler__dispose(var __this) {
 	return 0;
 }
 var JackCompiler__compile(var __this, var src_) {
-	var dst;
-	var a;
-	var c;
-	var s;
+	var dst = 0;
+	var a = 0;
+	var c = 0;
+	var s = 0;
 	__poke(src__, File__new(src_, 0));
 	dst = File__new(Memory__getString(JackCompiler___str0), -1);
 	s = String__copy(src_);
@@ -4060,10 +4060,10 @@ var JackCompiler__compile(var __this, var src_) {
 	return -1;
 }
 var JackCompiler__copyHead(var __this, var dst, var source) {
-	var s;
-	var l;
-	var src_;
-	var b;
+	var s = 0;
+	var l = 0;
+	var src_ = 0;
+	var b = 0;
 	src_ = File__new(source, 0);
 	s = Memory__getString(JackCompiler___str2);
 	s = String__copy(s);
@@ -4085,9 +4085,9 @@ var JackCompiler__copyHead(var __this, var dst, var source) {
 	return 0;
 }
 var JackCompiler__copy(var __this, var dst, var source) {
-	var l;
-	var src_;
-	var b;
+	var l = 0;
+	var src_ = 0;
+	var b = 0;
 	src_ = File__new(source, 0);
 	b = String__new(1024);
 	l = File__readLine(src_, b);
@@ -4101,11 +4101,11 @@ var JackCompiler__copy(var __this, var dst, var source) {
 	return 0;
 }
 var JackCompiler__copyBody(var __this, var dst, var source) {
-	var s;
-	var l;
-	var src_;
-	var b;
-	var doit;
+	var s = 0;
+	var l = 0;
+	var src_ = 0;
+	var b = 0;
+	var doit = 0;
 	doit = 0;
 	src_ = File__new(source, 0);
 	s = Memory__getString(JackCompiler___str3);
@@ -4134,11 +4134,11 @@ var JackCompiler__copyBody(var __this, var dst, var source) {
 	return 0;
 }
 var JackCompiler__link(var __this, var dir, var files) {
-	var i;
-	var l;
-	var s;
-	var dst;
-	var sr;
+	var i = 0;
+	var l = 0;
+	var s = 0;
+	var dst = 0;
+	var sr = 0;
 	s = String__copy(dir);
 	l = String__length(s);
 	if (0!=((((String__charAt(s, l-1))==(47))?-1:0))) {
@@ -4425,7 +4425,7 @@ var JackAstToC__dispose(var __this) {
 	return 0;
 }
 var JackAstToC__compile(var __this, var dst_) {
-	var c;
+	var c = 0;
 	__poke(dst__, dst_);
 	__poke(current__, __peek(ast__));
 	JackAstToC__nl(__this);
@@ -4485,8 +4485,8 @@ var JackAstToC__compile(var __this, var dst_) {
 	return -1;
 }
 var JackAstToC__coClass(var __this, var c) {
-	var d;
-	var t;
+	var d = 0;
+	var t = 0;
 	__poke(clas__, JackAst__getData(c));
 	File__writeString(__peek(dst__), Memory__getString(JackAstToC___str16));
 	File__writeString(__peek(dst__), __peek(clas__));
@@ -4566,11 +4566,11 @@ var JackAstToC__coClass(var __this, var c) {
 	return 0;
 }
 var JackAstToC__genStrings(var __this, var a) {
-	var s;
-	var o;
-	var i;
-	var l;
-	var n;
+	var s = 0;
+	var o = 0;
+	var i = 0;
+	var l = 0;
+	var n = 0;
 	if (0!=((((JackAst__getTag(a))==(C__STRING_CONST()))?-1:0))) {
 		File__writeString(__peek(dst__), Memory__getString(JackAstToC___str24));
 		File__writeString(__peek(dst__), __peek(clas__));
@@ -4611,7 +4611,7 @@ var JackAstToC__genStrings(var __this, var a) {
 	return 0;
 }
 var JackAstToC__spc(var __this) {
-	var i;
+	var i = 0;
 	i = 0;
 	while (-1==((((i)<(__peek(sp__)))?-1:0))) {
 		i = i+1;
@@ -4627,10 +4627,10 @@ var JackAstToC__nl(var __this) {
 	return 0;
 }
 var JackAstToC__coAsm(var __this, var c) {
-	var s;
-	var z;
-	var i;
-	var l;
+	var s = 0;
+	var z = 0;
+	var i = 0;
+	var l = 0;
 	i = 0;
 	z = Memory__getString(JackAstToC___str30);
 	s = JackAst__getData(c);
@@ -4671,7 +4671,7 @@ var JackAstToC__coFieldUndef(var __this, var c) {
 	return 0;
 }
 var JackAstToC__coField(var __this, var c) {
-	var s;
+	var s = 0;
 	c = JackAst__getChild(c);
 	File__writeString(__peek(dst__), Memory__getString(JackAstToC___str34));
 	c = JackAst__getChild(c);
@@ -4695,8 +4695,8 @@ var JackAstToC__coField(var __this, var c) {
 	return 0;
 }
 var JackAstToC__coMethodPre(var __this, var c) {
-	var d;
-	var t;
+	var d = 0;
+	var t = 0;
 	d = JackAst__getChild(c);
 	while (-1==(~((((d)==(0))?-1:0)))) {
 		t = JackAst__getTag(d);
@@ -4712,8 +4712,8 @@ var JackAstToC__coMethodPre(var __this, var c) {
 	return 0;
 }
 var JackAstToC__coConstructorPre(var __this, var c) {
-	var d;
-	var t;
+	var d = 0;
+	var t = 0;
 	d = JackAst__getChild(c);
 	while (-1==(~((((d)==(0))?-1:0)))) {
 		t = JackAst__getTag(d);
@@ -4729,9 +4729,9 @@ var JackAstToC__coConstructorPre(var __this, var c) {
 	return 0;
 }
 var JackAstToC__coMethod(var __this, var c) {
-	var d;
-	var t;
-	var l;
+	var d = 0;
+	var t = 0;
+	var l = 0;
 	d = JackAst__getChild(c);
 	l = 0;
 	while (-1==(~((((d)==(0))?-1:0)))) {
@@ -4760,10 +4760,10 @@ var JackAstToC__coMethod(var __this, var c) {
 	return 0;
 }
 var JackAstToC__coConstructor(var __this, var c) {
-	var d;
-	var t;
-	var l;
-	var s;
+	var d = 0;
+	var t = 0;
+	var l = 0;
+	var s = 0;
 	d = JackAst__getChild(c);
 	l = 0;
 	while (-1==(~((((d)==(0))?-1:0)))) {
@@ -4831,8 +4831,8 @@ var JackAstToC__coCallback(var __this, var c) {
 	return 0;
 }
 var JackAstToC__coFunctionPre(var __this, var c) {
-	var d;
-	var t;
+	var d = 0;
+	var t = 0;
 	d = JackAst__getChild(c);
 	while (-1==(~((((d)==(0))?-1:0)))) {
 		t = JackAst__getTag(d);
@@ -4855,8 +4855,8 @@ var JackAstToC__isType(var __this, var t) {
 	return 0;
 }
 var JackAstToC__coFunction(var __this, var c) {
-	var d;
-	var t;
+	var d = 0;
+	var t = 0;
 	d = JackAst__getChild(c);
 	while (-1==(~((((d)==(0))?-1:0)))) {
 		t = JackAst__getTag(d);
@@ -4918,8 +4918,8 @@ var JackAstToC__error(var __this, var txt, var c) {
 	return 0;
 }
 var JackAstToC__coStatement(var __this, var c) {
-	var t;
-	var newline;
+	var t = 0;
+	var newline = 0;
 	newline = -1;
 	t = JackAst__getTag(c);
 	if (0!=((((t)==(C__ASSIGN()))?-1:0))) {
@@ -4957,7 +4957,7 @@ var JackAstToC__coStatement(var __this, var c) {
 	return 0;
 }
 var JackAstToC__coWhile(var __this, var c) {
-	var d;
+	var d = 0;
 	d = JackAst__getChild(c);
 	JackAstToC__spc(__this);
 	File__writeString(__peek(dst__), Memory__getString(JackAstToC___str63));
@@ -4979,7 +4979,7 @@ var JackAstToC__coWhile(var __this, var c) {
 	return 0;
 }
 var JackAstToC__coIf(var __this, var c) {
-	var d;
+	var d = 0;
 	d = JackAst__getChild(c);
 	JackAstToC__spc(__this);
 	File__writeString(__peek(dst__), Memory__getString(JackAstToC___str67));
@@ -5036,7 +5036,7 @@ var JackAstToC__coIf(var __this, var c) {
 	return 0;
 }
 var JackAstToC__coReturn(var __this, var c) {
-	var d;
+	var d = 0;
 	d = JackAst__getChild(c);
 	JackAstToC__spc(__this);
 	File__writeString(__peek(dst__), Memory__getString(JackAstToC___str77));
@@ -5049,8 +5049,8 @@ var JackAstToC__coReturn(var __this, var c) {
 	return 0;
 }
 var JackAstToC__coAssign(var __this, var c) {
-	var d;
-	var is_hack_field;
+	var d = 0;
+	var is_hack_field = 0;
 	is_hack_field = 0;
 	d = JackAst__getLeft(c);
 	if (0!=((((d)==(0))?-1:0))) {
@@ -5088,8 +5088,8 @@ var JackAstToC__coAssign(var __this, var c) {
 	return 0;
 }
 var JackAstToC__coVarNameOrIndexed(var __this, var c, var isassign) {
-	var d;
-	var dohack;
+	var d = 0;
+	var dohack = 0;
 	d = JackAst__getChild(c);
 	dohack = __peek(hack__);
 	if (0!=(d)) {
@@ -5135,8 +5135,8 @@ var JackAstToC__coVarNameOrIndexed(var __this, var c, var isassign) {
 	return 0;
 }
 var JackAstToC__isParentExprBool(var __this, var c) {
-	var t;
-	var d;
+	var t = 0;
+	var d = 0;
 	d = JackAst__getParent(c);
 	t = JackAst__getTag(d);
 	if (0!=(((((t)==(C__LEFT_PARENTHESIS()))?-1:0)))) {
@@ -5182,9 +5182,9 @@ var JackAstToC__isParentExprBool(var __this, var c) {
 	return -1;
 }
 var JackAstToC__isInt(var __this, var c) {
-	var d;
-	var s;
-	var t;
+	var d = 0;
+	var s = 0;
+	var t = 0;
 	d = c;
 	if (0!=(d)) {
 		t = JackAst__getTag(d);
@@ -5262,10 +5262,10 @@ var JackAstToC__isInt(var __this, var c) {
 	return 0;
 }
 var JackAstToC__coExpr(var __this, var c, var isterm) {
-	var d;
-	var ok;
-	var t;
-	var s;
+	var d = 0;
+	var ok = 0;
+	var t = 0;
+	var s = 0;
 	if (0!=((((JackAst__getTag(c))==(C__EXPR()))?-1:0))) {
 		d = JackAst__getChild(c);
 	} else {
@@ -5451,7 +5451,7 @@ var JackAstToC__isSubroutine(var __this, var t) {
 	return 0;
 }
 var JackAstToC__isVarnameSet(var __this, var c, var s) {
-	var d;
+	var d = 0;
 	d = JackAst__getChild(c);
 	if (0!=(d)) {
 		d = JackAst__getChild(d);
@@ -5467,8 +5467,8 @@ var JackAstToC__isVarnameSet(var __this, var c, var s) {
 	return 0;
 }
 var JackAstToC__getTypeOfVarname(var __this, var c, var s) {
-	var d;
-	var t;
+	var d = 0;
+	var t = 0;
 	d = JackAst__getChild(c);
 	if (0!=((((d)==(0))?-1:0))) {
 		return 0;
@@ -5490,10 +5490,10 @@ var JackAstToC__getTypeOfVarname(var __this, var c, var s) {
 	return 0;
 }
 var JackAstToC__functionGetClassOf(var __this, var c, var s) {
-	var d;
-	var n;
-	var t;
-	var r;
+	var d = 0;
+	var n = 0;
+	var t = 0;
+	var r = 0;
 	d = JackAst__getChild(c);
 	t = JackAst__getTag(d);
 	if (0!=(JackAstToC__isType(__this, t))) {
@@ -5537,10 +5537,10 @@ var JackAstToC__functionGetClassOf(var __this, var c, var s) {
 	return 0;
 }
 var JackAstToC__functionGetTypeOf(var __this, var c, var s) {
-	var d;
-	var n;
-	var t;
-	var r;
+	var d = 0;
+	var n = 0;
+	var t = 0;
+	var r = 0;
 	d = JackAst__getChild(c);
 	while (-1==(~((((d)==(0))?-1:0)))) {
 		t = JackAst__getTag(d);
@@ -5583,10 +5583,10 @@ var JackAstToC__functionGetTypeOf(var __this, var c, var s) {
 	return 0;
 }
 var JackAstToC__classGetClassOf(var __this, var c, var s) {
-	var d;
-	var t;
-	var r;
-	var u;
+	var d = 0;
+	var t = 0;
+	var r = 0;
+	var u = 0;
 	d = JackAst__getChild(c);
 	while (-1==(~((((d)==(0))?-1:0)))) {
 		t = JackAst__getTag(d);
@@ -5612,9 +5612,9 @@ var JackAstToC__classGetClassOf(var __this, var c, var s) {
 	return 0;
 }
 var JackAstToC__classGetTypeOf(var __this, var c, var s) {
-	var d;
-	var t;
-	var r;
+	var d = 0;
+	var t = 0;
+	var r = 0;
 	d = JackAst__getChild(c);
 	while (-1==(~((((d)==(0))?-1:0)))) {
 		t = JackAst__getTag(d);
@@ -5631,10 +5631,10 @@ var JackAstToC__classGetTypeOf(var __this, var c, var s) {
 	return 0;
 }
 var JackAstToC__getTypeOf(var __this, var c) {
-	var d;
-	var t;
-	var s;
-	var r;
+	var d = 0;
+	var t = 0;
+	var s = 0;
+	var r = 0;
 	s = JackAst__getData(c);
 	d = JackAst__getParent(c);
 	t = JackAst__getTag(d);
@@ -5673,10 +5673,10 @@ var JackAstToC__getTypeOf(var __this, var c) {
 	return 0;
 }
 var JackAstToC__isStatic(var __this, var c) {
-	var d;
-	var n;
-	var t;
-	var s;
+	var d = 0;
+	var n = 0;
+	var t = 0;
+	var s = 0;
 	s = JackAst__getData(c);
 	d = JackAst__getParent(c);
 	t = JackAst__getTag(d);
@@ -5710,10 +5710,10 @@ var JackAstToC__isStatic(var __this, var c) {
 	return 0;
 }
 var JackAstToC__isField(var __this, var c) {
-	var d;
-	var n;
-	var t;
-	var s;
+	var d = 0;
+	var n = 0;
+	var t = 0;
+	var s = 0;
 	s = JackAst__getData(c);
 	d = JackAst__getParent(c);
 	t = JackAst__getTag(d);
@@ -5747,10 +5747,10 @@ var JackAstToC__isField(var __this, var c) {
 	return 0;
 }
 var JackAstToC__getClassOf(var __this, var c) {
-	var d;
-	var t;
-	var s;
-	var r;
+	var d = 0;
+	var t = 0;
+	var s = 0;
+	var r = 0;
 	s = JackAst__getData(c);
 	d = JackAst__getParent(c);
 	t = JackAst__getTag(d);
@@ -5789,12 +5789,12 @@ var JackAstToC__getClassOf(var __this, var c) {
 	return 0;
 }
 var JackAstToC__coSubroutineCall(var __this, var c) {
-	var d;
-	var t;
-	var s;
-	var thi;
-	var first;
-	var free_thi;
+	var d = 0;
+	var t = 0;
+	var s = 0;
+	var thi = 0;
+	var first = 0;
+	var free_thi = 0;
 	free_thi = 0;
 	first = -1;
 	thi = 0;
@@ -5881,7 +5881,7 @@ var JackAstToC__coSubroutineCall(var __this, var c) {
 	return 0;
 }
 var JackAstToC__coStatements(var __this, var c) {
-	var d;
+	var d = 0;
 	d = JackAst__getChild(c);
 	while (-1==(~((((d)==(0))?-1:0)))) {
 		JackAstToC__coStatement(__this, d);
@@ -5890,8 +5890,8 @@ var JackAstToC__coStatements(var __this, var c) {
 	return 0;
 }
 var JackAstToC__coFunctionHead(var __this, var c, var add_this) {
-	var d;
-	var t;
+	var d = 0;
+	var t = 0;
 	d = JackAst__getChild(c);
 	t = JackAst__getTag(c);
 	if (0!=((((d)==(0))?-1:0))) {
@@ -5920,7 +5920,7 @@ var JackAstToC__coFunctionHead(var __this, var c, var add_this) {
 	return 0;
 }
 var JackAstToC__coParams(var __this, var d, var add_this) {
-	var n;
+	var n = 0;
 	File__writeString(__peek(dst__), Memory__getString(JackAstToC___str144));
 	d = JackAst__getChild(d);
 	if (0!=(add_this)) {
@@ -5946,8 +5946,8 @@ var JackAstToC__coParams(var __this, var d, var add_this) {
 	return 0;
 }
 var JackAstToC__coVarDec(var __this, var c) {
-	var d;
-	var n;
+	var d = 0;
+	var n = 0;
 	d = JackAst__getChild(c);
 	while (-1==(~((((d)==(0))?-1:0)))) {
 		JackAstToC__spc(__this);
@@ -5965,7 +5965,7 @@ var JackAstToC__coVarDec(var __this, var c) {
 	return 0;
 }
 var JackAstToC__coType(var __this, var c) {
-	var t;
+	var t = 0;
 	t = JackAst__getTag(c);
 	if (0!=((((t)==(C__CLASSNAME()))?-1:0))) {
 		File__writeString(__peek(dst__), Memory__getString(JackAstToC___str152));
@@ -5975,8 +5975,8 @@ var JackAstToC__coType(var __this, var c) {
 	return 0;
 }
 var JackAstToC__coVarName(var __this, var c, var isassign) {
-	var s;
-	var t;
+	var s = 0;
+	var t = 0;
 	t = JackAst__getTag(c);
 	if (0!=(((((t)==(C__VARNAME()))?-1:0))|((((t)==(C__CLASSORVARNAME()))?-1:0)))) {
 		if (0!=((((JackAstToC__isField(__this, c))==(0))?-1:0))) {
@@ -6025,12 +6025,12 @@ var JackAstToC__coVarName(var __this, var c, var isassign) {
 #endif
 
 #ifdef JACK_IMPLEMENTATION
-var Sys2___args_;
+var Sys2___args_ = 0;
 var Sys2__init() {
 	return 0;
 }
 var Sys2__deInit() {
-	var b;
+	var b = 0;
 	if (0!=(Sys2___args_)) {
 		b = Sys2___args_;
 		Buffer__dispose(b);
@@ -6040,11 +6040,11 @@ var Sys2__deInit() {
 	return 0;
 }
 var Sys2__args() {
-	var a;
-	var s;
-	var i;
-	var isq;
-	var b;
+	var a = 0;
+	var s = 0;
+	var i = 0;
+	var isq = 0;
+	var b = 0;
 	if (0!=(Sys2___args_)) {
 		return Sys2___args_;
 	}
@@ -6072,7 +6072,7 @@ var File___str0[] = {78,101,103,97,116,105,118,101,32,83,116,114,105,110,103,32,
 #define name__ (__this+3)
 var File__new(var path, var writeing) {
 	var __this;
-	var l;
+	var l = 0;
 	__this = Memory__alloc(4);
 	__poke(fd__, -1);
 	__poke(is_write__, writeing);
@@ -6087,7 +6087,7 @@ var File__new(var path, var writeing) {
 	return __this;
 }
 var File__dispose(var __this) {
-	var f;
+	var f = 0;
 	f = __peek(fd__);
 	if (0!=(__peek(name__))) {
 		String__dispose(__peek(name__));
@@ -6106,10 +6106,10 @@ var File__getName(var __this) {
 	return __peek(name__);
 }
 var File__isdir(var __this) {
-	var l;
-	var s;
-	var f;
-	var b;
+	var l = 0;
+	var s = 0;
+	var f = 0;
+	var b = 0;
 	l = String__length(__peek(name__));
 	if (0!=((((l)<(1))?-1:0))) {
 		return 0;
@@ -6138,12 +6138,12 @@ var File__isdir(var __this) {
 	return f;
 }
 var File__open(var __this) {
-	var l;
-	var m;
-	var s;
-	var f;
-	var writing;
-	var b;
+	var l = 0;
+	var m = 0;
+	var s = 0;
+	var f = 0;
+	var writing = 0;
+	var b = 0;
 	if (0!=((((__peek(fd__))>(-1))?-1:0))) {
 		return 0;
 	}
@@ -6179,8 +6179,8 @@ var File__open(var __this) {
 	return -1;
 }
 var File__readByte(var __this) {
-	var b;
-	var f;
+	var b = 0;
+	var f = 0;
 	f = __peek(fd__);
 	if (0!=((((f)<(0))?-1:0))) {
 		File__open(__this);
@@ -6197,9 +6197,9 @@ var File__readByte(var __this) {
 	return b;
 }
 var File__seek(var __this, var position) {
-	var b;
-	var f;
-	var p;
+	var b = 0;
+	var f = 0;
+	var p = 0;
 	f = __peek(fd__);
 	p = position;
 	if (0!=((((f)<(0))?-1:0))) {
@@ -6215,9 +6215,9 @@ var File__seek(var __this, var position) {
 	return b;
 }
 var File__writeByte(var __this, var data) {
-	var r;
-	var f;
-	var b;
+	var r = 0;
+	var f = 0;
+	var b = 0;
 	b = data;
 	if (0!=((((__peek(fd__))<(0))?-1:0))) {
 		File__open(__this);
@@ -6232,9 +6232,9 @@ var File__writeByte(var __this, var data) {
 	return r;
 }
 var File__writeString(var __this, var s) {
-	var i;
-	var l;
-	var c;
+	var i = 0;
+	var l = 0;
+	var c = 0;
 	i = 0;
 	l = String__length(s);
 	while (-1==((((i)<(l))?-1:0))) {
@@ -6245,7 +6245,7 @@ var File__writeString(var __this, var s) {
 	return i;
 }
 var File__readLine(var __this, var buff) {
-	var c;
+	var c = 0;
 	c = File__readUtf8(__this);
 	if (0!=((((c)==(0))?-1:0))) {
 		return 0;
@@ -6263,8 +6263,8 @@ var File__readLine(var __this, var buff) {
 	return buff;
 }
 var File__readUtf8(var __this) {
-	var c;
-	var b;
+	var c = 0;
+	var b = 0;
 	c = File__readByte(__this);
 	if (0!=(((((c)<(1))?-1:0))|((((c)>(255))?-1:0)))) {
 		return 0;
@@ -6384,28 +6384,28 @@ var File__writeInt64(var __this, var d) {
 	return File__writeInt32(__this, (d/2147483648)/2);
 }
 var File__readInt16(var __this) {
-	var d;
+	var d = 0;
 	d = File__readByte(__this);
 	d = d+(File__readByte(__this)*256);
 	return d;
 }
 var File__readInt32(var __this) {
-	var d;
+	var d = 0;
 	d = File__readInt16(__this);
 	d = d+(File__readInt16(__this)*65536);
 	return d;
 }
 var File__readInt64(var __this) {
-	var d;
+	var d = 0;
 	d = File__readInt32(__this);
 	d = d+((File__readInt32(__this)*2147483648)*2);
 	return d;
 }
 var File__remove(var __this) {
-	var l;
-	var m;
-	var b;
-	var s;
+	var l = 0;
+	var m = 0;
+	var b = 0;
+	var s = 0;
 	if (0!=((((__peek(name__))==(0))?-1:0))) {
 		return 0;
 	}
@@ -6435,10 +6435,10 @@ var File__remove(var __this) {
 	return ((((m)==(0))?-1:0));
 }
 var File__mkdir(var __this) {
-	var l;
-	var m;
-	var s;
-	var b;
+	var l = 0;
+	var m = 0;
+	var s = 0;
+	var b = 0;
 	if (0!=((((__peek(name__))==(0))?-1:0))) {
 		return 0;
 	}
@@ -6459,14 +6459,14 @@ var File__mkdir(var __this) {
 	return ((((m)==(0))?-1:0));
 }
 var File__list(var __this) {
-	var i;
-	var l;
-	var b;
-	var s;
-	var na;
-	var n;
-	var a;
-	var str;
+	var i = 0;
+	var l = 0;
+	var b = 0;
+	var s = 0;
+	var na = 0;
+	var n = 0;
+	var a = 0;
+	var str = 0;
 	if (0!=((((__peek(name__))==(0))?-1:0))) {
 		return 0;
 	}
@@ -6566,7 +6566,7 @@ var Hash___str4[] = {59,0};
 #define cb__ (__this+3)
 var Hash__new(var size, var disposeCb) {
 	var __this;
-	var i;
+	var i = 0;
 	__this = Memory__alloc(4);
 	__poke(size___, Math__shiftLeft(1, Math__log2(size)));
 	__poke(mask__, __peek(size___)-1);
@@ -6580,10 +6580,10 @@ var Hash__new(var size, var disposeCb) {
 	return __this;
 }
 var Hash__dispose(var __this) {
-	var s;
-	var n;
-	var next;
-	var i;
+	var s = 0;
+	var n = 0;
+	var next = 0;
+	var i = 0;
 	i = 0;
 	while (-1==((((i)<(__peek(size___)))?-1:0))) {
 		n = __peek(__peek(table__)+i);
@@ -6612,12 +6612,12 @@ var Hash__dispose(var __this) {
 	return 0;
 }
 var Hash__stats(var __this) {
-	var s;
-	var n;
-	var next;
-	var i;
-	var max;
-	var depth;
+	var s = 0;
+	var n = 0;
+	var next = 0;
+	var i = 0;
+	var max = 0;
+	var depth = 0;
 	i = 0;
 	max = 0;
 	while (-1==((((i)<(__peek(size___)))?-1:0))) {
@@ -6650,10 +6650,10 @@ var Hash__stats(var __this) {
 	return 0;
 }
 var Hash__hash(var __this, var k) {
-	var h;
-	var l;
-	var i;
-	var t;
+	var h = 0;
+	var l = 0;
+	var i = 0;
+	var t = 0;
 	i = 1;
 	h = 0;
 	l = String__length(k);
@@ -6669,13 +6669,13 @@ var Hash__hash(var __this, var k) {
 	return h;
 }
 var Hash__add(var __this, var k, var val) {
-	var p;
-	var hhh;
-	var cmp;
-	var a;
-	var n;
-	var r;
-	var prev;
+	var p = 0;
+	var hhh = 0;
+	var cmp = 0;
+	var a = 0;
+	var n = 0;
+	var r = 0;
+	var prev = 0;
 	hhh = Hash__hash(__this, k);
 	p = hhh&__peek(mask__);
 	a = __peek(__peek(table__)+p);
@@ -6744,11 +6744,11 @@ var Hash__add(var __this, var k, var val) {
 	return 0;
 }
 var Hash__get(var __this, var k) {
-	var p;
-	var h;
-	var cmp;
-	var a;
-	var n;
+	var p = 0;
+	var h = 0;
+	var cmp = 0;
+	var a = 0;
+	var n = 0;
 	h = Hash__hash(__this, k);
 	p = h&__peek(mask__);
 	a = __peek(table__)+p;
@@ -6821,7 +6821,7 @@ var XmlNode__new(var x, var parent_, var tag_, var is_txt) {
 	return __this;
 }
 var XmlNode__dispose(var __this) {
-	var x;
+	var x = 0;
 	x = __this;
 	XmlNode__clear(x);
 	Memory__deAlloc(__this);
@@ -6851,10 +6851,10 @@ var XmlNode__clear(var __this) {
 	return 0;
 }
 var XmlNode__closeElement(var __this, var x, var tag_) {
-	var e;
-	var p;
-	var s;
-	var t;
+	var e = 0;
+	var p = 0;
+	var s = 0;
+	var t = 0;
 	s = Xml__getString(x, tag_);
 	e = __this;
 	p = XmlNode__getParent(e);
@@ -6878,8 +6878,8 @@ var XmlNode__removeElement(var __this, var x, var e) {
 	return e;
 }
 var XmlNode__addElement(var __this, var x, var tag_) {
-	var e;
-	var cb;
+	var e = 0;
+	var cb = 0;
 	e = XmlNode__new(x, __this, tag_, 0);
 	if (0!=((((__peek(elements__))==(0))?-1:0))) {
 		cb = CallbackXmlNodeDispose__new();
@@ -6890,8 +6890,8 @@ var XmlNode__addElement(var __this, var x, var tag_) {
 	return e;
 }
 var XmlNode__addAttribute(var __this, var x, var name, var value) {
-	var i;
-	var s;
+	var i = 0;
+	var s = 0;
 	if (0!=((((__peek(att_values__))==(0))?-1:0))) {
 		__poke(att_values__, Buffer__newString(1));
 		__poke(att_names__, Buffer__new(1, 0));
@@ -6910,8 +6910,8 @@ var XmlNode__addAttribute(var __this, var x, var name, var value) {
 	return 0;
 }
 var XmlNode__addContent(var __this, var x, var txt) {
-	var e;
-	var cb;
+	var e = 0;
+	var cb = 0;
 	e = XmlNode__new(x, __this, txt, -1);
 	if (0!=((((__peek(elements__))==(0))?-1:0))) {
 		cb = CallbackXmlNodeDispose__new();
@@ -6940,10 +6940,10 @@ var XmlNode__getTag(var __this) {
 	return __peek(tag__);
 }
 var XmlNode__dump(var __this, var x, var f, var depth) {
-	var d;
-	var i;
-	var s;
-	var e;
+	var d = 0;
+	var i = 0;
+	var s = 0;
+	var e = 0;
 	if (0!=(__peek(is_content___))) {
 		s = Xml__escape(x, __peek(tag__));
 		File__writeString(f, s);
@@ -7623,7 +7623,7 @@ var GifWriter___str2[] = {32,69,78,68,32,0};
 #define buf__ (__this+12)
 var GifWriter__new() {
 	var __this;
-	var i;
+	var i = 0;
 	__this = Memory__alloc(13);
 	__poke(fp__, 0);
 	__poke(palette__, Array__new(768));
@@ -7665,12 +7665,12 @@ var GifWriter__out16le(var __this, var code) {
 	return 0;
 }
 var GifWriter__lzwWrite(var __this, var code) {
-	var i;
-	var j;
-	var outBits_;
-	var curBits_;
-	var idx_;
-	var buf_;
+	var i = 0;
+	var j = 0;
+	var outBits_ = 0;
+	var curBits_ = 0;
+	var idx_ = 0;
+	var buf_ = 0;
 	buf_ = __peek(buf__);
 	idx_ = __peek(idx__);
 	outBits_ = __peek(outBits__)|Math__shiftLeft(code, __peek(curBits__));
@@ -7698,19 +7698,19 @@ var GifWriter__lzwWrite(var __this, var code) {
 	return 0;
 }
 var GifWriter__lzwEncode(var __this, var in_, var len) {
-	var maxcode;
-	var hashSize;
-	var codetab;
-	var hashTbl;
-	var i;
-	var free_ent;
-	var inp;
-	var ent;
-	var c;
-	var fcode;
-	var key;
-	var kk;
-	var CONTINUE;
+	var maxcode = 0;
+	var hashSize = 0;
+	var codetab = 0;
+	var hashTbl = 0;
+	var i = 0;
+	var free_ent = 0;
+	var inp = 0;
+	var ent = 0;
+	var c = 0;
+	var fcode = 0;
+	var key = 0;
+	var kk = 0;
+	var CONTINUE = 0;
 	__poke(numBits__, 9);
 	__poke(idx__, 0);
 	maxcode = 511;
@@ -7828,26 +7828,26 @@ var GifWriter__end(var __this) {
 	return GifWriter__out8(__this, 59);
 }
 var GifWriter__frame_(var __this, var rgba, var delayCsec, var localPalette) {
-	var size_;
-	var localPalTbl;
-	var palette_;
-	var indexedPixels;
-	var k;
-	var c;
-	var rgb0;
-	var rgb1;
-	var rgb2;
-	var bestd;
-	var best;
-	var i;
-	var j;
-	var rgb;
-	var bb;
-	var gg;
-	var rr;
-	var d;
-	var p;
-	var a;
+	var size_ = 0;
+	var localPalTbl = 0;
+	var palette_ = 0;
+	var indexedPixels = 0;
+	var k = 0;
+	var c = 0;
+	var rgb0 = 0;
+	var rgb1 = 0;
+	var rgb2 = 0;
+	var bestd = 0;
+	var best = 0;
+	var i = 0;
+	var j = 0;
+	var rgb = 0;
+	var bb = 0;
+	var gg = 0;
+	var rr = 0;
+	var d = 0;
+	var p = 0;
+	var a = 0;
 	size_ = __peek(width__)*__peek(height__);
 	localPalTbl = Array__new(768);
 	i = 0;
@@ -8306,7 +8306,7 @@ var Gif___str0[] = {32,0};
 #define comp__ (__this+29)
 var Gif__new() {
 	var __this;
-	var i;
+	var i = 0;
 	__this = Memory__alloc(30);
 	__poke(in_pos__, 0);
 	__poke(fd__, 0);
@@ -8352,8 +8352,8 @@ var Gif__new() {
 	return __this;
 }
 var Gif__dispose(var __this) {
-	var i;
-	var g;
+	var i = 0;
+	var g = 0;
 	if (0!=(__peek(fd__))) {
 		File__dispose(__peek(fd__));
 	}
@@ -8376,7 +8376,7 @@ var Gif__dispose(var __this) {
 	return 0;
 }
 var Gif__get8(var __this) {
-	var r;
+	var r = 0;
 	if (0!=(__peek(fd__))) {
 		return File__readByte(__peek(fd__));
 	}
@@ -8390,15 +8390,15 @@ var Gif__get8(var __this) {
 	return -1;
 }
 var Gif__get16le(var __this) {
-	var r;
+	var r = 0;
 	r = Gif__get8(__this);
 	r = r+(Gif__get8(__this)*256);
 	return r;
 }
 var Gif__parseColortable(var __this, var pal_, var num_entries, var transp) {
-	var i;
-	var n;
-	var o;
+	var i = 0;
+	var n = 0;
+	var o = 0;
 	i = 0;
 	while (-1==((((i)<(num_entries))?-1:0))) {
 		n = Gif__get8(__this)*65536;
@@ -8451,8 +8451,8 @@ var Gif__testRaw(var __this) {
 	return 0;
 }
 var Gif__outGifCode(var __this, var code) {
-	var idx;
-	var g;
+	var idx = 0;
+	var g = 0;
 	g = __peek(__peek(codes__)+code);
 	if (0!=((((GifLzw__getPrefix(g))>((-1)))?-1:0))) {
 		Gif__outGifCode(__this, GifLzw__getPrefix(g));
@@ -8486,20 +8486,20 @@ var Gif__skip(var __this, var len) {
 	return 0;
 }
 var Gif__processGifRaster(var __this) {
-	var lzw_cs;
-	var len;
-	var init_code;
-	var first;
-	var codesize;
-	var codemask;
-	var avail;
-	var oldcode;
-	var bits;
-	var valid_bits;
-	var clear;
-	var p;
-	var g;
-	var code_;
+	var lzw_cs = 0;
+	var len = 0;
+	var init_code = 0;
+	var first = 0;
+	var codesize = 0;
+	var codemask = 0;
+	var avail = 0;
+	var oldcode = 0;
+	var bits = 0;
+	var valid_bits = 0;
+	var clear = 0;
+	var p = 0;
+	var g = 0;
+	var code_ = 0;
 	oldcode = 0;
 	lzw_cs = Gif__get8(__this);
 	if (0!=((((lzw_cs)>(12))?-1:0))) {
@@ -8600,22 +8600,22 @@ var Gif__processGifRaster(var __this) {
 	return 0;
 }
 var Gif__loadNext(var __this, var two_back) {
-	var dispose_;
-	var first_frame;
-	var pi;
-	var pcount;
-	var i;
-	var tag;
-	var count;
-	var len;
-	var ext;
-	var x_;
-	var y_;
-	var w_;
-	var h_;
-	var o;
-	var tmp;
-	var BREAK;
+	var dispose_ = 0;
+	var first_frame = 0;
+	var pi = 0;
+	var pcount = 0;
+	var i = 0;
+	var tag = 0;
+	var count = 0;
+	var len = 0;
+	var ext = 0;
+	var x_ = 0;
+	var y_ = 0;
+	var w_ = 0;
+	var h_ = 0;
+	var o = 0;
+	var tmp = 0;
+	var BREAK = 0;
 	o = 0;
 	i = 0;
 	count = 0;
@@ -8789,7 +8789,7 @@ var Gif__error(var __this, var e, var d, var a) {
 	return 0;
 }
 var Gif__loadMain(var __this) {
-	var o;
+	var o = 0;
 	o = 0;
 	if (0!=(Gif__header(__this))) {
 		o = Gif__loadNext(__this, 0);
@@ -8804,7 +8804,7 @@ var Gif__getH(var __this) {
 	return __peek(h__);
 }
 var Gif__readFile(var __this, var f) {
-	var r;
+	var r = 0;
 	__poke(fd__, File__new(f, 0));
 	r = Gif__loadMain(__this);
 	File__dispose(__peek(fd__));
@@ -8885,7 +8885,7 @@ var Xml__clear(var __this) {
 	return 0;
 }
 var Xml__getStringNoCreate(var __this, var s) {
-	var i;
+	var i = 0;
 	i = Buffer__indexOfStr(__peek(strings__), s);
 	if (0!=((((i)>(-1))?-1:0))) {
 		return Buffer__getAt(__peek(strings__), i);
@@ -8894,7 +8894,7 @@ var Xml__getStringNoCreate(var __this, var s) {
 	return 0;
 }
 var Xml__getString(var __this, var s) {
-	var i;
+	var i = 0;
 	i = Buffer__indexOfStr(__peek(strings__), s);
 	if (0!=((((i)>(-1))?-1:0))) {
 		return Buffer__getAt(__peek(strings__), i);
@@ -8928,7 +8928,7 @@ var Xml__getCurrent(var __this) {
 	return __peek(current__);
 }
 var Xml__disposeCurrent(var __this) {
-	var o;
+	var o = 0;
 	o = __peek(current__);
 	__poke(current__, XmlNode__getParent(__peek(current__)));
 	if (0!=(__peek(current__))) {
@@ -8946,10 +8946,10 @@ var Xml__dump(var __this, var f) {
 	return 0;
 }
 var Xml__escape(var __this, var o) {
-	var i;
-	var l;
-	var c;
-	var s;
+	var i = 0;
+	var l = 0;
+	var c = 0;
+	var s = 0;
 	s = __peek(esca__);
 	String__setCharAt(s, 0, 0);
 	l = String__length(o);
@@ -9185,8 +9185,8 @@ var Const___str192[] = {115,117,98,114,111,117,116,105,110,101,99,97,108,108,0};
 var Const___str193[] = {99,108,97,115,115,111,114,118,97,114,110,97,109,101,0};
 var Const___str194[] = {110,101,120,116,95,102,114,101,101,95,99,111,110,115,116,97,110,116,0};
 var Const__getList() {
-	var b;
-	var s;
+	var b = 0;
+	var s = 0;
 	b = Buffer__new(256, 0);
 	s = Memory__getString(Const___str0);
 	String__setCharAt(s, 0, 0);
@@ -9629,7 +9629,7 @@ var JackParser__matched(var __this, var tok, var k) {
 	return 0;
 }
 var JackParser__matchKeyword(var __this, var k, var eat) {
-	var t;
+	var t = 0;
 	if (0!=(eat)) {
 		if (0!=(JackTokenizer__hasMoreTokens(__peek(jt__)))) {
 			JackTokenizer__advance(__peek(jt__));
@@ -9717,7 +9717,7 @@ var JackParser__matchIdentifier(var __this, var eat) {
 	return 0;
 }
 var JackParser__error(var __this, var w) {
-	var s;
+	var s = 0;
 	__poke(nberror__, __peek(nberror__)+1);
 	if (0!=((((__peek(nberror__))>(__peek(maxerror__)))?-1:0))) {
 		return 0;
@@ -9739,7 +9739,7 @@ var JackParser__error(var __this, var w) {
 	return 0;
 }
 var JackParser__getData(var __this) {
-	var s;
+	var s = 0;
 	s = 0;
 	if (0!=((((JackTokenizer__tokenType(__peek(jt__)))==(C__KEYWORD()))?-1:0))) {
 		s = JackParser__getConst(__this, JackTokenizer__keyWord(__peek(jt__)));
@@ -9791,7 +9791,7 @@ var JackParser__astAddName(var __this, var c, var name, var line_) {
 	return 0;
 }
 var JackParser__astAdd(var __this, var c) {
-	var s;
+	var s = 0;
 	s = JackParser__getData(__this);
 	__poke(current__, JackAst__add(__peek(current__), c, s));
 	JackAst__setLine(__peek(current__), JackTokenizer__getLine(__peek(jt__)), File__getName(__peek(src__)));
@@ -9811,8 +9811,8 @@ var JackParser__astAddType(var __this) {
 	return 0;
 }
 var JackParser__astAddLike(var __this, var prim, var type) {
-	var c;
-	var d;
+	var c = 0;
+	var d = 0;
 	c = __peek(current__);
 	__poke(current__, JackAst__getParent(prim));
 	d = prim;
@@ -9825,8 +9825,8 @@ var JackParser__astAddLike(var __this, var prim, var type) {
 	return 0;
 }
 var JackParser__compileClass(var __this, var tk, var dst_) {
-	var doit;
-	var save;
+	var doit = 0;
+	var save = 0;
 	save = __peek(current__);
 	__poke(jt__, tk);
 	doit = -1;
@@ -9868,9 +9868,9 @@ var JackParser__compileClass(var __this, var tk, var dst_) {
 	return 0;
 }
 var JackParser__compileClassVarDec(var __this) {
-	var z;
-	var save;
-	var primary;
+	var z = 0;
+	var save = 0;
+	var primary = 0;
 	save = __peek(current__);
 	z = JackParser__matchKeyword(__this, C__STATIC(), 0);
 	z = z|JackParser__matchKeyword(__this, C__FIELD(), 0);
@@ -9943,8 +9943,8 @@ var JackParser__compileClassVarDec(var __this) {
 	return 0;
 }
 var JackParser__compileSubroutineBody(var __this) {
-	var z;
-	var save;
+	var z = 0;
+	var save = 0;
 	save = __peek(current__);
 	z = JackParser__matchSymbol(__this, C__LEFT_CURLY_BRACKET(), 0);
 	if (0!=(z)) {
@@ -9966,9 +9966,9 @@ var JackParser__compileSubroutineBody(var __this) {
 	return 0;
 }
 var JackParser__compileCallbackDec(var __this) {
-	var z;
-	var save;
-	var body;
+	var z = 0;
+	var save = 0;
+	var body = 0;
 	save = __peek(current__);
 	z = JackParser__matchKeyword(__this, C__CALLBACK(), 0);
 	if (0!=((((0)==(z))?-1:0))) {
@@ -10021,9 +10021,9 @@ var JackParser__compileCallbackDec(var __this) {
 	return 0;
 }
 var JackParser__compileSubroutine(var __this) {
-	var z;
-	var save;
-	var body;
+	var z = 0;
+	var save = 0;
+	var body = 0;
 	save = __peek(current__);
 	z = JackParser__matchKeyword(__this, C__CONSTRUCTOR(), 0);
 	z = z|JackParser__matchKeyword(__this, C__FUNCTION(), 0);
@@ -10081,8 +10081,8 @@ var JackParser__compileSubroutine(var __this) {
 	return 0;
 }
 var JackParser__compileParameter(var __this) {
-	var z;
-	var save;
+	var z = 0;
+	var save = 0;
 	save = __peek(current__);
 	z = JackParser__matchKeyword(__this, C__INT(), 0);
 	z = z|JackParser__matchKeyword(__this, C__CHAR(), 0);
@@ -10112,8 +10112,8 @@ var JackParser__compileParameter(var __this) {
 	}
 }
 var JackParser__compileParameterList(var __this) {
-	var z;
-	var save;
+	var z = 0;
+	var save = 0;
 	save = __peek(current__);
 	z = -1;
 	JackParser__astAdd(__this, C__PARAMS());
@@ -10130,9 +10130,9 @@ var JackParser__compileParameterList(var __this) {
 	return 0;
 }
 var JackParser__compileVarDecVarList(var __this, var primary) {
-	var z;
-	var i;
-	var save;
+	var z = 0;
+	var i = 0;
+	var save = 0;
 	save = __peek(current__);
 	i = 0;
 	z = JackParser__matchIdentifier(__this, -1);
@@ -10169,9 +10169,9 @@ var JackParser__compileVarDecVarList(var __this, var primary) {
 	return -1;
 }
 var JackParser__compileVarDec(var __this) {
-	var z;
-	var save;
-	var primary;
+	var z = 0;
+	var save = 0;
+	var primary = 0;
 	save = __peek(current__);
 	z = -1;
 	z = JackParser__matchKeyword(__this, C__VAR(), 0);
@@ -10202,9 +10202,9 @@ var JackParser__compileVarDec(var __this) {
 	return -1;
 }
 var JackParser__compileStatements(var __this) {
-	var z;
-	var save;
-	var begin;
+	var z = 0;
+	var save = 0;
+	var begin = 0;
 	save = __peek(current__);
 	z = -1;
 	JackParser__astAdd(__this, C__STATEMENTS());
@@ -10249,10 +10249,10 @@ var JackParser__compileStatements(var __this) {
 	return 0;
 }
 var JackParser__compileDo(var __this) {
-	var s;
-	var z;
-	var l;
-	var save;
+	var s = 0;
+	var z = 0;
+	var l = 0;
+	var save = 0;
 	save = __peek(current__);
 	if (0!=((((0)==(JackParser__matchKeyword(__this, C__DO(), 0)))?-1:0))) {
 		JackParser__error(__this, Memory__getString(JackParser___str34));
@@ -10281,8 +10281,8 @@ var JackParser__compileDo(var __this) {
 	return 0;
 }
 var JackParser__callbackCall(var __this) {
-	var z;
-	var save;
+	var z = 0;
+	var save = 0;
 	save = __peek(current__);
 	if (0!=((((0)==(JackParser__matchKeyword(__this, C__CALLBACK(), 0)))?-1:0))) {
 		return 0;
@@ -10314,8 +10314,8 @@ var JackParser__callbackCall(var __this) {
 	return 0;
 }
 var JackParser__subroutineCall(var __this, var subroutineName, var tokenLine) {
-	var z;
-	var save;
+	var z = 0;
+	var save = 0;
 	save = __peek(current__);
 	JackParser__astAdd(__this, C__SUBROUTINECALL());
 	z = JackParser__matchSymbol(__this, C__LEFT_PARENTHESIS(), 0);
@@ -10367,9 +10367,9 @@ var JackParser__subroutineCall(var __this, var subroutineName, var tokenLine) {
 	return 0;
 }
 var JackParser__compileLet(var __this) {
-	var z;
-	var save;
-	var last;
+	var z = 0;
+	var save = 0;
+	var last = 0;
 	save = __peek(current__);
 	if (0!=((((0)==(JackParser__matchKeyword(__this, C__LET(), 0)))?-1:0))) {
 		JackParser__error(__this, Memory__getString(JackParser___str45));
@@ -10419,8 +10419,8 @@ var JackParser__compileLet(var __this) {
 	return 0;
 }
 var JackParser__compileWhile(var __this) {
-	var z;
-	var save;
+	var z = 0;
+	var save = 0;
 	save = __peek(current__);
 	if (0!=((((0)==(JackParser__matchKeyword(__this, C__WHILE(), 0)))?-1:0))) {
 		JackParser__error(__this, Memory__getString(JackParser___str50));
@@ -10461,8 +10461,8 @@ var JackParser__compileWhile(var __this) {
 	return 0;
 }
 var JackParser__compileReturn(var __this) {
-	var z;
-	var save;
+	var z = 0;
+	var save = 0;
 	save = __peek(current__);
 	if (0!=((((0)==(JackParser__matchKeyword(__this, C__RETURN(), 0)))?-1:0))) {
 		JackParser__error(__this, Memory__getString(JackParser___str55));
@@ -10491,9 +10491,9 @@ var JackParser__compileReturn(var __this) {
 	return 0;
 }
 var JackParser__compileIf(var __this) {
-	var z;
-	var save;
-	var begin;
+	var z = 0;
+	var save = 0;
+	var begin = 0;
 	save = __peek(current__);
 	if (0!=((((0)==(JackParser__matchKeyword(__this, C__IF(), 0)))?-1:0))) {
 		JackParser__error(__this, Memory__getString(JackParser___str57));
@@ -10557,8 +10557,8 @@ var JackParser__compileIf(var __this) {
 	return 0;
 }
 var JackParser__astAddAssign(var __this) {
-	var me;
-	var parent;
+	var me = 0;
+	var parent = 0;
 	parent = JackAst__getParent(__peek(current__));
 	me = JackAst__new(C__ASSIGN(), Memory__getString(JackParser___str64), parent);
 	JackAst__replaceChild(parent, __peek(current__), me);
@@ -10568,18 +10568,28 @@ var JackParser__astAddAssign(var __this) {
 	return me;
 }
 var JackParser__astAddOp(var __this) {
-	var c;
-	var parent;
-	var left;
+	var c = 0;
+	var parent = 0;
+	var left = 0;
+	var oldcurrent = 0;
 	c = JackTokenizer__symbol(__peek(jt__));
 	if (0!=((((c)>(0))?-1:0))) {
 		parent = JackAst__getParent(__peek(current__));
 		left = __peek(current__);
+		oldcurrent = __peek(current__);
+		if (0!=((((JackAst__getTag(left))==(C__EXPR()))?-1:0))) {
+			parent = left;
+			left = JackAst__getChild(left);
+		}
+
 		JackParser__astAddType(__this);
-		JackAst__removeChild(left, __peek(current__));
-		JackAst__replaceChild(parent, left, __peek(current__));
-		JackAst__setParent(left, __peek(current__));
-		JackAst__setLeft(__peek(current__), left);
+		if (0!=(left)) {
+			JackAst__removeChild(oldcurrent, __peek(current__));
+			JackAst__replaceChild(parent, left, __peek(current__));
+			JackAst__setParent(left, __peek(current__));
+			JackAst__setLeft(__peek(current__), left);
+		}
+
 	}
 
 	if (0!=((((c)==(C__PLUS()))?-1:0))) {
@@ -10621,8 +10631,8 @@ var JackParser__astAddOp(var __this) {
 	return 0;
 }
 var JackParser__compileExpression(var __this) {
-	var first;
-	var save;
+	var first = 0;
+	var save = 0;
 	save = __peek(current__);
 	first = -1;
 	while (-1==(-1)) {
@@ -10668,10 +10678,10 @@ var JackParser__compileExpression(var __this) {
 	return 0;
 }
 var JackParser__compileTerm(var __this, var expr) {
-	var z;
-	var s;
-	var l;
-	var save;
+	var z = 0;
+	var s = 0;
+	var l = 0;
+	var save = 0;
 	save = __peek(current__);
 	z = JackParser__matchIntegerConstant(__this, 0);
 	if (0!=(z)) {
@@ -10852,7 +10862,7 @@ var JackParser__compileTerm(var __this, var expr) {
 	return 0;
 }
 var JackParser__compileExpressionList(var __this) {
-	var save;
+	var save = 0;
 	save = __peek(current__);
 	JackParser__compileExpression(__this);
 	while (-1==(~((((JackParser__matchSymbol(__this, C__COMMA(), 0))==(0))?-1:0)))) {
@@ -11486,7 +11496,7 @@ var Font__new() {
 	return __this;
 }
 var Font__get(var __this, var c) {
-	var i;
+	var i = 0;
 	i = (c-32)*6;
 	return __peek(fnt__)+i;
 }
@@ -11495,7 +11505,7 @@ var Font__get(var __this, var c) {
 
 #ifdef JACK_IMPLEMENTATION
 var Array__new(var size) {
-	var a;
+	var a = 0;
 	a = Memory__alloc(size);
 	return a;
 }
@@ -11506,9 +11516,9 @@ var Array__dispose(var __this) {
 #endif
 
 #ifdef JACK_IMPLEMENTATION
-var Output___x;
-var Output___y;
-var Output___f;
+var Output___x = 0;
+var Output___y = 0;
+var Output___f = 0;
 var Output__init() {
 	Output___x = 0;
 	Output___y = 0;
@@ -11519,8 +11529,8 @@ var Output__deInit() {
 	return 0;
 }
 var Output__moveCursor(var row, var col) {
-	var xx;
-	var yy;
+	var xx = 0;
+	var yy = 0;
 	Output___x = col;
 	Output___y = row;
 	if (0!=((((Output___x)<(0))?-1:0))) {
@@ -11549,9 +11559,9 @@ var Output__moveCursor(var row, var col) {
 	return 0;
 }
 var Output__printString(var s) {
-	var i;
-	var l;
-	var c;
+	var i = 0;
+	var l = 0;
+	var c = 0;
 	i = 0;
 	l = String__length(s);
 	while (-1==((((i)<(l))?-1:0))) {
@@ -11573,14 +11583,14 @@ var Output__println() {
 	return 0;
 }
 var Output__printChar(var c) {
-	var xx;
-	var yy;
-	var i;
-	var j;
-	var l;
-	var p;
-	var chr;
-	var m;
+	var xx = 0;
+	var yy = 0;
+	var i = 0;
+	var j = 0;
+	var l = 0;
+	var p = 0;
+	var chr = 0;
+	var m = 0;
 	if (0!=(((((c)>(1114111))?-1:0))|((((c)<(0))?-1:0)))) {
 		return 0;
 	}
@@ -11639,7 +11649,7 @@ var Output__printChar(var c) {
 	return 0;
 }
 var Output__printInt(var c) {
-	var s;
+	var s = 0;
 	s = String__new(8);
 	s = String__setInt(s, c);
 	Output__printString(s);
@@ -11647,8 +11657,8 @@ var Output__printInt(var c) {
 	return 0;
 }
 var Output__backSpace() {
-	var xx;
-	var yy;
+	var xx = 0;
+	var yy = 0;
 	Output___x = Output___x-1;
 	if (0!=((((Output___x)<(0))?-1:0))) {
 		Output___x = 0;
@@ -11666,7 +11676,7 @@ var Output__backSpace() {
 #ifdef JACK_IMPLEMENTATION
 var Sys___str0[] = {69,114,114,111,114,40,0};
 var Sys___str1[] = {41,0};
-var Sys___in_error;
+var Sys___in_error = 0;
 var Sys__init() {
 	Sys___in_error = 0;
 	Memory__init();
@@ -11719,7 +11729,7 @@ var Sys__wait(var duration) {
 #endif
 
 #ifdef JACK_IMPLEMENTATION
-var Screen___color;
+var Screen___color = 0;
 var Screen__init() {
 	Screen___color = -1;
 	return 0;
@@ -11728,7 +11738,7 @@ var Screen__deInit() {
 	return 0;
 }
 var Screen__clearScreen() {
-	var i;
+	var i = 0;
 	i = 16384;
 	while (-1==((((i)<(24576))?-1:0))) {
 		Memory__poke(i, 0);
@@ -11742,10 +11752,10 @@ var Screen__setColor(var b) {
 	return 0;
 }
 var Screen__drawPixel(var x, var y) {
-	var b;
-	var i;
-	var r;
-	var p;
+	var b = 0;
+	var i = 0;
+	var r = 0;
+	var p = 0;
 	i = (x/16)+(y*(512/16))+16384;
 	b = Memory__peek(i);
 	r = x-((x/16)*16);
@@ -11763,13 +11773,13 @@ var Screen__drawPixel(var x, var y) {
 	return 0;
 }
 var Screen__drawLine(var x, var y, var x2, var y2) {
-	var a;
-	var b;
-	var dx;
-	var dy;
-	var ax;
-	var ay;
-	var adyMinusbdx;
+	var a = 0;
+	var b = 0;
+	var dx = 0;
+	var dy = 0;
+	var ax = 0;
+	var ay = 0;
+	var adyMinusbdx = 0;
 	dx = x2-x;
 	dy = y2-y;
 	if (0!=((((dx)==(0))?-1:0))) {
@@ -11853,7 +11863,7 @@ var Screen__drawLine(var x, var y, var x2, var y2) {
 	return 0;
 }
 var Screen__drawRectangle(var x, var y, var x2, var y2) {
-	var i;
+	var i = 0;
 	i = y;
 	Screen__drawLine(x, i, x2, i);
 	while (-1==((((i)<(y2))?-1:0))) {
@@ -11863,12 +11873,12 @@ var Screen__drawRectangle(var x, var y, var x2, var y2) {
 	return 0;
 }
 var Screen__drawCircle(var x, var y, var r) {
-	var dy;
-	var s;
-	var r2;
-	var x0;
-	var x1;
-	var y0;
+	var dy = 0;
+	var s = 0;
+	var r2 = 0;
+	var x0 = 0;
+	var x1 = 0;
+	var y0 = 0;
 	dy = -r;
 	if (0!=(((((r)>(181))?-1:0))|((((r)<(0))?-1:0)))) {
 		return 0;
@@ -11926,10 +11936,10 @@ var Math__abs(var a) {
 	return a;
 }
 var Math__multiply(var x, var y) {
-	var sum;
-	var j;
-	var b;
-	var shiftedX;
+	var sum = 0;
+	var j = 0;
+	var b = 0;
+	var shiftedX = 0;
 	sum = 0;
 	shiftedX = x;
 	if (0!=(((((x)<(1))?-1:0))|((((y)<(1))?-1:0)))) {
@@ -11950,7 +11960,7 @@ var Math__multiply(var x, var y) {
 	return sum;
 }
 var Math__divide(var x, var y) {
-	var q;
+	var q = 0;
 	if (0!=(((((x)<(0))?-1:0))|((((y)<(1))?-1:0)))) {
 		return 0;
 	}
@@ -11981,11 +11991,11 @@ var Math__max(var x, var y) {
 	return y;
 }
 var Math__sqrt(var x) {
-	var y;
-	var j;
-	var y2j;
-	var n2;
-	var xp;
+	var y = 0;
+	var j = 0;
+	var y2j = 0;
+	var n2 = 0;
+	var xp = 0;
 	if (0!=((((x)<(1))?-1:0))) {
 		return 0;
 	}
@@ -12021,7 +12031,7 @@ var Math__shiftRight(var value, var shift) {
 	return value;
 }
 var Math__rem(var a, var b) {
-	var c;
+	var c = 0;
 	if (0!=((((b)==(0))?-1:0))) {
 		return 0;
 	}
@@ -12031,13 +12041,13 @@ var Math__rem(var a, var b) {
 	return a-c;
 }
 var Math__xor(var a, var b) {
-	var c;
+	var c = 0;
 	c = a|b;
 	c = c&(~((a)&(b)));
 	return c;
 }
 var Math__log2(var n) {
-	var r;
+	var r = 0;
 	r = 0;
 	if (0!=((((n)==(0))?-1:0))) {
 		return -1;
@@ -12050,12 +12060,12 @@ var Math__log2(var n) {
 	return r;
 }
 var Math__sizeOfInt() {
-	var s;
+	var s = 0;
  	s = sizeof(var);
 	return s;
 }
 var Math__isBigEndian() {
-	var s;
+	var s = 0;
  	int x = 1;
  	char *y = (char*)&x;
  	s = 0;
@@ -12063,7 +12073,7 @@ var Math__isBigEndian() {
 	return s;
 }
 var Math__isWindows() {
-	var s;
+	var s = 0;
 	s = 0;
  #ifdef _WIN32
  	s = -1;
@@ -12090,8 +12100,8 @@ var String__dispose(var __this) {
 	return 0;
 }
 var String__length(var __this) {
-	var s;
-	var l;
+	var s = 0;
+	var l = 0;
 	l = 0;
 	s = __peek(str__);
 	if (0!=((((s)==(0))?-1:0))) {
@@ -12104,12 +12114,12 @@ var String__length(var __this) {
 	return l;
 }
 var String__charAt(var __this, var a) {
-	var ret;
+	var ret = 0;
 	ret = __peek(__peek(str__)+a);
 	return ret;
 }
 var String__setCharAt(var __this, var j, var c) {
-	var s;
+	var s = 0;
 	s = __peek(str__);
 	__poke(s+j, c);
 	return 0;
@@ -12118,12 +12128,12 @@ var String__getArray(var __this) {
 	return __peek(str__);
 }
 var String__appendChar(var __this, var c) {
-	var l;
-	var i;
-	var nl;
-	var max;
-	var b;
-	var d;
+	var l = 0;
+	var i = 0;
+	var nl = 0;
+	var max = 0;
+	var b = 0;
+	var d = 0;
 	d = __peek(str__);
 	if (0!=((((__peek(size__))<(1))?-1:0))) {
 		Sys__error(12);
@@ -12153,8 +12163,8 @@ var String__appendChar(var __this, var c) {
 	return __this;
 }
 var String__eraseLastChar(var __this) {
-	var l;
-	var s;
+	var l = 0;
+	var s = 0;
 	s = __peek(str__);
 	l = String__length(__this);
 	if (0!=((((l)>(0))?-1:0))) {
@@ -12164,11 +12174,11 @@ var String__eraseLastChar(var __this) {
 	return 0;
 }
 var String__intValue(var __this) {
-	var v;
-	var s;
-	var d;
-	var i;
-	var o;
+	var v = 0;
+	var s = 0;
+	var d = 0;
+	var i = 0;
+	var o = 0;
 	o = __peek(str__);
 	v = 0;
 	s = 1;
@@ -12189,10 +12199,10 @@ var String__intValue(var __this) {
 	return v*s;
 }
 var String__setInt(var __this, var j) {
-	var n;
-	var k;
-	var s;
-	var p;
+	var n = 0;
+	var k = 0;
+	var s = 0;
+	var p = 0;
 	p = 0;
 	s = __this;
 	String__setCharAt(s, 0, 0);
@@ -12227,11 +12237,11 @@ var String__setInt(var __this, var j) {
 	return __this;
 }
 var String__appendFromNative(var __this, var native) {
-	var l;
-	var i;
-	var c;
-	var n;
-	var s;
+	var l = 0;
+	var i = 0;
+	var c = 0;
+	var n = 0;
+	var s = 0;
 	s = __this;
 	n = native;
 	i = 0;
@@ -12273,9 +12283,9 @@ var String__newLine() {
 	return 10;
 }
 var String__copy(var __this) {
-	var s;
-	var j;
-	var l;
+	var s = 0;
+	var j = 0;
+	var l = 0;
 	j = 0;
 	l = String__length(__this);
 	s = String__new(l+1);
@@ -12286,9 +12296,9 @@ var String__copy(var __this) {
 	return s;
 }
 var String__appendString(var __this, var p) {
-	var j;
-	var l;
-	var s;
+	var j = 0;
+	var l = 0;
+	var s = 0;
 	s = __this;
 	j = 0;
 	l = String__length(p);
@@ -12299,11 +12309,11 @@ var String__appendString(var __this, var p) {
 	return __this;
 }
 var String__compare(var __this, var s) {
-	var p;
-	var j;
-	var lp;
-	var ls;
-	var r;
+	var p = 0;
+	var j = 0;
+	var lp = 0;
+	var ls = 0;
+	var r = 0;
 	p = __this;
 	lp = String__length(p);
 	ls = String__length(s);
@@ -12340,12 +12350,12 @@ var Memory___str13[] = {100,101,65,108,108,111,99,32,101,114,114,111,114,58,32,9
 var Memory___str14[] = {32,112,61,0};
 var Memory___str15[] = {69,114,114,111,114,32,105,110,32,100,101,65,108,108,111,99,33,0};
 var Memory___str16[] = {32,97,115,105,122,101,61,0};
-var Memory___arena;
-var Memory___asize;
-var Memory___freep;
-var Memory___mem;
+var Memory___arena = 0;
+var Memory___asize = 0;
+var Memory___freep = 0;
+var Memory___mem = 0;
 var Memory__init() {
-	var i;
+	var i = 0;
 	Memory___mem = 0;
  #ifndef JACK_HACK
  	return 0;
@@ -12406,9 +12416,9 @@ var Memory__poke(var addr, var value) {
 	return 0;
 }
 var Memory__defrag() {
-	var p;
-	var q;
-	var end;
+	var p = 0;
+	var q = 0;
+	var end = 0;
 	end = Memory___arena+Memory___asize;
 	p = Memory___arena;
 	while (-1==((((p)<(end))?-1:0))) {
@@ -12429,9 +12439,9 @@ var Memory__defrag() {
 	return 0;
 }
 var Memory__checkEmpty() {
-	var ok;
-	var p;
-	var end;
+	var ok = 0;
+	var p = 0;
+	var end = 0;
  	return -1;
 	end = Memory___arena+Memory___asize;
 	p = Memory___arena;
@@ -12458,13 +12468,13 @@ var Memory__checkEmpty() {
 	return ok;
 }
 var Memory__alloc(var size) {
-	var p;
-	var end;
-	var k;
-	var tries;
-	var i;
-	var j;
-	var doit;
+	var p = 0;
+	var end = 0;
+	var k = 0;
+	var tries = 0;
+	var i = 0;
+	var j = 0;
+	var doit = 0;
  #ifndef JACK_HACK
  	p = (var) malloc(sizeof(var)* (size+1));
  	((var*)p)[0] = -(size+1);
@@ -12553,7 +12563,7 @@ var Memory__log(var msg, var p, var q) {
 	Output__printInt(Memory___asize);
 }
 var Memory__deAlloc(var p) {
-	var pi;
+	var pi = 0;
  #ifndef JACK_HACK
  	//free((void*)(((var)(((var*)p)-1)) * 1));
  	free(((var*)(p* sizeof(var)))-1);
@@ -12620,7 +12630,7 @@ var Keyboard__deInit() {
 	return 0;
 }
 var Keyboard__keyPressed() {
-	var c;
+	var c = 0;
 	c = Keyboard__getKey();
 	if (0!=(c)) {
 		Memory__poke(24576, c);
@@ -12629,7 +12639,7 @@ var Keyboard__keyPressed() {
 	return Memory__peek(24576);
 }
 var Keyboard__getKey() {
-	var x;
+	var x = 0;
 	x = Keyboard__getChar();
 	if (0!=((((x)==(10))?-1:0))) {
 		return 128;
@@ -12728,7 +12738,7 @@ var Keyboard__getKey() {
 	return x;
 }
 var Keyboard__getChar() {
-	var x;
+	var x = 0;
  #ifndef _WIN32
  	//fd_set rd;
  	int flags;
@@ -12756,7 +12766,7 @@ var Keyboard__getChar() {
 	return x;
 }
 var Keyboard__readChar() {
-	var k;
+	var k = 0;
 	k = Keyboard__keyPressed();
 	while (-1==((((k)==(0))?-1:0))) {
 		Sys__wait(50);
@@ -12770,8 +12780,8 @@ var Keyboard__readChar() {
 	return k;
 }
 var Keyboard__readLine(var message) {
-	var s;
-	var k;
+	var s = 0;
+	var k = 0;
 	s = String__new(256);
 	Output__printString(message);
 	k = Keyboard__readChar();
@@ -12782,8 +12792,8 @@ var Keyboard__readLine(var message) {
 	return s;
 }
 var Keyboard__readInt(var message) {
-	var k;
-	var i;
+	var k = 0;
+	var i = 0;
 	Output__printString(message);
 	i = 0;
 	k = Keyboard__readChar();
@@ -12881,14 +12891,14 @@ var Main___str6[] = {76,105,110,107,105,110,103,32,0};
 var Main___str7[] = {46,46,46,0};
 var Main___str8[] = {68,111,110,101,46,0};
 var Main__getJackFiles(var lst, var dir) {
-	var f;
-	var p;
-	var i;
-	var l;
-	var j;
-	var c;
-	var d;
-	var doit;
+	var f = 0;
+	var p = 0;
+	var i = 0;
+	var l = 0;
+	var j = 0;
+	var c = 0;
+	var d = 0;
+	var doit = 0;
 	i = 0;
 	f = File__new(dir, 0);
 	if (0!=(f)) {
@@ -12945,14 +12955,14 @@ var Main__getJackFiles(var lst, var dir) {
 	return 0;
 }
 var Main__main() {
-	var cpl;
-	var dir;
-	var args;
-	var files;
-	var s;
-	var i;
-	var l;
-	var hack;
+	var cpl = 0;
+	var dir = 0;
+	var args = 0;
+	var files = 0;
+	var s = 0;
+	var i = 0;
+	var l = 0;
+	var hack = 0;
 	hack = 0;
 	args = Sys2__args();
 	if (0!=((((Buffer__getSize(args))<(2))?-1:0))) {
