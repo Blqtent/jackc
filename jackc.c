@@ -11712,7 +11712,8 @@ var Sys__error(var errorCode) {
 	Output__printInt(errorCode);
 	Output__printString(Memory__getString(Sys___str1));
 	Output__println();
- 	errorCode = 1 / (errorCode - errorCode);
+ 	errorCode = 0;
+ 	errorCode = 1 / (errorCode);
  	exit(errorCode);
 	Sys___in_error = 0;
 	return 0;
