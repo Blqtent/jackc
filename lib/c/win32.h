@@ -22,6 +22,8 @@ int width = 512;
 int height = 256;
 GLuint tex = 1;
 var refresh = 0;
+COORD coord;
+HANDLE output;
 
 void display()
 {
@@ -130,7 +132,9 @@ LONG WINAPI WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		break;
 	case WM_CHAR:
 		key = wParam;
-		Memory__poke(24576, key);
+		if (Memory__peek(24576) == 0) {
+			Memory__poke(24576, key);
+		}
 		return 0;
 	case WM_QUIT:
 		deInit();
@@ -248,6 +252,7 @@ var Screen__refresh()
 	if (refresh) return 0;
 	refresh = -1;
 	init();
+	PostMessage(hWnd, WM_PAINT, 0, 0);
 	return 0;
 }
 
@@ -262,7 +267,15 @@ var Screen__processEvents()
 	init();
 	key = 0;
 	if (refresh) {
+		while (PeekMessage(&msg, hWnd, 0, 0, PM_REMOVE)) {
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
+			if (key) { k = key; }
+		}
 		PostMessage(hWnd, WM_PAINT, 0, 0);
+		while (!PeekMessage(&msg, hWnd, 0, 0, PM_NOREMOVE)) {
+			Sleep(2);
+		}
 	}
 	while (PeekMessage(&msg, hWnd, 0, 0, PM_REMOVE)) {
 		TranslateMessage(&msg);
@@ -271,7 +284,9 @@ var Screen__processEvents()
 			k = key;
 		}
 	}
-	Sys__wait(20);
+	if (!k) {
+		Sleep(20);
+	}
 	in_proc = 0;
 	return k;
 }

@@ -42,8 +42,17 @@ class Output {
 		do Output.printChar(32);
 		let x = xx;
 		let y = yy;
-//#c 	printf("\033[%ld;%ldf ", (long)yy + 1, (long)xx + 1);
-//#c 	fflush(stdout);
+/*#c 	
+#ifdef _WIN32
+	output = GetStdHandle(STD_OUTPUT_HANDLE);
+	coord.X = (SHORT)xx;
+	coord.Y = (SHORT)yy;
+	SetConsoleCursorPosition(output, coord);	
+#else
+	printf("\033[%ld;%ldf ", (long)yy + 1, (long)xx + 1);
+ 	fflush(stdout);
+#endif
+#*/
 //#py 	sys.stdout.write("\033[%d;%dH" % (col, row))
 		return;
 	}

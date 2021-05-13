@@ -1396,59 +1396,6 @@ var refresh()
 	return 0;
 }
 
-/*
-var Screen__drawChar(var c, var x, var y) 
-{
-	int j, l;
-	var d;
-	if (y > 22 || x > 63 || x < 0 || y < 0) {
-				printf("GOH\n");
-		return 0;
-	}
-	init();
-	need_update = -1;
-	d = consoleb[x + (64 * y)];
-	consoleb[x + (64 * y)] = c;
-#ifdef JACK_HACK
-	if (d != ' ' || c != ' ') {
-		for (j = 0; j < 11; j++) {
-			l =  (((int)y * 11) + j) * width / 16 + (int)x/2;
-			if (x & 0x1) {
-				 Memory__memory[l+16384] &= 0x00FF;
-			} else {
-				 Memory__memory[l+16384] &= 0xFF00;
-			}
-			if (l+16384 > 24576) {
-				printf("HHHH\n");
-			}
-		}
-	}
-#endif 
-	return 0;
-}
-*/
-/*
-var Screen__putPixel(var index, var newvalue)
-{
-	var old;
-	var x, y;
-	need_update = -1;
-	old = Memory__peek(index + 16384);
-	x = (index % 32) * 2;
-	y = (index / 32);
-	if (y > 22) {
-		return 0;
-	}
-	//if ((old & 0x00FF) != (newvalue & 0x00FF)) {
-		Screen__drawChar(' ', x, y) ;
-	//}
-	//if ((old & 0xFF00) != (newvalue & 0xFF00)) {
-		Screen__drawChar(' ', x+1, y) ;
-	//}
-	return 0;
-}
-*/
-
 var Screen__refresh()
 {
 	Screen__need_refresh = -1;
@@ -1458,7 +1405,6 @@ var Screen__refresh()
 var Screen__processEvents()
 {
 	static var inproc = 0;
-	static var was_key = 0;
 	var e, r;
 
 	if (inproc) {
@@ -1467,7 +1413,14 @@ var Screen__processEvents()
 	inproc = -1;
 	init();
 	if (Screen__need_refresh) {
+		while (XPending(__display)) {
+			e = processEvent();
+			if (e) { r = e; }
+		}
 		refresh();
+		while (!XPending(__display)) {
+			usleep(1000);
+		}
 		Screen__need_refresh = 0;
 	}
 	while (XPending(__display)) {
@@ -1477,15 +1430,10 @@ var Screen__processEvents()
 		}
 	}
 	if (r) {
-		if (was_key) {
-			Sys__wait(30);
-		}
-		was_key = -1;
 		inproc = 0;
 		return r;
 	}
-	was_key = 0;
-	Sys__wait(10);
+	usleep(10000);
 	inproc = 0;
 	return 0;
 }
@@ -1521,6 +1469,8 @@ int width = 512;
 int height = 256;
 GLuint tex = 1;
 var refresh = 0;
+COORD coord;
+HANDLE output;
 
 void display()
 {
@@ -1629,7 +1579,9 @@ LONG WINAPI WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		break;
 	case WM_CHAR:
 		key = wParam;
-		Memory__poke(24576, key);
+		if (Memory__peek(24576) == 0) {
+			Memory__poke(24576, key);
+		}
 		return 0;
 	case WM_QUIT:
 		deInit();
@@ -1747,6 +1699,7 @@ var Screen__refresh()
 	if (refresh) return 0;
 	refresh = -1;
 	init();
+	PostMessage(hWnd, WM_PAINT, 0, 0);
 	return 0;
 }
 
@@ -1761,7 +1714,15 @@ var Screen__processEvents()
 	init();
 	key = 0;
 	if (refresh) {
+		while (PeekMessage(&msg, hWnd, 0, 0, PM_REMOVE)) {
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
+			if (key) { k = key; }
+		}
 		PostMessage(hWnd, WM_PAINT, 0, 0);
+		while (!PeekMessage(&msg, hWnd, 0, 0, PM_NOREMOVE)) {
+			Sleep(2);
+		}
 	}
 	while (PeekMessage(&msg, hWnd, 0, 0, PM_REMOVE)) {
 		TranslateMessage(&msg);
@@ -1770,7 +1731,9 @@ var Screen__processEvents()
 			k = key;
 		}
 	}
-	Sys__wait(20);
+	if (!k) {
+		Sleep(20);
+	}
 	in_proc = 0;
 	return k;
 }
@@ -2078,7 +2041,8 @@ void deInit()
 
 NSUInteger applicationShouldTerminate(id self, SEL _sel, id sender)
 {
-	exit(0);
+	deInit();
+	terminate = -1;
 	return 0;
 }
 
@@ -2535,7 +2499,6 @@ var Screen__refresh()
 	if (refresh_) return 0;
 	refresh_ = -1;
 	init();
-	update();
 	return 0;
 }
 
@@ -2548,6 +2511,10 @@ var Screen__processEvents()
 	}
 	in_proc = -1;
 	init();
+	if (refresh_) {
+		update();
+		refresh_ = 0;
+	}
 	key = 0;
 	while (check_event()) {
 		if (key) {
@@ -2557,8 +2524,13 @@ var Screen__processEvents()
 	if (terminate) {
 		exit(0);
 	}
-	update();
-	Sys__wait(20);
+	if (refresh_) {
+		update();
+		refresh_ = 0;
+	}
+	if (!k) {
+		usleep(10000);
+	}
 	in_proc = 0;
 	return k;
 }
@@ -11272,8 +11244,17 @@ var Output__moveCursor(var row, var col) {
 	Output__printChar(32);
 	Output___x = xx;
 	Output___y = yy;
- 	printf("\033[%ld;%ldf ", (long)yy + 1, (long)xx + 1);
+ 	
+#ifdef _WIN32
+	output = GetStdHandle(STD_OUTPUT_HANDLE);
+	coord.X = (SHORT)xx;
+	coord.Y = (SHORT)yy;
+	SetConsoleCursorPosition(output, coord);	
+#else
+	printf("\033[%ld;%ldf ", (long)yy + 1, (long)xx + 1);
  	fflush(stdout);
+#endif
+
 	return 0;
 }
 var Output__printString(var s) {
@@ -11550,14 +11531,11 @@ var Screen__drawLine(var x, var y, var x2, var y2) {
 	} else {
 		if ((((dx)>(0)))&&(((dy)<(0)))) {
 			dy = -dy;
-			y = y2;
 			ay = dy;
 		} else {
 			if ((((dx)<(0)))&&(((dy)>(0)))) {
 				dx = -dx;
-				x = x2;
-				y = y2;
-				ay = -dy;
+				ax = dx;
 			}
 
 		}
@@ -12083,9 +12061,11 @@ var Memory___arena;
 var Memory___asize;
 var Memory___freep;
 var Memory___mem;
+var Memory___keyread;
 var Memory__init() {
 	var i;
 	Memory___mem = 0;
+	Memory___keyread = 0;
  #ifndef JACK_HACK
  	return 0;
  #endif
@@ -12114,6 +12094,7 @@ var Memory__peek(var addr) {
 	}
 
 	if (((addr)==(24576))) {
+		Memory___keyread = -1;
 		addr = addr;
 	}
 
@@ -12133,6 +12114,11 @@ var Memory__poke(var addr, var value) {
 	}
 
 	if ((((addr)>(16383)))&&(((addr)<(24576)))) {
+		if (Memory___keyread) {
+			__poke(Memory___mem+24576, 0);
+			Memory___keyread = 0;
+		}
+
 		Screen__refresh();
 	}
 

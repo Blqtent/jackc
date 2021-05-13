@@ -296,7 +296,8 @@ void deInit()
 
 NSUInteger applicationShouldTerminate(id self, SEL _sel, id sender)
 {
-	exit(0);
+	deInit();
+	terminate = -1;
 	return 0;
 }
 
@@ -753,7 +754,6 @@ var Screen__refresh()
 	if (refresh_) return 0;
 	refresh_ = -1;
 	init();
-	update();
 	return 0;
 }
 
@@ -766,6 +766,10 @@ var Screen__processEvents()
 	}
 	in_proc = -1;
 	init();
+	if (refresh_) {
+		update();
+		refresh_ = 0;
+	}
 	key = 0;
 	while (check_event()) {
 		if (key) {
@@ -775,8 +779,13 @@ var Screen__processEvents()
 	if (terminate) {
 		exit(0);
 	}
-	update();
-	Sys__wait(20);
+	if (refresh_) {
+		update();
+		refresh_ = 0;
+	}
+	if (!k) {
+		usleep(10000);
+	}
 	in_proc = 0;
 	return k;
 }
