@@ -18,7 +18,7 @@ The [Jack programming language][1] is described in the book
 [www.nand2tetris.org][7]. There is a [set of video][3] on Youtube talking about it.
 
 This document is describing a Jack compiler written in Jack.
-At the begin it was itselfs bootstraped with a simple Python3 Jack compiler.
+At the begin it was itself bootstrapped with a simple Python3 Jack compiler.
 
 Status of this document
 -----------------------
@@ -71,7 +71,7 @@ Differences from the original Jack specification are :
 
 The range of decimal constant number and integer variable is unspecified. 
 The size of the integer is at least the same size as the size of a memory 
-adresse. (It could be from 8 to 512 bits).
+address. (It could be from 8 to 512 bits).
 
 The callback extension allows to call a `callback` method 
 from a Callback object.
@@ -96,7 +96,7 @@ The `while` and `if` conditions are coherent. In the VMEmulator  the
 `if` condition is true if it is not equal to 0. 
 The public domain jack compiler treats both conditions like the `if`.
 
-The static and local variables are not initilized to 0 at start up.
+The static and local variables are not initialized to 0 at start up.
 The VMEmulator does.
 
 
@@ -115,7 +115,7 @@ class Main {
 }
 ```
 
-You need to install a valid OpenGL developemnt envirionment, using
+You need to install a valid OpenGL development environment, using
 `sudo apt install build-essential libx11-dev libgl1-mesa-dev libglu1-mesa-dev`.
 
 Create an empty directory structure using `mkdir -p hello/lib`.
