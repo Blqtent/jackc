@@ -73,7 +73,7 @@ class Math {
 		let xp = x + 1;
 		let y = 0;
 		let n2 = 128;
-		let j = 7;
+		let j =7;
 		while (j > -1) {
 			let y2j = y + n2;
 			let y2j = y2j * y2j;

@@ -11,10 +11,12 @@ class Memory {
 	static int arena, asize;
 	static int freep;
 	static Array mem;
+	static boolean keyread;
 
 	function void init() {
 		var int i;
 		let mem = 0;
+		let keyread = false;
 //#c #ifndef JACK_HACK
 //#c 	return 0;
 //#c #endif
@@ -44,6 +46,7 @@ class Memory {
 			do Sys.error(28);
 		}
 		if (addr = 24576) {
+			let keyread = true;
 			let addr = addr;
 		} 
 //#c 	if (addr == 24576) {
@@ -61,6 +64,11 @@ class Memory {
 			do Sys.error(30);
 		}
 		if ((addr > 16383) & (addr < 24576)) {
+			if (keyread) {
+ 				// clear keyboard when drawing
+				let mem[24576] = 0;
+				let keyread = false;
+			}
 			do Screen.refresh();
 		} 
 //#c 	return Memory__memory[addr] = value;

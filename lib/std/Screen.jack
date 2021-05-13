@@ -105,14 +105,12 @@ class Screen {
 			let y = y2;
 		} else {if ((dx > 0) & (dy < 0)) {
 			let dy = -dy;
-			let y = y2;
 			let ay = dy;
 		} else {if ((dx < 0) & (dy > 0)) {
 			let dx = -dx;
-			let x = x2;
-			let y = y2;
-			let ay = -dy;
+			let ax = dx;
 		}}}
+
 		let a = 0;
 		let b = 0;
 		let adyMinusbdx = 0;

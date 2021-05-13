@@ -387,59 +387,6 @@ var refresh()
 	return 0;
 }
 
-/*
-var Screen__drawChar(var c, var x, var y) 
-{
-	int j, l;
-	var d;
-	if (y > 22 || x > 63 || x < 0 || y < 0) {
-				printf("GOH\n");
-		return 0;
-	}
-	init();
-	need_update = -1;
-	d = consoleb[x + (64 * y)];
-	consoleb[x + (64 * y)] = c;
-#ifdef JACK_HACK
-	if (d != ' ' || c != ' ') {
-		for (j = 0; j < 11; j++) {
-			l =  (((int)y * 11) + j) * width / 16 + (int)x/2;
-			if (x & 0x1) {
-				 Memory__memory[l+16384] &= 0x00FF;
-			} else {
-				 Memory__memory[l+16384] &= 0xFF00;
-			}
-			if (l+16384 > 24576) {
-				printf("HHHH\n");
-			}
-		}
-	}
-#endif 
-	return 0;
-}
-*/
-/*
-var Screen__putPixel(var index, var newvalue)
-{
-	var old;
-	var x, y;
-	need_update = -1;
-	old = Memory__peek(index + 16384);
-	x = (index % 32) * 2;
-	y = (index / 32);
-	if (y > 22) {
-		return 0;
-	}
-	//if ((old & 0x00FF) != (newvalue & 0x00FF)) {
-		Screen__drawChar(' ', x, y) ;
-	//}
-	//if ((old & 0xFF00) != (newvalue & 0xFF00)) {
-		Screen__drawChar(' ', x+1, y) ;
-	//}
-	return 0;
-}
-*/
-
 var Screen__refresh()
 {
 	Screen__need_refresh = -1;
@@ -449,7 +396,6 @@ var Screen__refresh()
 var Screen__processEvents()
 {
 	static var inproc = 0;
-	static var was_key = 0;
 	var e, r;
 
 	if (inproc) {
@@ -458,7 +404,14 @@ var Screen__processEvents()
 	inproc = -1;
 	init();
 	if (Screen__need_refresh) {
+		while (XPending(__display)) {
+			e = processEvent();
+			if (e) { r = e; }
+		}
 		refresh();
+		while (!XPending(__display)) {
+			usleep(1000);
+		}
 		Screen__need_refresh = 0;
 	}
 	while (XPending(__display)) {
@@ -468,15 +421,10 @@ var Screen__processEvents()
 		}
 	}
 	if (r) {
-		if (was_key) {
-			Sys__wait(30);
-		}
-		was_key = -1;
 		inproc = 0;
 		return r;
 	}
-	was_key = 0;
-	Sys__wait(10);
+	usleep(10000);
 	inproc = 0;
 	return 0;
 }
