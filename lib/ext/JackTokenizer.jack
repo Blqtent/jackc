@@ -70,7 +70,9 @@ class JackTokenizer {
 		do h.add("method", C.METHOD());
 		do h.add("function", C.FUNCTION());
 		do h.add("constructor", C.CONSTRUCTOR());
-		do h.add("callback", C.CALLBACK());
+		if (~hack) {
+			do h.add("callback", C.CALLBACK());
+		}
 		do h.add("int", C.INT());
 		do h.add("boolean", C.BOOLEAN());
 		do h.add("char", C.CHAR());

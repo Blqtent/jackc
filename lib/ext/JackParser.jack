@@ -457,7 +457,7 @@ class JackParser {
 	}
 
 	method boolean compileSubroutine() {
-		var boolean z;
+		var boolean z, iscb;
 		var JackAst save, body;
 		let save = current;
 		let z = matchKeyword(C.CONSTRUCTOR(), false);
@@ -482,13 +482,23 @@ class JackParser {
 			do error("expect type");
 			return false;
 		}
+		let iscb = false;
 		let z = matchIdentifier(true); // subroutinName
+		if (~z) {
+			let z = matchKeyword(C.CALLBACK(), false);
+			if (z) {
+				let iscb = true;
+			}
+		}
 		if (false=z) {
 			do error("expect subroutineName");
 			return false;
 		}
-		do astAdd(C.SUBROUTINENAME());
-			
+		if (iscb) {
+			do astAdd(C.CALLBACK());
+		} else {
+			do astAdd(C.SUBROUTINENAME());
+		}	
 		let z = matchSymbol(
 			C.LEFT_PARENTHESIS(), true);
 		if (false=z) {
