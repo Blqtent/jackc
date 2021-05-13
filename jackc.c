@@ -2499,7 +2499,6 @@ var Screen__refresh()
 	if (refresh_) return 0;
 	refresh_ = -1;
 	init();
-	update();
 	return 0;
 }
 
@@ -2525,10 +2524,8 @@ var Screen__processEvents()
 	if (terminate) {
 		exit(0);
 	}
-	if (refresh_) {
-		update();
-		refresh_ = 0;
-	}
+	update();
+	refresh_ = 0;
 	if (!k) {
 		usleep(10000);
 	}

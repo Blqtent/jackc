@@ -782,7 +782,7 @@ var Screen__processEvents()
 	update();
 	refresh_ = 0;
 	if (!k) {
-		usleep(10000);
+		usleep(1000);
 	}
 	in_proc = 0;
 	return k;
