@@ -287,7 +287,6 @@ class JackParser {
 		while (~(compileClassVarDec() = null)) {
 			let doit = doit; 
 		}
-		do compileCallbackDec();
 		while (~(compileSubroutine() = null)) {
 			let doit = doit; 
 		}
@@ -398,61 +397,6 @@ class JackParser {
 			return false;
 		}
 		do error("'{̈́' expected");
-		return false;
-	}
-
-	method void compileCallbackDec() {
-		var boolean z;
-		var JackAst save, body;
-		let save = current;
-
-		let z = matchKeyword(C.CALLBACK(), false);
-		if (false=z) {
-			return;
-		}
-		
-		do astAdd(C.CALLBACK());
-		let body = current;
-
-		let z = matchKeyword(C.INT(), true); // type
-		if (false=z) {
-			do error("'int' expected");
-			return;
-		}
-		do astAdd(C.INT());
-		let z = matchKeyword(C.CALLBACK(), true); // type
-		if (false=z) {
-			do error("'callback' expected");
-			return;
-		}
-		do astAdd(C.SUBROUTINENAME());
-		let z = matchSymbol(C.LEFT_PARENTHESIS(), true);
-		if (false=z) {
-			do error("expect '('");
-			return false;
-		}				
-
-		do advance();
-		//let current = body;
-		do astAdd(C.PARAMS());
-		do compileParameter();
-		let z = matchSymbol(C.COMMA(), false);
-		if (false=z) {
-	        	do error("expect ',' ");
-			return false;
-
-		}
-		do advance();
-		do compileParameter();
-		let z = matchSymbol(C.RIGHT_PARENTHESIS(), false);
-		if (z) {
-			do advance();
-			let current = body;
-			let z = compileSubroutineBody();
-			let current = save;
-			return z;
-	    	}
-	        do error("expect ')'.");
 		return false;
 	}
 

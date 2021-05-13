@@ -105,15 +105,13 @@ class JackAstToC {
 				do coMethod(d);
 			} else { if (t = C.CONSTRUCTOR()) {
 				do coConstructor(d);
-			} else { if (t = C.CALLBACK()) {
-				do coCallback(d);
 			} else { if (t = C.FIELD()) {
 				do coField(d);
 			} else { if (t = C.STATIC()) {
 				do coStatic(d);
 			} else { 
 				do error("Unexpected kind.", d);
-			}}}}}}
+			}}}}}
 			let d = d.getNext();
 		}
 
@@ -385,13 +383,6 @@ class JackAstToC {
 			}
 			let d = d.getNext();
 		}
-		return;
-	}
-
-	method void coCallback(JackAst c) {
-		let nb_field = nb_field + 1;
-		let has_callback = true;
-		do coMethod(c);
 		return;
 	}
 
@@ -1004,9 +995,6 @@ class JackAstToC {
 			return true;
 		}
 		if (t = C.CONSTRUCTOR()) {
-			return true;
-		}
-		if (t = C.CALLBACK()) {
 			return true;
 		}
 		return false;

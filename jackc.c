@@ -193,7 +193,6 @@ var JackAstToC__coMethodPre(var __this, var c);
 var JackAstToC__coConstructorPre(var __this, var c);
 var JackAstToC__coMethod(var __this, var c);
 var JackAstToC__coConstructor(var __this, var c);
-var JackAstToC__coCallback(var __this, var c);
 var JackAstToC__coFunctionPre(var __this, var c);
 var JackAstToC__isType(var __this, var t);
 var JackAstToC__coFunction(var __this, var c);
@@ -651,7 +650,6 @@ var JackParser__astAddLike(var __this, var prim, var type);
 var JackParser__compileClass(var __this, var tk, var dst_);
 var JackParser__compileClassVarDec(var __this);
 var JackParser__compileSubroutineBody(var __this);
-var JackParser__compileCallbackDec(var __this);
 var JackParser__compileSubroutine(var __this);
 var JackParser__compileParameter(var __this);
 var JackParser__compileParameterList(var __this);
@@ -4264,17 +4262,13 @@ var JackAstToC__coClass(var __this, var c) {
 				if (((t)==(C__CONSTRUCTOR()))) {
 					JackAstToC__coConstructor(__this, d);
 				} else {
-					if (((t)==(C__CALLBACK()))) {
-						JackAstToC__coCallback(__this, d);
+					if (((t)==(C__FIELD()))) {
+						JackAstToC__coField(__this, d);
 					} else {
-						if (((t)==(C__FIELD()))) {
-							JackAstToC__coField(__this, d);
+						if (((t)==(C__STATIC()))) {
+							JackAstToC__coStatic(__this, d);
 						} else {
-							if (((t)==(C__STATIC()))) {
-								JackAstToC__coStatic(__this, d);
-							} else {
-								JackAstToC__error(__this, Memory__getString(JackAstToC___str8), d);
-							}
+							JackAstToC__error(__this, Memory__getString(JackAstToC___str8), d);
 						}
 					}
 				}
@@ -4548,12 +4542,6 @@ var JackAstToC__coConstructor(var __this, var c) {
 
 		d = JackAst__getNext(d);
 	}
-	return 0;
-}
-var JackAstToC__coCallback(var __this, var c) {
-	__poke(nb_field__, __peek(nb_field__)+1);
-	__poke(has_callback__, -1);
-	JackAstToC__coMethod(__this, c);
 	return 0;
 }
 var JackAstToC__coFunctionPre(var __this, var c) {
@@ -5200,10 +5188,6 @@ var JackAstToC__isSubroutine(var __this, var t) {
 	}
 
 	if (((t)==(C__CONSTRUCTOR()))) {
-		return -1;
-	}
-
-	if (((t)==(C__CALLBACK()))) {
 		return -1;
 	}
 
@@ -9300,55 +9284,50 @@ var JackParser___str17[] = {44,118,97,114,78,97,109,101,32,101,120,112,101,99,11
 var JackParser___str18[] = {39,59,39,32,101,120,112,101,99,116,101,100,46,0};
 var JackParser___str19[] = {39,125,39,32,101,120,112,101,99,116,101,100,44,44,0};
 var JackParser___str20[] = {39,123,836,39,32,101,120,112,101,99,116,101,100,0};
-var JackParser___str21[] = {39,105,110,116,39,32,101,120,112,101,99,116,101,100,0};
-var JackParser___str22[] = {39,99,97,108,108,98,97,99,107,39,32,101,120,112,101,99,116,101,100,0};
+var JackParser___str21[] = {101,120,112,101,99,116,32,116,121,112,101,0};
+var JackParser___str22[] = {101,120,112,101,99,116,32,115,117,98,114,111,117,116,105,110,101,78,97,109,101,0};
 var JackParser___str23[] = {101,120,112,101,99,116,32,39,40,39,0};
-var JackParser___str24[] = {101,120,112,101,99,116,32,39,44,39,32,0};
-var JackParser___str25[] = {101,120,112,101,99,116,32,39,41,39,46,0};
-var JackParser___str26[] = {101,120,112,101,99,116,32,116,121,112,101,0};
-var JackParser___str27[] = {101,120,112,101,99,116,32,115,117,98,114,111,117,116,105,110,101,78,97,109,101,0};
-var JackParser___str28[] = {101,120,112,101,99,116,32,39,40,39,0};
-var JackParser___str29[] = {101,120,112,101,99,116,32,39,41,39,46,0};
-var JackParser___str30[] = {118,97,114,78,97,109,101,32,101,120,112,101,99,116,101,100,46,46,0};
-var JackParser___str31[] = {44,32,111,114,32,59,32,101,120,112,101,99,116,101,100,0};
-var JackParser___str32[] = {118,97,114,78,97,109,101,32,101,120,112,101,99,116,101,100,46,46,0};
-var JackParser___str33[] = {115,116,97,116,101,109,101,110,116,32,101,120,112,101,99,116,101,100,0};
-var JackParser___str34[] = {100,111,32,101,120,112,101,99,116,101,100,0};
-var JackParser___str35[] = {115,117,98,114,111,117,116,105,110,101,78,97,109,101,32,101,120,112,101,99,116,101,100,0};
-var JackParser___str36[] = {39,59,39,32,101,120,112,101,99,116,101,100,46,46,0};
-var JackParser___str37[] = {39,40,39,32,101,120,112,101,99,116,101,100,0};
-var JackParser___str38[] = {39,44,39,32,101,120,112,101,99,116,101,100,0};
-var JackParser___str39[] = {39,41,39,32,101,120,112,101,99,116,101,100,0};
-var JackParser___str40[] = {39,41,39,32,101,120,112,101,99,116,101,100,0};
-var JackParser___str41[] = {39,40,39,32,111,114,32,39,46,39,32,101,120,112,101,99,116,101,100,0};
-var JackParser___str42[] = {115,117,98,114,111,117,116,105,110,101,78,97,109,101,32,101,120,112,101,99,116,101,100,0};
-var JackParser___str43[] = {39,40,39,32,101,120,112,101,99,116,101,100,0};
-var JackParser___str44[] = {39,41,39,32,101,120,112,101,99,116,101,100,46,0};
-var JackParser___str45[] = {108,101,116,32,101,120,112,101,99,116,101,100,0};
-var JackParser___str46[] = {118,97,114,78,97,109,101,32,101,120,112,101,99,116,101,100,0};
-var JackParser___str47[] = {39,93,39,32,101,120,112,101,99,116,101,100,0};
-var JackParser___str48[] = {39,61,39,32,101,120,112,101,99,116,101,100,0};
-var JackParser___str49[] = {39,59,39,32,101,120,112,101,99,116,101,100,0};
-var JackParser___str50[] = {119,104,105,108,101,32,101,120,112,101,99,116,101,100,0};
-var JackParser___str51[] = {39,40,39,32,101,120,112,101,99,116,101,100,0};
-var JackParser___str52[] = {39,41,39,32,101,120,112,101,99,116,101,100,0};
-var JackParser___str53[] = {39,123,39,32,101,120,112,101,99,116,101,100,0};
-var JackParser___str54[] = {39,125,39,32,101,120,112,101,99,116,101,100,44,0};
-var JackParser___str55[] = {114,101,116,117,114,110,32,101,120,112,101,99,116,101,100,0};
-var JackParser___str56[] = {39,59,39,32,101,120,112,101,99,116,101,100,46,46,46,0};
-var JackParser___str57[] = {105,102,32,101,120,112,101,99,116,101,100,0};
-var JackParser___str58[] = {39,40,39,32,101,120,112,101,99,116,101,100,0};
-var JackParser___str59[] = {39,41,39,32,101,120,112,101,99,116,101,100,46,46,0};
-var JackParser___str60[] = {39,123,39,32,101,120,112,101,99,116,101,100,0};
-var JackParser___str61[] = {39,125,39,32,101,120,112,101,99,116,101,100,46,0};
-var JackParser___str62[] = {39,123,39,32,101,120,112,101,99,116,101,100,0};
-var JackParser___str63[] = {39,125,39,32,101,120,112,101,99,116,101,100,46,46,0};
-var JackParser___str64[] = {0};
-var JackParser___str65[] = {117,110,101,120,112,101,99,116,101,100,32,111,112,46,0};
-var JackParser___str66[] = {109,105,115,115,105,110,103,32,116,111,107,101,110,32,97,116,32,101,110,100,32,111,102,32,102,105,108,101,0};
-var JackParser___str67[] = {39,41,39,32,101,120,112,101,99,116,101,100,32,104,101,114,101,0};
-var JackParser___str68[] = {85,110,101,120,112,101,99,116,101,100,32,116,111,107,101,110,46,46,46,0};
-var JackParser___str69[] = {39,93,39,32,101,120,112,101,99,116,101,100,46,0};
+var JackParser___str24[] = {101,120,112,101,99,116,32,39,41,39,46,0};
+var JackParser___str25[] = {118,97,114,78,97,109,101,32,101,120,112,101,99,116,101,100,46,46,0};
+var JackParser___str26[] = {44,32,111,114,32,59,32,101,120,112,101,99,116,101,100,0};
+var JackParser___str27[] = {118,97,114,78,97,109,101,32,101,120,112,101,99,116,101,100,46,46,0};
+var JackParser___str28[] = {115,116,97,116,101,109,101,110,116,32,101,120,112,101,99,116,101,100,0};
+var JackParser___str29[] = {100,111,32,101,120,112,101,99,116,101,100,0};
+var JackParser___str30[] = {115,117,98,114,111,117,116,105,110,101,78,97,109,101,32,101,120,112,101,99,116,101,100,0};
+var JackParser___str31[] = {39,59,39,32,101,120,112,101,99,116,101,100,46,46,0};
+var JackParser___str32[] = {39,40,39,32,101,120,112,101,99,116,101,100,0};
+var JackParser___str33[] = {39,44,39,32,101,120,112,101,99,116,101,100,0};
+var JackParser___str34[] = {39,41,39,32,101,120,112,101,99,116,101,100,0};
+var JackParser___str35[] = {39,41,39,32,101,120,112,101,99,116,101,100,0};
+var JackParser___str36[] = {39,40,39,32,111,114,32,39,46,39,32,101,120,112,101,99,116,101,100,0};
+var JackParser___str37[] = {115,117,98,114,111,117,116,105,110,101,78,97,109,101,32,101,120,112,101,99,116,101,100,0};
+var JackParser___str38[] = {39,40,39,32,101,120,112,101,99,116,101,100,0};
+var JackParser___str39[] = {39,41,39,32,101,120,112,101,99,116,101,100,46,0};
+var JackParser___str40[] = {108,101,116,32,101,120,112,101,99,116,101,100,0};
+var JackParser___str41[] = {118,97,114,78,97,109,101,32,101,120,112,101,99,116,101,100,0};
+var JackParser___str42[] = {39,93,39,32,101,120,112,101,99,116,101,100,0};
+var JackParser___str43[] = {39,61,39,32,101,120,112,101,99,116,101,100,0};
+var JackParser___str44[] = {39,59,39,32,101,120,112,101,99,116,101,100,0};
+var JackParser___str45[] = {119,104,105,108,101,32,101,120,112,101,99,116,101,100,0};
+var JackParser___str46[] = {39,40,39,32,101,120,112,101,99,116,101,100,0};
+var JackParser___str47[] = {39,41,39,32,101,120,112,101,99,116,101,100,0};
+var JackParser___str48[] = {39,123,39,32,101,120,112,101,99,116,101,100,0};
+var JackParser___str49[] = {39,125,39,32,101,120,112,101,99,116,101,100,44,0};
+var JackParser___str50[] = {114,101,116,117,114,110,32,101,120,112,101,99,116,101,100,0};
+var JackParser___str51[] = {39,59,39,32,101,120,112,101,99,116,101,100,46,46,46,0};
+var JackParser___str52[] = {105,102,32,101,120,112,101,99,116,101,100,0};
+var JackParser___str53[] = {39,40,39,32,101,120,112,101,99,116,101,100,0};
+var JackParser___str54[] = {39,41,39,32,101,120,112,101,99,116,101,100,46,46,0};
+var JackParser___str55[] = {39,123,39,32,101,120,112,101,99,116,101,100,0};
+var JackParser___str56[] = {39,125,39,32,101,120,112,101,99,116,101,100,46,0};
+var JackParser___str57[] = {39,123,39,32,101,120,112,101,99,116,101,100,0};
+var JackParser___str58[] = {39,125,39,32,101,120,112,101,99,116,101,100,46,46,0};
+var JackParser___str59[] = {0};
+var JackParser___str60[] = {117,110,101,120,112,101,99,116,101,100,32,111,112,46,0};
+var JackParser___str61[] = {109,105,115,115,105,110,103,32,116,111,107,101,110,32,97,116,32,101,110,100,32,111,102,32,102,105,108,101,0};
+var JackParser___str62[] = {39,41,39,32,101,120,112,101,99,116,101,100,32,104,101,114,101,0};
+var JackParser___str63[] = {85,110,101,120,112,101,99,116,101,100,32,116,111,107,101,110,46,46,46,0};
+var JackParser___str64[] = {39,93,39,32,101,120,112,101,99,116,101,100,46,0};
 #define jt__ (__this+0)
 #define src__ (__this+1)
 #define maxerror__ (__this+2)
@@ -9631,7 +9610,6 @@ var JackParser__compileClass(var __this, var tk, var dst_) {
 	while (!(((JackParser__compileClassVarDec(__this))==(0)))) {
 		doit = doit;
 	}
-	JackParser__compileCallbackDec(__this);
 	while (!(((JackParser__compileSubroutine(__this))==(0)))) {
 		doit = doit;
 	}
@@ -9746,61 +9724,6 @@ var JackParser__compileSubroutineBody(var __this) {
 	JackParser__error(__this, Memory__getString(JackParser___str20));
 	return 0;
 }
-var JackParser__compileCallbackDec(var __this) {
-	var z;
-	var save;
-	var body;
-	save = __peek(current__);
-	z = JackParser__matchKeyword(__this, C__CALLBACK(), 0);
-	if (((0)==(z))) {
-		return 0;
-	}
-
-	JackParser__astAdd(__this, C__CALLBACK());
-	body = __peek(current__);
-	z = JackParser__matchKeyword(__this, C__INT(), -1);
-	if (((0)==(z))) {
-		JackParser__error(__this, Memory__getString(JackParser___str21));
-		return 0;
-	}
-
-	JackParser__astAdd(__this, C__INT());
-	z = JackParser__matchKeyword(__this, C__CALLBACK(), -1);
-	if (((0)==(z))) {
-		JackParser__error(__this, Memory__getString(JackParser___str22));
-		return 0;
-	}
-
-	JackParser__astAdd(__this, C__SUBROUTINENAME());
-	z = JackParser__matchSymbol(__this, C__LEFT_PARENTHESIS(), -1);
-	if (((0)==(z))) {
-		JackParser__error(__this, Memory__getString(JackParser___str23));
-		return 0;
-	}
-
-	JackParser__advance(__this);
-	JackParser__astAdd(__this, C__PARAMS());
-	JackParser__compileParameter(__this);
-	z = JackParser__matchSymbol(__this, C__COMMA(), 0);
-	if (((0)==(z))) {
-		JackParser__error(__this, Memory__getString(JackParser___str24));
-		return 0;
-	}
-
-	JackParser__advance(__this);
-	JackParser__compileParameter(__this);
-	z = JackParser__matchSymbol(__this, C__RIGHT_PARENTHESIS(), 0);
-	if (z) {
-		JackParser__advance(__this);
-		__poke(current__, body);
-		z = JackParser__compileSubroutineBody(__this);
-		__poke(current__, save);
-		return z;
-	}
-
-	JackParser__error(__this, Memory__getString(JackParser___str25));
-	return 0;
-}
 var JackParser__compileSubroutine(var __this) {
 	var z;
 	var iscb;
@@ -9827,7 +9750,7 @@ var JackParser__compileSubroutine(var __this) {
 		JackParser__astAdd(__this, C__CLASSNAME());
 	}
 	if (((0)==(z))) {
-		JackParser__error(__this, Memory__getString(JackParser___str26));
+		JackParser__error(__this, Memory__getString(JackParser___str21));
 		return 0;
 	}
 
@@ -9842,7 +9765,7 @@ var JackParser__compileSubroutine(var __this) {
 	}
 
 	if (((0)==(z))) {
-		JackParser__error(__this, Memory__getString(JackParser___str27));
+		JackParser__error(__this, Memory__getString(JackParser___str22));
 		return 0;
 	}
 
@@ -9853,7 +9776,7 @@ var JackParser__compileSubroutine(var __this) {
 	}
 	z = JackParser__matchSymbol(__this, C__LEFT_PARENTHESIS(), -1);
 	if (((0)==(z))) {
-		JackParser__error(__this, Memory__getString(JackParser___str28));
+		JackParser__error(__this, Memory__getString(JackParser___str23));
 		return 0;
 	}
 
@@ -9872,7 +9795,7 @@ var JackParser__compileSubroutine(var __this) {
 		return z;
 	}
 
-	JackParser__error(__this, Memory__getString(JackParser___str29));
+	JackParser__error(__this, Memory__getString(JackParser___str24));
 	return 0;
 }
 var JackParser__compileParameter(var __this) {
@@ -9899,7 +9822,7 @@ var JackParser__compileParameter(var __this) {
 			__poke(current__, save);
 			return -1;
 		} else {
-			JackParser__error(__this, Memory__getString(JackParser___str30));
+			JackParser__error(__this, Memory__getString(JackParser___str25));
 			return 0;
 		}
 	} else {
@@ -9942,7 +9865,7 @@ var JackParser__compileVarDecVarList(var __this, var primary) {
 		if (((0)==(z))) {
 			z = JackParser__matchSymbol(__this, C__SEMICOLON(), 0);
 			if (((0)==(z))) {
-				JackParser__error(__this, Memory__getString(JackParser___str31));
+				JackParser__error(__this, Memory__getString(JackParser___str26));
 				return 0;
 			}
 
@@ -9951,7 +9874,7 @@ var JackParser__compileVarDecVarList(var __this, var primary) {
 		} else {
 			z = JackParser__matchIdentifier(__this, -1);
 			if (((0)==(z))) {
-				JackParser__error(__this, Memory__getString(JackParser___str32));
+				JackParser__error(__this, Memory__getString(JackParser___str27));
 				return 0;
 			}
 
@@ -10031,7 +9954,7 @@ var JackParser__compileStatements(var __this) {
 								JackParser__advance(__this);
 								__poke(current__, begin);
 							} else {
-								JackParser__error(__this, Memory__getString(JackParser___str33));
+								JackParser__error(__this, Memory__getString(JackParser___str28));
 								return 0;
 							}
 						}
@@ -10050,12 +9973,12 @@ var JackParser__compileDo(var __this) {
 	var save;
 	save = __peek(current__);
 	if (((0)==(JackParser__matchKeyword(__this, C__DO(), 0)))) {
-		JackParser__error(__this, Memory__getString(JackParser___str34));
+		JackParser__error(__this, Memory__getString(JackParser___str29));
 		return 0;
 	}
 
 	if (((0)==(JackParser__matchIdentifier(__this, -1)))) {
-		JackParser__error(__this, Memory__getString(JackParser___str35));
+		JackParser__error(__this, Memory__getString(JackParser___str30));
 		return 0;
 	}
 
@@ -10067,7 +9990,7 @@ var JackParser__compileDo(var __this) {
 	String__dispose(s);
 	z = JackParser__matchSymbol(__this, C__SEMICOLON(), 0);
 	if (((0)==(z))) {
-		JackParser__error(__this, Memory__getString(JackParser___str36));
+		JackParser__error(__this, Memory__getString(JackParser___str31));
 		return 0;
 	}
 
@@ -10087,21 +10010,21 @@ var JackParser__callbackCall(var __this) {
 	JackParser__astAdd(__this, C__CALLBACK());
 	z = JackParser__matchSymbol(__this, C__LEFT_PARENTHESIS(), -1);
 	if (((0)==(z))) {
-		JackParser__error(__this, Memory__getString(JackParser___str37));
+		JackParser__error(__this, Memory__getString(JackParser___str32));
 	}
 
 	JackParser__advance(__this);
 	JackParser__compileExpression(__this);
 	z = JackParser__matchSymbol(__this, C__COMMA(), 0);
 	if (((0)==(z))) {
-		JackParser__error(__this, Memory__getString(JackParser___str38));
+		JackParser__error(__this, Memory__getString(JackParser___str33));
 	}
 
 	JackParser__advance(__this);
 	JackParser__compileExpression(__this);
 	z = JackParser__matchSymbol(__this, C__RIGHT_PARENTHESIS(), 0);
 	if (((0)==(z))) {
-		JackParser__error(__this, Memory__getString(JackParser___str39));
+		JackParser__error(__this, Memory__getString(JackParser___str34));
 	}
 
 	JackParser__advance(__this);
@@ -10120,7 +10043,7 @@ var JackParser__subroutineCall(var __this, var subroutineName, var tokenLine) {
 		JackParser__compileExpressionList(__this);
 		z = JackParser__matchSymbol(__this, C__RIGHT_PARENTHESIS(), 0);
 		if (((0)==(z))) {
-			JackParser__error(__this, Memory__getString(JackParser___str40));
+			JackParser__error(__this, Memory__getString(JackParser___str35));
 			return 0;
 		}
 
@@ -10131,21 +10054,21 @@ var JackParser__subroutineCall(var __this, var subroutineName, var tokenLine) {
 
 	z = JackParser__matchSymbol(__this, C__DOT(), 0);
 	if (((0)==(z))) {
-		JackParser__error(__this, Memory__getString(JackParser___str41));
+		JackParser__error(__this, Memory__getString(JackParser___str36));
 		return 0;
 	}
 
 	JackAst__setTag(__peek(current__), C__CLASSORVARNAME());
 	z = JackParser__matchIdentifier(__this, -1);
 	if (((0)==(z))) {
-		JackParser__error(__this, Memory__getString(JackParser___str42));
+		JackParser__error(__this, Memory__getString(JackParser___str37));
 		return 0;
 	}
 
 	JackParser__astAdd(__this, C__SUBROUTINENAME());
 	z = JackParser__matchSymbol(__this, C__LEFT_PARENTHESIS(), -1);
 	if (((0)==(z))) {
-		JackParser__error(__this, Memory__getString(JackParser___str43));
+		JackParser__error(__this, Memory__getString(JackParser___str38));
 		return 0;
 	}
 
@@ -10158,7 +10081,7 @@ var JackParser__subroutineCall(var __this, var subroutineName, var tokenLine) {
 		return 0;
 	}
 
-	JackParser__error(__this, Memory__getString(JackParser___str44));
+	JackParser__error(__this, Memory__getString(JackParser___str39));
 	return 0;
 }
 var JackParser__compileLet(var __this) {
@@ -10167,13 +10090,13 @@ var JackParser__compileLet(var __this) {
 	var last;
 	save = __peek(current__);
 	if (((0)==(JackParser__matchKeyword(__this, C__LET(), 0)))) {
-		JackParser__error(__this, Memory__getString(JackParser___str45));
+		JackParser__error(__this, Memory__getString(JackParser___str40));
 		return 0;
 	}
 
 	z = JackParser__matchIdentifier(__this, -1);
 	if (((0)==(z))) {
-		JackParser__error(__this, Memory__getString(JackParser___str46));
+		JackParser__error(__this, Memory__getString(JackParser___str41));
 		return 0;
 	}
 
@@ -10186,7 +10109,7 @@ var JackParser__compileLet(var __this) {
 		JackParser__compileExpression(__this);
 		z = JackParser__matchSymbol(__this, C__RIGHT_SQUARE_BRACKET(), 0);
 		if (((0)==(z))) {
-			JackParser__error(__this, Memory__getString(JackParser___str47));
+			JackParser__error(__this, Memory__getString(JackParser___str42));
 			return 0;
 		}
 
@@ -10196,7 +10119,7 @@ var JackParser__compileLet(var __this) {
 	__poke(current__, last);
 	z = JackParser__matchSymbol(__this, C__EQUAL(), 0);
 	if (((0)==(z))) {
-		JackParser__error(__this, Memory__getString(JackParser___str48));
+		JackParser__error(__this, Memory__getString(JackParser___str43));
 		return 0;
 	}
 
@@ -10205,7 +10128,7 @@ var JackParser__compileLet(var __this) {
 	JackParser__compileExpression(__this);
 	z = JackParser__matchSymbol(__this, C__SEMICOLON(), 0);
 	if (((0)==(z))) {
-		JackParser__error(__this, Memory__getString(JackParser___str49));
+		JackParser__error(__this, Memory__getString(JackParser___str44));
 		return 0;
 	}
 
@@ -10218,14 +10141,14 @@ var JackParser__compileWhile(var __this) {
 	var save;
 	save = __peek(current__);
 	if (((0)==(JackParser__matchKeyword(__this, C__WHILE(), 0)))) {
-		JackParser__error(__this, Memory__getString(JackParser___str50));
+		JackParser__error(__this, Memory__getString(JackParser___str45));
 		return 0;
 	}
 
 	JackParser__astAddType(__this);
 	z = JackParser__matchSymbol(__this, C__LEFT_PARENTHESIS(), -1);
 	if (((0)==(z))) {
-		JackParser__error(__this, Memory__getString(JackParser___str51));
+		JackParser__error(__this, Memory__getString(JackParser___str46));
 		return 0;
 	}
 
@@ -10233,13 +10156,13 @@ var JackParser__compileWhile(var __this) {
 	JackParser__compileExpression(__this);
 	z = JackParser__matchSymbol(__this, C__RIGHT_PARENTHESIS(), 0);
 	if (((0)==(z))) {
-		JackParser__error(__this, Memory__getString(JackParser___str52));
+		JackParser__error(__this, Memory__getString(JackParser___str47));
 		return 0;
 	}
 
 	z = JackParser__matchSymbol(__this, C__LEFT_CURLY_BRACKET(), -1);
 	if (((0)==(z))) {
-		JackParser__error(__this, Memory__getString(JackParser___str53));
+		JackParser__error(__this, Memory__getString(JackParser___str48));
 		return 0;
 	}
 
@@ -10247,7 +10170,7 @@ var JackParser__compileWhile(var __this) {
 	JackParser__compileStatements(__this);
 	z = JackParser__matchSymbol(__this, C__RIGHT_CURLY_BRACKET(), 0);
 	if (((0)==(z))) {
-		JackParser__error(__this, Memory__getString(JackParser___str54));
+		JackParser__error(__this, Memory__getString(JackParser___str49));
 		return 0;
 	}
 
@@ -10260,7 +10183,7 @@ var JackParser__compileReturn(var __this) {
 	var save;
 	save = __peek(current__);
 	if (((0)==(JackParser__matchKeyword(__this, C__RETURN(), 0)))) {
-		JackParser__error(__this, Memory__getString(JackParser___str55));
+		JackParser__error(__this, Memory__getString(JackParser___str50));
 		return 0;
 	}
 
@@ -10277,7 +10200,7 @@ var JackParser__compileReturn(var __this) {
 	JackParser__compileExpression(__this);
 	z = JackParser__matchSymbol(__this, C__SEMICOLON(), 0);
 	if (((0)==(z))) {
-		JackParser__error(__this, Memory__getString(JackParser___str56));
+		JackParser__error(__this, Memory__getString(JackParser___str51));
 		return 0;
 	}
 
@@ -10291,7 +10214,7 @@ var JackParser__compileIf(var __this) {
 	var begin;
 	save = __peek(current__);
 	if (((0)==(JackParser__matchKeyword(__this, C__IF(), 0)))) {
-		JackParser__error(__this, Memory__getString(JackParser___str57));
+		JackParser__error(__this, Memory__getString(JackParser___str52));
 		return 0;
 	}
 
@@ -10299,7 +10222,7 @@ var JackParser__compileIf(var __this) {
 	begin = __peek(current__);
 	z = JackParser__matchSymbol(__this, C__LEFT_PARENTHESIS(), -1);
 	if (((0)==(z))) {
-		JackParser__error(__this, Memory__getString(JackParser___str58));
+		JackParser__error(__this, Memory__getString(JackParser___str53));
 		return 0;
 	}
 
@@ -10307,13 +10230,13 @@ var JackParser__compileIf(var __this) {
 	JackParser__compileExpression(__this);
 	z = JackParser__matchSymbol(__this, C__RIGHT_PARENTHESIS(), 0);
 	if (((0)==(z))) {
-		JackParser__error(__this, Memory__getString(JackParser___str59));
+		JackParser__error(__this, Memory__getString(JackParser___str54));
 		return 0;
 	}
 
 	z = JackParser__matchSymbol(__this, C__LEFT_CURLY_BRACKET(), -1);
 	if (((0)==(z))) {
-		JackParser__error(__this, Memory__getString(JackParser___str60));
+		JackParser__error(__this, Memory__getString(JackParser___str55));
 		return 0;
 	}
 
@@ -10321,7 +10244,7 @@ var JackParser__compileIf(var __this) {
 	JackParser__compileStatements(__this);
 	z = JackParser__matchSymbol(__this, C__RIGHT_CURLY_BRACKET(), 0);
 	if (((0)==(z))) {
-		JackParser__error(__this, Memory__getString(JackParser___str61));
+		JackParser__error(__this, Memory__getString(JackParser___str56));
 		return 0;
 	}
 
@@ -10335,7 +10258,7 @@ var JackParser__compileIf(var __this) {
 	JackParser__astAddType(__this);
 	z = JackParser__matchSymbol(__this, C__LEFT_CURLY_BRACKET(), -1);
 	if (((0)==(z))) {
-		JackParser__error(__this, Memory__getString(JackParser___str62));
+		JackParser__error(__this, Memory__getString(JackParser___str57));
 		return 0;
 	}
 
@@ -10343,7 +10266,7 @@ var JackParser__compileIf(var __this) {
 	JackParser__compileStatements(__this);
 	z = JackParser__matchSymbol(__this, C__RIGHT_CURLY_BRACKET(), 0);
 	if (((0)==(z))) {
-		JackParser__error(__this, Memory__getString(JackParser___str63));
+		JackParser__error(__this, Memory__getString(JackParser___str58));
 		return 0;
 	}
 
@@ -10355,7 +10278,7 @@ var JackParser__astAddAssign(var __this) {
 	var me;
 	var parent;
 	parent = JackAst__getParent(__peek(current__));
-	me = JackAst__new(C__ASSIGN(), Memory__getString(JackParser___str64), parent);
+	me = JackAst__new(C__ASSIGN(), Memory__getString(JackParser___str59), parent);
 	JackAst__replaceChild(parent, __peek(current__), me);
 	JackAst__setParent(__peek(current__), me);
 	JackAst__setLeft(me, __peek(current__));
@@ -10455,12 +10378,12 @@ var JackParser__compileExpression(var __this) {
 
 		if (((JackTokenizer__tokenType(__peek(jt__)))==(C__SYMBOL()))) {
 			if (((JackParser__astAddOp(__this))==(0))) {
-				JackParser__error(__this, Memory__getString(JackParser___str65));
+				JackParser__error(__this, Memory__getString(JackParser___str60));
 				return 0;
 			}
 
 			if (((0)==(JackParser__advance(__this)))) {
-				JackParser__error(__this, Memory__getString(JackParser___str66));
+				JackParser__error(__this, Memory__getString(JackParser___str61));
 				return 0;
 			}
 
@@ -10606,13 +10529,13 @@ var JackParser__compileTerm(var __this, var expr) {
 			return 0;
 		}
 
-		JackParser__error(__this, Memory__getString(JackParser___str67));
+		JackParser__error(__this, Memory__getString(JackParser___str62));
 		return 0;
 	}
 
 	z = JackParser__matchIdentifier(__this, 0);
 	if (((0)==(z))) {
-		JackParser__error(__this, Memory__getString(JackParser___str68));
+		JackParser__error(__this, Memory__getString(JackParser___str63));
 		return 0;
 	}
 
@@ -10633,7 +10556,7 @@ var JackParser__compileTerm(var __this, var expr) {
 		JackParser__compileExpression(__this);
 		z = JackParser__matchSymbol(__this, C__RIGHT_SQUARE_BRACKET(), 0);
 		if (((0)==(z))) {
-			JackParser__error(__this, Memory__getString(JackParser___str69));
+			JackParser__error(__this, Memory__getString(JackParser___str64));
 			return 0;
 		}
 
