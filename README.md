@@ -92,7 +92,7 @@ Differences from the official first edition of  Hack Java VMEmulator are :
 The `\` in strings literal does  not escape `\` and `"`. The VMEmulator does.
 
 The `while` and `if` conditions are coherent. In the VMEmulator  the
-`while` the [condition is true if it is equal to -1][10], but the 
+`while` [condition is true if it is equal to -1][10], but the 
 `if` condition is true if it is not equal to 0. 
 The public domain jack compiler treats both conditions like the `if`.
 
