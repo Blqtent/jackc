@@ -754,6 +754,7 @@ var Screen__refresh()
 	if (refresh_) return 0;
 	refresh_ = -1;
 	init();
+	update();
 	return 0;
 }
 
