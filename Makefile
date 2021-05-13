@@ -18,7 +18,7 @@ mkfont: mkfont.c font.h
 
 
 mac:
-	scp jml@192.168.43.93:src/jack/jackc.c .
+//	scp jml@192.168.43.93:src/jack/jackc.c .
 	xcodebuild
 
 win:

@@ -717,7 +717,7 @@ int check_event()
 	case NSEventTypeKeyUp:
 		keyCode = (unsigned short)objc_msgSend(event, keyCodeSel);
 		key = 0;
-		Memory__poke(24576, 0);
+		//Memory__poke(24576, 0);
 		break;
 	default:
 		break;
@@ -766,10 +766,6 @@ var Screen__processEvents()
 	}
 	in_proc = -1;
 	init();
-	if (refresh_) {
-		update();
-		refresh_ = 0;
-	}
 	key = 0;
 	while (check_event()) {
 		if (key) {
