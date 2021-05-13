@@ -1,12 +1,12 @@
 ﻿
-The Jack Programming language
-=============================
+Public Domain JACK compiler
+===========================
 
 ![public domain](https://raw.githubusercontent.com/public-domain/jack/main/img/pd.png)
 
 
-Public Domain JACK compiler
----------------------------
+The Jack Programming language
+-----------------------------
 
 ***
 
@@ -73,27 +73,28 @@ The range of decimal constant number and integer variable is unspecified.
 The size of the integer is at least the same size as the size of a memory 
 adresse. (It could be from 8 to 512 bits).
 
-The callback extension allows to call a callback method from a variable.
+The callback extension allows to call a `callback` method 
+from a Callback object.
 
 The inline assembly comment extension allows to insert target language code 
-between //# and /*# #*/ comments.
+between `//#` and `/*# #*/` comments.
 
 There is additional classes to allow interaction with the operating 
 system (files and directories...).
 
 ### 1.3 Differences from VMEmulator  
 
-With the "-hack" option the public domain jack compiler is 
+With the `-hack` option the public domain jack compiler is 
 disabling these differences.
 
 Differences from the official first edition of  Hack Java VMEmulator are :
 
-The \ in strings literal does  not escape \ and ". The VMEmulator does.
+The `\` in strings literal does  not escape `\` and `"`. The VMEmulator does.
 
-The "while" and "if" conditions are coherent. In the VMEmulator  the
-"while" the [condition is true if it is equal to -1][10], but the "if" condition
-is true if it is not equal to 0. The public domain jack compiler treats both conditions like
-the "if".
+The `while` and `if` conditions are coherent. In the VMEmulator  the
+`while` the [condition is true if it is equal to -1][10], but the 
+`if` condition is true if it is not equal to 0. 
+The public domain jack compiler treats both conditions like the `if`.
 
 The static and local variables are not initilized to 0 at start up.
 The VMEmulator does.
@@ -119,7 +120,7 @@ You need to install a valid OpenGL developemnt envirionment, using
 
 Create an empty directory structure using `mkdir -p hello/lib`.
  
-Save the text source code in a file named `hello/Main.jack` using you
+Save the text source code in a file named `hello/Main.jack` using your
 favorite plain text editor.
 
 Copy the JackOS and the C runtime from the jack compiler source code, using
