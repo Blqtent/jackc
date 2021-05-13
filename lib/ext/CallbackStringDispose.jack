@@ -1,6 +1,6 @@
 
 class CallbackStringDispose {
-	callback int callback(String a, int b) {
+	method int callback(String a, int b) {
 		do a.dispose();
 		return 0;
 	}

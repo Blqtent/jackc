@@ -310,7 +310,7 @@ class JackAstToC {
 				do dst.writeString(" {");
 				do nl();
 				let sp = sp + 1;
-			}	
+			}
 			if (t = C.VAR()) {
 				do coVarDec(d);
 				let l = l + 1;
@@ -390,7 +390,7 @@ class JackAstToC {
 
 	method void coCallback(JackAst c) {
 		let nb_field = nb_field + 1;
-		let has_callback = 1;
+		let has_callback = true;
 		do coMethod(c);
 		return;
 	}
@@ -1061,7 +1061,7 @@ class JackAstToC {
 		if (isType(t)) {
 			let n = d.getChild();
 			let t = n.getTag();
-			if (t = C.SUBROUTINENAME()) {
+			if ((t = C.SUBROUTINENAME()) | (t = C.CALLBACK())) {
 				let n = n.getChild();
 				let t = n.getTag();
 				if (t = C.PARAMS()) {
@@ -1104,7 +1104,9 @@ class JackAstToC {
 			if (isType(t)) {
 				let n = d.getChild();
 				let t = n.getTag();
-				if (t = C.SUBROUTINENAME()) {
+				if ((t = C.SUBROUTINENAME()) | 
+					(t = C.CALLBACK())) 
+				{
 					let n = n.getChild();
 					let t = n.getTag();
 					if (t = C.PARAMS()) {
@@ -1447,10 +1449,21 @@ class JackAstToC {
 		if (d.getTag() = C.SUBROUTINENAME()) {
 			do dst.writeString(d.getData());
 			let d = d.getChild();
+		} else { if (d.getTag() = C.CALLBACK()) {
+			if (~has_callback) {
+				if (nb_field > 0) {
+					do error("There must be no fields!", d);
+					return;	
+				}
+				let nb_field = nb_field + 1;
+				let has_callback = true;
+			}	
+			do dst.writeString("callback");
+			let d = d.getChild();
 		} else {
 			do error("subroutine name expected", c);
 			return;
-		}
+		}}
 		if (d.getTag() = C.PARAMS()) { 
 			do coParams(d, add_this);
 		}

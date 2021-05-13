@@ -1,6 +1,6 @@
 
 class Callback {
-	callback int callback(int a, int b) {
+	method int callback(int a, int b) {
 		return 0;
 	}
 
