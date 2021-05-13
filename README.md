@@ -17,7 +17,8 @@ The [Jack programming language][1] is described in the book
 [The Elements of Computing Systems][8] and on the website 
 [www.nand2tetris.org][7]. There is a [set of video][3] on Youtube talking about it.
 
-This document is describing a Jack compiler written in Jack, itselfs bootstraped with a simple Python3 Jack compiler.
+This document is describing a Jack compiler written in Jack.
+At the begin it was itselfs bootstraped with a simple Python3 Jack compiler.
 
 Status of this document
 -----------------------
@@ -39,9 +40,11 @@ Table of Contents
 
 1. [Introduction](#1-introduction)
      1. [Background](#11-background)
-     2. [Differences](#12-differences)
+     2. [Differences from the book](#12-differences-from-the-book)
+     2. [Differences from VMEmulator](#13-differences-from-vmemulator)
 2. [Hello World!](#2-hello-world)
 3. [Grammar](#3-grammar)
+4. [Classes](#4-classes)
      
 ***
 
@@ -58,19 +61,47 @@ Jack is easy to learn but it is designed to be yet useful.
 
 ### 1.1 Background
 
+The Jack language was design for teaching the basis of computer construction.
+
 ![the number of](https://raw.githubusercontent.com/public-domain/jack/main/img/beast.jpg)
 
-### 1.2 Differences
+### 1.2 Differences from the book
 
-Diffrences from the original Jack specification are :
+Differences from the original Jack specification are :
 
-The range of decimal constant number and integer variable is unspecified. The size of the integer is at least the same size as the size of a memory adresse. (It could be from 8 to 512 bits).
+The range of decimal constant number and integer variable is unspecified. 
+The size of the integer is at least the same size as the size of a memory 
+adresse. (It could be from 8 to 512 bits).
 
 The callback extension allows to call a callback method from a variable.
 
-There is additional classes to allow interaction with the operating system (files and directories...).
+The inline assembly comment extension allows to insert target language code 
+between //# and /*# #*/ comments.
+
+There is additional classes to allow interaction with the operating 
+system (files and directories...).
+
+### 1.3 Differences from VMEmulator  
+
+With the "-hack" option the public domain jack compiler is 
+disabling these differences.
+
+Differences from the official first edition of  Hack Java VMEmulator are :
+
+The \ in strings literal does  not escape \ and ". The VMEmulator does.
+
+The "while" and "if" conditions are coherent. In the VMEmulator  the
+"while" the [condition is true if it is equal to -1][10], but the "if" condition
+is true if it is not equal to 0. The public domain jack compiler treats both conditions like
+the "if".
+
+The static and local variables are not initilized to 0 at start up.
+The VMEmulator does.
+
 
 ## 2. Hello world
+
+Source code :
 
 ``` 
 class Main {
@@ -81,7 +112,24 @@ class Main {
 		return;
 	}
 }
-``` 
+```
+
+You need to install a valid OpenGL developemnt envirionment, using
+`sudo apt install build-essential libx11-dev libgl1-mesa-dev libglu1-mesa-dev`.
+
+Create an empty directory structure using `mkdir -p hello/lib`.
+ 
+Save the text source code in a file named `hello/Main.jack` using you
+favorite plain text editor.
+
+Copy the JackOS and the C runtime from the jack compiler source code, using
+`cp -r lib/std/ hello/lib/std; cp -r lib/c/ hello/lib/c/`
+ 
+Translate it to C using `./jack.exe -hack hello`.
+
+Make an executable using `cc -o hello.exe hello.c -lX11 -lGL -lGLU`.
+
+Run it using `./hello.exe`.
 
 ## 3. Grammar
 
@@ -116,7 +164,7 @@ identifier:
 	letterOrUnderscore digitOrLetterOrUnderscore_opt
 
 classDec:
-	class className { classVarDecList_opt callbackDec_opt subroutineDecList_opt }
+	class className { classVarDecList_opt subroutineDecList_opt }
 
 varNameList:
 	varName
@@ -155,9 +203,6 @@ subroutineDecList:
 subroutineDec:
 	subroutineKind subroutineType subroutineName ( parameterList_opt ) subroutineBody
 
-callbackDec:
-	callback int callback ( type varName , type varName ) subroutineBody
-
 parameterList:
 	type varName
 	parameterList, type varName
@@ -181,6 +226,7 @@ className:
 
 subroutineName:
 	identifier
+	callback
 
 varName:
 	identifier
@@ -260,6 +306,13 @@ keywordConstant:
 
 ``` 
 
+## 4. Classes
+
+### 4.1. File
+
+For now, look at the source code and Unit test files.
+
+
 ***
 [1]: https://www.nand2tetris.org/project09
 [2]: https://www.csie.ntu.edu.tw/~cyy/courses/introCS/13fall/lectures/handouts/lec11_Jack.pdf
@@ -270,6 +323,7 @@ keywordConstant:
 [7]: https://www.nand2tetris.org/
 [8]: https://www.amazon.com/Elements-Computing-Systems-Building-Principles/dp/0262640686/ref=ed_oe_p
 [9]: https://www.youtube.com/watch?v=2KK_kzrJPS8 
+[10]: http://nand2tetris-questions-and-answers-forum.32033.n3.nabble.com/Supplied-compiler-doesn-t-agree-what-is-true-between-if-statement-and-while-statement-td4032492.html
 
 ***
 
