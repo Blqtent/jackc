@@ -84,17 +84,18 @@ system (files and directories...).
 With the `-hack` option the public domain jack compiler is 
 disabling these differences.
 
-Differences from the official first edition of  Hack Java VMEmulator are :
+Differences from the official first edition of Hack Java VMEmulator are :
 
-The `\` in strings literal does  not escape `\` and `"`. The VMEmulator does.
+The `\` in strings literal does  not escape `\` and `"`. 
+The official JackCompiler does.
 
-The `while` and `if` conditions are coherent. In the VMEmulator  the
+The `while` and `if` conditions are coherent. In the official JackCompiler the
 `while` [condition is true if it is equal to -1][10], but the 
 `if` condition is true if it is not equal to 0. 
 The public domain jack compiler treats both conditions like the `if`.
 
 The static and local variables are not initialized to 0 at start up.
-The VMEmulator does.
+The VMEmulator seems to do it.
 
 
 ## 2. Hello world
