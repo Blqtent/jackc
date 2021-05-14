@@ -174,7 +174,7 @@ directory, possibly with sub-directories.
 A class name, variable name or subroutine name (identifiers) always begin with
 a letter or a `_` and next is composed of letters, `_` or digits.
 
-The indentifiers are case sensitive.
+The identifiers are case sensitive.
 
 `Name.jack` :
 ```
@@ -196,6 +196,7 @@ class Name {	// Name is the name of the class
 	// method, constructor or function in any order and quantity
 
 	// a constructor always returns an object of type of its class.
+	// subroutines can have any quantity of parametres.
 	constuctor Name constructorName(int parameter1, String parameter2) {
 		var int local_variable_name;	// local variable in any type
 		var Array local_variable_name2; // or quantity
@@ -275,9 +276,9 @@ have a class scope.
 subroutine execution and a scope of the local subroutine.
 
 Every kind of variable is accessed only by its identifier. You don not
-need to add class identifier for static varaiable. And you cannot
+need to add class identifier for static variable. And you cannot
 access fields of object. If you need to access field, you need to
-write a getter and setter.
+write getter and setter.
 
 Each variable has a type that can be a primitive or a object type of a class.
 
@@ -289,15 +290,20 @@ A constant can be assigned to a variable.
 Integer constant are always positive.
 The unary minus `-` is used to get negative numbers.
 
+There is only decimal constant. No hex, octal or character constants.
+
 On 16bit platforms the biggest integer constant is 32767, on 32bit
 2147483647, on 64bit 9223372036854775807.
 To get the most negative number you must use these biggest constants, 
 negate them using unary `-` and then subtract `1`.
 
 String constant are beginning and ending with `"` and can't contain `"` or 
-newline (ascii character 10).
+newline (ascii character 10 in decimal). There is no escape
+sequences (`\n \\ \t \"` are not producing the same result as in other
+ programming languages).
 
-The `null` constant is a null reference to an object;
+The `null` constant is a null reference to an object 
+(equivalent to `0` or `false`).
 
 Boolean `true` is `-1` and `false` is `0`.
 
@@ -308,9 +314,9 @@ That code is perfectly valid:
 ```
 var int variable;
 var Array arr;
-let variable = 1000;
+let variable = 2000;
 let arr = variable;
-let arr[1] = 3;      // now memory located at address 1001 contains the value 3
+let arr[1] = 3;      // now memory located at address 2001 contains the value 3
 ```
 
 ### 3.3 Subroutines
@@ -321,7 +327,7 @@ current newly created object. A constructor must end with `return this;`
 statement and its return type must be the one of its class.
 
 Constructors are called using the 
-`let obj = ClassName.contructorName(arguments);`
+`let obj = ClassName.constructorName(arguments);`
 syntax.
 
 The `dispose()` method is generally used in counterpart of constructors to
@@ -420,17 +426,28 @@ indicate the type of target assembly language.
 
 Extension `//#` acts the same as `/*#` except it is single line.
 
+WARNING: These extensions are only supported by the 
+public domain jack compiler described in this document.
+
 ### 3.7 Callback extension
 
 The `callback` keyword extension allows to call a method referenced 
 by an object. It is useful for creating generic algorithms independent
 of types.
 
+WARNING: This extension is only supported by the 
+public domain jack compiler described in this document.
+Do not use it for the orginal Hack platform.
+
+This extension is a cheap replacement for `virtual` C++ functions and 
+Java non-static, non-final, non-private methods.
+
 The syntax is:
 ```
 class MyCallback {
 	// the class must have no field
 
+	// There can be only one callback per class.
 	// the callback is called by invoke()
 	// it must return int and have two int parameters
 	method int callback(int a, int b) {
@@ -455,8 +472,20 @@ class MyCallback {
 	method int invoke(int a, int b) {
 		return callback(a, b); // the magic is here
 				       // it calls the callback referred
-				       // by field of the `this` reference 
+				       // by a field in the `this` reference 
 	}
+}
+```
+
+```
+class MyOtherCallback {
+	method int callback(int a, int b) {
+		return 0;
+	}
+	constructor MyOtherCallback new() {
+		return this;
+	}
+	// we dont need the invoke method since we never use it in this class
 }
 ```
 
