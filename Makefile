@@ -3,8 +3,8 @@ all:
 	rm -rf jackc/lib
 	#cp -r old jackc/lib
 	cp -r lib jackc/
-	gcc -o jack64.run jackc.c -lX11 -lGL -lGLU 
-	./jack64.run jackc
+	gcc -o jack.run jackc.c -lX11 -lGL -lGLU 
+	./jack.run jackc
 	#gcc -m32 -ggdb -Wall jackc.c -lX11 -lGL -lGLU -o jack32
 	gcc -m64 -ggdb -Wall -o jack64 jackc.c -lX11 -lGL -lGLU -lpthread
 	#i686-w64-mingw32-gcc -g -municode  -static -lwsock32 -lopengl32 -lwinspool -lshell32 -luuid jackc.c -o jack32.exe 
@@ -24,7 +24,7 @@ mac:
 win:
 	rm -rf jackc/lib
 	cp -r lib jackc/
-	./jack64.run jackc
+	./jack.run jackc
 	i686-w64-mingw32-gcc -g -municode  jackc.c -lgdi32 -lwsock32 -lopengl32 -lwinspool -lshell32 -luuid -o jack32.exe 
 	x86_64-w64-mingw32-gcc -g -municode  jackc.c -lgdi32 -lwsock32 -lopengl32 -lwinspool -lshell32 -luuid -o jack64.exe 
 
@@ -58,7 +58,7 @@ py: exe.py
 	gcc -m32 -ggdb -static -Wall -lX11 main_jack.c -o jack32
 	i686-w64-mingw32-gcc -static -lwsock32 -lwinspool -lshell32 -luuid main_jack.c -o jack32.exe 
 	x86_64-w64-mingw32-gcc -static -lwsock32 -lwinspool -lshell32 -luuid main_jack.c -o jack64.exe 
-	cp jack64 jack64.run
+	cp jack64 jack.run
 hello:
 	i686-w64-mingw32-gcc -static -lwsock32 -lwinspool -lshell32 -luuid hello.c -o hello32.exe 
 	wine hello32.exe
@@ -66,7 +66,7 @@ hello:
 test:
 	rm -rf tests/lib
 	cp -r lib tests/
-	#./jack64.run tests
+	#./jack.run tests
 	#gcc -g tests.c -o tests.run -lX11 -lGL -lGLU
 	#./tests.run
 	./jack64 tests

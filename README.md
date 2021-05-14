@@ -18,7 +18,7 @@ The [Jack programming language][1] is described in the book
 [www.nand2tetris.org][7]. There is a [set of video][3] on Youtube talking about it.
 
 This document is describing a Jack compiler written in Jack.
-At the begin it was itself bootstrapped with a simple Python3 Jack compiler.
+At the beginning it was itself bootstrapped with a simple Python3 Jack compiler.
 
 Status of this document
 -----------------------
@@ -30,10 +30,6 @@ of the public at large and to the detriment of our heirs and successors.
 We intend this dedication to be an overt act of relinquishment in perpetuity 
 of all present and future rights to this Document under copyright law. 
 ```
-> This is an early draft
-
-> Your opinions are welcome!
-
 
 Table of Contents
 -----------------
@@ -43,8 +39,9 @@ Table of Contents
      2. [Differences from the book](#12-differences-from-the-book)
      2. [Differences from VMEmulator](#13-differences-from-vmemulator)
 2. [Hello World!](#2-hello-world)
-3. [Grammar](#3-grammar)
+3. [Specification](#3-specification)
 4. [Classes](#4-classes)
+5. [Grammar](#5-grammar)
      
 ***
 
@@ -115,24 +112,409 @@ class Main {
 }
 ```
 
-You need to install a valid OpenGL development environment, using
-`sudo apt install build-essential libx11-dev libgl1-mesa-dev libglu1-mesa-dev`.
+With Debian or Ubuntu, you need to install a valid OpenGL development environment, using:
+```
+sudo apt install build-essential git libx11-dev libgl1-mesa-dev libglu1-mesa-dev 
+```
 
-Create an empty directory structure using `mkdir -p hello/lib`.
+Then clone this repository : 
+```
+git clone https://github.com/public-domain/jack.git 
+```
+
+Build the compiler : 
+```
+cd jack; make 
+```
+
+Create an empty directory structure using 
+```
+mkdir -p hello/lib 
+```
  
 Save the text source code in a file named `hello/Main.jack` using your
 favorite plain text editor.
 
-Copy the JackOS and the C runtime from the jack compiler source code, using
-`cp -r lib/std/ hello/lib/std; cp -r lib/c/ hello/lib/c/`
+Copy the JackOS and the C run-time from the jack compiler source code, using
+```
+cp -r lib/std/ hello/lib/std; cp -r lib/c/ hello/lib/c/ 
+```
  
-Translate it to C using `./jack.exe -hack hello`.
+Translate it to C using 
+```
+./jack.run -hack hello
+```
 
-Make an executable using `cc -o hello.exe hello.c -lX11 -lGL -lGLU`.
+Make an executable using 
+```
+cc -o hello.run hello.c -lX11 -lGL -lGLU 
+```
 
-Run it using `./hello.exe`.
+Run it 
+```
+./hello.run
+```
 
-## 3. Grammar
+Done!
+
+## 3. Specification
+
+### 3.1 Organization
+
+A Jack program is composed of one or more files that each describe a single
+class. Each class is compiled separately then they are all linked to create
+a single executable file.
+
+A class name begins with a capital letter and is saved in a text file with 
+the same name with the `.jack` extension appended.
+
+All the `.jack` files for a project are located in a single source
+directory, possibly with sub-directories.
+
+A class name, variable name or subroutine name (identifiers) always begin with
+a letter or a `_` and next is composed of letters, `_` or digits.
+
+The indentifiers are case sensitive.
+
+`Name.jack` :
+```
+/** class definition */
+
+class Name {	// Name is the name of the class
+
+	static int     static_variable_name; // static or field declarations
+	field  int     field_variable_name;  // in any order, type or quantity
+	static char    static_variable_name2;
+	field  char    field_variable_name2;
+	static boolean static_variable_name3;
+	field  boolean field_variable_name3;
+	static Name    static_variable_name4;
+	field  Name    field_variable_name4;
+	// ...
+
+	/* subroutines declarations */
+	// method, constructor or function in any order and quantity
+
+	// a constructor always returns an object of type of its class.
+	constuctor Name constructorName(int parameter1, String parameter2) {
+		var int local_variable_name;	// local variable in any type
+		var Array local_variable_name2; // or quantity
+		// ...
+		
+		// statements
+		let local_variable_name2 = null;
+
+		return this;
+	}
+
+	// a function doesn't have the `this` object
+	function int functionName(char parameter1) {
+		var int local_variable_name;
+		var Name object;
+		var boolean condition;
+		// ...
+
+		// statements
+		let condition = false;
+		if (~condition) {
+			let local_variable_name = 1 + 2;
+		} else {
+			let local_variable_name = 1 * 2;
+		}
+
+		let object = Name.constructorName(1, "Hello");
+		do object.methodName(true, Array.new(3));
+		do object.dispose();
+
+		return 0;
+	}
+
+	// a method has an object `this` of its class
+	method void methodName(boolean parameter1, Array parameter2) {
+		var int local_variable_name;
+		var boolean condition, local_var_2, local_var_3;
+		var Name an_object;
+
+		// ...
+
+		// statements
+		let an_object = this;
+		let condition = true;
+		let local_variable_name = 3 & 1;
+
+		while (condition) {
+
+			do Name.functionName(65);
+			do methodName(false, null);
+
+			let parameter2[0] = 7 - 1;
+			if (local_variable_name > 0) {
+				let parameter2[1] = 7 - (3 / 2);
+			}
+			if (local_variable_name > 0) {
+				let parameter2[1] = 1 | 2;
+			}
+			if (local_variable_name = 0) {
+				return;
+			}
+			let condition = ~condition;		 
+		}
+		return;
+	}
+}
+```
+
+### 3.2 Variables
+
+`static` kind variables are living during all the program execution and
+have a class scope.
+
+`field` kind variables have the life of an object have an object scope.
+
+`var` kind variables and parameter variables have the life of 
+subroutine execution and a scope of the local subroutine.
+
+Each variable has a type that can be a primitive or a object type of a class.
+
+The primitives types are `int` 2's complement integer, `boolean` that can be
+`true` or `false`, and `char` an UTF-16 Unicode character.
+
+A constant can be assigned to a variable.
+
+Integer constant are always positive.
+The unary minus `-` is used to get negative numbers.
+
+On 16bit platforms the biggest integer constant is 32767, on 32bit
+2147483647, on 64bit 9223372036854775807.
+To get the most negative number you must use these biggest constants, 
+negate them using unary `-` and then subtract `1`.
+
+String constant are beginning and ending with `"` and can't contain `"` or 
+newline (ascii charter 10).
+
+The `null` constant is a null reference to an object;
+
+Boolean `true` is `-1` and `false` is `0`.
+
+Variables are weakly typed you can assign any type of variable to any
+type of other.
+
+That code is perfectly valid:
+```
+var int variable;
+var Array arr;
+let variable = 1000;
+let arr = variable;
+do arr[1] = 3;      // now memory located at address 1001 contains the value 3
+```
+
+### 3.3 Subroutines
+
+`constructor` are automatically allocating the memory for an object of type
+of their class. Inside the constructor `this` is a reference to the 
+current newly created object. A constructor must end with `return this;` 
+statement and its return type must be the one of its class.
+
+Constructors are called using the 
+`let obj = ClassName.contructorName(arguments);`
+syntax.
+
+The `dispose()` method is generally used in counterpart of constructors to
+free memory used by the object.
+
+`function` subroutines are called using the
+`let data = ClassName.functionName(arguments);`
+syntax.
+
+`method` subroutines are called using the
+`let data = obj.methodName(arguments);` syntax outside their class and
+`let data = methodName(arguments);` syntax inside their class.
+Methods have the `this` reference to the current object of type of their class.
+
+The last statement of subroutines is always a `return` statement.
+
+Note that the compiler has no way to find the return type of a subroutine
+which is not inside its class scope. So in fact `void` subroutines return
+`0`.
+
+
+### 3.4 Statements
+
+`let` syntax is 
+`let variable = expression;` or 
+`let variable[expression] = expression;`.
+
+`do` syntax is
+`do ClassName.functionName(arguments);` or
+`do obj.methodName(arguments);`. 
+
+`if` syntax is 
+```
+if (expression) {
+	statements; // executed when expression evaluates to true
+} else {
+	statements; // executed when expression evaluates to false
+}
+```
+The `else { statements; }` is an optional clause.
+
+`while` syntax is
+```
+while (expression) {
+	statements;   // executed in loop until expression evaluates to false
+}
+```
+
+`return` syntax is
+`return expression;` for non void subroutines 
+or `return;` for `void` subroutines.
+
+
+### 3.5 Expressions
+
+An expression can be:
+
+- A constant (`1234` or `"Hello World"` or `true/false` or 'null')
+- A variable name
+- The `this` keyword
+- A `variable_name[expression]`
+- A subroutine call
+- A `~expression` // bit-wise Boolean INVERT on int and logical NOT on others
+- A `-expression` // unary minus
+- A `(expression)`
+- Or :
+```
+expression + expression // integer addition
+expression - expression // integer 2's complement subtraction
+expression * expression	// integer multiplication
+expression / expression // integer division
+expression & expression // bit-wise AND on int and logical AND on others
+expression | expression // bit-wise OR on int and logical OR on others
+expression > expression // is greater than
+expression = expression // is equal
+expression < expression // is less than
+```
+
+There is no priority of operators. You must always enclose sub-expressions
+in parenthesis. Result of `let variable = 2 * 4 + 5;" is undetermined,
+you must use `let variable = (2 * 4) + 5;".
+
+### 3.6 Comments
+
+`//` is introducing a single line comment, the text after `//` is
+ignored till the end of line.
+
+`/*` is introducing a multi line is comment, the text after `/*` is
+ignored till '*/' is encountered.
+
+Special `/**` is introducing an API documentation comment.
+
+Extension `/*#` is introducing an inline assembly source code and runs till
+`#*/` is encountered. `/*#` is followed by one to four characters that
+indicate the type of target assembly language.
+
+Extension `//#` acts the same as `/*#` except it is single line.
+
+### 3.7 Callback extension
+
+The `callback` keyword extension allows to call a method referenced 
+by an object. It is useful for creating generic algorithms independent
+of types.
+
+The syntax is:
+```
+class MyCallback {
+	// the class must have no field
+
+	// the callback is called by invoke()
+	// it must return int and have two int parameters
+	method int callback(int a, int b) {
+		// do something with a and b.
+		// a and b can be assigned to variable of a class type 
+		// to do something useful by calling then a method.
+		var Array array;
+		let array = a;
+		if (array) {
+			do array.dispose();
+		}
+		return 0;
+	}
+
+	constructor MyCallback new() {
+		// the compiler assign the callback method to an
+		// hidden field (big enough to contain a subroutine pointer)
+		// of the class
+		return this;
+	}
+	
+	method int invoke(int a, int b) {
+		return callback(a, b); // the magic is here
+				       // it calls the callback referred
+				       // by field of the `this` reference 
+	}
+}
+```
+
+```
+class Main {
+	function void Main() {
+		var MyCallback cb;
+
+		let cb = MyCallback.new();
+		do cb.invoke(0, 0); // calls MyCallback.callback()
+		do cb.dispose();
+		let cb = MyOtherCallback.new();
+		do cb.invoke(0, 0); // calls MyOtherCallback.callback()
+				    // without the extension it would have
+				    // called MyCallback.callback() again
+		do cb.dispose();
+		return;
+	}
+}
+
+```
+
+## 4. Classes
+
+### 4.1. Math 
+### 4.2. String
+### 4.3. Array 
+### 4.4. Output
+### 4.5. Screen
+### 4.6. Keyboard
+### 4.7. Memory
+### 4.8. Sys 
+
+### 4.9. File
+```
+	constructor File new(String path, boolean writing);
+
+	method String getName()
+
+	method boolean isdir()
+
+	method boolean open()
+
+	method int readByte()
+
+	method int seek(int position)
+
+	method int writeByte(int data)
+
+	method int writeString(String s)
+
+	method boolean remove()
+
+	method boolean mkdir()
+
+	method Buffer list()
+
+```
+
+For now, look at the source code and Unit test files.
+
+
+## 5. Grammar
 
 ``` 
 keyword: one of
@@ -306,13 +688,6 @@ keywordConstant:
 	this
 
 ``` 
-
-## 4. Classes
-
-### 4.1. File
-
-For now, look at the source code and Unit test files.
-
 
 ***
 [1]: https://www.nand2tetris.org/project09

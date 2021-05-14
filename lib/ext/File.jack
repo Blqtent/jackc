@@ -6,10 +6,10 @@ class File {
 	field Array buffer;
 	field String name;
 	
-	constructor File new(String path, boolean writeing) {
+	constructor File new(String path, boolean writing) {
 		var int l;
 		let fd = -1;
-		let is_write = writeing;
+		let is_write = writing;
 		let l = path.length();
 		if (l < 0) {
 			do Output.printString("Negative String length.");
