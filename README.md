@@ -5,8 +5,8 @@ Public Domain JACK compiler
 ![public domain](https://raw.githubusercontent.com/public-domain/jack/main/img/pd.png)
 
 
-The Jack Programming language
------------------------------
+The Unofficial Jack Programming language
+----------------------------------------
 
 ***
 
@@ -549,6 +549,7 @@ There is special key values:
 - up arrow    is 131
 - right arrow is 132
 - down arrow  is 133
+
 ...
 
 See the [book][8] for more.
