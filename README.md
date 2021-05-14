@@ -437,7 +437,7 @@ of types.
 
 WARNING: This extension is only supported by the 
 public domain jack compiler described in this document.
-Do not use it for the orginal Hack platform.
+Do not use it for the original Hack platform.
 
 This extension is a cheap replacement for `virtual` C++ functions and 
 Java non-static, non-final, non-private methods.
