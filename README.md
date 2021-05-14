@@ -385,7 +385,7 @@ or `return;` for `void` subroutines.
 
 An expression can be:
 
-- A constant (`1234` or `"Hello World"` or `true/false` or 'null')
+- A constant (`1234` or `"Hello World"` or `true`/`false` or `null`)
 - A variable name
 - The `this` keyword
 - A `variable_name[expression]`
@@ -511,15 +511,59 @@ class Main {
 ## 4. Classes
 
 ### 4.1. Math 
+
+See the [book][8].
+
 ### 4.2. String
+
+See the [book][8].
+
 ### 4.3. Array 
+
+See the [book][8].
+
 ### 4.4. Output
+
+See the [book][8].
+
 ### 4.5. Screen
+
+Screen 512 x 256 pixels. 
+
+The screen memory starts a 16384 and ends at 24575. 
+
+Pixels are single bit black and white packed in 16bit words.
+There is 32 16bit words by line of screen.
+
+See the [book][8] for more.
+
 ### 4.6. Keyboard
+
+The current pressed key Unicode value is located at memory address 24576.
+
+There is special key values:
+- Newline     is 128.
+- Backspace   is 129
+- left arrow  is 130
+- up arrow    is 131
+- right arrow is 132
+- down arrow  is 133
+...
+
+See the [book][8] for more.
+
 ### 4.7. Memory
+
+See the [book][8].
+
 ### 4.8. Sys 
 
+See the [book][8].
+
 ### 4.9. File
+
+TODO.
+
 ```
 	constructor File new(String path, boolean writing);
 
@@ -544,8 +588,6 @@ class Main {
 	method Buffer list()
 
 ```
-
-For now, look at the source code and Unit test files.
 
 
 ## 5. Grammar
