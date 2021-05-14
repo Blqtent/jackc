@@ -297,7 +297,7 @@ var processEvent()
 		if (!is_wait) {
 			Memory__poke(24576, 0);
 		}
-		return -1;
+		return 0;
 	case KeyPress:
 		c = 0;
 		r = XLookupString(&ev.xkey, text, 255, &key, 0);

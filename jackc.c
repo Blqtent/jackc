@@ -1042,7 +1042,7 @@ GLuint base;
 GLuint tex = 1;
 Atom wm_del;
 var isfirst = -1;
-
+var is_wait = 0;
 var need_update = -1;
 GLint att[] = {GLX_RENDER_TYPE, GLX_RGBA_BIT, 
 		GLX_DRAWABLE_TYPE, GLX_WINDOW_BIT,
@@ -1303,8 +1303,10 @@ var processEvent()
 	gc = DefaultGC(__display, 0);
 	switch (ev.type) {
 	case KeyRelease:
-		Memory__poke(24576, 0);
-		return -1;
+		if (!is_wait) {
+			Memory__poke(24576, 0);
+		}
+		return 0;
 	case KeyPress:
 		c = 0;
 		r = XLookupString(&ev.xkey, text, 255, &key, 0);
@@ -1356,7 +1358,6 @@ var processEvent()
 			c = (key - XK_F1) + Keyboard__F1();
 		}
 		if (c) {	
-			Memory__poke(24576, c);
 			return c;
 		}
 		break;
@@ -1402,40 +1403,50 @@ var Screen__refresh()
 	return 0;
 }
 
-var Screen__processEvents()
+var Screen__processEvents(var iswait)
 {
-	static var inproc = 0;
+	static var nextk = 0;
 	var e, r;
 
-	if (inproc) {
-		return 0;
-	}
-	inproc = -1;
+	r = nextk;
+	nextk = 0;
+	is_wait = iswait;
 	init();
 	if (Screen__need_refresh) {
 		while (XPending(__display)) {
 			e = processEvent();
-			if (e) { r = e; }
+			if (e) {
+				if (r || iswait) {
+					nextk = e;
+				} else {
+					r = e;
+				}
+			}
 		}
 		refresh();
 		while (!XPending(__display)) {
 			usleep(1000);
 		}
-		Screen__need_refresh = 0;
 	}
 	while (XPending(__display)) {
 		e = processEvent();
 		if (e) {
-			r = e;
+			if (r || iswait) {
+				nextk = e;
+			} else {
+				r = e;
+			}
 		}
 	}
-	if (r) {
-		inproc = 0;
-		return r;
+	if (!r) {
+		if (!iswait && Screen__need_refresh) {
+			usleep(1000);
+		}
+	} else {
+		Memory__poke(24576, r);
 	}
-	usleep(10000);
-	inproc = 0;
-	return 0;
+	Screen__need_refresh = 0;
+	return r;
 }
 
 
@@ -1471,6 +1482,7 @@ GLuint tex = 1;
 var refresh = 0;
 COORD coord;
 HANDLE output;
+var is_wait = 0;
 
 void display()
 {
@@ -1521,14 +1533,15 @@ LONG WINAPI WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		wglMakeCurrent(hDC, hRC);
 		screen2rgba(width, height);
 		display();
-		refresh = 0;
 		return 0;
 	case WM_SIZE:
 		PostMessage(hWnd, WM_PAINT, 0, 0);
 		return 0;
 	case WM_KEYUP:
 		key = 0;
-		Memory__poke(24576, 0);
+		if (!is_wait) {
+			Memory__poke(24576, 0);
+		}
 		break;
 	case WM_KEYDOWN:
 		switch (wParam) {
@@ -1573,14 +1586,13 @@ LONG WINAPI WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			key = (wParam - VK_F1) + Keyboard__F1();
 		}
 		if (key) {	
-			Memory__poke(24576, key);
 			return 0;
 		}
 		break;
 	case WM_CHAR:
 		key = wParam;
-		if (Memory__peek(24576) == 0) {
-			Memory__poke(24576, key);
+		if (Memory__peek(24576) != 0) {
+			key = 0;
 		}
 		return 0;
 	case WM_QUIT:
@@ -1703,21 +1715,25 @@ var Screen__refresh()
 	return 0;
 }
 
-var Screen__processEvents()
+var Screen__processEvents(var iswait)
 {
-	var k = 0;
-	static var in_proc = 0;
-	if (in_proc) {
-		return 0;
-	}
-	in_proc = -1;
+	static var nextk = 0;
+	var k = nextk;
+	nextk = 0;
+	is_wait = iswait;
 	init();
 	key = 0;
 	if (refresh) {
 		while (PeekMessage(&msg, hWnd, 0, 0, PM_REMOVE)) {
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
-			if (key) { k = key; }
+			if (key) { 
+				if (k || iswait) {
+					nextk = k;
+				} else {
+				k = key;
+				}
+			}
 		}
 		PostMessage(hWnd, WM_PAINT, 0, 0);
 		while (!PeekMessage(&msg, hWnd, 0, 0, PM_NOREMOVE)) {
@@ -1728,13 +1744,21 @@ var Screen__processEvents()
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
 		if (key) {
-			k = key;
+			if (k || iswait) {
+				nextk = k;
+			} else {
+				k = key;
+			}
 		}
 	}
 	if (!k) {
-		Sleep(20);
+		if (!iswait && refresh) {
+			Sleep(2);
+		}
+	} else {
+		Memory__poke(24576, k);
 	}
-	in_proc = 0;
+	refresh = 0;
 	return k;
 }
 
@@ -1885,6 +1909,7 @@ int width = 512;
 int height = 256;
 var refresh_ = 0;
 var key = 0;
+var is_wait = 0;
 SEL allocSel = 0;
 SEL initSel;
 GLuint tex = 1;
@@ -2042,8 +2067,7 @@ void deInit()
 NSUInteger applicationShouldTerminate(id self, SEL _sel, id sender)
 {
 	deInit();
-	terminate = -1;
-	return 0;
+	return 1;
 }
 
 void windowWillClose(id self, SEL _sel, id notification)
@@ -2457,12 +2481,13 @@ int check_event()
 		if (!key && inputTextUTF8) {
 			key = inputTextUTF8[0]; // FIXME
 		}
-		Memory__poke(24576, key);
 		break;
 	case NSEventTypeKeyUp:
 		keyCode = (unsigned short)objc_msgSend(event, keyCodeSel);
 		key = 0;
-		Memory__poke(24576, 0);
+		if (!is_wait) {
+			Memory__poke(24576, 0);
+		}
 		break;
 	default:
 		break;
@@ -2502,34 +2527,36 @@ var Screen__refresh()
 	return 0;
 }
 
-var Screen__processEvents()
+var Screen__processEvents(var iswait)
 {
-	var k = 0;
-	static var in_proc = 0;
-	if (in_proc) {
-		return 0;
-	}
-	in_proc = -1;
+	static var nextk = 0;
+	var k = nextk;
+	is_wait = iswait;
+	nextk = 0;
 	init();
-	if (refresh_) {
-		update();
-		refresh_ = 0;
-	}
 	key = 0;
 	while (check_event()) {
 		if (key) {
-			k = key;
+			if (k || iswait) {
+				nextk = key;
+			} else {
+				k = key;
+			}
+			key = 0;
 		}
 	}
 	if (terminate) {
-		exit(0);
+		objc_msgSend(NSApp, terminateSel);
 	}
 	update();
-	refresh_ = 0;
 	if (!k) {
-		usleep(10000);
+		if (!iswait && refresh_) {
+			usleep(1000);
+		}
+	} else {
+		Memory__poke(24576, k);
 	}
-	in_proc = 0;
+	refresh_ = 0;
 	return k;
 }
 
@@ -11419,7 +11446,7 @@ var Sys__error(var errorCode) {
 	return 0;
 }
 var Sys__wait(var duration) {
-	Screen__processEvents();
+	Screen__processEvents(-1);
  
 #ifdef _WIN32
  	Sleep(duration);
@@ -12097,7 +12124,7 @@ var Memory__peek(var addr) {
 	}
 
  	if (addr == 24576) {
- 		Screen__processEvents();
+ 		Screen__processEvents(0);
 	}
  	return Memory__memory[addr];
 	return __peek(Memory___mem+addr);

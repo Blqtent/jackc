@@ -64,6 +64,7 @@ void deInit()
 
 LONG WINAPI WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
+	static var waskey = 0;
 	RECT r;
 
 	switch(uMsg) {
@@ -127,14 +128,17 @@ LONG WINAPI WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		if (wParam >= VK_F1 && wParam <= VK_F12) {
 			key = (wParam - VK_F1) + Keyboard__F1();
 		}
-		if (key) {	
+		if (key) {
+			waskey = -1;
 			return 0;
 		}
+		waskey = 0;
 		break;
 	case WM_CHAR:
 		key = wParam;
-		if (Memory__peek(24576) != 0) {
+		if (waskey) {
 			key = 0;
+			waskey = 0;
 		}
 		return 0;
 	case WM_QUIT:
@@ -271,10 +275,11 @@ var Screen__processEvents(var iswait)
 			DispatchMessage(&msg);
 			if (key) { 
 				if (k || iswait) {
-					nextk = k;
+					nextk = key;
 				} else {
-				k = key;
+					k = key;
 				}
+				key = 0;
 			}
 		}
 		PostMessage(hWnd, WM_PAINT, 0, 0);
@@ -287,10 +292,11 @@ var Screen__processEvents(var iswait)
 		DispatchMessage(&msg);
 		if (key) {
 			if (k || iswait) {
-				nextk = k;
+				nextk = key;
 			} else {
 				k = key;
 			}
+			key = 0;
 		}
 	}
 	if (!k) {
