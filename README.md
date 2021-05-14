@@ -274,6 +274,11 @@ have a class scope.
 `var` kind variables and parameter variables have the life of 
 subroutine execution and a scope of the local subroutine.
 
+Every kind of variable is accessed only by its identifier. You don not
+need to add class identifier for static varaiable. And you cannot
+access fields of object. If you need to access field, you need to
+write a getter and setter.
+
 Each variable has a type that can be a primitive or a object type of a class.
 
 The primitives types are `int` 2's complement integer, `boolean` that can be
@@ -290,7 +295,7 @@ To get the most negative number you must use these biggest constants,
 negate them using unary `-` and then subtract `1`.
 
 String constant are beginning and ending with `"` and can't contain `"` or 
-newline (ascii charter 10).
+newline (ascii character 10).
 
 The `null` constant is a null reference to an object;
 
@@ -305,7 +310,7 @@ var int variable;
 var Array arr;
 let variable = 1000;
 let arr = variable;
-do arr[1] = 3;      // now memory located at address 1001 contains the value 3
+let arr[1] = 3;      // now memory located at address 1001 contains the value 3
 ```
 
 ### 3.3 Subroutines
@@ -396,8 +401,8 @@ expression < expression // is less than
 ```
 
 There is no priority of operators. You must always enclose sub-expressions
-in parenthesis. Result of `let variable = 2 * 4 + 5;" is undetermined,
-you must use `let variable = (2 * 4) + 5;".
+in parenthesis. Result of `let variable = 2 * 4 + 5;` is undetermined,
+you must use `let variable = (2 * 4) + 5;`.
 
 ### 3.6 Comments
 
@@ -405,7 +410,7 @@ you must use `let variable = (2 * 4) + 5;".
 ignored till the end of line.
 
 `/*` is introducing a multi line is comment, the text after `/*` is
-ignored till '*/' is encountered.
+ignored till `*/` is encountered.
 
 Special `/**` is introducing an API documentation comment.
 
