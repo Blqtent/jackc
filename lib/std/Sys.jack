@@ -63,7 +63,7 @@ class Sys {
 	}
 
 	function void wait(int duration) {
-		do Screen.processEvents();
+		do Screen.processEvents(true);
 /*#c 
 #ifdef _WIN32
  	Sleep(duration);

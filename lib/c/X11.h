@@ -33,7 +33,7 @@ GLuint base;
 GLuint tex = 1;
 Atom wm_del;
 var isfirst = -1;
-
+var is_wait = 0;
 var need_update = -1;
 GLint att[] = {GLX_RENDER_TYPE, GLX_RGBA_BIT, 
 		GLX_DRAWABLE_TYPE, GLX_WINDOW_BIT,
@@ -294,7 +294,9 @@ var processEvent()
 	gc = DefaultGC(__display, 0);
 	switch (ev.type) {
 	case KeyRelease:
-		Memory__poke(24576, 0);
+		if (!is_wait) {
+			Memory__poke(24576, 0);
+		}
 		return -1;
 	case KeyPress:
 		c = 0;
@@ -347,7 +349,6 @@ var processEvent()
 			c = (key - XK_F1) + Keyboard__F1();
 		}
 		if (c) {	
-			Memory__poke(24576, c);
 			return c;
 		}
 		break;
@@ -393,40 +394,50 @@ var Screen__refresh()
 	return 0;
 }
 
-var Screen__processEvents()
+var Screen__processEvents(var iswait)
 {
-	static var inproc = 0;
+	static var nextk = 0;
 	var e, r;
 
-	if (inproc) {
-		return 0;
-	}
-	inproc = -1;
+	r = nextk;
+	nextk = 0;
+	is_wait = iswait;
 	init();
 	if (Screen__need_refresh) {
 		while (XPending(__display)) {
 			e = processEvent();
-			if (e) { r = e; }
+			if (e) {
+				if (r || iswait) {
+					nextk = e;
+				} else {
+					r = e;
+				}
+			}
 		}
 		refresh();
 		while (!XPending(__display)) {
 			usleep(1000);
 		}
-		Screen__need_refresh = 0;
 	}
 	while (XPending(__display)) {
 		e = processEvent();
 		if (e) {
-			r = e;
+			if (r || iswait) {
+				nextk = e;
+			} else {
+				r = e;
+			}
 		}
 	}
-	if (r) {
-		inproc = 0;
-		return r;
+	if (!r) {
+		if (!iswait && Screen__need_refresh) {
+			usleep(1000);
+		}
+	} else {
+		Memory__poke(24576, r);
 	}
-	usleep(10000);
-	inproc = 0;
-	return 0;
+	Screen__need_refresh = 0;
+	return r;
 }
 
 

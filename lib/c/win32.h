@@ -24,6 +24,7 @@ GLuint tex = 1;
 var refresh = 0;
 COORD coord;
 HANDLE output;
+var is_wait = 0;
 
 void display()
 {
@@ -74,14 +75,15 @@ LONG WINAPI WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		wglMakeCurrent(hDC, hRC);
 		screen2rgba(width, height);
 		display();
-		refresh = 0;
 		return 0;
 	case WM_SIZE:
 		PostMessage(hWnd, WM_PAINT, 0, 0);
 		return 0;
 	case WM_KEYUP:
 		key = 0;
-		Memory__poke(24576, 0);
+		if (!is_wait) {
+			Memory__poke(24576, 0);
+		}
 		break;
 	case WM_KEYDOWN:
 		switch (wParam) {
@@ -126,14 +128,13 @@ LONG WINAPI WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			key = (wParam - VK_F1) + Keyboard__F1();
 		}
 		if (key) {	
-			Memory__poke(24576, key);
 			return 0;
 		}
 		break;
 	case WM_CHAR:
 		key = wParam;
-		if (Memory__peek(24576) == 0) {
-			Memory__poke(24576, key);
+		if (Memory__peek(24576) != 0) {
+			key = 0;
 		}
 		return 0;
 	case WM_QUIT:
@@ -256,21 +257,25 @@ var Screen__refresh()
 	return 0;
 }
 
-var Screen__processEvents()
+var Screen__processEvents(var iswait)
 {
-	var k = 0;
-	static var in_proc = 0;
-	if (in_proc) {
-		return 0;
-	}
-	in_proc = -1;
+	static var nextk = 0;
+	var k = nextk;
+	nextk = 0;
+	is_wait = iswait;
 	init();
 	key = 0;
 	if (refresh) {
 		while (PeekMessage(&msg, hWnd, 0, 0, PM_REMOVE)) {
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
-			if (key) { k = key; }
+			if (key) { 
+				if (k || iswait) {
+					nextk = k;
+				} else {
+				k = key;
+				}
+			}
 		}
 		PostMessage(hWnd, WM_PAINT, 0, 0);
 		while (!PeekMessage(&msg, hWnd, 0, 0, PM_NOREMOVE)) {
@@ -281,13 +286,21 @@ var Screen__processEvents()
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
 		if (key) {
-			k = key;
+			if (k || iswait) {
+				nextk = k;
+			} else {
+				k = key;
+			}
 		}
 	}
 	if (!k) {
-		Sleep(20);
+		if (!iswait && refresh) {
+			Sleep(2);
+		}
+	} else {
+		Memory__poke(24576, k);
 	}
-	in_proc = 0;
+	refresh = 0;
 	return k;
 }
 

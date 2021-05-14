@@ -140,6 +140,7 @@ int width = 512;
 int height = 256;
 var refresh_ = 0;
 var key = 0;
+var is_wait = 0;
 SEL allocSel = 0;
 SEL initSel;
 GLuint tex = 1;
@@ -297,8 +298,7 @@ void deInit()
 NSUInteger applicationShouldTerminate(id self, SEL _sel, id sender)
 {
 	deInit();
-	terminate = -1;
-	return 0;
+	return 1;
 }
 
 void windowWillClose(id self, SEL _sel, id notification)
@@ -712,12 +712,13 @@ int check_event()
 		if (!key && inputTextUTF8) {
 			key = inputTextUTF8[0]; // FIXME
 		}
-		Memory__poke(24576, key);
 		break;
 	case NSEventTypeKeyUp:
 		keyCode = (unsigned short)objc_msgSend(event, keyCodeSel);
 		key = 0;
-		//Memory__poke(24576, 0);
+		if (!is_wait) {
+			Memory__poke(24576, 0);
+		}
 		break;
 	default:
 		break;
@@ -757,30 +758,36 @@ var Screen__refresh()
 	return 0;
 }
 
-var Screen__processEvents()
+var Screen__processEvents(var iswait)
 {
-	var k = 0;
-	static var in_proc = 0;
-	if (in_proc) {
-		return 0;
-	}
-	in_proc = -1;
+	static var nextk = 0;
+	var k = nextk;
+	is_wait = iswait;
+	nextk = 0;
 	init();
 	key = 0;
 	while (check_event()) {
 		if (key) {
-			k = key;
+			if (k || iswait) {
+				nextk = key;
+			} else {
+				k = key;
+			}
+			key = 0;
 		}
 	}
 	if (terminate) {
-		exit(0);
+		objc_msgSend(NSApp, terminateSel);
 	}
 	update();
-	refresh_ = 0;
 	if (!k) {
-		usleep(1000);
+		if (!iswait && refresh_) {
+			usleep(1000);
+		}
+	} else {
+		Memory__poke(24576, k);
 	}
-	in_proc = 0;
+	refresh_ = 0;
 	return k;
 }
 

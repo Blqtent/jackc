@@ -50,7 +50,7 @@ class Memory {
 			let addr = addr;
 		} 
 //#c 	if (addr == 24576) {
-//#c 		Screen__processEvents();
+//#c 		Screen__processEvents(false);
 //#c	}
 //#c 	return Memory__memory[addr];
 		return mem[addr];
