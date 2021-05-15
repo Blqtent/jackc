@@ -103,6 +103,29 @@ var Bytes__setStringToNative(var __this, var name);
 
 #endif
 
+#ifndef JACK_JackAstUtils_H
+#define JACK_JackAstUtils_H
+var JackAstUtils__isType(var t);
+var JackAstUtils__isParentExprBool(var c);
+var JackAstUtils__isInt(var p, var c);
+var JackAstUtils__isSubroutine(var t);
+var JackAstUtils__isVarnameSet(var c, var s);
+var JackAstUtils__functionGetClassOf(var c, var s);
+var JackAstUtils__classGetClassOf(var clas, var c, var s);
+var JackAstUtils__classGetTypeOf(var p, var c, var s);
+var JackAstUtils__functionGetTypeOf(var p, var c, var s);
+var JackAstUtils__getTypeOf(var p, var c);
+var JackAstUtils__isStatic(var c);
+var JackAstUtils__isField(var c);
+var JackAstUtils__getTypeOfVarname(var p, var c, var s);
+var JackAstUtils__getClassOf(var clas, var c);
+#endif
+
+
+#if 0
+
+#endif
+
 #ifndef JACK_Canavas_H
 #define JACK_Canavas_H
 var Canavas__draw(var x, var y);
@@ -183,6 +206,12 @@ var JackAstToC__compile(var __this, var dst_);
 var JackAstToC__coClass(var __this, var c);
 var JackAstToC__genStrings(var __this, var a);
 var JackAstToC__spc(var __this);
+var JackAstToC__getTypeOf(var __this, var y);
+var JackAstToC__getClassOf(var __this, var y);
+var JackAstToC__isInt(var __this, var y);
+var JackAstToC__isStatic(var __this, var y);
+var JackAstToC__isField(var __this, var y);
+var JackAstToC__isType(var __this, var y);
 var JackAstToC__str(var __this, var c);
 var JackAstToC__nl(var __this);
 var JackAstToC__coAsm(var __this, var c);
@@ -194,7 +223,6 @@ var JackAstToC__coConstructorPre(var __this, var c);
 var JackAstToC__coMethod(var __this, var c);
 var JackAstToC__coConstructor(var __this, var c);
 var JackAstToC__coFunctionPre(var __this, var c);
-var JackAstToC__isType(var __this, var t);
 var JackAstToC__coFunction(var __this, var c);
 var JackAstToC__error(var __this, var txt, var c);
 var JackAstToC__coStatement(var __this, var c);
@@ -203,20 +231,7 @@ var JackAstToC__coIf(var __this, var c);
 var JackAstToC__coReturn(var __this, var c);
 var JackAstToC__coAssign(var __this, var c);
 var JackAstToC__coVarNameOrIndexed(var __this, var c, var isassign);
-var JackAstToC__isParentExprBool(var __this, var c);
-var JackAstToC__isInt(var __this, var c);
 var JackAstToC__coExpr(var __this, var c, var isterm);
-var JackAstToC__isSubroutine(var __this, var t);
-var JackAstToC__isVarnameSet(var __this, var c, var s);
-var JackAstToC__getTypeOfVarname(var __this, var c, var s);
-var JackAstToC__functionGetClassOf(var __this, var c, var s);
-var JackAstToC__functionGetTypeOf(var __this, var c, var s);
-var JackAstToC__classGetClassOf(var __this, var c, var s);
-var JackAstToC__classGetTypeOf(var __this, var c, var s);
-var JackAstToC__getTypeOf(var __this, var c);
-var JackAstToC__isStatic(var __this, var c);
-var JackAstToC__isField(var __this, var c);
-var JackAstToC__getClassOf(var __this, var c);
 var JackAstToC__coSubroutineCall(var __this, var c);
 var JackAstToC__coStatements(var __this, var c);
 var JackAstToC__coFunctionHead(var __this, var c, var add_this);
@@ -3480,6 +3495,489 @@ var Bytes__setStringToNative(var __this, var name) {
 #endif
 
 #ifdef JACK_IMPLEMENTATION
+var JackAstUtils___str0[] = {105,110,116,0};
+var JackAstUtils___str1[] = {0};
+var JackAstUtils___str2[] = {0};
+var JackAstUtils__isType(var t) {
+	if ((((t)==(C__CLASSNAME())))||(((t)==(C__VOID())))||(((t)==(C__INT())))||(((t)==(C__BOOLEAN())))||(((t)==(C__CHAR())))) {
+		return -1;
+	}
+
+	return 0;
+}
+var JackAstUtils__isParentExprBool(var c) {
+	var t;
+	var d;
+	d = JackAst__getParent(c);
+	t = JackAst__getTag(d);
+	if ((((t)==(C__LEFT_PARENTHESIS())))) {
+		return JackAstUtils__isParentExprBool(d);
+	}
+
+	if ((((t)==(C__EXPR())))) {
+		return JackAstUtils__isParentExprBool(d);
+	}
+
+	if ((((t)==(C__UNARYTILDE())))) {
+		return JackAstUtils__isParentExprBool(d);
+	}
+
+	if ((((t)==(C__OR())))) {
+		return JackAstUtils__isParentExprBool(d);
+	}
+
+	if ((((t)==(C__AND())))) {
+		return JackAstUtils__isParentExprBool(d);
+	}
+
+	if (((t)==(C__MULTIPLY()))) {
+		return 0;
+	}
+
+	if (((t)==(C__PLUS()))) {
+		return 0;
+	}
+
+	if (((t)==(C__DIV()))) {
+		return 0;
+	}
+
+	if (((t)==(C__MINUS()))) {
+		return 0;
+	}
+
+	if (((t)==(C__ASSIGN()))) {
+		return 0;
+	}
+
+	return -1;
+}
+var JackAstUtils__isInt(var p, var c) {
+	var d;
+	var s;
+	var t;
+	d = c;
+	if (d) {
+		t = JackAst__getTag(d);
+		if ((((t)==(C__LEFT_PARENTHESIS())))) {
+			return JackAstUtils__isInt(p, JackAst__getChild(d));
+		}
+
+		if (((t)==(C__EXPR()))) {
+			return JackAstUtils__isInt(p, JackAst__getChild(d));
+		}
+
+		if (((t)==(C__UNARYTILDE()))) {
+			return JackAstUtils__isInt(p, JackAst__getChild(d));
+		}
+
+		if (((t)==(C__AND()))) {
+			if (JackAstUtils__isInt(p, JackAst__getLeft(d))) {
+				return -1;
+			}
+
+			return JackAstUtils__isInt(p, JackAst__getChild(d));
+		}
+
+		if (((t)==(C__OR()))) {
+			if (JackAstUtils__isInt(p, JackAst__getLeft(d))) {
+				return -1;
+			}
+
+			return JackAstUtils__isInt(p, JackAst__getChild(d));
+		}
+
+		if (((t)==(C__MULTIPLY()))) {
+			return -1;
+		}
+
+		if (((t)==(C__PLUS()))) {
+			return -1;
+		}
+
+		if (((t)==(C__DIV()))) {
+			return -1;
+		}
+
+		if (((t)==(C__MINUS()))) {
+			return -1;
+		}
+
+		if (((t)==(C__INT_CONST()))) {
+			return -1;
+		}
+
+		if (((t)==(C__VARNAME()))) {
+			s = JackAstUtils__getTypeOf(p, d);
+			if (((0)==(String__compare(s, Memory__getString(JackAstUtils___str0))))) {
+				return -1;
+			} else {
+				return 0;
+			}
+		}
+
+		if (((t)==(C__LESS()))) {
+			return 0;
+		}
+
+		if (((t)==(C__GREATER()))) {
+			return 0;
+		}
+
+		if (((t)==(C__EQUAL()))) {
+			return 0;
+		}
+
+	}
+
+	return 0;
+}
+var JackAstUtils__isSubroutine(var t) {
+	if (((t)==(C__FUNCTION()))) {
+		return -1;
+	}
+
+	if (((t)==(C__METHOD()))) {
+		return -1;
+	}
+
+	if (((t)==(C__CONSTRUCTOR()))) {
+		return -1;
+	}
+
+	return 0;
+}
+var JackAstUtils__isVarnameSet(var c, var s) {
+	var d;
+	d = JackAst__getChild(c);
+	if (d) {
+		d = JackAst__getChild(d);
+	}
+
+	if (d) {
+		if (((String__compare(s, JackAst__getData(d)))==(0))) {
+			return -1;
+		}
+
+	}
+
+	return 0;
+}
+var JackAstUtils__functionGetClassOf(var c, var s) {
+	var d;
+	var n;
+	var t;
+	var r;
+	d = JackAst__getChild(c);
+	t = JackAst__getTag(d);
+	if (JackAstUtils__isType(t)) {
+		n = JackAst__getChild(d);
+		t = JackAst__getTag(n);
+		if ((((t)==(C__SUBROUTINENAME())))||(((t)==(C__CALLBACK())))) {
+			n = JackAst__getChild(n);
+			t = JackAst__getTag(n);
+			if (((t)==(C__PARAMS()))) {
+				n = JackAst__getChild(n);
+				while (!(((n)==(0)))) {
+					r = JackAstUtils__isVarnameSet(n, s);
+					if (r) {
+						return Memory__getString(JackAstUtils___str1);
+					}
+
+					n = JackAst__getNext(n);
+				}
+			}
+
+		}
+
+	}
+
+	while (!(((d)==(0)))) {
+		t = JackAst__getTag(d);
+		if (((t)==(C__VAR()))) {
+			n = JackAst__getChild(d);
+			if (n) {
+				r = JackAstUtils__isVarnameSet(n, s);
+				if (r) {
+					return Memory__getString(JackAstUtils___str2);
+				}
+
+			}
+
+		}
+
+		d = JackAst__getNext(d);
+	}
+	return 0;
+}
+var JackAstUtils__classGetClassOf(var clas, var c, var s) {
+	var d;
+	var t;
+	var r;
+	d = JackAst__getChild(c);
+	while (!(((d)==(0)))) {
+		t = JackAst__getTag(d);
+		if ((((t)==(C__FIELD())))||(((t)==(C__STATIC())))) {
+			r = JackAstUtils__isVarnameSet(d, s);
+			if (r) {
+				return clas;
+			}
+
+		}
+
+		d = JackAst__getNext(d);
+	}
+	return 0;
+}
+var JackAstUtils__classGetTypeOf(var p, var c, var s) {
+	var d;
+	var t;
+	var r;
+	d = JackAst__getChild(c);
+	while (!(((d)==(0)))) {
+		t = JackAst__getTag(d);
+		if ((((t)==(C__FIELD())))||(((t)==(C__STATIC())))) {
+			r = JackAstUtils__getTypeOfVarname(p, JackAst__getChild(d), s);
+			if (r) {
+				return r;
+			}
+
+		}
+
+		d = JackAst__getNext(d);
+	}
+	return 0;
+}
+var JackAstUtils__functionGetTypeOf(var p, var c, var s) {
+	var d;
+	var n;
+	var t;
+	var r;
+	d = JackAst__getChild(c);
+	while (!(((d)==(0)))) {
+		t = JackAst__getTag(d);
+		if (JackAstUtils__isType(t)) {
+			n = JackAst__getChild(d);
+			t = JackAst__getTag(n);
+			if ((((t)==(C__SUBROUTINENAME())))||(((t)==(C__CALLBACK())))) {
+				n = JackAst__getChild(n);
+				t = JackAst__getTag(n);
+				if (((t)==(C__PARAMS()))) {
+					n = JackAst__getChild(n);
+					while (!(((n)==(0)))) {
+						r = JackAstUtils__getTypeOfVarname(p, n, s);
+						if (r) {
+							return r;
+						}
+
+						n = JackAst__getNext(n);
+					}
+				}
+
+			}
+
+		}
+
+		if (((t)==(C__VAR()))) {
+			n = JackAst__getChild(d);
+			if (n) {
+				r = JackAstUtils__getTypeOfVarname(p, n, s);
+				if (r) {
+					return r;
+				}
+
+			}
+
+		}
+
+		d = JackAst__getNext(d);
+	}
+	return 0;
+}
+var JackAstUtils__getTypeOf(var p, var c) {
+	var d;
+	var t;
+	var s;
+	var r;
+	s = JackAst__getData(c);
+	d = JackAst__getParent(c);
+	t = JackAst__getTag(d);
+	while (((((((d)==(0))))==(0)))&&(((JackAstUtils__isSubroutine(t))==(0)))) {
+		d = JackAst__getParent(d);
+		if (d) {
+			t = JackAst__getTag(d);
+		}
+
+	}
+	if (((d)==(0))) {
+		return 0;
+	}
+
+	r = JackAstUtils__functionGetTypeOf(p, d, s);
+	if (r) {
+		return r;
+	}
+
+	while (((((((d)==(0))))==(0)))&&((((((t)==(C__CLASS()))))==(0)))) {
+		d = JackAst__getParent(d);
+		if (d) {
+			t = JackAst__getTag(d);
+		}
+
+	}
+	if (((d)==(0))) {
+		return 0;
+	}
+
+	r = JackAstUtils__classGetTypeOf(p, d, s);
+	if (r) {
+		return r;
+	}
+
+	return 0;
+}
+var JackAstUtils__isStatic(var c) {
+	var d;
+	var n;
+	var t;
+	var s;
+	s = JackAst__getData(c);
+	d = JackAst__getParent(c);
+	t = JackAst__getTag(d);
+	while (((((((d)==(0))))==(0)))&&((((((t)==(C__CLASS()))))==(0)))) {
+		d = JackAst__getParent(d);
+		if (d) {
+			t = JackAst__getTag(d);
+		}
+
+	}
+	if (((d)==(0))) {
+		return 0;
+	}
+
+	d = JackAst__getChild(d);
+	while (!(((d)==(0)))) {
+		if (((JackAst__getTag(d))==(C__STATIC()))) {
+			n = JackAst__getChild(d);
+			if (n) {
+				n = JackAst__getChild(n);
+				if (((String__compare(s, JackAst__getData(n)))==(0))) {
+					return -1;
+				}
+
+			}
+
+		}
+
+		d = JackAst__getNext(d);
+	}
+	return 0;
+}
+var JackAstUtils__isField(var c) {
+	var d;
+	var n;
+	var t;
+	var s;
+	s = JackAst__getData(c);
+	d = JackAst__getParent(c);
+	t = JackAst__getTag(d);
+	while (((((((d)==(0))))==(0)))&&((((((t)==(C__CLASS()))))==(0)))) {
+		d = JackAst__getParent(d);
+		if (d) {
+			t = JackAst__getTag(d);
+		}
+
+	}
+	if (((d)==(0))) {
+		return 0;
+	}
+
+	d = JackAst__getChild(d);
+	while (!(((d)==(0)))) {
+		if (((JackAst__getTag(d))==(C__FIELD()))) {
+			n = JackAst__getChild(d);
+			if (n) {
+				n = JackAst__getChild(n);
+				if (((String__compare(s, JackAst__getData(n)))==(0))) {
+					return -1;
+				}
+
+			}
+
+		}
+
+		d = JackAst__getNext(d);
+	}
+	return 0;
+}
+var JackAstUtils__getTypeOfVarname(var p, var c, var s) {
+	var d;
+	var t;
+	d = JackAst__getChild(c);
+	if (((d)==(0))) {
+		return 0;
+	}
+
+	if (((JackAst__getData(d))==(0))) {
+		return 0;
+	}
+
+	if (((String__compare(s, JackAst__getData(d)))==(0))) {
+		t = JackAst__getTag(c);
+		if ((((t)==(C__VOID())))||(((t)==(C__INT())))||(((t)==(C__BOOLEAN())))||(((t)==(C__CHAR())))) {
+			return JackParser__getConst(p, t);
+		}
+
+		return JackAst__getData(c);
+	}
+
+	return 0;
+}
+var JackAstUtils__getClassOf(var clas, var c) {
+	var d;
+	var t;
+	var s;
+	var r;
+	s = JackAst__getData(c);
+	d = JackAst__getParent(c);
+	t = JackAst__getTag(d);
+	while (((((((d)==(0))))==(0)))&&(((JackAstUtils__isSubroutine(t))==(0)))) {
+		d = JackAst__getParent(d);
+		if (d) {
+			t = JackAst__getTag(d);
+		}
+
+	}
+	if (((d)==(0))) {
+		return 0;
+	}
+
+	r = JackAstUtils__functionGetClassOf(d, s);
+	if (r) {
+		return r;
+	}
+
+	while (((((((d)==(0))))==(0)))&&((((((t)==(C__CLASS()))))==(0)))) {
+		d = JackAst__getParent(d);
+		if (d) {
+			t = JackAst__getTag(d);
+		}
+
+	}
+	if (((d)==(0))) {
+		return 0;
+	}
+
+	r = JackAstUtils__classGetClassOf(clas, d, s);
+	if (r) {
+		return r;
+	}
+
+	return 0;
+}
+#endif
+
+#ifdef JACK_IMPLEMENTATION
 var Canavas__draw(var x, var y) {
 	return 0;
 }
@@ -4085,86 +4583,80 @@ var JackAstToC___str76[] = {95,95,0};
 var JackAstToC___str77[] = {43,0};
 var JackAstToC___str78[] = {41,0};
 var JackAstToC___str79[] = {39,91,39,32,101,120,112,101,99,116,101,100,0};
-var JackAstToC___str80[] = {105,110,116,0};
-var JackAstToC___str81[] = {45,0};
-var JackAstToC___str82[] = {126,0};
-var JackAstToC___str83[] = {33,0};
-var JackAstToC___str84[] = {38,0};
-var JackAstToC___str85[] = {38,38,0};
-var JackAstToC___str86[] = {124,0};
-var JackAstToC___str87[] = {124,124,0};
-var JackAstToC___str88[] = {48,0};
-var JackAstToC___str89[] = {95,95,116,104,105,115,0};
-var JackAstToC___str90[] = {48,0};
-var JackAstToC___str91[] = {45,49,0};
-var JackAstToC___str92[] = {40,0};
-var JackAstToC___str93[] = {41,0};
-var JackAstToC___str94[] = {77,101,109,111,114,121,95,95,103,101,116,83,116,114,105,110,103,40,0};
-var JackAstToC___str95[] = {95,95,95,115,116,114,0};
-var JackAstToC___str96[] = {41,0};
-var JackAstToC___str97[] = {43,0};
-var JackAstToC___str98[] = {45,0};
-var JackAstToC___str99[] = {42,0};
-var JackAstToC___str100[] = {47,0};
-var JackAstToC___str101[] = {40,40,40,0};
-var JackAstToC___str102[] = {41,60,40,0};
-var JackAstToC___str103[] = {41,41,63,45,49,58,48,41,0};
-var JackAstToC___str104[] = {40,40,0};
-var JackAstToC___str105[] = {41,60,40,0};
-var JackAstToC___str106[] = {41,41,0};
-var JackAstToC___str107[] = {40,40,40,0};
-var JackAstToC___str108[] = {41,62,40,0};
-var JackAstToC___str109[] = {41,41,63,45,49,58,48,41,0};
-var JackAstToC___str110[] = {40,40,0};
-var JackAstToC___str111[] = {41,62,40,0};
-var JackAstToC___str112[] = {41,41,0};
-var JackAstToC___str113[] = {40,40,40,0};
-var JackAstToC___str114[] = {41,61,61,40,0};
-var JackAstToC___str115[] = {41,41,63,45,49,58,48,41,0};
-var JackAstToC___str116[] = {40,40,0};
-var JackAstToC___str117[] = {41,61,61,40,0};
-var JackAstToC___str118[] = {41,41,0};
-var JackAstToC___str119[] = {85,110,101,120,112,101,99,116,101,100,32,116,101,114,109,0};
-var JackAstToC___str120[] = {0};
-var JackAstToC___str121[] = {0};
-var JackAstToC___str122[] = {116,101,120,116,51,0};
-var JackAstToC___str123[] = {72,72,72,0};
-var JackAstToC___str124[] = {32,0};
-var JackAstToC___str125[] = {95,95,95,0};
-var JackAstToC___str126[] = {95,95,112,101,101,107,40,0};
-var JackAstToC___str127[] = {95,95,41,0};
+var JackAstToC___str80[] = {45,0};
+var JackAstToC___str81[] = {126,0};
+var JackAstToC___str82[] = {33,0};
+var JackAstToC___str83[] = {38,0};
+var JackAstToC___str84[] = {38,38,0};
+var JackAstToC___str85[] = {124,0};
+var JackAstToC___str86[] = {124,124,0};
+var JackAstToC___str87[] = {48,0};
+var JackAstToC___str88[] = {95,95,116,104,105,115,0};
+var JackAstToC___str89[] = {48,0};
+var JackAstToC___str90[] = {45,49,0};
+var JackAstToC___str91[] = {40,0};
+var JackAstToC___str92[] = {41,0};
+var JackAstToC___str93[] = {77,101,109,111,114,121,95,95,103,101,116,83,116,114,105,110,103,40,0};
+var JackAstToC___str94[] = {95,95,95,115,116,114,0};
+var JackAstToC___str95[] = {41,0};
+var JackAstToC___str96[] = {43,0};
+var JackAstToC___str97[] = {45,0};
+var JackAstToC___str98[] = {42,0};
+var JackAstToC___str99[] = {47,0};
+var JackAstToC___str100[] = {40,40,40,0};
+var JackAstToC___str101[] = {41,60,40,0};
+var JackAstToC___str102[] = {41,41,63,45,49,58,48,41,0};
+var JackAstToC___str103[] = {40,40,0};
+var JackAstToC___str104[] = {41,60,40,0};
+var JackAstToC___str105[] = {41,41,0};
+var JackAstToC___str106[] = {40,40,40,0};
+var JackAstToC___str107[] = {41,62,40,0};
+var JackAstToC___str108[] = {41,41,63,45,49,58,48,41,0};
+var JackAstToC___str109[] = {40,40,0};
+var JackAstToC___str110[] = {41,62,40,0};
+var JackAstToC___str111[] = {41,41,0};
+var JackAstToC___str112[] = {40,40,40,0};
+var JackAstToC___str113[] = {41,61,61,40,0};
+var JackAstToC___str114[] = {41,41,63,45,49,58,48,41,0};
+var JackAstToC___str115[] = {40,40,0};
+var JackAstToC___str116[] = {41,61,61,40,0};
+var JackAstToC___str117[] = {41,41,0};
+var JackAstToC___str118[] = {85,110,101,120,112,101,99,116,101,100,32,116,101,114,109,0};
+var JackAstToC___str119[] = {95,95,95,0};
+var JackAstToC___str120[] = {95,95,112,101,101,107,40,0};
+var JackAstToC___str121[] = {95,95,41,0};
+var JackAstToC___str122[] = {95,95,0};
+var JackAstToC___str123[] = {95,95,0};
+var JackAstToC___str124[] = {47,42,32,69,82,82,79,82,32,110,111,116,32,97,108,108,111,119,101,100,32,98,121,32,72,65,67,75,32,42,47,0};
+var JackAstToC___str125[] = {109,105,115,115,105,110,103,32,99,97,108,108,98,97,99,107,32,102,105,101,108,100,0};
+var JackAstToC___str126[] = {40,40,118,97,114,40,42,41,40,118,97,114,44,118,97,114,44,118,97,114,41,41,40,95,95,112,101,101,107,40,95,95,116,104,105,115,41,41,41,0};
+var JackAstToC___str127[] = {95,95,116,104,105,115,0};
 var JackAstToC___str128[] = {95,95,0};
-var JackAstToC___str129[] = {95,95,0};
-var JackAstToC___str130[] = {47,42,32,69,82,82,79,82,32,110,111,116,32,97,108,108,111,119,101,100,32,98,121,32,72,65,67,75,32,42,47,0};
-var JackAstToC___str131[] = {109,105,115,115,105,110,103,32,99,97,108,108,98,97,99,107,32,102,105,101,108,100,0};
-var JackAstToC___str132[] = {40,40,118,97,114,40,42,41,40,118,97,114,44,118,97,114,44,118,97,114,41,41,40,95,95,112,101,101,107,40,95,95,116,104,105,115,41,41,41,0};
-var JackAstToC___str133[] = {95,95,116,104,105,115,0};
-var JackAstToC___str134[] = {95,95,0};
-var JackAstToC___str135[] = {95,95,116,104,105,115,0};
-var JackAstToC___str136[] = {40,0};
-var JackAstToC___str137[] = {44,32,0};
-var JackAstToC___str138[] = {41,0};
-var JackAstToC___str139[] = {118,97,114,0};
-var JackAstToC___str140[] = {118,97,114,0};
-var JackAstToC___str141[] = {32,0};
-var JackAstToC___str142[] = {95,95,0};
-var JackAstToC___str143[] = {99,97,108,108,98,97,99,107,0};
-var JackAstToC___str144[] = {115,117,98,114,111,117,116,105,110,101,32,110,97,109,101,32,101,120,112,101,99,116,101,100,0};
-var JackAstToC___str145[] = {40,0};
-var JackAstToC___str146[] = {118,97,114,32,95,95,116,104,105,115,0};
-var JackAstToC___str147[] = {44,32,0};
-var JackAstToC___str148[] = {32,0};
-var JackAstToC___str149[] = {44,32,0};
-var JackAstToC___str150[] = {41,0};
-var JackAstToC___str151[] = {32,0};
-var JackAstToC___str152[] = {32,61,32,48,59,0};
-var JackAstToC___str153[] = {59,0};
-var JackAstToC___str154[] = {118,97,114,0};
-var JackAstToC___str155[] = {118,97,114,0};
-var JackAstToC___str156[] = {95,95,95,0};
-var JackAstToC___str157[] = {95,95,112,101,101,107,40,0};
-var JackAstToC___str158[] = {95,95,41,0};
-var JackAstToC___str159[] = {95,95,0};
+var JackAstToC___str129[] = {95,95,116,104,105,115,0};
+var JackAstToC___str130[] = {40,0};
+var JackAstToC___str131[] = {44,32,0};
+var JackAstToC___str132[] = {41,0};
+var JackAstToC___str133[] = {118,97,114,0};
+var JackAstToC___str134[] = {118,97,114,0};
+var JackAstToC___str135[] = {32,0};
+var JackAstToC___str136[] = {95,95,0};
+var JackAstToC___str137[] = {99,97,108,108,98,97,99,107,0};
+var JackAstToC___str138[] = {115,117,98,114,111,117,116,105,110,101,32,110,97,109,101,32,101,120,112,101,99,116,101,100,0};
+var JackAstToC___str139[] = {40,0};
+var JackAstToC___str140[] = {118,97,114,32,95,95,116,104,105,115,0};
+var JackAstToC___str141[] = {44,32,0};
+var JackAstToC___str142[] = {32,0};
+var JackAstToC___str143[] = {44,32,0};
+var JackAstToC___str144[] = {41,0};
+var JackAstToC___str145[] = {32,0};
+var JackAstToC___str146[] = {32,61,32,48,59,0};
+var JackAstToC___str147[] = {59,0};
+var JackAstToC___str148[] = {118,97,114,0};
+var JackAstToC___str149[] = {118,97,114,0};
+var JackAstToC___str150[] = {95,95,95,0};
+var JackAstToC___str151[] = {95,95,112,101,101,107,40,0};
+var JackAstToC___str152[] = {95,95,41,0};
+var JackAstToC___str153[] = {95,95,0};
 #define dst__ (__this+0)
 #define parser__ (__this+1)
 #define ast__ (__this+2)
@@ -4348,6 +4840,24 @@ var JackAstToC__spc(var __this) {
 		File__writeString(__peek(dst__), Memory__getString(JackAstToC___str15));
 	}
 	return 0;
+}
+var JackAstToC__getTypeOf(var __this, var y) {
+	return JackAstUtils__getTypeOf(__peek(parser__), y);
+}
+var JackAstToC__getClassOf(var __this, var y) {
+	return JackAstUtils__getClassOf(__peek(clas__), y);
+}
+var JackAstToC__isInt(var __this, var y) {
+	return JackAstUtils__isInt(__peek(parser__), y);
+}
+var JackAstToC__isStatic(var __this, var y) {
+	return JackAstUtils__isStatic(y);
+}
+var JackAstToC__isField(var __this, var y) {
+	return JackAstUtils__isField(y);
+}
+var JackAstToC__isType(var __this, var y) {
+	return JackAstUtils__isType(y);
 }
 var JackAstToC__str(var __this, var c) {
 	return JackParser__getConst(__peek(parser__), c);
@@ -4573,13 +5083,6 @@ var JackAstToC__coFunctionPre(var __this, var c) {
 
 		d = JackAst__getNext(d);
 	}
-	return 0;
-}
-var JackAstToC__isType(var __this, var t) {
-	if ((((t)==(C__CLASSNAME())))||(((t)==(C__VOID())))||(((t)==(C__INT())))||(((t)==(C__BOOLEAN())))||(((t)==(C__CHAR())))) {
-		return -1;
-	}
-
 	return 0;
 }
 var JackAstToC__coFunction(var __this, var c) {
@@ -4859,133 +5362,6 @@ var JackAstToC__coVarNameOrIndexed(var __this, var c, var isassign) {
 	}
 	return 0;
 }
-var JackAstToC__isParentExprBool(var __this, var c) {
-	var t;
-	var d;
-	d = JackAst__getParent(c);
-	t = JackAst__getTag(d);
-	if ((((t)==(C__LEFT_PARENTHESIS())))) {
-		return JackAstToC__isParentExprBool(__this, d);
-	}
-
-	if ((((t)==(C__EXPR())))) {
-		return JackAstToC__isParentExprBool(__this, d);
-	}
-
-	if ((((t)==(C__UNARYTILDE())))) {
-		return JackAstToC__isParentExprBool(__this, d);
-	}
-
-	if ((((t)==(C__OR())))) {
-		return JackAstToC__isParentExprBool(__this, d);
-	}
-
-	if ((((t)==(C__AND())))) {
-		return JackAstToC__isParentExprBool(__this, d);
-	}
-
-	if (((t)==(C__MULTIPLY()))) {
-		return 0;
-	}
-
-	if (((t)==(C__PLUS()))) {
-		return 0;
-	}
-
-	if (((t)==(C__DIV()))) {
-		return 0;
-	}
-
-	if (((t)==(C__MINUS()))) {
-		return 0;
-	}
-
-	if (((t)==(C__ASSIGN()))) {
-		return 0;
-	}
-
-	return -1;
-}
-var JackAstToC__isInt(var __this, var c) {
-	var d;
-	var s;
-	var t;
-	d = c;
-	if (d) {
-		t = JackAst__getTag(d);
-		if ((((t)==(C__LEFT_PARENTHESIS())))) {
-			return JackAstToC__isInt(__this, JackAst__getChild(d));
-		}
-
-		if (((t)==(C__EXPR()))) {
-			return JackAstToC__isInt(__this, JackAst__getChild(d));
-		}
-
-		if (((t)==(C__UNARYTILDE()))) {
-			return JackAstToC__isInt(__this, JackAst__getChild(d));
-		}
-
-		if (((t)==(C__AND()))) {
-			if (JackAstToC__isInt(__this, JackAst__getLeft(d))) {
-				return -1;
-			}
-
-			return JackAstToC__isInt(__this, JackAst__getChild(d));
-		}
-
-		if (((t)==(C__OR()))) {
-			if (JackAstToC__isInt(__this, JackAst__getLeft(d))) {
-				return -1;
-			}
-
-			return JackAstToC__isInt(__this, JackAst__getChild(d));
-		}
-
-		if (((t)==(C__MULTIPLY()))) {
-			return -1;
-		}
-
-		if (((t)==(C__PLUS()))) {
-			return -1;
-		}
-
-		if (((t)==(C__DIV()))) {
-			return -1;
-		}
-
-		if (((t)==(C__MINUS()))) {
-			return -1;
-		}
-
-		if (((t)==(C__INT_CONST()))) {
-			return -1;
-		}
-
-		if (((t)==(C__VARNAME()))) {
-			s = JackAstToC__getTypeOf(__this, d);
-			if (((0)==(String__compare(s, Memory__getString(JackAstToC___str80))))) {
-				return -1;
-			} else {
-				return 0;
-			}
-		}
-
-		if (((t)==(C__LESS()))) {
-			return 0;
-		}
-
-		if (((t)==(C__GREATER()))) {
-			return 0;
-		}
-
-		if (((t)==(C__EQUAL()))) {
-			return 0;
-		}
-
-	}
-
-	return 0;
-}
 var JackAstToC__coExpr(var __this, var c, var isterm) {
 	var d;
 	var ok;
@@ -5005,16 +5381,16 @@ var JackAstToC__coExpr(var __this, var c, var isterm) {
 		}
 
 		if (((t)==(C__UNARYMINUS()))) {
-			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str81));
+			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str80));
 			JackAstToC__coExpr(__this, JackAst__getChild(d), -1);
 			ok = -1;
 		}
 
 		if (((t)==(C__UNARYTILDE()))) {
 			if (__peek(hack__)||JackAstToC__isInt(__this, d)) {
-				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str82));
+				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str81));
 			} else {
-				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str83));
+				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str82));
 			}
 			JackAstToC__coExpr(__this, JackAst__getChild(d), -1);
 			ok = -1;
@@ -5023,9 +5399,9 @@ var JackAstToC__coExpr(var __this, var c, var isterm) {
 		if (((t)==(C__AND()))) {
 			JackAstToC__coExpr(__this, JackAst__getLeft(d), 0);
 			if (__peek(hack__)||JackAstToC__isInt(__this, d)) {
-				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str84));
+				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str83));
 			} else {
-				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str85));
+				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str84));
 			}
 			JackAstToC__coExpr(__this, JackAst__getChild(d), 0);
 			ok = -1;
@@ -5034,38 +5410,38 @@ var JackAstToC__coExpr(var __this, var c, var isterm) {
 		if (((t)==(C__OR()))) {
 			JackAstToC__coExpr(__this, JackAst__getLeft(d), 0);
 			if (__peek(hack__)||JackAstToC__isInt(__this, d)) {
-				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str86));
+				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str85));
 			} else {
-				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str87));
+				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str86));
 			}
 			JackAstToC__coExpr(__this, JackAst__getChild(d), 0);
 			ok = -1;
 		}
 
 		if (((t)==(C__NULL()))) {
-			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str88));
+			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str87));
 			ok = -1;
 		}
 
 		if (((t)==(C__THIS()))) {
-			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str89));
+			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str88));
 			ok = -1;
 		}
 
 		if (((t)==(C__FALSE()))) {
-			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str90));
+			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str89));
 			ok = -1;
 		}
 
 		if (((t)==(C__TRUE()))) {
-			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str91));
+			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str90));
 			ok = -1;
 		}
 
 		if (((t)==(C__LEFT_PARENTHESIS()))) {
-			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str92));
+			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str91));
 			JackAstToC__coExpr(__this, JackAst__getChild(d), 0);
-			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str93));
+			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str92));
 			ok = -1;
 		}
 
@@ -5075,93 +5451,93 @@ var JackAstToC__coExpr(var __this, var c, var isterm) {
 		}
 
 		if (((t)==(C__STRING_CONST()))) {
-			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str94));
+			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str93));
 			File__writeString(__peek(dst__), __peek(clas__));
-			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str95));
+			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str94));
 			s = String__new(8);
 			s = String__setInt(s, JackAst__getId(d));
 			File__writeString(__peek(dst__), s);
 			String__dispose(s);
 			__poke(stringid__, __peek(stringid__)+1);
-			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str96));
+			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str95));
 			ok = -1;
 		}
 
 		if (((t)==(C__PLUS()))) {
 			JackAstToC__coExpr(__this, JackAst__getLeft(d), 0);
-			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str97));
+			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str96));
 			JackAstToC__coExpr(__this, JackAst__getChild(d), 0);
 			ok = -1;
 		}
 
 		if (((t)==(C__MINUS()))) {
 			JackAstToC__coExpr(__this, JackAst__getLeft(d), 0);
-			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str98));
+			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str97));
 			JackAstToC__coExpr(__this, JackAst__getChild(d), 0);
 			ok = -1;
 		}
 
 		if (((t)==(C__MULTIPLY()))) {
 			JackAstToC__coExpr(__this, JackAst__getLeft(d), 0);
-			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str99));
+			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str98));
 			JackAstToC__coExpr(__this, JackAst__getChild(d), 0);
 			ok = -1;
 		}
 
 		if (((t)==(C__DIV()))) {
 			JackAstToC__coExpr(__this, JackAst__getLeft(d), 0);
-			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str100));
+			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str99));
 			JackAstToC__coExpr(__this, JackAst__getChild(d), 0);
 			ok = -1;
 		}
 
 		if (((t)==(C__LESS()))) {
 			if (__peek(hack__)) {
+				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str100));
+				JackAstToC__coExpr(__this, JackAst__getLeft(d), 0);
 				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str101));
-				JackAstToC__coExpr(__this, JackAst__getLeft(d), 0);
+				JackAstToC__coExpr(__this, JackAst__getChild(d), 0);
 				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str102));
-				JackAstToC__coExpr(__this, JackAst__getChild(d), 0);
-				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str103));
 			} else {
-				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str104));
+				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str103));
 				JackAstToC__coExpr(__this, JackAst__getLeft(d), 0);
-				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str105));
+				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str104));
 				JackAstToC__coExpr(__this, JackAst__getChild(d), 0);
-				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str106));
+				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str105));
 			}
 			ok = -1;
 		}
 
 		if (((t)==(C__GREATER()))) {
 			if (__peek(hack__)) {
+				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str106));
+				JackAstToC__coExpr(__this, JackAst__getLeft(d), 0);
 				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str107));
-				JackAstToC__coExpr(__this, JackAst__getLeft(d), 0);
+				JackAstToC__coExpr(__this, JackAst__getChild(d), 0);
 				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str108));
-				JackAstToC__coExpr(__this, JackAst__getChild(d), 0);
-				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str109));
 			} else {
-				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str110));
+				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str109));
 				JackAstToC__coExpr(__this, JackAst__getLeft(d), 0);
-				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str111));
+				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str110));
 				JackAstToC__coExpr(__this, JackAst__getChild(d), 0);
-				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str112));
+				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str111));
 			}
 			ok = -1;
 		}
 
 		if (((t)==(C__EQUAL()))) {
 			if (__peek(hack__)) {
+				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str112));
+				JackAstToC__coExpr(__this, JackAst__getLeft(d), 0);
 				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str113));
-				JackAstToC__coExpr(__this, JackAst__getLeft(d), 0);
+				JackAstToC__coExpr(__this, JackAst__getChild(d), 0);
 				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str114));
-				JackAstToC__coExpr(__this, JackAst__getChild(d), 0);
-				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str115));
 			} else {
-				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str116));
+				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str115));
 				JackAstToC__coExpr(__this, JackAst__getLeft(d), 0);
-				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str117));
+				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str116));
 				JackAstToC__coExpr(__this, JackAst__getChild(d), 0);
-				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str118));
+				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str117));
 			}
 			ok = -1;
 		}
@@ -5180,7 +5556,7 @@ var JackAstToC__coExpr(var __this, var c, var isterm) {
 		}
 
 		if (((ok)==(0))) {
-			JackAstToC__error(__this, Memory__getString(JackAstToC___str119), d);
+			JackAstToC__error(__this, Memory__getString(JackAstToC___str118), d);
 		}
 
 		if (isterm) {
@@ -5190,359 +5566,6 @@ var JackAstToC__coExpr(var __this, var c, var isterm) {
 		return 0;
 		d = JackAst__getNext(d);
 	}
-	return 0;
-}
-var JackAstToC__isSubroutine(var __this, var t) {
-	if (((t)==(C__FUNCTION()))) {
-		return -1;
-	}
-
-	if (((t)==(C__METHOD()))) {
-		return -1;
-	}
-
-	if (((t)==(C__CONSTRUCTOR()))) {
-		return -1;
-	}
-
-	return 0;
-}
-var JackAstToC__isVarnameSet(var __this, var c, var s) {
-	var d;
-	d = JackAst__getChild(c);
-	if (d) {
-		d = JackAst__getChild(d);
-	}
-
-	if (d) {
-		if (((String__compare(s, JackAst__getData(d)))==(0))) {
-			return -1;
-		}
-
-	}
-
-	return 0;
-}
-var JackAstToC__getTypeOfVarname(var __this, var c, var s) {
-	var d;
-	var t;
-	d = JackAst__getChild(c);
-	if (((d)==(0))) {
-		return 0;
-	}
-
-	if (((JackAst__getData(d))==(0))) {
-		return 0;
-	}
-
-	if (((String__compare(s, JackAst__getData(d)))==(0))) {
-		t = JackAst__getTag(c);
-		if ((((t)==(C__VOID())))||(((t)==(C__INT())))||(((t)==(C__BOOLEAN())))||(((t)==(C__CHAR())))) {
-			return JackAstToC__str(__this, t);
-		}
-
-		return JackAst__getData(c);
-	}
-
-	return 0;
-}
-var JackAstToC__functionGetClassOf(var __this, var c, var s) {
-	var d;
-	var n;
-	var t;
-	var r;
-	d = JackAst__getChild(c);
-	t = JackAst__getTag(d);
-	if (JackAstToC__isType(__this, t)) {
-		n = JackAst__getChild(d);
-		t = JackAst__getTag(n);
-		if ((((t)==(C__SUBROUTINENAME())))||(((t)==(C__CALLBACK())))) {
-			n = JackAst__getChild(n);
-			t = JackAst__getTag(n);
-			if (((t)==(C__PARAMS()))) {
-				n = JackAst__getChild(n);
-				while (!(((n)==(0)))) {
-					r = JackAstToC__isVarnameSet(__this, n, s);
-					if (r) {
-						return Memory__getString(JackAstToC___str120);
-					}
-
-					n = JackAst__getNext(n);
-				}
-			}
-
-		}
-
-	}
-
-	while (!(((d)==(0)))) {
-		t = JackAst__getTag(d);
-		if (((t)==(C__VAR()))) {
-			n = JackAst__getChild(d);
-			if (n) {
-				r = JackAstToC__isVarnameSet(__this, n, s);
-				if (r) {
-					return Memory__getString(JackAstToC___str121);
-				}
-
-			}
-
-		}
-
-		d = JackAst__getNext(d);
-	}
-	return 0;
-}
-var JackAstToC__functionGetTypeOf(var __this, var c, var s) {
-	var d;
-	var n;
-	var t;
-	var r;
-	d = JackAst__getChild(c);
-	while (!(((d)==(0)))) {
-		t = JackAst__getTag(d);
-		if (JackAstToC__isType(__this, t)) {
-			n = JackAst__getChild(d);
-			t = JackAst__getTag(n);
-			if ((((t)==(C__SUBROUTINENAME())))||(((t)==(C__CALLBACK())))) {
-				n = JackAst__getChild(n);
-				t = JackAst__getTag(n);
-				if (((t)==(C__PARAMS()))) {
-					n = JackAst__getChild(n);
-					while (!(((n)==(0)))) {
-						r = JackAstToC__getTypeOfVarname(__this, n, s);
-						if (r) {
-							return r;
-						}
-
-						n = JackAst__getNext(n);
-					}
-				}
-
-			}
-
-		}
-
-		if (((t)==(C__VAR()))) {
-			n = JackAst__getChild(d);
-			if (n) {
-				r = JackAstToC__getTypeOfVarname(__this, n, s);
-				if (r) {
-					return r;
-				}
-
-			}
-
-		}
-
-		d = JackAst__getNext(d);
-	}
-	return 0;
-}
-var JackAstToC__classGetClassOf(var __this, var c, var s) {
-	var d;
-	var t;
-	var r;
-	var u;
-	d = JackAst__getChild(c);
-	while (!(((d)==(0)))) {
-		t = JackAst__getTag(d);
-		if ((((t)==(C__FIELD())))||(((t)==(C__STATIC())))) {
-			r = JackAstToC__isVarnameSet(__this, d, s);
-			u = Memory__getString(JackAstToC___str122);
-			if (((String__compare(u, s))==(0))) {
-				Output__printString(Memory__getString(JackAstToC___str123));
-				Output__printString(__peek(clas__));
-				Output__printString(Memory__getString(JackAstToC___str124));
-				Output__printInt(r);
-				Output__println();
-			}
-
-			if (r) {
-				return __peek(clas__);
-			}
-
-		}
-
-		d = JackAst__getNext(d);
-	}
-	return 0;
-}
-var JackAstToC__classGetTypeOf(var __this, var c, var s) {
-	var d;
-	var t;
-	var r;
-	d = JackAst__getChild(c);
-	while (!(((d)==(0)))) {
-		t = JackAst__getTag(d);
-		if ((((t)==(C__FIELD())))||(((t)==(C__STATIC())))) {
-			r = JackAstToC__getTypeOfVarname(__this, JackAst__getChild(d), s);
-			if (r) {
-				return r;
-			}
-
-		}
-
-		d = JackAst__getNext(d);
-	}
-	return 0;
-}
-var JackAstToC__getTypeOf(var __this, var c) {
-	var d;
-	var t;
-	var s;
-	var r;
-	s = JackAst__getData(c);
-	d = JackAst__getParent(c);
-	t = JackAst__getTag(d);
-	while (((((((d)==(0))))==(0)))&&(((JackAstToC__isSubroutine(__this, t))==(0)))) {
-		d = JackAst__getParent(d);
-		if (d) {
-			t = JackAst__getTag(d);
-		}
-
-	}
-	if (((d)==(0))) {
-		return 0;
-	}
-
-	r = JackAstToC__functionGetTypeOf(__this, d, s);
-	if (r) {
-		return r;
-	}
-
-	while (((((((d)==(0))))==(0)))&&((((((t)==(C__CLASS()))))==(0)))) {
-		d = JackAst__getParent(d);
-		if (d) {
-			t = JackAst__getTag(d);
-		}
-
-	}
-	if (((d)==(0))) {
-		return 0;
-	}
-
-	r = JackAstToC__classGetTypeOf(__this, d, s);
-	if (r) {
-		return r;
-	}
-
-	return 0;
-}
-var JackAstToC__isStatic(var __this, var c) {
-	var d;
-	var n;
-	var t;
-	var s;
-	s = JackAst__getData(c);
-	d = JackAst__getParent(c);
-	t = JackAst__getTag(d);
-	while (((((((d)==(0))))==(0)))&&((((((t)==(C__CLASS()))))==(0)))) {
-		d = JackAst__getParent(d);
-		if (d) {
-			t = JackAst__getTag(d);
-		}
-
-	}
-	if (((d)==(0))) {
-		return 0;
-	}
-
-	d = JackAst__getChild(d);
-	while (!(((d)==(0)))) {
-		if (((JackAst__getTag(d))==(C__STATIC()))) {
-			n = JackAst__getChild(d);
-			if (n) {
-				n = JackAst__getChild(n);
-				if (((String__compare(s, JackAst__getData(n)))==(0))) {
-					return -1;
-				}
-
-			}
-
-		}
-
-		d = JackAst__getNext(d);
-	}
-	return 0;
-}
-var JackAstToC__isField(var __this, var c) {
-	var d;
-	var n;
-	var t;
-	var s;
-	s = JackAst__getData(c);
-	d = JackAst__getParent(c);
-	t = JackAst__getTag(d);
-	while (((((((d)==(0))))==(0)))&&((((((t)==(C__CLASS()))))==(0)))) {
-		d = JackAst__getParent(d);
-		if (d) {
-			t = JackAst__getTag(d);
-		}
-
-	}
-	if (((d)==(0))) {
-		return 0;
-	}
-
-	d = JackAst__getChild(d);
-	while (!(((d)==(0)))) {
-		if (((JackAst__getTag(d))==(C__FIELD()))) {
-			n = JackAst__getChild(d);
-			if (n) {
-				n = JackAst__getChild(n);
-				if (((String__compare(s, JackAst__getData(n)))==(0))) {
-					return -1;
-				}
-
-			}
-
-		}
-
-		d = JackAst__getNext(d);
-	}
-	return 0;
-}
-var JackAstToC__getClassOf(var __this, var c) {
-	var d;
-	var t;
-	var s;
-	var r;
-	s = JackAst__getData(c);
-	d = JackAst__getParent(c);
-	t = JackAst__getTag(d);
-	while (((((((d)==(0))))==(0)))&&(((JackAstToC__isSubroutine(__this, t))==(0)))) {
-		d = JackAst__getParent(d);
-		if (d) {
-			t = JackAst__getTag(d);
-		}
-
-	}
-	if (((d)==(0))) {
-		return 0;
-	}
-
-	r = JackAstToC__functionGetClassOf(__this, d, s);
-	if (r) {
-		return r;
-	}
-
-	while (((((((d)==(0))))==(0)))&&((((((t)==(C__CLASS()))))==(0)))) {
-		d = JackAst__getParent(d);
-		if (d) {
-			t = JackAst__getTag(d);
-		}
-
-	}
-	if (((d)==(0))) {
-		return 0;
-	}
-
-	r = JackAstToC__classGetClassOf(__this, d, s);
-	if (r) {
-		return r;
-	}
-
 	return 0;
 }
 var JackAstToC__coSubroutineCall(var __this, var c) {
@@ -5562,7 +5585,7 @@ var JackAstToC__coSubroutineCall(var __this, var c) {
 			s = JackAstToC__getTypeOf(__this, d);
 			File__writeString(__peek(dst__), s);
 			thi = String__copy(__peek(clas__));
-			thi = String__appendString(thi, Memory__getString(JackAstToC___str125));
+			thi = String__appendString(thi, Memory__getString(JackAstToC___str119));
 			thi = String__appendString(thi, JackAst__getData(d));
 			free_thi = -1;
 			s = 0;
@@ -5574,9 +5597,9 @@ var JackAstToC__coSubroutineCall(var __this, var c) {
 				File__writeString(__peek(dst__), s);
 				if (JackAstToC__isField(__this, d)) {
 					thi = String__new(20);
-					thi = String__appendString(thi, Memory__getString(JackAstToC___str126));
+					thi = String__appendString(thi, Memory__getString(JackAstToC___str120));
 					thi = String__appendString(thi, JackAst__getData(d));
-					thi = String__appendString(thi, Memory__getString(JackAstToC___str127));
+					thi = String__appendString(thi, Memory__getString(JackAstToC___str121));
 					free_thi = -1;
 				} else {
 					thi = JackAst__getData(d);
@@ -5591,38 +5614,38 @@ var JackAstToC__coSubroutineCall(var __this, var c) {
 
 		}
 		d = JackAst__getChild(d);
-		File__writeString(__peek(dst__), Memory__getString(JackAstToC___str128));
+		File__writeString(__peek(dst__), Memory__getString(JackAstToC___str122));
 		File__writeString(__peek(dst__), JackAst__getData(d));
 	} else {
 		if ((((t)==(C__CLASSNAME())))) {
 			File__writeString(__peek(dst__), JackAst__getData(d));
 			d = JackAst__getChild(d);
-			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str129));
+			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str123));
 			File__writeString(__peek(dst__), JackAst__getData(d));
 		} else {
 			if (((t)==(C__CALLBACK()))) {
 				if (__peek(hack__)) {
-					File__writeString(__peek(dst__), Memory__getString(JackAstToC___str130));
+					File__writeString(__peek(dst__), Memory__getString(JackAstToC___str124));
 				} else {
 					if (!__peek(has_callback__)) {
-						JackAstToC__error(__this, Memory__getString(JackAstToC___str131), d);
+						JackAstToC__error(__this, Memory__getString(JackAstToC___str125), d);
 					}
 
-					File__writeString(__peek(dst__), Memory__getString(JackAstToC___str132));
+					File__writeString(__peek(dst__), Memory__getString(JackAstToC___str126));
 				}
-				thi = Memory__getString(JackAstToC___str133);
+				thi = Memory__getString(JackAstToC___str127);
 			} else {
 				if (((t)==(C__SUBROUTINENAME()))) {
 					File__writeString(__peek(dst__), __peek(clas__));
-					File__writeString(__peek(dst__), Memory__getString(JackAstToC___str134));
+					File__writeString(__peek(dst__), Memory__getString(JackAstToC___str128));
 					File__writeString(__peek(dst__), JackAst__getData(d));
-					thi = Memory__getString(JackAstToC___str135);
+					thi = Memory__getString(JackAstToC___str129);
 				}
 
 			}
 		}
 	}
-	File__writeString(__peek(dst__), Memory__getString(JackAstToC___str136));
+	File__writeString(__peek(dst__), Memory__getString(JackAstToC___str130));
 	if (thi) {
 		first = 0;
 		File__writeString(__peek(dst__), thi);
@@ -5635,14 +5658,14 @@ var JackAstToC__coSubroutineCall(var __this, var c) {
 	d = JackAst__getChild(d);
 	while (!(((d)==(0)))) {
 		if (((first)==(0))) {
-			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str137));
+			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str131));
 		}
 
 		first = 0;
 		JackAstToC__coExpr(__this, d, 0);
 		d = JackAst__getNext(d);
 	}
-	File__writeString(__peek(dst__), Memory__getString(JackAstToC___str138));
+	File__writeString(__peek(dst__), Memory__getString(JackAstToC___str132));
 	return 0;
 }
 var JackAstToC__coStatements(var __this, var c) {
@@ -5664,22 +5687,22 @@ var JackAstToC__coFunctionHead(var __this, var c, var add_this) {
 	}
 
 	if (((t)==(C__CLASSNAME()))) {
-		File__writeString(__peek(dst__), Memory__getString(JackAstToC___str139));
+		File__writeString(__peek(dst__), Memory__getString(JackAstToC___str133));
 	} else {
-		File__writeString(__peek(dst__), Memory__getString(JackAstToC___str140));
+		File__writeString(__peek(dst__), Memory__getString(JackAstToC___str134));
 	}
-	File__writeString(__peek(dst__), Memory__getString(JackAstToC___str141));
+	File__writeString(__peek(dst__), Memory__getString(JackAstToC___str135));
 	File__writeString(__peek(dst__), __peek(clas__));
-	File__writeString(__peek(dst__), Memory__getString(JackAstToC___str142));
+	File__writeString(__peek(dst__), Memory__getString(JackAstToC___str136));
 	if (((JackAst__getTag(d))==(C__SUBROUTINENAME()))) {
 		File__writeString(__peek(dst__), JackAst__getData(d));
 		d = JackAst__getChild(d);
 	} else {
 		if (((JackAst__getTag(d))==(C__CALLBACK()))) {
-			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str143));
+			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str137));
 			d = JackAst__getChild(d);
 		} else {
-			JackAstToC__error(__this, Memory__getString(JackAstToC___str144), c);
+			JackAstToC__error(__this, Memory__getString(JackAstToC___str138), c);
 			return 0;
 		}
 	}
@@ -5691,28 +5714,28 @@ var JackAstToC__coFunctionHead(var __this, var c, var add_this) {
 }
 var JackAstToC__coParams(var __this, var d, var add_this) {
 	var n;
-	File__writeString(__peek(dst__), Memory__getString(JackAstToC___str145));
+	File__writeString(__peek(dst__), Memory__getString(JackAstToC___str139));
 	d = JackAst__getChild(d);
 	if (add_this) {
-		File__writeString(__peek(dst__), Memory__getString(JackAstToC___str146));
+		File__writeString(__peek(dst__), Memory__getString(JackAstToC___str140));
 		if (d) {
-			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str147));
+			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str141));
 		}
 
 	}
 
 	while (!(((d)==(0)))) {
 		JackAstToC__coType(__this, d);
-		File__writeString(__peek(dst__), Memory__getString(JackAstToC___str148));
+		File__writeString(__peek(dst__), Memory__getString(JackAstToC___str142));
 		n = JackAst__getChild(d);
 		File__writeString(__peek(dst__), JackAst__getData(n));
 		d = JackAst__getNext(d);
 		if (d) {
-			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str149));
+			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str143));
 		}
 
 	}
-	File__writeString(__peek(dst__), Memory__getString(JackAstToC___str150));
+	File__writeString(__peek(dst__), Memory__getString(JackAstToC___str144));
 	return 0;
 }
 var JackAstToC__coVarDec(var __this, var c) {
@@ -5724,12 +5747,12 @@ var JackAstToC__coVarDec(var __this, var c) {
 		JackAstToC__coType(__this, d);
 		n = JackAst__getChild(d);
 		if (n) {
-			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str151));
+			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str145));
 			JackAstToC__coVarName(__this, n, -1);
 			if (__peek(hack__)) {
-				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str152));
+				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str146));
 			} else {
-				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str153));
+				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str147));
 			}
 			JackAstToC__nl(__this);
 		}
@@ -5742,9 +5765,9 @@ var JackAstToC__coType(var __this, var c) {
 	var t;
 	t = JackAst__getTag(c);
 	if (((t)==(C__CLASSNAME()))) {
-		File__writeString(__peek(dst__), Memory__getString(JackAstToC___str154));
+		File__writeString(__peek(dst__), Memory__getString(JackAstToC___str148));
 	} else {
-		File__writeString(__peek(dst__), Memory__getString(JackAstToC___str155));
+		File__writeString(__peek(dst__), Memory__getString(JackAstToC___str149));
 	}
 	return 0;
 }
@@ -5762,7 +5785,7 @@ var JackAstToC__coVarName(var __this, var c, var isassign) {
 			if (s) {
 				if (((String__length(s))>(0))) {
 					File__writeString(__peek(dst__), s);
-					File__writeString(__peek(dst__), Memory__getString(JackAstToC___str156));
+					File__writeString(__peek(dst__), Memory__getString(JackAstToC___str150));
 				}
 
 			}
@@ -5770,12 +5793,12 @@ var JackAstToC__coVarName(var __this, var c, var isassign) {
 			File__writeString(__peek(dst__), JackAst__getData(c));
 		} else {
 			if (((isassign)==(0))) {
-				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str157));
+				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str151));
 				File__writeString(__peek(dst__), JackAst__getData(c));
-				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str158));
+				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str152));
 			} else {
 				File__writeString(__peek(dst__), JackAst__getData(c));
-				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str159));
+				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str153));
 			}
 		}
 	}

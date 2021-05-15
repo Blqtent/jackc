@@ -181,7 +181,30 @@ class JackAstToC {
 		return;
 	}
 
-	
+	method String getTypeOf(JackAst y) {
+		return JackAstUtils.getTypeOf(parser, y);
+	}
+
+	method String getClassOf(JackAst y) {
+		return JackAstUtils.getClassOf(clas, y);
+	}
+
+	method boolean isInt(JackAst y) {
+		return JackAstUtils.isInt(parser, y);
+	}
+
+	method boolean isStatic(JackAst y) {
+		return JackAstUtils.isStatic(y);
+	}
+
+	method boolean isField(JackAst y) {
+		return JackAstUtils.isField(y);
+	}
+
+	method boolean isType(int y) {
+		return JackAstUtils.isType(y);
+	}
+
 	method String str(int c) {
 		return parser.getConst(c);
 	}
@@ -408,18 +431,6 @@ class JackAstToC {
 			let d = d.getNext();
 		}
 		return;
-	}
-
-	method boolean isType(int t) {
-		if ((t = C.CLASSNAME()) | 
-			(t = C.VOID()) |
-			(t = C.INT()) |
-			(t = C.BOOLEAN()) |
-			(t = C.CHAR()))
-		{
-			return true;
-		}
-		return false;
 	}
 
 	method void coFunction(JackAst c) {
@@ -681,120 +692,6 @@ class JackAstToC {
 		return;
 	}
 
-	method boolean isParentExprBool(JackAst c) {
-		var int t;
-		var JackAst d;
-		let d = c.getParent();
-		let t = d.getTag();
-		if ((t = C.LEFT_PARENTHESIS())) {
-			return isParentExprBool(d);
-		}	
-		if ((t = C.EXPR())) {
-			return isParentExprBool(d);
-		}
-		if ((t = C.UNARYTILDE())) {
-			return isParentExprBool(d);
-		}
-		if ((t = C.OR())) {
-			return isParentExprBool(d);
-		}
-		if ((t = C.AND())) {
-			return isParentExprBool(d);
-		}
-		if (t = C.MULTIPLY()) {
-			return false;
-		}
-
-		if (t = C.PLUS()) {
-			return false;
-		}
-
-		if (t = C.DIV()) {
-			return false;
-		}
-
-		if (t = C.MINUS()) {
-			return false;
-		}
-
-		if (t = C.ASSIGN()) {
-			return false;
-		}
-		return true;	
-	}
-
-	method boolean isInt(JackAst c) {
-		var JackAst d;
-		var String s;
-		var int t;
-		let d = c;	
-		if (d) {
-			let t = d.getTag();
-			if ((t = C.LEFT_PARENTHESIS())) {
-				return isInt(d.getChild());
-			}
-			if (t = C.EXPR()) {
-				return isInt(d.getChild());
-			}
-			if (t = C.UNARYTILDE()) 
-			{
-				return isInt(d.getChild());
-			} 
-			if (t = C.AND()) 
-			{
-				if (isInt(d.getLeft())) {
-					return true;
-				}
-				return isInt(d.getChild());
-			} 
-			if (t = C.OR()) 
-			{
-				if (isInt(d.getLeft())) {
-					return true;
-				}
-				return isInt(d.getChild());
-			} 
-			if (t = C.MULTIPLY()) {
-				return true;
-			}
-
-			if (t = C.PLUS()) {
-				return true;
-			}
-
-			if (t = C.DIV()) {
-				return true;
-			}
-
-			if (t = C.MINUS()) {
-				return true;
-			}
-
-			if (t = C.INT_CONST()) {
-				return true;
-			}
-
-			if (t = C.VARNAME()) {
-				let s = getTypeOf(d);
-				if (0=s.compare("int")) {
-					return true;
-				} else {
-					return false;
-				}
-			}
-			if (t = C.LESS()) {
-				return false;
-			}
-			if (t = C.GREATER()) {
-				return false;
-			}
-			if (t = C.EQUAL()) {
-				return false;
-			}
-		}
-		return false;	
-	}
-
 	method void coExpr(JackAst c, boolean isterm) {
 		var JackAst d;
 		var boolean ok;
@@ -993,335 +890,6 @@ class JackAstToC {
 		return;
 	}
 
-	method boolean isSubroutine(int t) {
-		if (t = C.FUNCTION()) {
-			return true;
-		}
-		if (t = C.METHOD()) {
-			return true;
-		}
-		if (t = C.CONSTRUCTOR()) {
-			return true;
-		}
-		return false;
-	}
-
-	method boolean isVarnameSet(JackAst c, String s) {
-		var JackAst d;
-		let d = c.getChild();
-		if (d) {
-			// type
-			let d = d.getChild();
-		}
-		if (d) {
-			if (s.compare(d.getData()) = 0) {
-				return true;					
-			}
-		}
-		return false;
-	}
-
-
-	method String getTypeOfVarname(JackAst c, String s) {
-		var JackAst d;
-		var int t;
-		let d = c.getChild();
-		if (d = null) {
-			return null;
-		}
-		if (d.getData() = null) {
-			return null;
-		}
-		if (s.compare(d.getData()) = 0) {
-			let t = c.getTag();
-			if ((t = C.VOID()) |		
-				(t = C.INT()) |		
-				(t = C.BOOLEAN()) |		
-				(t = C.CHAR()))
-			{
-				return str(t);
-			}
-			return c.getData();					
-		}
-		return null;
-	}
-
-	method String functionGetClassOf(JackAst c, String s) {
-		var JackAst d, n;
-		var int t;
-		var String r;
-		let d = c.getChild();
-		let t = d.getTag();
-		if (isType(t)) {
-			let n = d.getChild();
-			let t = n.getTag();
-			if ((t = C.SUBROUTINENAME()) | (t = C.CALLBACK())) {
-				let n = n.getChild();
-				let t = n.getTag();
-				if (t = C.PARAMS()) {
-				    let n = n.getChild();
-				    while (~(n = null)) {
-					let r = isVarnameSet(n, s); 
-					if (r) {
-					    return "";
-					}
-					let n = n.getNext();
-				    }
-				}
-			
-			}	
-		}
-		while (~(d = null)) {
-			let t = d.getTag();
-			if (t = C.VAR()) {
-				let n = d.getChild();
-				if (n) {
-					let r = isVarnameSet(n, s); 
-					if (r) {
-						return "";
-					}
-				}
-			}
-			let d = d.getNext(); 
-		}
-		return null;	
-	}
-
-
-	method String functionGetTypeOf(JackAst c, String s) {
-		var JackAst d, n;
-		var int t;
-		var String r;
-		let d = c.getChild();
-		while (~(d = null)) {
-			let t = d.getTag();
-			if (isType(t)) {
-				let n = d.getChild();
-				let t = n.getTag();
-				if ((t = C.SUBROUTINENAME()) | 
-					(t = C.CALLBACK())) 
-				{
-					let n = n.getChild();
-					let t = n.getTag();
-					if (t = C.PARAMS()) {
-					    let n = n.getChild();
-					    while (~(n = null)) {
-						let r = getTypeOfVarname(n, s); 
-						if (r) {
-						    return r;
-						}
-						let n = n.getNext();
-					    }
-					}
-				
-				}	
-			}
-			if (t = C.VAR()) {
-				let n = d.getChild();
-				if (n) {
-					let r = getTypeOfVarname(n, s); 
-					if (r) {
-						return r;
-					}
-				}
-			}
-			let d = d.getNext(); 
-		}
-		return null;	
-	}
-
-	method String classGetClassOf(JackAst c, String s) {
-		var JackAst d;
-		var int t;
-		var String r, u;
-		let d = c.getChild();
-		while (~(d = null)) {
-			let t = d.getTag();
-			if ((t = C.FIELD()) | (t = C.STATIC())) {
-				let r = isVarnameSet(d, s); 
-				let u = "text3";
-				if (u.compare(s) = 0) {
-					do Output.printString("HHH");
-					do Output.printString(clas);
-					do Output.printString(" ");
-					do Output.printInt(r);
-					do Output.println();
-				}
-				if (r) {
-					return clas;
-				}
-			}
-			let d = d.getNext();
-		}
-
-		return null;
-	}
-
-
-	method String classGetTypeOf(JackAst c, String s) {
-		var JackAst d;
-		var int t;
-		var String r;
-		let d = c.getChild();
-		while (~(d = null)) {
-			let t = d.getTag();
-			if ((t = C.FIELD()) | (t = C.STATIC())) {
-				let r = getTypeOfVarname(d.getChild(), s); 
-				if (r) {
-					return r;
-				}
-			}
-			let d = d.getNext();
-		}
-
-		return null;
-	}
-
-	method String getTypeOf(JackAst c) {
-		var JackAst d;
-		var int t;
-		var String s, r;
-		let s = c.getData();
-		let d = c.getParent();
-		let t = d.getTag();
-		while (((d=null)=false) & (isSubroutine(t) = false)) {
-			let d = d.getParent();
-			if (d) {
-				let t = d.getTag();
-			}
-		}
-		if (d = null) {
-			return null;
-		}
-
-		let r = functionGetTypeOf(d, s);
-		if (r) {
-			return r;
-		}	
-		while (((d = null) = false) & ((t = C.CLASS()) = false)) {
-			let d = d.getParent();
-			if (d) {
-				let t = d.getTag();
-			}
-		}
-		if (d = null) {
-			return null;
-		}
-
-		let r = classGetTypeOf(d, s);
-		if (r) {
-			return r;
-		}	
-
-		return null;
-	}
-
-	method boolean isStatic(JackAst c) {
-		var JackAst d, n;
-		var int t;
-		var String s;
-		let s = c.getData();
-		let d = c.getParent();
-		let t = d.getTag();
-		while (((d = null) = false) & ((t = C.CLASS()) = false)) {
-			let d = d.getParent();
-			if (d) {
-				let t = d.getTag();
-			}
-		}
-		if (d = null) {
-			return false;
-		}
-		let d = d.getChild();
-		while (~(d = null)) {
-			if (d.getTag() = C.STATIC()) {
-				let n = d.getChild();
-				if (n) {
-					let n = n.getChild();
-					if (s.compare(n.getData()) = 0) {
-						return true;
-					}
-				}
-			}
-			let d = d.getNext();
-		}
-
-		return false;
-	}
-
-
-	method boolean isField(JackAst c) {
-		var JackAst d, n;
-		var int t;
-		var String s;
-		let s = c.getData();
-		let d = c.getParent();
-		let t = d.getTag();
-		while (((d = null) = false) & ((t = C.CLASS()) = false)) {
-			let d = d.getParent();
-			if (d) {
-				let t = d.getTag();
-			}
-		}
-		if (d = null) {
-			return false;
-		}
-		let d = d.getChild();
-		while (~(d = null)) {
-			if (d.getTag() = C.FIELD()) {
-				let n = d.getChild();
-				if (n) {
-					let n = n.getChild();
-					if (s.compare(n.getData()) = 0) {
-						return true;
-					}
-				}
-			}
-			let d = d.getNext();
-		}
-
-		return false;
-	}
-
-	method String getClassOf(JackAst c) {
-		var JackAst d;
-		var int t;
-		var String s, r;
-		let s = c.getData();
-		let d = c.getParent();
-		let t = d.getTag();
-		while (((d = null) = false) & (isSubroutine(t) = false)) {
-			let d = d.getParent();
-			if (d) {
-				let t = d.getTag();
-			}
-		}
-		if (d = null) {
-			return null;
-		}
-
-		let r = functionGetClassOf(d, s);
-		if (r) {
-			return r;
-		}	
-		while (((d = null) = false) & ((t = C.CLASS()) = false)) {
-			let d = d.getParent();
-			if (d) {
-				let t = d.getTag();
-			}
-		}
-		if (d = null) {
-			return null;
-		}
-
-		let r = classGetClassOf(d, s);
-		if (r) {
-			return r;
-		}	
-
-		return null;
-	}
-
 	method void coSubroutineCall(JackAst c) {
 		var JackAst d;
 		var int t;
@@ -1504,6 +1072,7 @@ class JackAstToC {
 		}
 		return;
 	}
+
 
 	method void coType(JackAst c) {
 		var int t;
