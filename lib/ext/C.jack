@@ -1,3 +1,12 @@
+/*
+ *                     jack public domain compiler
+ *
+ *                      15 may MMXXI PUBLIC DOMAIN
+ *           The author disclaims copyright to this source code.
+ *
+ *
+ */
+
 class C {
 	function int NULL_CHARACTER() {return 0;}
 	function int START_OF_HEADING() {return 1;}

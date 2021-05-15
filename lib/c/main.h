@@ -1,3 +1,13 @@
+/*
+ *                     jack public domain compiler
+ *
+ *                      15 may MMXXI PUBLIC DOMAIN
+ *           The author disclaims copyright to this source code.
+ *
+ *
+ */
+
+
 #ifndef JACK_MAIN_C_FILE
 #define JACK_MAIN_C_FILE
 #include <string.h>

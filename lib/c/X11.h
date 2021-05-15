@@ -1,3 +1,13 @@
+/*
+ *                     jack public domain compiler
+ *
+ *                      15 may MMXXI PUBLIC DOMAIN
+ *           The author disclaims copyright to this source code.
+ *
+ *
+ */
+
+
 #ifndef JACK_X11_C_H
 #define JACK_X11_C_H
 #ifndef _WIN32

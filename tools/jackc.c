@@ -703,17 +703,6 @@ var Callback__invoke(var __this, var a, var b);
 
 #endif
 
-#ifndef JACK_SymbolTable_H
-#define JACK_SymbolTable_H
-var SymbolTable__new();
-var SymbolTable__dispose(var __this);
-#endif
-
-
-#if 0
-
-#endif
-
 #ifndef JACK_Font_H
 #define JACK_Font_H
 var Font__new();
@@ -905,6 +894,16 @@ var Main__main();
 #endif
 
 #define JACK_IMPLEMENTATION
+/*
+ *                     jack public domain compiler
+ *
+ *                      15 may MMXXI PUBLIC DOMAIN
+ *           The author disclaims copyright to this source code.
+ *
+ *
+ */
+
+
 #ifndef JACK_MAIN_C_FILE
 #define JACK_MAIN_C_FILE
 #include <string.h>
@@ -1022,6 +1021,16 @@ var Memory__getString(var* str) {
 
 #endif
 #endif
+/*
+ *                     jack public domain compiler
+ *
+ *                      15 may MMXXI PUBLIC DOMAIN
+ *           The author disclaims copyright to this source code.
+ *
+ *
+ */
+
+
 #ifndef JACK_X11_C_H
 #define JACK_X11_C_H
 #ifndef _WIN32
@@ -1470,6 +1479,16 @@ var Screen__processEvents(var iswait)
 #endif // __APPLE
 #endif // _WIN32
 #endif // H
+
+/*
+ *                     jack public domain compiler
+ *
+ *                      15 may MMXXI PUBLIC DOMAIN
+ *           The author disclaims copyright to this source code.
+ *
+ *
+ */
+
 
 #ifndef JACK_WIN32_H
 #define JACK_WIN32_H
@@ -2586,6 +2605,26 @@ var Screen__processEvents(var iswait)
 
 #endif // __APPLE__
 #endif // H
+
+/*
+ *                     jack public domain compiler
+ *
+ *                      15 may MMXXI PUBLIC DOMAIN
+ *           The author disclaims copyright to this source code.
+ *
+ *
+ */
+
+
+/*
+ *                     jack public domain compiler
+ *
+ *                      15 may MMXXI PUBLIC DOMAIN
+ *           The author disclaims copyright to this source code.
+ *
+ *
+ */
+
 
 #ifdef JACK_IMPLEMENTATION
 #define buffer__ (__this+0)
@@ -10665,20 +10704,6 @@ var Callback__invoke(var __this, var a, var b) {
 	return ((var(*)(var,var,var))(__peek(__this)))(__this, a, b);
 }
 #undef callback__
-#endif
-
-#ifdef JACK_IMPLEMENTATION
-#define src__ (__this+0)
-var SymbolTable__new() {
-	var __this;
-	__this = Memory__alloc(1);
-	return __this;
-}
-var SymbolTable__dispose(var __this) {
-	Memory__deAlloc(__this);
-	return 0;
-}
-#undef src__
 #endif
 
 #ifdef JACK_IMPLEMENTATION
