@@ -25,7 +25,7 @@
 
 /* Begin PBXFileReference section */
 		A492A910264282C700FE1882 /* jack */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = jack; sourceTree = BUILT_PRODUCTS_DIR; };
-		A492A913264282C700FE1882 /* jackc.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = jackc.c; sourceTree = "<group>"; };
+		A492A913264282C700FE1882 /* jackc.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = tools/jackc.c; sourceTree = "<group>"; };
 		A4E075D92642D71A00F45C24 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
