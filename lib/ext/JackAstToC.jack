@@ -253,7 +253,13 @@ class JackAstToC {
 		do s.dispose();
 		do dst.writeString(")");
 		do nl();
-	
+		if (c.getTag() = C.CALLBACK()) {
+			if (nb_field > 0) {
+				do error(
+					"callback must be the first field.",c);
+			}
+			let has_callback = 1;
+		}
 		let nb_field = nb_field + 1;
 		return;
 	}
@@ -1439,10 +1445,6 @@ class JackAstToC {
 			let d = d.getChild();
 		} else { if (d.getTag() = C.CALLBACK()) {
 			if (~has_callback) {
-				if (nb_field > 0) {
-					do error("There must be no fields!", d);
-					return;	
-				}
 				let nb_field = nb_field + 1;
 				let has_callback = true;
 			}	
@@ -1520,7 +1522,9 @@ class JackAstToC {
 		var String s;
 		var int t;
 		let t = c.getTag();
-		if ((t = C.VARNAME()) | (t = C.CLASSORVARNAME())) {
+		if ((t = C.VARNAME()) | (t = C.CLASSORVARNAME()) |
+			(t = C.CALLBACK())) 
+		{
 			if (isField(c) = false) {
 				if (isStatic(c)) {
 					let s = clas;

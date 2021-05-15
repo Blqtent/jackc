@@ -321,8 +321,10 @@ class JackParser {
 		if (z) {
 			do astAddType();
 		} else {
-			let z = z | matchIdentifier(false);
-			do astAdd(C.CLASSNAME());
+			let z = matchIdentifier(false);
+			if (z) {
+				do astAdd(C.CLASSNAME());
+			}
 		}
 		if (false=z) { 
 			do error("type expected");
@@ -330,11 +332,18 @@ class JackParser {
 		}					
 
 		let z = matchIdentifier(true); // varName
+		if (z) {
+			do astAdd(C.VARNAME());
+		} else {
+			let z = matchKeyword(C.CALLBACK(), false);
+			if (z) {
+				do astAdd(C.CALLBACK());
+			}
+		}
 		if (false=z) {
 			do error("varName expected.");	
 			return false;
 		}				
-		do astAdd(C.VARNAME());
 	
 		let z = matchSymbol(C.COMMA(), true); // ,
 		while (~(z = null)) {

@@ -136,7 +136,8 @@ mkdir -p hello/lib
 Save the text source code in a file named `hello/Main.jack` using your
 favorite plain text editor.
 
-Copy the JackOS and the C run-time from the jack compiler source code, using
+Copy the JackOS and the C run-time from the 
+public domain jack compiler source code :
 ```
 cp -r lib/std/ hello/lib/std; cp -r lib/c/ hello/lib/c/ 
 ```
