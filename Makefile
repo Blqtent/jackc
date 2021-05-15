@@ -71,3 +71,7 @@ hello:
 	cc -o hello.run hello.c -lX11 -lGL -lGLU 
 	./hello.run
 
+git-release:
+	git tag v0.0.0
+	git push origin v0.0.0
+
