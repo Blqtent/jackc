@@ -57,6 +57,8 @@ clean:
 	rm -rf hello mkfont
 	rm -f hello.run hello.c
 	rm -f jack.run tests.run
+	rm -rf jack-linux
+	rm -f jack-linux.tar.gz
 
 hello:
 	cc -o jack.run tools/jackc.c -lX11 -lGL -lGLU 
@@ -70,6 +72,14 @@ hello:
 	./jack.run -hack hello
 	cc -o hello.run hello.c -lX11 -lGL -lGLU 
 	./hello.run
+
+release:
+	mkdir -p jack-linux/
+	rm -rf jack-linux/*
+	cp LICENSE.txt jack-linux/
+	cp README.md jack-linux/
+	cp jack.run jack-linux/
+	tar -cvzf jack-linux.tar.gz jack-linux/
 
 git-release:
 	git tag v0.0.0
