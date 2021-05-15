@@ -1,5 +1,7 @@
 
 class CallbackStringDispose {
+	field int callback;
+
 	method int callback(String a, int b) {
 		do a.dispose();
 		return 0;

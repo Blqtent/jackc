@@ -46,7 +46,7 @@ class Buffer {
 		return;
 	}
 
-	method int getAt(int p) {
+	method Array getAt(int p) {
 		return buffer[p];
 	}
 

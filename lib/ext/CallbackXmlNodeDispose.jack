@@ -1,5 +1,7 @@
 
 class CallbackXmlNodeDispose {
+	field int callback;
+
 	method int callback(XmlNode a, int b) {
 		do a.dispose();
 		return 0;

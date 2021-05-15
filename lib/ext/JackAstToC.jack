@@ -1382,6 +1382,9 @@ class JackAstToC {
 				do dst.writeString(
 				  "/* ERROR not allowed by HACK */");
 			} else {
+				if (~has_callback) {
+					do error("missing callback field", d);
+				}
 				do dst.writeString(
 				  "((var(*)(var,var,var))(__peek(__this)))");
 			}
@@ -1444,10 +1447,6 @@ class JackAstToC {
 			do dst.writeString(d.getData());
 			let d = d.getChild();
 		} else { if (d.getTag() = C.CALLBACK()) {
-			if (~has_callback) {
-				let nb_field = nb_field + 1;
-				let has_callback = true;
-			}	
 			do dst.writeString("callback");
 			let d = d.getChild();
 		} else {

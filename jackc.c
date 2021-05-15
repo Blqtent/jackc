@@ -677,9 +677,9 @@ var JackParser__compileExpressionList(var __this);
 
 #ifndef JACK_Callback_H
 #define JACK_Callback_H
-var Callback__callback(var __this, var a, var b);
 var Callback__new();
 var Callback__dispose(var __this);
+var Callback__callback(var __this, var a, var b);
 var Callback__invoke(var __this, var a, var b);
 #endif
 
@@ -3486,6 +3486,7 @@ var Canavas__draw(var x, var y) {
 #endif
 
 #ifdef JACK_IMPLEMENTATION
+#define callback__ (__this+0)
 var CallbackXmlNodeDispose__callback(var __this, var a, var b) {
 	XmlNode__dispose(a);
 	return 0;
@@ -3496,6 +3497,7 @@ var CallbackXmlNodeDispose__new() {
 	(__peek(__this+0)) = (var)CallbackXmlNodeDispose__callback;
 	return __this;
 }
+#undef callback__
 #endif
 
 #ifdef JACK_IMPLEMENTATION
@@ -4134,34 +4136,35 @@ var JackAstToC___str127[] = {95,95,41,0};
 var JackAstToC___str128[] = {95,95,0};
 var JackAstToC___str129[] = {95,95,0};
 var JackAstToC___str130[] = {47,42,32,69,82,82,79,82,32,110,111,116,32,97,108,108,111,119,101,100,32,98,121,32,72,65,67,75,32,42,47,0};
-var JackAstToC___str131[] = {40,40,118,97,114,40,42,41,40,118,97,114,44,118,97,114,44,118,97,114,41,41,40,95,95,112,101,101,107,40,95,95,116,104,105,115,41,41,41,0};
-var JackAstToC___str132[] = {95,95,116,104,105,115,0};
-var JackAstToC___str133[] = {95,95,0};
-var JackAstToC___str134[] = {95,95,116,104,105,115,0};
-var JackAstToC___str135[] = {40,0};
-var JackAstToC___str136[] = {44,32,0};
-var JackAstToC___str137[] = {41,0};
-var JackAstToC___str138[] = {118,97,114,0};
+var JackAstToC___str131[] = {109,105,115,115,105,110,103,32,99,97,108,108,98,97,99,107,32,102,105,101,108,100,0};
+var JackAstToC___str132[] = {40,40,118,97,114,40,42,41,40,118,97,114,44,118,97,114,44,118,97,114,41,41,40,95,95,112,101,101,107,40,95,95,116,104,105,115,41,41,41,0};
+var JackAstToC___str133[] = {95,95,116,104,105,115,0};
+var JackAstToC___str134[] = {95,95,0};
+var JackAstToC___str135[] = {95,95,116,104,105,115,0};
+var JackAstToC___str136[] = {40,0};
+var JackAstToC___str137[] = {44,32,0};
+var JackAstToC___str138[] = {41,0};
 var JackAstToC___str139[] = {118,97,114,0};
-var JackAstToC___str140[] = {32,0};
-var JackAstToC___str141[] = {95,95,0};
-var JackAstToC___str142[] = {99,97,108,108,98,97,99,107,0};
-var JackAstToC___str143[] = {115,117,98,114,111,117,116,105,110,101,32,110,97,109,101,32,101,120,112,101,99,116,101,100,0};
-var JackAstToC___str144[] = {40,0};
-var JackAstToC___str145[] = {118,97,114,32,95,95,116,104,105,115,0};
-var JackAstToC___str146[] = {44,32,0};
-var JackAstToC___str147[] = {32,0};
-var JackAstToC___str148[] = {44,32,0};
-var JackAstToC___str149[] = {41,0};
-var JackAstToC___str150[] = {32,0};
-var JackAstToC___str151[] = {32,61,32,48,59,0};
-var JackAstToC___str152[] = {59,0};
-var JackAstToC___str153[] = {118,97,114,0};
+var JackAstToC___str140[] = {118,97,114,0};
+var JackAstToC___str141[] = {32,0};
+var JackAstToC___str142[] = {95,95,0};
+var JackAstToC___str143[] = {99,97,108,108,98,97,99,107,0};
+var JackAstToC___str144[] = {115,117,98,114,111,117,116,105,110,101,32,110,97,109,101,32,101,120,112,101,99,116,101,100,0};
+var JackAstToC___str145[] = {40,0};
+var JackAstToC___str146[] = {118,97,114,32,95,95,116,104,105,115,0};
+var JackAstToC___str147[] = {44,32,0};
+var JackAstToC___str148[] = {32,0};
+var JackAstToC___str149[] = {44,32,0};
+var JackAstToC___str150[] = {41,0};
+var JackAstToC___str151[] = {32,0};
+var JackAstToC___str152[] = {32,61,32,48,59,0};
+var JackAstToC___str153[] = {59,0};
 var JackAstToC___str154[] = {118,97,114,0};
-var JackAstToC___str155[] = {95,95,95,0};
-var JackAstToC___str156[] = {95,95,112,101,101,107,40,0};
-var JackAstToC___str157[] = {95,95,41,0};
-var JackAstToC___str158[] = {95,95,0};
+var JackAstToC___str155[] = {118,97,114,0};
+var JackAstToC___str156[] = {95,95,95,0};
+var JackAstToC___str157[] = {95,95,112,101,101,107,40,0};
+var JackAstToC___str158[] = {95,95,41,0};
+var JackAstToC___str159[] = {95,95,0};
 #define dst__ (__this+0)
 #define parser__ (__this+1)
 #define ast__ (__this+2)
@@ -5601,21 +5604,25 @@ var JackAstToC__coSubroutineCall(var __this, var c) {
 				if (__peek(hack__)) {
 					File__writeString(__peek(dst__), Memory__getString(JackAstToC___str130));
 				} else {
-					File__writeString(__peek(dst__), Memory__getString(JackAstToC___str131));
+					if (!__peek(has_callback__)) {
+						JackAstToC__error(__this, Memory__getString(JackAstToC___str131), d);
+					}
+
+					File__writeString(__peek(dst__), Memory__getString(JackAstToC___str132));
 				}
-				thi = Memory__getString(JackAstToC___str132);
+				thi = Memory__getString(JackAstToC___str133);
 			} else {
 				if (((t)==(C__SUBROUTINENAME()))) {
 					File__writeString(__peek(dst__), __peek(clas__));
-					File__writeString(__peek(dst__), Memory__getString(JackAstToC___str133));
+					File__writeString(__peek(dst__), Memory__getString(JackAstToC___str134));
 					File__writeString(__peek(dst__), JackAst__getData(d));
-					thi = Memory__getString(JackAstToC___str134);
+					thi = Memory__getString(JackAstToC___str135);
 				}
 
 			}
 		}
 	}
-	File__writeString(__peek(dst__), Memory__getString(JackAstToC___str135));
+	File__writeString(__peek(dst__), Memory__getString(JackAstToC___str136));
 	if (thi) {
 		first = 0;
 		File__writeString(__peek(dst__), thi);
@@ -5628,14 +5635,14 @@ var JackAstToC__coSubroutineCall(var __this, var c) {
 	d = JackAst__getChild(d);
 	while (!(((d)==(0)))) {
 		if (((first)==(0))) {
-			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str136));
+			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str137));
 		}
 
 		first = 0;
 		JackAstToC__coExpr(__this, d, 0);
 		d = JackAst__getNext(d);
 	}
-	File__writeString(__peek(dst__), Memory__getString(JackAstToC___str137));
+	File__writeString(__peek(dst__), Memory__getString(JackAstToC___str138));
 	return 0;
 }
 var JackAstToC__coStatements(var __this, var c) {
@@ -5657,27 +5664,22 @@ var JackAstToC__coFunctionHead(var __this, var c, var add_this) {
 	}
 
 	if (((t)==(C__CLASSNAME()))) {
-		File__writeString(__peek(dst__), Memory__getString(JackAstToC___str138));
-	} else {
 		File__writeString(__peek(dst__), Memory__getString(JackAstToC___str139));
+	} else {
+		File__writeString(__peek(dst__), Memory__getString(JackAstToC___str140));
 	}
-	File__writeString(__peek(dst__), Memory__getString(JackAstToC___str140));
-	File__writeString(__peek(dst__), __peek(clas__));
 	File__writeString(__peek(dst__), Memory__getString(JackAstToC___str141));
+	File__writeString(__peek(dst__), __peek(clas__));
+	File__writeString(__peek(dst__), Memory__getString(JackAstToC___str142));
 	if (((JackAst__getTag(d))==(C__SUBROUTINENAME()))) {
 		File__writeString(__peek(dst__), JackAst__getData(d));
 		d = JackAst__getChild(d);
 	} else {
 		if (((JackAst__getTag(d))==(C__CALLBACK()))) {
-			if (!__peek(has_callback__)) {
-				__poke(nb_field__, __peek(nb_field__)+1);
-				__poke(has_callback__, -1);
-			}
-
-			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str142));
+			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str143));
 			d = JackAst__getChild(d);
 		} else {
-			JackAstToC__error(__this, Memory__getString(JackAstToC___str143), c);
+			JackAstToC__error(__this, Memory__getString(JackAstToC___str144), c);
 			return 0;
 		}
 	}
@@ -5689,28 +5691,28 @@ var JackAstToC__coFunctionHead(var __this, var c, var add_this) {
 }
 var JackAstToC__coParams(var __this, var d, var add_this) {
 	var n;
-	File__writeString(__peek(dst__), Memory__getString(JackAstToC___str144));
+	File__writeString(__peek(dst__), Memory__getString(JackAstToC___str145));
 	d = JackAst__getChild(d);
 	if (add_this) {
-		File__writeString(__peek(dst__), Memory__getString(JackAstToC___str145));
+		File__writeString(__peek(dst__), Memory__getString(JackAstToC___str146));
 		if (d) {
-			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str146));
+			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str147));
 		}
 
 	}
 
 	while (!(((d)==(0)))) {
 		JackAstToC__coType(__this, d);
-		File__writeString(__peek(dst__), Memory__getString(JackAstToC___str147));
+		File__writeString(__peek(dst__), Memory__getString(JackAstToC___str148));
 		n = JackAst__getChild(d);
 		File__writeString(__peek(dst__), JackAst__getData(n));
 		d = JackAst__getNext(d);
 		if (d) {
-			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str148));
+			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str149));
 		}
 
 	}
-	File__writeString(__peek(dst__), Memory__getString(JackAstToC___str149));
+	File__writeString(__peek(dst__), Memory__getString(JackAstToC___str150));
 	return 0;
 }
 var JackAstToC__coVarDec(var __this, var c) {
@@ -5722,12 +5724,12 @@ var JackAstToC__coVarDec(var __this, var c) {
 		JackAstToC__coType(__this, d);
 		n = JackAst__getChild(d);
 		if (n) {
-			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str150));
+			File__writeString(__peek(dst__), Memory__getString(JackAstToC___str151));
 			JackAstToC__coVarName(__this, n, -1);
 			if (__peek(hack__)) {
-				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str151));
-			} else {
 				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str152));
+			} else {
+				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str153));
 			}
 			JackAstToC__nl(__this);
 		}
@@ -5740,9 +5742,9 @@ var JackAstToC__coType(var __this, var c) {
 	var t;
 	t = JackAst__getTag(c);
 	if (((t)==(C__CLASSNAME()))) {
-		File__writeString(__peek(dst__), Memory__getString(JackAstToC___str153));
-	} else {
 		File__writeString(__peek(dst__), Memory__getString(JackAstToC___str154));
+	} else {
+		File__writeString(__peek(dst__), Memory__getString(JackAstToC___str155));
 	}
 	return 0;
 }
@@ -5760,7 +5762,7 @@ var JackAstToC__coVarName(var __this, var c, var isassign) {
 			if (s) {
 				if (((String__length(s))>(0))) {
 					File__writeString(__peek(dst__), s);
-					File__writeString(__peek(dst__), Memory__getString(JackAstToC___str155));
+					File__writeString(__peek(dst__), Memory__getString(JackAstToC___str156));
 				}
 
 			}
@@ -5768,12 +5770,12 @@ var JackAstToC__coVarName(var __this, var c, var isassign) {
 			File__writeString(__peek(dst__), JackAst__getData(c));
 		} else {
 			if (((isassign)==(0))) {
-				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str156));
-				File__writeString(__peek(dst__), JackAst__getData(c));
 				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str157));
-			} else {
 				File__writeString(__peek(dst__), JackAst__getData(c));
 				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str158));
+			} else {
+				File__writeString(__peek(dst__), JackAst__getData(c));
+				File__writeString(__peek(dst__), Memory__getString(JackAstToC___str159));
 			}
 		}
 	}
@@ -6557,6 +6559,7 @@ var Hash__get(var __this, var k) {
 #endif
 
 #ifdef JACK_IMPLEMENTATION
+#define callback__ (__this+0)
 var CallbackStringDispose__callback(var __this, var a, var b) {
 	String__dispose(a);
 	return 0;
@@ -6567,6 +6570,7 @@ var CallbackStringDispose__new() {
 	(__peek(__this+0)) = (var)CallbackStringDispose__callback;
 	return __this;
 }
+#undef callback__
 #endif
 
 #ifdef JACK_IMPLEMENTATION
@@ -10620,9 +10624,7 @@ var JackParser__compileExpressionList(var __this) {
 #endif
 
 #ifdef JACK_IMPLEMENTATION
-var Callback__callback(var __this, var a, var b) {
-	return 0;
-}
+#define callback__ (__this+0)
 var Callback__new() {
 	var __this;
 	__this = Memory__alloc(1);
@@ -10633,9 +10635,13 @@ var Callback__dispose(var __this) {
 	Memory__deAlloc(__this);
 	return 0;
 }
+var Callback__callback(var __this, var a, var b) {
+	return 0;
+}
 var Callback__invoke(var __this, var a, var b) {
 	return ((var(*)(var,var,var))(__peek(__this)))(__this, a, b);
 }
+#undef callback__
 #endif
 
 #ifdef JACK_IMPLEMENTATION

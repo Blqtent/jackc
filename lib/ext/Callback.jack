@@ -1,8 +1,6 @@
 
 class Callback {
-	method int callback(int a, int b) {
-		return 0;
-	}
+	field int callback;
 
 	constructor Callback new() {
 		return this;
@@ -11,6 +9,10 @@ class Callback {
 	method void dispose() {
 		do Memory.deAlloc(this);
 		return;
+	}
+
+	method int callback(int a, int b) {
+		return 0;
 	}
 
 	method int invoke(int a, int b) {

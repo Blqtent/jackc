@@ -17,7 +17,9 @@ The [Jack programming language][1] is described in the book
 [The Elements of Computing Systems][8] and on the website 
 [www.nand2tetris.org][7]. There is a [set of video][3] on Youtube talking about it.
 
-This document is describing a Jack compiler written in Jack.
+This document is describing a Jack compiler written in Jack which 
+outputs C code.
+
 At the beginning it was itself bootstrapped with a simple Python3 Jack compiler.
 
 Status of this document
@@ -296,13 +298,13 @@ There is only decimal constant. No hex, octal or character constants.
 
 On 16bit platforms the biggest integer constant is 32767, on 32bit
 2147483647, on 64bit 9223372036854775807.
-To get the most negative number you must use these biggest constants, 
-negate them using unary `-` and then subtract `1`.
+To get the most negative number you must use these biggest constants 
+and add `1` to them.
 
 String constant are beginning and ending with `"` and can't contain `"` or 
 newline (ascii character 10 in decimal). There is no escape
 sequences (`\n \\ \t \"` are not producing the same result as in other
- programming languages).
+programming languages).
 
 The `null` constant is a null reference to an object 
 (equivalent to `0` or `false`).
@@ -329,19 +331,19 @@ current newly created object. A constructor must end with `return this;`
 statement and its return type must be the one of its class.
 
 Constructors are called using the 
-`let obj = ClassName.constructorName(arguments);`
+```let obj = ClassName.constructorName(arguments);```
 syntax.
 
 The `dispose()` method is generally used in counterpart of constructors to
 free memory used by the object.
 
 `function` subroutines are called using the
-`let data = ClassName.functionName(arguments);`
+```let data = ClassName.functionName(arguments);```
 syntax.
 
 `method` subroutines are called using the
-`let data = obj.methodName(arguments);` syntax outside their class and
-`let data = methodName(arguments);` syntax inside their class.
+```let data = obj.methodName(arguments);``` syntax outside their class and
+```let data = methodName(arguments);``` syntax inside their class.
 Methods have the `this` reference to the current object of type of their class.
 
 The last statement of subroutines is always a `return` statement.
@@ -354,12 +356,12 @@ which is not inside its class scope. So in fact `void` subroutines return
 ### 3.4 Statements
 
 `let` syntax is 
-`let variable = expression;` or 
-`let variable[expression] = expression;`.
+```let variable = expression;``` or 
+```let variable[expression] = expression;```.
 
 `do` syntax is
-`do ClassName.functionName(arguments);` or
-`do obj.methodName(arguments);`. 
+```do ClassName.functionName(arguments);``` or
+```do obj.methodName(arguments);```. 
 
 `if` syntax is 
 ```
@@ -379,8 +381,8 @@ while (expression) {
 ```
 
 `return` syntax is
-`return expression;` for non void subroutines 
-or `return;` for `void` subroutines.
+```return expression;``` for non void subroutines 
+or ```return;``` for `void` subroutines.
 
 
 ### 3.5 Expressions
@@ -394,7 +396,7 @@ An expression can be:
 - A subroutine call
 - A `~expression` // bit-wise Boolean INVERT on int and logical NOT on others
 - A `-expression` // unary minus
-- A `(expression)`
+- A `(expression)` // expression enclosed in parenthesis 
 - Or :
 ```
 expression + expression // integer addition
@@ -447,7 +449,8 @@ Java non-static, non-final, non-private methods.
 The syntax is:
 ```
 class MyCallback {
-	// the class must have no field
+	// the class must begin with a `int` field named "callback"
+	field int callback;
 
 	// There can be only one callback per class.
 	// the callback is called by invoke()
@@ -465,29 +468,36 @@ class MyCallback {
 	}
 
 	constructor MyCallback new() {
-		// the compiler assign the callback method to an
-		// hidden field (big enough to contain a subroutine pointer)
-		// of the class
+		// the compiler automatically assigns the callback method to the
+		// callback field of the object
 		return this;
+	}
+
+	method void dispose() {
+		do Memory.deAlloc(this);
+		return;
 	}
 	
 	method int invoke(int a, int b) {
-		return callback(a, b); // the magic is here
+		return callback(a, b); // the magic is here.
 				       // it calls the callback referred
-				       // by a field in the `this` reference 
+				       // by the callback field in 
+				       // the `this` reference 
 	}
 }
 ```
 
 ```
 class MyOtherCallback {
-	method int callback(int a, int b) {
-		return 0;
-	}
+	field int callback;
 	constructor MyOtherCallback new() {
 		return this;
 	}
-	// we dont need the invoke method since we never use it in this class
+	method int callback(int a, int b) {
+		return 0; // do nothing
+	}
+	// we dont need the invoke and dispose methods since we 
+	// never use them in this class
 }
 ```
 
@@ -530,9 +540,9 @@ See the [book][8].
 
 ### 4.5. Screen
 
-Screen 512 x 256 pixels. 
+Screen resolution is 512 x 256 pixels. 
 
-The screen memory starts a 16384 and ends at 24575. 
+The screen memory starts at memory location 16384 and ends at 24575. 
 
 Pixels are single bit black and white packed in 16bit words.
 There is 32 16bit words by line of screen.
@@ -565,33 +575,118 @@ See the [book][8].
 
 ### 4.9. File
 
-TODO.
+Manage files and directories.
 
 ```
-	constructor File new(String path, boolean writing);
+	constructor File new(String path, boolean writing)
+		path:    path of the file or directory.
+		writing: true if you want write to the file.
+		return:  an object of type File.
 
 	method String getName()
+		return: the path.
 
 	method boolean isdir()
+		return: true if path is a directory.
 
 	method boolean open()
+		return: true if the file has been successfuly opened.
 
 	method int readByte()
+		return: a single byte read from the file or -1 if the
+			end of file has been reached.
+	
+	method String readLine(String buffer)
+		return: a line from the file or `null` if end of file has
+			been reached.
 
 	method int seek(int position)
+		Move the current byte position in the file 
+		for writing or reading.
+		return: position if successful.
 
 	method int writeByte(int data)
+		return: 1 if a single byte "data" has been writen to the file.
 
 	method int writeString(String s)
+		return: the length of the "s" String successfuly writen to 
+		        the file.
 
 	method boolean remove()
+		return: true if the file or directory has been deleted.
 
 	method boolean mkdir()
+		return: true if the directory has been created successfuly.
 
 	method Buffer list()
+		return: a Buffer containing the list of files or directories
+			in the "path" directory.
 
 ```
 
+Usage :
+```
+	var Buffer dir;
+	var File file;
+	var int i, c;
+	var String d;
+
+	let file = File.new("./", false);
+	let dir = File.list();
+	if (~dir) { return; }
+	let i = 0;
+	while (i < dir.getSize()) {
+		let d = dir.getAt(i);
+		do Output.printString(d);
+		do Output.println();
+		do d.dispose();
+		let i = i + 1; 
+	}
+	do dir.dispose();
+	do file.dispose();
+
+	let file = File.new("hello.txt", true);
+	do file.writeString("Hello World!");
+	do file.writeByte(10); // newline
+	do file.dispose();
+
+	let file = File.new("hello.txt", false);
+	let c = file.readByte();	
+	while (c > 0) {
+		do Output.printChar(c);
+		let c = file.readByte();
+	}
+	do file.dispose();
+	
+	let file = File.new("hello.txt", false);
+	do file.remove();
+	do file.dispose();
+
+```
+
+### 4.10. Buffer
+
+An Array that grows automatically.
+
+```
+	constructor Buffer new(int initial, Callback dispose_cb)
+		initial:    preallocated size of the internal Array.
+		dispose_cb: a Callback to free elements when the Buffer is
+ 			    disposed or "null" if the elements don't need
+			    to be unallocated.
+		return:     a Buffer object with preallocated "initial" 
+			    elements space.
+
+	method Array getAt(int index)
+		return : the element at postion "index".
+
+	method int append(Array data)
+		return: the index of the element "data" appended to the 
+			internal Array.
+
+	method int getSize()
+		return : the number of elements in the buffer.
+```
 
 ## 5. Grammar
 
@@ -642,6 +737,7 @@ classVarDecList:
 
 classVarDec:
 	classVarKind type varNameList ;
+	field int callback ;
 
 type:
 	int
