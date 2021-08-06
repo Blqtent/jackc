@@ -1,9 +1,9 @@
+This public domain software is a sustainable economy project.
 
       PUBLIC DOMAIN MMXXI by Jean-Marc Lienher
+  
+   The authors disclaim copyright to this software.
 
-This software is released into the public domain.
-
-Even so, you may want to purchase a license for legal needs.
 To purchase a license send the authors a request for an Open Source
 license of your choice with your best offer (no negotiations).
 

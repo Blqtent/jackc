@@ -2,6 +2,8 @@
 Public Domain JACK compiler
 ===========================
 
+This public domain software is sustainable economy project.
+
 ![public domain](https://raw.githubusercontent.com/public-domain/jack/main/img/pd.png)
 
 
@@ -873,6 +875,7 @@ keywordConstant:
 [8]: https://www.amazon.com/Elements-Computing-Systems-Building-Principles/dp/0262640686/ref=ed_oe_p
 [9]: https://www.youtube.com/watch?v=2KK_kzrJPS8 
 [10]: http://nand2tetris-questions-and-answers-forum.32033.n3.nabble.com/Supplied-compiler-doesn-t-agree-what-is-true-between-if-statement-and-while-statement-td4032492.html
+[11]: https://www.sustainable.org/economy/
 
 ***
 

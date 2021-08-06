@@ -1,3 +1,6 @@
+This public domain software is a sustainable economy project.
+=============================================================
+
 To contribute, add :
 "
    PUBLIC DOMAIN <year in roman number> by <your name, email or pseudo>
@@ -7,9 +10,7 @@ to the top of each file you created and don't forget to cite your
 sources of information.
 
 If you contribute, please add your name, rating and your total
-amount of time spent on the project in this file.
-
-
+amount of time spent on the project at end of this file.
 
 The rating money unit is the BigMac (BM) currency.
 
@@ -25,7 +26,7 @@ http://www.salaryexplorer.com/salary-survey.php?loc=173&loctype=1&job=1&jobtype=
 
 The 08 august 2021, the proposed ratings are :
 
-Yearly salaries :
+Yearly salaries int IT industry :
          CHF        INR        USD        PLN        RUB
 LOW       64500     200000      49300      47300      648000 
 AVERAGE  124000     385000      95100      91100     1250000
@@ -45,35 +46,38 @@ LOW           4.85       0.50       4.26      1.72         1.87
 AVERAGE       9.31       0.99       8.22      3.31         3.61
 HIGH         15.25       1.61      13.40      5.42         5.89
 
-Choose what you think is the right BM/h for your skills.
+Choose what you think is the fair BM/h for your skills.
 
 (in other countries, you are working more than 256 days per year and more
- than 8 hours per day...)
-
+ than 8 hours per day... so the real BM/h for you is even less than that.)
 
 --------------------------------------------------------------------------------
 
 If we make significant amount of money with this software we will pay the
 contributors to the ratio of their hours spent. 
 
-# examples :   
+###########
+# example :  
+########### 
 # hours      BM/hour Name
 # ---------- ------- -------------------------------------------------------
-#   160       12     Jane Doe 
-#    20        5     john.doe@privileged.ch 
-#    15       17     ashok.kumar@indiadevel.in 
-#     0.5      9     anonymous bug reporter 
-# (160 * 12 + 20 * 5 + 15 * 17 + 0.5 * 9) = 2279.5 BigMac spent in 
+#   160        1.50  Jane Doe 
+#    20        0.75  john.doe@privileged.ch 
+#    15        2     ashok.kumar@indiadevel.in 
+#     0.5      1     anonymous bug reporter 
+# (160 * 1.5 + 20 * 0.75 + 15 * 2 + 0.5 * 1) = 285.5 BigMac spent in 
 #                                                  total on the project
 # 
 # We get 1000 USD from a customer.
-# 1000 / 2279.5 = 0.439 USD per BigMac 
-# Jane gets  : 160 * 12 * 0.439 = 842.28 USD
-# John gets  :  20 *  5 * 0.439 =  43.86 USD
-# Ashok gets :  15 * 17 * 0.439 = 111.86 USD
-# Redistributed total :           998.00
-# It remains 2 USD that we will use to something useful to the world.
-#
+# 1000 / 285.5 = 3.5 USD per BigMac 
+# Jane gets  : 160 * 1.50 * 3.50 = 840.00 USD
+# John gets  :  20 * 0.75 * 3.50 =  52.50 USD
+# Ashok gets :  15 * 2.00 * 3.50 = 105.00 USD
+# Redistributed total :            997.50
+# It remains 2.50 USD that we will use to something useful to the world.
+# Note that the money transfer will be charged by the banks so the real amount
+# will be lower than that.
+
 --------------------------------------------------------------------------------
 
  ===========                       
@@ -82,7 +86,7 @@ contributors to the ratio of their hours spent.
 
 hours      BM/hour Name
 ---------- ------- -------------------------------------------------------
-   80       14     Jean-Marc Lienher 
+   80       1.50   Jean-Marc Lienher 
 
 --------------------------------------------------------------------------------
 
