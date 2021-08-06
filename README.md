@@ -2,7 +2,7 @@
 Public Domain JACK compiler
 ===========================
 
-This public domain software is sustainable economy project.
+This public domain software is a sustainable economy project.
 
 ![public domain](https://raw.githubusercontent.com/public-domain/jack/main/img/pd.png)
 
