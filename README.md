@@ -876,6 +876,17 @@ keywordConstant:
 [9]: https://www.youtube.com/watch?v=2KK_kzrJPS8 
 [10]: http://nand2tetris-questions-and-answers-forum.32033.n3.nabble.com/Supplied-compiler-doesn-t-agree-what-is-true-between-if-statement-and-while-statement-td4032492.html
 [11]: https://www.sustainable.org/economy/
+[12]: https://web.archive.org/web/20110920035144/http://www.dcd.pl/asoft.php
+[13]: https://archive.org/details/bitsavers_motorola
+[14]: https://unlicense.org/
+[15]: https://www.sqlite.org/copyright.html
+[16]: https://ohwr.org/cern_ohl_p_v2.txt
+[17]: https://www.youtube.com/watch?v=Q8RqgVjIDB8
+[18]: https://www.economist.com/big-mac-index
+[19]: https://www.travailler-en-suisse.ch/tendances-salaires-informaticiens-suisse.html
+[20]: https://opensource.org/licenses
+[21]: http://www.salaryexplorer.com/salary-survey.php?loc=210&loctype=1&job=1&jobtype=1
+
 
 ***
 

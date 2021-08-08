@@ -3,7 +3,7 @@ This public domain software is a sustainable economy project.
 
 To contribute, add :
 "
-   PUBLIC DOMAIN <year in roman number> by <your name, email or pseudo>
+     PUBLIC DOMAIN <day> <month> <year in roman number> by <your name>
            The author disclaims copyright to this source code.
 "
 to the top of each file you created and don't forget to cite your
@@ -24,7 +24,7 @@ http://www.salaryexplorer.com/salary-survey.php?loc=229&loctype=1&job=1&jobtype=
 
 http://www.salaryexplorer.com/salary-survey.php?loc=173&loctype=1&job=1&jobtype=1
 
-The 08 august 2021, the proposed ratings are :
+The 08 August 2021, the proposed ratings are :
 
 Yearly salaries int IT industry :
          CHF        INR        USD        PLN        RUB
@@ -46,7 +46,8 @@ LOW           4.85       0.50       4.26      1.72         1.87
 AVERAGE       9.31       0.99       8.22      3.31         3.61
 HIGH         15.25       1.61      13.40      5.42         5.89
 
-Choose what you think is the fair BM/h for your skills.
+Choose what you think is the fair BM/h for your skills versus the rest 
+of the world.
 
 (in other countries, you are working more than 256 days per year and more
  than 8 hours per day... so the real BM/h for you is even less than that.)
@@ -74,7 +75,7 @@ contributors to the ratio of their hours spent.
 # John gets  :  20 * 0.75 * 3.50 =  52.50 USD
 # Ashok gets :  15 * 2.00 * 3.50 = 105.00 USD
 # Redistributed total :            997.50
-# It remains 2.50 USD that we will use to something useful to the world.
+# It remains 2.50 USD that we will use to pay the infrastructure (website, ...).
 # Note that the money transfer will be charged by the banks so the real amount
 # will be lower than that.
 
@@ -86,7 +87,7 @@ contributors to the ratio of their hours spent.
 
 hours      BM/hour Name
 ---------- ------- -------------------------------------------------------
-   80       1.50   Jean-Marc Lienher 
+   80       3.70   Jean-Marc Lienher 
 
 --------------------------------------------------------------------------------
 
