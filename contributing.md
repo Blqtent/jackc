@@ -24,46 +24,54 @@ http://www.salaryexplorer.com/salary-survey.php?loc=229&loctype=1&job=1&jobtype=
 
 http://www.salaryexplorer.com/salary-survey.php?loc=173&loctype=1&job=1&jobtype=1
 
-The 08 August 2021, the proposed ratings are :
 
-Yearly salaries int IT industry :
-"""
 ```
-         CHF        INR        USD        PLN        RUB
-LOW       64500     200000      49300      47300      648000 
-AVERAGE  124000     385000      95100      91100     1250000
-HIGH     203000     627000     155000     149000     2040000
+Yearly salaries in the IT industry as of 8 August 2021 :
+         Switzerland    India          USA    Poland       Russia
+         CHF            INR            USD       PLN          RUB
+LOW       64500         200000       49300     47300       648000 
+AVERAGE  124000         385000       95100     91100      1250000
+HIGH     203000         627000      155000     49000      2040000
 
-BigMac        6.50     190          5.65      13.43      169
+Price of a Big Mac:
+         Switzerland    India          USA    Poland       Russia
+                 CHF      INR          USD       PLN          RUB
+BigMac          6.50      190         5.65      13.4          169
+
+```
+
+--------------------------------------------------------------------------------
+
+Yearly working hours :
+
+https://www.arbeitstage.ch/FR/
+
+256 working days per year and 8 working hours per day = 2048 h/year in 2021
 
 --------------------------------------------------------------------------------
 ```
-
-In Switzerland:
-
-256 working days per year and 8 working hours per day = 2048 h/year
-
-In 2017:
+BigMac per hour of work (BM/h) : 
+# yearly_salary / yearly_working_hours / BigMac_price = BigMac_per_working_hour 
+# example with india LOW salary:
+# 200000 / 2048 / 190 =  0.51
+# example with Poland AVERAGE salary:
+# 91100 / 2048 / 13.4 =  3.31 
+        
+         Switzerland    India          USA    Poland       Russia
+                BM/h     BM/h         BM/h      BM/h         BM/h
+LOW             4.85     0.50         4.26      1.72         1.87
+AVERAGE         9.31     0.99         8.22      3.31         3.61
+HIGH           15.25     1.61        13.40      5.42         5.89
+```
 
 https://www.overshootday.org/newsroom/country-overshoot-days/
 
 We need 2.79 Earth if the Humanity wants to live like swiss people in 2017.
-We round that to 3.00 in 2021, (United Nation data has a delay of 4 years...)
-
---------------------------------------------------------------------------------
-```
-BigMac per hour (BM/h):            
-       Switzerland      India        USA    Poland       Russia
-LOW           4.85       0.50       4.26      1.72         1.87
-AVERAGE       9.31       0.99       8.22      3.31         3.61
-HIGH         15.25       1.61      13.40      5.42         5.89
-```
+(United Nation data, on which this number is computed have a delay of 4 years)
+We will round it to 3.00 in 2021. 
 
 Choose what you think is the fair BM/h for your skills versus the rest 
-of the world.
-
-(in other countries, you are working more than 256 days per year and more
- than 8 hours per day... so the real BM/h for you is even less than that.)
+of the world and our planet Earth.
 
 --------------------------------------------------------------------------------
 
@@ -88,7 +96,7 @@ contributors to the ratio of their hours spent.
 # Jane gets  : 160 * 1.50 * 3.50 = 840.00 USD
 # John gets  :  20 * 0.75 * 3.50 =  52.50 USD
 # Ashok gets :  15 * 2.00 * 3.50 = 105.00 USD
-# Redistributed total :            997.50
+# Redistributed total :            997.50 USD
 # It remains 2.50 USD that we will use to pay the infrastructure (website, ...).
 # Note that the money transfer will be charged by the banks so the real amount
 # will be lower than that.
@@ -103,7 +111,8 @@ contributors to the ratio of their hours spent.
 
 hours      BM/hour Name
 ---------- ------- -------------------------------------------------------
-   80       3.70   Jean-Marc Lienher 
+   80       5.40   Jean-Marc Lienher 
+
+```
 
 --------------------------------------------------------------------------------
-```
