@@ -2,10 +2,10 @@ This public domain software is a sustainable economy project.
 =============================================================
 
 To contribute, add :
-"""
+```
      PUBLIC DOMAIN <day> <month> <year in roman number> by <your name>
            The author disclaims copyright to this source code.
-"""
+```
 to the top of each file you created and don't forget to cite your
 sources of information.
 
@@ -28,14 +28,16 @@ The 08 August 2021, the proposed ratings are :
 
 Yearly salaries int IT industry :
 """
+```
          CHF        INR        USD        PLN        RUB
 LOW       64500     200000      49300      47300      648000 
 AVERAGE  124000     385000      95100      91100     1250000
 HIGH     203000     627000     155000     149000     2040000
 
 BigMac        6.50     190          5.65      13.43      169
+
 --------------------------------------------------------------------------------
-"""
+```
 
 In Switzerland:
 
@@ -49,13 +51,14 @@ We need 2.79 Earth if the Humanity wants to live like swiss people in 2017.
 We round that to 3.00 in 2021, (United Nation data has a delay of 4 years...)
 
 --------------------------------------------------------------------------------
-"""
+```
 BigMac per hour (BM/h):            
        Switzerland      India        USA    Poland       Russia
 LOW           4.85       0.50       4.26      1.72         1.87
 AVERAGE       9.31       0.99       8.22      3.31         3.61
 HIGH         15.25       1.61      13.40      5.42         5.89
-"""
+```
+
 Choose what you think is the fair BM/h for your skills versus the rest 
 of the world.
 
@@ -67,7 +70,7 @@ of the world.
 If we make significant amount of money with this software we will pay the
 contributors to the ratio of their hours spent. 
 
-"""
+```
 ###########
 # example :  
 ########### 
@@ -89,10 +92,11 @@ contributors to the ratio of their hours spent.
 # It remains 2.50 USD that we will use to pay the infrastructure (website, ...).
 # Note that the money transfer will be charged by the banks so the real amount
 # will be lower than that.
-"""
+```
+
 --------------------------------------------------------------------------------
 
-"""
+```
  ===========                       
 | Work book |
  ===========
@@ -102,4 +106,4 @@ hours      BM/hour Name
    80       3.70   Jean-Marc Lienher 
 
 --------------------------------------------------------------------------------
-"""
+```
