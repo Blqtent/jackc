@@ -1,11 +1,7 @@
-This public domain software is a sustainable economy project.
 
-      PUBLIC DOMAIN 8 August MMXXI by Jean-Marc Lienher
+PUBLIC DOMAIN 8 August MMXXI by Jean-Marc Lienher
   
 The authors disclaim copyright to this software.
-
-To purchase a license send the authors a request for an Open Source
-license of your choice with your best offer (no negotiations).
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
