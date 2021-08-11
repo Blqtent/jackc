@@ -4,7 +4,7 @@ Public Domain JACK compiler
 
 This public domain software is a sustainable economy project.
 
-![public domain](https://raw.githubusercontent.com/public-domain/jack/main/img/pd.png)
+![public domain](https://raw.githubusercontent.com/cod5-dot-com/jackc/main/img/pd.png)
 
 
 The Unofficial Jack Programming language
