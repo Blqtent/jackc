@@ -62,7 +62,7 @@ Jack is easy to learn but it is designed to be yet useful.
 
 The Jack language was design for teaching the basis of computer construction.
 
-![the number of](https://raw.githubusercontent.com/public-domain/jack/main/img/beast.jpg)
+![the number of](https://raw.githubusercontent.com/cod5-dot-com/jackc/main/img/beast.jpg)
 
 ### 1.2 Differences from the book
 
