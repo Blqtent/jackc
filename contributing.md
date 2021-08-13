@@ -111,7 +111,7 @@ contributors to the ratio of their hours spent.
 
 hours      BM/hour Name
 ---------- ------- -------------------------------------------------------
-   80       5.40   Jean-Marc Lienher 
+  160       5.40   Jean-Marc Lienher 
 
 ```
 
